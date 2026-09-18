@@ -12,18 +12,6 @@ Minha jornada no programa passou pelas etapas de Nivelamento, Básico, Fundament
 
 ## Minha Jornada
 
-```
-Nivelamento
-    ↓
-Básico
-    ↓
-Fundamental
-    ↓
-Especialização
-    ↓
-Residência Tecnológica
-```
-
 | Etapa | Status |
 |---|---|
 | Nivelamento | ✅ Concluído |
