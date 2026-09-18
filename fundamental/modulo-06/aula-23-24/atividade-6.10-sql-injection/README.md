@@ -549,10 +549,3 @@ A evidência desta atividade corresponde ao **passo 11**, no qual as credenciais
 
 [**Evidências — Módulo 6 / Aulas 3 e 4**](../evidencias.pdf)
 
----
-
-## Encerramento
-
-Após a conclusão do teste, o Terminal e o Firefox foram fechados.
-
-As credenciais utilizadas durante o laboratório não foram registradas neste documento para evitar a exposição desnecessária de informações de autenticação.
