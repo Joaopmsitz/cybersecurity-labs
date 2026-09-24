@@ -1,0 +1,17 @@
+# 💉 Vaccine — Starting Point (Very Easy)
+
+🔗 Prova de conclusão:
+https://labs.hackthebox.com/achievement/machine/2578759/289
+
+## ✔ O que foi praticado
+- Enumeração inicial com Nmap, identificando serviços HTTP, SSH e PostgreSQL
+- Análise da aplicação web e interceptação de requisições para descobrir credenciais
+- Decodificação de parâmetros sensíveis expostos pela aplicação
+- Acesso ao banco PostgreSQL utilizando credenciais obtidas
+- Enumeração das tabelas do banco e extração de hashes de senha
+- Quebra do hash utilizando ferramentas de cracking para obter credenciais válidas
+- Acesso ao sistema via SSH com as credenciais quebradas
+- Enumeração pós-exploração no Linux para identificar vetor de escalonamento
+- Exploração de SUID/binários vulneráveis para elevar privilégios até root
+- Coleta das duas flags: user.txt e root.txt
+- Compreensão de um fluxo completo: web → banco → cracking → SSH → privesc
