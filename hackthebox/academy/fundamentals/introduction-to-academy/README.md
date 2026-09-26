@@ -38,7 +38,10 @@ This module is introductory and does not contain relevant commands or technical 
 ## 🏆 Completion
 
 <p align="center">
-  <img src="./badge.png" width="140" alt="HTB Academy - Introduction to Academy Badge">
+  <a href="https://academy.hackthebox.com/achievement/badge/29b8084a-8e43-11f0-9254-bea50ffe6cb4">
+    <img src="./badge-academician.png" width="160" alt="HTB Academy - Academician Badge">
+  </a>
 </p>
 
-**Completed:** September 2026
+**Badge:** Academician  
+**Completed:** 10 September 2025
