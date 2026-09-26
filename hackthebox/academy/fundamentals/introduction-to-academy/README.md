@@ -1,10 +1,12 @@
 <p align="center">
-  <img src="./module-avatar.png" width="180" alt="HTB Academy - Introduction to Academy">
+  <img src="./module-avatar.png" width="240" alt="HTB Academy - Introduction to Academy">
 </p>
 
-# Introduction to Academy
+<h1 align="center">Introduction to Academy</h1>
 
-> Introduction to the HTB Academy platform, its structure, learning paths, and practical exercises.
+<p align="center">
+  Introduction to the HTB Academy platform, its structure, learning paths, and practical exercises.
+</p>
 
 ---
 
@@ -43,5 +45,11 @@ This module is introductory and does not contain relevant commands or technical 
   </a>
 </p>
 
-**Badge:** Academician  
+<p align="center">
+  <a href="https://academy.hackthebox.com/achievement/badge/29b8084a-8e43-11f0-9254-bea50ffe6cb4">
+    <strong>🔗 View Achievement</strong>
+  </a>
+</p>
+
+**Badge:** Academician
 **Completed:** 10 September 2025
