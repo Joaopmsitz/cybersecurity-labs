@@ -8,6 +8,7 @@ These investigations focus on malicious emails, phishing URLs, social engineerin
 
 ## 📂 Included Investigations
 
+- SOC120 - Phishing Mail Detected - Internal to Internal — False Positive
 - SOC140 - Phishing Malicious Attachment
 - SOC141 - Phishing URL Detected
 - SOC146 - Phishing Mail Detected - Excel 4.0 Macros
