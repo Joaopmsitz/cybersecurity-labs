@@ -1,10 +1,8 @@
 # Incident Handling Process
 
+![Incident Handling Process](./images/incident-handling-process.png)
+
 > HTB Academy — SOC Analyst Job Role Path (CDSA)
-
-[![HTB Academy — Panoptic](./images/htb-panoptic-badge.png)](https://academy.hackthebox.com/achievement/badge/bf211f5d-c1b8-11f1-9524-0affe7dfeb45)
-
-**Completed:** 6 October 2026
 
 ## Overview
 
@@ -258,6 +256,16 @@ Lessons Learned
 * Chain of custody helps maintain evidence integrity.
 * MITRE ATT&CK provides a structured language for adversary behavior.
 * Effective preparation, visibility, and detection improve incident response.
+
+---
+
+## Completion
+
+[![HTB Academy — Panoptic](./images/htb-panoptic-badge.png)](https://academy.hackthebox.com/achievement/badge/bf211f5d-c1b8-11f1-9524-0affe7dfeb45)
+
+**Completed:** 6 October 2026
+
+[View achievement on HTB Academy](https://academy.hackthebox.com/achievement/badge/bf211f5d-c1b8-11f1-9524-0affe7dfeb45)
 
 ---
 
