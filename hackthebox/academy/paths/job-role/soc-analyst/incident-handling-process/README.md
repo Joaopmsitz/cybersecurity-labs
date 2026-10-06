@@ -1,8 +1,4 @@
-# Incident Handling Process
-
-<p align="center">
-  <img src="./images/incident-handling-process.png" width="140" alt="Incident Handling Process">
-</p>
+# <img src="./images/incident-handling-process.png" width="36" alt="Incident Handling Process"> Incident Handling Process
 
 > HTB Academy — SOC Analyst Job Role Path (CDSA)
 
@@ -263,11 +259,7 @@ Lessons Learned
 
 ## Completion
 
-<p align="center">
-  <a href="https://academy.hackthebox.com/achievement/badge/bf211f5d-c1b8-11f1-9524-0affe7dfeb45">
-    <img src="./images/htb-panoptic-badge.png" width="180" alt="HTB Academy Panoptic Badge">
-  </a>
-</p>
+[![HTB Academy — Panoptic](./images/htb-panoptic-badge.png)](https://academy.hackthebox.com/achievement/badge/bf211f5d-c1b8-11f1-9524-0affe7dfeb45)
 
 **Completed:** 6 October 2026
 
