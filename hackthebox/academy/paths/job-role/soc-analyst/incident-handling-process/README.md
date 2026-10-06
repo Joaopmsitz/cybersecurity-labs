@@ -4,15 +4,11 @@
 
 ## Overview
 
-This module covers the incident handling lifecycle, detection and analysis, investigation, containment, eradication, recovery, and post-incident activities.
-
-The goal is to understand how security incidents are prepared for, detected, investigated, contained, and resolved.
+This module covers the incident handling lifecycle, investigation, detection and analysis, response, recovery, and post-incident activities.
 
 ---
 
-## Core Concepts
-
-### Incident Handling Lifecycle
+## Incident Handling Lifecycle
 
 ```text
 Preparation
@@ -25,33 +21,24 @@ Post-Incident Activity
      ↺
 ```
 
-Incident handling is a continuous process rather than a strictly linear workflow.
+Incident handling is a continuous process that evolves as new evidence and leads are identified.
+
+---
+
+## Core Concepts
 
 ### Cyber Kill Chain
 
-The Cyber Kill Chain provides a high-level view of how an attack progresses.
-
 ```text
-Reconnaissance
-     ↓
-Weaponization
-     ↓
-Delivery
-     ↓
-Exploitation
-     ↓
-Installation
-     ↓
-Command & Control
-     ↓
-Actions on Objectives
+Reconnaissance → Weaponization → Delivery → Exploitation
+→ Installation → Command & Control → Actions on Objectives
 ```
 
-The defensive objective is to detect and disrupt adversary activity as early as possible.
+The goal of defenders is to detect and disrupt adversary activity as early as possible.
 
 ### MITRE ATT&CK
 
-MITRE ATT&CK provides a granular representation of adversary behavior through tactics, techniques, and sub-techniques.
+MITRE ATT&CK provides a structured way to describe adversary behavior through tactics, techniques, and sub-techniques.
 
 | Technique | Description                         |
 | --------- | ----------------------------------- |
@@ -59,11 +46,10 @@ MITRE ATT&CK provides a granular representation of adversary behavior through ta
 | T1021.001 | Remote Services: RDP                |
 | T1003.001 | OS Credential Dumping: LSASS Memory |
 | T1105     | Ingress Tool Transfer               |
+| T1555     | Credentials from Password Stores    |
 | T1486     | Data Encrypted for Impact           |
 
 ### Pyramid of Pain
-
-The Pyramid of Pain illustrates how difficult different types of indicators are for an adversary to change.
 
 ```text
              TTPs
@@ -74,104 +60,99 @@ The Pyramid of Pain illustrates how difficult different types of indicators are 
            Hashes
 ```
 
-Hashes and IP addresses are generally easier to change, while tools and TTPs are more difficult to modify.
+Hashes and IPs are easier to change, while tools and TTPs are more difficult to replace.
 
 ---
 
-## Incident Response Process
-
-### Preparation
-
-Incident response capability must exist before an incident occurs.
-
-Key preparation areas:
-
-* Incident response policies, procedures, roles, and escalation paths
-* Asset inventory, network diagrams, and known-clean baselines
-* Evidence preservation and chain of custody
-* Secure incident documentation and communication
-* Emergency privileged access
-* Forensic and investigation resources
-
-### Protective Controls
-
-Preventive and defensive controls can reduce attack surface and improve detection capabilities.
-
-* DMARC / SPF / DKIM
-* Endpoint hardening, EDR, AMSI, and Attack Surface Reduction
-* MFA, PIM, LAPS, and privileged access controls
-* Network segmentation, firewalls, IDS / IPS
-* Vulnerability management
-* Security awareness and phishing testing
-* Active Directory security assessments
-* Purple Team exercises
+## Investigation Process
 
 ### Detection & Analysis
 
 Detection can originate from:
 
 * User reports
-* EDR / antivirus
-* SIEM
-* IDS / IPS
-* Firewalls
+* SIEM / EDR alerts
+* Network security devices
 * Threat hunting
 * Third-party notifications
 
-Detection should provide visibility across multiple layers:
+Effective detection requires visibility across network, endpoint, and application layers.
+
+### Investigation Cycle
 
 ```text
-Network Perimeter
-       ↓
-Internal Network
-       ↓
-Endpoint
-       ↓
-Application
+Initial Investigation Data
+          ↓
+       IOCs
+          ↓
+New Leads & Affected Systems
+          ↓
+Collect & Analyze Data
+          ↺
 ```
 
-### Investigation & Triage
+Investigation is iterative: new findings generate new leads, which guide further collection and analysis.
 
-Initial investigation should establish enough context to understand the incident before major response actions are taken.
+### Indicators of Compromise
 
-Important information includes:
+Common IOCs include:
 
-* Date and time
-* Detection source and reporter
-* Incident type
-* Affected systems
-* Hostnames, IP addresses, and operating systems
-* System owners and purpose
-* Current system state
-* User activity
-* Ongoing suspicious activity
-* Malware, artifacts, hashes, and forensic evidence
+* IP addresses
+* File hashes
+* File names
+* Domains
+* Other host or network artifacts
+
+IOC matches must be validated to reduce false positives and identify additional affected systems.
+
+### Evidence Collection
+
+* Minimize interaction with affected systems
+* Preserve volatile evidence when necessary
+* Use live response when appropriate
+* Maintain chain of custody when required
+* Understand how investigative tools affect evidence and credentials
 
 ### Incident Timeline
 
 A timeline helps correlate evidence and reconstruct attacker activity.
 
-| Date | Time | Hostname | Event Description | Data Source |
-| ---- | ---- | -------- | ----------------- | ----------- |
+| Date | Time | Host | Event | Source |
+| ---- | ---- | ---- | ----- | ------ |
 
-Focus on events that are relevant to the investigation and preserve the original context of the evidence.
+### Severity & Communication
 
-### Severity, Scope & Communication
+Severity should consider impact, scope, affected systems, business criticality, propagation, and available remediation.
 
-Incident severity should consider:
+Incident information should follow a **need-to-know** principle and use controlled communication channels.
 
-* Potential impact
-* Exploitation requirements
-* Business-critical systems
-* Number of affected systems
-* Threat propagation capabilities
-* Available remediation options
+---
 
-Incident information should follow a **need-to-know** principle and be communicated through controlled channels with the appropriate stakeholders.
+## Incident Response
+
+### Preparation
+
+Incident response capability should be established before an incident occurs.
+
+Key areas:
+
+* Response policies and procedures
+* Roles and escalation paths
+* Asset inventory and network documentation
+* Known-clean baselines
+* Evidence preservation
+* Secure communication
+* Forensic resources
+
+### Protective Controls
+
+* Endpoint and identity hardening
+* MFA and privileged access controls
+* Network segmentation and monitoring
+* Vulnerability management
+* Security awareness
 
 ### Containment, Eradication & Recovery
-
-After understanding the scope of an incident:
 
 ```text
 Containment
@@ -183,41 +164,21 @@ Recovery
 Validation
 ```
 
-* Contain affected systems and prevent further spread
-* Remove malware, persistence, and attacker access
-* Restore systems and business operations
-* Validate that the environment is secure
+Contain affected systems, remove malicious activity and persistence, restore operations, and validate the environment.
 
 ---
 
 ## Tools & Technologies
 
-| Tool / Technology | Purpose                                    |
-| ----------------- | ------------------------------------------ |
-| TheHive           | Incident and case management               |
-| SIEM              | Log collection, correlation, and detection |
-| EDR               | Endpoint visibility and detection          |
-| IDS / IPS         | Network threat detection and prevention    |
-| Firewall          | Network traffic control                    |
-| Sysmon            | Windows telemetry                          |
-| MITRE ATT&CK      | Adversary behavior mapping                 |
+| Tool         | Purpose                                |
+| ------------ | -------------------------------------- |
+| TheHive      | Incident and case management           |
+| Wazuh / SIEM | Alerting, monitoring, and log analysis |
+| Sysmon       | Windows telemetry                      |
+| EDR          | Endpoint visibility and detection      |
+| MITRE ATT&CK | Adversary behavior mapping             |
 
----
-
-## Hands-on Lab
-
-### Lab 01 — TheHive Incident Investigation
-
-TheHive was used to investigate a security alert related to **Mimikatz and credential dumping**.
-
-Key activities:
-
-* Alert triage
-* Incident investigation
-* MITRE ATT&CK mapping
-* Evidence documentation
-
-![TheHive Mimikatz Alert](./images/thehive-mimikatz-alert.png)
+Practical exercises from this module are documented separately under `labs/`.
 
 ---
 
@@ -232,11 +193,11 @@ Establish Context
    ↓
 Determine Scope
    ↓
+Identify IOCs / TTPs
+   ↓
 Build Timeline
    ↓
-Collect Evidence
-   ↓
-Identify IoCs / TTPs
+Collect & Analyze Evidence
    ↓
 Containment
    ↓
@@ -251,14 +212,14 @@ Lessons Learned
 
 ## Key Takeaways
 
-* Incident response starts before an incident occurs.
-* Effective detection requires visibility across multiple layers.
-* Initial triage should establish context before major response actions.
-* Timelines help correlate evidence and reconstruct attacker activity.
-* Severity depends on impact, scope, and threat characteristics.
-* MITRE ATT&CK provides a structured way to describe adversary behavior.
-* TheHive can centralize alerts, evidence, investigation findings, and response activities.
-* Preventive controls and detection capabilities directly influence incident response effectiveness.
+* Incident response begins before an incident occurs.
+* Investigation is an iterative process driven by evidence and new leads.
+* IOC matches must be validated to avoid false positives.
+* Timelines help reconstruct attacker activity.
+* Live response can preserve volatile evidence.
+* Chain of custody helps maintain evidence integrity.
+* MITRE ATT&CK provides a structured language for adversary behavior.
+* Effective preparation, visibility, and detection directly improve incident response.
 
 ---
 
