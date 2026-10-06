@@ -4,7 +4,7 @@
 
 ## Overview
 
-This module covers the incident handling lifecycle, investigation, detection and analysis, response, recovery, and post-incident activities.
+This module covers the incident handling lifecycle, investigation, detection and analysis, containment, eradication, recovery, and post-incident activities.
 
 ---
 
@@ -21,7 +21,7 @@ Post-Incident Activity
      ↺
 ```
 
-Incident handling is a continuous process that evolves as new evidence and leads are identified.
+Incident handling is a continuous process driven by new evidence, findings, and lessons learned.
 
 ---
 
@@ -60,7 +60,7 @@ MITRE ATT&CK provides a structured way to describe adversary behavior through ta
            Hashes
 ```
 
-Hashes and IPs are easier to change, while tools and TTPs are more difficult to replace.
+Hashes and IPs are easier to change, while tools and TTPs are harder for adversaries to replace.
 
 ---
 
@@ -72,7 +72,7 @@ Detection can originate from:
 
 * User reports
 * SIEM / EDR alerts
-* Network security devices
+* Network security controls
 * Threat hunting
 * Third-party notifications
 
@@ -83,7 +83,7 @@ Effective detection requires visibility across network, endpoint, and applicatio
 ```text
 Initial Investigation Data
           ↓
-       IOCs
+          IOCs
           ↓
 New Leads & Affected Systems
           ↓
@@ -91,7 +91,7 @@ Collect & Analyze Data
           ↺
 ```
 
-Investigation is iterative: new findings generate new leads, which guide further collection and analysis.
+Investigation is iterative: new findings generate new leads and guide further collection and analysis.
 
 ### Indicators of Compromise
 
@@ -101,9 +101,11 @@ Common IOCs include:
 * File hashes
 * File names
 * Domains
-* Other host or network artifacts
+* Host and network artifacts
 
 IOC matches must be validated to reduce false positives and identify additional affected systems.
+
+STIX and OpenIOC can be used to represent and exchange IOC information, while YARA can support pattern-based detection.
 
 ### Evidence Collection
 
@@ -122,7 +124,14 @@ A timeline helps correlate evidence and reconstruct attacker activity.
 
 ### Severity & Communication
 
-Severity should consider impact, scope, affected systems, business criticality, propagation, and available remediation.
+Severity should consider:
+
+* Impact
+* Scope
+* Business-critical systems
+* Number of affected systems
+* Threat propagation
+* Available remediation
 
 Incident information should follow a **need-to-know** principle and use controlled communication channels.
 
@@ -134,7 +143,7 @@ Incident information should follow a **need-to-know** principle and use controll
 
 Incident response capability should be established before an incident occurs.
 
-Key areas:
+Key areas include:
 
 * Response policies and procedures
 * Roles and escalation paths
@@ -152,7 +161,22 @@ Key areas:
 * Vulnerability management
 * Security awareness
 
-### Containment, Eradication & Recovery
+### Containment
+
+Containment aims to limit damage and prevent further spread.
+
+**Short-term containment** focuses on rapid isolation while preserving evidence.
+
+**Long-term containment** introduces persistent changes such as password resets, firewall rules, patches, and additional monitoring.
+
+### Eradication
+
+* Remove malware and persistence
+* Rebuild or restore affected systems
+* Apply required patches
+* Harden affected systems and the wider environment
+
+### Recovery
 
 ```text
 Containment
@@ -164,21 +188,19 @@ Recovery
 Validation
 ```
 
-Contain affected systems, remove malicious activity and persistence, restore operations, and validate the environment.
+Restore normal operations, validate systems before returning them to production, and increase logging and monitoring after recovery.
 
 ---
 
-## Tools & Technologies
+## Post-Incident Activity
 
-| Tool         | Purpose                                |
-| ------------ | -------------------------------------- |
-| TheHive      | Incident and case management           |
-| Wazuh / SIEM | Alerting, monitoring, and log analysis |
-| Sysmon       | Windows telemetry                      |
-| EDR          | Endpoint visibility and detection      |
-| MITRE ATT&CK | Adversary behavior mapping             |
+The post-incident stage focuses on improving future response capabilities.
 
-Practical exercises from this module are documented separately under `labs/`.
+* Conduct lessons-learned reviews
+* Perform root cause analysis
+* Update policies, playbooks, and detection rules
+* Improve training, tooling, and readiness
+* Document the incident and close the case
 
 ---
 
@@ -210,16 +232,28 @@ Lessons Learned
 
 ---
 
+## Tools & Technologies
+
+| Tool         | Purpose                                |
+| ------------ | -------------------------------------- |
+| TheHive      | Incident and case management           |
+| Wazuh / SIEM | Alerting, monitoring, and log analysis |
+| Sysmon       | Windows telemetry                      |
+| EDR          | Endpoint visibility and detection      |
+| MITRE ATT&CK | Adversary behavior mapping             |
+
+---
+
 ## Key Takeaways
 
 * Incident response begins before an incident occurs.
 * Investigation is an iterative process driven by evidence and new leads.
-* IOC matches must be validated to avoid false positives.
+* IOC matches must be validated to reduce false positives.
 * Timelines help reconstruct attacker activity.
 * Live response can preserve volatile evidence.
 * Chain of custody helps maintain evidence integrity.
 * MITRE ATT&CK provides a structured language for adversary behavior.
-* Effective preparation, visibility, and detection directly improve incident response.
+* Effective preparation, visibility, and detection improve incident response.
 
 ---
 
@@ -228,3 +262,4 @@ Lessons Learned
 * Hack The Box Academy — Incident Handling Process
 * MITRE ATT&CK
 * NIST SP 800-61
+* OASIS STIX
