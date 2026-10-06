@@ -259,7 +259,9 @@ Lessons Learned
 
 ## Completion
 
-[![HTB Academy — Panoptic](./images/htb-panoptic-badge.png)](https://academy.hackthebox.com/achievement/badge/bf211f5d-c1b8-11f1-9524-0affe7dfeb45)
+<a href="https://academy.hackthebox.com/achievement/badge/bf211f5d-c1b8-11f1-9524-0affe7dfeb45">
+  <img src="./images/htb-panoptic-badge.png" width="120" alt="HTB Academy — Panoptic Badge">
+</a>
 
 **Completed:** 6 October 2026
 
