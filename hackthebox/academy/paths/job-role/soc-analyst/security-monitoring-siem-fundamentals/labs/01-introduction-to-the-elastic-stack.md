@@ -18,6 +18,12 @@ event.code:4625
 event.code:4625 AND winlog.event_data.SubStatus:0xC0000072
 ```
 
+**Search for failed logons using a wildcard to match usernames beginning with `admin`:**
+
+```kql
+event.code:4625 AND user.name:admin*
+```
+
 **Filter events within a specific time range:**
 
 ```kql
@@ -30,6 +36,7 @@ event.code:4625 AND winlog.event_data.SubStatus:0xC0000072 AND @timestamp >= "20
 - **Index pattern:** `windows*`
 - **Event ID 4625:** Failed logon attempt.
 - **SubStatus `0xC0000072`:** Indicates a disabled account.
+- **Wildcard `*`:** Matches zero or more characters in supported field values.
 - **`winlog.event_data.TargetUserName`:** Identifies the account targeted by the logon attempt.
 - **`agent.name`:** Identifies the reporting endpoint, not the username.
 
@@ -43,5 +50,6 @@ The investigation required examining the event fields to distinguish the affecte
 
 - Used KQL to filter Windows authentication events.
 - Combined conditions and timestamps to narrow search results.
+- Applied wildcard syntax to demonstrate pattern-based username filtering.
 - Inspected event fields to identify the relevant account.
 - Distinguished endpoint metadata from authentication data.
