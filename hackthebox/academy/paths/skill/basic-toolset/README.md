@@ -1,6 +1,5 @@
-﻿# Basic Toolset
+﻿# <img src="./images/basic-toolset.png" width="36" alt="Basic Toolset"> Basic Toolset
 
-<p align="center"><img src="./images/htb-basic-toolset-cover.png" width="420" alt="HTB Academy — Basic Toolset"></p>
 > HTB Academy — Skill Path
 
 A practical introduction to essential tools used in network enumeration, authentication testing, web application assessment, password cracking, database testing, traffic analysis, and web proxy workflows.
