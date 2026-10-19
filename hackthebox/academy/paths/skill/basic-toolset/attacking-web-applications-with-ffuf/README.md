@@ -1,6 +1,6 @@
 ﻿# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
 
-> HTB Academy — Basic Toolset
+> HTB Academy â€” Basic Toolset
 
 ## Overview
 
@@ -37,12 +37,11 @@ Ffuf is a web fuzzer used to discover resources and test input locations in auth
 
 Add exercise-specific payloads, findings, and screenshots as you document the Academy labs. Store screenshots in `images/` and detailed write-ups in a `labs/` directory.
 
-## References
-
-- [Ffuf project](https://github.com/ffuf/ffuf)
-
 ## Completion
 
 <a href="https://academy.hackthebox.com/achievement/badge/00a6ff26-cca4-11f0-9254-bea50ffe6cb4"><img src="./images/htb-attacking-web-applications-with-ffuf-badge.png" width="120" alt="HTB Academy — Fuzzing is power Badge"></a>
 
 **Completed:** 28 November 2025
+## References
+
+- [Ffuf project](https://github.com/ffuf/ffuf)
