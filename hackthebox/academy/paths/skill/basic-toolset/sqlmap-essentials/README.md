@@ -1,4 +1,4 @@
-﻿# <img src="./images/sqlmap-essentials.jpg" width="36" alt="SQLMap Essentials"> SQLMap Essentials
+# <img src="./images/sqlmap-essentials.jpg" width="36" alt="SQLMap Essentials"> SQLMap Essentials
 
 > HTB Academy — Basic Toolset
 
@@ -36,6 +36,12 @@ SQLMap automates the detection and assessment of SQL injection vulnerabilities i
 ## Lab Notes
 
 Record the vulnerable parameter, evidence, database behavior, and the relevant exercise findings. Do not test or extract data from systems outside the authorized lab.
+
+## Completion
+
+<a href="https://academy.hackthebox.com/achievement/badge/a0a45ab8-b09a-11f1-82d1-bea50ffe6cb4"><img src="./images/htb-sqlmap-essentials-badge.png" width="120" alt="HTB Academy — JOIN the adventure Badge"></a>
+
+**Completed:** 15 September 2026
 
 ## References
 

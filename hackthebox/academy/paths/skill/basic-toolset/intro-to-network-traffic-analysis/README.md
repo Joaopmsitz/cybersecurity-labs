@@ -1,4 +1,4 @@
-﻿# <img src="./images/intro-to-network-traffic-analysis.jpg" width="36" alt="Intro to Network Traffic Analysis"> Intro to Network Traffic Analysis
+# <img src="./images/intro-to-network-traffic-analysis.jpg" width="36" alt="Intro to Network Traffic Analysis"> Intro to Network Traffic Analysis
 
 > HTB Academy — Basic Toolset
 
@@ -44,6 +44,12 @@ Network traffic analysis examines packet captures to understand communication pa
 ## Lab Notes
 
 Document the capture examined, filters used, notable packets, and conclusions supported by the evidence.
+
+## Completion
+
+<a href="https://academy.hackthebox.com/achievement/badge/20a2de44-dd2b-11f0-9254-bea50ffe6cb4"><img src="./images/htb-intro-to-network-traffic-analysis-badge.png" width="120" alt="HTB Academy — Lurk in the packets Badge"></a>
+
+**Completed:** 19 December 2025
 
 ## References
 

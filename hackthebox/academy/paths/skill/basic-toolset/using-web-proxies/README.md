@@ -1,4 +1,4 @@
-﻿# <img src="./images/using-web-proxies.jpg" width="36" alt="Using Web Proxies"> Using Web Proxies
+# <img src="./images/using-web-proxies.jpg" width="36" alt="Using Web Proxies"> Using Web Proxies
 
 > HTB Academy — Basic Toolset
 
@@ -38,6 +38,12 @@ Web proxies let security testers inspect and modify HTTP(S) requests and respons
 ## Lab Notes
 
 Record the request, the modification made, the resulting response, and what the result demonstrates.
+
+## Completion
+
+<a href="https://academy.hackthebox.com/achievement/badge/c6b43d4e-b93d-11f1-9524-0affe7dfeb45"><img src="./images/htb-using-web-proxies-badge.png" width="120" alt="HTB Academy — Dive into requests Badge"></a>
+
+**Completed:** 26 September 2026
 
 ## References
 
