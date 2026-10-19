@@ -1,4 +1,4 @@
-﻿# Network Enumeration with Nmap
+﻿# <img src="./images/network-enumeration-with-nmap.png" width="36" alt="Network Enumeration with Nmap"> Network Enumeration with Nmap
 
 > HTB Academy — Basic Toolset
 
@@ -49,3 +49,8 @@ Document exercise solutions, observations, and screenshots as the module labs ar
 - [Official Nmap Manual](https://nmap.org/book/man.html)
 - [Nmap Reference Guide](https://nmap.org/book/)
 
+## Completion
+
+<a href="https://academy.hackthebox.com/achievement/badge/cdfeee8f-972d-11f0-9254-bea50ffe6cb4"><img src="./images/htb-network-enumeration-with-nmap-badge.png" width="120" alt="HTB Academy — The Eye That Sees All Badge"></a>
+
+**Completed:** 21 September 2025
