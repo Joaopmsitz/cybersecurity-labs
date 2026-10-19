@@ -1,4 +1,4 @@
-﻿# Login Brute Forcing
+﻿# <img src="./images/login-brute-forcing.png" width="36" alt="Login Brute Forcing"> Login Brute Forcing
 
 > HTB Academy — Basic Toolset
 
@@ -37,3 +37,9 @@ Add exercise-specific findings and screenshots as you document the Academy labs.
 ## References
 
 - [THC Hydra](https://github.com/vanhauser-thc/thc-hydra)
+
+## Completion
+
+<a href="https://academy.hackthebox.com/achievement/badge/11926dad-d75e-11f0-9254-bea50ffe6cb4"><img src="./images/htb-login-brute-forcing-badge.png" width="120" alt="HTB Academy — Crude but effective Badge"></a>
+
+**Completed:** 12 December 2025
