@@ -1,4 +1,4 @@
-# <img src="./images/security-monitoring-siem-fundamentals.png" height="36" alt="Security Monitoring & SIEM Fundamentals"> Security Monitoring & SIEM Fundamentals
+# <img src="./images/security-monitoring-siem-fundamentals.png" width="36" alt="Security Monitoring & SIEM Fundamentals"> Security Monitoring & SIEM Fundamentals
 
 > HTB Academy — SOC Analyst Job Role Path (CDSA)
 
@@ -60,6 +60,13 @@ It combines their telemetry with other log sources to help analysts identify eve
 - Detection rules require tuning to reduce alert fatigue.
 - SIEM supports investigation, incident response, monitoring, and compliance.
 
+## Completion
+
+<a href="https://academy.hackthebox.com/achievement/2133209/211">
+  <img src="./images/htb-security-monitoring-siem-fundamentals-badge.jpg" width="120" alt="HTB Academy — Security Monitoring & SIEM Fundamentals Badge">
+</a>
+
+**Completed:** 19 October 2026
 ## References
 
 - [HTB Academy — Security Monitoring & SIEM Fundamentals](https://academy.hackthebox.com/course/preview/security-monitoring--siem-fundamentals)
