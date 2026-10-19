@@ -1,12 +1,12 @@
-﻿# <img src="./images/attacking-web-applications-with-ffuf.png" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
+﻿# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
 
 > HTB Academy — Basic Toolset
 
-## Overview
+# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
 
 Ffuf is a web fuzzer used to discover resources and test input locations in authorized web assessments.
 
-## Command Reference
+# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
 
 | Objective | Example | Notes |
 |---|---|---|
@@ -16,7 +16,7 @@ Ffuf is a web fuzzer used to discover resources and test input locations in auth
 | Filter status codes | `ffuf -w wordlist.txt -u http://<lab-target>/FUZZ -fc 404` | Hides responses with the selected code |
 | Save results | `ffuf -w wordlist.txt -u http://<lab-target>/FUZZ -o results.json -of json` | Saves JSON output |
 
-## Key Concepts
+# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
 
 - Directory and file discovery
 - Virtual-host fuzzing
@@ -25,7 +25,7 @@ Ffuf is a web fuzzer used to discover resources and test input locations in auth
 - Response codes, sizes, words, and filtering
 - Interpreting false positives
 
-## Practical Workflow
+# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
 
 1. Confirm the permitted target and wordlist.
 2. Identify the correct FUZZ position.
@@ -33,13 +33,19 @@ Ffuf is a web fuzzer used to discover resources and test input locations in auth
 4. Filter unhelpful responses.
 5. Validate interesting results manually.
 
-## Lab Notes
+# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
 
 Add exercise-specific payloads, findings, and screenshots as you document the Academy labs.
 
-## References
+# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
 
 - [Ffuf project](https://github.com/ffuf/ffuf)
+
+# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
+
+<a href="https://academy.hackthebox.com/achievement/badge/00a6ff26-cca4-11f0-9254-bea50ffe6cb4"><img src="./images/htb-attacking-web-applications-with-ffuf-badge.png" width="120" alt="HTB Academy — Fuzzing is power Badge"></a>
+
+**Completed:** 28 November 2025
 
 ## Completion
 
