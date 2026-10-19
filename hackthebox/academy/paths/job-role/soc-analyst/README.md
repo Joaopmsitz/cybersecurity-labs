@@ -18,25 +18,25 @@ A practical learning path focused on security monitoring, threat detection, inci
 
 ## Modules
 
-The table follows the official HTB Academy path order. Technical documentation is maintained centrally under `modules/` and linked here when available.
+The table follows the official HTB path order. Module names link to the local README when documentation exists; otherwise, they link to the official HTB Academy module page. `—` indicates metadata that has not yet been verified.
 
-| # | Module | Difficulty | Sections | Reward | Documentation |
-|---:|---|---|---:|---:|---|
-| 1 | Incident Handling Process | Easy | 11 | +10 | [README](../../../modules/defensive/incident-handling-process/README.md) |
-| 2 | Security Monitoring & SIEM Fundamentals | Easy | 11 | +20 | [README](../../../modules/defensive/security-monitoring-siem-fundamentals/README.md) |
-| 3 | Windows Event Logs & Finding Evil | Medium | 6 | +20 | Not documented yet |
-| 4 | Introduction to Threat Hunting & Hunting With Elastic | Medium | 6 | +20 | Not documented yet |
-| 5 | Understanding Log Sources & Investigating with Splunk | Medium | 6 | +20 | Not documented yet |
-| 6 | Windows Attacks & Defense | Medium | 16 | +20 | Not documented yet |
-| 7 | Intro to Network Traffic Analysis | Medium | 15 | +10 | [README](../../../modules/networking/intro-to-network-traffic-analysis/README.md) |
-| 8 | Intermediate Network Traffic Analysis | Easy | 18 | +20 | Not documented yet |
-| 9 | Working with IDS/IPS | Medium | 11 | +20 | Not documented yet |
-| 10 | Introduction to Malware Analysis | Hard | 9 | +20 | Not documented yet |
-| 11 | JavaScript Deobfuscation | Easy | 11 | +10 | [README](../../../modules/web/javascript-deobfuscation/README.md) |
-| 12 | YARA & Sigma for SOC Analysts | Easy | 11 | +20 | Not documented yet |
-| 13 | Introduction to Digital Forensics | Medium | 8 | +20 | Not documented yet |
-| 14 | Detecting Windows Attacks with Splunk | Medium | 23 | +20 | Not documented yet |
-| 15 | Security Incident Reporting | Easy | 5 | +10 | Not documented yet |
+| # | Module | Difficulty | Estimated Duration | Tier |
+|---:|---|---|---|---|
+| 1 | [Incident Handling Process](../../../modules/defensive/incident-handling-process/README.md) | Easy | — | I |
+| 2 | [Security Monitoring & SIEM Fundamentals](../../../modules/defensive/security-monitoring-siem-fundamentals/README.md) | Easy | — | II |
+| 3 | [Windows Event Logs & Finding Evil](https://academy.hackthebox.com/course/preview/windows-event-logs--finding-evil) | Medium | — | II |
+| 4 | [Introduction to Threat Hunting & Hunting With Elastic](https://academy.hackthebox.com/course/preview/introduction-to-threat-hunting--hunting-with-elastic) | Medium | — | II |
+| 5 | [Understanding Log Sources & Investigating with Splunk](https://academy.hackthebox.com/course/preview/understanding-log-sources--investigating-with-splunk) | Medium | — | II |
+| 6 | [Windows Attacks & Defense](https://academy.hackthebox.com/course/preview/windows-attacks--defense) | Medium | — | II |
+| 7 | [Intro to Network Traffic Analysis](../../../modules/networking/intro-to-network-traffic-analysis/README.md) | Medium | 1 day | 0 |
+| 8 | [Intermediate Network Traffic Analysis](https://academy.hackthebox.com/course/preview/intermediate-network-traffic-analysis) | Easy | — | II |
+| 9 | [Working with IDS/IPS](https://academy.hackthebox.com/course/preview/working-with-idsips) | Medium | — | II |
+| 10 | [Introduction to Malware Analysis](https://academy.hackthebox.com/course/preview/introduction-to-malware-analysis) | Hard | — | II |
+| 11 | [JavaScript Deobfuscation](../../../modules/web/javascript-deobfuscation/README.md) | Easy | 4 hours | 0 |
+| 12 | [YARA & Sigma for SOC Analysts](https://academy.hackthebox.com/course/preview/yara--sigma-for-soc-analysts) | Easy | — | II |
+| 13 | [Introduction to Digital Forensics](https://academy.hackthebox.com/course/preview/introduction-to-digital-forensics) | Medium | — | II |
+| 14 | [Detecting Windows Attacks with Splunk](https://academy.hackthebox.com/course/preview/detecting-windows-attacks-with-splunk) | Medium | — | II |
+| 15 | [Security Incident Reporting](https://academy.hackthebox.com/course/preview/security-incident-reporting) | Easy | — | — |
 
 ## Skills Covered
 
