@@ -20,9 +20,9 @@ A beginner-friendly path introducing web communication, JavaScript analysis, and
 
 | # | Module | Difficulty | Estimated Duration | Tier |
 |---:|---|---|---|---|
-| 1 | [Web Requests](./web-requests/README.md) | Fundamental | 4 hours | 0 |
-| 2 | [JavaScript Deobfuscation](./javascript-deobfuscation/README.md) | Easy | 4 hours | 0 |
-| 3 | [Getting Started](../../../fundamentals/getting-started/README.md) | Fundamental | 1 day | 0 |
+| 1 | [Web Requests](../../../modules/web/web-requests/README.md) | Fundamental | 4 hours | 0 |
+| 2 | [JavaScript Deobfuscation](../../../modules/web/javascript-deobfuscation/README.md) | Easy | 4 hours | 0 |
+| 3 | [Getting Started](../../../modules/academy-basics/getting-started/README.md) | Fundamental | 1 day | 0 |
 
 ## Skills Covered
 

@@ -1,4 +1,4 @@
-﻿# <img src="./images/basic-toolset.png" width="36" alt="Basic Toolset"> Basic Toolset
+# <img src="./images/basic-toolset.png" width="36" alt="Basic Toolset"> Basic Toolset
 
 > HTB Academy — Skill Path
 
@@ -20,13 +20,13 @@ A practical introduction to essential tools used in network enumeration, authent
 
 | # | Module | Difficulty | Estimated Duration | Tier |
 |---:|---|---|---|---|
-| 1 | [Network Enumeration with Nmap](./network-enumeration-with-nmap/README.md) | Easy | 7 hours | I |
-| 2 | [Login Brute Forcing](./login-brute-forcing/README.md) | Easy | 6 hours | II |
-| 3 | [Attacking Web Applications with Ffuf](./attacking-web-applications-with-ffuf/README.md) | Easy | 5 hours | 0 |
-| 4 | [Cracking Passwords with Hashcat](./cracking-passwords-with-hashcat/README.md) | Medium | 1 day | II |
-| 5 | [SQLMap Essentials](./sqlmap-essentials/README.md) | Easy | 4 hours | II |
-| 6 | [Intro to Network Traffic Analysis](./intro-to-network-traffic-analysis/README.md) | Medium | 1 day | 0 |
-| 7 | [Using Web Proxies](./using-web-proxies/README.md) | Easy | 1 day | II |
+| 1 | [Network Enumeration with Nmap](../../../modules/reconnaissance/network-enumeration-with-nmap/README.md) | Easy | 7 hours | I |
+| 2 | [Login Brute Forcing](../../../modules/password-attacks/login-brute-forcing/README.md) | Easy | 6 hours | II |
+| 3 | [Attacking Web Applications with Ffuf](../../../modules/web/attacking-web-applications-with-ffuf/README.md) | Easy | 5 hours | 0 |
+| 4 | [Cracking Passwords with Hashcat](../../../modules/password-attacks/cracking-passwords-with-hashcat/README.md) | Medium | 1 day | II |
+| 5 | [SQLMap Essentials](../../../modules/web/sqlmap-essentials/README.md) | Easy | 4 hours | II |
+| 6 | [Intro to Network Traffic Analysis](../../../modules/networking/intro-to-network-traffic-analysis/README.md) | Medium | 1 day | 0 |
+| 7 | [Using Web Proxies](../../../modules/web/using-web-proxies/README.md) | Easy | 1 day | II |
 
 ## Skills Covered
 
