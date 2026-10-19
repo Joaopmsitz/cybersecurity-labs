@@ -2,11 +2,11 @@
 
 > HTB Academy — Basic Toolset
 
-# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
+## Overview
 
 Ffuf is a web fuzzer used to discover resources and test input locations in authorized web assessments.
 
-# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
+## Command Reference
 
 | Objective | Example | Notes |
 |---|---|---|
@@ -16,7 +16,7 @@ Ffuf is a web fuzzer used to discover resources and test input locations in auth
 | Filter status codes | `ffuf -w wordlist.txt -u http://<lab-target>/FUZZ -fc 404` | Hides responses with the selected code |
 | Save results | `ffuf -w wordlist.txt -u http://<lab-target>/FUZZ -o results.json -of json` | Saves JSON output |
 
-# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
+## Key Concepts
 
 - Directory and file discovery
 - Virtual-host fuzzing
@@ -25,7 +25,7 @@ Ffuf is a web fuzzer used to discover resources and test input locations in auth
 - Response codes, sizes, words, and filtering
 - Interpreting false positives
 
-# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
+## Practical Workflow
 
 1. Confirm the permitted target and wordlist.
 2. Identify the correct FUZZ position.
@@ -33,19 +33,13 @@ Ffuf is a web fuzzer used to discover resources and test input locations in auth
 4. Filter unhelpful responses.
 5. Validate interesting results manually.
 
-# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
+## Lab Notes
 
-Add exercise-specific payloads, findings, and screenshots as you document the Academy labs.
+Add exercise-specific payloads, findings, and screenshots as you document the Academy labs. Store screenshots in `images/` and detailed write-ups in a `labs/` directory.
 
-# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
+## References
 
 - [Ffuf project](https://github.com/ffuf/ffuf)
-
-# <img src="./images/attacking-web-applications-with-ffuf.jpg" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
-
-<a href="https://academy.hackthebox.com/achievement/badge/00a6ff26-cca4-11f0-9254-bea50ffe6cb4"><img src="./images/htb-attacking-web-applications-with-ffuf-badge.png" width="120" alt="HTB Academy — Fuzzing is power Badge"></a>
-
-**Completed:** 28 November 2025
 
 ## Completion
 
