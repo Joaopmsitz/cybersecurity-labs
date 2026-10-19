@@ -1,4 +1,4 @@
-﻿# Cracking Passwords with Hashcat
+﻿# <img src="./images/cracking-passwords-with-hashcat.jpg" width="36" alt="Cracking Passwords with Hashcat"> Cracking Passwords with Hashcat
 
 > HTB Academy — Basic Toolset
 
@@ -36,6 +36,12 @@ Hashcat performs password-recovery tests against password hashes. Use it only wi
 ## Lab Notes
 
 Record the hash type, chosen mode, attack strategy, and lab outcome.
+
+## Completion
+
+<a href="https://academy.hackthebox.com/achievement/badge/295ab279-e5ea-11f0-9254-bea50ffe6cb4"><img src="./images/htb-cracking-passwords-with-hashcat-badge.png" width="120" alt="HTB Academy — Good things take time Badge"></a>
+
+**Completed:** 31 December 2025
 
 ## References
 
