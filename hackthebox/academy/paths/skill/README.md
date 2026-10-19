@@ -15,10 +15,10 @@ Skill Paths organize learning around specific technical topics, tools, and found
 
 ## Path Catalog
 
-| Skill Path | Status | Progress | Difficulty | Modules | Interactive Sections | Assessments | Estimated Duration | Reward | Completed |
-|---|---|---:|---|---:|---:|---:|---|---:|---|
-| [Basic Toolset](./basic-toolset/README.md) | Completed | 100% | Medium | 7 | 60 | 5 | 5 days, 6 hours | 110 Cubes | 2026-09-26 |
-| [Cracking into Hack the Box](./cracking-into-hack-the-box/README.md) | Completed | 100% | Easy | 3 | 22 | 1 | 2 days | 30 Cubes | 2025-12-10 |
+| Skill Path | Status | Progress | Difficulty | Modules | Interactive Sections | Assessments | Estimated Duration | Completed |
+| --- | --- | ---: | --- | ---: | ---: | ---: | --- | --- |
+| [Basic Toolset](./basic-toolset/README.md) | Completed | 100% | Medium | 7 | 60 | 5 | 5 days, 6 hours | 2026-09-26 |
+| [Cracking into Hack the Box](./cracking-into-hack-the-box/README.md) | Completed | 100% | Easy | 3 | 22 | 1 | 2 days | 2025-12-10 |
 
 ## Path Summaries
 
