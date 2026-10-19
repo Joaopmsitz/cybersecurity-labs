@@ -62,7 +62,7 @@ It combines their telemetry with other log sources to help analysts identify eve
 
 ## Completion
 
-<a href="https://academy.hackthebox.com/achievement/2133209/211">
+<a href="https://academy.hackthebox.com/achievement/badge/0fa90ed4-cc01-11f1-9524-0affe7dfeb45">
   <img src="./images/htb-security-monitoring-siem-fundamentals-badge.png" width="120" alt="HTB Academy — Security Monitoring & SIEM Fundamentals Badge">
 </a>
 
