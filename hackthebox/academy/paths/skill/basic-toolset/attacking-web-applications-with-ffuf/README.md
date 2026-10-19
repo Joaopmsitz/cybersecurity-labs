@@ -1,4 +1,4 @@
-﻿# Attacking Web Applications with Ffuf
+﻿# <img src="./images/attacking-web-applications-with-ffuf.png" width="36" alt="Attacking Web Applications with Ffuf"> Attacking Web Applications with Ffuf
 
 > HTB Academy — Basic Toolset
 
@@ -40,3 +40,9 @@ Add exercise-specific payloads, findings, and screenshots as you document the Ac
 ## References
 
 - [Ffuf project](https://github.com/ffuf/ffuf)
+
+## Completion
+
+<a href="https://academy.hackthebox.com/achievement/badge/00a6ff26-cca4-11f0-9254-bea50ffe6cb4"><img src="./images/htb-attacking-web-applications-with-ffuf-badge.png" width="120" alt="HTB Academy — Fuzzing is power Badge"></a>
+
+**Completed:** 28 November 2025
