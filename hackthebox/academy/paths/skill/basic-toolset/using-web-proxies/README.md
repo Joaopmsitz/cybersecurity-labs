@@ -1,4 +1,4 @@
-﻿# Using Web Proxies
+﻿# <img src="./images/using-web-proxies.jpg" width="36" alt="Using Web Proxies"> Using Web Proxies
 
 > HTB Academy — Basic Toolset
 

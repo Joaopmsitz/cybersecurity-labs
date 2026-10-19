@@ -1,4 +1,4 @@
-﻿# Intro to Network Traffic Analysis
+﻿# <img src="./images/intro-to-network-traffic-analysis.jpg" width="36" alt="Intro to Network Traffic Analysis"> Intro to Network Traffic Analysis
 
 > HTB Academy — Basic Toolset
 

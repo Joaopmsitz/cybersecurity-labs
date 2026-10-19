@@ -1,4 +1,4 @@
-﻿# SQLMap Essentials
+﻿# <img src="./images/sqlmap-essentials.jpg" width="36" alt="SQLMap Essentials"> SQLMap Essentials
 
 > HTB Academy — Basic Toolset
 
