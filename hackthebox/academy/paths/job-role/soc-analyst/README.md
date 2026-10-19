@@ -1,61 +1,67 @@
-# 🛡️ SOC Analyst
+# SOC Analyst
 
-> HTB Academy — Job Role Path
+> HTB Academy — Job Role Path / CDSA Certification
 
-A practical learning path focused on security monitoring, threat detection, incident response, network traffic analysis, digital forensics, and security investigation. The path combines defensive security concepts with hands-on analysis using SIEM platforms, endpoint telemetry, and detection tools.
+The SOC Analyst Job Role Path develops the practical skills required to monitor enterprise infrastructure, investigate suspicious activity, detect intrusions, and handle security incidents. It combines security monitoring, SIEM operations, threat hunting, network traffic analysis, malware analysis, digital forensics, and incident reporting.
 
 ## Path Overview
 
 | Property | Details |
 |---|---|
-| **Status** | In Progress |
+| **Path Type** | Job Role Path |
+| **Certification** | HTB Certified Defensive Security Analyst (CDSA) |
 | **Difficulty** | Medium |
+| **Status** | In Progress |
+| **Path Progress** | 28.7% |
 | **Modules** | 15 |
-| **Sections** | 167 |
-| **Estimated Duration** | 23 days, 5 hours (~189 study hours) |
-| **Required Cubes** | 1,220 |
-| **Reward** | 260 Cubes |
+| **Completed Modules** | 4 of 15 |
+| **Interactive Sections** | 131 |
+| **Assessments** | 14 |
+| **Estimated Duration** | 23 days, 5 hours |
+| **Completion Reward** | 260 Cubes |
+| **Projected Cost** | 0 Cubes |
+
+## Description
+
+This path is designed for aspiring SOC analysts and covers the practical workflow of security operations, from monitoring logs and network traffic to identifying adversary activity, investigating incidents, and preparing actionable reports.
+
+The modules introduce defensive tools, detection techniques, attacker tactics, and investigation methodologies. Practical exercises help develop the ability to correlate evidence across different data sources, determine incident scope and impact, and support effective incident response.
 
 ## Modules
 
-The table follows the official HTB path order. Module names link to the local README when documentation exists; otherwise, they link to the official HTB Academy module page. `—` indicates metadata that has not yet been verified.
+| # | Module | Type | Category | Difficulty | Estimated Duration | Tier | Status |
+|---:|---|---|---|---|---|---|---|
+| 1 | [Incident Handling Process](./incident-handling-process/README.md) | Regular | General | Easy | 1 day | I | Completed |
+| 2 | [Security Monitoring & SIEM Fundamentals](./security-monitoring-siem-fundamentals/README.md) | Regular | Defensive | Easy | 5 hours | II | Completed |
+| 3 | [Windows Event Logs & Finding Evil](https://academy.hackthebox.com/course/preview/windows-event-logs--finding-evil) | Mini | Defensive | Medium | 5 hours | II | Not completed |
+| 4 | [Introduction to Threat Hunting & Hunting With Elastic](https://academy.hackthebox.com/course/preview/introduction-to-threat-hunting--hunting-with-elastic) | Mini | Defensive | Medium | 4 hours | II | Not completed |
+| 5 | [Understanding Log Sources & Investigating with Splunk](https://academy.hackthebox.com/course/preview/understanding-log-sources--investigating-with-splunk) | Mini | Defensive | Medium | 1 day | II | Not completed |
+| 6 | [Windows Attacks & Defense](https://academy.hackthebox.com/course/preview/windows-attacks--defense) | Regular | Purple | Medium | 2 days | II | Not completed |
+| 7 | [Intro to Network Traffic Analysis](../../../modules/networking/intro-to-network-traffic-analysis/README.md) | Regular | General | Medium | 1 day | 0 | Completed |
+| 8 | [Intermediate Network Traffic Analysis](https://academy.hackthebox.com/course/preview/intermediate-network-traffic-analysis) | Regular | Defensive | Easy | 7 hours | II | Not completed |
+| 9 | [Working with IDS/IPS](https://academy.hackthebox.com/course/preview/working-with-ids-ips) | Regular | Defensive | Medium | 2 days | II | Not completed |
+| 10 | [Introduction to Malware Analysis](https://academy.hackthebox.com/course/preview/introduction-to-malware-analysis) | Regular | Defensive | Hard | 3 days | II | Not completed |
+| 11 | [JavaScript Deobfuscation](https://academy.hackthebox.com/course/preview/javascript-deobfuscation) | Regular | Defensive | Easy | 4 hours | 0 | Completed |
+| 12 | [YARA & Sigma for SOC Analysts](https://academy.hackthebox.com/course/preview/yara--sigma-for-soc-analysts) | Regular | Defensive | Easy | 3 days | II | Not completed |
+| 13 | [Introduction to Digital Forensics](https://academy.hackthebox.com/course/preview/introduction-to-digital-forensics) | Regular | Defensive | Medium | 2 days | II | Not completed |
+| 14 | [Detecting Windows Attacks with Splunk](https://academy.hackthebox.com/course/preview/detecting-windows-attacks-with-splunk) | Regular | Defensive | Medium | 5 days | II | Not completed |
+| 15 | [Security Incident Reporting](https://academy.hackthebox.com/course/preview/security-incident-reporting) | Mini | General | Easy | 4 hours | I | Not completed |
 
-| # | Module | Difficulty | Estimated Duration | Tier |
-|---:|---|---|---|---|
-| 1 | [Incident Handling Process](../../../modules/defensive/incident-handling-process/README.md) | Easy | — | I |
-| 2 | [Security Monitoring & SIEM Fundamentals](../../../modules/defensive/security-monitoring-siem-fundamentals/README.md) | Easy | — | II |
-| 3 | [Windows Event Logs & Finding Evil](https://academy.hackthebox.com/course/preview/windows-event-logs--finding-evil) | Medium | — | II |
-| 4 | [Introduction to Threat Hunting & Hunting With Elastic](https://academy.hackthebox.com/course/preview/introduction-to-threat-hunting--hunting-with-elastic) | Medium | — | II |
-| 5 | [Understanding Log Sources & Investigating with Splunk](https://academy.hackthebox.com/course/preview/understanding-log-sources--investigating-with-splunk) | Medium | — | II |
-| 6 | [Windows Attacks & Defense](https://academy.hackthebox.com/course/preview/windows-attacks--defense) | Medium | — | II |
-| 7 | [Intro to Network Traffic Analysis](../../../modules/networking/intro-to-network-traffic-analysis/README.md) | Medium | 1 day | 0 |
-| 8 | [Intermediate Network Traffic Analysis](https://academy.hackthebox.com/course/preview/intermediate-network-traffic-analysis) | Easy | — | II |
-| 9 | [Working with IDS/IPS](https://academy.hackthebox.com/course/preview/working-with-idsips) | Medium | — | II |
-| 10 | [Introduction to Malware Analysis](https://academy.hackthebox.com/course/preview/introduction-to-malware-analysis) | Hard | — | II |
-| 11 | [JavaScript Deobfuscation](../../../modules/web/javascript-deobfuscation/README.md) | Easy | 4 hours | 0 |
-| 12 | [YARA & Sigma for SOC Analysts](https://academy.hackthebox.com/course/preview/yara--sigma-for-soc-analysts) | Easy | — | II |
-| 13 | [Introduction to Digital Forensics](https://academy.hackthebox.com/course/preview/introduction-to-digital-forensics) | Medium | — | II |
-| 14 | [Detecting Windows Attacks with Splunk](https://academy.hackthebox.com/course/preview/detecting-windows-attacks-with-splunk) | Medium | — | II |
-| 15 | [Security Incident Reporting](https://academy.hackthebox.com/course/preview/security-incident-reporting) | Easy | — | — |
+> **Progress note:** The completion statuses above reflect the information recorded from the HTB Academy path overview. The overall path progress is tracked separately by HTB Academy.
 
-## Skills Covered
+## Certification — CDSA
 
-- **Incident response:** incident triage, investigation, handling, and reporting.
-- **SIEM and log analysis:** Elastic Stack, Splunk, search queries, and security monitoring.
-- **Threat hunting and detection:** threat intelligence, hunting workflows, YARA, Sigma, and detection rules.
-- **Network security monitoring:** packet analysis, traffic anomalies, and IDS/IPS technologies.
-- **Windows security:** event logs, Sysmon, Active Directory attacks, and defensive techniques.
-- **Digital forensics and malware analysis:** forensic artifacts, evidence analysis, and investigation of malicious software.
+The **HTB Certified Defensive Security Analyst (CDSA)** certification validates practical skills in security analysis, SOC operations, and incident handling.
 
-## Documentation Principles
+The certification focuses on the ability to investigate security events, correlate evidence from multiple sources, identify suspicious activity, determine incident impact, and produce actionable incident reports. Completing the path unlocks access to the certification exam.
 
-1. Each module has one canonical location under `modules/`.
-2. This README tracks the official path and links to existing module documentation.
-3. New module notes are added to the relevant domain as practical work progresses.
-4. Path-specific progress and completion information remain separate from technical notes.
+## Recommended Prerequisite
+
+The [SOC Analyst Prerequisites skill path](https://academy.hackthebox.com/) is recommended for learners who need to strengthen their foundational knowledge before progressing through the SOC Analyst Job Role Path.
 
 ## References
 
-- [HTB Academy — SOC Analyst Job Role Path](https://academy.hackthebox.com/path/preview/soc-analyst)
-- [HTB Academy — SOC Analyst Prerequisites](https://academy.hackthebox.com/path/preview/soc-analyst-prerequisites)
-- [HTB Academy — Modules and Paths Help Center](https://help.hackthebox.com/en/articles/12741910-academy-modules-paths)
+- [HTB Academy](https://academy.hackthebox.com/)
+- [HTB Academy — Incident Handling Process](https://academy.hackthebox.com/course/preview/incident-handling-process)
+- [HTB Academy — Security Monitoring & SIEM Fundamentals](https://academy.hackthebox.com/course/preview/security-monitoring--siem-fundamentals)
+- [HTB Certified Defensive Security Analyst (CDSA)](https://academy.hackthebox.com/)
