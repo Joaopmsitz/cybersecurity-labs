@@ -33,9 +33,8 @@ event.code:4625 AND winlog.event_data.SubStatus:0xC0000072
 
 Inspecting the configured query helps explain which events are included in a visualization without relying solely on the dashboard's displayed results.
 
-### Dashboard
-
-![Kibana dashboard for failed logon attempts involving disabled users](../images/lab-03-disabled-users-dashboard.png)
+### Visualization Panel
+![Kibana disabled-user visualization panel](../images/lab-03-disabled-users-panel.png)
 
 ## Key Takeaways
 
