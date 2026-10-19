@@ -1,5 +1,6 @@
 ﻿# Basic Toolset
 
+<p align="center"><img src="./images/htb-basic-toolset-cover.png" width="420" alt="HTB Academy — Basic Toolset"></p>
 > HTB Academy — Skill Path
 
 A practical introduction to essential tools used in network enumeration, authentication testing, web application assessment, password cracking, database testing, traffic analysis, and web proxy workflows.
@@ -20,13 +21,13 @@ A practical introduction to essential tools used in network enumeration, authent
 
 | # | Module | Difficulty | Estimated Duration | Tier |
 |---:|---|---|---|---|
-| 1 | [Network Enumeration with Nmap](https://academy.hackthebox.com/module/19) | Easy | 7 hours | I |
-| 2 | [Login Brute Forcing](https://academy.hackthebox.com/module/57) | Easy | 6 hours | II |
-| 3 | [Attacking Web Applications with Ffuf](https://academy.hackthebox.com/module/54) | Easy | 5 hours | 0 |
-| 4 | [Cracking Passwords with Hashcat](https://academy.hackthebox.com/module/20) | Medium | 1 day | II |
-| 5 | [SQLMap Essentials](https://academy.hackthebox.com/module/58) | Easy | 4 hours | II |
-| 6 | [Intro to Network Traffic Analysis](https://academy.hackthebox.com/module/81) | Medium | 1 day | 0 |
-| 7 | [Using Web Proxies](https://academy.hackthebox.com/module/110) | Easy | 1 day | II |
+| 1 | [Network Enumeration with Nmap](./network-enumeration-with-nmap/README.md) | Easy | 7 hours | I |
+| 2 | [Login Brute Forcing](./login-brute-forcing/README.md) | Easy | 6 hours | II |
+| 3 | [Attacking Web Applications with Ffuf](./attacking-web-applications-with-ffuf/README.md) | Easy | 5 hours | 0 |
+| 4 | [Cracking Passwords with Hashcat](./cracking-passwords-with-hashcat/README.md) | Medium | 1 day | II |
+| 5 | [SQLMap Essentials](./sqlmap-essentials/README.md) | Easy | 4 hours | II |
+| 6 | [Intro to Network Traffic Analysis](./intro-to-network-traffic-analysis/README.md) | Medium | 1 day | 0 |
+| 7 | [Using Web Proxies](./using-web-proxies/README.md) | Easy | 1 day | II |
 
 ## Skills Covered
 
