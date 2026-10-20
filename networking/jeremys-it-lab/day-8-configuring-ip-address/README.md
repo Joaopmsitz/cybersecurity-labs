@@ -1,6 +1,6 @@
 # Day 8 — Configuring IP Addresses
 
-<img width="1439" height="899" alt="Initial Packet Tracer topology" src="https://github.com/user-attachments/assets/4dc57913-163c-4d83-bc2b-aefbcd67038e" />
+![Initial Packet Tracer topology](./images/1ccna.png)
 
 Lab completed as part of **Jeremy's IT Lab — Free CCNA 200-301 Complete Course**.
 
@@ -83,7 +83,7 @@ copy running-config startup-config
 
 ## R1 Interface Configuration
 
-<img width="1438" height="899" alt="R1 interface configuration after setup" src="https://github.com/user-attachments/assets/3f910629-673f-448a-b4fe-292b4d781e32" />
+![R1 configuration](./images/2ccna.png)
 
 ## Connectivity Tests
 
@@ -96,7 +96,7 @@ ping 201.191.20.1
 
 The ping tests were used to verify end-to-end connectivity between the PCs on the three networks.
 
-<img width="1439" height="899" alt="Ping tests from PC1 to PC2 and PC3" src="https://github.com/user-attachments/assets/87b42590-ccab-45f6-8ea9-4e09b17eb9b6" />
+![Ping tests to PC2 and PC3](./images/3ccna.png)
 
 ## Tool
 
