@@ -1,8 +1,6 @@
-# Day 4 — Basic Device Security
+# Day 4 â€” Basic Device Security
 
-<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/0b3e4903-b386-48a1-af5f-cd735028905e" />
-
-Lab completed as part of **Jeremy's IT Lab — Free CCNA 200-301 Complete Course**.
+Lab completed as part of **Jeremy's IT Lab â€” Free CCNA 200-301 Complete Course**.
 
 ## Topics
 
@@ -30,13 +28,26 @@ show running-config
 copy running-config startup-config
 ```
 
+## Evidence
+
+### Screenshot 1
+
+<img width="1439" alt="Day 4 lab evidence 1" src="./images/1ccna.png" />
+
+### Screenshot 2
+
+<img width="1439" alt="Day 4 lab evidence 2" src="./images/2ccna.png" />
+
+### Screenshot 3
+
+<img width="1439" alt="Day 4 lab evidence 3" src="./images/3ccna.png" />
+
 ## Tool
 
 * Cisco Packet Tracer
 
 ## Reference
 
-Jeremy's IT Lab — Free CCNA 200-301 Complete Course
-Day 4 — Basic Device Security
+Jeremy's IT Lab â€” Free CCNA 200-301 Complete Course
+Day 4 â€” Basic Device Security
 
-<img width="1439" height="899" alt="image" src="https://github.com/user-attachments/assets/ffd93f4f-d6a7-43ec-91fc-2fed3fa97181" />
