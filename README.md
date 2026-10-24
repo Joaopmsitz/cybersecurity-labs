@@ -36,19 +36,6 @@ The tools used for each activity are listed in its corresponding write-up. This 
 - **Microsoft SC-200:** preparation in progress.
 - Additional security, cloud, and networking study is documented in the relevant sections as it becomes available.
 
-## Documentation standard
-
-Where applicable, each lab or investigation should describe:
-
-1. Objective and scope.
-2. Environment and tools.
-3. Procedure, queries, or commands used.
-4. Evidence and relevant observations.
-5. Analysis and reasoning behind the conclusion.
-6. Result, limitations, and lessons learned.
-
-Reusable starting points: [SOC investigation template](./templates/soc-investigation-template.md) and [technical lab template](./templates/cybersecurity-lab-template.md). Adapt each template to the actual activity and include only results and evidence that were observed.
-
 ## Responsible use
 
 Offensive testing is limited to authorized training platforms, isolated labs, or systems for which permission has been granted. Review evidence before publication to avoid exposing credentials, personal information, private infrastructure, or restricted training material. Follow the rules of each training platform.
