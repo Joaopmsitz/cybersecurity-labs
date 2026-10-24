@@ -1,56 +1,46 @@
-# CCNA Networking Labs
+# Networking Labs — CCNA Preparation
 
-Hands-on networking labs and experiments created during my CCNA preparation.
-
-This repository contains Packet Tracer activities, Cisco IOS configurations, troubleshooting exercises, and personal labs.
+Hands-on networking exercises and notes created during CCNA preparation. This section is intended to document configuration, verification, troubleshooting, and the reasoning behind network behavior.
 
 ## Contents
 
 ### Cisco Networking Academy
 
-Labs completed as part of the Cisco Networking Academy CCNA curriculum.
-
-* [CCNA 1 — Introduction to Networks](./ccna-1-introduction-to-networks/)
-* CCNA 2 — Switching, Routing, and Wireless Essentials
-* CCNA 3 — Enterprise Networking, Security, and Automation
+- [CCNA 1 — Introduction to Networks](./ccna-1-introduction-to-networks/)
+- CCNA 2 — Switching, Routing, and Wireless Essentials
+- CCNA 3 — Enterprise Networking, Security, and Automation
 
 ### Jeremy's IT Lab
 
-Labs completed as part of my practical CCNA preparation using Jeremy's IT Lab.
+Study and lab work from Jeremy's IT Lab. Add direct links to each documented course folder as those paths are verified in the repository.
 
-* CCNA 1
-* CCNA 2
-* CCNA 3
+### Personal labs
 
-### Personal Labs
-
-Additional Packet Tracer labs created to reinforce networking concepts and practice troubleshooting.
-
-## Topics
-
-* Network fundamentals
-* IPv4 and IPv6
-* Ethernet and switching
-* VLANs and trunking
-* STP
-* EtherChannel
-* Routing
-* OSPF
-* DHCP
-* ACLs
-* NAT
-* Wireless
-* Network security
-* Automation and programmability
-
-## Tools
-
-* Cisco Packet Tracer
-* Cisco IOS
-* Anki
+Additional Packet Tracer labs and troubleshooting exercises created to reinforce networking concepts.
 
 ## Goal
 
 Build practical networking knowledge while preparing for the Cisco CCNA certification.
 
 The repository is updated as I progress through the curriculum.
+
+## Topics
+
+- Network fundamentals and TCP/IP.
+- IPv4, IPv6, and subnetting.
+- Ethernet, switching, VLANs, trunks, STP, and EtherChannel.
+- Routing and OSPF.
+- DHCP, ACLs, NAT, and wireless networking.
+- Network security, troubleshooting, and automation fundamentals.
+
+## Tools
+
+- Cisco Packet Tracer.
+- Cisco IOS command-line interface.
+- Anki for review.
+
+## Suggested lab documentation
+
+For configuration labs, include the objective, topology, addressing plan, relevant configuration, verification commands and outputs, troubleshooting performed, final result, and lessons learned. Sanitize public IPs, credentials, and any information belonging to real environments.
+
+[Back to the main portfolio](../README.md)

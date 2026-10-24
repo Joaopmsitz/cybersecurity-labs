@@ -1,113 +1,50 @@
 # Hackers do Bem — Cybersecurity Labs
 
-Documentação da minha jornada prática no **Hackers do Bem**, reunindo laboratórios, atividades, ferramentas, estudos e evidências desenvolvidos ao longo da formação em cibersegurança.
+Documentação da minha jornada prática no programa Hackers do Bem, com atividades, laboratórios, ferramentas e evidências produzidos durante a formação em cibersegurança.
 
-O repositório funciona como um **registro técnico** do que foi estudado e praticado durante o programa, com foco em segurança da informação, redes, defesa, resposta a incidentes, forense e segurança em ambientes tecnológicos.
+O objetivo desta seção é registrar o que foi praticado e aprendido, incluindo procedimentos, comandos, resultados observados e conceitos de segurança relacionados.
 
-## Sobre o Hackers do Bem
-
-O Hackers do Bem é um programa nacional de formação em cibersegurança desenvolvido por instituições como SENAI e RNP, com diferentes etapas de capacitação e uma fase final de residência tecnológica.
-
-Minha jornada no programa passou pelas etapas de Nivelamento, Básico, Fundamental e Especialização, restando atualmente apenas a Residência Tecnológica.
-
-## Minha Jornada
+## Minha jornada
 
 | Etapa | Status |
 |---|---|
-| Nivelamento | ✅ Concluído |
-| Básico | ✅ Concluído |
-| Fundamental | ✅ Concluído |
-| Especialização | ✅ Concluído |
-| Residência Tecnológica | ⬜ Próxima etapa |
+| Nivelamento | Concluído |
+| Básico | Concluído |
+| Fundamental | Concluído |
+| Especialização — Resposta a Incidentes e Forense | Concluída |
+| Residência Tecnológica | Próxima etapa |
 
-## Progresso
+**Status registrado neste README:** Especialização concluída; Residência Tecnológica como próxima etapa.
 
-```
-Nivelamento                  ████████████████████  100% ✅
-Básico                       ████████████████████  100% ✅
-Fundamental                  ████████████████████  100% ✅
-Especialização               ████████████████████  100% ✅
-Residência Tecnológica       ░░░░░░░░░░░░░░░░░░░░    0% ⬜
-```
+## Conteúdo
 
-**Status atual:** Especialização concluída. Próxima etapa: Residência Tecnológica.
+### [Fundamental](./fundamental/README.md)
 
-## Estrutura do Repositório
+Doze módulos com atividades sobre integridade e hashing, malware, reconhecimento, testes em laboratório, autenticação, Active Directory, automação, segurança web, backup, criptografia, certificados digitais, hardening, redes, logs e forense básica.
 
-```
-hackers-do-bem-labs/
-│
-├── README.md
-│
-├── fundamental/
-│   ├── README.md
-│   └── modulo-01/ ... modulo-12/
-│       └── aula-XX-XX/
-│           ├── atividade-X.X-nome/
-│           └── evidencias.pdf
-│
-└── especializacao-resposta-incidentes-forense/
-```
+### [Especialização — Resposta a Incidentes e Forense](./especializacao-resposta-incidentes-forense/)
 
-Cada atividade possui sua própria documentação, descrevendo objetivo, ambiente, procedimento, comandos utilizados, resultado e conceitos praticados. As atividades práticas também possuem arquivos de evidência quando aplicável — quando várias atividades pertencem à mesma aula, as evidências são reunidas em um único PDF para facilitar a consulta.
+Atividades voltadas à identificação, análise e documentação de incidentes e evidências digitais.
 
-## Etapas Documentadas
+## Ferramentas e tecnologias
 
-### Fundamental
+As atividades documentadas incluem temas e ferramentas como Kali Linux, Windows Server, Wireshark, tcpdump, Nmap, Burp Suite, OpenSSL, Suricata, ClamAV, Python, PowerShell, Active Directory, iptables e OpenVPN. Consulte cada atividade para confirmar o que foi efetivamente utilizado e em qual contexto.
 
-A etapa Fundamental aprofundou conceitos de segurança da informação através de aulas teóricas e atividades práticas em ambiente de laboratório, cobrindo 12 módulos: integridade e hashing, malware, reconhecimento e pentest, autenticação, Active Directory, automação/exploração web, backup e descarte seguro, criptografia, certificados digitais, hardening, redes e, por fim, logs e forense básica.
+## Como as atividades são documentadas
 
-→ [Ver documentação do Fundamental](./fundamental/README.md)
+Quando aplicável, cada registro apresenta:
 
-### Especialização — Resposta a Incidentes e Forense
+- Objetivo e contexto da atividade.
+- Ambiente e ferramentas utilizadas.
+- Procedimento e comandos executados.
+- Resultado observado e interpretação.
+- Conceitos de segurança relacionados.
+- Evidências da execução.
 
-Etapa concluída com foco em Resposta a Incidentes e Forense, aprofundando investigação e análise de incidentes de segurança: identificação, análise e documentação de evidências digitais.
+As evidências compartilhadas devem ser adequadas à publicação pública e não conter dados pessoais, credenciais ou materiais que o programa não autorize divulgar.
 
-→ [Ver Especialização — Resposta a Incidentes e Forense](./especializacao-resposta-incidentes-forense/)
+## Sobre o programa
 
-## Ferramentas e Tecnologias
+O Hackers do Bem é uma iniciativa de formação em cibersegurança. Esta seção documenta minha experiência de aprendizagem no programa; ela não representa uma publicação oficial do programa.
 
-| Ferramenta / Tecnologia | Contexto |
-|---|---|
-| Kali Linux | Ambiente de laboratório de segurança |
-| Windows Server | Administração, GPO, AD, hardening |
-| Wireshark / tcpdump | Captura e análise de pacotes |
-| Maltego | OSINT e correlação de informações |
-| Nmap / Burp Suite | Reconhecimento e testes de intrusão |
-| OpenSSL | Criptografia e certificados digitais |
-| Suricata / ClamAV | Detecção de intrusão e antivírus |
-| Python / PowerShell | Scripting e automação |
-| Active Directory | Gestão de identidade e domínio |
-| iptables / OpenVPN | Firewall e VPN |
-
-*A lista será atualizada conforme novas ferramentas forem utilizadas durante a formação.*
-
-## O que este repositório documenta
-
-O objetivo não é apenas armazenar certificados ou materiais do curso. Cada atividade documentada busca registrar:
-
-- O que foi estudado
-- Como o laboratório foi executado
-- Comandos utilizados
-- Ferramentas empregadas
-- Resultados observados
-- Conceitos de segurança envolvidos
-- Evidências da execução
-
-Dessa forma, o repositório também funciona como um **portfólio prático de aprendizado em cibersegurança**.
-
-## Próxima Etapa
-
-**Residência Tecnológica** — fase destinada à aplicação prática dos conhecimentos desenvolvidos durante a formação.
-
-```
-Formação teórica → Laboratórios → Especialização → Residência Tecnológica → Experiência prática em cibersegurança
-```
-
-## Sobre
-
-Cybersecurity portfolio com laboratórios, atividades práticas e documentação da minha jornada no programa Hackers do Bem.
-
-O repositório será atualizado conforme novas atividades, projetos e experiências forem desenvolvidos.
-
-**Autor:** João Paulo Moreira de Sousa
+[Voltar ao portfólio principal](../README.md)

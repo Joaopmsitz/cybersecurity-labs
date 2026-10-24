@@ -1,81 +1,26 @@
-# Fundamental
+# Fundamental — Hackers do Bem
 
-Documentação da etapa **Fundamental** do programa Hackers do Bem: 12 módulos, cada um dividido em duas aulas, cobrindo desde integridade de arquivos e hashing até forense básica e análise de tráfego.
+Documentação da etapa Fundamental do programa Hackers do Bem. Os doze módulos cobrem atividades que vão de integridade de arquivos e hashing a redes, análise de tráfego, logs e conceitos de forense digital.
 
-Cada atividade possui sua própria pasta com objetivo, ambiente, procedimento, comandos utilizados, resultado e conceitos praticados. As evidências de cada aula estão reunidas em um `evidencias.pdf` dentro da respectiva pasta de aula.
+Cada atividade possui documentação própria quando aplicável. As evidências de uma aula podem estar reunidas no arquivo `evidencias.pdf` correspondente.
 
 ## Módulos
 
-### Módulo 01 — Integridade, Hashing e Reconhecimento Inicial
-**Aula 01-02:** integridade de texto · integridade de arquivos · hash · criptografia · Taskwarrior
-**Aula 03-04:** phishing · WHOIS · Maltego · OSINT · adversarial ML
+1. [Módulo 01 — Integridade, hashing e reconhecimento inicial](./modulo-01/)
+2. [Módulo 02 — Malware e anonimato](./modulo-02/)
+3. [Módulo 03 — Reconhecimento e testes de intrusão](./modulo-03/)
+4. [Módulo 04 — Autenticação e controle de acesso](./modulo-04/)
+5. [Módulo 05 — Active Directory](./modulo-05/)
+6. [Módulo 06 — Automação e segurança web](./modulo-06/)
+7. [Módulo 07 — Backup e descarte seguro](./modulo-07/)
+8. [Módulo 08 — Criptografia](./modulo-08/)
+9. [Módulo 09 — Certificados digitais](./modulo-09/)
+10. [Módulo 10 — Hardening e virtualização](./modulo-10/)
+11. [Módulo 11 — Redes e firewall](./modulo-11/)
+12. [Módulo 12 — Logs e forense básica](./modulo-12/)
 
-### Módulo 02 — Malware e Anonimato
-**Aula 05-06:** trojan de acesso remoto · keylogger (XSpy) · ransomware · múltiplos payloads de malware · Windows Defender vs. keylogger
-**Aula 07-08:** ccrypt · logcheck · Tor Browser · deep web / Tor · políticas de segurança do Windows
+## Padrão das atividades
 
-### Módulo 03 — Reconhecimento e Testes de Intrusão
-**Aula 09-10:** ExploitDB · Nmap · Burp Suite · Netcat listener · Ncat (redirecionamento de portas)
-**Aula 11-12:** diagnóstico de rede · honeypot (Pentbox) · enumeração DNS (host, nslookup, dig)
+Os registros devem priorizar o raciocínio técnico e os resultados observados, não apenas capturas de tela. Quando aplicável, inclua objetivo, ambiente, procedimento, comandos, resultado, interpretação e aprendizados.
 
-### Módulo 04 — Autenticação e Controle de Acesso
-**Aula 13-14:** controle de autenticação · SELinux · KeePassXC · John the Ripper (dicionário) · credential manager
-**Aula 15-16:** RADIUS · Google Authenticator · Google Authenticator no Firefox · TPM/USB · OTP Client
-
-### Módulo 05 — Active Directory
-**Aula 17-18:** Active Directory · Domain Controller · usuário no AD · cliente no domínio · política de senhas (GPO)
-**Aula 19-20:** DAC no Windows · OU no Active Directory · DAC no Kali · RBAC no Kali · rotação de senha no Kali
-
-### Módulo 06 — Automação e Segurança Web
-**Aula 21-22:** reuso de código em Python · JDK/NetBeans · automação em Python · assinaturas ClamAV · PowerShell
-**Aula 23-24:** HTTP via cURL · encurtador de URL com QR code · clickjacking · verificação de clickjacking · SQL injection
-
-### Módulo 07 — Backup e Descarte Seguro
-**Aula 25-26:** RAID 0 no Kali · RAID 1 no Kali · rsync manual · rsync via cron · backup no OneDrive
-**Aula 27-28:** Duplicity (backup completo) · Duplicity (backup diferencial) · formatação completa · sobrescrita simples · sobrescrita DoD
-
-### Módulo 08 — Criptografia
-**Aula 29-30:** esteganografia no Kali · ofuscação em Python · AES-256 · 3DES · Blowfish
-**Aula 31-32:** hash MD5/RIPEMD-160/BLAKE2 · hash SHA · RSA-2048 (confidencialidade) · ECC-256 (confidencialidade) · RSA-2048 (assinatura digital)
-
-### Módulo 09 — Certificados Digitais
-**Aula 33-34:** criando autoridade certificadora · emitindo certificados · conhecendo certificado digital · avaliando certificados web · certificado autoassinado no Kali
-**Aula 35-36:** revogando certificado (Windows Server) · cancelando revogação (Windows Server) · verificando certificados web via OCSP no Kali · criando carteira Bitcoin (Electrum) · recuperando carteira Bitcoin (Electrum)
-
-### Módulo 10 — Hardening e Virtualização
-**Aula 37-38:** integridade de memória / manutenção (Windows Server) · controle de aplicativos e navegadores (Windows Server) · atualizações (Windows Server) · ClamAV no Kali · Suricata no Kali
-**Aula 39-40:** hypervisor tipo 2 no Kali · criando VM Debian no VirtualBox · UEFI/BIOS (simulação) · full disk encryption no Kali · container Ubuntu com Docker no Kali
-
-### Módulo 11 — Redes e Firewall
-**Aula 41-42:** tabela ARP no Kali · alias de interface de rede no Kali · MAC cloning no Kali · QoS no Kali · QoS no Windows Server
-**Aula 43-44:** ACL/firewall no Windows Server 2022 · bloqueando sites com iptables (Kali) · redirecionando DNS com iptables (Kali) · OpenVPN no Kali · bloqueando ICMP (Windows Server + Kali)
-
-### Módulo 12 — Logs e Forense Básica
-**Aula 45-46:** logs no Windows Server 2022 · NTP no Windows Server 2022 · explorando logs no Kali · capturando pacotes com Wireshark no Kali · analisando pacotes TLS com tcpdump/Wireshark
-**Aula 47-48:** lendo metadados no Kali · apagando metadados no Kali · escrevendo metadados no Kali · explorando o TSK (The Sleuth Kit) no Kali · aquisição de imagem de disco no Kali
-
-## Estrutura de Pastas
-
-```
-fundamental/
-├── README.md
-├── modulo-01/
-│   ├── aula-01-02/
-│   │   ├── atividade-1.1-integridade-texto/
-│   │   ├── atividade-1.2-integridade-arquivos/
-│   │   ├── ...
-│   │   └── evidencias.pdf
-│   └── aula-03-04/
-│       ├── atividade-1.6-phishing/
-│       ├── ...
-│       └── evidencias.pdf
-├── modulo-02/
-│   └── ...
-...
-└── modulo-12/
-    └── ...
-```
-
-## Voltar
-
-→ [Repositório principal](../README.md)
+[Voltar para Hackers do Bem](../README.md) · [Voltar ao portfólio principal](../../README.md)
