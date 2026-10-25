@@ -1,59 +1,64 @@
-# Atividade 1.4 — Criptografia
+# Activity 1.4 — Classical Cryptography with ROT13 and Caesar Cipher
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 01  
+> **Class:** 01–02  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Praticar conceitos básicos de criptografia por meio da cifra ROT13 e da implementação de uma cifra de César em Python.
+## Objective
 
-A atividade demonstra como um texto pode ser transformado utilizando um deslocamento fixo no alfabeto e posteriormente recuperado aplicando o deslocamento inverso.
+Explore basic cryptography concepts by applying the ROT13 substitution cipher and implementing a Caesar cipher in Python.
 
-## Ambiente
+The activity demonstrates how text can be transformed using a fixed alphabet shift and recovered by applying the inverse shift.
 
-* Kali Linux
-* Terminal
-* Python 3
-* `rot13`
-* Editor `nano`
+## Environment
 
-## Procedimento
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Python:** Python 3
+- **Tools:** `rot13`, `nano`
 
-### 1. Teste com ROT13
+## Procedure
 
-Primeiro, foi utilizado o comando `rot13` para aplicar a transformação sobre uma mensagem:
+### 1. Test ROT13
+
+The `rot13` command was used to transform a message:
 
 ```bash
 echo "Hackers do bem - Fundamental" | rot13
 ```
 
-Resultado:
+Output:
 
 ```text
 Unpxref qb orz - Shaqnzragny
 ```
 
-Em seguida, foi aplicado o ROT13 novamente sobre o texto transformado:
+The ROT13 transformation was then applied to the encoded text:
 
 ```bash
 echo "Unpxref qb orz - Shaqnzragny" | rot13
 ```
 
-Resultado:
+Output:
 
 ```text
 Hackers do bem - Fundamental
 ```
 
-Como o ROT13 utiliza um deslocamento de 13 posições, aplicar a transformação duas vezes retorna o texto original.
+ROT13 shifts each letter by 13 positions in the alphabet. Since the English alphabet contains 26 letters, applying the transformation twice restores the original text.
 
-### 2. Criação da cifra de César
+### 2. Create the Caesar Cipher Program
 
-Foi criado o arquivo `cesar_cipher.py` no diretório `Documentos`:
+A Python file named `cesar_cipher.py` was created in the Documents directory:
 
 ```bash
 cd /home/aluno/Documentos/
 nano cesar_cipher.py
 ```
 
-O código utilizado foi:
+The following code was used:
 
 ```python
 def caesar_cipher(text, shift):
@@ -97,115 +102,120 @@ if __name__ == "__main__":
     main()
 ```
 
-O programa percorre cada caractere da mensagem e aplica um deslocamento definido pelo usuário. Caracteres que não são letras, como espaços e hífens, são mantidos.
+The program processes each character and applies the shift specified by the user. Non-letter characters, such as spaces and hyphens, are preserved.
 
-### 3. Cifrando uma mensagem
+**Implementation note:** The code is designed for basic English letters (`A–Z` and `a–z`). It does not correctly handle all Unicode alphabetic characters, such as accented letters.
 
-O programa foi executado com:
+### 3. Encrypt a Message
+
+The program was executed using:
 
 ```bash
 python3 cesar_cipher.py
 ```
 
-Foi utilizada a mensagem:
+The input message was:
 
 ```text
 Hackers do bem - Fundamental
 ```
 
-Com deslocamento:
+The shift value was:
 
 ```text
 10
 ```
 
-O resultado foi:
+The resulting encrypted text was:
 
 ```text
 Rkmuobc ny low - Pexnkwoxdkv
 ```
 
-### 4. Decifrando a mensagem
+Each letter was shifted ten positions forward in the alphabet, wrapping around when necessary.
 
-Para recuperar o texto original, o programa foi executado novamente:
+### 4. Decrypt the Message
+
+The program was executed again:
 
 ```bash
 python3 cesar_cipher.py
 ```
 
-Foi utilizado o texto cifrado:
+The encrypted message was entered:
 
 ```text
 Rkmuobc ny low - Pexnkwoxdkv
 ```
 
-E aplicado o deslocamento inverso:
+The inverse shift was applied:
 
 ```text
 -10
 ```
 
-Resultado:
+The result was:
 
 ```text
 Hackers do bem - Fundamental
 ```
 
-Isso demonstra que o mesmo algoritmo pode ser utilizado para cifrar e decifrar uma mensagem, desde que o deslocamento correto seja conhecido.
+This demonstrated that the same function can encrypt and decrypt a message by using an appropriate shift value.
 
-### 5. Limpeza
+### 5. Clean Up the Environment
 
-Após concluir a atividade, o arquivo utilizado no laboratório foi removido:
+After completing the activity, the Python script was removed:
 
 ```bash
 rm cesar_cipher.py
 ```
 
-Em seguida, foi verificado o conteúdo do diretório:
+The remaining files were checked using:
 
 ```bash
 ls
 ```
 
-## Comandos utilizados
+## Commands Used
 
 ```bash
-sudo -i
-
 echo "Hackers do bem - Fundamental" | rot13
-
 echo "Unpxref qb orz - Shaqnzragny" | rot13
-
 cd /home/aluno/Documentos/
-
 nano cesar_cipher.py
-
 python3 cesar_cipher.py
-
 rm cesar_cipher.py
-
 ls
 ```
 
-## Resultado
+## Result
 
-Foi possível aplicar ROT13 em uma mensagem e implementar uma cifra de César em Python, realizando tanto a cifragem quanto a decifragem por meio da alteração do deslocamento no alfabeto.
+The activity demonstrated how to apply ROT13 to a message and implement a Caesar cipher in Python for both encryption and decryption.
 
-## Conceitos praticados
+ROT13 restored the original message when applied twice. The Caesar cipher transformed the input using a shift of 10 and recovered the original text when the inverse shift of -10 was applied.
 
-* Criptografia clássica
-* ROT13
-* Cifra de César
-* Cifragem e decifragem
-* Deslocamento de caracteres
-* Manipulação de strings em Python
-* Uso de `ord()` e `chr()`
-* Execução de scripts Python no Linux
+## Concepts Practiced
 
-> **Observação:** ROT13 e cifra de César são técnicas criptográficas históricas e não devem ser utilizadas para proteger informações reais. A atividade tem finalidade exclusivamente didática.
+- Classical cryptography
+- ROT13 substitution cipher
+- Caesar cipher
+- Encryption and decryption
+- Alphabetic character shifting
+- Python string manipulation
+- Use of `ord()` and `chr()`
+- Execution of Python scripts on Linux
+- Basic command-line file management
 
-## Evidência
+**Security note:** ROT13 and the Caesar cipher are historical substitution techniques and should not be used to protect real-world sensitive information. They are included here for educational purposes only.
 
-A execução da atividade foi registrada no PDF de evidências da Aula 01–02.
+## Evidence
 
-[Ver evidências — Aula 01–02](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-01/aula-01-02/evidencias.pdf)
+The activity was documented in the PDF containing the evidence for Classes 01–02.
+
+The evidence shows the execution of the ROT13 commands and the Caesar cipher program, including the transformation and recovery of the message.
+
+[View Evidence — Classes 01–02](../evidencias.pdf)
+
+---
+
+[Back to Classes 01–02](../) · [Back to Module 01](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
