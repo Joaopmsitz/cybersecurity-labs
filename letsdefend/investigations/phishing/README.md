@@ -1,64 +1,33 @@
-# 🎣 Phishing Investigations
+# Phishing Investigations
 
-This directory contains phishing-related security investigations performed during hands-on SOC Analyst training on the Let's Defend platform.
+Documented SOC investigation exercises completed on the LetsDefend platform, focusing on phishing emails, malicious attachments, suspicious URLs, and malware delivery techniques.
 
-These investigations focus on malicious emails, phishing URLs, social engineering techniques, malicious attachments, and payload delivery attempts.
+## Investigations
 
----
+| Case | Focus |
+| --- | --- |
+| [SOC114 — Malicious Attachment Detected](./SOC114-malicious-attachment-detected-phishing-alert.md) | Phishing alert involving a malicious attachment. |
+| [SOC120 — Phishing Mail: Internal to Internal](./SOC120-phishing-mail-detected-internal-to-internal.md) | Phishing email investigation involving internal senders and recipients. |
+| [SOC140 — Phishing Malicious Attachment](./SOC140-phishing-malicious-attachment.md) | Investigation of a phishing email containing a suspicious attachment. |
+| [SOC141 — Phishing URL Detected](./SOC141-phishing-url-detected.md) | Investigation of a URL flagged as phishing. |
+| [SOC146 — Excel 4.0 Macros](./SOC146-Phishing-Mail-Detected-Excel-4.0-Macros.md) | Phishing investigation involving Excel 4.0 macros. |
+| [SOC282 — Phishing Deceptive Email](./SOC282-phishing-deceptive-email.md) | Analysis of a deceptive phishing email. |
+| [SOC338 — Lumma Stealer ClickFix](./SOC338-Lumma-Stealer-ClickFix.md) | Investigation of a ClickFix phishing scenario associated with Lumma Stealer. |
 
-## 📂 Included Investigations
+## Topics
 
-- SOC114 - Malicious Attachment Detected - Phishing Alert 
-- SOC120 - Phishing Mail Detected - Internal to Internal 
-- SOC140 - Phishing Malicious Attachment
-- SOC141 - Phishing URL Detected
-- SOC146 - Phishing Mail Detected - Excel 4.0 Macros
-- SOC282 - Phishing Deceptive Email
-- SOC338 - Lumma Stealer ClickFix Phishing
+- Phishing email analysis
+- Sender and URL investigation
+- Malicious attachment analysis
+- Social engineering indicators
+- Indicators of Compromise (IOCs)
+- Malware delivery techniques
+- Threat classification and incident documentation
 
----
+## Scope
 
-## 🎯 Investigation Areas
-
-- Email Header Analysis
-- Sender Reputation Validation
-- Attachment Analysis
-- URL Analysis
-- Sandbox Analysis
-- Social Engineering Identification
-- IOC Identification
-- Malware Delivery Analysis
-- User Interaction Analysis
-- Threat Validation
+This directory contains documented training scenarios from LetsDefend. Findings and response actions refer to the simulated investigations and should not be interpreted as real-world incident response experience.
 
 ---
 
-## 🧠 SOC Workflow Applied
-
-- Alert Triage
-- Evidence Collection
-- Email Analysis
-- Attachment and URL Inspection
-- Threat Intelligence Validation
-- MITRE ATT&CK Mapping
-- Threat Classification
-- Incident Response
-- Final Reporting
-
----
-
-## 🎯 Skills Demonstrated
-
-- Phishing Detection
-- Email Security Analysis
-- Social Engineering Identification
-- IOC Extraction
-- Threat Validation
-- Malware Delivery Analysis
-- Endpoint Investigation
-- PowerShell Investigation
-- Security Reporting
-
----
-
-⭐ Practical phishing investigation experience developed through real-world email security incidents, malicious attachments, credential harvesting attempts, malware delivery campaigns, and user-focused attack scenarios.
+[Back to Investigations](../README.md) · [Back to LetsDefend](../../README.md)
