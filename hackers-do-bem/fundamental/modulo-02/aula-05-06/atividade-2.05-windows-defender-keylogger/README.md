@@ -1,204 +1,221 @@
-# Atividade 2.5 — Explorando como o Windows Defender detecta um Keylogger como programa malicioso
+# Activity 2.05 — Observing Microsoft Defender SmartScreen Protection Against a Keylogger Sample
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 02  
+> **Class:** 05–06  
+> **Environment:** Windows Server 2022 virtual lab  
+> **Status:** Completed
 
-Explorar, em um ambiente controlado de laboratório, como os mecanismos de proteção do Windows identificam e bloqueiam um arquivo associado a um **keylogger**.
+## Objective
 
-A atividade utilizou o **Microsoft Defender SmartScreen** para observar o comportamento do sistema de segurança diante da tentativa de download de um arquivo contendo um keylogger.
+Explore how Windows security protections respond to a file associated with a **keylogger** in a controlled laboratory environment.
 
-O objetivo principal foi compreender como mecanismos de proteção de endpoints podem impedir o acesso a arquivos potencialmente maliciosos antes mesmo de sua execução.
+The activity used **Microsoft Defender SmartScreen** to observe the browser's response to an attempted download of a file containing a keylogger example.
 
-> **Aviso:** a atividade foi realizada exclusivamente para fins acadêmicos e em ambiente de laboratório. O arquivo analisado não foi executado.
+The main objective was to understand how endpoint protection mechanisms can warn users about potentially unsafe downloads before the downloaded content is executed.
 
-## Ambiente
+> **Safety notice:** This activity was performed exclusively for educational purposes in a laboratory environment. The file was not executed, and the keylogger was not installed or run.
 
-* Windows Server 2022
-* Microsoft Edge
-* Microsoft Defender SmartScreen
-* Explorador de Arquivos
-* Máquina virtual de laboratório
-* Repositório público no GitHub contendo o exemplo de keylogger utilizado na atividade
+## Environment
 
-## Procedimento
+- **Operating system:** Windows Server 2022
+- **Browser:** Microsoft Edge
+- **Security feature:** Microsoft Defender SmartScreen
+- **File manager:** Windows File Explorer
+- **Execution environment:** Virtual machine
+- **Source repository:** GitHub project containing the keylogger example used in the activity
 
-### 1. Acesso ao ambiente Windows
+## Procedure
 
-A máquina virtual com Windows Server 2022 foi inicializada e, após o acesso ao sistema, foi aberta a área de trabalho.
+### 1. Access the Windows Environment
 
-Na primeira utilização do sistema, foi apresentada a pergunta relacionada à descoberta do computador na rede:
+The Windows Server 2022 virtual machine was started, and the desktop was accessed.
+
+During the initial use of the system, a network discovery prompt appeared:
 
 ```text
 Do you want to allow your PC to be discoverable by Other PCs and devices on this network?
 ```
 
-O ambiente de laboratório foi configurado conforme solicitado pela atividade.
+The laboratory environment was configured according to the exercise instructions.
 
-### 2. Acesso ao repositório do keylogger
+### 2. Access the Keylogger Repository
 
-O Microsoft Edge foi aberto e o endereço abaixo foi acessado:
+Microsoft Edge was opened, and the following GitHub repository was accessed:
 
 ```text
 https://github.com/MinhasKamal/StupidKeylogger
 ```
 
-O repositório apresenta um projeto denominado **StupidKeylogger**, utilizado na atividade para demonstrar o funcionamento de um programa capaz de registrar entradas de teclado.
+The repository contains a project named **StupidKeylogger**, used in the activity to demonstrate a program designed to record keyboard input.
 
-A consulta ao repositório permitiu observar a finalidade do projeto antes da tentativa de download.
+The repository was inspected to understand the purpose of the project before attempting to obtain the archive.
 
-### 3. Acesso ao arquivo para download
+### 3. Open the Download URL
 
-Em uma nova aba do Microsoft Edge, foi acessado o arquivo compactado disponibilizado pelo projeto:
+A new Microsoft Edge tab was opened to access the archive associated with the project:
 
 ```text
 https://github.com/MinhasKamal/StupidKeylogger/archive/application.zip
 ```
 
-O objetivo dessa etapa era observar como o mecanismo de proteção do Windows responderia à tentativa de obtenção do arquivo.
+The purpose of this step was to observe how the Windows security mechanisms would respond to an attempt to download the file.
 
-### 4. Bloqueio pelo Microsoft Defender SmartScreen
+### 4. Observe the Microsoft Defender SmartScreen Warning
 
-Durante a tentativa de download, o Microsoft Edge apresentou uma mensagem informando que o arquivo havia sido bloqueado por ser considerado inseguro:
+During the download attempt, Microsoft Edge displayed the following warning:
 
 ```text
 StupidKeylogger-application.zip was blocked as unsafe by Microsoft Defender SmartScreen.
 ```
 
-Esse foi o principal resultado observado na atividade.
+This was the main result observed during the activity.
 
-O SmartScreen impediu inicialmente o download do arquivo, demonstrando a atuação de um mecanismo de proteção integrado ao Windows e ao navegador Microsoft Edge.
+Microsoft Edge initially blocked the download and displayed a security warning. This demonstrated the operation of a browser-integrated protection mechanism designed to help users avoid potentially unsafe downloads.
 
-### 5. Observação das opções de segurança
+**Technical note:** SmartScreen evaluates reputation and other risk signals associated with websites and downloaded files. A warning can indicate known malicious content or an unknown or insufficiently trusted download reputation. The warning alone does not establish that Microsoft Defender Antivirus specifically identified the file as a keylogger.
 
-A mensagem de bloqueio disponibilizada pelo navegador apresentava opções relacionadas ao arquivo.
+### 5. Inspect the Available Security Options
 
-A interface permitiu visualizar as opções adicionais através do menu representado pelos três pontos.
+The browser's download warning provided additional options related to the file.
 
-O laboratório demonstrou que, mesmo diante de uma tentativa de obtenção de um arquivo classificado como inseguro, o mecanismo de proteção apresenta uma etapa de alerta antes que o usuário consiga acessar o conteúdo.
+The additional options were accessed through the menu represented by three dots (`...`).
 
-> A atividade foi realizada para observar o comportamento do mecanismo de segurança. O arquivo não foi executado.
+This step demonstrated how Microsoft Edge presents security information and additional controls when a download is classified as unsafe.
 
-### 6. Mensagem adicional de proteção
+The activity focused on observing the protection interface. The file was not executed.
 
-Após a interação prevista pelo exercício, o Microsoft Edge apresentou uma segunda mensagem de segurança:
+### 6. Observe the Additional Protection Message
+
+After the interaction described during the exercise, Microsoft Edge displayed a second security message:
 
 ```text
 This app is unsafe
 ```
 
-Essa mensagem reforçou a classificação do conteúdo como potencialmente perigoso.
+This message provided an additional warning concerning the file.
 
-O comportamento observado demonstra que a proteção não se limita a uma simples notificação de download: o navegador continua apresentando alertas relacionados à segurança do arquivo.
+The observed behavior demonstrated that security warnings can appear at different stages of the download and file-access process.
 
-### 7. Verificação da pasta Downloads
+The warning should be interpreted as a security signal rather than independent proof of a specific malware classification.
 
-Após a etapa de download prevista pelo laboratório, o **Explorador de Arquivos** foi aberto e a pasta `Downloads` foi acessada.
+### 7. Inspect the Downloads Folder
 
-Foi localizado o arquivo associado ao projeto:
+After the download-related steps in the exercise, Windows File Explorer was opened and the `Downloads` folder was inspected.
+
+The following file was located:
 
 ```text
 StupidKeylogger-application.zip
 ```
 
-A presença do arquivo permitiu verificar visualmente o resultado da atividade no sistema de arquivos.
+Its presence in the file system allowed the activity's result to be visually inspected.
 
-Essa etapa corresponde ao **print solicitado pela atividade**.
+This was the screenshot requested by the exercise.
 
-O arquivo permaneceu somente como objeto de análise. Não foi realizada a instalação nem a execução do keylogger.
+The archive remained an object of analysis only. The keylogger was not installed or executed.
 
-## Comandos e ações utilizados
+## Commands and Actions Used
 
-Diferentemente das atividades realizadas no Kali Linux, esta atividade foi executada principalmente através da interface gráfica do Windows.
+Unlike the previous Kali Linux activities, this exercise was performed primarily through the Windows graphical interface.
 
-O fluxo utilizado foi:
+The observed workflow was:
 
 ```text
 Microsoft Edge
-    │
-    ▼
-Repositório StupidKeylogger
-    │
-    ▼
-Arquivo application.zip
-    │
-    ▼
+    |
+    v
+StupidKeylogger GitHub Repository
+    |
+    v
+application.zip Download URL
+    |
+    v
 Microsoft Defender SmartScreen
-    │
-    ▼
-Alerta de segurança
-    │
-    ▼
-Downloads
-    │
-    ▼
-Inspeção do arquivo
+    |
+    v
+Security Warning
+    |
+    v
+Additional Security Options
+    |
+    v
+Downloads Folder
+    |
+    v
+File Inspection
 ```
 
-Não foram necessários comandos de Terminal ou PowerShell para realizar o experimento.
+No terminal or PowerShell commands were required.
 
-## Interpretação
+## Interpreting the Results
 
-O laboratório demonstrou a atuação do **Microsoft Defender SmartScreen** diante de um arquivo associado a um keylogger.
+The activity demonstrated how Microsoft Defender SmartScreen can respond to a download associated with a keylogger sample.
 
-O SmartScreen apresentou inicialmente:
+The first warning displayed was:
 
 ```text
 StupidKeylogger-application.zip was blocked as unsafe by Microsoft Defender SmartScreen.
 ```
 
-E posteriormente:
+A subsequent message displayed:
 
 ```text
 This app is unsafe
 ```
 
-Essas mensagens indicam que o mecanismo de proteção classificou o conteúdo como potencialmente inseguro e aplicou uma barreira durante o processo de obtenção do arquivo.
+These messages showed that the browser presented security warnings and applied a protective barrier during the download and file-access process.
 
-A atividade é importante para compreender uma camada de defesa presente em endpoints Windows: a proteção pode atuar **antes da execução do código**, reduzindo a possibilidade de que um usuário obtenha e execute diretamente um arquivo potencialmente malicioso.
+Microsoft Defender SmartScreen uses reputation-based checks and other signals to assess potentially unsafe websites and downloaded applications. Its warnings can help users recognize risky downloads before running them.
 
-O experimento também mostra a importância de mecanismos de segurança em conjunto com a conscientização do usuário. Um alerta de segurança durante um download pode impedir que um artefato potencialmente perigoso chegue à etapa de execução.
+However, it is important to distinguish among different security outcomes:
 
-## Resultado
+- **SmartScreen warning:** Indicates that a download or application presents a security concern based on reputation and other available signals.
+- **Antivirus detection:** Indicates that an antivirus engine has identified a file as malicious or potentially unwanted according to its detection criteria.
+- **Execution prevention:** Prevents or interrupts a file's execution, which is a separate outcome from a download warning.
 
-Foi possível:
+The observed warning does not, by itself, prove that the file was scanned and specifically detected as a keylogger by Microsoft Defender Antivirus.
 
-* Acessar o projeto utilizado como exemplo de keylogger;
-* Identificar o arquivo compactado disponibilizado pelo projeto;
-* Realizar a tentativa de download no Microsoft Edge;
-* Observar o bloqueio realizado pelo Microsoft Defender SmartScreen;
-* Visualizar a mensagem:
+The experiment also reinforced the importance of user awareness. Users should treat unexpected security warnings seriously and avoid proceeding with files they cannot verify.
 
-```text
-StupidKeylogger-application.zip was blocked as unsafe by Microsoft Defender SmartScreen.
-```
+## Result
 
-* Observar posteriormente a mensagem:
+The activity demonstrated how to:
 
-```text
-This app is unsafe
-```
+- Access the GitHub project used as the keylogger example.
+- Identify the ZIP archive provided by the project.
+- Attempt to download the archive through Microsoft Edge.
+- Observe the Microsoft Defender SmartScreen warning.
+- Inspect the additional security options in the browser.
+- Observe the subsequent `This app is unsafe` message.
+- Inspect the Windows `Downloads` folder.
+- Locate the archive associated with the demonstration.
+- Observe a preventive security mechanism without executing the keylogger.
 
-* Acessar a pasta `Downloads`;
-* Localizar o arquivo utilizado na demonstração;
-* Observar na prática uma camada de proteção do Windows contra conteúdo potencialmente malicioso.
+The file was not executed during the activity.
 
-O arquivo não foi executado durante a atividade.
+## Concepts Practiced
 
-## Conceitos praticados
+- Microsoft Defender SmartScreen
+- Endpoint security
+- Keyloggers and malware risks
+- Download reputation and security warnings
+- Browser security
+- Preventive protection
+- Security alert interpretation
+- File inspection
+- Threat prevention
+- User security awareness
+- Safe handling of potentially malicious artifacts
 
-* Microsoft Defender
-* Microsoft Defender SmartScreen
-* Segurança de endpoints
-* Keylogger
-* Malware
-* Detecção de arquivos maliciosos
-* Bloqueio de downloads
-* Segurança de navegadores
-* Proteção preventiva
-* Análise de artefatos
-* Threat Prevention
+## Evidence
 
-## Evidência
+The activity evidence is included in the PDF for Classes 05–06.
 
-A execução da atividade foi registrada no PDF de evidências da Aula 05–06.
+The relevant screenshots document the download attempt, the SmartScreen warning, the additional security message, and the file observed in the Downloads folder.
 
-[Ver evidências — Aula 05–06](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-02/aula-05-06/evidencias.pdf)
+[View Evidence — Classes 05–06](../evidencias.pdf)
+
+---
+
+[Back to Classes 05–06](../) · [Back to Module 02](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
