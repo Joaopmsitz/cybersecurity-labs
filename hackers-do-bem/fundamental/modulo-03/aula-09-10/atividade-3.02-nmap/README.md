@@ -1,42 +1,46 @@
-# Atividade 3.2 — Nmap
+# Activity 3.02 — Network Scanning with Nmap
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 03  
+> **Class:** 09–10  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **Nmap** para realizar descoberta de hosts, identificar dispositivos ativos na rede, analisar estados de portas, filtrar resultados e observar os pacotes utilizados durante a varredura.
+## Objective
 
-A atividade foi realizada em um ambiente de laboratório controlado, utilizando a rede `192.168.98.0/24`.
+Use Nmap to discover hosts, identify active devices on a network, analyze port states, filter scan results, and observe the packets used during scanning.
 
----
+The activity was conducted in a controlled laboratory environment using the `192.168.98.0/24` network.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramenta:** Nmap 7.95
-* **Interface de rede:** `eth0`
-* **Rede do laboratório:** `192.168.98.0/24`
-* **IP da máquina Kali:** `192.168.98.40/24`
+- **Operating system:** Kali Linux
+- **Tool:** Nmap 7.95
+- **Network interface:** `eth0`
+- **Laboratory network:** `192.168.98.0/24`
+- **Kali Linux IP address:** `192.168.98.40/24`
 
----
+## Procedure
 
-## 1. Acesso como root
+### 1. Obtain Root Access
 
-Inicialmente, foi aberto um terminal e obtido acesso administrativo:
+A terminal was opened and an administrative session was started:
 
 ```bash
 sudo -i
 ```
 
----
+This command provided a root shell for the laboratory procedures.
 
-## 2. Identificação das interfaces de rede
+### 2. Identify Network Interfaces
 
-Foi utilizado o `ifconfig` para verificar as interfaces e os endereços IP disponíveis:
+The `ifconfig` command was used to inspect the available network interfaces and IP addresses:
 
 ```bash
 ifconfig
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
@@ -52,21 +56,21 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
 ```
 
-A interface utilizada para a rede do laboratório foi a `eth0`, com endereço `192.168.98.40/24`.
+The interface used to access the laboratory network was `eth0`, with the address `192.168.98.40/24`.
 
----
+The output also showed the `docker0` interface, associated with a Docker network, and the loopback interface `lo`.
 
-## 3. Descoberta de hosts com Nmap
+### 3. Discover Hosts with Nmap
 
-Para descobrir quais hosts estavam ativos na rede, foi utilizado:
+To identify active hosts on the network, the following command was used:
 
 ```bash
 nmap -sn 192.168.98.0/24
 ```
 
-O parâmetro `-sn` realiza uma descoberta de hosts sem executar a varredura convencional de portas.
+The `-sn` option performs host discovery without the conventional port scan.
 
-Saída observada:
+**Observed output:**
 
 ```text
 Starting Nmap 7.95 ( https://nmap.org )
@@ -91,58 +95,58 @@ Host is up.
 Nmap done: 256 IP addresses (6 hosts up) scanned in ...
 ```
 
-Foram identificados **6 hosts ativos** na rede:
+Six active hosts were identified in the laboratory network:
 
-* `192.168.98.1`
-* `192.168.98.2`
-* `192.168.98.20`
-* `192.168.98.30`
-* `192.168.98.201`
-* `192.168.98.40`
+- `192.168.98.1`
+- `192.168.98.2`
+- `192.168.98.20`
+- `192.168.98.30`
+- `192.168.98.201`
+- `192.168.98.40`
 
----
+The results represent the hosts reported as active during this scan. Host discovery results may vary depending on network configuration, filtering, and device availability.
 
-## 4. Filtrando os IPs encontrados
+### 4. Filter the Discovered IP Addresses
 
-Foi criado um arquivo contendo os endereços encontrados utilizando um pipeline de comandos:
+A directory was selected to store the results:
 
 ```bash
 cd /home/aluno/Documentos/
 ```
 
-Depois:
+The directory contents were checked:
 
 ```bash
 ls
 ```
 
-Em seguida, o resultado do Nmap foi filtrado:
+The Nmap results were then filtered using a command pipeline:
 
 ```bash
 nmap -sn 192.168.98.0/24 | grep 192 | cut -d ' ' -f 5 > ips.txt
 ```
 
-O comando utiliza:
+The command combines several shell operations:
 
-* `nmap -sn` — descoberta dos hosts ativos;
-* `grep 192` — filtra as linhas contendo os endereços da rede;
-* `cut -d ' ' -f 5` — extrai o campo correspondente ao endereço;
-* `>` — redireciona o resultado para um arquivo;
-* `ips.txt` — arquivo criado para armazenar os resultados.
+- `nmap -sn` — discovers active hosts.
+- `grep 192` — filters lines containing the string `192`.
+- `cut -d ' ' -f 5` — extracts the fifth field when splitting on individual space characters.
+- `>` — redirects command output into a file.
+- `ips.txt` — the file used to store the results.
 
-Foi verificada a criação do arquivo:
+The file was checked after creation:
 
 ```bash
 ls
 ```
 
-E seu conteúdo:
+Its contents were displayed with:
 
 ```bash
 cat ips.txt
 ```
 
-Resultado:
+**Observed result:**
 
 ```text
 192.168.98.1
@@ -153,36 +157,36 @@ Resultado:
 192.168.98.40
 ```
 
-Essa etapa demonstra a utilização de **pipes (`|`) e redirecionamento (`>`)** para transformar a saída de uma ferramenta em entrada para outras ferramentas do sistema.
+This step demonstrates the use of pipes (`|`) and output redirection (`>`) to transform the output of one tool into input for other system utilities.
 
----
+**Technical note:** Using `cut -d ' ' -f 5` with Nmap's formatted output can be fragile because spacing and output formats may vary. The observed result above is preserved as recorded in the laboratory. For more robust automation, structured output or explicit extraction of IP addresses is preferable.
 
-## 5. Varredura utilizando ACK Scan
+### 5. Perform an ACK Scan
 
-Foi utilizada a opção `-sA`:
+The `-sA` option was used:
 
 ```bash
 nmap -sA 192.168.98.0/24
 ```
 
-O ACK Scan é utilizado principalmente para identificar se as portas estão sendo filtradas por firewall. Diferentemente de uma varredura SYN, ele não deve ser interpretado simplesmente como uma identificação de portas abertas.
+A TCP ACK scan is primarily used to investigate whether ports are filtered by a firewall. Unlike a SYN scan, it should not be interpreted as a direct method for identifying open ports.
 
-Nesse tipo de varredura, o Nmap pode apresentar estados como:
+This scan can report states such as:
 
-* **filtered** — há indícios de filtragem por firewall ou outro mecanismo;
-* **unfiltered** — a porta pode ser alcançada, mas o ACK Scan não determina que ela esteja aberta.
+- **filtered** — filtering by a firewall or another network mechanism prevents Nmap from determining whether the port is reachable.
+- **unfiltered** — the probe can reach the port, but the ACK scan cannot determine whether the port is open or closed.
 
----
+The results depend on the responses received and the network's filtering behavior.
 
-## 6. Exibindo somente portas abertas
+### 6. Display Port Scan Results
 
-Foi realizada uma nova varredura utilizando:
+The following command was used for another scan:
 
 ```bash
 nmap --open 192.168.98.0/24
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 Nmap scan report for ip-192-168-98-1.ec2.internal (192.168.98.1)
@@ -208,106 +212,125 @@ All 1000 scanned ports on 192.168.98.40 are unfiltered
 Nmap done: 256 IP addresses (6 hosts up) scanned in 12.73 seconds
 ```
 
-Um ponto importante observado durante a atividade é que **`unfiltered` não significa necessariamente `open`**. O resultado depende do tipo de varredura utilizada. O ACK Scan é principalmente utilizado para estudar filtragem de pacotes.
+An important observation is that **`unfiltered` does not mean `open`**. Port states must be interpreted in the context of the scan type used.
 
----
+The ACK scan is primarily designed to investigate packet filtering, and an `unfiltered` result does not establish that a service is listening on that port.
 
-## 7. Observando os pacotes com `--packet-trace`
+The `--open` option is intended to limit reported ports to those considered open or potentially open by Nmap. Since the captured output also contains `filtered` and `unfiltered` states, these lines have been retained exactly as provided in the laboratory record. They should not be treated as proof that those ports are open.
 
-Por fim, foi utilizada a opção `--packet-trace` para visualizar informações dos pacotes envolvidos durante a varredura:
+### 7. Observe Packets with `--packet-trace`
+
+Finally, the `--packet-trace` option was used to display information about packets involved in the scan:
 
 ```bash
 nmap --packet-trace 192.168.98.0/24
 ```
 
-Entre as informações observadas estavam requisições ARP para descoberta dos hosts, por exemplo:
+Among the observations were ARP requests used for host discovery, for example:
 
 ```text
 ARP who-has 192.168.98.x tell 192.168.98.40
 ```
 
-Também foram identificadas portas abertas no próprio host do laboratório:
+The scan also identified open ports on the laboratory host itself:
 
 ```text
 22/tcp open  ssh
 3389/tcp open  ms-wbt-server
 ```
 
-O parâmetro `--packet-trace` permite observar uma camada mais baixa do processo de varredura, tornando possível relacionar o resultado apresentado pelo Nmap com os pacotes efetivamente utilizados para realizar a descoberta e análise.
+The `--packet-trace` option provides additional visibility into the scanning process, making it possible to relate Nmap's reported results to the packets used for host discovery and analysis.
 
----
+Port `22/tcp` was identified as associated with SSH, while `3389/tcp` was identified as associated with Microsoft's Remote Desktop Protocol (RDP).
 
-## 8. Remoção do arquivo temporário
+These results apply to the observed laboratory environment and do not establish that the same ports will be open in other environments.
 
-Após finalizar a atividade, o arquivo utilizado para armazenar os IPs foi removido:
+### 8. Remove the Temporary File
+
+After completing the activity, the file used to store the IP addresses was removed:
 
 ```bash
 rm ips.txt
 ```
 
----
+This command deletes the temporary file `ips.txt` from the current directory.
 
-## Conceitos praticados
+## Commands Used
+
+The commands used throughout the activity were:
+
+```bash
+sudo -i
+ifconfig
+nmap -sn 192.168.98.0/24
+cd /home/aluno/Documentos/
+ls
+nmap -sn 192.168.98.0/24 | grep 192 | cut -d ' ' -f 5 > ips.txt
+cat ips.txt
+nmap -sA 192.168.98.0/24
+nmap --open 192.168.98.0/24
+nmap --packet-trace 192.168.98.0/24
+rm ips.txt
+```
+
+## Concepts Practiced
 
 ### Nmap
 
-Ferramenta utilizada para descoberta de hosts, análise de portas e identificação de características de uma rede.
+A network scanning tool used for host discovery, port analysis, and identification of network characteristics.
 
 ### Host Discovery
 
-Processo utilizado para identificar quais endereços IP estão ativos em determinado segmento de rede.
+The process of identifying which IP addresses appear to be active within a network segment.
 
 ### TCP ACK Scan
 
-A opção `-sA` envia pacotes TCP ACK e é utilizada principalmente para analisar regras de filtragem e comportamento de firewalls.
+The `-sA` option sends TCP ACK probes and is primarily used to examine packet filtering and firewall behavior.
 
-### Estados de portas
+### Port States
 
-Durante a atividade foram observados estados como `filtered` e `unfiltered`. A interpretação desses estados depende do tipo de scan utilizado.
+The activity covered states such as `filtered` and `unfiltered`. Their interpretation depends on the type of scan performed and the responses received.
 
 ### `--open`
 
-Permite reduzir a quantidade de informações exibidas, concentrando a saída em portas identificadas como abertas quando o tipo de varredura consegue determinar esse estado.
+An option intended to limit the reported results to ports that Nmap considers open or potentially open. It does not make every reported state equivalent to `open`.
 
 ### `--packet-trace`
 
-Exibe informações sobre os pacotes utilizados durante a execução do Nmap, permitindo observar o funcionamento da varredura.
+Displays information about packets used during Nmap execution, providing additional visibility into the scanning process.
 
-### Pipes e redirecionamento
+### Pipes and Output Redirection
 
-A atividade também utilizou recursos básicos do shell:
+The activity also used basic shell features:
 
-```text
-|
-```
+- `|` to chain commands and pass output between utilities.
+- `>` to redirect output into a file.
 
-para encadear comandos, e:
+These techniques are useful for extracting, processing, and storing information from command-line security tools.
 
-```text
->
-```
+## Results
 
-para redirecionar a saída para um arquivo.
+The activity provided practical experience using Nmap on a laboratory network through several stages:
+
+- Identifying the network interface and the machine's IP address.
+- Discovering active hosts.
+- Extracting discovered IP addresses using Linux commands.
+- Investigating packet filtering with an ACK scan.
+- Reviewing port scan results.
+- Observing packets used during scanning.
+
+The exercise reinforced the relationship between host discovery, port analysis, network filtering, firewalls, and TCP/IP traffic.
+
+The results also highlighted the importance of interpreting Nmap port states according to the scan method rather than assuming that every reachable or unfiltered port is open.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 03, Classes 09–10.
+
+**Recorded screenshot:** Step 6 of the activity, as required by the laboratory instructions.
+
+[View Evidence — Classes 09–10](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-A atividade permitiu utilizar o Nmap de forma prática em uma rede de laboratório, passando por diferentes etapas:
-
-1. identificação da interface e do endereço IP da máquina;
-2. descoberta de hosts ativos;
-3. extração dos IPs encontrados utilizando comandos do Linux;
-4. análise de filtragem com ACK Scan;
-5. análise de portas;
-6. observação dos pacotes utilizados durante a varredura.
-
-O exercício reforçou a relação entre **descoberta de hosts, análise de portas, filtragem de rede, firewall e tráfego TCP/IP**.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 3 / Aulas 9 e 10**](../evidencias.pdf)
-
-**Print registrado:** etapa 6 da atividade, conforme solicitado pelo roteiro.
+[Back to Classes 09–10](../) · [Back to Module 03](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
