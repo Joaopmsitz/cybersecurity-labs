@@ -1,83 +1,30 @@
-# 🔐 Brute Force Investigations
+# Brute Force Investigations
 
-This directory contains brute force and unauthorized access investigations performed during hands-on SOC Analyst training on the Let's Defend platform.
+Documented SOC investigation exercises from LetsDefend focused on brute-force attacks, authentication analysis, and unauthorized remote access.
 
-These investigations focus on authentication attacks, credential abuse, account compromise, and post-authentication attacker activity.
+## Investigations
 
----
+| Case | Focus | Status |
+| --- | --- | --- |
+| [SOC176 — RDP Brute Force Detected](./SOC176-rdp-brute-force-detected.md) | RDP authentication failures, successful logon analysis, and post-authentication reconnaissance. | Completed |
 
-## 📂 Included Investigations
+## Topics Covered
 
-- SOC176 - RDP Brute Force Detected
+- Failed and successful Windows logon events
+- Windows Security Event IDs 4625 and 4624
+- RDP brute-force investigation
+- Source IP and authentication analysis
+- Post-authentication reconnaissance
+- Indicators of Compromise (IOCs)
+- MITRE ATT&CK mapping
+- Incident classification and response documentation
 
----
+## Scope
 
-## 🎯 Attack Types Analyzed
+This directory currently contains one documented investigation. Additional cases will be added as they are completed and documented.
 
-This section covers:
-
-- RDP Brute Force Attacks
-- SSH Brute Force Attacks
-- Credential Spraying
-- Password Guessing
-- Unauthorized Remote Access
-- Account Compromise
-- Post-Authentication Discovery
-
----
-
-## 🔍 Investigation Focus
-
-Each investigation may include:
-
-- Authentication Log Analysis
-- Successful vs Failed Logon Correlation
-- Event ID Analysis
-- Source IP Investigation
-- Threat Intelligence Validation
-- Account Discovery Activity
-- Privilege Enumeration
-- Network Discovery
-- Endpoint Containment
+All cases originate from training exercises. Findings and response actions refer to the documented simulation, not to real-world incident response.
 
 ---
 
-## 🧠 SOC Workflow Applied
-
-- Alert Triage
-- Log Analysis
-- Authentication Review
-- Threat Validation
-- MITRE ATT&CK Mapping
-- Incident Classification
-- Containment Actions
-
----
-
-## 🎯 Skills Demonstrated
-
-- Windows Event Analysis
-- Brute Force Detection
-- RDP Investigation
-- Account Compromise Validation
-- IOC Identification
-- Incident Response
-- Endpoint Containment
-- Security Reporting
-
----
-
-## ✅ Investigation Outcomes
-
-Investigations in this category include:
-
-- Failed Authentication Attempts
-- Successful Account Compromise
-- Remote Access Abuse
-- Attacker Reconnaissance
-- Post-Compromise Activity Analysis
-- Host Containment
-
----
-
-⭐ Continuous development of identity security, authentication monitoring, incident response, and SOC investigation skills.
+[Back to Investigations](../README.md) · [Back to LetsDefend](../../README.md)
