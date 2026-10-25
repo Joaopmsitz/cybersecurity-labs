@@ -11,7 +11,6 @@ Build networking fundamentals through practical exercises, configuration, and tr
 - [Module 01 — Networking Today](./module-01-networking-today/)
 - [Module 02 — Basic Switch and End Device Configuration](./module-02-basic-switch-and-end-device-configuration/)
 - [Module 03 — Network Protocols](./module-03-network-protocols/)
-  - [Investigate TCP/IP and OSI Models in Action](./module-03-network-protocols/01-investigate-tcp-ip-and-osi-models-in-action/)
 - [Module 04 — Physical Layer](./module-04-physical-layer/)
 
 Additional modules will be documented as the repository expands.
