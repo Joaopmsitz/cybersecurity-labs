@@ -1,4 +1,4 @@
-# Hack The Box — TwoMillion
+# TwoMillion — Easy Machine
 
 **Difficulty:** Easy  
 **Operating System:** Linux  
@@ -17,9 +17,9 @@
 - Privilege escalation to an application administrator.
 - Command injection in the VPN profile generation endpoint.
 - Configuration file analysis and identification of exposed credentials.
-- Credential reuse analysis and access to the local admin account.
+- Credential reuse analysis and access to the local user account.
 - Linux privilege escalation and root access.
-- Retrieval of the machine's user and root flags.
+- Retrieval of the user and root flags.
 
 ## Key Takeaways
 
@@ -27,8 +27,8 @@
 - Administrative API endpoints must enforce server-side authorization.
 - Unsanitized user input passed to operating system commands can lead to command injection.
 - Sensitive credentials must not be exposed in application configuration files.
-- Password reuse can allow an application-level compromise to become a system-level compromise.
-- Unpatched operating systems may expose additional privilege-escalation paths.
+- Password reuse can turn an application-level compromise into a system-level compromise.
+- Unpatched software may expose additional privilege-escalation paths.
 
 ---
 
