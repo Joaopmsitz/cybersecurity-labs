@@ -1,12 +1,30 @@
-# 🔥 Preignition — Starting Point (Very Easy)
+# Preignition — Starting Point (Very Easy)
 
-🔗 Prova de conclusão:
-https://labs.hackthebox.com/achievement/machine/2578759/397
+**Operating System:** Linux  
+**Status:** Completed
 
-## ✔ O que foi praticado
-- Enumeração inicial com Nmap, identificando portas HTTP (80) e SSH (22)
-- Acesso ao serviço web e inspeção dos arquivos disponíveis
-- Identificação do diretório `/templates` exposto no servidor
-- Download e análise do arquivo contendo a flag diretamente via navegador ou curl
-- Compreensão de exposição indevida de diretórios e arquivos em servidores HTTP
-- Avaliação do risco de má configuração que permite acesso público a arquivos internos
+## Completion Proof
+
+[View Hack The Box Achievement](https://labs.hackthebox.com/achievement/machine/2578759/397)
+
+## What I Practiced
+
+- Network enumeration with Nmap.
+- Identification of HTTP on TCP port 80 and the Nginx web server.
+- Service version detection using Nmap.
+- Web directory enumeration using Gobuster.
+- Discovery of the `admin.php` administrative login page.
+- Testing default credentials (`admin:admin`).
+- Accessing the administrative interface and retrieving the flag.
+
+## Key Takeaways
+
+- Directory enumeration helps discover hidden web pages and resources.
+- Default credentials can expose administrative interfaces to unauthorized access.
+- Administrative pages must enforce strong authentication.
+- Web server identification and version detection provide useful context during enumeration.
+- Replacing default credentials and following secure configuration practices reduces the risk of unauthorized access.
+
+---
+
+[Back to Tier 0](../README.md) · [Back to Starting Point](../../README.md) · [Back to Hack The Box](../../../README.md)
