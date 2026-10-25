@@ -1,15 +1,34 @@
-# 🧢 Cap — Starting Point (Easy)
+# Cap — Easy Machine
 
-🔗 Prova de conclusão:  
-https://labs.hackthebox.com/achievement/machine/2578759/351
+**Difficulty:** Easy  
+**Operating System:** Linux  
+**Status:** Completed
 
-## ✔ O que foi praticado
-- Enumeração inicial com Nmap, identificando portas 21 (FTP), 22 (SSH) e 80 (HTTP)
-- Acesso ao serviço HTTP e identificação da funcionalidade de download de arquivos `.pcap`
-- Download e análise do arquivo `.pcap` disponível no site
-- Uso da ferramenta **Wireshark** para inspecionar o tráfego capturado
-- Extração de credenciais em texto claro observadas dentro do pacote de captura
-- Login via SSH utilizando as credenciais obtidas
-- Acesso ao sistema remoto para captura da flag
-- Identificação de falha grave: exposição de dados sensíveis por meio de pacotes de rede
-- Compreensão do risco de *Sensitive Data Exposure* em ambientes mal configurados
+## Completion Proof
+
+[View Hack The Box Achievement](https://labs.hackthebox.com/achievement/machine/2578759/351)
+
+## What I Practiced
+
+- Network enumeration with Nmap, identifying FTP (port 21), SSH (port 22), and HTTP (port 80).
+- Web application enumeration and analysis of a network capture dashboard.
+- Identification of an Insecure Direct Object Reference (IDOR) vulnerability.
+- Access to another user's packet capture due to insufficient authorization checks.
+- PCAP analysis with Wireshark to identify FTP credentials transmitted in plaintext.
+- SSH access using the recovered credentials.
+- Linux privilege-escalation enumeration.
+- Identification of the `cap_setuid` capability assigned to the Python interpreter.
+- Privilege escalation to root by abusing the misconfigured Linux capability.
+- Retrieval of the user and root flags.
+
+## Key Takeaways
+
+- Applications must enforce server-side authorization when accessing user-specific resources.
+- Network captures may expose credentials when authentication protocols transmit data in plaintext.
+- Password reuse can allow exposed credentials to compromise other services.
+- Linux capabilities must be assigned according to the principle of least privilege.
+- Reviewing system capabilities can reveal privilege-escalation opportunities.
+
+---
+
+[Back to Easy Machines](../README.md) · [Back to Hack The Box](../../README.md)
