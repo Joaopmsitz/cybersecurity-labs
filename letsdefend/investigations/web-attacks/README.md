@@ -1,85 +1,27 @@
-# 🌐 Web Attack Investigations
+# Web Attack Investigations
 
-This directory contains web attack investigations performed during hands-on SOC Analyst training on the Let's Defend platform.
+Documented SOC investigation exercises completed on the LetsDefend platform, focusing on suspicious web requests, injection payloads, and application-layer attack detection.
 
-These investigations focus on identifying, analyzing, and validating attacks targeting web applications, including injection attempts, malicious payloads, and suspicious URL activity.
+## Investigations
 
----
+| Case | Focus |
+| --- | --- |
+| [SOC165 — Possible SQL Injection Payload Detected](./SOC165-possible-sql-injection-payload-detected.md) | Investigation of a suspected SQL injection payload in web traffic. |
+| [SOC166 — JavaScript Code Detected in URL](./SOC166-javascript-code-detected-in-url.md) | Investigation of suspicious JavaScript code detected in a requested URL. |
 
-## 📂 Included Investigations
+## Topics
 
-- SOC165 - SQL Injection Attempt
-- SOC166 - JavaScript Code Detected in URL
+- Web attack alert triage
+- HTTP request and URL analysis
+- SQL injection indicators
+- Suspicious JavaScript payloads
+- Evidence review and threat validation
+- Incident classification and documentation
 
----
+## Scope
 
-## 🎯 Attack Types Analyzed
-
-This section covers common web-based attack techniques such as:
-
-- SQL Injection (SQLi)
-- JavaScript Injection
-- URL-based payload delivery
-- Command execution attempts
-- Web application exploitation
-- Application-layer attacks
+This directory contains documented training scenarios from LetsDefend. Findings and response actions refer to the simulated investigations and should not be interpreted as real-world incident response experience.
 
 ---
 
-## 🔍 Investigation Focus
-
-Each web attack investigation may include:
-
-- HTTP request analysis
-- URL inspection
-- Payload identification
-- Payload decoding
-- Web server log analysis
-- SIEM log correlation
-- IOC identification
-- Threat validation
-- Impact assessment
-
----
-
-## 🧠 SOC Workflow Applied
-
-- Alert triage
-- Evidence collection
-- Web log analysis
-- Request inspection
-- Payload analysis
-- Threat intelligence validation
-- MITRE ATT&CK mapping
-- Threat classification
-- Final reporting
-
----
-
-## 🎯 Skills Demonstrated
-
-- Web attack detection
-- SQL injection analysis
-- JavaScript injection analysis
-- HTTP request inspection
-- IOC extraction
-- Threat validation
-- Log correlation
-- Security reporting
-
----
-
-## ✅ Investigation Outcomes
-
-Investigations in this category include:
-
-- Confirmed web attack activity
-- Injection attempts
-- Malicious URL analysis
-- Payload identification
-- Threat validation and classification
-
----
-
-⭐ Continuous development of web application security monitoring and Blue Team investigation skills.
-``
+[Back to Investigations](../README.md) · [Back to LetsDefend](../../README.md)
