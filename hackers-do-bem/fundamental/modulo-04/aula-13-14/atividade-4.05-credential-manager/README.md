@@ -1,236 +1,249 @@
-# Atividade 4.5 — Windows Credential Manager
+# Activity 4.05 — Windows Credential Manager
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 04  
+> **Class:** 13–14  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Explorar o **Credential Manager (Gerenciador de Credenciais)** do Windows Server 2022, identificando os diferentes tipos de credenciais armazenadas e realizando o procedimento de backup das credenciais em um ambiente de laboratório.
+## Objective
 
-A atividade também demonstra a importância de proteger arquivos de backup de credenciais, pois eles podem conter informações sensíveis relacionadas à autenticação do sistema.
+Explore Windows Credential Manager in Windows Server 2022, identify the different types of stored credentials, and perform a credential backup procedure in a laboratory environment.
 
----
+The activity also demonstrates the importance of protecting credential backup files, as they may contain sensitive authentication-related information.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Windows Server 2022
-* **Recurso utilizado:** Credential Manager
-* **Tipos de credenciais observados:**
+- **Operating system:** Windows Server 2022
+- **Feature:** Credential Manager
+- **Credential categories observed:**
+  - Web Credentials
+  - Windows Credentials
+  - Certificate-based Credentials
+  - Generic Credentials
+- **Backup file:** `backup.cdr`
 
-  * Web Credentials
-  * Windows Credentials
-  * Certificate-based Credentials
-  * Generic Credentials
-* **Arquivo de backup:** `backup.cdr`
+The credentials used to access the course environment are not reproduced in this README.
 
-> As credenciais utilizadas para acesso ao ambiente do curso não são reproduzidas neste README.
+## Procedure
 
----
+### 1. Open Credential Manager
 
-## 1. Acesso ao Credential Manager
+After accessing Windows Server 2022 in the laboratory environment, the following feature was searched for:
 
-Após acessar o Windows Server 2022 no ambiente de laboratório, foi realizada uma pesquisa pelo recurso:
-
-```text
+```text id="1d7r2a"
 Credential Manager
 ```
 
-O **Credential Manager** foi então aberto.
+Credential Manager was then opened.
 
-Essa ferramenta permite visualizar e gerenciar determinados tipos de informações de autenticação armazenadas pelo Windows.
+This Windows feature allows users to view and manage certain types of authentication information stored by the operating system.
 
----
+### 2. Inspect Web Credentials
 
-## 2. Web Credentials
+The **Web Credentials** section was opened to inspect the available credentials.
 
-Na seção **Web Credentials**, foram verificadas as credenciais disponíveis.
+In the laboratory environment, this section could be empty.
 
-No ambiente utilizado pelo laboratório, essa seção podia estar vazia.
+This area relates to credentials used by certain Windows components and applications to authenticate to web resources.
 
-Essa área está relacionada a credenciais utilizadas por determinados componentes e aplicações do Windows para autenticação em recursos web.
+The presence or absence of entries depends on the accounts, applications, and services used in the environment.
 
----
+### 3. Inspect Windows Credentials
 
-## 3. Windows Credentials
+The **Windows Credentials** section was then opened.
 
-Em seguida, foi acessada a seção **Windows Credentials**.
+The system displayed the following categories:
 
-Foram observadas as categorias apresentadas pelo sistema:
-
-```text
+```text id="4ngh5x"
 Windows Credentials
 Certificate-based Credentials
 Generic Credentials
 ```
 
-### Windows Credentials
+#### Windows Credentials
 
-Relacionadas a credenciais utilizadas para autenticação em determinados recursos e serviços do Windows.
+These are related to credentials used to authenticate to certain Windows resources and services.
 
-### Certificate-based Credentials
+#### Certificate-based Credentials
 
-Relacionadas a mecanismos de autenticação baseados em certificados.
+These are related to authentication mechanisms that use certificates.
 
-### Generic Credentials
+#### Generic Credentials
 
-Utilizadas por aplicações para armazenar determinados tipos de informações de autenticação que não se enquadram necessariamente nas credenciais específicas do Windows.
+These are used by applications to store certain types of authentication information that do not necessarily fall into the Windows-specific credential category.
 
----
+The available categories help distinguish different types of authentication information managed through Windows Credential Manager.
 
-## 4. Início do backup das credenciais
+### 4. Start the Credential Backup
 
-Na janela do Credential Manager, foi selecionada a opção:
+In the Credential Manager window, the following option was selected:
 
-```text
+```text id="w0o8bi"
 Back up Credentials
 ```
 
-O assistente de backup foi iniciado.
+The backup wizard was launched.
 
-Em seguida, foi utilizada a opção para selecionar o local onde o arquivo seria salvo.
+The option to select the destination for the backup file was then used.
 
----
+### 5. Specify the Backup File
 
-## 5. Definição do arquivo de backup
+In the wizard, the desktop was selected as the temporary storage location.
 
-No assistente, foi selecionada a área de trabalho (**Desktop**) como local de armazenamento temporário.
+The filename entered was:
 
-O nome definido para o arquivo foi:
-
-```text
+```text id="f04wz3"
 backup
 ```
 
-O Windows adicionou a extensão correspondente ao arquivo de backup.
+Windows added the appropriate extension to the backup file.
 
-O arquivo resultante foi:
+The resulting filename was:
 
-```text
+```text id="5s19nr"
 backup.cdr
 ```
 
-> O arquivo de backup não faz parte deste repositório. Ele pode conter informações relacionadas às credenciais e deve ser tratado como material sensível.
+**Security note:** The backup file is not included in this repository. It may contain sensitive authentication-related information and must be handled as confidential material.
 
----
+### 6. Authenticate to Create the Backup
 
-## 6. Autenticação para criação do backup
+During the procedure, Windows requested additional authentication.
 
-Durante o processo, o Windows solicitou uma autenticação adicional.
+In the virtualized environment, the command equivalent to the following key combination was sent through the virtual machine's control toolbar:
 
-No ambiente virtualizado, foi enviado o comando equivalente a:
-
-```text
+```text id="7e7d7p"
 Ctrl + Alt + Delete
 ```
 
-utilizando a barra de controle da máquina virtual.
+The credentials for the account used in the laboratory were then entered to authorize the operation.
 
-A credencial da conta utilizada no laboratório foi então informada para confirmar a operação.
+The credentials used to access the course environment are not included in this README.
 
-As credenciais de acesso do ambiente não são registradas neste README.
+### 7. Confirm the Backup
 
----
+After authentication, the wizard continued creating the backup.
 
-## 7. Confirmação do backup
+When the process finished, Windows displayed the following confirmation:
 
-Após a autenticação, o assistente prosseguiu com a criação do backup.
-
-Ao finalizar, o Windows apresentou a confirmação:
-
-```text
+```text id="v4fbb1"
 The backup was successful
 ```
 
-Isso indica que o procedimento de criação do arquivo de backup foi concluído.
+This message indicates that the backup creation procedure completed successfully.
 
----
+### 8. Verify the Backup File
 
-## 8. Verificação do arquivo
+The created file was located on the desktop:
 
-O arquivo criado foi localizado na área de trabalho:
-
-```text
+```text id="qs82rp"
 backup.cdr
 ```
 
-Essa verificação demonstra que o backup foi efetivamente criado no local selecionado.
+This verification demonstrated that the backup file had been created in the selected location.
 
-Por conter material relacionado às credenciais, o arquivo não deve ser enviado para um repositório GitHub ou compartilhado publicamente.
+Because the file contains authentication-related material, it should not be uploaded to GitHub or shared publicly.
 
----
+### 9. Clean Up the Laboratory Environment
 
-## 9. Limpeza do ambiente
+After completing the activity, the backup file was removed from the laboratory environment.
 
-Após a conclusão da atividade, o arquivo de backup foi removido do ambiente de laboratório.
+Removing unnecessary copies of credential backups reduces the risk of unauthorized access to sensitive authentication information.
 
-A remoção é importante porque um backup de credenciais não deve permanecer armazenado sem necessidade.
+The file used during this activity was not included in the repository.
 
-O arquivo utilizado na atividade não foi incluído neste repositório.
+## Tools and Actions Used
 
----
+The activity was performed through the Windows graphical interface. The main actions were:
 
-## Conceitos praticados
+```text id="2u1zfr"
+Credential Manager
+Back up Credentials
+Ctrl + Alt + Delete
+```
 
-### Credential Manager
+The backup was saved temporarily using the filename:
 
-O **Windows Credential Manager** é um componente do Windows utilizado para gerenciar diferentes tipos de credenciais utilizadas pelo sistema e por aplicações.
+```text id="5qs5zm"
+backup.cdr
+```
+
+The file was removed after the laboratory exercise was completed.
+
+## Concepts Practiced
+
+### Windows Credential Manager
+
+Windows Credential Manager is a Windows component used to manage different types of credentials used by the operating system and applications.
 
 ### Windows Credentials
 
-Categoria destinada a credenciais utilizadas para determinados recursos e serviços do Windows.
+A category for credentials used to access certain Windows resources and services.
 
 ### Generic Credentials
 
-Categoria utilizada para credenciais genéricas armazenadas por aplicações e outros componentes.
+A category for generic authentication information stored by applications and other components.
 
-### Certificate-based Credentials
+### Certificate-Based Credentials
 
-Categoria relacionada a mecanismos de autenticação baseados em certificados.
+A category associated with certificate-based authentication mechanisms.
 
-### Backup de credenciais
+### Credential Backup
 
-O Windows permite realizar backup de determinadas informações de credenciais por meio do Credential Manager.
+Windows provides a way to back up certain credential information through Credential Manager.
 
-Esse recurso deve ser tratado com cuidado, pois o arquivo gerado possui informações relacionadas à autenticação.
+This feature must be handled carefully because the resulting file contains authentication-related material and may be sensitive.
+
+### Additional Authentication
+
+The backup procedure required an additional authentication step before the operation could continue.
+
+This demonstrates how Windows may request confirmation before performing sensitive credential-management operations.
+
+## Security Considerations
+
+The credential backup file created during this activity should not be committed to GitHub.
+
+In a real environment, files of this type should be:
+
+- Protected against unauthorized access.
+- Stored only when necessary.
+- Protected during transfer.
+- Removed from temporary locations after use.
+- Kept out of public repositories and other unauthorized sharing locations.
+
+A successful backup does not make the backup file safe to disclose. Its contents should be treated as sensitive authentication material even after the original operation is complete.
+
+The laboratory backup file was removed after the exercise.
+
+## Results
+
+The activity provided practical experience with Windows Credential Manager in Windows Server 2022 and the main credential categories presented by the feature.
+
+The following tasks were completed:
+
+- Located Credential Manager.
+- Inspected Web Credentials.
+- Inspected Windows Credentials.
+- Identified Certificate-based Credentials.
+- Identified Generic Credentials.
+- Started the backup wizard.
+- Created a temporary backup file.
+- Authenticated the operation.
+- Confirmed that the backup was created.
+- Removed the backup file after completing the laboratory.
+
+The exercise demonstrated that credential-management and backup mechanisms must be treated as sensitive components of system security.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 04, Classes 13–14.
+
+**Recorded screenshot:** Step 11 of the activity, as specified in the overall Module 4 evidence list.
+
+[View Evidence — Classes 13–14](../evidencias.pdf)
 
 ---
 
-## Cuidados de segurança
-
-O arquivo de backup criado durante a atividade **não deve ser versionado no GitHub**.
-
-Em um ambiente real, um arquivo desse tipo deve ser:
-
-* protegido contra acesso não autorizado;
-* armazenado somente quando necessário;
-* protegido durante transferência;
-* removido de locais temporários após o uso;
-* nunca publicado em repositórios públicos.
-
-No laboratório, o arquivo foi removido após a conclusão do exercício.
-
----
-
-## Resultado
-
-A atividade permitiu explorar o Credential Manager do Windows Server 2022 e compreender as principais categorias de credenciais apresentadas pela ferramenta.
-
-Foi possível:
-
-* localizar o Credential Manager;
-* consultar Web Credentials;
-* consultar Windows Credentials;
-* identificar Certificate-based Credentials;
-* identificar Generic Credentials;
-* iniciar o assistente de backup;
-* criar um arquivo de backup temporário;
-* autenticar a operação;
-* confirmar a criação do backup;
-* remover o arquivo após a conclusão do laboratório.
-
-O exercício demonstrou que mecanismos de gerenciamento e backup de credenciais devem ser tratados como componentes sensíveis da segurança do sistema.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 4 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Print registrado:** etapa 11 da atividade, conforme definido na lista geral de evidências do Módulo 4.
+[Back to Classes 13–14](../) · [Back to Module 04](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
