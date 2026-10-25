@@ -1,34 +1,38 @@
-# Atividade 4.1 — Modificando os parâmetros de Controle de Autenticação no Kali Linux
+# Activity 4.01 — Modifying Authentication Control Settings on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 04  
+> **Class:** 13–14  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Modificar e validar a senha de autenticação de um usuário no **Kali Linux**, observando também como as informações de usuários e grupos são organizadas nos arquivos `/etc/passwd` e `/etc/group`.
+## Objective
 
-A atividade foi realizada em ambiente acadêmico controlado e teve como objetivo compreender o funcionamento básico do controle de autenticação baseado em senha no Linux.
+Change and validate a user's authentication password on Kali Linux, while examining how user and group information is organized in the `/etc/passwd` and `/etc/group` files.
 
----
+The activity was performed in a controlled academic environment to understand the basic operation of password-based authentication controls in Linux.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Usuário utilizado:** `aluno`
-* **Ferramentas/comandos:** `whoami`, `pwd`, `cat`, `sudo`, `passwd`
-* **Arquivos analisados:** `/etc/passwd` e `/etc/group`
+- **Operating system:** Kali Linux
+- **User account:** `aluno`
+- **Tools and commands:** `whoami`, `pwd`, `cat`, `sudo`, `passwd`
+- **Files examined:** `/etc/passwd` and `/etc/group`
 
----
+## Procedure
 
-## 1. Identificação do usuário e diretório atual
+### 1. Identify the Current User and Working Directory
 
-Inicialmente, foram executados os comandos `whoami` e `pwd`:
+The `whoami` and `pwd` commands were executed:
 
-```bash
+```bash id="a9f5v2"
 whoami
 pwd
 ```
 
-Saída:
+**Observed output:**
 
-```text
+```text id="p6j8e4"
 ┌──(aluno㉿kali)-[~]
 └─$ whoami
 aluno
@@ -38,28 +42,26 @@ aluno
 /home/aluno
 ```
 
-O comando `whoami` informa o usuário associado ao processo atual.
+The `whoami` command identifies the user associated with the current process.
 
-Já o comando `pwd` (**Print Working Directory**) mostra o caminho completo do diretório de trabalho atual.
+The `pwd` command (Print Working Directory) displays the full path of the current working directory.
 
-Neste caso:
+In this case:
 
-* Usuário atual: `aluno`
-* Diretório inicial: `/home/aluno`
+- **Current user:** `aluno`
+- **Home directory:** `/home/aluno`
 
----
+### 2. Examine the `/etc/passwd` File
 
-## 2. Análise do arquivo `/etc/passwd`
+The `/etc/passwd` file was inspected using:
 
-Em seguida, foi consultado o arquivo `/etc/passwd`:
-
-```bash
+```bash id="q9x2nc"
 cat /etc/passwd
 ```
 
-Saída observada:
+**Observed output:**
 
-```text
+```text id="w3k4mt"
 root:x:0:0:root:/root:/usr/bin/zsh
 daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
 bin:x:2:2:bin:/bin:/usr/sbin/nologin
@@ -92,7 +94,7 @@ avahi:x:106:113:Avahi mDNS daemon,,,:/run/avahi-daemon:/usr/sbin/nologin
 lightdm:x:107:114:Light Display Manager:/var/lib/lightdm:/bin/false
 pulse:x:108:115:PulseAudio daemon,,,:/run/pulse:/usr/sbin/nologin
 saned:x:109:118::/var/lib/saned:/usr/sbin/nologin
-colord:x:110:119:colord colour management daemon,,,:/usr/sbin/nologin
+colord:x:110:119::/var/lib/colord:/usr/sbin/nologin
 xrdp:x:111:121::/run/xrdp:/usr/sbin/nologin
 Debian-exim:x:112:122::/var/spool/exim4:/usr/sbin/nologin
 logcheck:x:113:123:logcheck system account,,,:/var/lib/logcheck:/usr/sbin/nologin
@@ -102,41 +104,43 @@ geoclue:x:116:126::/var/lib/geoclue:/usr/sbin/nologin
 postgres:x:117:130:PostgreSQL administrator,,,:/var/lib/postgresql:/bin/bash
 ```
 
-O `/etc/passwd` é um arquivo de configuração que mantém informações básicas das contas locais.
+The `/etc/passwd` file stores basic information about local user accounts.
 
-Cada entrada possui sete campos separados por `:`:
+Each entry contains seven colon-separated fields:
 
-```text
-usuário:senha:UID:GID:GECOS:home:shell
+```text id="n7bc4a"
+username:password:UID:GID:GECOS:home:shell
 ```
 
-Tomando como exemplo a conta `aluno`:
+Using the `aluno` account as an example:
 
-```text
+```text id="mt6w2q"
 aluno:x:1001:1002::/home/aluno:/bin/bash
 ```
 
-* `aluno` — nome da conta.
-* `x` — indica que o hash da senha não fica armazenado diretamente nesse arquivo; em sistemas Linux modernos, ele fica normalmente em `/etc/shadow`.
-* `1001` — UID (**User ID**) do usuário.
-* `1002` — GID (**Group ID**) do grupo primário.
-* campo vazio — campo GECOS/comentário.
-* `/home/aluno` — diretório pessoal.
-* `/bin/bash` — shell de login.
+The fields are interpreted as follows:
 
----
+- `aluno` — account name.
+- `x` — indicates that the password hash is not stored directly in this file; on modern Linux systems, password hashes are generally stored in `/etc/shadow`.
+- `1001` — UID (User ID), the numeric identifier assigned to the user.
+- `1002` — GID (Group ID), the numeric identifier of the primary group.
+- Empty field — the GECOS/comment field is empty.
+- `/home/aluno` — home directory.
+- `/bin/bash` — login shell.
 
-## 3. Análise do arquivo `/etc/group`
+The file also contains service accounts that commonly use shells such as `/usr/sbin/nologin` or `/bin/false` to prevent interactive logins.
 
-Foi consultado o arquivo responsável pelas informações dos grupos:
+### 3. Examine the `/etc/group` File
 
-```bash
+The file containing local group information was inspected using:
+
+```bash id="x8w2fh"
 cat /etc/group
 ```
 
-Saída:
+**Observed output:**
 
-```text
+```text id="v6s9kp"
 root:x:0:
 daemon:x:1:
 bin:x:2:
@@ -213,41 +217,41 @@ _cvsadmin:x:129:
 postgres:x:130:
 ```
 
-O formato das entradas é:
+The entry format is:
 
-```text
-grupo:senha:GID:membros
+```text id="y2x7jn"
+group:password:GID:members
 ```
 
-Por exemplo:
+For example:
 
-```text
+```text id="f0m7rw"
 sudo:x:27:kali,aluno
 ```
 
-indica o grupo `sudo`, com GID `27`, tendo `kali` e `aluno` como membros.
+This indicates that the `sudo` group has GID `27` and lists `kali` and `aluno` as members.
 
-A consulta também mostra que o usuário `aluno` possui associação ao grupo `sudo`, permitindo a execução de comandos administrativos mediante autenticação.
+The output shows that `aluno` belongs to the `sudo` group. This membership can permit administrative commands through `sudo`, subject to the system's applicable authorization and authentication configuration.
 
----
+### 4. Change the User's Password
 
-## 4. Alteração da senha do usuário
+To change the password for the `aluno` account, administrative access was obtained:
 
-Para alterar a senha da conta `aluno`, foi obtido acesso administrativo:
-
-```bash
+```bash id="px5c8n"
 sudo -i
 ```
 
-Depois, foi utilizado:
+The following command was then used:
 
-```bash
+```bash id="b5z3qn"
 passwd aluno
 ```
 
-O sistema solicitou a nova senha duas vezes e confirmou a alteração:
+The system requested the new password twice and confirmed the change.
 
-```text
+**Observed output:**
+
+```text id="t3c7wv"
 ┌──(aluno㉿kali)-[~]
 └─$ sudo -i
 [sudo] senha para aluno:
@@ -259,96 +263,114 @@ Redigite a nova senha:
 passwd: senha atualizada com sucesso
 ```
 
-A mensagem:
+The confirmation message was:
 
-```text
+```text id="r9v2fk"
 passwd: senha atualizada com sucesso
 ```
 
-confirma que a alteração foi realizada.
+This indicates that the password change completed successfully.
 
-A senha utilizada no laboratório não é reproduzida neste README.
+The laboratory password is not reproduced in this README.
 
----
+### 5. Validate the New Authentication
 
-## 5. Validação da nova autenticação
+After changing the password, the user's graphical session was ended.
 
-Após alterar a senha, foi encerrada a sessão gráfica do usuário.
+Kali Linux was then started again, and the new password configured in the previous step was used to authenticate.
 
-Em seguida, o Kali Linux foi inicializado novamente e a nova senha definida no passo anterior foi utilizada para autenticação.
+The login succeeded, demonstrating that the password change performed with `passwd` had been applied correctly.
 
-O login foi realizado com sucesso, demonstrando que a alteração efetuada pelo comando `passwd` foi aplicada corretamente.
+### 6. Restore the Original Password
 
----
+After validating the new credential, the password-change procedure was repeated to restore the original credential used by the laboratory.
 
-## 6. Restauração da senha original
+The following commands were used:
 
-Após validar a nova credencial, foi repetido o procedimento de alteração da senha para restaurar a credencial original utilizada pelo laboratório.
-
-O procedimento foi realizado através do comando:
-
-```bash
+```bash id="d3hx9v"
 sudo -i
 passwd aluno
 ```
 
-Após a confirmação da alteração, a sessão foi encerrada novamente.
+After the change was confirmed, the session was ended again.
 
-Essa etapa garante que o ambiente do laboratório permaneça com a configuração esperada para as atividades seguintes.
+This step ensured that the laboratory environment remained in the expected state for subsequent activities.
 
----
+The original and replacement passwords are not documented in this README.
 
-## Conceitos praticados
+## Commands Used
+
+The following commands were used during the activity:
+
+```bash id="q3gm65"
+whoami
+pwd
+cat /etc/passwd
+cat /etc/group
+sudo -i
+passwd aluno
+```
+
+## Concepts Practiced
 
 ### `/etc/passwd`
 
-Arquivo que armazena informações básicas das contas locais do Linux, como nome do usuário, UID, GID, diretório pessoal e shell.
+A file that stores basic information about local Linux accounts, including usernames, UIDs, GIDs, home directories, and login shells.
 
 ### `/etc/group`
 
-Arquivo que mantém informações sobre os grupos locais e seus respectivos membros.
+A file that stores information about local groups and their associated members.
 
-### UID e GID
+### UID and GID
 
-* **UID:** identificador numérico de um usuário.
-* **GID:** identificador numérico de um grupo.
+- **UID:** Numeric identifier assigned to a user.
+- **GID:** Numeric identifier assigned to a group.
+
+These identifiers help Linux associate processes and file permissions with the appropriate users and groups.
 
 ### `/etc/shadow`
 
-Embora não tenha sido necessário consultar seu conteúdo nesta atividade, o `/etc/shadow` é utilizado pelo Linux para armazenar os hashes das senhas e informações relacionadas à expiração e validade das credenciais.
+Although its contents did not need to be inspected during this activity, `/etc/shadow` is used by Linux to store password hashes and information related to password aging and validity.
+
+Access to this file is restricted because it contains sensitive authentication information.
 
 ### `passwd`
 
-Comando utilizado para definir ou alterar a senha de uma conta local.
+A command used to set or change the password of a local account.
 
 ### `sudo`
 
-Permite que usuários autorizados executem comandos com privilégios administrativos.
+Allows authorized users to execute commands with administrative privileges, subject to the system's configuration.
+
+### Password Authentication
+
+Password-based authentication verifies that a user supplies the credential associated with an account. Changing a password and successfully logging in with the new credential verifies the change from the user's perspective.
+
+## Results
+
+The activity demonstrated the basic operation of password-based authentication controls on Kali Linux.
+
+The following tasks were completed:
+
+- Identified the currently authenticated user.
+- Verified the working directory.
+- Examined the structure of `/etc/passwd`.
+- Examined the structure of `/etc/group`.
+- Understood the relationship between users, UIDs, and GIDs.
+- Changed a local account password using `passwd`.
+- Validated authentication with the new password.
+- Restored the laboratory's original password configuration.
+
+The exercise reinforced the importance of proper credential management and access-control mechanisms in Linux systems.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 04, Classes 13–14.
+
+**Recorded screenshot:** Step 7 of the activity, as required by the laboratory instructions, documenting authentication validation after the password change and restoration.
+
+[View Evidence — Classes 13–14](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-A atividade demonstrou o funcionamento básico do controle de autenticação por senha no Kali Linux.
-
-Foi possível:
-
-* identificar o usuário atualmente autenticado;
-* verificar o diretório de trabalho;
-* analisar a estrutura do `/etc/passwd`;
-* analisar a estrutura do `/etc/group`;
-* compreender a relação entre usuários, UIDs e GIDs;
-* alterar a senha de uma conta com `passwd`;
-* validar a nova autenticação;
-* restaurar a configuração original do laboratório.
-
-A atividade reforça a importância do gerenciamento adequado de credenciais e dos mecanismos de controle de acesso presentes em sistemas Linux.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 4 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Print registrado:** etapa 7 da atividade, conforme solicitado pelo roteiro, referente à validação da autenticação após a alteração e restauração da senha.
-
+[Back to Classes 13–14](../) · [Back to Module 04](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
