@@ -1,103 +1,106 @@
-# Atividade 2.2 — Explorando o Keylogger XSPY no Kali Linux
+# Activity 2.02 — Exploring the XSPY Keylogger on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 02  
+> **Class:** 05–06  
+> **Environment:** Kali Linux virtual lab  
+> **Status:** Completed
 
-Explorar, em um ambiente controlado de laboratório, o funcionamento do **Keylogger XSPY** no Kali Linux.
+## Objective
 
-A atividade teve como objetivo observar como um keylogger pode monitorar as teclas digitadas durante sua execução e armazenar os dados capturados em um arquivo de texto.
+Explore the basic operation of the XSPY keylogger in a controlled laboratory environment.
 
-> **Aviso:** a atividade foi realizada exclusivamente para fins acadêmicos, dentro do ambiente de laboratório. O keylogger foi utilizado somente para demonstrar seu funcionamento e não foi empregado para capturar informações de terceiros.
+The activity demonstrates how a keylogger can monitor keyboard events during execution and store captured output in a text file for subsequent analysis.
 
-## Ambiente
+> **Safety notice:** This activity was performed exclusively for educational purposes in a controlled laboratory environment. The keylogger was used only to demonstrate its operation and was not used to capture information from third parties.
 
-* Kali Linux
-* Terminal
-* XSPY
-* Editor de texto
-* Sistema virtualizado de laboratório
+## Environment
 
-## Procedimento
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Tool:** XSPY
+- **Text editor:** Kali Linux graphical text editor
+- **Execution environment:** Virtualized laboratory
 
-### 1. Acesso ao diretório de documentos
+## Procedure
 
-O Terminal foi aberto e o diretório `Documentos` foi acessado:
+### 1. Navigate to the Working Directory
+
+The terminal was opened, and the Documents directory was accessed:
 
 ```bash
 cd /home/aluno/Documentos
 ```
 
-Em seguida, foi utilizado o comando `ls` para verificar o conteúdo do diretório:
+The contents of the directory were checked using:
 
 ```bash
 ls
 ```
 
-Como o diretório estava sendo utilizado para armazenar o resultado da atividade, inicialmente não havia o arquivo `teste.log`.
+At the beginning of the activity, the `teste.log` file did not exist in the directory.
 
-### 2. Inicialização do XSPY
+### 2. Start XSPY
 
-O XSPY foi iniciado no Terminal com seu resultado sendo redirecionado para o arquivo `teste.log`:
+XSPY was started from the terminal, with its standard output redirected to `teste.log`:
 
 ```bash
 xspy >> teste.log
 ```
 
-O operador `>>` foi utilizado para direcionar a saída do programa para um arquivo de texto.
+The `>>` operator appends standard output to a file, creating the file if it does not already exist.
 
-A partir desse momento, o XSPY passou a registrar as teclas utilizadas durante a demonstração.
+During the demonstration, XSPY began recording keyboard events within the laboratory environment.
 
-### 3. Digitação de texto para teste
+### 3. Type Test Text
 
-Com o XSPY em execução, foi aberto o editor de texto do Kali Linux.
+While XSPY was running, the Kali Linux text editor was opened.
 
-Foi digitada manualmente a seguinte frase:
+The following phrase was typed manually:
 
 ```text
 Hacker do bem!
 ```
 
-A digitação foi realizada diretamente pelo teclado, sem utilizar copiar e colar, permitindo que o keylogger registrasse os eventos de teclado.
+The text was entered directly through the keyboard rather than being copied and pasted, allowing the experiment to observe the resulting keyboard events.
 
-### 4. Encerramento do XSPY
+### 4. Stop XSPY
 
-Após a digitação do texto de teste, o Terminal foi acessado novamente e a execução do XSPY foi interrompida utilizando:
+After the test text was entered, the terminal was accessed again and XSPY was stopped using:
 
 ```text
 Ctrl + C
 ```
 
-O Terminal apresentou o encerramento da execução:
+The terminal showed that the running process had been interrupted.
 
-```text
-xspy >> teste.log
-^C
-```
+No additional keyboard monitoring was performed after the demonstration ended.
 
-### 5. Verificação do arquivo de captura
+### 5. Verify the Captured Output File
 
-Após o encerramento do programa, foi utilizado o comando `ls` para verificar se o arquivo havia sido criado:
+The directory contents were checked again:
 
 ```bash
 ls
 ```
 
-O resultado observado foi:
+The resulting listing included:
 
 ```text
 teste.log
 ```
 
-A presença do arquivo confirmou que a saída do XSPY havia sido armazenada no diretório `Documentos`.
+The file's presence confirmed that the output had been redirected to the Documents directory.
 
-### 6. Visualização dos dados capturados
+### 6. Review the Recorded Events
 
-Para visualizar o conteúdo do arquivo, foi utilizado:
+The file was opened in the terminal using:
 
 ```bash
 cat teste.log
 ```
 
-A saída observada no ambiente de laboratório foi semelhante a:
+The observed output was similar to:
 
 ```text
 opened :10.0 for snoopng
@@ -105,39 +108,35 @@ opened :10.0 for snoopng
 Shift_L hacker do bemShift_L 1Control_L c
 ```
 
-A saída não reproduziu necessariamente o texto exatamente da mesma forma que foi digitado. Isso ocorre devido à forma como os eventos de teclado são capturados no ambiente virtualizado utilizado na atividade.
+The exact output depended on the laboratory environment and the keyboard events captured during execution.
 
-Mesmo assim, foi possível identificar na saída a sequência correspondente à frase digitada:
+The output did not necessarily reproduce the typed phrase exactly as it appeared in the text editor. Some events were represented by key names, including `Shift_L` and `Control_L`.
 
-```text
-hacker do bem
-```
+Despite these differences, the recorded output contained a recognizable sequence corresponding to the test phrase.
 
-Também foram registrados eventos relacionados às teclas utilizadas durante a atividade, como `Shift_L` e `Control_L`.
+This demonstrated that the tool could record keyboard-related events and make the resulting output available for later review.
 
-Esse resultado demonstrou que o XSPY consegue registrar eventos de teclado e armazená-los em um arquivo para posterior consulta.
+### 7. Remove the Test File
 
-### 7. Remoção do arquivo
-
-Após a análise do conteúdo capturado, o arquivo de teste foi removido:
+After reviewing the captured output, the test file was deleted:
 
 ```bash
 rm teste.log
 ```
 
-Em seguida, o diretório foi novamente verificado:
+The directory was then checked again:
 
 ```bash
 ls
 ```
 
-O arquivo `teste.log` não estava mais presente no diretório.
+The `teste.log` file was no longer present.
 
-A remoção foi realizada para não deixar dados capturados pelo experimento no ambiente de laboratório.
+Removing the test file prevented the captured laboratory data from remaining unnecessarily in the working directory.
 
-## Comandos utilizados
+## Commands Used
 
-Os comandos utilizados durante a atividade foram:
+The principal commands used during the activity were:
 
 ```bash
 cd /home/aluno/Documentos
@@ -145,98 +144,86 @@ ls
 xspy >> teste.log
 ```
 
-Após a execução do keylogger:
+The running process was stopped using `Ctrl + C`.
 
-```text
-Ctrl + C
-```
-
-Para verificar o arquivo criado:
+The output was then inspected and the test file removed:
 
 ```bash
 ls
-```
-
-Para visualizar os dados registrados:
-
-```bash
 cat teste.log
-```
-
-E, finalmente, para remover o arquivo:
-
-```bash
 rm teste.log
 ls
 ```
 
-## Interpretação
+## Interpreting the Results
 
-O experimento demonstrou o funcionamento básico de um **keylogger**, que é um tipo de software capaz de registrar eventos de teclado.
+The experiment demonstrated the basic operation of a keylogger, a tool capable of recording keyboard events.
 
-O fluxo observado foi:
+The observed workflow was:
 
 ```text
-Teclado
-   │
-   ▼
-XSPY
-   │
-   ▼
-teste.log
-   │
-   ▼
-cat teste.log
-   │
-   ▼
-Visualização dos eventos capturados
+Keyboard Events
+       |
+       v
+      XSPY
+       |
+       v
+   teste.log
+       |
+       v
+  cat teste.log
+       |
+       v
+Review of Recorded Events
 ```
 
-O redirecionamento utilizado no comando:
+The command:
 
 ```bash
 xspy >> teste.log
 ```
 
-permitiu armazenar a saída do programa em um arquivo.
+redirected the program's standard output to a file, allowing the recorded output to be reviewed after execution had stopped.
 
-A consulta posterior com `cat` demonstrou que as informações registradas durante a execução permaneceram armazenadas no arquivo mesmo após o encerramento do XSPY.
+The subsequent use of `cat` demonstrated that the redirected output remained available in the file after XSPY was terminated.
 
-O laboratório também mostrou que a representação dos dados capturados pode variar de acordo com o ambiente. No caso da VM utilizada, alguns eventos foram apresentados com seus nomes de teclas, como `Shift_L` e `Control_L`.
+The laboratory also showed that recorded keyboard events may be represented differently from the original text, depending on the environment and the way the tool reports those events.
 
-## Resultado
+## Result
 
-Foi possível:
+The activity demonstrated how to:
 
-* Acessar o diretório utilizado para armazenar os dados da atividade;
-* Inicializar o XSPY;
-* Criar o arquivo `teste.log`;
-* Realizar uma digitação controlada para teste;
-* Encerrar o keylogger com `Ctrl + C`;
-* Confirmar a criação do arquivo com `ls`;
-* Visualizar os eventos registrados utilizando `cat`;
-* Identificar a frase digitada na saída capturada;
-* Remover o arquivo após a conclusão do experimento.
+- Access the directory used to store the laboratory output.
+- Start XSPY in the virtualized environment.
+- Redirect the program's output to `teste.log`.
+- Enter controlled test text through the keyboard.
+- Stop the running process with `Ctrl + C`.
+- Verify that the output file had been created.
+- Review the recorded events using `cat`.
+- Remove the test file after the experiment.
 
-A atividade demonstrou, de forma controlada, como um keylogger pode registrar eventos de teclado e armazenar os dados capturados para posterior análise.
+The exercise illustrated how keylogging tools can record keyboard-related activity and retain captured output for subsequent analysis.
 
-## Conceitos praticados
+## Concepts Practiced
 
-* Keylogger
-* XSPY
-* Captura de teclas
-* Eventos de teclado
-* Redirecionamento de saída
-* Arquivos de log
-* `>>`
-* `ls`
-* `cat`
-* `rm`
-* Monitoramento de entrada
-* Segurança de endpoints
+- Keyloggers and keyboard event monitoring
+- XSPY
+- Keyboard input capture
+- Output redirection with `>>`
+- Log and text file handling
+- Linux terminal operations
+- Use of `ls`, `cat`, and `rm`
+- Endpoint security
+- Privacy and safe handling of captured data
 
-## Evidência
+## Evidence
 
-A execução da atividade foi registrada no PDF de evidências da Aula 05–06.
+The activity evidence is included in the PDF for Classes 05–06.
 
-[Ver evidências — Aula 05–06](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-02/aula-05-06/evidencias.pdf)
+The relevant screenshot documents the XSPY test, the contents of `teste.log`, and the recorded keyboard events.
+
+[View Evidence — Classes 05–06](../evidencias.pdf)
+
+---
+
+[Back to Classes 05–06](../) · [Back to Module 02](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
