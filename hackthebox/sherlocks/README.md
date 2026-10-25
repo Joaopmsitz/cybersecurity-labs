@@ -1,23 +1,29 @@
-# 🔍 Sherlocks — Hack The Box
+# Hack The Box — Sherlocks
 
-This directory contains Sherlock investigations completed on Hack The Box.
+Documented defensive investigation exercises focused on digital forensics, threat intelligence, malware analysis, and incident investigation.
 
-## ✅ Completed Challenges
+## Completed Sherlocks
 
-| Sherlock | Domain | Focus Area | Skills Developed |
-|-----------|-----------|-----------|-----------|
-| Brutus | DFIR | Linux Log Analysis | SSH Investigation, Timeline Reconstruction |
-| PhishNet | Email Security | Phishing Investigation | Header Analysis, Attachment Analysis, IOC Extraction |
-| PhantomRing | DFIR | Malware Investigation | IOC Analysis, Incident Response, Evidence Review |
-| FortySeven-1 | Threat Intelligence | APT Profiling | MITRE ATT&CK, OSINT, Threat Attribution |
+| Sherlock | Focus Area | Key Skills |
+| --- | --- | --- |
+| [Brutus](./Brutus.md) | DFIR | Linux authentication logs, SSH investigation, timeline reconstruction |
+| [PhishNet](./PhishNet.md) | Email Security | Email header analysis, phishing investigation, IOC extraction |
+| [PhantomRing](./PhantomRing.md) | Malware Analysis | Malware investigation, artifact analysis, IOC identification |
+| [FortySeven-1](./FortySeven-1.md) | Threat Intelligence | OSINT, MITRE ATT&CK, threat analysis |
 
-## 🎯 Focus Areas
+## Skills Practiced
 
-- Digital Forensics
-- Threat Intelligence
-- Incident Response
-- Malware Analysis
-- IOC Identification
-- Log Analysis
+- Digital forensics and evidence analysis
+- Security log investigation and timeline reconstruction
+- Phishing and malicious artifact analysis
+- Indicators of Compromise (IOC) identification
+- Threat intelligence and MITRE ATT&CK mapping
+- Technical reporting and investigation documentation
 
-These challenges help develop investigative and analytical skills commonly used in SOC and DFIR environments.
+## Scope
+
+These write-ups document training scenarios completed on Hack The Box Sherlocks. Findings and conclusions refer to the evidence provided by each exercise.
+
+---
+
+[Back to Hack The Box](../README.md) · [Back to Cybersecurity Portfolio](../../README.md)
