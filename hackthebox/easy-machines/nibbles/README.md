@@ -1,6 +1,5 @@
 # Nibbles — Easy Machine
 
-**Platform:** Hack The Box  
 **Operating System:** Linux  
 **Difficulty:** Easy  
 **Status:** Completed
