@@ -1,11 +1,27 @@
-# 🐱 Meow — Starting Point (Very Easy)
+# Meow — Starting Point (Very Easy)
 
-🔗 Prova de conclusão:  
-https://labs.hackthebox.com/achievement/machine/2578759/394
+**Operating System:** Linux  
+**Status:** Completed
 
-## O que foi praticado
-- Enumeração básica com Nmap
-- Descoberta de porta Telnet aberta
-- Exploração sem autenticação
-- Acesso inicial ao sistema
-- Primeiros conceitos de pós-exploração
+## Completion Proof
+
+[View Hack The Box Achievement](https://labs.hackthebox.com/achievement/machine/2578759/394)
+
+## What I Practiced
+
+- Basic network enumeration using Nmap.
+- Identification of an exposed Telnet service on TCP port 23.
+- Investigation of insecure remote access configuration.
+- Initial access by logging in as `root` without a password.
+- Basic Linux command-line interaction and flag retrieval.
+
+## Key Takeaways
+
+- Network enumeration helps identify exposed services and potential entry points.
+- Telnet transmits traffic without encryption and should not be used for secure remote administration.
+- Allowing root access without a password can result in immediate system compromise.
+- Remote administration services should use secure protocols and strong authentication.
+
+---
+
+[Back to Tier 0](../README.md) · [Back to Starting Point](../../README.md) · [Back to Hack The Box](../../../README.md)
