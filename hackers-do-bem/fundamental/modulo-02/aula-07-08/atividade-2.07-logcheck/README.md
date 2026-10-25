@@ -1,28 +1,36 @@
-# Atividade 2.7 — Explorando os eventos de sistema com o Logcheck no Linux
+# Activity 2.07 — Analyzing Linux System Events with Logcheck
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 02  
+> **Class:** 07–08  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **Logcheck** para analisar eventos registrados no sistema Linux, observando principalmente eventos relacionados a autenticação, serviços de rede e mensagens de erro.
+## Objective
 
-A atividade demonstra como uma ferramenta de monitoramento pode filtrar e apresentar eventos relevantes dos logs do sistema, auxiliando na identificação de comportamentos que podem exigir investigação.
+Use Logcheck to analyze events recorded by a Linux system, focusing on authentication activity, network services, and error messages.
 
-## Ambiente
+This activity demonstrates how a monitoring tool can filter and report relevant system log events, helping identify behavior that may require further investigation.
 
-* Kali Linux
-* Terminal
-* Logcheck
-* Arquivos de log do sistema
-* Sessão administrativa `root`
+## Environment
 
-## 1. Executando o Logcheck
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Tool:** Logcheck
+- **Data sources:** System log files
+- **Administrative context:** Root session
 
-O Logcheck pode ser executado utilizando o usuário de serviço `logcheck`:
+## Procedure
+
+### 1. Run Logcheck
+
+Logcheck was executed using its service account:
 
 ```bash
 sudo -u logcheck logcheck -o -t
 ```
 
-A execução apresentou eventos relacionados ao `sudo`, ao cliente DHCP e ao serviço XRDP:
+The execution produced events related to `sudo`, the DHCP client, and the XRDP service:
 
 ```text
 This email is sent by logcheck. If you no longer wish to receive
@@ -46,67 +54,59 @@ fev 08 18:04:50 kali xrdp-chansrv[1991]: [ERROR] clipboard_event_selection_reque
 fev 08 18:04:50 kali xrdp-chansrv[1991]: [ERROR] clipboard_event_selection_request: unknown target text/plain;charset=utf-8
 ```
 
-### Interpretação
+The output included a security event associated with the closing of a root session, DHCP client requests on `eth0`, and XRDP clipboard-related errors.
 
-Os eventos apresentados podem ser divididos em três grupos principais:
+### 2. Change the Logcheck Configuration
 
-* **sudo:** registra o encerramento de uma sessão administrativa do usuário `root`.
-* **dhclient:** registra solicitações relacionadas à obtenção/configuração de endereço IP na interface `eth0`.
-* **xrdp-chansrv:** apresenta erros relacionados a eventos de transferência de conteúdo da área de transferência durante a sessão remota.
-
-A presença de uma mensagem `[ERROR]` no log não significa, isoladamente, que houve um incidente de segurança. O evento precisa ser analisado dentro do contexto do sistema e da atividade que estava sendo realizada.
-
-## 2. Alterando a configuração do Logcheck
-
-Para alterar a configuração, foi aberta uma sessão administrativa:
+An administrative shell was opened:
 
 ```bash
 sudo -i
 ```
 
-Em seguida, o arquivo de configuração foi aberto:
+The configuration file was opened with Nano:
 
 ```bash
 nano /etc/logcheck/logcheck.conf
 ```
 
-A configuração utilizada na atividade definiu o nível de relatório como `workstation`:
+The configuration used during the activity included:
 
-```text
+```bash
 REPORTLEVEL="workstation"
 
-SENDMAILTO="<endereço de e-mail configurado no laboratório>"
+SENDMAILTO="<email address configured in the lab>"
 
 MAILASATTACH=1
 ```
 
-### REPORTLEVEL
+The email address configured during the laboratory exercise is not reproduced in this document.
 
-O `REPORTLEVEL` determina o nível de filtragem utilizado pelo Logcheck.
+The `REPORTLEVEL` setting determines which filtering rules Logcheck uses when preparing its reports.
 
-Os principais níveis apresentados na atividade são:
+The levels discussed during the activity were:
 
-* **server:** nível padrão, voltado para sistemas que executam serviços e daemons.
-* **paranoid:** nível mais restritivo e detalhado, podendo gerar uma quantidade maior de eventos.
-* **workstation:** direcionado a estações de trabalho, utilizando filtros adequados a esse tipo de sistema.
+| Level | Description |
+|---|---|
+| `server` | Default level for systems running services and daemons |
+| `paranoid` | More restrictive and detailed reporting, potentially generating more events |
+| `workstation` | Filtering profile intended for workstation environments |
 
-Nesta atividade, foi utilizado:
+The setting used in the exercise was:
 
-```text
+```bash
 REPORTLEVEL="workstation"
 ```
 
-O endereço de e-mail utilizado no laboratório não é reproduzido neste documento.
+### 3. Run Logcheck Again
 
-## 3. Executando novamente o Logcheck
-
-Após a alteração da configuração, o Logcheck foi executado novamente:
+After modifying the configuration, Logcheck was executed again:
 
 ```bash
 sudo -u logcheck logcheck -o -t
 ```
 
-A nova execução apresentou eventos adicionais relacionados às sessões `sudo`, além dos eventos de rede e XRDP:
+The second execution displayed additional events related to `sudo` sessions, along with the previously observed network and XRDP events:
 
 ```text
 This email is sent by logcheck. If you no longer wish to receive
@@ -142,96 +142,159 @@ fev 08 18:13:47 kali xrdp-chansrv[1991]: [ERROR] clipboard_event_selection_reque
 fev 08 18:14:54 kali dhclient[495]: XMT: Solicit on eth0, interval 114690ms.
 ```
 
-## 4. Análise dos eventos
+The second report contained additional authentication records, including the opening and closing of an administrative session.
 
-A segunda execução permite observar com mais detalhes o comportamento do sistema durante o período analisado.
+### 4. Analyze the Events
 
-### Eventos de autenticação
+The second execution provided more detail about system activity during the period represented by the logs.
 
-Os registros do `sudo` mostram a abertura e o encerramento de uma sessão administrativa:
+#### Authentication Events
+
+The `sudo` records showed the opening and closing of an administrative session:
 
 ```text
 sudo: pam_unix(sudo-i:session): session opened for user root(uid=0) by (uid=1001)
 sudo: pam_unix(sudo-i:session): session closed for user root
 ```
 
-Esses eventos são importantes em uma análise de segurança porque permitem identificar quando privilégios administrativos foram utilizados.
+These events are useful during security investigations because they help establish when administrative privileges were used.
 
-### Eventos DHCP
+The records show that a session associated with the `root` account was opened by a process associated with UID `1001` and subsequently closed.
 
-As mensagens:
+#### DHCP Events
+
+The following messages appeared repeatedly:
 
 ```text
-dhclient[495]: XMT: Solicit on eth0
+dhclient[495]: XMT: Solicit on eth0, interval 108860ms
 ```
 
-indicam que o cliente DHCP estava realizando solicitações na interface de rede `eth0`.
+These messages indicate that the DHCP client was transmitting solicitation requests on the `eth0` network interface.
 
-Esse tipo de evento é esperado em determinadas situações de configuração ou renovação de endereço IP.
+Such events may be expected during network configuration or address acquisition. Their significance depends on the system's network state and configuration.
 
-### Eventos XRDP
+#### XRDP Events
 
-Foram identificadas mensagens:
+The logs contained the following errors:
 
 ```text
 xrdp-chansrv[1991]: [ERROR] clipboard_event_selection_request: unknown target text/plain;charset=utf-8
 ```
 
-Elas estão relacionadas ao componente responsável pelos canais da sessão XRDP e indicam uma solicitação de área de transferência que não foi reconhecida pelo serviço.
+These messages originated from the XRDP channel server component and indicated that a clipboard selection request used an unrecognized target.
 
-No contexto do laboratório, esses eventos foram observados durante o uso da sessão remota e não foram tratados isoladamente como um incidente.
+In the laboratory context, these events were observed during remote-session use. They were not treated as a security incident based solely on the presence of the `[ERROR]` label.
 
-## 5. Conceitos praticados
+### 5. Concepts Practiced
 
-### Logcheck
+#### Logcheck
 
-Ferramenta utilizada para analisar e filtrar eventos de logs, destacando mensagens que podem ser relevantes para a administração e segurança do sistema.
+Logcheck is a tool used to analyze and filter log events, highlighting messages that may be relevant to system administration and security monitoring.
 
-### Análise de logs
+#### Log Analysis
 
-A análise de logs é uma atividade importante para identificar:
+Log analysis is important for identifying:
 
-* autenticações e uso de privilégios;
-* alterações e atividades administrativas;
-* eventos de rede;
-* erros de serviços;
-* comportamentos fora do padrão;
-* possíveis indicadores de comprometimento.
+- Authentication activity and privilege usage
+- Administrative actions and system changes
+- Network events
+- Service errors
+- Unusual behavior
+- Potential indicators of compromise
 
-### Monitoramento e detecção
+#### Monitoring and Detection
 
-O Logcheck funciona como um mecanismo de apoio à detecção, reduzindo a necessidade de analisar manualmente todos os eventos registrados pelo sistema.
+Logcheck supports detection by filtering system log information, reducing the need to manually review every recorded event.
 
-### `sudo` e PAM
+It does not replace investigation or other security monitoring controls.
 
-Os eventos relacionados ao `sudo` utilizam o **PAM (Pluggable Authentication Modules)** para registrar informações sobre sessões administrativas.
+#### Sudo and PAM
 
-### DHCP
+The `sudo` events in this activity included messages generated by PAM (Pluggable Authentication Modules), which participates in authentication and session management.
 
-O `dhclient` é responsável por interagir com o serviço DHCP para obter ou renovar configurações de rede.
+These records can help analysts reconstruct administrative activity.
 
-### XRDP
+#### DHCP
 
-O XRDP permite acesso remoto a ambientes gráficos Linux. Seus componentes também podem registrar eventos relacionados à sessão, incluindo problemas com recursos como a área de transferência.
+The `dhclient` process interacts with DHCP services to obtain or renew network configuration information.
 
-## 6. Resultado
+#### XRDP
 
-A atividade demonstrou o uso do Logcheck para filtrar e apresentar eventos do sistema Linux.
+XRDP provides remote graphical access to Linux systems. Its components can generate session-related events, including errors involving features such as clipboard integration.
 
-Foi possível observar:
+## Commands Used
 
-1. Eventos de abertura e encerramento de sessões administrativas;
-2. Solicitações DHCP na interface de rede;
-3. Mensagens de erro do serviço XRDP;
-4. A influência do `REPORTLEVEL` na filtragem dos eventos;
-5. A importância de interpretar cada evento considerando o contexto do sistema.
+The main commands used during the activity were:
 
-O exercício reforçou a importância da análise de logs como parte do monitoramento e da identificação de possíveis eventos de segurança.
+```bash
+sudo -u logcheck logcheck -o -t
 
-## Evidência
+sudo -i
 
-A evidência da atividade está no PDF geral das Aulas 7 e 8:
+nano /etc/logcheck/logcheck.conf
 
-[Ver evidências — Aulas 7 e 8](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-02/aula-07-08/evidencias.pdf)
+sudo -u logcheck logcheck -o -t
+```
 
-**Print registrado:** etapa 5 da atividade, conforme solicitado pelo roteiro.
+The configuration file was updated with the following settings:
+
+```bash
+REPORTLEVEL="workstation"
+
+SENDMAILTO="<email address configured in the lab>"
+
+MAILASATTACH=1
+```
+
+## Interpreting the Results
+
+The activity demonstrated the use of Logcheck to filter and present Linux system log events.
+
+The first execution displayed a root-session closure, DHCP requests, and XRDP clipboard errors. After the configuration was changed to use the `workstation` report level, the second execution included additional `sudo` session events and further network and XRDP records.
+
+The results highlighted the importance of reviewing logs in context. For example:
+
+- A `sudo` session opening or closing can help establish an administrative activity timeline.
+- DHCP solicitation messages can reflect routine network behavior.
+- XRDP clipboard errors may arise from remote-session compatibility or clipboard handling issues.
+
+A log message marked `[ERROR]` does not automatically indicate a security incident. Events should be correlated with other information, system configuration, and the activities performed at the time.
+
+## Result
+
+The activity demonstrated how Logcheck can filter and report Linux system events.
+
+The exercise provided practical experience in observing:
+
+- Administrative session opening and closing events
+- DHCP solicitation messages on a network interface
+- XRDP clipboard-related errors
+- The effect of the `REPORTLEVEL` setting on Logcheck reporting
+- The importance of contextual interpretation during log analysis
+
+The exercise reinforced the role of log analysis in system monitoring and security-event investigation.
+
+## Concepts Practiced
+
+- Logcheck
+- Linux log analysis
+- System event monitoring
+- Authentication and privilege auditing
+- `sudo` and PAM
+- DHCP and network events
+- XRDP session events
+- Log filtering and report levels
+- Security-event interpretation
+- Detection and incident investigation
+
+## Evidence
+
+The activity evidence is included in the PDF for Classes 07–08.
+
+The screenshot requested by the activity corresponds to **Step 5**, as specified by the laboratory instructions.
+
+[View Evidence — Classes 07–08](../evidencia.pdf)
+
+---
+
+[Back to Classes 07–08](../) · [Back to Module 02](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
