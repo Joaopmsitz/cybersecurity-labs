@@ -17,8 +17,6 @@ Index of HTB Academy Skill Paths and Job Role Paths documented in this repositor
 | [Basic Toolset](./skill/basic-toolset/) | Skill | Completed | 100% | 7 of 7 |
 | [Cracking into Hack The Box](./skill/cracking-into-hack-the-box/) | Skill | Completed | 100% | 3 of 3 |
 
-> **Progress note:** SOC Analyst progress reflects the last recorded update from October 19, 2026. Update the progress and completed-module count as you advance.
-
 ## Repository Organization
 
 - **Path indexes** organize learning paths by category.
