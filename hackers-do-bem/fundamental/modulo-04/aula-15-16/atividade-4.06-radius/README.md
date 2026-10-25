@@ -1,51 +1,53 @@
-# Atividade 4.6 — Implementando um servidor RADIUS no Kali Linux
+# Activity 4.06 — Implementing a RADIUS Server on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 04  
+> **Class:** 15–16  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Implementar e testar um servidor **RADIUS (Remote Authentication Dial-In User Service)** utilizando o **FreeRADIUS** no Kali Linux.
+## Objective
 
-A atividade demonstra um cenário de autenticação centralizada, no qual um cliente envia uma solicitação de autenticação para o servidor RADIUS. Foram realizados testes com um usuário previamente configurado e também com um usuário inexistente, permitindo observar tanto uma autenticação aceita quanto uma tentativa rejeitada.
+Implement and test a RADIUS (Remote Authentication Dial-In User Service) server using FreeRADIUS on Kali Linux.
 
-O laboratório foi realizado em ambiente acadêmico controlado.
+The activity demonstrates a centralized authentication scenario in which a client sends an authentication request to a RADIUS server. Tests were performed using both a previously configured user and a nonexistent user, allowing the observation of an accepted authentication request and a rejected attempt.
 
----
+The laboratory was performed in a controlled academic environment.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Servidor RADIUS:** FreeRADIUS 3.2.3
-* **Interface de rede:** `eth0`
-* **IP do laboratório:** `192.168.98.40`
-* **Loopback:** `127.0.0.1`
-* **Porta RADIUS de autenticação:** `1812`
-* **Porta RADIUS de contabilidade:** `1813`
-* **Ferramenta de teste:** `radtest`
+- **Operating system:** Kali Linux
+- **RADIUS server:** FreeRADIUS 3.2.3
+- **Network interface:** `eth0`
+- **Laboratory IP address:** `192.168.98.40`
+- **Loopback address:** `127.0.0.1`
+- **RADIUS authentication port:** `1812`
+- **RADIUS accounting port:** `1813`
+- **Testing tool:** `radtest`
 
-> As credenciais utilizadas para acesso à VM do curso não são registradas neste README.
+The credentials used to access the course virtual machine are not documented in this README.
 
----
+## Procedure
 
-## 1. Acesso administrativo
+### 1. Obtain Administrative Access
 
-Inicialmente, foi aberto o terminal e obtido acesso de superusuário:
+A terminal was opened, and superuser access was obtained:
 
 ```bash
 sudo -i
 ```
 
-A senha utilizada para elevação de privilégio pertence ao ambiente do laboratório e não é reproduzida neste documento.
+The password used for privilege elevation belongs to the laboratory environment and is not reproduced in this document.
 
----
+### 2. Inspect Network Interfaces
 
-## 2. Verificação das interfaces de rede
-
-Foi utilizado o comando `ifconfig` para verificar as interfaces disponíveis, principalmente a interface de loopback:
+The `ifconfig` command was used to inspect the available interfaces, particularly the loopback interface:
 
 ```bash
 ifconfig
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
@@ -63,7 +65,7 @@ eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
         RX packets 1818194  bytes 2694820836 (2.5 GiB)
         RX errors 0  dropped 0  overruns 0  frame 0
         TX packets 61082  bytes 77348531 (73.7 MiB)
-        TX errors 0  dropped 0  overruns 0  carrier 0  collisions 0
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1  netmask 255.0.0.0
@@ -75,25 +77,23 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         RX errors 0  dropped 0  overruns 0  frame 0
 ```
 
-As interfaces principais observadas foram:
+The main interfaces identified were:
 
-* `docker0` — interface relacionada à rede Docker;
-* `eth0` — interface de rede utilizada pela VM, com endereço `192.168.98.40`;
-* `lo` — interface de loopback, utilizando `127.0.0.1`.
+- `docker0` — interface associated with the Docker network.
+- `eth0` — network interface used by the virtual machine, with the address `192.168.98.40`.
+- `lo` — loopback interface, using `127.0.0.1`.
 
-A atividade utiliza a interface de loopback para realizar os testes locais de autenticação.
+The activity uses the loopback interface to perform local authentication tests.
 
----
+### 3. Inspect FreeRADIUS Configuration Files
 
-## 3. Verificação dos arquivos do FreeRADIUS
-
-Os arquivos de configuração do FreeRADIUS foram listados com:
+The FreeRADIUS configuration directory was listed using:
 
 ```bash
 ls /etc/freeradius/3.0
 ```
 
-Saída:
+**Observed output:**
 
 ```text
 certs         experimental.conf  mods-available  panic.gdb
@@ -103,27 +103,25 @@ README.rst    radiusd.conf       sites-enabled    templates.conf
 sites-available  trigger.conf    users
 ```
 
-O diretório contém os principais arquivos e diretórios utilizados pelo FreeRADIUS, incluindo:
+The directory contains the primary FreeRADIUS configuration files and subdirectories, including:
 
-* `clients.conf` — configuração dos clientes RADIUS;
-* `users` — arquivo utilizado no laboratório para definir o usuário de teste;
-* `sites-enabled` — configurações dos servidores virtuais habilitados;
-* `mods-enabled` — módulos habilitados;
-* `radiusd.conf` — configuração principal do serviço.
+- `clients.conf` — configuration for RADIUS clients.
+- `users` — file used in this laboratory to define the test user.
+- `sites-enabled` — configuration for enabled virtual servers.
+- `mods-enabled` — enabled modules.
+- `radiusd.conf` — main service configuration file.
 
----
+### 4. Inspect RADIUS Client Configuration
 
-## 4. Verificação dos clientes RADIUS
-
-Foi consultado o arquivo de configuração dos clientes:
+The client configuration file was inspected:
 
 ```bash
 cat /etc/freeradius/3.0/clients.conf
 ```
 
-No ambiente do laboratório, havia um cliente localhost previamente configurado.
+The laboratory environment already contained a configured localhost client.
 
-A configuração relevante apresentada pelo roteiro utiliza:
+The relevant configuration shown in the laboratory instructions was:
 
 ```text
 #  The default secret below is only for testing, and should
@@ -132,31 +130,29 @@ A configuração relevante apresentada pelo roteiro utiliza:
 secret = testing123
 ```
 
-O valor `testing123` é uma **shared secret** utilizada pelo cliente e pelo servidor para proteger e validar a comunicação RADIUS no cenário de teste.
+The value `testing123` is a shared secret used by the RADIUS client and server to protect and validate communication in this test scenario.
 
-> Essa configuração é apropriada apenas para o laboratório. Uma shared secret previsível não deve ser utilizada em um ambiente de produção.
+**Security note:** This configuration is suitable only for the laboratory. A predictable shared secret must not be used in production. Real deployments should use a strong, unique secret and protect RADIUS traffic appropriately.
 
----
+### 5. Create a Test User
 
-## 5. Criação do usuário de teste
-
-Foi editado o arquivo de usuários do FreeRADIUS:
+The FreeRADIUS users file was edited:
 
 ```bash
 nano /etc/freeradius/3.0/users
 ```
 
-A entrada adicionada foi:
+The following entry was added:
 
 ```text
 usuario1 Cleartext-Password := "[senha definida no laboratório]"
 ```
 
-O usuário `usuario1` foi utilizado posteriormente para testar uma autenticação válida.
+The user `usuario1` was subsequently used to test a valid authentication request.
 
-A senha original utilizada durante o laboratório não é publicada neste README.
+The original laboratory password is not published in this README.
 
-Após a edição, o arquivo foi salvo utilizando:
+After editing the file, the changes were saved using:
 
 ```text
 Ctrl + X
@@ -164,19 +160,19 @@ S
 ENTER
 ```
 
----
+The password is represented by a placeholder and should be replaced only with the laboratory's actual test credential when reproducing the exercise in an authorized environment.
 
-## 6. Inicialização do FreeRADIUS
+### 6. Start FreeRADIUS
 
-O servidor foi iniciado em modo de depuração com:
+The server was started in debug mode:
 
 ```bash
 freeradius -X
 ```
 
-O modo `-X` é particularmente útil em laboratório porque apresenta no terminal o processamento detalhado das requisições recebidas.
+The `-X` option is particularly useful in a laboratory because it displays detailed information about the processing of incoming requests in the terminal.
 
-Saída inicial:
+**Initial output:**
 
 ```text
 FreeRADIUS Version 3.2.3
@@ -217,31 +213,31 @@ Listening on proxy address :: port 36998
 Ready to process requests
 ```
 
-A mensagem:
+The message:
 
 ```text
 Ready to process requests
 ```
 
-indica que o FreeRADIUS terminou o carregamento da configuração e está pronto para receber requisições.
+indicates that FreeRADIUS finished loading its configuration and was ready to receive requests.
 
-No cenário observado:
+In the observed configuration:
 
-* `1812` — autenticação RADIUS;
-* `1813` — contabilidade RADIUS;
-* `127.0.0.1:18120` — servidor `inner-tunnel`.
+- **1812** — RADIUS authentication.
+- **1813** — RADIUS accounting.
+- **127.0.0.1:18120** — the `inner-tunnel` virtual server.
 
----
+The debug process remained active while the tests were performed from a second terminal.
 
-## 7. Teste de autenticação com usuário válido
+### 7. Test Authentication with a Valid User
 
-Em um segundo terminal, foi realizado um teste utilizando o `radtest`:
+A second terminal was used to run an authentication test with `radtest`:
 
 ```bash
 radtest usuario1 [senha-do-laboratório] 127.0.0.1 0 testing123
 ```
 
-A saída observada foi:
+**Observed output:**
 
 ```text
 Sent Access-Request Id 246 from 0.0.0.0:af56 to 127.0.0.1:1812 length 78
@@ -255,32 +251,32 @@ Received Access-Accept Id 246 from 127.0.0.1:714 to 127.0.0.1:44886 length 20
 Message-Authenticator = 0xca5dfd87ba2b797e16edfe5c7ecb1d40
 ```
 
-O resultado mais importante é:
+The most important result was:
 
 ```text
 Received Access-Accept
 ```
 
-Isso indica que o servidor RADIUS aceitou a solicitação de autenticação.
+This indicates that the RADIUS server accepted the authentication request.
 
-### Parâmetros utilizados
+#### Parameters Used
 
-| Parâmetro    | Função                                                   |
-| ------------ | -------------------------------------------------------- |
-| `radtest`    | Ferramenta utilizada para testar uma autenticação RADIUS |
-| `usuario1`   | Usuário configurado no FreeRADIUS                        |
-| senha        | Credencial definida para o usuário no laboratório        |
-| `127.0.0.1`  | Endereço do servidor RADIUS utilizado no teste           |
-| `0`          | NAS-Port utilizado pela ferramenta no teste              |
-| `testing123` | Shared secret configurada para o cliente de teste        |
+| Parameter | Purpose |
+|---|---|
+| `radtest` | Tool used to test RADIUS authentication |
+| `usuario1` | User configured in FreeRADIUS |
+| Test password | Credential configured for the laboratory user |
+| `127.0.0.1` | RADIUS server address used for the test |
+| `0` | NAS-Port value used by the test utility |
+| `testing123` | Shared secret configured for the test client |
 
----
+The test was performed against the local RADIUS server, avoiding the need for an external authentication endpoint.
 
-## 8. Análise do log da autenticação aceita
+### 8. Analyze the Accepted Authentication Log
 
-No primeiro terminal, o FreeRADIUS registrou o processamento da requisição.
+The first terminal displayed the processing of the request by FreeRADIUS.
 
-Trechos principais:
+**Relevant log output:**
 
 ```text
 Ready to process requests
@@ -359,41 +355,41 @@ Waking up in 4.9 seconds.
 Ready to process requests
 ```
 
-### Interpretação
+#### Interpretation
 
-O fluxo observado foi:
+The observed flow was:
 
-1. O FreeRADIUS recebeu um `Access-Request`.
-2. O usuário `usuario1` foi localizado no arquivo `users`.
-3. A entrada do usuário foi considerada válida pela seção `files`.
-4. O servidor definiu `Auth-Type = PAP`.
-5. O módulo PAP comparou a senha apresentada com a credencial configurada.
-6. A autenticação foi concluída com sucesso.
-7. O servidor enviou `Access-Accept`.
+1. FreeRADIUS received an `Access-Request`.
+2. The `usuario1` account was found in the `users` file.
+3. The entry was accepted by the `files` module.
+4. The server selected `Auth-Type = PAP`.
+5. The PAP module compared the supplied password with the configured credential.
+6. Authentication completed successfully.
+7. The server returned `Access-Accept`.
 
-A linha mais significativa é:
+The most significant log line was:
 
 ```text
 pap: User authenticated successfully
 ```
 
-seguida por:
+This was followed by:
 
 ```text
 Sent Access-Accept
 ```
 
----
+Together, these messages confirm that FreeRADIUS accepted the authentication request for the configured test user.
 
-## 9. Teste com usuário inexistente
+### 9. Test Authentication with a Nonexistent User
 
-Depois do teste bem-sucedido, foi realizada uma nova tentativa utilizando um usuário que não estava configurado:
+After the successful test, another authentication attempt was made with a username that had not been configured:
 
 ```bash
 radtest usuarioX [senha-do-laboratório] 127.0.0.1 0 testing123
 ```
 
-Saída:
+**Observed output:**
 
 ```text
 Sent Access-Request Id 211 from 0.0.0.0:bd19 to 127.0.0.1:1812 length 78
@@ -408,19 +404,19 @@ Received Access-Reject Id 211 from 127.0.0.1:714 to 127.0.0.1:60653 length 20
 (0) -: Expected Access-Accept got Access-Reject
 ```
 
-O resultado foi diferente do teste anterior:
+The result differed from the previous test:
 
 ```text
 Received Access-Reject
 ```
 
-Isso demonstra que a autenticação do usuário inexistente foi rejeitada.
+This demonstrates that the authentication request for the unconfigured user was rejected.
 
----
+The final message from `radtest` indicates that the utility expected an `Access-Accept` but received an `Access-Reject`, which was the expected outcome for this test case.
 
-## 10. Análise do log da autenticação rejeitada
+### 10. Analyze the Rejected Authentication Log
 
-O primeiro terminal registrou o processamento da tentativa:
+The first terminal recorded the processing of the request:
 
 ```text
 Ready to process requests
@@ -495,97 +491,128 @@ Waking up in 3.9 seconds.
 Ready to process requests
 ```
 
-### Interpretação
+#### Interpretation
 
-Diferentemente do usuário `usuario1`, a entrada de `usuarioX` não foi encontrada no arquivo de usuários.
+Unlike `usuario1`, the `usuarioX` entry was not found in the configured users file.
 
-O log evidencia isso por meio de:
+The log shows this through:
 
 ```text
 [files] = noop
 ```
 
-e posteriormente:
+and subsequently:
 
 ```text
 pap: WARNING: No "known good" password found for the user.
 ```
 
-Como não havia uma credencial válida associada ao usuário, o servidor não definiu um `Auth-Type` para realizar a autenticação:
+Because no valid credential was associated with the requested account, the server did not set an authentication type:
 
 ```text
 ERROR: No Auth-Type found: rejecting the user via Post-Auth-Type = Reject
 ```
 
-Por fim, o servidor enviou:
+Finally, the server sent:
 
 ```text
 Sent Access-Reject
 ```
 
-Assim, o segundo teste demonstrou o comportamento do FreeRADIUS diante de uma tentativa de autenticação para um usuário não cadastrado.
+The second test therefore demonstrated how FreeRADIUS rejects an authentication request when no configured credential is available for the requested user.
 
----
+## Commands Used
 
-## Conceitos praticados
+The following commands and configuration operations were used throughout the activity:
+
+```bash
+sudo -i
+ifconfig
+ls /etc/freeradius/3.0
+cat /etc/freeradius/3.0/clients.conf
+nano /etc/freeradius/3.0/users
+freeradius -X
+radtest usuario1 [senha-do-laboratório] 127.0.0.1 0 testing123
+radtest usuarioX [senha-do-laboratório] 127.0.0.1 0 testing123
+```
+
+The two `radtest` commands were executed from a second terminal while the FreeRADIUS debug process remained active in the first terminal.
+
+**Credential-handling note:** The password and the shared secret in these example commands are laboratory values. Avoid using real passwords directly in command-line arguments in production environments, because they may be exposed through shell history or process information.
+
+## Concepts Practiced
 
 ### RADIUS
 
-O **RADIUS** é um protocolo utilizado para autenticação, autorização e contabilidade em ambientes de rede.
+RADIUS is a protocol used for authentication, authorization, and accounting in network environments.
 
 ### FreeRADIUS
 
-O FreeRADIUS é uma implementação de código aberto do protocolo RADIUS e pode atuar como servidor centralizado de autenticação.
+FreeRADIUS is an open-source implementation of the RADIUS protocol that can provide centralized authentication.
 
 ### Access-Request
 
-Mensagem enviada pelo cliente ao servidor RADIUS solicitando a autenticação de um usuário.
+A message sent by a client to a RADIUS server requesting authentication of a user.
 
 ### Access-Accept
 
-Resposta utilizada quando o servidor aceita a solicitação de autenticação.
+A response indicating that the server accepted the authentication request.
 
 ### Access-Reject
 
-Resposta enviada quando a solicitação não pode ser autenticada.
+A response indicating that the authentication request was rejected.
 
 ### Shared Secret
 
-Segredo compartilhado entre o cliente RADIUS e o servidor, utilizado como parte da proteção e validação da comunicação.
+A secret shared between the RADIUS client and server, used as part of the protection and validation of RADIUS communication.
+
+The laboratory used `testing123`, a weak value intended only for testing. Production environments require a strong, unique shared secret and appropriate network protections.
 
 ### PAP
 
-O **Password Authentication Protocol** foi o método observado durante o teste do usuário configurado. O log apresentou:
+Password Authentication Protocol was the authentication method observed during the test for the configured user.
+
+The log included:
 
 ```text
 Found Auth-Type = PAP
 ```
 
-e:
+and:
 
 ```text
 pap: User authenticated successfully
 ```
 
+PAP is a protocol mechanism whose security depends on the protection of the communication channel and the surrounding RADIUS deployment. It should be configured only with suitable transport protections and within the requirements of the authentication environment.
+
+### RADIUS Debugging
+
+The `freeradius -X` command displays detailed processing information, allowing administrators to identify configuration issues and understand why authentication requests are accepted or rejected.
+
+## Results
+
+The activity demonstrated how to implement a FreeRADIUS server and validate its behavior using local authentication requests.
+
+Two scenarios were tested:
+
+| Scenario | Result |
+|---|---|
+| `usuario1` configured in FreeRADIUS | `Access-Accept` |
+| `usuarioX` not configured in FreeRADIUS | `Access-Reject` |
+
+The first test demonstrated the full flow of an accepted authentication request. The second showed how the server rejects a request when it cannot find a valid configured credential for the requested user.
+
+The exercise reinforced the role of centralized authentication, RADIUS request/response messages, shared secrets, user configuration, and server-side debugging in network security.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 04, Classes 15–16.
+
+**Recorded screenshot:** Step 11 of the activity, as specified by the general Module 04 evidence instructions.
+
+[View Evidence — Classes 15–16](../evidencias.pdf)
+
 ---
 
-## Resultado
-
-A atividade permitiu implementar um servidor FreeRADIUS e validar seu funcionamento utilizando requisições locais.
-
-Foram realizados dois cenários:
-
-| Cenário                              | Resultado       |
-| ------------------------------------ | --------------- |
-| `usuario1` configurado no FreeRADIUS | `Access-Accept` |
-| `usuarioX` não configurado           | `Access-Reject` |
-
-O primeiro teste demonstrou o fluxo completo de uma autenticação aceita, enquanto o segundo mostrou como o servidor rejeita uma tentativa quando não encontra uma credencial válida para o usuário solicitado.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 4 / Aulas 3 e 4**](../evidencias.pdf)
-
-**Print registrado:** etapa 11 da atividade, conforme solicitado pelo roteiro geral de evidências do Módulo 4.
+[Back to Classes 15–16](../) · [Back to Module 04](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
