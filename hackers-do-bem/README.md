@@ -6,13 +6,17 @@ This section records the skills practiced, procedures performed, results observe
 
 ## Learning Progress
 
-| Program Stage | Status |
-| --- | --- |
-| Leveling (Nivelamento) | Completed |
-| Basic (Básico) | Completed |
-| Fundamental | Completed |
-| Specialized — Incident Response and Digital Forensics | Completed |
-| Technological Residency (Residência Tecnológica) | Next Step |
+| Program Stage | Workload | Status |
+| --- | ---: | --- |
+| Leveling (Nivelamento) | 80 hours | Completed |
+| Basic (Básico) | 64 hours | Completed |
+| Fundamental | 96 hours | Completed |
+| Specialized — Incident Response and Digital Forensics | 80 hours | Completed |
+| Technological Residency (Residência Tecnológica) | 6 months | Next Step |
+
+**Total completed training workload: 320 hours**
+
+The four training courses account for 320 hours, excluding the Technological Residency, which is measured in months.
 
 ## Training Tracks
 
