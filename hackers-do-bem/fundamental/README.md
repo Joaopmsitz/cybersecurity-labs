@@ -1,26 +1,61 @@
-# Fundamental — Hackers do Bem
+# Hackers do Bem — Fundamental
 
-Documentação da etapa Fundamental do programa Hackers do Bem. Os doze módulos cobrem atividades que vão de integridade de arquivos e hashing a redes, análise de tráfego, logs e conceitos de forense digital.
+Documentation of the Fundamental stage of the Hackers do Bem cybersecurity training program, covering security principles, threat analysis, secure development, infrastructure protection, and incident response fundamentals.
 
-Cada atividade possui documentação própria quando aplicável. As evidências de uma aula podem estar reunidas no arquivo `evidencias.pdf` correspondente.
+## Course Overview
 
-## Módulos
+| Item | Details |
+| --- | --- |
+| Program | Hackers do Bem |
+| Stage | Fundamental |
+| Workload | 96 hours |
+| Modules | 12 |
+| Status | Completed |
 
-1. [Módulo 01 — Integridade, hashing e reconhecimento inicial](./modulo-01/)
-2. [Módulo 02 — Malware e anonimato](./modulo-02/)
-3. [Módulo 03 — Reconhecimento e testes de intrusão](./modulo-03/)
-4. [Módulo 04 — Autenticação e controle de acesso](./modulo-04/)
-5. [Módulo 05 — Active Directory](./modulo-05/)
-6. [Módulo 06 — Automação e segurança web](./modulo-06/)
-7. [Módulo 07 — Backup e descarte seguro](./modulo-07/)
-8. [Módulo 08 — Criptografia](./modulo-08/)
-9. [Módulo 09 — Certificados digitais](./modulo-09/)
-10. [Módulo 10 — Hardening e virtualização](./modulo-10/)
-11. [Módulo 11 — Redes e firewall](./modulo-11/)
-12. [Módulo 12 — Logs e forense básica](./modulo-12/)
+## Modules
 
-## Padrão das atividades
+| Module | Main Topics |
+| --- | --- |
+| [Module 01](./modulo-01/) | Security principles, file integrity, hashing, and initial reconnaissance |
+| [Module 02](./modulo-02/) | Malware, anonymity, and related security risks |
+| [Module 03](./modulo-03/) | Reconnaissance and penetration testing |
+| [Module 04](./modulo-04/) | Authentication and access control |
+| [Module 05](./modulo-05/) | Active Directory and directory services security |
+| [Module 06](./modulo-06/) | Automation and web security |
+| [Module 07](./modulo-07/) | Backup strategies and secure disposal |
+| [Module 08](./modulo-08/) | Cryptography and data protection |
+| [Module 09](./modulo-09/) | Digital certificates and public key infrastructure |
+| [Module 10](./modulo-10/) | System hardening and virtualization |
+| [Module 11](./modulo-11/) | Networking, firewalls, and network security |
+| [Module 12](./modulo-12/) | Log analysis and introductory digital forensics |
 
-Os registros devem priorizar o raciocínio técnico e os resultados observados, não apenas capturas de tela. Quando aplicável, inclua objetivo, ambiente, procedimento, comandos, resultado, interpretação e aprendizados.
+## Documentation Approach
 
-[Voltar para Hackers do Bem](../README.md) · [Voltar ao portfólio principal](../../README.md)
+Each module directory contains the corresponding practical activities and supporting materials.
+
+Where applicable, activity documentation should include:
+
+- Objective and technical context
+- Lab environment and tools used
+- Procedures and commands performed
+- Observed results and technical analysis
+- Security concepts and key takeaways
+- Supporting evidence, when available
+
+Evidence files, including `evidencias.pdf` where present, should be reviewed before publication to ensure that they contain no sensitive information or material that is not authorized for public distribution.
+
+## Learning Outcomes
+
+The Fundamental stage develops practical understanding of:
+
+- Security principles and risk analysis
+- Threat identification and vulnerability assessment
+- Authentication and access control
+- Network and host security
+- Cryptography and digital certificates
+- Secure development and automation
+- Log analysis and basic digital forensics
+
+---
+
+[Back to Hackers do Bem](../README.md) · [Back to Cybersecurity Portfolio](../../README.md)
