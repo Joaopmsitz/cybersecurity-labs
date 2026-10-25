@@ -1,138 +1,146 @@
-# Atividade 1.6 — Conhecendo a ferramenta ShellPhish no Kali Linux
+# Activity 1.6 — Exploring ShellPhish on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 01  
+> **Class:** 03–04  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Explorar, em um ambiente controlado de laboratório, o funcionamento básico de uma ferramenta de simulação de phishing.
+## Objective
 
-A atividade utiliza uma página de login falsa hospedada localmente para demonstrar como informações inseridas em um formulário podem ser capturadas por uma aplicação maliciosa.
+Explore the basic operation of a phishing simulation tool in a controlled laboratory environment.
 
-> **Aviso:** toda a atividade foi realizada exclusivamente no ambiente de laboratório, utilizando `localhost` e credenciais fictícias fornecidas pelo exercício.
+This activity uses a simulated login page hosted locally to demonstrate how information submitted through a malicious web form can be captured by the application operating it.
 
-## Ambiente
+> **Safety notice:** This activity was performed exclusively in a controlled laboratory environment using `localhost` and fictional credentials supplied for the exercise. No real accounts or credentials were used.
 
-* Kali Linux
-* Terminal
-* ShellPhish
-* Firefox ESR
-* Servidor local em `localhost`
-* Porta `5050`
+## Environment
 
-## Procedimento
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Tool:** ShellPhish
+- **Browser:** Firefox ESR
+- **Hosting address:** `localhost`
+- **Port:** `5050`
 
-### 1. Acesso ao modo administrador
+## Procedure
 
-Foi aberto o Terminal e utilizado o `sudo` para acessar o modo administrador:
+### 1. Open an Administrative Shell
+
+The terminal was opened and the following command was used to switch to the administrator account:
 
 ```bash
 sudo -i
 ```
 
-### 2. Acesso ao diretório da ferramenta
+### 2. Access the Tool Directory
 
-Em seguida, foi acessado o diretório onde o ShellPhish estava disponibilizado:
+The directory containing ShellPhish was accessed:
 
 ```bash
 cd /curso/ShellPhish
 ```
 
-O conteúdo do diretório foi verificado com:
+The directory contents were checked using:
 
 ```bash
 ls
 ```
 
-Entre os arquivos encontrados estavam o script principal da ferramenta, arquivos de configuração e os diretórios contendo os sites utilizados na simulação.
+The directory contained the tool's main script, configuration files, and directories holding the website templates used in the simulation.
 
-### 3. Inicialização do ShellPhish
+### 3. Launch ShellPhish
 
-A ferramenta foi executada através do script principal:
+The tool was started by running its main script:
 
 ```bash
 bash shellphish.sh
 ```
 
-Após a inicialização, foi apresentado o menu com os sites disponíveis para a simulação.
+After initialization, the tool displayed a menu of website templates available for the simulation.
 
-### 4. Seleção do site utilizado na simulação
+### 4. Select the Simulated Website
 
-Para o exercício, foi selecionada a opção correspondente ao Facebook:
+For this exercise, the Facebook option was selected:
 
 ```text
 [01] Facebook
 ```
 
-Em seguida, foi selecionada a opção de página tradicional de login:
+The traditional login page option was then selected:
 
 ```text
 [01] Traditional Login Page
 ```
 
-### 5. Configuração do acesso local
+This selection was used solely to demonstrate how a familiar-looking login interface can be imitated in a phishing scenario.
 
-Na etapa de configuração do método de hospedagem, foi selecionada a opção:
+### 5. Configure Local Hosting
+
+When prompted to select a hosting method, the local hosting option was chosen:
 
 ```text
 [01] LocalHost
 ```
 
-Foi utilizada a porta:
+The port configured for the exercise was:
 
 ```text
 5050
 ```
 
-A ferramenta então disponibilizou a página localmente em:
+The simulated page was made available at:
 
 ```text
 http://localhost:5050
 ```
 
-O uso de `localhost` mantém a simulação restrita ao próprio ambiente do laboratório.
+Using `localhost` restricted the intended test to the local laboratory environment rather than requiring an externally accessible address.
 
-### 6. Acesso à página simulada
+### 6. Open the Simulated Login Page
 
-O endereço abaixo foi aberto no Firefox ESR:
+The following address was opened in Firefox ESR:
 
 ```text
 http://localhost:5050
 ```
 
-Foi apresentada uma página de login simulada.
+A simulated login page was displayed.
 
-Para a demonstração, foram utilizadas somente as credenciais fictícias fornecidas pela atividade:
+Only fictional credentials provided for the exercise were entered:
 
 ```text
-Usuário: teste_usuario
-Senha: teste_senha
+Username: teste_usuario
+Password: teste_senha
 ```
 
-Essas credenciais não correspondem a uma conta real.
+These values did not correspond to a real account.
 
-### 7. Observação da captura
+### 7. Observe the Captured Test Data
 
-Após o envio do formulário, a autenticação não foi realizada e a ferramenta apresentou no Terminal as informações recebidas durante a simulação.
+After the form was submitted, no actual authentication took place. Instead, the terminal displayed the information received by the simulation.
 
-O ShellPhish também registrou o endereço de origem utilizado no laboratório:
+The tool also displayed the source address used in the laboratory:
 
 ```text
 Victim IP: 127.0.0.1
 ```
 
-Em seguida, foram exibidos os dados fictícios utilizados no teste.
+The fictional test data was then displayed in the terminal.
 
-O resultado demonstrou, de forma controlada, que uma página de phishing pode encaminhar os dados inseridos pelo usuário para o operador da aplicação.
+This demonstrated how a phishing page can transmit information submitted by a user to the application operating the page, even when the page does not provide genuine authentication.
 
-### 8. Encerramento
+### 8. Stop the Simulation
 
-Após observar o resultado, a ferramenta foi encerrada com:
+After the output had been reviewed, the tool was stopped using:
 
 ```text
 Ctrl + C
 ```
 
-O navegador e o Terminal foram fechados ao final da atividade.
+The browser and terminal were closed at the end of the activity.
 
-## Comandos utilizados
+## Commands Used
 
 ```bash
 sudo -i
@@ -141,37 +149,44 @@ ls
 bash shellphish.sh
 ```
 
-O acesso à página simulada foi realizado pelo navegador através de:
+The simulated page was accessed through Firefox ESR at:
 
 ```text
 http://localhost:5050
 ```
 
-## Resultado
+## Result
 
-Foi possível executar uma simulação local de phishing e observar o fluxo básico de uma página falsa de autenticação.
+The activity demonstrated how to run a local phishing simulation and observe the behavior of a fake authentication page.
 
-A atividade demonstrou:
+The exercise covered:
 
-* Hospedagem de uma página falsa em ambiente local;
-* Funcionamento básico de um formulário de autenticação malicioso;
-* Captura de informações submetidas pelo usuário;
-* Identificação do endereço de origem da conexão;
-* Importância de verificar o endereço e a autenticidade de páginas de login.
+- Hosting a simulated login page locally
+- Understanding how a malicious authentication form can collect submitted information
+- Observing the source IP address of a local connection
+- Reviewing the output generated by the simulation
+- Recognizing the importance of verifying login page authenticity
 
-## Conceitos praticados
+## Concepts Practiced
 
-* Phishing
-* Engenharia social
-* Páginas falsas de autenticação
-* Captura de credenciais
-* `localhost`
-* Endereço IP de loopback (`127.0.0.1`)
-* Segurança de aplicações web
-* Conscientização contra ataques de phishing
+- Phishing
+- Social engineering
+- Simulated authentication pages
+- Credential capture risks
+- Localhost and loopback networking
+- Loopback IP address (`127.0.0.1`)
+- Web application security
+- Phishing awareness and prevention
+- Controlled security testing
 
-## Evidência
+## Evidence
 
-A execução da atividade foi registrada no PDF de evidências da Aula 03–04.
+The activity evidence is included in the PDF for Classes 03–04.
 
-[Ver evidências — Aula 03–04](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-01/aula-03-04/evidencias.pdf)
+The relevant screenshot documents the local phishing simulation and the output displayed after the fictional credentials were submitted.
+
+[View Evidence — Classes 03–04](../evidencias.pdf)
+
+---
+
+[Back to Classes 03–04](../) · [Back to Module 01](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
