@@ -1,41 +1,35 @@
 # HTB Academy — Module Library
 
-> Centralized technical documentation for HTB Academy modules.
-
-This directory contains reusable technical notes, commands, workflows, and practical exercises organized by cybersecurity domain.
+Centralized technical documentation for Hack The Box Academy modules, organized by cybersecurity domain.
 
 ## Knowledge Domains
 
 | Domain | Focus |
-|---|---|
-| [Academy Basics](./academy-basics/) | Platform orientation and foundational concepts |
-| [Defensive](./defensive/) | Security monitoring, detection, and incident response |
-| [Networking](./networking/) | Network protocols, concepts, and traffic analysis |
+| --- | --- |
+| [Academy Basics](./academy-basics/) | Academy orientation and foundational concepts |
+| [Defensive Security](./defensive/) | Security monitoring, SIEM, and incident response |
+| [Networking](./networking/) | Network concepts, protocols, and traffic analysis |
 | [Password Attacks](./password-attacks/) | Password cracking and authentication attacks |
 | [Reconnaissance](./reconnaissance/) | Information gathering, scanning, and enumeration |
-| [Web](./web/) | HTTP, JavaScript analysis, web assessment, and security tools |
+| [Web Security](./web/) | HTTP, JavaScript analysis, web assessment, and security tools |
 
-Domains represent the primary subject of a module, not the learning path where it appears.
+## Documentation Structure
 
-## Module Structure
+Each module is documented in its own directory and may contain:
 
-- `README.md` — concise technical reference with reusable concepts, commands, workflows, and lessons learned.
-- `images/` — screenshots and supporting images referenced in the documentation.
-- `labs/` — separate notes for relevant practical exercises.
+- `README.md` — Technical notes, commands, workflows, and lessons learned.
+- `images/` — Relevant screenshots and supporting images.
+- `labs/` — Practical exercises and additional lab notes.
 
-Create `images/` and `labs/` only when needed.
+Create additional files and directories as needed.
 
 ## Documentation Principles
 
-- **One module, one location:** maintain a single technical reference for each module.
-- **Organize by domain:** classify modules by their primary technical subject.
-- **Link instead of duplicating:** learning paths reference existing module documentation.
-- **Prioritize practical value:** document useful findings and workflows instead of reproducing Academy lessons.
+- **One module, one location:** Keep technical notes and exercises together.
+- **Organize by domain:** Group modules according to their primary subject.
+- **Avoid duplication:** Learning paths should link to existing module documentation.
+- **Focus on practical value:** Document useful commands, findings, and lessons learned in your own words.
 
-## Navigation
+---
 
-- [HTB Academy Overview](../README.md)
-- [All Learning Paths](../paths/README.md)
-- [Job Role Paths](../paths/job-role/README.md)
-- [Skill Paths](../paths/skill/README.md)
-- [HTB Academy](https://academy.hackthebox.com/)
+[Back to HTB Academy](../README.md) · [View Learning Paths](../paths/README.md)
