@@ -1,119 +1,117 @@
-# Atividade 4.4 — John the Ripper: Ataque de Dicionário
+# Activity 4.04 — John the Ripper: Dictionary Attack
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 04  
+> **Class:** 13–14  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **John the Ripper** para realizar uma auditoria offline de uma credencial em ambiente controlado, utilizando um hash de senha armazenado no sistema e um ataque baseado em dicionário.
+## Objective
 
-A atividade demonstra como senhas fracas podem ser recuperadas quando um atacante obtém acesso aos hashes armazenados, sem necessidade de realizar tentativas diretamente contra o serviço de autenticação.
+Use John the Ripper to perform an offline password audit in a controlled environment, using a password hash stored on the system and a dictionary-based attack.
 
----
+The activity demonstrates how weak passwords can be recovered when an attacker obtains access to stored password hashes, without having to make authentication attempts directly against the original service.
 
-## Ambiente
+**Laboratory scope:** All procedures were performed exclusively with an account created for the exercise.
 
-* **Sistema:** Kali Linux
-* **Ferramentas:** John the Ripper, OpenSSL
-* **Arquivo de teste:** `credencial.txt`
-* **Arquivo do sistema analisado:** `/etc/shadow`
-* **Tipo de hash utilizado no laboratório:** `crypt`
-* **Método:** ataque de dicionário
+## Environment
 
-> Todo o procedimento foi realizado exclusivamente com uma conta criada para o laboratório.
+- **Operating system:** Kali Linux
+- **Tools:** John the Ripper, OpenSSL
+- **Test file:** `credencial.txt`
+- **System file examined:** `/etc/shadow`
+- **Hash format used in the laboratory:** `crypt`
+- **Method:** Dictionary attack
 
----
+## Procedure
 
-## 1. Acesso ao `/etc/shadow`
+### 1. Access the `/etc/shadow` File
 
-Inicialmente, foi obtido acesso administrativo:
+Administrative access was obtained first:
 
-```bash id="p7k2ma"
+```bash id="shv0qa"
 sudo -i
 ```
 
-Em seguida, o arquivo `/etc/shadow` foi consultado:
+The `/etc/shadow` file was then inspected:
 
-```bash id="r3x8vc"
+```bash id="qz6fda"
 cat /etc/shadow
 ```
 
-O `/etc/shadow` contém informações relacionadas às credenciais das contas locais, incluindo hashes de senha e parâmetros de envelhecimento das credenciais.
+The `/etc/shadow` file contains authentication-related information for local accounts, including password hashes and password-aging parameters.
 
-No laboratório, a saída continha entradas para diferentes usuários do sistema.
+The laboratory output contained entries for several system users.
 
-Por segurança, os hashes reais do ambiente não são reproduzidos neste README.
+For security reasons, the actual hashes from the environment are not reproduced in this README.
 
-Uma entrada possui uma estrutura semelhante a:
+An entry has a structure similar to:
 
-```text id="k6n1zw"
-usuario:<hash>:...
+```text id="m07vdt"
+username:<hash>:...
 ```
 
-O arquivo é protegido porque o acesso aos hashes permite a realização de ataques offline de quebra de senha.
+Access to this file must be restricted because obtaining password hashes can enable offline password-cracking attempts.
 
----
+### 2. Create a Test User
 
-## 2. Criação de um usuário de teste
+A user account exclusively for the activity was created using `useradd` and OpenSSL:
 
-Foi criado um usuário exclusivamente para a atividade utilizando `useradd` e `openssl`:
-
-```bash id="v9c4qt"
+```bash id="wjac55"
 useradd -p $(openssl passwd -1 [senha-de-teste]) teste1
 ```
 
-No laboratório, a opção `-1` do OpenSSL foi utilizada para gerar um hash no formato **MD5-crypt**, identificado pelo prefixo `$1$`.
+In the laboratory, the OpenSSL `-1` option was used to generate a hash in the MD5-crypt format, identified by the `$1$` prefix.
 
-> A senha de teste utilizada pelo roteiro não é reproduzida neste README.
+**Note:** `[senha-de-teste]` is a placeholder for the test password used in the laboratory, not a literal password to enter unchanged. The test password is not reproduced in this README.
 
-Após a criação, a conta `teste1` passou a possuir uma entrada correspondente no `/etc/shadow`.
+After creation, the `teste1` account had a corresponding entry in `/etc/shadow`.
 
----
+### 3. Identify the Test Account Entry
 
-## 3. Identificação da entrada da conta de teste
+The file was inspected again:
 
-Foi consultado novamente o arquivo:
-
-```bash id="n5w2df"
+```bash id="5nq4si"
 cat /etc/shadow
 ```
 
-A entrada correspondente ao usuário criado apresentava um formato semelhante a:
+The entry associated with the newly created user had a structure similar to:
 
-```text id="x4q8pb"
+```text id="z9m8fp"
 teste1:<hash-do-laboratório>:...
 ```
 
-O objetivo dessa etapa foi identificar somente a linha correspondente à conta de teste.
+The purpose of this step was to identify the line corresponding to the test account.
 
-O hash foi utilizado como entrada para o processo de auditoria offline.
+The hash was used as input for the offline password-auditing process.
 
----
+### 4. Create the Credential File
 
-## 4. Criação do arquivo de credencial
+The entry corresponding to the `teste1` user was copied into a separate file:
 
-A linha correspondente ao usuário `teste1` foi copiada para um arquivo separado:
-
-```text id="f1y6kc"
+```text id="b4mz9g"
 credencial.txt
 ```
 
-Esse arquivo contém o material necessário para que o John the Ripper tente identificar a senha correspondente ao hash.
+This file contained the material required for John the Ripper to attempt to identify the password corresponding to the hash.
 
-A separação do hash em um arquivo próprio evita trabalhar diretamente sobre o `/etc/shadow` durante a atividade.
+Separating the hash into its own file avoided working directly with `/etc/shadow` during the exercise.
 
----
+The hash in this file was laboratory test data, not a production credential.
 
-## 5. Execução do John the Ripper
+### 5. Run John the Ripper
 
-Com o arquivo de teste preparado, foi executado:
+After preparing the test file, the following command was executed:
 
-```bash id="q8s4nv"
+```bash id="a8jh12"
 john -format=crypt credencial.txt
 ```
 
-O John identificou o hash e iniciou a tentativa de recuperação utilizando suas regras e a wordlist padrão.
+John identified the hash and began attempting recovery using its rules and the default wordlist.
 
-Saída observada:
+**Observed output:**
 
-```text id="d2v7rx"
+```text id="vvpq57"
 Created directory: /root/.john
 Using default input encoding: UTF-8
 Loaded 1 password hash (crypt, generic crypt(3) [?/64])
@@ -130,149 +128,175 @@ Use the "--show" option to display all of the cracked passwords reliably
 Session completed.
 ```
 
-A execução apresentou:
+The execution displayed:
 
-```text id="n4s8jq"
+```text id="a9vruw"
 Loaded 1 password hash
 ```
 
-indicando que um hash foi carregado para análise.
+This indicates that one password hash was loaded for analysis.
 
-Também foi utilizada a wordlist padrão:
+The default wordlist was also used:
 
-```text id="z7c2mx"
+```text id="z7qnmt"
 /usr/share/john/password.lst
 ```
 
-O resultado:
+The result:
 
-```text id="v1h9sk"
+```text id="jrf6ta"
 1g 0:00:00:00 DONE
 ```
 
-indica que uma credencial foi recuperada durante a execução.
+indicates that one credential was recovered during the execution.
 
-O plaintext recuperado foi omitido do README porque corresponde à senha utilizada pelo laboratório.
+The recovered plaintext password is not reproduced in this README because it corresponds to the password used in the laboratory.
 
----
+### 6. Interpret the Results
 
-## 6. Interpretação do resultado
+The result demonstrates the difference between online authentication attempts and offline password attacks.
 
-O resultado demonstra a diferença entre **autenticação online** e **ataque offline**.
+In this exercise, John the Ripper did not need to submit attempts to a login page. Instead, it received a password hash and worked locally to find a candidate that matched the stored hash.
 
-Neste exercício, o John the Ripper não precisou realizar tentativas contra uma tela de login. Ele recebeu diretamente o hash da senha e trabalhou localmente para encontrar uma entrada compatível.
+The process can be represented as follows:
 
-O processo pode ser representado de forma simplificada:
-
-```text
-Senha de teste
-      │
-      ▼
-Hash armazenado no /etc/shadow
-      │
-      ▼
-Cópia do hash → credencial.txt
-      │
-      ▼
+```text id="hxm67k"
+Test password
+      |
+      v
+Password hash stored in /etc/shadow
+      |
+      v
+Copy of the hash -> credencial.txt
+      |
+      v
 John the Ripper
-      │
-      ▼
-Wordlist / regras de candidatos
-      │
-      ▼
-Comparação com o hash
-      │
-      ▼
-Senha recuperada
+      |
+      v
+Wordlist and candidate-generation rules
+      |
+      v
+Comparison against the hash
+      |
+      v
+Recovered password
 ```
 
-Isso evidencia por que a proteção do `/etc/shadow` é importante: obter os hashes pode permitir tentativas de quebra offline sem gerar tentativas de login no serviço original.
+This illustrates why protecting `/etc/shadow` is important: obtaining password hashes can allow offline cracking attempts without generating login attempts against the original authentication service.
 
----
+The success of a dictionary attack depends on factors such as password predictability, the hash algorithm, its computational cost, and the candidates available to the cracking tool.
 
-## 7. Limpeza do arquivo de teste
+### 7. Remove the Test File
 
-Após concluir o exercício, foi verificado o conteúdo do diretório:
+After completing the exercise, the directory contents were checked:
 
-```bash id="w6k3px"
+```bash id="c3ffm5"
 ls
 ```
 
-O arquivo criado para a atividade foi removido:
+The file created for the activity was removed:
 
-```bash id="a9m4rz"
+```bash id="g7n8zp"
 rm credencial.txt
 ```
 
-A limpeza evita deixar uma cópia desnecessária do hash utilizado durante o exercício.
+This cleanup step prevented an unnecessary copy of the test hash from being left behind.
 
----
+Removing `credencial.txt` does not automatically delete the test account or its entry in `/etc/shadow`. The documented cleanup specifically removed the temporary hash file.
 
-## Conceitos praticados
+## Commands Used
+
+The following commands were used during the activity:
+
+```bash id="xmyjhm"
+sudo -i
+cat /etc/shadow
+useradd -p $(openssl passwd -1 [senha-de-teste]) teste1
+cat /etc/shadow
+john -format=crypt credencial.txt
+ls
+rm credencial.txt
+```
+
+The test hash was handled in a separate file, and the recovered password is intentionally omitted from the documentation.
+
+## Concepts Practiced
 
 ### `/etc/shadow`
 
-Arquivo utilizado pelo Linux para armazenar hashes de senhas e informações relacionadas ao envelhecimento das credenciais.
+A Linux file used to store password hashes and information related to password aging.
 
-Diferentemente de uma senha em texto puro, o sistema não precisa armazenar a senha diretamente para realizar a autenticação.
+Unlike plaintext password storage, Linux authentication can verify a password without storing the original password directly in this file.
 
-### Hash de senha
+Because password hashes can be targeted by offline cracking tools, access to `/etc/shadow` must be tightly restricted.
 
-É o resultado de uma função utilizada para representar uma senha de forma que o valor original não fique armazenado diretamente.
+### Password Hash
 
-Entretanto, hashes de algoritmos antigos ou senhas fracas podem ser vulneráveis a ataques de recuperação offline.
+A password hash is the output of a function used to represent a password without storing the original value directly.
+
+However, hashes generated with older algorithms or derived from weak passwords can be vulnerable to offline cracking.
 
 ### MD5-crypt
 
-O laboratório utilizou:
+The laboratory used the following OpenSSL option:
 
-```bash id="j5t8wb"
+```bash id="vnns6g"
 openssl passwd -1
 ```
 
-A opção `-1` gera hashes no formato **MD5-crypt**, identificado pelo prefixo `$1$`.
+The `-1` option generates hashes in the MD5-crypt format, identified by the `$1$` prefix.
 
-Esse algoritmo é considerado legado e não deve ser utilizado como referência para sistemas modernos de armazenamento de senhas.
+MD5-crypt is considered a legacy password-hashing scheme and should not be used as a model for modern password storage. Modern systems should use purpose-built password-hashing algorithms with appropriate work factors, such as Argon2id, scrypt, or appropriately configured bcrypt.
 
 ### John the Ripper
 
-Ferramenta de auditoria de senhas capaz de testar candidatos contra hashes conhecidos.
+John the Ripper is a password-auditing tool that tests candidate passwords against known hashes.
 
-Ela pode utilizar diferentes estratégias, incluindo:
+It can use different techniques, including:
 
-* wordlists;
-* regras de transformação;
-* diferentes formatos de hash;
-* combinações de candidatos.
+- Wordlists.
+- Password-transformation rules.
+- Multiple hash formats.
+- Candidate combinations.
 
-### Ataque offline
+### Dictionary Attack
 
-Nesse modelo, o atacante trabalha sobre uma cópia do material de autenticação, como hashes, sem precisar enviar cada tentativa ao serviço que originalmente autentica o usuário.
+A dictionary attack tests candidate passwords drawn from a list or generated using predefined rules.
+
+It is particularly effective against weak or predictable passwords that appear in the candidate set.
+
+### Offline Attack
+
+In an offline attack, the attacker works with a copy of authentication material, such as password hashes, without having to submit each candidate to the original authentication service.
+
+Offline attacks can avoid generating login-failure events on the original service, which makes protecting stored hashes and selecting strong passwords especially important.
+
+## Results
+
+The activity demonstrated how John the Ripper can be used to audit a credential from its hash in a controlled environment.
+
+The following tasks were completed:
+
+- Examined the purpose of `/etc/shadow`.
+- Created an account specifically for the laboratory.
+- Generated a test credential using OpenSSL.
+- Separated the hash into `credencial.txt`.
+- Identified the `crypt` hash format.
+- Executed John the Ripper.
+- Used the default wordlist.
+- Recovered the test password.
+- Removed the temporary file after completing the exercise.
+
+The exercise reinforced the importance of modern password-hashing algorithms, strong password policies, and restricted access to files containing authentication material.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 04, Classes 13–14.
+
+**Recorded screenshot:** Step 7 of the activity, as required by the laboratory instructions, showing John the Ripper's execution and recovery of the test credential.
+
+[View Evidence — Classes 13–14](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-A atividade demonstrou, em um ambiente controlado, como o John the Ripper pode ser utilizado para auditar uma credencial a partir de seu hash.
-
-Foi possível:
-
-* analisar a finalidade do `/etc/shadow`;
-* criar uma conta específica para o laboratório;
-* gerar uma credencial de teste;
-* separar o hash em `credencial.txt`;
-* identificar o formato `crypt`;
-* executar o John the Ripper;
-* utilizar a wordlist padrão;
-* recuperar a senha de teste;
-* remover o arquivo temporário após a atividade.
-
-O exercício reforça a importância de utilizar algoritmos modernos para armazenamento de senhas, aplicar políticas de senhas adequadas e restringir o acesso aos arquivos que armazenam material de autenticação.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 4 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Print registrado:** etapa 7 da atividade, conforme solicitado pelo roteiro, mostrando a execução do John the Ripper e a recuperação da credencial de teste.
+[Back to Classes 13–14](../) · [Back to Module 04](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
