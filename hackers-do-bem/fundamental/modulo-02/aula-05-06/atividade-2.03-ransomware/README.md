@@ -1,157 +1,98 @@
-# Atividade 2.3 — Explorando Ransomwares no Kali Linux
+# Activity 2.03 — Exploring Ransomware Artifacts on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 02  
+> **Class:** 05–06  
+> **Environment:** Kali Linux virtual lab  
+> **Status:** Completed
 
-Explorar, em um ambiente controlado de laboratório, uma ferramenta capaz de gerar amostras de ransomware no Kali Linux.
+## Objective
 
-A atividade teve como objetivo compreender a existência de diferentes famílias de ransomware, observar o processo de geração de uma amostra e verificar o artefato criado no sistema de arquivos.
+Explore a ransomware artifact-generation tool in a controlled laboratory environment, observe the available ransomware family labels, and inspect the resulting file in the Linux filesystem.
 
-O ransomware gerado durante o laboratório **não foi executado**. A atividade foi limitada à criação e inspeção do arquivo para fins educacionais.
+The activity focused on understanding how a tool can produce a potentially malicious artifact and how the generated file can be inspected without executing it.
 
-> **Aviso:** ransomware é um tipo de malware capaz de causar indisponibilidade e perda de dados. O artefato criado nesta atividade não deve ser executado fora de um ambiente de análise controlado.
+> **Safety notice:** Ransomware can cause data loss, system disruption, and service unavailability. The artifact produced during this exercise was not executed. All observations were performed in a virtualized laboratory environment for educational purposes.
 
-## Ambiente
+## Environment
 
-* Kali Linux
-* Terminal
-* Ransomware Creator
-* Python 3
-* Thunar
-* Sistema virtualizado de laboratório
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Tool:** Ransomware Creator
+- **Runtime:** Python 3
+- **File manager:** Thunar
+- **Execution environment:** Virtualized laboratory
 
-## Procedimento
+## Procedure
 
-### 1. Acesso ao modo administrador
+### 1. Open an Administrative Shell
 
-O Terminal foi aberto e o ambiente foi acessado com privilégios administrativos:
+The terminal was opened and an administrative shell was started:
 
-```bash id="jv3x6k"
+```bash
 sudo -i
 ```
 
-### 2. Acesso ao diretório da ferramenta
+### 2. Access the Tool Directory
 
-Em seguida, foi acessado o diretório onde a ferramenta de criação de ransomware estava disponibilizada:
+The directory containing the laboratory tool was accessed:
 
-```bash id="4z5q81"
+```bash
 cd /curso/Ransomware
 ```
 
-A ferramenta foi executada com Python 3:
+The directory contents were inspected using:
 
-```bash id="m9w1f2"
-python3 Ransomware
+```bash
+ls
 ```
 
-Após a inicialização, foi apresentada a interface do programa:
+The Ransomware Creator was then opened in the laboratory environment. Its startup screen identified the tool as:
 
-```text id="0h2p8q"
-██████╗  █████╗ ███╗   ██╗███████╗ ██████╗ ███╗   ███╗
-██╔══██╗██╔══██╗████╗  ██║██╔════╝██╔══██╗████╗ ████║
-██████╔╝███████║██╔██╗ ██║███████╗██║   ██║██╔████╔██║
-██╔══██╗██╔══██║██║╚██╗██║╚════██║██║   ██║██║╚██╔╝██║
-██║  ██║██║  ██║██║ ╚████║███████║╚██████╔╝██║ ╚═╝ ██║
-╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝ ╚═════╝ ╚═╝     ╚═╝
-
-           RANSOMWARE CREATOR BY ERR0R
+```text
+RANSOMWARE CREATOR BY ERR0R
 
 Ransomware Virus Creator Tools Version 1.0
 DON'T Try to Use it on Your Computer!
 ```
 
-### 3. Exploração dos comandos disponíveis
+### 3. Inspect the Available Commands
 
-Foi utilizado o comando:
+The tool's help interface was consulted to understand the available menu options.
 
-```text id="w3m5jx"
-Ransomware®Creator~> help
-```
+The displayed commands included:
 
-A ferramenta apresentou as opções disponíveis:
+| Command | Purpose |
+|---|---|
+| `help` | Display usage information |
+| `show` | List the ransomware labels available in the tool |
+| `clear` | Clear the terminal interface |
+| `menu` | Return to the main menu |
+| `EXIT` | Close the program |
 
-```text id="xj6b1p"
-----------------------------------
-| Commands            Description|
-----------------------------------
-| Help                How to Use |
-| Show      Show List Ransomware |
-| Clear             Clear window |
-| Menu              Back to Menu |
-| EXIT              Exit Program |
-----------------------------------
-```
+This step provided an overview of the tool's interface and functionality.
 
-O comando `help` permitiu identificar as operações básicas disponibilizadas pela ferramenta.
+### 4. Review the Available Ransomware Labels
 
-### 4. Listagem das famílias disponíveis
+The listing function displayed references to multiple ransomware families, including:
 
-Para visualizar as amostras disponíveis para criação, foi utilizado:
+- Cerber
+- CryptoWall
+- Jigsaw
+- Locky
+- Mamba
+- Petya
+- TeslaCrypt
+- WannaCry
+- Other entries provided by the tool
 
-```text id="5b7v4c"
-Ransomware®Creator~> show
-```
+These names represent labels presented by the laboratory application. Their presence in the menu does not independently establish that the tool generates authentic samples of each named family.
 
-A ferramenta apresentou:
+### 5. Observe the Generated Artifact
 
-```text id="8x4f2d"
-This Files are Very Sensitive
-Be Careful While You Using Them !
+During the laboratory exercise, the tool reported that it had completed artifact generation. Its output included the following information:
 
-01. Ransomware.Cerber
-02. Ransomware.Cryptowall
-03. Ransomware.Jigsaw
-04. Ransomware.Locky
-05. Ransomware.Mamba
-06. Ransomware.Matsnu
-07. Ransomware.Petrwrap
-08. Ransomware.Petya
-09. Ransomware.Radamant
-10. Ransomware.Rex
-11. Ransomware.Satana
-12. Ransomware.TeslaCrypt
-13. Ransomware.Vipasana
-14. Ransomware.WannaCry
-15. Ransomware.WannaCry_Plus
-```
-
-A listagem permitiu observar que a ferramenta disponibiliza referências a diferentes famílias de ransomware.
-
-### 5. Verificação do diretório raiz
-
-Um segundo Terminal foi utilizado para acompanhar a criação do artefato no sistema de arquivos.
-
-O diretório raiz foi acessado:
-
-```bash id="xv6p3n"
-cd /
-```
-
-Em seguida:
-
-```bash id="r1k7sz"
-ls
-```
-
-Antes da geração do artefato, a saída apresentava os diretórios padrão do sistema:
-
-```text id="z0q5mj"
-bin   curso  etc   lib   lost+found  mnt  proc  run   snap  sys  usr
-boot  dev    home  lib64 media       opt  root  sbin  srv   tmp  var
-```
-
-Essa etapa serviu como referência para identificar posteriormente a criação do novo arquivo/diretório utilizado pela ferramenta.
-
-### 6. Geração da amostra WannaCry
-
-De volta ao primeiro Terminal, foi selecionada a opção correspondente à amostra WannaCry:
-
-```text id="6k2s9a"
-Ransomware®Creator~> 14
-```
-
-A ferramenta iniciou o processo de geração e apresentou:
-
-```text id="m5w8x1"
+```text
 Creating Ransomware
 File name: Ransomware.WannaCry.zip
 File type: .zip
@@ -160,149 +101,121 @@ File type: .zip
 
 Completed
 File saved as /sdcard
-For back to main menu, type: menu
 ```
 
-O resultado indica que a ferramenta concluiu a geração do artefato e o salvou no caminho:
+The output indicated that the operation had completed and reported `/sdcard` as the destination.
 
-```text id="n7c4qx"
-/sdcard
-```
+The tool labeled the generated artifact `Ransomware.WannaCry.zip`. This label was recorded as part of the laboratory output rather than treated as independent confirmation of the artifact's malware family.
 
-O arquivo foi tratado somente como **artefato de análise** e não foi executado.
+### 6. Inspect the Filesystem
 
-### 7. Verificação da criação do artefato
+A second terminal was used to inspect the root directory:
 
-No segundo Terminal, o comando `ls` foi executado novamente:
-
-```bash id="4b2z7k"
-ls
-```
-
-A nova saída apresentou o diretório `sdcard`:
-
-```text id="8qf3yc"
-bin   curso  etc   lib   lost+found  mnt  proc  run   sdcard  srv  tmp  var
-boot  dev    home  lib64  media       opt  root  sbin  snap    sys  usr
-```
-
-A presença de `sdcard` confirmou que a ferramenta havia criado o artefato no sistema de arquivos.
-
-### 8. Inspeção do arquivo pelo Thunar
-
-O explorador de arquivos **Thunar** foi aberto para realizar uma inspeção visual do conteúdo.
-
-O caminho utilizado foi:
-
-```text id="d4v8kp"
-/
-```
-
-Dentro do diretório raiz, foi localizado o arquivo:
-
-```text id="q5s2mn"
-sdcard
-```
-
-O arquivo foi aberto para visualizar seu conteúdo.
-
-### 9. Identificação do executável
-
-Dentro do `sdcard`, foi identificado um arquivo com extensão `.exe`, com aproximadamente **3,5 MB**.
-
-O artefato correspondia ao executável associado à amostra WannaCry gerada pela ferramenta.
-
-Essa foi a etapa utilizada como evidência da atividade, pois permitiu visualizar diretamente que a ferramenta havia produzido um executável.
-
-> **Importante:** o executável foi somente identificado e inspecionado. Ele não foi aberto nem executado.
-
-## Comandos utilizados
-
-Os principais comandos utilizados durante a atividade foram:
-
-```bash id="v7c9x2"
-sudo -i
-cd /curso/Ransomware
-python3 Ransomware
-```
-
-Para acompanhar o sistema de arquivos:
-
-```bash id="h2p6nm"
+```bash
 cd /
 ls
 ```
 
-Após a geração da amostra, o comando `ls` foi utilizado novamente para confirmar a criação de:
+The listing included an entry named:
 
-```text id="q9r4tw"
+```text
 sdcard
 ```
 
-## Interpretação
+This entry was subsequently located using the Thunar file manager.
 
-O laboratório demonstrou uma etapa importante do ciclo de uma ameaça de ransomware: a geração de um artefato que posteriormente poderia ser utilizado para comprometer um sistema.
+The artifact was inspected visually to verify the result of the preceding operation.
 
-A ferramenta disponibilizada no laboratório apresentou uma lista contendo referências a diversas famílias de ransomware. A opção escolhida gerou uma amostra associada ao **WannaCry**.
+### 7. Identify the Executable
 
-O fluxo observado foi:
+During the inspection, a file with the `.exe` extension and an approximate size of 3.5 MB was observed at the reported output location.
 
-```text id="8p6z1k"
-Ransomware Creator
-        │
-        ▼
-Seleção da amostra
-        │
-        ▼
-Geração do artefato
-        │
-        ▼
-/sdcard
-        │
-        ▼
-Inspeção no Thunar
-        │
-        ▼
-Executável identificado
+The executable was identified as part of the artifact produced during the exercise.
+
+**Important:** The file was inspected but never opened or executed. No attempt was made to encrypt files, modify a target system, or test ransomware behavior.
+
+### 8. Handle the Artifact Safely
+
+After the inspection, the laboratory activity was concluded without executing the artifact.
+
+Potentially malicious files should remain isolated from production systems and personal data. Any further analysis should take place in an appropriately isolated environment using established malware-analysis procedures.
+
+## Commands Used
+
+The documented filesystem inspection commands were:
+
+```bash
+sudo -i
+cd /curso/Ransomware
+ls
+
+cd /
+ls
 ```
 
-A atividade também reforçou a diferença entre **criar/observar um artefato de malware** e **executá-lo**. Neste laboratório, a análise foi encerrada antes de qualquer execução, reduzindo o risco de alteração ou indisponibilidade do ambiente.
+The tool interface was used to review the available functionality and observe the artifact-generation result. The generated file was not executed.
 
-## Resultado
+## Interpreting the Results
 
-Foi possível:
+The exercise demonstrated a basic stage in the handling of potentially malicious software: the creation and subsequent inspection of a file that may require security analysis.
 
-* Inicializar a ferramenta Ransomware Creator;
-* Consultar os comandos disponíveis com `help`;
-* Listar diferentes famílias de ransomware com `show`;
-* Selecionar a amostra associada ao WannaCry;
-* Gerar o artefato dentro do ambiente controlado;
-* Confirmar sua criação utilizando `ls`;
-* Localizar o arquivo `sdcard` no diretório raiz;
-* Inspecionar o conteúdo utilizando o Thunar;
-* Identificar um executável `.exe` de aproximadamente 3,5 MB;
-* Encerrar a atividade sem executar o ransomware;
-* Remover o artefato ao final do laboratório.
+The observed workflow was:
 
-A atividade permitiu compreender, de forma prática e controlada, como ferramentas maliciosas podem gerar artefatos executáveis e por que esses arquivos devem ser tratados como potencialmente perigosos.
+```text
+Ransomware Creator
+        |
+        v
+Artifact Generation Report
+        |
+        v
+Filesystem Inspection
+        |
+        v
+Executable Identified
+        |
+        v
+No Execution Performed
+```
 
-## Conceitos praticados
+The artifact's name and file extension were not sufficient to establish its true behavior or family attribution. Reliable identification would require additional evidence, such as cryptographic hashes, static analysis, and results from reputable malware-analysis services.
 
-* Ransomware
-* Malware
-* WannaCry
-* Ransomware Creator
-* Artefato malicioso
-* Executável Windows
-* Análise de malware
-* Sistema de arquivos Linux
-* Inspeção de arquivos
-* Ambiente controlado
-* Segurança de endpoints
-* Prevenção contra execução de malware
+The main distinction demonstrated by this activity was the difference between identifying a potentially malicious artifact and executing it. The laboratory stopped at the inspection stage, avoiding the operational risks associated with running ransomware.
 
-## Evidência
+## Result
 
-A execução da atividade foi registrada no PDF de evidências da Aula 05–06.
+The activity provided experience in:
 
-[Ver evidências — Aula 05–06](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-02/aula-05-06/evidencias.pdf)
+- Exploring the interface of a ransomware artifact-generation tool
+- Reviewing the labels presented for different ransomware families
+- Observing the tool's reported generation result
+- Inspecting the Linux filesystem for the resulting artifact
+- Identifying a Windows executable during the inspection
+- Distinguishing an artifact label from verified malware attribution
+- Completing the exercise without executing the file
+
+The activity reinforced the importance of treating suspicious executable files as potentially dangerous and examining them only under appropriate safety controls.
+
+## Concepts Practiced
+
+- Ransomware and malware artifacts
+- WannaCry as a ransomware-family reference
+- Suspicious executable identification
+- Linux filesystem navigation
+- Thunar file inspection
+- Malware-analysis fundamentals
+- Safe handling of potentially malicious files
+- Virtualized laboratory environments
+- Endpoint security
+- Threat identification and evidence documentation
+
+## Evidence
+
+The activity evidence is included in the PDF for Classes 05–06.
+
+The relevant screenshots document the tool interface, its reported output, and the subsequent filesystem inspection.
+
+[View Evidence — Classes 05–06](../evidencias.pdf)
+
+---
+
+[Back to Classes 05–06](../) · [Back to Module 02](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
