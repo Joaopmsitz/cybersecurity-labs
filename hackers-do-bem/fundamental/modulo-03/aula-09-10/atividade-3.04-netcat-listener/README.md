@@ -1,48 +1,50 @@
-# Atividade 3.4 — Netcat
+# Activity 3.04 — Creating a TCP Listener with Netcat
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 03  
+> **Class:** 09–10  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **Netcat (`nc`)** para criar um listener TCP em uma porta específica e observar uma requisição HTTP enviada pelo navegador.
+## Objective
 
-A atividade demonstra, de forma prática, como uma ferramenta simples de rede pode receber conexões TCP e permitir a visualização dos dados transmitidos pelo cliente.
+Use Netcat (`nc`) to create a TCP listener on a specific port and observe an HTTP request sent by a web browser.
 
----
+The activity demonstrates how a simple networking tool can accept TCP connections and display the data transmitted by a client.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramenta:** Netcat
-* **Navegador:** Mozilla Firefox
-* **Interface de rede:** `eth0`
-* **IP da máquina Kali:** `192.168.98.40`
-* **Porta utilizada:** `5555`
-* **Protocolo observado:** HTTP
+- **Operating system:** Kali Linux
+- **Tool:** Netcat
+- **Browser:** Mozilla Firefox
+- **Network interface:** `eth0`
+- **Kali Linux IP address:** `192.168.98.40`
+- **Port:** `5555`
+- **Protocol observed:** HTTP
 
----
+## Procedure
 
-## 1. Acesso como root
+### 1. Obtain Root Access
 
-Inicialmente, foi obtido acesso administrativo:
+Administrative access was obtained using:
 
-```bash
+```bash id="b8d3vu"
 sudo -i
 ```
 
----
+This opened a root shell for the laboratory procedures.
 
-## 2. Verificação da ajuda do Netcat
+### 2. Review the Netcat Help Output
 
-Foi utilizado o comando:
+The following command was used to inspect the available options in the installed Netcat version:
 
-```bash
+```bash id="a3n4wa"
 nc -help
 ```
 
-O objetivo foi consultar as opções disponíveis na versão instalada do Netcat.
+**Observed output:**
 
-Saída observada:
-
-```text
+```text id="f5sd69"
 OpenBSD netcat (Debian patchlevel 1.229-1)
 usage: nc [-46CDdFhklNnrStUuvZz] [-I length] [-i interval] [-M ttl]
           [-m minttl] [-O length] [-P proxy_username] [-p source_port]
@@ -75,85 +77,77 @@ Command Summary:
 -z              Zero-I/O mode
 ```
 
-Entre as opções relevantes para a atividade estão:
+The options most relevant to this activity were:
 
-* `-l` — coloca o Netcat em modo de escuta;
-* `-p` — define a porta local utilizada;
-* `-v` — habilita informações detalhadas sobre a conexão.
+- `-l` — places Netcat in listening mode.
+- `-p` — specifies the local port to use.
+- `-v` — enables verbose connection information.
 
----
+The installed version was OpenBSD Netcat, as indicated in the output.
 
-## 3. Identificação do endereço IP
+### 3. Identify the IP Address
 
-Foi executado:
+The network interfaces were inspected using:
 
-```bash
+```bash id="35gxyv"
 ifconfig
 ```
 
-A interface utilizada no laboratório foi a `eth0`, configurada com o endereço:
+The interface used in the laboratory was `eth0`, configured with the address:
 
-```text
+```text id="fy4nqv"
 192.168.98.40
 ```
 
-A interface estava associada à rede:
+The interface belonged to the following network:
 
-```text
+```text id="kaf35w"
 192.168.98.0/24
 ```
 
-Esse endereço foi utilizado posteriormente para acessar o listener através do Firefox.
+This address was used to access the listener from Firefox.
 
----
+### 4. Create the Listener
 
-## 4. Criação do listener
+A TCP listener was started on port `5555`:
 
-Foi iniciado um listener TCP na porta `5555`:
-
-```bash
+```bash id="fv4e3i"
 nc -l -p 5555 -v
 ```
 
-O Netcat apresentou:
+Netcat displayed:
 
-```text
+```text id="b8z7ef"
 listening on [any] 5555 ...
 ```
 
-Nesse momento, o Netcat permaneceu aguardando uma conexão de entrada na porta `5555`.
+At this point, Netcat remained waiting for an incoming connection on port `5555`.
 
-A combinação utilizada pode ser entendida como:
+The command options can be understood as follows:
 
-```text
--l  → escutar conexões
--p  → utilizar a porta especificada
--v  → exibir informações detalhadas
-```
+- `-l` — listen for incoming connections.
+- `-p` — use the specified port.
+- `-v` — display detailed connection information.
 
----
+### 5. Connect Through the Browser
 
-## 5. Acesso pelo navegador
+With the listener running, Firefox was opened and the following URL was accessed:
 
-Com o listener ativo, foi aberto o Firefox e acessado:
-
-```text
+```text id="wqj0dz"
 http://192.168.98.40:5555
 ```
 
-O navegador tentou estabelecer uma conexão TCP com a porta `5555` da máquina Kali.
+The browser attempted to establish a TCP connection to port `5555` on the Kali Linux machine.
 
-Como o Netcat estava escutando nessa porta, a conexão foi recebida pelo processo.
+Because Netcat was listening on that port, the connection was received by the Netcat process.
 
-O navegador então enviou uma requisição HTTP ao listener.
+The browser then sent an HTTP request to the listener.
 
----
+### 6. Observe the HTTP Request
 
-## 6. Observação da requisição HTTP
+The following output was observed in the Netcat terminal:
 
-A saída observada no terminal do Netcat foi:
-
-```text
+```text id="g9f4v2"
 ┌──(root㉿kali)-[~]
 └─# nc -l -p 5555 -v
 Listening on 0.0.0.0 5555
@@ -169,135 +163,180 @@ Upgrade-Insecure-Requests: 1
 Priority: u=0, i
 ```
 
-Esse foi o resultado principal observado na atividade.
+This was the main result of the activity.
 
-O Netcat recebeu a conexão e exibiu diretamente no terminal os dados enviados pelo navegador.
+Netcat accepted the connection and displayed the data sent by the browser directly in the terminal.
 
-### Interpretação da requisição
+The output includes the client-side source port `42396`, which was used for this connection, and the HTTP request headers sent by Firefox.
 
-A primeira linha:
+#### Interpreting the Request
 
-```text
+**Request line**
+
+```http
 GET / HTTP/1.1
 ```
 
-indica uma requisição HTTP utilizando o método **GET** para solicitar o recurso `/`.
+This line indicates an HTTP request using the `GET` method to request the `/` resource over HTTP/1.1.
 
-O campo:
+**Host**
 
-```text
+```http
 Host: 192.168.98.40:5555
 ```
 
-identifica o destino da requisição, incluindo a porta utilizada.
+Identifies the destination host and the port used for the request.
 
-O:
+**User-Agent**
 
-```text
-User-Agent:
+```http
+User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:128.0) Gecko/20100101 Firefox/128.0
 ```
 
-informa características do cliente HTTP. Nesse caso, a requisição foi realizada pelo Firefox executando em Linux.
+Provides information about the client making the request. In this case, the request was generated by Firefox running on Linux.
 
-O campo:
+**Accept**
 
-```text
-Accept:
+```http
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
 ```
 
-indica quais tipos de conteúdo o navegador aceita como resposta.
+Indicates the types of content the browser is willing to accept in a response, along with their relative preferences.
 
-Já:
+**Accept-Language**
 
-```text
+```http
 Accept-Language: en-US,en;q=0.5
 ```
 
-indica as preferências de idioma enviadas pelo navegador.
+Indicates the language preferences supplied by the browser.
 
-O:
+**Accept-Encoding**
 
-```text
+```http
 Accept-Encoding: gzip, deflate
 ```
 
-informa mecanismos de compressão que o cliente aceita.
+Lists compression formats accepted by the client for the response.
 
-Por fim:
+**Connection**
 
-```text
+```http
 Connection: keep-alive
 ```
 
-indica a preferência do cliente por manter a conexão TCP aberta para outras comunicações.
+Indicates the client's preference to keep the TCP connection available for further communication.
 
----
+**Upgrade-Insecure-Requests**
 
-## Conceitos praticados
+```http
+Upgrade-Insecure-Requests: 1
+```
+
+Indicates that the browser expresses a preference for upgrading insecure requests to secure connections when supported by the destination and browser behavior.
+
+**Priority**
+
+```http
+Priority: u=0, i
+```
+
+Provides request-priority information using the priority syntax supported by the client.
+
+The captured request demonstrates that an HTTP request contains a request line and headers that provide additional information about the client and destination.
+
+## Concepts Practiced
 
 ### Netcat
 
-O **Netcat** é uma ferramenta de rede utilizada para estabelecer conexões TCP/UDP, criar listeners e realizar testes de comunicação.
+Netcat is a networking utility used to establish TCP/UDP connections, create listeners, and test network communication.
 
 ### Listener
 
-Um listener é um processo que permanece aguardando conexões de entrada em determinado endereço e porta.
+A listener is a process that waits for incoming connections on a specified address and port.
 
-Neste laboratório:
+In this laboratory, the listener used:
 
-```text
-IP: 192.168.98.40
-Porta: 5555
-```
+- **IP address:** `192.168.98.40`
+- **Port:** `5555`
 
 ### TCP
 
-A conexão estabelecida pelo navegador com o Netcat utilizou TCP, permitindo que o processo recebesse os dados enviados pelo cliente.
+The browser established a TCP connection to Netcat, allowing the process to receive data sent by the client.
+
+TCP provides a connection-oriented transport mechanism, while the application data in this exercise followed the HTTP protocol.
 
 ### HTTP
 
-A requisição observada foi uma comunicação HTTP, permitindo visualizar diretamente seus elementos no terminal.
+The observed request used HTTP, allowing its request line and headers to be viewed directly in the terminal.
+
+Because the request used plain HTTP rather than HTTPS, the request data was visible to the listener without TLS decryption.
 
 ### HTTP Headers
 
-Os cabeçalhos observados demonstram que uma requisição HTTP contém informações adicionais além do método e do caminho solicitado.
+The captured headers demonstrated that HTTP requests contain information beyond the method and requested path.
 
-Entre eles:
+The headers observed included:
 
-* `Host`
-* `User-Agent`
-* `Accept`
-* `Accept-Language`
-* `Accept-Encoding`
-* `Connection`
+- `Host`
+- `User-Agent`
+- `Accept`
+- `Accept-Language`
+- `Accept-Encoding`
+- `Connection`
+- `Upgrade-Insecure-Requests`
+- `Priority`
 
----
+These fields help describe the request and the client's preferences.
 
-## Resultado
+## Commands Used
 
-A atividade demonstrou como o Netcat pode ser utilizado para criar um listener TCP e observar uma requisição HTTP de forma direta.
+The commands used during the activity were:
 
-O navegador realizou uma conexão com:
+```bash id="c5s8d7"
+sudo -i
+nc -help
+ifconfig
+nc -l -p 5555 -v
+```
 
-```text
+The listener was accessed through Firefox using:
+
+```text id="c1p4nu"
+http://192.168.98.40:5555
+```
+
+## Results
+
+The activity demonstrated how Netcat can create a TCP listener and receive an HTTP request directly from a web browser.
+
+Firefox connected to:
+
+```text id="e3ud8v"
 192.168.98.40:5555
 ```
 
-e o Netcat recebeu e exibiu no terminal:
+Netcat received the connection and displayed the following information in the terminal:
 
-* a conexão de entrada;
-* a porta de origem;
-* o método HTTP;
-* o caminho solicitado;
-* o protocolo HTTP;
-* os cabeçalhos enviados pelo navegador.
+- The incoming connection.
+- The client's source port.
+- The HTTP method.
+- The requested path.
+- The HTTP protocol version.
+- The headers sent by the browser.
 
-O exercício ajudou a relacionar **TCP, portas, listeners, conexões de rede e estrutura de requisições HTTP**.
+The exercise helped connect concepts involving TCP, ports, listeners, network connections, and HTTP request structure.
+
+The listener acted as a simple demonstration endpoint; the activity did not establish a complete web server or generate a full HTTP response.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 03, Classes 09–10.
+
+**Recorded screenshot:** Step 6 of the activity, as required by the laboratory instructions.
+
+[View Evidence — Classes 09–10](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-[**Evidências — Módulo 3 / Aulas 9 e 10**](../evidencias.pdf)
-
-**Print registrado:** etapa 6 da atividade, conforme solicitado pelo roteiro.
+[Back to Classes 09–10](../) · [Back to Module 03](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
