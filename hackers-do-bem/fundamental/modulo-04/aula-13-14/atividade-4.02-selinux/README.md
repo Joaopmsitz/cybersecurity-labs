@@ -1,47 +1,49 @@
-# Atividade 4.2 — Explorando o SELinux no Kali Linux
+# Activity 4.02 — Exploring SELinux on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 04  
+> **Class:** 13–14  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Explorar o **SELinux (Security-Enhanced Linux)** no Kali Linux, compreendendo seu funcionamento como mecanismo de **controle de acesso obrigatório (MAC — Mandatory Access Control)**.
+## Objective
 
-Durante a atividade foram realizadas operações de ativação, verificação e consulta das configurações do SELinux, incluindo seu modo de operação, usuários, associações de login, variáveis booleanas e tipos de portas.
+Explore SELinux (Security-Enhanced Linux) on Kali Linux and understand how it works as a mandatory access control (MAC) mechanism.
 
-> **Atenção:** o roteiro alerta que alterações incorretas na configuração do SELinux podem causar indisponibilidade de acesso ao ambiente. As etapas foram realizadas exclusivamente no laboratório acadêmico.
+The activity covered SELinux activation, status verification, and configuration inspection, including its operating mode, users, login mappings, Boolean variables, and port types.
 
----
+**Important:** The laboratory instructions warn that incorrect SELinux configuration changes can make the environment inaccessible. All procedures were performed exclusively in the academic laboratory.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramentas:** `selinux-activate`, `sestatus`, `semanage`
-* **Serviço de segurança:** SELinux
-* **Política observada:** `default`
+- **Operating system:** Kali Linux
+- **Tools:** `selinux-activate`, `sestatus`, `semanage`
+- **Security mechanism:** SELinux
+- **Observed policy:** `default`
 
----
+## Procedure
 
-## 1. Acesso administrativo
+### 1. Obtain Administrative Access
 
-Inicialmente, foi obtido acesso administrativo ao sistema:
+Administrative access to the system was obtained using:
 
-```bash id="m8p5tz"
+```bash
 sudo -i
 ```
 
-O `sudo -i` inicia uma sessão de shell com privilégios administrativos, permitindo executar os comandos necessários para configuração e consulta do SELinux.
+The `sudo -i` command starts a shell with administrative privileges, allowing the commands required to configure and inspect SELinux to be executed.
 
----
+### 2. Activate SELinux
 
-## 2. Ativação do SELinux
+SELinux was activated using:
 
-O SELinux foi ativado utilizando:
-
-```bash id="r2q8wj"
+```bash
 selinux-activate
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="9s7m2k"
+```text
 Activating SE Linux
 Generating grub configuration file ...
 Found background image: /usr/share/images/desktop-base/desktop-grub.png
@@ -55,31 +57,29 @@ done
 SE Linux is activated.  You may need to reboot now.
 ```
 
-O comando realizou a ativação do SELinux e regenerou a configuração do **GRUB**, identificando os kernels e respectivas imagens `initrd` disponíveis no sistema.
+The command activated SELinux and regenerated the GRUB configuration, identifying the kernels and corresponding initrd images available on the system.
 
-A mensagem final:
+The final message:
 
-```text id="l2cz9d"
+```text
 SE Linux is activated.  You may need to reboot now.
 ```
 
-indica que uma reinicialização pode ser necessária para que a configuração entre em funcionamento.
+indicates that a reboot may be required for the configuration to take effect.
 
----
+### 3. Reboot the System
 
-## 3. Reinicialização
+The system was restarted using:
 
-O sistema foi reiniciado com:
-
-```bash id="qv4f31"
+```bash
 reboot
 ```
 
-Durante a inicialização, o SELinux pode realizar o **relabeling** do sistema de arquivos para aplicar os contextos de segurança necessários.
+During startup, SELinux may relabel the filesystem to apply the required security contexts.
 
-O roteiro apresenta uma saída semelhante a:
+The laboratory instructions provided output similar to the following:
 
-```text id="1f5v8c"
+```text
 *** Warning -- SELinux default policy relabel is requires.
 *** Relabeling could take a very long time, dependeing on file
 *** system size and speed of hard drives.
@@ -93,23 +93,23 @@ Relabeling /
 75.5%
 ```
 
-O **relabeling** consiste na aplicação dos contextos de segurança do SELinux aos arquivos e recursos do sistema.
+Filesystem relabeling applies SELinux security contexts to files and system resources.
 
-Como o ambiente remoto perde a conexão durante o reboot, essa etapa pode não ficar visível diretamente pela sessão RDP.
+Because the remote environment loses its connection during a reboot, this step may not be directly visible from the RDP session.
 
----
+The output above is retained as recorded in the laboratory instructions, including the original messages and spelling.
 
-## 4. Verificação do status do SELinux
+### 4. Verify SELinux Status
 
-Após aguardar o tempo indicado pelo laboratório e iniciar novamente o Kali Linux, foi consultado o status do SELinux:
+After waiting for the time indicated by the laboratory and starting Kali Linux again, the SELinux status was checked:
 
-```bash id="nq0g6b"
+```bash
 sestatus
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="6r8j3p"
+```text
 SELinux status:                 enabled
 SELinuxfs mount:                /sys/fs/selinux
 SELinux root directory:         /etc/selinux
@@ -122,49 +122,47 @@ Memory protection checking:     actual (secure)
 Max kernel policy version:      33
 ```
 
-### Interpretação
+#### Interpretation
 
-* **SELinux status:** `enabled` — o SELinux está habilitado.
-* **SELinuxfs mount:** `/sys/fs/selinux` — ponto de montagem do sistema de arquivos utilizado pelo SELinux.
-* **SELinux root directory:** `/etc/selinux` — diretório onde ficam as configurações do SELinux.
-* **Loaded policy name:** `default` — política carregada.
-* **Current mode:** `permissive` — violações são registradas, mas os acessos não são bloqueados pela política.
-* **Mode from config file:** `permissive` — o modo configurado também é permissivo.
-* **Policy MLS status:** `enabled` — suporte relacionado a MLS está habilitado.
-* **Policy deny_unknown status:** `allowed` — o comportamento configurado para permissões desconhecidas é permitir.
-* **Memory protection checking:** `actual (secure)` — mecanismo de verificação de proteção de memória indicado pela instalação.
-* **Max kernel policy version:** `33` — versão máxima de política suportada pelo kernel apresentado.
+- **SELinux status: enabled** — SELinux is enabled.
+- **SELinuxfs mount: `/sys/fs/selinux`** — mount point for the filesystem used by SELinux.
+- **SELinux root directory: `/etc/selinux`** — directory containing SELinux configuration.
+- **Loaded policy name: `default`** — name of the loaded policy.
+- **Current mode: `permissive`** — policy violations are recorded, but access is not blocked by SELinux enforcement.
+- **Mode from config file: `permissive`** — the configured mode is also permissive.
+- **Policy MLS status: enabled** — MLS-related support is enabled.
+- **Policy deny_unknown status: allowed** — the reported policy setting permits unknown permissions or policy elements according to this status.
+- **Memory protection checking: actual (secure)** — memory protection checking is reported as active in the installed configuration.
+- **Max kernel policy version: `33`** — maximum policy version supported by the reported kernel interface.
 
-### Enforcing x Permissive
+#### Enforcing vs. Permissive
 
-O SELinux possui diferentes modos de operação. Os dois principais observados no roteiro são:
+SELinux supports different operating modes. The two main modes covered in the laboratory were:
 
 **Enforcing**
 
-* As políticas são aplicadas.
-* Acessos não autorizados pelas políticas podem ser bloqueados.
-* As violações também podem ser registradas.
+- SELinux policies are enforced.
+- Accesses prohibited by the applicable policy can be blocked.
+- Policy violations may also be logged.
 
 **Permissive**
 
-* As políticas são avaliadas e as violações podem ser registradas.
-* Os acessos não são efetivamente bloqueados pela política.
+- SELinux evaluates policy rules and can log violations.
+- Accesses are not blocked on the basis of those violations.
 
-O laboratório apresentou o SELinux em **permissive** após a ativação.
+The laboratory showed SELinux running in **permissive** mode after activation.
 
----
+### 5. Inspect SELinux Users
 
-## 5. Consulta dos usuários SELinux
+The `semanage` tool was used to list SELinux users:
 
-Foi utilizada a ferramenta `semanage` para listar os usuários SELinux:
-
-```bash id="5e7x2n"
+```bash
 semanage user -l
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="4u9q6s"
+```text
                 Rótulo     MLS/       MLS/                          
 Usuário do SELinux Prefixo    Nível MCS  Intervalo MCS                  Funções do SELinux
 
@@ -179,32 +177,32 @@ xdm             user       s0         s0                             system_r xd
 xguest_u        user       s0         s0                             xguest_r
 ```
 
-A consulta apresenta associações entre usuários SELinux, seus níveis e as funções (**roles**) disponíveis.
+The query displays the relationship between SELinux users, their levels, and their available roles.
 
-Algumas funções presentes na saída:
+Some roles shown in the output include:
 
-* `guest_r` — função destinada a usuários convidados.
-* `staff_r` — função relacionada a usuários de staff.
-* `sysadm_r` — função administrativa.
-* `system_r` — função utilizada por processos e componentes do sistema.
-* `unconfined_r` — função com restrições reduzidas.
-* `user_r` — função destinada a usuários comuns.
-* `xdm_r` — função relacionada ao gerenciador gráfico.
-* `xguest_r` — função destinada a ambientes de convidado com restrições adicionais.
+- `guest_r` — role intended for guest users.
+- `staff_r` — role associated with staff users.
+- `sysadm_r` — administrative role.
+- `system_r` — role used by system processes and components.
+- `unconfined_r` — role with fewer SELinux restrictions.
+- `user_r` — role intended for regular users.
+- `xdm_r` — role associated with the graphical display manager.
+- `xguest_r` — role intended for guest environments with additional restrictions.
 
----
+SELinux identities and roles are distinct from ordinary Linux usernames and groups. Their effective access depends on the policy and the context in which they are used.
 
-## 6. Consulta das associações de login
+### 6. Inspect Login Mappings
 
-Em seguida, foram consultadas as associações entre contas de login e usuários SELinux:
+The mappings between login accounts and SELinux users were inspected using:
 
-```bash id="1h8v5a"
+```bash
 semanage login -l
 ```
 
-Saída:
+**Observed output:**
 
-```text id="7b4s2x"
+```text
 Login Name           SELinux User         MLS/MCS Range        Service
 
 __default__          unconfined_u         s0-s0:c0.c1023       *
@@ -212,32 +210,32 @@ root                 unconfined_u         s0-s0:c0.c1023       *
 sddm                 xdm                  s0-s0                *
 ```
 
-A tabela apresenta:
+The table contains the following fields:
 
-* **Login Name:** conta utilizada para login.
-* **SELinux User:** identidade SELinux associada à conta.
-* **MLS/MCS Range:** intervalo de níveis/categorias de segurança.
-* **Service:** serviço ao qual a associação se aplica.
+- **Login Name:** account used for login.
+- **SELinux User:** SELinux identity associated with the account.
+- **MLS/MCS Range:** range of security levels or categories.
+- **Service:** service to which the mapping applies.
 
-Nesse ambiente:
+In this environment:
 
-* `__default__` utiliza `unconfined_u`.
-* `root` está associado a `unconfined_u`.
-* `sddm` está associado ao usuário SELinux `xdm`.
+- `__default__` maps to `unconfined_u`.
+- `root` maps to `unconfined_u`.
+- `sddm` maps to the SELinux user `xdm`.
 
----
+These mappings determine which SELinux identity is assigned to a login account during the relevant login process.
 
-## 7. Consulta das variáveis booleanas
+### 7. Inspect SELinux Boolean Variables
 
-Foi utilizada a seguinte consulta:
+The following command was used:
 
-```bash id="e3w5k7"
+```bash
 semanage boolean -l
 ```
 
-A saída apresenta uma grande quantidade de variáveis booleanas do SELinux. Entre os exemplos observados:
+The command returns a large list of SELinux Boolean variables. Examples from the observed output include:
 
-```text id="c5q1md"
+```text
 SELinux boolean                State  Default Description
 
 aide_mmap_files                (off  ,  off)  Control if AIDE can mmap files. AIDE can be compiled with the option 'with-mmap' in which case it will attempt to mmap files while running.
@@ -258,28 +256,28 @@ xserver_xdm_can_network        (off  ,  off)  Allows the X display manager to us
 zabbix_can_network             (off  ,  off)  Determine whether zabbix can connect to all TCP ports
 ```
 
-As colunas principais são:
+The main columns are:
 
-* **SELinux boolean:** nome da variável.
-* **State:** estado atual.
-* **Default:** estado padrão.
-* **Description:** finalidade da variável.
+- **SELinux boolean:** name of the Boolean variable.
+- **State:** current state.
+- **Default:** default state.
+- **Description:** purpose of the variable.
 
-Os booleanos permitem ajustar determinados comportamentos das políticas SELinux sem necessariamente modificar toda a política.
+Boolean variables allow specific SELinux policy behaviors to be adjusted without necessarily replacing or rewriting the entire policy.
 
----
+The output above contains a shortened middle section, represented by the ellipsis as in the laboratory notes.
 
-## 8. Consulta das portas definidas no SELinux
+### 8. Inspect SELinux Port Definitions
 
-Por fim, foram listadas as definições de portas conhecidas pelo SELinux:
+The final configuration query listed port definitions known to SELinux:
 
-```bash id="k4r7vc"
+```bash
 semanage port -l
 ```
 
-A saída apresenta o tipo SELinux, protocolo e número da porta:
+The output showed the SELinux port type, protocol, and port number:
 
-```text id="2n8s5x"
+```text
 SELinux Port Type              Proto    Port Number
 
 afs3_callback_port_t           tcp      7001
@@ -294,109 +292,138 @@ zookeeper_leader_port_t        tcp      2888
 zope_port_t                    tcp      8021
 ```
 
-Essa associação permite que o SELinux saiba quais tipos de portas estão relacionados a determinados serviços e protocolos.
+This mapping allows SELinux policies to associate port types with particular services and protocols.
 
-Os principais campos são:
+The main fields are:
 
-* **SELinux Port Type:** tipo de segurança associado à porta.
-* **Proto:** protocolo utilizado, como TCP ou UDP.
-* **Port Number:** número da porta.
+- **SELinux Port Type:** security type associated with the port.
+- **Proto:** protocol used, such as TCP or UDP.
+- **Port Number:** numeric port identifier.
 
----
+The displayed entries are examples from the available output. The full command can return many additional port definitions.
 
-## 9. Desativação do SELinux
+### 9. SELinux Deactivation — Optional Step
 
-O roteiro apresenta uma etapa opcional para desabilitar o SELinux, destinada exclusivamente a uma VM local e **não ao ambiente Hacker do Bem**.
+The laboratory instructions include an optional step for disabling SELinux, intended exclusively for a local virtual machine and not for the Hackers do Bem remote environment.
 
-Por esse motivo, essa alteração não deve ser realizada nas VMs compartilhadas do laboratório.
+For this reason, **this change should not be performed on shared laboratory VMs**.
 
-O procedimento descrito pelo roteiro consiste em alterar:
+The procedure described in the instructions consists of changing:
 
-```text id="0b7j8k"
+```text
 SELINUX=permissive
 ```
 
-para:
+to:
 
-```text id="0r3q5m"
+```text
 SELINUX=disabled
 ```
 
-no arquivo:
+in the configuration file:
 
-```text id="z7x1vc"
+```text
 /etc/selinux/config
 ```
 
-e posteriormente reiniciar o sistema.
+and then rebooting the system.
 
-Após a desativação, o `sestatus` poderia apresentar:
+After SELinux is disabled, `sestatus` may display:
 
-```text id="8p2m4d"
+```text
 SELinux status:                 disabled
 ```
 
-Essa etapa serve para demonstrar como a configuração persistente do SELinux pode ser alterada, mas não faz parte da execução recomendada no ambiente remoto do curso.
+This optional step illustrates how persistent SELinux configuration can be changed. It was not part of the recommended procedure for the course's remote environment.
 
----
+Disabling SELinux removes an important security control. The setting should only be modified in an authorized local test environment where the consequences are understood and recovery access is available.
 
-## Conceitos praticados
+## Commands Used
+
+The following commands were used during the activity:
+
+```bash
+sudo -i
+selinux-activate
+reboot
+sestatus
+semanage user -l
+semanage login -l
+semanage boolean -l
+semanage port -l
+```
+
+The optional configuration file discussed in the laboratory instructions was:
+
+```text
+/etc/selinux/config
+```
+
+## Concepts Practiced
 
 ### SELinux
 
-**Security-Enhanced Linux** é um mecanismo de segurança que implementa **controle de acesso obrigatório (MAC)**, adicionando políticas e contextos de segurança além das permissões tradicionais de usuários e grupos do Linux.
+Security-Enhanced Linux is a security mechanism that implements mandatory access control (MAC), adding security policies and contexts beyond conventional Linux user and group permissions.
 
-### MAC
+### MAC — Mandatory Access Control
 
-**Mandatory Access Control** é um modelo no qual as regras de acesso são determinadas por políticas de segurança, independentemente das permissões tradicionais do sistema de arquivos.
+A model in which access decisions are governed by security policies rather than relying exclusively on standard filesystem permissions.
 
-### Permissive
+### Permissive Mode
 
-Modo em que o SELinux registra violações das políticas, mas não bloqueia os acessos com base nessas violações.
+A mode in which SELinux records policy violations but does not block access based on those violations.
 
-### Enforcing
+### Enforcing Mode
 
-Modo em que as políticas SELinux são efetivamente aplicadas e acessos não autorizados podem ser bloqueados.
+A mode in which SELinux policies are actively enforced and unauthorized access can be blocked.
 
 ### `sestatus`
 
-Comando utilizado para consultar o estado atual do SELinux, sua política carregada e seu modo de operação.
+A command used to inspect SELinux status, the loaded policy, and the current operating mode.
 
 ### `semanage`
 
-Ferramenta utilizada para administrar partes da configuração de políticas SELinux, incluindo usuários, logins, booleanos e portas.
+A tool used to administer aspects of SELinux policy configuration, including users, login mappings, Boolean variables, and ports.
 
-### Booleanos SELinux
+### SELinux Boolean Variables
 
-Variáveis que permitem controlar determinados comportamentos das políticas de segurança de maneira dinâmica.
+Variables that allow specific security policy behaviors to be enabled or disabled without requiring a complete policy rewrite.
 
-### Contextos e tipos
+### Security Contexts and Types
 
-O SELinux utiliza informações adicionais de segurança para determinar como usuários, processos, arquivos e outros recursos podem interagir.
+SELinux uses additional security information to determine how users, processes, files, and other resources may interact.
+
+### Filesystem Relabeling
+
+Relabeling applies the security contexts expected by the SELinux policy to filesystem objects. This can be required when SELinux is first enabled or when policy and labeling configurations change.
+
+## Results
+
+The activity provided a practical introduction to SELinux on Kali Linux and demonstrated how this mechanism complements the traditional Linux permission model.
+
+The following operations and configurations were examined:
+
+- SELinux activation.
+- Status and operating mode.
+- Loaded security policy.
+- SELinux users.
+- Mappings between login accounts and SELinux users.
+- Boolean variables.
+- Port types.
+- Persistent configuration settings.
+
+The activity also demonstrated the difference between **permissive** and **enforcing** modes and showed how `semanage` can be used to inspect multiple components of SELinux policy.
+
+The recorded status showed that SELinux was enabled and operating in permissive mode. This means that policy violations could be logged without being blocked by SELinux enforcement.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 04, Classes 13–14.
+
+**Recorded screenshot:** Step 5 of the activity, as required by the laboratory instructions, showing the SELinux status query using `sestatus`.
+
+[View Evidence — Classes 13–14](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-A atividade permitiu explorar o funcionamento do SELinux no Kali Linux e compreender como o mecanismo complementa o modelo tradicional de permissões do Linux.
-
-Foram realizadas consultas e verificações relacionadas a:
-
-* ativação do SELinux;
-* estado e modo de operação;
-* política carregada;
-* usuários SELinux;
-* associações entre logins e usuários SELinux;
-* variáveis booleanas;
-* tipos de portas;
-* configuração persistente do serviço.
-
-A atividade também demonstrou a diferença prática entre os modos **permissive** e **enforcing** e mostrou como o `semanage` pode ser utilizado para consultar diferentes componentes da política SELinux.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 4 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Print registrado:** etapa 5 da atividade, conforme solicitado pelo roteiro, mostrando a consulta do status do SELinux com `sestatus`.
+[Back to Classes 13–14](../) · [Back to Module 04](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
