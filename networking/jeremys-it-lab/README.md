@@ -1,18 +1,10 @@
-# Jeremy's IT Lab — CCNA 200-301
+# Jeremy's IT Lab
 
-Hands-on networking labs completed during my preparation for the Cisco CCNA certification using Jeremy's IT Lab Free CCNA course.
-
-## Learning Status
-
-| Certification | Status |
-| --- | --- |
-| Cisco CCNA 200-301 | In Progress |
+Hands-on networking exercises from Jeremy's IT Lab Free CCNA course, documented using Cisco Packet Tracer.
 
 ## Course
 
 **Free CCNA 200-301 Complete Course — Jeremy's IT Lab**
-
-This repository documents practical exercises completed using Cisco Packet Tracer.
 
 ## Labs
 
@@ -22,7 +14,7 @@ This repository documents practical exercises completed using Cisco Packet Trace
 
 ## Study Materials
 
-I also use the Anki flashcards provided by Jeremy's IT Lab for spaced-repetition review. These are third-party study materials, separate from my own lab documentation.
+Anki flashcards from Jeremy's IT Lab are used for spaced-repetition review. These are third-party materials and are separate from my own lab documentation.
 
 ## Tools
 
