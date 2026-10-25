@@ -1,61 +1,63 @@
-# Atividade 1.2 — Comparando integridade de arquivos genéricos
+# Activity 1.2 — Comparing Binary File Integrity
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 01  
+> **Class:** 01–02  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Verificar a integridade de arquivos genéricos, utilizando imagens como exemplo, por meio da comparação entre arquivos idênticos e arquivos que sofreram alterações.
+## Objective
 
-Nesta atividade foi utilizado o comando `cmp` do Linux para identificar diferenças entre arquivos binários.
+Verify the integrity of binary files by comparing identical and modified files. This activity uses image files as examples and the Linux `cmp` command to detect byte-level differences.
 
-## Ambiente
+## Environment
 
-* Kali Linux
-* Terminal
-* KolourPaint
-* Usuário `aluno`
-* Diretório de trabalho: `/home/aluno/Documentos`
-* Ferramentas utilizadas: `cmp`, `cd` e `ls`
+- **Operating system:** Kali Linux
+- **User account:** `aluno`
+- **Working directory:** `/home/aluno/Documentos`
+- **Tools:** KolourPaint, `cmp`, `cd`, and `ls`
 
-## Procedimento
+## Procedure
 
-### 1. Abrindo o KolourPaint
+### 1. Open KolourPaint
 
-O KolourPaint foi iniciado pelo terminal utilizando:
+KolourPaint was launched from the terminal using:
 
 ```bash
 kolourpaint
 ```
 
-### 2. Criando a primeira imagem
+### 2. Create the First Image
 
-No KolourPaint, foi criada uma imagem utilizando diferentes cores e desenhos livres.
+An image was created in KolourPaint using different colors and freehand drawings.
 
-A imagem foi salva no diretório `Documentos` com o nome:
+The image was saved in the Documents directory as:
 
 ```text
 Imagem1.png
 ```
 
-### 3. Criando uma cópia da imagem
+### 3. Create an Identical Copy
 
-A mesma imagem foi salva novamente, sem nenhuma alteração, com o nome:
+The same image was saved again without any modifications under the name:
 
 ```text
 Imagem1_copia.png
 ```
 
-Dessa forma, `Imagem1.png` e `Imagem1_copia.png` deveriam possuir exatamente o mesmo conteúdo.
+At this point, `Imagem1.png` and `Imagem1_copia.png` were expected to contain identical data.
 
-### 4. Modificando a imagem
+### 4. Modify the Image
 
-Após criar a cópia, foi realizada uma pequena alteração na imagem original, adicionando um ponto utilizando uma das cores disponíveis no KolourPaint.
+A small change was then made to the image by adding a colored dot in KolourPaint.
 
-A imagem modificada foi salva como:
+The modified image was saved as:
 
 ```text
 Imagem2.png
 ```
 
-Nesse momento, foram obtidos três arquivos:
+The three files used in the activity were:
 
 ```text
 Imagem1.png
@@ -63,25 +65,25 @@ Imagem1_copia.png
 Imagem2.png
 ```
 
-`Imagem1.png` e `Imagem1_copia.png` são cópias idênticas, enquanto `Imagem2.png` contém uma alteração.
+`Imagem1.png` and `Imagem1_copia.png` were identical, while `Imagem2.png` contained the modification.
 
-### 5. Verificando os arquivos no terminal
+### 5. Verify the Files in the Terminal
 
-Após fechar o KolourPaint, foi acessado o diretório onde as imagens foram armazenadas:
+After closing KolourPaint, the terminal was used to access the directory containing the images:
 
 ```bash
 cd /home/aluno/Documentos
 ```
 
-Em seguida, foi utilizado:
+The files were listed with:
 
 ```bash
 ls
 ```
 
-A listagem apresentou os arquivos criados na atividade, juntamente com os arquivos utilizados anteriormente na Atividade 1.1.
+The output included the image files created for this activity, along with files from Activity 1.1.
 
-Exemplo:
+Example:
 
 ```text
 Imagem1_copia.png
@@ -91,69 +93,57 @@ Texto_copia.txt
 Texto.txt
 ```
 
-### 6. Comparando arquivos idênticos
+### 6. Compare Identical Files
 
-Para verificar se `Imagem1.png` e `Imagem1_copia.png` possuíam diferenças, foi utilizado:
-
-```bash
-cmp Imagem1.png Imagem1_copia.png
-```
-
-O comando não apresentou nenhuma saída.
-
-No `cmp`, a ausência de saída indica que nenhum byte diferente foi encontrado entre os dois arquivos.
-
-Portanto, as duas imagens possuíam conteúdo idêntico.
-
-### 7. Comparando arquivos modificados
-
-Em seguida, foi realizada a comparação entre `Imagem1.png` e `Imagem2.png`:
-
-```bash
-cmp Imagem1.png Imagem2.png
-```
-
-Como `Imagem2.png` havia recebido uma alteração, o comando identificou uma diferença entre os arquivos.
-
-Um resultado possível é semelhante a:
-
-```text
-Imagem1.png e Imagem2.png são diferentes: byte 58, linha 3
-```
-
-Os valores apresentados podem variar dependendo do conteúdo da imagem e da alteração realizada.
-
-## Interpretação do resultado
-
-O comando `cmp` realiza uma comparação byte a byte entre dois arquivos.
-
-Na primeira comparação:
+The original image was compared with its identical copy:
 
 ```bash
 cmp Imagem1.png Imagem1_copia.png
 ```
 
-não houve saída, indicando que os arquivos eram idênticos.
+The command produced no output, indicating that no differing bytes were found and both files had identical contents.
 
-Na segunda comparação:
+### 7. Compare the Modified Image
+
+Next, the original image was compared with the modified version:
 
 ```bash
 cmp Imagem1.png Imagem2.png
 ```
 
-foi identificada uma diferença, pois `Imagem2.png` havia sido modificada.
+Because `Imagem2.png` had been modified, `cmp` reported a difference between the files.
 
-Quando o comando informa, por exemplo:
+An example of the output is:
 
 ```text
-byte 58, linha 3
+Imagem1.png Imagem2.png differ: byte 58, line 3
 ```
 
-ele está indicando a posição aproximada em que a diferença foi encontrada.
+The byte position and line number shown here are illustrative; the actual output depends on the image data and the modification performed.
 
-Como estamos trabalhando com arquivos de imagem, que são arquivos binários, o termo `linha` não deve ser interpretado da mesma forma que uma linha de um arquivo de texto.
+## Interpreting the Results
 
-## Comandos utilizados
+The `cmp` command compares two files byte by byte.
+
+**First comparison:**
+
+```bash
+cmp Imagem1.png Imagem1_copia.png
+```
+
+No output was produced, indicating that the files were identical.
+
+**Second comparison:**
+
+```bash
+cmp Imagem1.png Imagem2.png
+```
+
+The command reported a difference because the second image contained a modification.
+
+When `cmp` reports a position such as `byte 58, line 3`, it identifies the byte where the difference was detected. For binary image files, the reported line number refers to newline characters in the underlying data; it does not represent a visual line in the image.
+
+## Commands Used
 
 ```bash
 kolourpaint
@@ -163,31 +153,32 @@ cmp Imagem1.png Imagem1_copia.png
 cmp Imagem1.png Imagem2.png
 ```
 
-## Resultado
+## Result
 
-Foi possível verificar a integridade de arquivos de imagem por meio da comparação byte a byte.
+The activity demonstrated how to compare image files byte by byte to identify changes.
 
-A comparação entre `Imagem1.png` e `Imagem1_copia.png` não encontrou diferenças, pois os arquivos eram idênticos.
+The comparison between `Imagem1.png` and `Imagem1_copia.png` found no differences because their contents were identical. The comparison between `Imagem1.png` and `Imagem2.png` detected a difference after the image was modified.
 
-Já a comparação entre `Imagem1.png` e `Imagem2.png` identificou uma diferença, demonstrando que uma pequena alteração no conteúdo da imagem pode ser detectada pelo comando `cmp`.
+## Concepts Practiced
 
-## Conceitos praticados
+- File integrity and change detection
+- Binary file comparison
+- Byte-by-byte comparison
+- Linux command-line operations
+- Image file analysis
+- Use of `cmp`, `ls`, and `cd`
+- Interpretation of command output
 
-* Integridade de arquivos
-* Comparação de arquivos binários
-* Comparação byte a byte
-* Linux
-* Terminal
-* `cmp`
-* `ls`
-* `cd`
-* Identificação de alterações em arquivos
-* Arquivos de imagem
+**Technical distinction:** `cmp` directly compares file contents, whereas cryptographic hashes such as SHA-256 can be used to calculate and compare file fingerprints. Both approaches can help identify changes, but they serve different purposes.
 
-## Evidência
+## Evidence
 
-A evidência visual solicitada pelo curso está disponível no PDF de evidências da Aula 01–02.
+The visual evidence requested for the course is included in the PDF for Classes 01–02.
 
-O print corresponde à execução do comando `cmp` entre `Imagem1.png` e `Imagem2.png`, demonstrando a diferença encontrada entre os arquivos.
+The relevant screenshot shows the `cmp` command comparing `Imagem1.png` with `Imagem2.png`, demonstrating the detected difference between the files.
 
-[Ver evidências — Aula 01–02](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-01/aula-01-02/evidencias.pdf)
+[View Evidence — Classes 01–02](../evidencias.pdf)
+
+---
+
+[Back to Module 01](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
