@@ -1,97 +1,65 @@
-# 🎯 FortySeven-1 — Sherlock (Very Easy)
+# PhantomRing — Sherlock (Very Easy)
 
-🔗 Completion Proof:  
-[Hack The Box Achievement](https://labs.hackthebox.com/achievement/sherlock/2578759/1200)
+**Category:** Malware Analysis & Reverse Engineering  
+**Status:** Completed
 
-## 📝 Description
+## Completion Proof
 
-FortySeven-1 is a Threat Intelligence-focused Sherlock centered on profiling an Advanced Persistent Threat (APT) group through the analysis of multiple public intelligence reports.
+[View Hack The Box Achievement](https://labs.hackthebox.com/achievement/sherlock/2578759/1296)
 
-The challenge investigates **Mysterious Elephant (APT-K-47)**, a threat actor linked to phishing campaigns targeting government and diplomatic personnel. The objective was to correlate intelligence from different sources to identify the group's tools, infrastructure, attack techniques, persistence mechanisms, and operational objectives.
+## Overview
 
-## ✔ Skills Practiced
+PhantomRing is a Sherlock challenge focused on static malware analysis and reverse engineering.
 
-- Threat Intelligence Analysis
-- APT Profiling
-- Open-Source Intelligence (OSINT)
-- Intelligence Correlation
-- Threat Actor Attribution
-- MITRE ATT&CK Mapping
-- Malware Family Analysis
-- Campaign Tracking
-- TTP Analysis
-- Strategic Threat Research
+The scenario involves a suspicious Linux executable discovered on a system and suspected of making outbound connections. The investigation examines the binary to identify its capabilities, command-and-control (C2) configuration, indicators of compromise (IOCs), and defense-evasion techniques.
 
-## 🛠 Tools Used
+## Investigation Focus
 
-- Public Threat Intelligence Reports
-- Kaspersky Securelist Research
-- Knownsec 404 Research
-- MITRE ATT&CK Framework
-- OSINT Sources
-- Manual Intelligence Correlation
+- Linux ELF binary triage
+- File identification and SHA-256 hashing
+- Static analysis of strings, symbols, and executable code
+- Command-and-control configuration analysis
+- Malware command-handler investigation
+- Linux process and session enumeration
+- SUID binary discovery routines
+- Evasion techniques involving `io_uring`
+- eBPF-related security-tool detection
+- Linux tracing and anti-forensics behavior
+- Self-destruct functionality analysis
+- IOC extraction and technical documentation
 
-## 🔎 Key Findings
+## Tools and Techniques
 
-During the investigation, it was possible to identify:
+- Linux command-line utilities
+- `file` and `sha256sum`
+- `strings` and `nm`
+- `objdump`
+- Static binary inspection
+- Disassembly and function analysis
 
-- The threat actor known as **Mysterious Elephant (APT-K-47)**
-- Attack activity dating back to 2022
-- The use of ORPCBackdoor malware
-- The AsyncShell malware family
-- WhatsApp-focused data collection operations
-- Hajj-themed phishing campaigns
-- DLL side-loading techniques
-- Hidden desktop execution methods
-- Sandbox evasion mechanisms
-- Custom persistence mechanisms
-- Custom exfiltration tools
-- Command-and-control communications over HTTP and HTTPS
+## Key Findings
 
-The investigation required correlating multiple intelligence reports to build a complete profile of the actor, including its malware ecosystem, attack methodologies, and operational objectives.
+The investigation focused on identifying:
 
-## 🧠 MITRE ATT&CK
+- The binary's architecture and executable format
+- Embedded C2 configuration and connection behavior
+- Supported commands and their associated capabilities
+- System paths used for user and process enumeration
+- Routines for discovering SUID binaries
+- Mechanisms designed to interfere with security monitoring
+- Self-location and self-deletion behavior
 
-- T1566.001 — Spearphishing Attachment
-- T1190 — Exploit Public-Facing Application
-- T1059 — Command and Scripting Interpreter
-- T1059.001 — PowerShell
-- T1218 — System Binary Proxy Execution
-- T1053 — Scheduled Task
-- T1547.001 — Registry Run Keys / Startup Folder
-- T1574.002 — DLL Side-Loading
-- T1027 — Obfuscated Files or Information
-- T1497 — Virtualization/Sandbox Evasion
-- T1082 — System Information Discovery
-- T1057 — Process Discovery
-- T1071 — Application Layer Protocol
-- T1105 — Ingress Tool Transfer
-- T1041 — Exfiltration Over C2 Channel
+The analysis helped establish how the suspicious agent communicates, performs system discovery, and attempts to evade defensive monitoring.
 
-## 📚 Knowledge Gained
+## Key Takeaways
 
-- Threat Intelligence fundamentals
-- APT attribution methodologies
-- Threat actor profiling
-- Intelligence report correlation
-- MITRE ATT&CK analysis
-- Malware ecosystem research
-- Campaign tracking techniques
-- Adversary TTP identification
+- Static analysis can reveal malware capabilities without executing the sample.
+- Embedded strings and symbol names can provide valuable leads during reverse engineering.
+- Understanding command handlers helps explain how a malware agent processes remote instructions.
+- Attempts to disable tracing or interfere with security tools are important behavioral indicators.
+- File hashes and network indicators support malware identification and threat hunting.
+- Suspicious binaries should be analyzed in a controlled environment, avoiding execution on production systems.
 
 ---
 
-# 🔍 HTB Sherlocks — Threat Intelligence & APT Investigations
-
-Hack The Box Sherlocks focus on:
-
-- Threat Intelligence
-- Digital Forensics
-- Incident Response
-- Malware Analysis
-- Threat Hunting
-- IOC Analysis
-- Threat Actor Profiling
-- Security Investigations
-
-These challenges simulate real-world scenarios where analysts must gather and correlate information from multiple sources, understand attacker behavior, identify operational objectives, and validate intelligence using industry-standard methodologies.
+[Back to Sherlocks](./README.md) · [Back to Hack The Box](../README.md)
