@@ -1,43 +1,45 @@
-# Atividade 3.6 — Explorando ferramentas de detecção de rede no Kali Linux
+# Activity 3.06 — Exploring Network Diagnostic Tools on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 03  
+> **Class:** 11–12  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar comandos disponíveis no **Kali Linux** para diagnosticar o estado da rede, identificar interfaces, testar conectividade, observar rotas, consultar estatísticas de protocolos e verificar conexões e serviços de rede em execução.
+## Objective
 
-A atividade foi realizada em ambiente de laboratório e os comandos foram utilizados exclusivamente para fins acadêmicos.
+Use commands available in Kali Linux to diagnose network status, identify interfaces, test connectivity, inspect routes, query protocol statistics, and check active network connections and services.
 
----
+The activity was conducted in a laboratory environment, and the commands were used exclusively for academic purposes.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Interface principal:** `eth0`
-* **IP da máquina:** `192.168.98.40/24`
-* **Rede:** `192.168.98.0/24`
+- **Operating system:** Kali Linux
+- **Primary network interface:** `eth0`
+- **Machine IP address:** `192.168.98.40/24`
+- **Network:** `192.168.98.0/24`
 
----
+## Procedure
 
-## 1. Acesso como superusuário
+### 1. Obtain Superuser Access
 
-Foi aberto o Terminal e executado:
+The terminal was opened and the following command was executed:
 
 ```bash
 sudo -i
 ```
 
-Após informar a senha do ambiente de laboratório, o terminal passou a operar como `root`.
+After entering the laboratory environment password, the terminal operated as the root user.
 
----
+### 2. Identify Network Interfaces
 
-## 2. Identificação das interfaces de rede
-
-Foi utilizado o comando:
+The following command was used:
 
 ```bash
 ifconfig
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
@@ -67,25 +69,25 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-Foram identificadas três interfaces:
+Three network interfaces were identified:
 
-* `docker0` — interface virtual utilizada pelo Docker;
-* `eth0` — interface principal conectada à rede do laboratório;
-* `lo` — interface de loopback.
+- `docker0` — virtual interface used by Docker.
+- `eth0` — primary interface connected to the laboratory network.
+- `lo` — loopback interface.
 
-A interface `eth0` possuía o endereço `192.168.98.40/24`.
+The `eth0` interface had the address `192.168.98.40/24`.
 
----
+The output also displayed traffic counters, interface status flags, the MTU, and the IPv6 link-local address assigned to `eth0`.
 
-## 3. Teste de conectividade com `ping`
+### 3. Test Connectivity with Ping
 
-Para testar a conectividade e verificar a resolução do nome de domínio, foi utilizado:
+To test connectivity and verify domain name resolution, the following command was used:
 
 ```bash
 ping www.google.com
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 PING www.google.com (172.253.63.106) 56(84) bytes of data.
@@ -93,33 +95,33 @@ PING www.google.com (172.253.63.106) 56(84) bytes of data.
 64 bytes from bi-in-f106.1e100.net (172.253.63.106): icmp_seq=2 ttl=109 time=1.41 ms
 ```
 
-A execução foi interrompida utilizando:
+Execution was interrupted using:
 
 ```text
 Ctrl + C
 ```
 
-O resultado demonstra que `www.google.com` foi resolvido para o endereço `172.253.63.106` no momento da execução e que houve respostas aos pacotes ICMP enviados.
+The result shows that `www.google.com` resolved to `172.253.63.106` at the time of the test and that responses were received for the transmitted ICMP echo requests.
 
-Os principais campos observados foram:
+The main fields observed were:
 
-* `icmp_seq` — número sequencial do pacote;
-* `ttl` — valor de Time To Live observado na resposta;
-* `time` — tempo de ida e volta (RTT) da comunicação.
+- `icmp_seq` — sequence number of the packet.
+- `ttl` — Time To Live value observed in the response.
+- `time` — round-trip time (RTT) of the communication.
 
----
+Ping provides a basic way to test reachability, although a lack of responses does not always mean a host is unavailable. ICMP traffic can be filtered by network devices or the destination host.
 
-## 4. Rastreamento da rota com `traceroute`
+### 4. Trace the Route with Traceroute
 
-Em seguida, foi utilizado:
+The following command was executed:
 
 ```bash
 traceroute -I grancursos.com.br
 ```
 
-O parâmetro `-I` faz o `traceroute` utilizar sondas ICMP.
+The `-I` option makes traceroute use ICMP probes.
 
-Saída apresentada no roteiro:
+**Output recorded in the laboratory instructions:**
 
 ```text
 traceroute to grancursos.com.br (172.67.175.92), 30 hops max, 60 byte packets
@@ -134,25 +136,23 @@ traceroute to grancursos.com.br (172.67.175.92), 30 hops max, 60 byte packets
  9  172.67.175.92 (172.67.175.92)  0.901 ms  0.889 ms  0.870 ms
 ```
 
-O `traceroute` permite observar os saltos utilizados pelos pacotes entre a origem e o destino.
+Traceroute helps visualize the hops traversed by probes between the source and destination.
 
-Os `*` representam sondas que não receberam resposta dentro do tempo esperado. Isso não significa necessariamente que exista uma falha de conectividade: roteadores e dispositivos intermediários podem não responder a determinados tipos de sondas ICMP.
+The `*` symbols represent probes that did not receive a response within the expected time. This does not necessarily indicate a connectivity failure: routers and intermediate devices may not respond to particular ICMP probes.
 
-A saída também demonstra que o caminho pode passar por diferentes redes e infraestruturas antes de chegar ao destino.
+The output also illustrates how a network path can traverse different networks and infrastructure before reaching its destination.
 
-> **Observação:** resultados de `traceroute` podem variar conforme o momento da execução, roteamento, balanceamento de carga e políticas de filtragem.
+**Observation:** Traceroute results may vary depending on the time of execution, routing decisions, load balancing, and filtering policies. The addresses shown above are preserved from the laboratory record and should not be interpreted as a current route.
 
----
+### 5. Inspect Interface Statistics with `netstat -i`
 
-## 5. Estatísticas das interfaces com `netstat -i`
-
-Foi utilizado:
+The following command was used:
 
 ```bash
 netstat -i
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 Tabela de Interfaces do Kernel
@@ -162,33 +162,35 @@ eth0             9001     8055      0      0 0          9143      0      0      
 lo              65536       23      0      0 0            23      0      0      0 LRU
 ```
 
-O comando apresenta estatísticas relacionadas às interfaces de rede.
+The command displays statistics associated with network interfaces.
 
-Campos importantes:
+Important fields include:
 
-* **Iface** — nome da interface;
-* **MTU** — Maximum Transmission Unit;
-* **RX-OK** — pacotes recebidos sem erro;
-* **RX-ERR** — erros de recepção;
-* **RX-DRP** — pacotes recebidos descartados;
-* **RX-OVR** — ocorrências de overflow na recepção;
-* **TX-OK** — pacotes transmitidos com sucesso;
-* **TX-ERR** — erros de transmissão;
-* **TX-DRP** — pacotes descartados durante transmissão;
-* **TX-OVR** — ocorrências de overflow na transmissão;
-* **Flg** — flags associadas à interface.
+- `Iface` — interface name.
+- `MTU` — Maximum Transmission Unit.
+- `RX-OK` — packets received successfully.
+- `RX-ERR` — receive errors.
+- `RX-DRP` — received packets dropped.
+- `RX-OVR` — receive overrun events.
+- `TX-OK` — packets transmitted successfully.
+- `TX-ERR` — transmission errors.
+- `TX-DRP` — packets dropped during transmission.
+- `TX-OVR` — transmission overrun events.
+- `Flg` — flags associated with the interface.
 
----
+The captured output shows no receive or transmission errors for the listed interfaces in those counters.
 
-## 6. Consulta da tabela de roteamento
+**Technical note:** The packet counters reported by this command differ from those shown earlier by `ifconfig`. These values are retained as recorded in the lab. When comparing counters from different commands, consider whether they were collected at different times or through different system reporting mechanisms.
 
-Foi executado:
+### 6. Inspect the Routing Table
+
+The following command was executed:
 
 ```bash
 netstat -rn
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 Tabela de Roteamento IP do Kernel
@@ -198,43 +200,43 @@ Destino         Roteador        MáscaraGen.    Opções   MSS Janela  irtt Ifac
 192.168.98.0    0.0.0.0         255.255.255.0   U         0 0          0 eth0
 ```
 
-A tabela mostra as rotas conhecidas pelo sistema.
+The table displays the routes known to the system.
 
-A entrada:
+The entry:
 
 ```text
 0.0.0.0         192.168.98.1    0.0.0.0         UG
 ```
 
-representa a rota padrão, utilizando `192.168.98.1` como gateway através da interface `eth0`.
+represents the default route, using `192.168.98.1` as the gateway through the `eth0` interface.
 
-A rede:
+The network:
 
 ```text
 192.168.98.0/24
 ```
 
-está diretamente associada à interface `eth0`.
+is directly associated with `eth0`.
 
-Já:
+The network:
 
 ```text
 172.17.0.0/16
 ```
 
-está associada à interface virtual `docker0`.
+is associated with the virtual `docker0` interface.
 
----
+The `-r` option displays the routing table, while `-n` prevents address and port resolution so that addresses are shown numerically.
 
-## 7. Estatísticas dos protocolos de rede
+### 7. Inspect Network Protocol Statistics
 
-Foi utilizado:
+The following command was used:
 
 ```bash
 netstat -s
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 Ip:
@@ -305,52 +307,52 @@ IpExt:
 MPTcpExt:
 ```
 
-O resultado apresenta estatísticas agrupadas por protocolo e extensão.
+The output presents statistics grouped by protocol and extension.
 
-### IP
+#### IP
 
-Apresenta informações gerais sobre o tráfego IP, incluindo pacotes recebidos, descartados e enviados.
+Displays general information about IP traffic, including packets received, discarded, and sent.
 
-### ICMP
+#### ICMP
 
-Apresenta estatísticas de mensagens ICMP, incluindo:
+Displays statistics for ICMP messages, including:
 
-* `echo requests`;
-* `echo replies`;
-* `destination unreachable`;
-* `timeout in transit`.
+- Echo requests.
+- Echo replies.
+- Destination unreachable messages.
+- Time exceeded messages.
 
-### TCP
+#### TCP
 
-Apresenta estatísticas relacionadas às conexões TCP, incluindo aberturas de conexão, segmentos recebidos e enviados, retransmissões e resets.
+Displays statistics related to TCP connections, including connection openings, segments received and sent, retransmissions, and resets.
 
-### UDP
+#### UDP
 
-Apresenta estatísticas de datagramas UDP recebidos e enviados.
+Displays statistics for UDP datagrams received and sent.
 
-### TcpExt / IpExt
+#### TcpExt and IpExt
 
-Apresentam informações adicionais relacionadas aos protocolos TCP e IP.
+Provide additional statistics related to TCP and IP operation.
 
----
+These counters reflect activity during the lifetime of the system or network stack, depending on the counter. They are not limited to the individual commands executed during this exercise.
 
-## 8. Verificação de conexões e serviços
+### 8. Inspect Network Connections and Services
 
-A etapa final e principal ponto de evidência da atividade utilizou:
+The final step, which was also the main evidence requested for the activity, used:
 
 ```bash
 netstat -anptu
 ```
 
-O comando combina diferentes opções:
+The command combines several options:
 
-* `-a` — mostra todas as conexões e sockets em escuta;
-* `-n` — exibe endereços e portas numericamente;
-* `-p` — mostra o PID e o programa associado;
-* `-t` — inclui conexões TCP;
-* `-u` — inclui conexões UDP.
+- `-a` — displays all connections and listening sockets.
+- `-n` — displays addresses and ports numerically.
+- `-p` — shows the associated process ID and program when available.
+- `-t` — includes TCP connections.
+- `-u` — includes UDP sockets.
 
-Saída observada:
+**Observed output:**
 
 ```text
 Conexões Internet Ativas (servidores e estabelecidas)
@@ -365,70 +367,93 @@ udp        0      0 0.0.0.0:68              0.0.0.0:*                           
 udp6       0      0 fe80::1005:27ff:fe4:546 :::*                                494/dhclient
 ```
 
-Essa saída permite relacionar **portas de rede, estados de conexão e processos em execução**.
+The output allows network ports, connection states, and running processes to be examined together.
 
-Por exemplo:
+For example:
 
 ```text
 tcp  0  0  0.0.0.0:22  0.0.0.0:*  OUÇA  618/sshd
 ```
 
-indica que o serviço `sshd` estava escutando na porta TCP `22`.
+indicates that the `sshd` service was listening on TCP port `22`.
 
-Também foi observada uma conexão RDP:
+An RDP connection was also observed:
 
 ```text
 tcp6  0  0  192.168.98.40:3389  192.168.98.201:49732  ESTABELECIDA  2206/xrdp
 ```
 
-Nesse caso, a porta `3389` estava associada ao serviço `xrdp`, e havia uma conexão estabelecida com outro endereço do ambiente de laboratório.
+In this case, port `3389` was associated with the `xrdp` service, and an established connection to another address in the laboratory environment was shown.
 
-A saída também mostrou o `dhclient` associado à porta UDP `68`, utilizada pelo DHCP.
+The output also showed `dhclient` associated with UDP port `68`, which is used by DHCP clients.
+
+The state labels `OUÇA` and `ESTABELECIDA` correspond to listening and established connections, respectively.
+
+**Note:** The command output is preserved as recorded in the laboratory, including the localized labels. Actual process names, ports, and connection states depend on the services running when the command is executed.
+
+### 9. Finish the Activity
+
+After completing the network queries, the terminal was closed.
+
+## Commands Used
+
+The following commands were used throughout the activity:
+
+```bash
+sudo -i
+ifconfig
+ping www.google.com
+traceroute -I grancursos.com.br
+netstat -i
+netstat -rn
+netstat -s
+netstat -anptu
+```
+
+The `ping` process was stopped using `Ctrl + C`.
+
+## Concepts Practiced
+
+The activity used several tools for network diagnostics:
+
+| Command | Purpose |
+|---|---|
+| `ifconfig` | Identify network interfaces and IP addresses |
+| `ping` | Test connectivity using ICMP |
+| `traceroute -I` | Observe network hops using ICMP probes |
+| `netstat -i` | Inspect network interface statistics |
+| `netstat -rn` | Display the routing table |
+| `netstat -s` | Inspect protocol statistics |
+| `netstat -anptu` | Examine connections, ports, states, and associated processes |
+
+Together, these commands provide a practical overview of the state of a Linux system's network.
+
+## Results
+
+The activity provided experience analyzing several layers of networking in Kali Linux, from interface configuration to active connections and services.
+
+The following information was examined:
+
+- Network interfaces and IP addresses.
+- Connectivity through ICMP.
+- Network route hops between the source and destination.
+- Packet transmission and reception statistics.
+- Configured routes.
+- IP, ICMP, TCP, and UDP protocol statistics.
+- Listening ports.
+- Established connections.
+- Processes associated with network sockets.
+
+The final `netstat -anptu` step was used as the main evidence for the activity, as specified in the laboratory instructions.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 03, Classes 11–12.
+
+**Recorded screenshot:** The final step using `netstat -anptu`, as specified in the laboratory instructions.
+
+[View Evidence — Classes 11–12](../evidencias.pdf)
 
 ---
 
-## 9. Encerramento
-
-Após finalizar as consultas, o Terminal foi fechado.
-
----
-
-## Conceitos praticados
-
-Durante a atividade foram utilizados diferentes recursos de diagnóstico de rede:
-
-* `ifconfig` — identificação de interfaces e endereços;
-* `ping` — teste de conectividade utilizando ICMP;
-* `traceroute` — observação dos saltos entre origem e destino;
-* `netstat -i` — estatísticas das interfaces;
-* `netstat -rn` — tabela de roteamento;
-* `netstat -s` — estatísticas dos protocolos;
-* `netstat -anptu` — conexões, portas, estados e processos associados.
-
-O conjunto desses comandos permite obter uma visão prática do estado da rede de um sistema Linux.
-
----
-
-## Resultado
-
-A atividade permitiu analisar diferentes camadas do funcionamento da rede no Kali Linux, desde a configuração das interfaces até as conexões e serviços que estavam ativos.
-
-Foi possível identificar:
-
-1. interfaces e endereços IP;
-2. conectividade através de ICMP;
-3. saltos de uma rota de rede;
-4. estatísticas de transmissão e recepção;
-5. rotas configuradas;
-6. estatísticas dos protocolos IP, ICMP, TCP e UDP;
-7. portas em estado de escuta;
-8. conexões estabelecidas;
-9. processos associados aos sockets.
-
-A etapa final com `netstat -anptu` foi utilizada como evidência da atividade, conforme especificado no roteiro.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 3 / Aulas 11 e 12**](../evidencias.pdf)
+[Back to Classes 11–12](../) · [Back to Module 03](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
