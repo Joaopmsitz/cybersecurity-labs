@@ -1,20 +1,28 @@
-# Atividade 1.5 — Taskwarrior
+# Activity 1.5 — Task Management with Taskwarrior
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 01  
+> **Class:** 01–02  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Praticar o gerenciamento de tarefas pelo terminal utilizando o **Taskwarrior**, criando tarefas, adicionando prioridade, definindo prazo e marcando tarefas como concluídas.
+## Objective
 
-## Ambiente
+Practice command-line task management using Taskwarrior by creating tasks, adding tags, setting due dates, and marking tasks as completed.
 
-* Kali Linux
-* Terminal
-* Taskwarrior
+## Environment
 
-## Procedimento
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Tool:** Taskwarrior
+- **Configuration directory:** `~/.task`
+- **Configuration file:** `~/.taskrc`
 
-### 1. Preparação do Taskwarrior
+## Procedure
 
-Primeiro, foi acessado o modo administrador e configurado o diretório utilizado pelo Taskwarrior:
+### 1. Configure Taskwarrior
+
+The terminal was opened in an administrator shell, and the directory used by Taskwarrior was configured:
 
 ```bash
 sudo -i
@@ -22,11 +30,13 @@ mkdir -p ~/.task
 echo 'data.location=~/.task' > ~/.taskrc
 ```
 
-A opção `data.location` define o local onde o Taskwarrior armazenará seus dados.
+The `data.location` setting specifies where Taskwarrior stores its task data. The `~/.taskrc` file contains the configuration setting, while `~/.task` is the designated data directory.
 
-### 2. Criação das tarefas
+**Note:** Because the setup was performed after `sudo -i`, the configuration and task data belong to the `root` user. Root privileges are not normally required for task management; using a regular user account is preferable for routine operations.
 
-Foram criadas três tarefas:
+### 2. Create Tasks
+
+Three tasks were created using the following commands:
 
 ```bash
 task add Comprar leite
@@ -34,63 +44,65 @@ task add Comprar cafe
 task add Comprar salgados
 ```
 
-Em seguida, foi utilizado o comando abaixo para visualizar as tarefas:
+The `task list` command was then used to display the tasks:
 
 ```bash
 task list
 ```
 
-As tarefas receberam identificadores numéricos, que foram utilizados posteriormente para modificá-las.
+Taskwarrior assigned numeric identifiers to the new tasks. These identifiers were used in subsequent operations.
 
-### 3. Adicionando prioridade
+The task descriptions were kept in Portuguese to match the original laboratory procedure.
 
-A tarefa de número 2 recebeu a tag `urgent`:
+### 3. Add an Urgency Tag
+
+The task with ID `2` was modified to include the `urgent` tag:
 
 ```bash
 task 2 modify +urgent
 ```
 
-Depois, a lista foi consultada novamente:
+The task list was then displayed again:
 
 ```bash
 task list
 ```
 
-A tag `+urgent` adiciona uma característica à tarefa que pode influenciar sua organização e seu nível de urgência dentro do Taskwarrior.
+The `+urgent` syntax adds a tag named `urgent` to the task. Tags can help categorize and filter tasks, but this command does not set Taskwarrior's priority attribute.
 
-### 4. Definindo uma data de vencimento
+### 4. Set a Due Date
 
-A tarefa de número 3 recebeu uma data de vencimento:
+A due date was assigned to task `3`:
 
 ```bash
 task 3 modify due:2036-12-31
 ```
 
-Depois, foi executado:
+The task list was displayed again:
 
 ```bash
 task list
 ```
 
-A tarefa passou a apresentar a data definida como prazo.
+Task `3` now had a due date of December 31, 2036.
 
-### 5. Concluindo uma tarefa
+### 5. Mark a Task as Completed
 
-A tarefa de número 1 foi marcada como concluída:
+Task `1` was marked as completed:
 
 ```bash
 task 1 done
 ```
 
-Por fim, a lista foi consultada novamente:
+Finally, the task list was checked again:
 
 ```bash
 task list
 ```
 
-A tarefa concluída deixou de aparecer entre as tarefas pendentes.
+The completed task no longer appeared among the pending tasks in the default list report.
 
-## Comandos utilizados
+## Commands Used
 
 ```bash
 sudo -i
@@ -113,28 +125,35 @@ task 1 done
 task list
 ```
 
-## Resultado
+## Result
 
-Foi possível utilizar o Taskwarrior para criar e organizar tarefas diretamente pelo terminal, aplicando diferentes recursos de gerenciamento:
+The activity demonstrated how to manage tasks from the Linux command line using Taskwarrior.
 
-* Criação de tarefas;
-* Visualização da lista;
-* Adição de prioridade/urgência;
-* Definição de prazo;
-* Conclusão de tarefas.
+The following operations were performed:
 
-## Conceitos praticados
+- Created three tasks.
+- Listed the tasks and identified their numeric IDs.
+- Added the `urgent` tag to a task.
+- Assigned a due date to another task.
+- Marked a task as completed.
 
-* Gerenciamento de tarefas via terminal
-* Linux
-* Taskwarrior
-* Tags de tarefas
-* Prioridade e urgência
-* Datas de vencimento
-* Controle de tarefas concluídas
+## Concepts Practiced
 
-## Evidência
+- Command-line task management
+- Taskwarrior configuration
+- Task creation and listing
+- Task identifiers
+- Tags and task categorization
+- Due dates and deadlines
+- Task completion and status management
+- Linux terminal operations
 
-A execução da atividade foi registrada no PDF de evidências da Aula 01–02.
+## Evidence
 
-[Ver evidências — Aula 01–02](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-01/aula-01-02/evidencias.pdf)
+The activity evidence is included in the PDF for Classes 01–02.
+
+[View Evidence — Classes 01–02](../evidencias.pdf)
+
+---
+
+[Back to Classes 01–02](../) · [Back to Module 01](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
