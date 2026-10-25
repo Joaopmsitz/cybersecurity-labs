@@ -1,30 +1,38 @@
-# Atividade 2.8 — Tor Browser no Kali Linux
+# Activity 2.08 — Exploring Tor Browser on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 02  
+> **Class:** 07–08  
+> **Environment:** Kali Linux virtual lab  
+> **Status:** Completed
 
-Configurar e utilizar o **Tor Browser** no Kali Linux para observar, em um ambiente controlado, como uma conexão realizada através da rede Tor pode apresentar um endereço IP de saída diferente daquele observado em uma conexão convencional.
+## Objective
 
-A atividade também permite visualizar informações associadas ao endereço IP apresentado por um serviço de consulta, comparando o acesso pelo Tor Browser com o acesso pelo navegador convencional.
+Configure and use Tor Browser on Kali Linux to observe how a connection through the Tor network can present a different public IP address from a conventional browser connection.
 
-## Ambiente
+The activity also examines information associated with the IP addresses reported by an external lookup service, comparing access through Tor Browser with access through a conventional browser.
 
-* Kali Linux
-* Terminal
-* Tor Browser
-* Firefox
-* `torbrowser-launcher`
-* Rede Tor
-* Serviço de consulta de endereço IP
+## Environment
 
-## 1. Iniciando o Tor Browser
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Browser:** Tor Browser
+- **Conventional browser:** Firefox
+- **Launcher:** `torbrowser-launcher`
+- **Network:** Tor
+- **IP lookup service:** WhatIsMyIPAddress
 
-O Tor Browser foi iniciado através do terminal com:
+## Procedure
+
+### 1. Launch Tor Browser
+
+Tor Browser was started from the terminal using:
 
 ```bash
 torbrowser-launcher
 ```
 
-Na primeira execução, o launcher realizou o download e a preparação do navegador:
+During the first launch, the launcher downloaded and prepared the browser. The following output was observed:
 
 ```text
 Lançador do Navegador Tor
@@ -47,49 +55,51 @@ Rodando /home/aluno/.local/share/torbrowser/tbb/x86_64/tor-browser/start-tor-bro
 Launching './Browser/start-tor-browser --detach'...
 ```
 
-O processo realizou as seguintes etapas:
+The process performed the following actions:
 
-1. Criou o diretório utilizado pelo launcher;
-2. Verificou a versão disponível do Tor Browser;
-3. Baixou o pacote do navegador;
-4. Baixou a chave utilizada para verificar a assinatura;
-5. Verificou a assinatura;
-6. Extraiu o navegador;
-7. Iniciou o Tor Browser.
+- Created the directory used by the launcher.
+- Checked the available Tor Browser version.
+- Downloaded the browser package.
+- Downloaded the signing key used to verify the package.
+- Verified the package signature.
+- Extracted the browser archive.
+- Started Tor Browser.
 
-As mensagens relacionadas ao `MESA`/`ZINK` apareceram durante a inicialização gráfica do ambiente e não impediram a continuação da atividade.
+The MESA/ZINK messages appeared during graphical initialization. They did not prevent the activity from continuing.
 
-## 2. Estabelecendo a conexão Tor
+The version reported during this laboratory run was **13.5.6**. This records the version observed at the time of the exercise, not necessarily the current release.
 
-Após a abertura do Tor Browser, foi utilizada a opção **Connect** para estabelecer a conexão com a rede Tor.
+### 2. Establish a Tor Connection
 
-Durante o processo, caso a conexão não fosse estabelecida normalmente, foi utilizada a opção **Try a bridge**, conforme o procedimento apresentado no laboratório.
+After Tor Browser opened, the **Connect** option was used to establish a connection to the Tor network.
 
-A conexão estabelecida pelo navegador permite que o tráfego seja encaminhado pela rede Tor antes de chegar ao destino.
+When a direct connection could not be established normally, the laboratory procedure allowed the use of **Try a bridge**.
 
-## 3. Acessando a Web pelo Tor Browser
+Once connected, the browser routed its traffic through the Tor network before reaching the destination.
 
-Com o navegador conectado à rede Tor, foi acessado:
+### 3. Browse the Web Through Tor Browser
+
+With Tor Browser connected to the Tor network, the following website was accessed:
 
 ```text
 https://duckduckgo.com/
 ```
 
-A página foi utilizada apenas para confirmar o funcionamento da navegação através do Tor.
+The page was used to confirm that browsing through Tor was working.
 
-Em seguida, foi aberta uma nova aba para consultar o endereço IP observado externamente:
+A new tab was then opened to check the externally observed IP address:
 
 ```text
 https://whatismyipaddress.com/
 ```
 
-Foi aceita a solicitação de privacidade apresentada pelo site para visualizar as informações disponíveis.
+The privacy prompt displayed by the website was accepted to view the available information.
 
-## 4. Verificando o endereço IP através do Tor
+### 4. Check the IP Address Through Tor
 
-A consulta apresentou um endereço IPv4 e informações associadas ao nó de saída utilizado pela conexão do laboratório.
+The lookup service displayed an IPv4 address and information associated with the exit node used during the laboratory session.
 
-Exemplo observado durante a atividade:
+The observed output was:
 
 ```text
 IPv6: ? 2a0b:f4c0:16c:16::1
@@ -114,15 +124,15 @@ Region: Hessen
 Country: Germany
 ```
 
-O resultado identificou o endereço como pertencente a um **Tor Exit Node**, indicando que a conexão estava saindo para a Internet através de um nó de saída da rede Tor.
+The result identified the address as belonging to a **Tor Exit Node**, indicating that the connection reached the public Internet through a Tor exit relay.
 
-A localização apresentada pelo serviço corresponde ao ponto associado ao endereço IP de saída, e não necessariamente à localização real do usuário.
+The location reported by the lookup service corresponds to the location associated with the observed exit-node IP address. It does not necessarily represent the user's actual physical location.
 
-## 5. Comparação com uma conexão convencional
+### 5. Compare with a Conventional Connection
 
-Para comparar o resultado, o mesmo serviço foi acessado pelo Firefox convencional, fora do Tor Browser.
+To compare the results, the same lookup service was accessed through the conventional Firefox browser, outside Tor Browser.
 
-O resultado observado foi:
+The observed output was:
 
 ```text
 IPv4: 107.22.123.86
@@ -145,69 +155,151 @@ Region: Virginia
 Country: United States
 ```
 
-Os resultados demonstram que os dois navegadores apresentaram endereços IP diferentes para o serviço consultado.
+The results showed different IP addresses for the two browser connections.
 
-### Comparação observada
+#### Observed Comparison
 
-| Acesso               | IPv4 observado    | Informações apresentadas          |
-| -------------------- | ----------------- | --------------------------------- |
-| Tor Browser          | `185.220.100.240` | Tor Exit Node / Frankfurt am Main |
-| Firefox convencional | `107.22.123.86`   | Amazon.com Inc. / Ashburn         |
+| Connection | IPv4 Address Observed | Information Reported by the Service |
+|---|---|---|
+| Tor Browser | `185.220.100.240` | Tor Exit Node / Frankfurt am Main, Germany |
+| Conventional Firefox | `107.22.123.86` | Amazon.com Inc. / Ashburn, Virginia, United States |
 
-Os endereços acima correspondem aos resultados observados no laboratório e não devem ser interpretados como endereços atuais.
+**Historical-data note:** These addresses and geographic details are the results recorded during this laboratory exercise. They should not be interpreted as current IP addresses or as definitive evidence of the user's physical location or Internet provider.
 
-## 6. Como a rede Tor se relaciona com o resultado
+The conventional browser result was associated with Amazon's network. This observation alone does not establish why that address was used; the surrounding virtualized or network environment can affect the externally observed IP address.
 
-Em uma conexão convencional, o serviço acessado normalmente observa o endereço IP público utilizado pela conexão do cliente.
+### 6. Understand How Tor Relates to the Results
 
-No Tor Browser, o tráfego é encaminhado pela rede Tor, que utiliza múltiplos relays para transportar a comunicação. Para um serviço externo, o endereço observado pode ser o do **nó de saída**, em vez do endereço público original do cliente.
+In a conventional connection, a destination website generally observes the public IP address used by the client connection.
 
-A atividade demonstra essa diferença de forma prática através da consulta do endereço IP.
+With Tor Browser, traffic is forwarded through the Tor network using multiple relays. When traffic reaches a public Internet destination, the destination generally observes the IP address of the Tor exit relay rather than the client's original public IP address.
 
-O resultado não significa que o Tor torne toda atividade automaticamente anônima ou que elimine todas as possibilidades de identificação. A proteção depende também da forma como o navegador e os serviços são utilizados.
+The activity demonstrated this difference through an external IP lookup service.
 
-## 7. Conceitos praticados
+However, Tor does not automatically make every activity anonymous or eliminate every possibility of identification. Privacy depends on how the browser, accounts, applications, and destination services are used. Tor also does not guarantee protection against all forms of tracking or information disclosure.
 
-### Tor
+### 7. Concepts Practiced
 
-O **Tor (The Onion Router)** é uma rede projetada para aumentar a privacidade das comunicações por meio do encaminhamento do tráfego através de uma sequência de relays.
+#### Tor Network
 
-### Tor Browser
+Tor is a network designed to improve communication privacy by routing traffic through a sequence of relays.
 
-É um navegador configurado para utilizar a rede Tor, buscando reduzir determinadas formas de rastreamento e exposição da origem da conexão.
+#### Tor Browser
 
-### Tor Exit Node
+Tor Browser is a browser configured to use the Tor network and reduce certain forms of tracking and exposure of the user's network origin.
 
-O **nó de saída** é o ponto da rede Tor responsável por encaminhar o tráfego para a Internet convencional.
+#### Tor Exit Node
 
-É o endereço associado a esse nó que pode ser observado pelo serviço de destino.
+A Tor exit node is the relay through which traffic leaves the Tor network and reaches the conventional Internet.
 
-### IP público
+The destination service can observe the exit node's IP address rather than the original public IP address used by the client.
 
-O endereço IP público é utilizado para identificar a origem de uma conexão na Internet. A comparação realizada na atividade demonstra que o endereço observado por um serviço pode variar conforme o caminho utilizado para estabelecer a conexão.
+#### Public IP Address
 
-### Privacidade na Internet
+A public IP address is used to identify the network endpoint from which an Internet connection appears to originate.
 
-A atividade demonstra, de forma prática, como diferentes mecanismos de conexão podem alterar as informações de rede observadas externamente.
+The comparison in this activity demonstrated that the address observed by an external service can differ depending on the connection path.
 
-## 8. Resultado
+#### Internet Privacy
 
-A atividade permitiu:
+The activity provided a practical demonstration of how different connection methods affect the network information visible to external services.
 
-1. Instalar e iniciar o Tor Browser através do `torbrowser-launcher`;
-2. Estabelecer uma conexão com a rede Tor;
-3. Realizar uma navegação simples através do Tor Browser;
-4. Consultar o endereço IP observado externamente;
-5. Identificar um Tor Exit Node no resultado;
-6. Comparar o endereço apresentado pelo Tor Browser com uma conexão convencional;
-7. Compreender a função dos nós de saída e o impacto da rede Tor na visibilidade do endereço IP.
+## Commands Used
 
-A principal observação foi a diferença entre o endereço IP apresentado pelo Tor Browser e o endereço apresentado pelo Firefox convencional durante o laboratório.
+The terminal command used to start the browser was:
 
-## Evidência
+```bash
+torbrowser-launcher
+```
 
-A evidência da atividade está no PDF geral das Aulas 7 e 8:
+All other steps were performed through the Tor Browser and Firefox graphical interfaces.
 
-[Ver evidências — Aulas 7 e 8](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-02/aula-07-08/evidencias.pdf)
+The external IP lookup service was accessed at:
 
-**Print registrado:** etapa 7 da atividade, conforme solicitado pelo roteiro.
+```text
+https://whatismyipaddress.com/
+```
+
+## Interpreting the Results
+
+The activity demonstrated how Tor Browser can change the IP address observed by an external website.
+
+During the Tor Browser session, the lookup service reported:
+
+```text
+IPv4: ? 185.220.100.240
+
+Services: Tor Exit Node
+
+City: Frankfurt am Main
+
+Region: Hessen
+
+Country: Germany
+```
+
+During the conventional Firefox session, the service reported:
+
+```text
+IPv4: 107.22.123.86
+
+IPv6: Not detected
+
+ISP: Amazon.com Inc.
+
+City: Ashburn
+
+Region: Virginia
+
+Country: United States
+```
+
+The comparison showed that the two connections presented different IPv4 addresses and different network-provider and geographic information.
+
+The observations support the following conclusions:
+
+- Tor Browser successfully connected through a Tor exit node during the recorded test.
+- The external lookup service reported an IP address associated with a Tor exit node.
+- The conventional Firefox connection presented a different public IP address.
+- The geographic information returned by the service described the network address, not necessarily the physical location of the user.
+
+These are observations from the specific laboratory run, not guarantees about future connection behavior.
+
+## Result
+
+The activity demonstrated how to:
+
+- Install and launch Tor Browser through `torbrowser-launcher`.
+- Establish a connection to the Tor network.
+- Browse a website through Tor Browser.
+- Query the IP address observed by an external service.
+- Identify a Tor exit node in the returned information.
+- Compare the IP address reported through Tor Browser with a conventional Firefox connection.
+- Understand the role of Tor exit nodes and their effect on the IP address visible to destination services.
+
+The main observation was the difference between the IP addresses reported for Tor Browser and conventional Firefox during the laboratory session.
+
+## Concepts Practiced
+
+- Tor network
+- Tor Browser
+- Tor relays and exit nodes
+- Public IP addresses
+- IP lookup services
+- Network privacy
+- Anonymous browsing concepts
+- Virtualized network environments
+- Interpretation of IP geolocation information
+- Privacy limitations and operational awareness
+
+## Evidence
+
+The activity evidence is included in the PDF for Classes 07–08.
+
+The screenshot recorded for the activity corresponds to **Step 7**, as specified in the laboratory instructions.
+
+[View Evidence — Classes 07–08](../evidencia.pdf)
+
+---
+
+[Back to Classes 07–08](../) · [Back to Module 02](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
