@@ -1,15 +1,30 @@
-# 💃 Dancing — Starting Point (Very Easy)
+# Dancing — Starting Point (Very Easy)
 
-🔗 Prova de conclusão:
-https://labs.hackthebox.com/achievement/machine/2578759/395
+**Operating System:** Windows  
+**Status:** Completed
 
-## ✔ O que foi praticado
-- Enumeração inicial com Nmap, identificando portas SMB abertas (135, 139, 445)
-- Identificação do serviço SMB ativo na máquina
-- Enumeração de compartilhamentos SMB usando `smbclient -L`
-- Verificação de acesso anônimo habilitado
-- Acesso ao compartilhamento WorkShares sem autenticação
-- Navegação pelos diretórios dos usuários dentro do share
-- Download do arquivo contendo a flag usando `get`
-- Identificação de falha de configuração (SMB com permissões anônimas)
-- Compreensão do risco de exposição de arquivos sem controle de acesso
+## Completion Proof
+
+[View Hack The Box Achievement](https://labs.hackthebox.com/achievement/machine/2578759/395)
+
+## What I Practiced
+
+- Network enumeration with Nmap, identifying RPC (135), NetBIOS (139), and SMB (445).
+- Identification of SMB as the primary attack surface.
+- Enumeration of available SMB shares using `smbclient`.
+- Testing anonymous access without providing a password.
+- Accessing the `WorkShares` share without credentials.
+- Navigating user directories within the share.
+- Downloading files using the SMB `get` command.
+- Retrieving the flag from an exposed file.
+
+## Key Takeaways
+
+- SMB enumeration can reveal shared resources and misconfigured permissions.
+- Anonymous access should be disabled unless explicitly required and properly restricted.
+- File shares must enforce appropriate authentication and access controls.
+- Nmap and `smbclient` are useful tools for identifying and investigating exposed SMB resources.
+
+---
+
+[Back to Tier 0](../README.md) · [Back to Starting Point](../../README.md) · [Back to Hack The Box](../../../README.md)
