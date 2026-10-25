@@ -1,36 +1,32 @@
-# HTB Academy — Paths
+# HTB Academy — Learning Paths
 
-> Index of HTB Academy Skill Paths and Job Role Paths documented in this repository.
-
-This directory organizes HTB Academy learning paths by purpose: **Job Role Paths** focus on the competencies required for a specific security role, while **Skill Paths** concentrate on foundational knowledge, technical topics, and toolsets.
+Index of HTB Academy Skill Paths and Job Role Paths documented in this repository.
 
 ## Path Categories
 
-| Category | Focus | Index |
-|---|---|---|
-| **Job Role Paths** | Role-oriented curricula covering practical responsibilities, investigation workflows, and job-related competencies. | [Browse Job Role Paths](./job-role/README.md) |
-| **Skill Paths** | Topic-focused curricula that develop specific technical skills and foundational knowledge. | [Browse Skill Paths](./skill/README.md) |
+| Category | Description | Directory |
+| --- | --- | --- |
+| Job Role Paths | Learning paths focused on the skills required for specific cybersecurity roles. | [Browse Job Role Paths](./job-role/) |
+| Skill Paths | Learning paths focused on specific technical skills and tools. | [Browse Skill Paths](./skill/) |
 
 ## Documented Paths
 
-| Path | Category | Status | Progress | Modules | Completed Modules |
-|---|---|---|---:|---:|---:|
-| [SOC Analyst](./job-role/soc-analyst/README.md) | Job Role | In Progress | 28.7% | 15 | 4 of 15 |
-| [Basic Toolset](./skill/basic-toolset/README.md) | Skill | Completed | 100% | 7 | 7 of 7 |
-| [Cracking into Hack the Box](./skill/cracking-into-hack-the-box/README.md) | Skill | Completed | 100% | 3 | 3 of 3 |
+| Path | Category | Status | Progress | Modules Completed |
+| --- | --- | --- | ---: | ---: |
+| [SOC Analyst](./job-role/soc-analyst/) | Job Role | In Progress | 28.7% | 4 of 15 |
+| [Basic Toolset](./skill/basic-toolset/) | Skill | Completed | 100% | 7 of 7 |
+| [Cracking into Hack The Box](./skill/cracking-into-hack-the-box/) | Skill | Completed | 100% | 3 of 3 |
 
-> **Progress note:** SOC Analyst progress reflects the HTB Academy path overview provided on 19 October 2026. Update the progress and completed-module count when the path advances.
+> **Progress note:** SOC Analyst progress reflects the last recorded update from October 19, 2026. Update the progress and completed-module count as you advance.
 
-## How the Repository Is Organized
+## Repository Organization
 
-- **Path indexes** provide an overview of each category and link to the documented paths.
-- **Path READMEs** summarize the curriculum, list modules, record progress, and link to module documentation.
-- **Module READMEs** contain the technical notes, relevant lab documentation, and evidence associated with individual modules.
+- **Path indexes** organize learning paths by category.
+- **Path READMEs** document the curriculum, modules, progress, and completion status.
+- **Module READMEs** contain technical notes, lab documentation, and practical findings.
 
-A module may appear in more than one HTB Academy path. When that happens, the path documentation records its role in each curriculum, while the module documentation remains the detailed technical reference.
+When a module appears in multiple learning paths, its technical documentation remains centralized in the module library to avoid duplication.
 
-## Navigation
+---
 
-- [HTB Academy Documentation](../README.md)
-- [Job Role Paths](./job-role/README.md)
-- [Skill Paths](./skill/README.md)
+[Back to HTB Academy](../README.md) · [Browse Module Library](../modules/README.md)
