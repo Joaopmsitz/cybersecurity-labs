@@ -1,50 +1,57 @@
-# Atividade 1.3 — Verificando integridade de arquivos com função Hash
+# Activity 1.3 — Verifying File Integrity with MD5 Hashes
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 01  
+> **Class:** 01–02  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Verificar a integridade de arquivos utilizando uma função de Hash, comparando os valores gerados pelo algoritmo MD5 para arquivos idênticos e arquivos que sofreram alterações.
+## Objective
 
-A atividade utiliza o comando `md5sum` do Kali Linux para calcular o hash MD5 dos arquivos e demonstrar como uma alteração no conteúdo resulta em um valor de hash diferente.
+Verify file integrity by calculating and comparing MD5 hashes for identical and modified files.
 
-## Ambiente
+This activity uses the Linux `md5sum` command to demonstrate how file content is represented by a hash value and how modifications generally produce a different result.
 
-* Kali Linux
-* Terminal
-* Usuário `aluno`
-* Diretório de trabalho: `/home/aluno/Documentos`
-* Ferramenta utilizada: `md5sum`
+## Environment
 
-## Procedimento
+- **Operating system:** Kali Linux
+- **User account:** `aluno`, with a superuser shell used during the activity
+- **Working directory:** `/home/aluno/Documentos`
+- **Tool:** `md5sum`
 
-### 1. Acessando o terminal como superusuário
+## Procedure
 
-Foi aberto o Terminal Emulator e executado:
+### 1. Open a Superuser Shell
+
+The terminal was opened and the following command was executed:
 
 ```bash
 sudo -i
 ```
 
-Após a autenticação, o terminal passou a utilizar o usuário `root`.
+After authentication, the terminal session switched to the `root` user.
 
-### 2. Acessando o diretório dos arquivos
+**Note:** Root privileges are not normally required to calculate hashes for files the current user can read. Using the least privileges necessary is preferable for routine file operations.
 
-Os arquivos utilizados nas atividades anteriores foram armazenados no diretório `Documentos`.
+### 2. Navigate to the Working Directory
 
-Para acessar o diretório:
+The files from the previous activities were stored in the Documents directory.
+
+The following command was used to access it:
 
 ```bash
 cd /home/aluno/Documentos/
 ```
 
-### 3. Verificando os arquivos disponíveis
+### 3. List the Available Files
 
-Foi utilizado o comando:
+The `ls` command was used to list the files:
 
 ```bash
 ls
 ```
 
-Os arquivos criados nas atividades anteriores foram identificados no diretório:
+The files created during the previous activities were present:
 
 ```text
 Imagem1.png
@@ -54,88 +61,67 @@ Texto.txt
 Texto_copia.txt
 ```
 
-### 4. Calculando o Hash MD5
+### 4. Calculate the MD5 Hashes
 
-O comando `md5sum` foi utilizado para calcular o hash de cada arquivo.
+The `md5sum` command was used to calculate the hash of each file.
 
-Para `Imagem1.png`:
+For the original image:
 
 ```bash
 md5sum Imagem1.png
 ```
 
-Para `Imagem1_copia.png`:
+For the identical image copy:
 
 ```bash
 md5sum Imagem1_copia.png
 ```
 
-Para `Imagem2.png`:
+For the modified image:
 
 ```bash
 md5sum Imagem2.png
 ```
 
-Para `Texto.txt`:
+For the original text file:
 
 ```bash
 md5sum Texto.txt
 ```
 
-Para `Texto_copia.txt`:
+For the modified text copy:
 
 ```bash
 md5sum Texto_copia.txt
 ```
 
-Os valores hexadecimais retornados são específicos para os arquivos utilizados durante a execução da atividade e podem ser diferentes em outras execuções.
+Each command returned a hexadecimal hash value followed by the corresponding filename. The exact values depend on the contents of the files and are therefore not reproduced here.
 
-### 5. Comparando os hashes
+### 5. Compare the Hashes
 
-Os valores retornados pelo `md5sum` foram comparados para verificar a integridade dos arquivos.
+The resulting hash values were compared to identify differences.
 
-`Imagem1.png` e `Imagem1_copia.png` apresentaram o mesmo valor de hash, pois eram arquivos idênticos.
+`Imagem1.png` and `Imagem1_copia.png` produced the same hash because the files were identical.
 
-Já `Imagem2.png` apresentou um valor diferente, pois a imagem havia recebido uma alteração.
+`Imagem2.png` produced a different hash because the image had been modified.
 
-Da mesma forma, `Texto.txt` e `Texto_copia.txt` apresentaram hashes diferentes porque o conteúdo da cópia havia sido modificado na Atividade 1.1.
+The same behavior was observed with the text files: `Texto.txt` and `Texto_copia.txt` produced different hashes because the copy had been modified during Activity 1.1.
 
-## Interpretação do resultado
+## Interpreting the Results
 
-O MD5 gera um valor hexadecimal a partir do conteúdo de um arquivo.
+MD5 is a hash function that produces a 128-bit digest, typically displayed as a 32-character hexadecimal value.
 
-Quando dois arquivos possuem o mesmo conteúdo, o resultado do MD5 tende a ser o mesmo. Quando o conteúdo é alterado, o valor calculado também muda.
+For this laboratory:
 
-Neste laboratório:
+- Identical files produced matching MD5 hashes.
+- Modified files produced different MD5 hashes.
+- Comparing hash values provided a practical way to detect the changes made in the previous activities.
 
-```text
-Imagem1.png
-Imagem1_copia.png
-```
+**Security note:** MD5 is no longer considered suitable for security-sensitive integrity verification because it is vulnerable to collision attacks. For modern applications, SHA-256 is generally preferred.
 
-possuíam o mesmo hash porque os arquivos eram idênticos.
+A matching hash is useful evidence that two files have the same content, but MD5 hash equality does not provide a cryptographic guarantee that the files are identical.
 
-Já:
-
-```text
-Imagem1.png
-Imagem2.png
-```
-
-possuíam hashes diferentes devido à alteração realizada na imagem.
-
-O mesmo comportamento foi observado nos arquivos de texto:
-
-```text
-Texto.txt
-Texto_copia.txt
-```
-
-A alteração realizada anteriormente na cópia fez com que os valores de hash fossem diferentes.
-
-> **Observação:** MD5 é útil para demonstrar o conceito de verificação de integridade neste laboratório, mas não é considerado adequado para aplicações modernas que dependem de resistência a colisões criptográficas. Para usos atuais de segurança, algoritmos mais robustos, como SHA-256, são preferíveis.
-
-## Comandos utilizados
+## Commands Used
 
 ```bash
 sudo -i
@@ -148,49 +134,43 @@ md5sum Texto.txt
 md5sum Texto_copia.txt
 ```
 
-## Limpeza do ambiente
+## Cleanup
 
-Após a realização dos testes, os arquivos utilizados foram removidos com:
+The original activity included the following command to remove files from the working directory:
 
 ```bash
 rm *
 ```
 
-O sistema solicitou confirmação antes da remoção dos arquivos.
+**Warning:** This command can delete all non-hidden files and directories matched by `*` in the current directory. It normally does not prompt for confirmation by default.
 
-Depois, foi utilizado:
+Always verify the current directory and the files selected before using a destructive command. File cleanup is not required to perform hash comparisons.
 
-```bash
-ls
-```
+## Result
 
-para verificar o conteúdo restante do diretório.
+The activity demonstrated how MD5 hashes can be calculated and compared to detect file modifications.
 
-## Resultado
+The identical image files produced the same hash, while the modified image and text files produced different values. This provided a practical demonstration of file integrity checking through hash comparison.
 
-Foi possível utilizar o algoritmo MD5 para comparar a integridade dos arquivos.
+## Concepts Practiced
 
-Os arquivos idênticos apresentaram o mesmo hash, enquanto os arquivos que sofreram alterações apresentaram valores diferentes.
+- File integrity verification
+- Cryptographic hash functions
+- MD5 hashing
+- Hash value comparison
+- Detection of file modifications
+- Linux command-line operations
+- Use of `md5sum`, `ls`, and `cd`
+- Safe file management practices
 
-A atividade demonstrou, na prática, como funções de hash podem ser utilizadas para identificar alterações no conteúdo de arquivos.
+## Evidence
 
-## Conceitos praticados
+The visual evidence requested for the course is included in the PDF for Classes 01–02.
 
-* Integridade de arquivos
-* Funções de Hash
-* MD5
-* Verificação de integridade
-* Comparação de valores hash
-* Linux
-* Terminal
-* `md5sum`
-* `rm`
-* `ls`
+The relevant screenshot shows the execution of the `md5sum` commands and the resulting hash values for the files used in the activity.
 
-## Evidência
+[View Evidence — Classes 01–02](../evidencias.pdf)
 
-A evidência visual solicitada pelo curso está disponível no PDF de evidências da Aula 01–02.
+---
 
-O print corresponde à execução dos comandos `md5sum` e apresenta os valores de hash calculados para os arquivos utilizados na atividade.
-
-[Ver evidências — Aula 01–02](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-01/aula-01-02/evidencias.pdf)
+[Back to Classes 01–02](../) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
