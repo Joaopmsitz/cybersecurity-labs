@@ -1,50 +1,62 @@
-# Hackers do Bem — Cybersecurity Labs
+# Hackers do Bem — Cybersecurity Training
 
-Documentação da minha jornada prática no programa Hackers do Bem, com atividades, laboratórios, ferramentas e evidências produzidos durante a formação em cibersegurança.
+Documentation of my practical learning journey through the Hackers do Bem cybersecurity training program, including hands-on activities, laboratory exercises, tools, and technical findings.
 
-O objetivo desta seção é registrar o que foi praticado e aprendido, incluindo procedimentos, comandos, resultados observados e conceitos de segurança relacionados.
+This section records the skills practiced, procedures performed, results observed, and security concepts explored throughout the training.
 
-## Minha jornada
+## Learning Progress
 
-| Etapa | Status |
-|---|---|
-| Nivelamento | Concluído |
-| Básico | Concluído |
-| Fundamental | Concluído |
-| Especialização — Resposta a Incidentes e Forense | Concluída |
-| Residência Tecnológica | Próxima etapa |
+| Program Stage | Status |
+| --- | --- |
+| Leveling (Nivelamento) | Completed |
+| Basic (Básico) | Completed |
+| Fundamental | Completed |
+| Specialized — Incident Response and Digital Forensics | Completed |
+| Technological Residency (Residência Tecnológica) | Next Step |
 
-**Status registrado neste README:** Especialização concluída; Residência Tecnológica como próxima etapa.
+## Training Tracks
 
-## Conteúdo
+### [Fundamental](./fundamental/)
 
-### [Fundamental](./fundamental/README.md)
+Twelve modules covering topics such as hashing and integrity, malware, reconnaissance, security testing, authentication, Active Directory, automation, web security, backups, cryptography, digital certificates, hardening, networking, logs, and basic digital forensics.
 
-Doze módulos com atividades sobre integridade e hashing, malware, reconhecimento, testes em laboratório, autenticação, Active Directory, automação, segurança web, backup, criptografia, certificados digitais, hardening, redes, logs e forense básica.
+### [Specialization — Incident Response and Digital Forensics](./especializacao-resposta-incidentes-forense/)
 
-### [Especialização — Resposta a Incidentes e Forense](./especializacao-resposta-incidentes-forense/)
+Practical activities focused on incident identification, investigation, digital evidence analysis, and technical reporting.
 
-Atividades voltadas à identificação, análise e documentação de incidentes e evidências digitais.
+## Tools and Technologies
 
-## Ferramentas e tecnologias
+The documented activities cover tools and technologies such as:
 
-As atividades documentadas incluem temas e ferramentas como Kali Linux, Windows Server, Wireshark, tcpdump, Nmap, Burp Suite, OpenSSL, Suricata, ClamAV, Python, PowerShell, Active Directory, iptables e OpenVPN. Consulte cada atividade para confirmar o que foi efetivamente utilizado e em qual contexto.
+- **Network analysis:** Wireshark, tcpdump, Nmap
+- **Web security:** Burp Suite
+- **Cryptography and certificates:** OpenSSL
+- **Detection and monitoring:** Suricata, ClamAV
+- **Automation and scripting:** Python, PowerShell
+- **Systems and infrastructure:** Kali Linux, Windows Server, Active Directory
+- **Network security:** iptables, OpenVPN
 
-## Como as atividades são documentadas
+Refer to each activity's documentation for the tools actually used and the context in which they were applied.
 
-Quando aplicável, cada registro apresenta:
+## Documentation Standards
 
-- Objetivo e contexto da atividade.
-- Ambiente e ferramentas utilizadas.
-- Procedimento e comandos executados.
-- Resultado observado e interpretação.
-- Conceitos de segurança relacionados.
-- Evidências da execução.
+Where applicable, each activity includes:
 
-As evidências compartilhadas devem ser adequadas à publicação pública e não conter dados pessoais, credenciais ou materiais que o programa não autorize divulgar.
+- Objective and technical context
+- Lab environment and tools
+- Procedures and commands performed
+- Observed results and technical interpretation
+- Relevant cybersecurity concepts
+- Supporting evidence
 
-## Sobre o programa
+All published evidence should be reviewed to ensure that it contains no personal data, credentials, or materials that the program does not authorize for public distribution.
 
-O Hackers do Bem é uma iniciativa de formação em cibersegurança. Esta seção documenta minha experiência de aprendizagem no programa; ela não representa uma publicação oficial do programa.
+## About the Program
 
-[Voltar ao portfólio principal](../README.md)
+Hackers do Bem is a Brazilian cybersecurity training initiative. This repository documents my personal learning experience and practical work; it is not an official publication of the program.
+
+For official information, visit the [Hackers do Bem website](https://hackersdobem.org.br/).
+
+---
+
+[Back to Cybersecurity Portfolio](../README.md)
