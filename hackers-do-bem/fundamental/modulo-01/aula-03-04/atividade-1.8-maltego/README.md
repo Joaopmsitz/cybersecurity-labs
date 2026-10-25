@@ -1,130 +1,142 @@
-# Atividade 1.8 — Explorando a ferramenta Maltego no Kali Linux
+# Activity 1.8 — Exploring Maltego on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 01  
+> **Class:** 03–04  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Conhecer a ferramenta **Maltego** e sua utilização para atividades de OSINT e reconhecimento de informações públicas.
+## Objective
 
-A atividade consistiu em realizar a configuração inicial da ferramenta, autenticar uma conta Maltego e explorar as fontes de dados e recursos disponíveis no **Maltego Data Hub**.
+Become familiar with **Maltego** and its use in Open-Source Intelligence (OSINT) and public-information reconnaissance.
 
-## Ambiente
+The activity involved completing the initial configuration of the application, authenticating a Maltego account, and exploring the data sources and resources available through the **Maltego Data Hub**.
 
-* Kali Linux
-* Terminal
-* Maltego
-* Firefox
-* Maltego Data Hub
+## Environment
 
-## Procedimento
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Tool:** Maltego
+- **Browser:** Firefox
+- **Feature explored:** Maltego Data Hub
 
-### 1. Criação da conta
+## Procedure
 
-Antes de iniciar a ferramenta no Kali Linux, foi criada uma conta gratuita no Maltego utilizando o navegador do computador pessoal.
+### 1. Create an Account
 
-A conta foi utilizada posteriormente para realizar a ativação da aplicação.
+Before launching Maltego on Kali Linux, a free account was created using the browser on the personal computer.
 
-### 2. Inicialização do Maltego
+The account was subsequently used to activate the application.
 
-No Kali Linux, a ferramenta foi iniciada pelo Terminal com:
+### 2. Launch Maltego
 
-```bash id="e8q3zr"
+Maltego was started from the terminal using:
+
+```bash
 maltego
 ```
 
-Após a inicialização, foi apresentada a tela de configuração inicial do programa.
+The application's initial setup screen appeared after launch.
 
-### 3. Seleção do método de ativação
+### 3. Select the Activation Method
 
-Na tela **Welcome to Maltego**, foi selecionada a opção:
+On the **Welcome to Maltego** screen, the following option was selected:
 
 ```text
 MALTEGO ID
 ```
 
-Em seguida, foi escolhido:
+The default online activation method was then chosen:
 
 ```text
 Online Activation (Default)
 ```
 
-### 4. Aceite da configuração
+### 4. Accept the Configuration
 
-Na janela **Configure Maltego**, foi selecionada a opção de aceite para prosseguir com a configuração.
+On the **Configure Maltego** screen, the acceptance option was selected to proceed with the configuration.
 
-### 5. Autenticação pelo navegador
+### 5. Authenticate Through the Browser
 
-Na etapa de autenticação, foi selecionada a opção:
+During the authentication step, the following option was selected:
 
 ```text
 Browser Login
 ```
 
-O Firefox foi aberto automaticamente e as credenciais da conta criada anteriormente foram utilizadas para realizar o login.
+Firefox opened automatically, and the credentials for the previously created account were used to sign in.
 
-Após a autenticação, o navegador apresentou a confirmação:
+After successful authentication, the browser displayed the confirmation:
 
 ```text
 Authentication Complete
 ```
 
-### 6. Finalização da configuração
+### 6. Complete the Initial Setup
 
-Após retornar ao Maltego, foi apresentada a mensagem:
+After returning to Maltego, the following confirmation message was displayed:
 
 ```text
 Have fun using Maltego
 ```
 
-As etapas de configuração foram avançadas até a seção relacionada aos termos das fontes de dados.
+The remaining setup steps were completed, including the section related to data source terms.
 
-Foi marcada a opção de aceite dos termos e a configuração foi concluída através do botão:
+The applicable terms were accepted, and the configuration was finalized using:
 
 ```text
 Finish
 ```
 
-Durante a inicialização também foram fechadas as mensagens introdutórias e o aviso relacionado à alocação de memória.
+Introductory messages and the memory allocation notification displayed during startup were also dismissed.
 
-### 7. Acesso ao Data Hub
+### 7. Explore the Data Hub
 
-Com o Maltego aberto, foi acessada a área:
+With Maltego open, the following interface area was accessed:
 
 ```text
 Transforms → Maltego Data Hub
 ```
 
-Nessa área foram exploradas as aplicações e fontes de dados disponíveis para utilização em atividades de OSINT.
+The available applications, integrations, and data sources were explored to understand the resources that can support OSINT activities.
 
-Essa etapa foi utilizada como evidência da atividade.
+This step was used as the primary evidence for the activity.
 
-## Comandos utilizados
+## Commands Used
 
-O único comando utilizado no Terminal para iniciar a ferramenta foi:
+The only terminal command used to launch the application was:
 
-```bash id="e3h36v"
+```bash
 maltego
 ```
 
-As demais etapas foram realizadas através da interface gráfica do Maltego e do navegador.
+The remaining steps were performed through the Maltego graphical interface and the web browser.
 
-## Resultado
+## Result
 
-Foi concluída a configuração inicial do Maltego e realizada a autenticação da conta.
+The initial Maltego configuration was completed, and the account was successfully authenticated.
 
-Também foi possível acessar o **Maltego Data Hub** e visualizar as fontes de dados e aplicações disponíveis para atividades de OSINT.
+The Maltego Data Hub was also accessed, allowing the available applications, integrations, and data sources for OSINT activities to be explored.
 
-## Conceitos praticados
+## Concepts Practiced
 
-* OSINT
-* Reconhecimento passivo
-* Maltego
-* Maltego Data Hub
-* Fontes de dados
-* Engenharia social
-* Coleta de informações públicas
-* Reconhecimento de infraestrutura
+- Open-Source Intelligence (OSINT)
+- Passive reconnaissance concepts
+- Maltego configuration and account authentication
+- Maltego Data Hub
+- Data sources and integrations
+- Public-information gathering
+- Infrastructure reconnaissance
+- OSINT tooling and workflow familiarization
 
-## Evidência
+## Evidence
 
-A execução da atividade foi registrada no PDF de evidências da Aula 03–04.
+The activity evidence is included in the PDF for Classes 03–04.
 
-[Ver evidências — Aula 03–04](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-01/aula-03-04/evidencias.pdf)
+The relevant screenshot documents the Maltego Data Hub and the available resources explored during the activity.
+
+[View Evidence — Classes 03–04](../evidencias.pdf)
+
+---
+
+[Back to Classes 03–04](../) · [Back to Module 01](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
