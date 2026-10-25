@@ -1,32 +1,36 @@
-# Atividade 3.9 — Enumeração DNS com NSLookup
+# Activity 3.09 — DNS Enumeration with NSLookup
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 03  
+> **Class:** 11–12  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **NSLookup** para realizar consultas DNS e identificar diferentes tipos de registros de um domínio, incluindo endereços IP, servidores DNS, servidores de e-mail e registros TXT.
+## Objective
 
-A atividade permite observar a diferença entre consultas diretas e consultas realizadas no modo interativo da ferramenta, além de compreender como os registros DNS podem fornecer informações sobre a infraestrutura de um domínio.
+Use NSLookup to perform DNS queries and identify different types of records associated with a domain, including IP addresses, DNS servers, mail servers, and TXT records.
 
----
+The activity demonstrates the differences between direct queries and queries performed in the tool's interactive mode, while exploring how DNS records can reveal information about a domain's infrastructure.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramenta:** `nslookup`
-* **Domínio analisado:** `grancursosonline.com.br`
-* **Servidor DNS utilizado:** `192.168.98.2`
+- **Operating system:** Kali Linux
+- **Tool:** `nslookup`
+- **Domain analyzed:** `grancursosonline.com.br`
+- **DNS server:** `192.168.98.2`
 
----
+## Procedure
 
-## 1. Consulta inicial do domínio
+### 1. Perform an Initial Domain Query
 
-Primeiramente, foi realizada uma consulta direta utilizando o `nslookup`:
+A direct DNS query was performed using NSLookup:
 
 ```bash
 sudo -i
 nslookup grancursosonline.com.br
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 Server: 192.168.98.2
@@ -43,33 +47,31 @@ Name:   grancursosonline.com.br
 Address: 2606:4700::6812:64e1
 ```
 
-A consulta retornou endereços **IPv4 (A)** e **IPv6 (AAAA)** associados ao domínio.
+The query returned IPv4 addresses (A records) and IPv6 addresses (AAAA records) associated with the domain.
 
-A indicação `Non-authoritative answer` significa que a resposta foi fornecida pelo servidor DNS consultado, e não diretamente por um servidor autoritativo do domínio.
+The message `Non-authoritative answer` indicates that the response was provided by the DNS resolver queried, rather than directly by an authoritative name server for the domain.
 
----
+### 2. Query DNS Name Servers in Interactive Mode
 
-## 2. Consulta interativa de servidores DNS
-
-O `nslookup` também pode ser utilizado em modo interativo:
+NSLookup can also operate in interactive mode:
 
 ```bash
 nslookup
 ```
 
-Dentro do modo interativo, foi definido o tipo de registro como `NS`:
+Within the interactive session, the record type was set to NS:
 
 ```text
 set type=ns
 ```
 
-Em seguida, foi consultado o domínio:
+The domain was then queried:
 
 ```text
 grancursosonline.com.br
 ```
 
-Saída:
+**Observed output:**
 
 ```text
 Server: 192.168.98.2
@@ -83,30 +85,30 @@ Authoritative answers can be found from:
 >
 ```
 
-Os registros **NS (Name Server)** identificam os servidores responsáveis pelo serviço DNS autoritativo do domínio.
+NS records identify the name servers associated with the domain's authoritative DNS service.
 
-Nesse resultado, foram identificados:
+The following servers were returned:
 
-* `dan.ns.cloudflare.com`
-* `rita.ns.cloudflare.com`
+- `dan.ns.cloudflare.com`
+- `rita.ns.cloudflare.com`
 
----
+This query demonstrates how NSLookup's interactive mode can be used to inspect name server records.
 
-## 3. Consulta dos servidores de e-mail
+### 3. Query Mail Servers
 
-Ainda no modo interativo, foi alterado o tipo de consulta para `MX`:
+While still in interactive mode, the record type was changed to MX:
 
 ```text
 set type=mx
 ```
 
-Depois:
+The domain was queried again:
 
 ```text
 grancursosonline.com.br
 ```
 
-Saída:
+**Observed output:**
 
 ```text
 Server: 192.168.98.2
@@ -120,37 +122,35 @@ grancursosonline.com.br mail exchanger = 5 alt1.aspmx.l.google.com.
 grancursosonline.com.br mail exchanger = 5 alt2.aspmx.l.google.com.
 ```
 
-Os registros **MX (Mail Exchange)** indicam quais servidores recebem e-mails destinados ao domínio.
+MX (Mail Exchange) records identify the servers responsible for receiving email addressed to a domain.
 
-A preferência é representada pelo primeiro número de cada registro. Valores menores possuem maior prioridade.
+The first number in each record represents the server's preference value. Lower values have higher preference.
 
-| Prioridade | Servidor                  |
-| ---------: | ------------------------- |
-|          1 | `aspmx.l.google.com`      |
-|          5 | `alt1.aspmx.l.google.com` |
-|          5 | `alt2.aspmx.l.google.com` |
-|         10 | `alt3.aspmx.l.google.com` |
-|         10 | `alt4.aspmx.l.google.com` |
+| Preference | Mail server |
+|---:|---|
+| 1 | `aspmx.l.google.com` |
+| 5 | `alt1.aspmx.l.google.com` |
+| 5 | `alt2.aspmx.l.google.com` |
+| 10 | `alt3.aspmx.l.google.com` |
+| 10 | `alt4.aspmx.l.google.com` |
 
-Os resultados mostram a utilização de infraestrutura de e-mail do Google para o domínio consultado.
+The results show that the queried domain published MX records associated with Google's mail infrastructure at the time of the laboratory exercise.
 
-Para sair do modo interativo:
+To exit the interactive session, the following keyboard shortcut was used:
 
 ```text
 Ctrl+C
 ```
 
----
+### 4. Query TXT Records
 
-## 4. Consulta de registros TXT
-
-Por fim, foi realizada uma consulta direta aos registros **TXT**:
+Finally, a direct query for TXT records was performed:
 
 ```bash
 nslookup -type=txt grancursosonline.com.br
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 ;; Truncated, retrying in TCP mode.
@@ -173,73 +173,129 @@ grancursosonline.com.br text = "google-site-verification=JoSCARaYBckFvemdRfu8wT2
 grancursosonline.com.br text = "google-site-verification=atopuSr7BiVqBseFzJr4OII1FZtMEoSeA09MYZE7sRo"
 ```
 
-Os registros TXT podem ser utilizados para diferentes finalidades administrativas e de segurança.
+TXT records can serve several administrative and security purposes.
 
-No resultado, é possível identificar:
+The observed output included the following types of information:
 
-* **Verificações de domínio:** registros utilizados por serviços como Google, Atlassian, Microsoft, Miro e OneTrust.
-* **SPF:** o registro iniciado por `v=spf1` define uma política para identificar servidores autorizados a enviar e-mails em nome do domínio.
-* **Múltiplos serviços:** a existência de vários registros de verificação demonstra a integração do domínio com diferentes plataformas.
+**Domain verification records**
 
-A mensagem:
+Records with names such as `google-site-verification`, `atlassian-domain-verification`, `MS`, `miro-verification`, and `onetrust-domain-verification` are associated with domain verification processes for different platforms.
+
+Their presence can indicate that domain ownership or control has been verified for particular services. However, the records alone do not establish which services are currently active or in use.
+
+**SPF record**
+
+The record beginning with `v=spf1` defines a Sender Policy Framework (SPF) policy used to identify mail servers authorized to send email on behalf of the domain.
+
+The observed record references Amazon SES, Google, Zendesk, HubSpot, Salesforce, and specific IPv4 addresses. These entries indicate the sources permitted by the published SPF policy.
+
+The `~all` mechanism indicates a soft-fail policy for sources not otherwise authorized by the SPF record. It does not, by itself, determine how every receiving mail system will handle a message.
+
+**Multiple service integrations**
+
+The presence of multiple verification records demonstrates how public DNS can contain information related to different service providers and administrative integrations.
+
+#### Interpreting the TCP Retry Message
+
+The output began with:
 
 ```text
 ;; Truncated, retrying in TCP mode.
 ```
 
-indica que a resposta DNS inicialmente excedeu o limite de uma consulta UDP e o `nslookup` repetiu a consulta utilizando TCP para obter a resposta completa.
+This indicates that the DNS response received initially was truncated and that NSLookup retried the query over TCP to obtain the complete response.
 
----
+DNS commonly uses UDP for queries, but TCP can be used when a response is too large to fit in the available UDP response size or when other DNS requirements call for TCP.
 
-## Conceitos praticados
+## Commands Used
+
+The following commands and interactive instructions were used:
+
+```bash
+sudo -i
+nslookup grancursosonline.com.br
+nslookup
+```
+
+Within the interactive NSLookup session:
+
+```text
+set type=ns
+grancursosonline.com.br
+
+set type=mx
+grancursosonline.com.br
+
+Ctrl+C
+```
+
+The TXT records were then queried directly:
+
+```bash
+nslookup -type=txt grancursosonline.com.br
+```
+
+## Concepts Practiced
 
 ### NSLookup
 
-Ferramenta utilizada para consultar servidores DNS e obter informações sobre registros associados a domínios.
+A command-line utility used to query DNS servers and retrieve information about records associated with domain names.
 
-### A
+### A Records
 
-Registro que associa um domínio a um endereço **IPv4**.
+Associate a domain name with an IPv4 address.
 
-### AAAA
+### AAAA Records
 
-Registro utilizado para associar um domínio a um endereço **IPv6**.
+Associate a domain name with an IPv6 address.
 
-### NS
+### NS Records
 
-Identifica os servidores DNS autoritativos responsáveis pelo domínio.
+Identify name servers associated with a domain's authoritative DNS configuration.
 
-### MX
+### MX Records
 
-Identifica os servidores responsáveis pelo recebimento de e-mails do domínio. O número associado ao registro representa sua prioridade.
+Identify mail servers responsible for receiving email for a domain. The associated preference values influence the order in which mail servers are selected.
 
-### TXT
+### TXT Records
 
-Permite armazenar informações textuais no DNS. É utilizado, entre outras finalidades, para verificações de domínio e políticas de autenticação de e-mail, como SPF.
+Allow arbitrary text data to be published in DNS. Common uses include domain verification and email authentication policies such as SPF.
 
-### Non-authoritative answer
+### Non-Authoritative Answer
 
-Indica que a resposta foi obtida através do servidor DNS consultado, em vez de ser retornada diretamente por um servidor autoritativo.
+Indicates that the response was supplied by the DNS resolver queried, rather than directly by an authoritative name server. A recursive resolver can return cached data obtained through its DNS resolution process.
+
+### Interactive and Direct Queries
+
+NSLookup supports both direct command-line queries and an interactive session in which the record type can be changed before querying different records.
+
+### DNS Enumeration
+
+DNS enumeration collects publicly available information about a domain's addressing, name servers, email infrastructure, and service integrations. This information can support reconnaissance and security assessments.
+
+## Results
+
+The activity demonstrated how NSLookup can be used for DNS enumeration to identify:
+
+- IPv4 and IPv6 addresses.
+- Name servers.
+- Mail servers.
+- TXT records.
+- Services and platforms referenced in domain verification records.
+- Information related to SPF email authentication policies.
+
+The exercise reinforced the role of DNS queries in reconnaissance and infrastructure analysis without directly exploiting the services associated with the domain.
+
+The results represent the records returned by the DNS resolver during the recorded laboratory session. DNS configurations can change, so the observed values should not be treated as a current inventory.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 03, Classes 11–12.
+
+**Recorded screenshot:** Step 5 of the activity, as required by the laboratory instructions, showing the TXT record query performed with NSLookup.
+
+[View Evidence — Classes 11–12](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-A atividade demonstrou como o `nslookup` pode ser utilizado para realizar **enumeração DNS passiva**, permitindo identificar:
-
-* Endereços IPv4 e IPv6;
-* Servidores DNS;
-* Servidores de e-mail;
-* Registros TXT;
-* Serviços e plataformas associados ao domínio;
-* Informações relacionadas à política SPF.
-
-A consulta de registros DNS é uma etapa importante de reconhecimento, pois permite compreender parte da infraestrutura pública associada a um domínio sem realizar exploração do alvo.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 3 / Aulas 11 e 12**](../evidencias.pdf)
-
-**Print registrado:** etapa 5 da atividade, conforme solicitado pelo roteiro, mostrando a consulta dos registros TXT com `nslookup`.
+[Back to Classes 11–12](../) · [Back to Module 03](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
