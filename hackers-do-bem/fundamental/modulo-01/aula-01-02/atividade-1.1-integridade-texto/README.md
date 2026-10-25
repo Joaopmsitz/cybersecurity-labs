@@ -1,165 +1,154 @@
-# Atividade 1.1 — Comparando integridade de arquivos de texto
+# Activity 1.1 — Comparing Text Files to Detect Changes
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 01  
+> **Class:** 01–02  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Verificar a integridade de arquivos de texto por meio da comparação entre um arquivo original e uma cópia, identificando alterações realizadas após a cópia.
+## Objective
 
-A atividade utiliza o comando `diff` do Linux para verificar se existem diferenças entre dois arquivos de texto.
+Verify whether a text file has changed by comparing an original file with a copy. This activity uses the Linux `diff` command to identify differences after modifying the copied file.
 
-## Ambiente
+## Environment
 
-* Kali Linux
-* Terminal
-* Usuário `aluno`
-* Diretório de trabalho: `/home/aluno/Documentos`
-* Ferramentas utilizadas: `diff`, `cp`, `ls` e `nano`
+- **Operating system:** Kali Linux
+- **User account:** `aluno`, with a superuser shell used during the activity
+- **Working directory:** `/home/aluno/Documentos`
+- **Tools:** `diff`, `cp`, `ls`, and `nano`
 
-## Procedimento
+## Procedure
 
-### 1. Criando o arquivo de texto
+### 1. Create the Original Text File
 
-Foi criado um arquivo chamado `Texto.txt` utilizando o editor de texto do Kali Linux.
+A text file named `Texto.txt` was created using the Kali Linux text editor.
 
-O conteúdo utilizado foi:
+The file contained the following text:
 
 ```text
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.
 ```
 
-O arquivo foi salvo no diretório:
+The file was saved in:
 
-```text
+```bash
 /home/aluno/Documentos/
 ```
 
-### 2. Acessando o terminal como superusuário
+### 2. Open a Superuser Shell
 
-Foi aberto o Terminal Emulator e executado o seguinte comando:
+The terminal was opened and the following command was executed:
 
 ```bash
 sudo -i
 ```
 
-Após a autenticação, o terminal passou a utilizar o usuário `root`.
+After authentication, the terminal session switched to the `root` user.
 
-### 3. Acessando o diretório dos arquivos
+**Note:** Elevated privileges are generally unnecessary for comparing files in a directory the current user can access. Following the principle of least privilege is preferable during routine file operations.
 
-Foi acessado o diretório onde o arquivo `Texto.txt` foi salvo:
+### 3. Navigate to the Working Directory
+
+The directory containing the original file was accessed:
 
 ```bash
 cd /home/aluno/Documentos/
 ```
 
-Em seguida, foi utilizado o comando `ls` para verificar os arquivos presentes:
+The `ls` command was used to list the files:
 
 ```bash
 ls
 ```
 
-O arquivo `Texto.txt` foi identificado no diretório.
+The file `Texto.txt` was confirmed to be present.
 
-### 4. Criando uma cópia do arquivo
+### 4. Create a Copy of the File
 
-Foi criada uma cópia do arquivo original utilizando o comando `cp`:
+The original file was copied using `cp`:
 
 ```bash
 cp Texto.txt Texto_copia.txt
 ```
 
-Depois, o comando `ls` foi utilizado novamente para confirmar a criação da cópia:
+The directory contents were checked again:
 
 ```bash
 ls
 ```
 
-Os dois arquivos passaram a estar presentes no diretório:
+Both files were present:
 
 ```text
 Texto.txt
 Texto_copia.txt
 ```
 
-### 5. Comparando os arquivos antes da alteração
+### 5. Compare the Files Before Modification
 
-Com os dois arquivos ainda idênticos, foi executado:
+The `diff` command was executed:
 
 ```bash
 diff Texto.txt Texto_copia.txt
 ```
 
-O comando não apresentou nenhuma saída.
+No output was displayed, indicating that the two files had identical contents at the time of comparison.
 
-Isso indica que não foram encontradas diferenças entre os arquivos naquele momento.
+### 6. Modify the Copy
 
-### 6. Modificando a cópia
-
-Para simular uma alteração no arquivo, a cópia foi aberta utilizando o editor `nano`:
+The copied file was opened in the `nano` editor:
 
 ```bash
 nano Texto_copia.txt
 ```
 
-A primeira letra `L` do texto foi alterada para `P`.
+The first letter `L` in the text was changed to `P`.
 
-O início do conteúdo original:
+Original text:
 
 ```text
 Lorem ipsum dolor sit amet...
 ```
 
-passou a ser:
+Modified text:
 
 ```text
 Porem ipsum dolor sit amet...
 ```
 
-Após a alteração, o arquivo foi salvo e o editor foi fechado.
+The modified file was saved and the editor was closed.
 
-### 7. Comparando novamente os arquivos
+### 7. Compare the Files Again
 
-Após a modificação, o comando `diff` foi executado novamente:
+The comparison was repeated:
 
 ```bash
 diff Texto.txt Texto_copia.txt
 ```
 
-Dessa vez, o comando identificou a diferença existente entre os arquivos.
+This time, `diff` reported a difference in the first line. The relevant output was:
 
-A saída apresentada foi semelhante a:
-
-```text
+```diff
 1c1
-< Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.
+< Lorem ipsum dolor sit amet...
 ---
-> Porem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eget ligula eu lectus lobortis condimentum. Aliquam nonummy auctor massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nulla at risus. Quisque purus magna, auctor et, sagittis ac, posuere eu, lectus. Nam mattis, felis ut adipiscing.
+> Porem ipsum dolor sit amet...
 ```
 
-A saída pode apresentar pequenas diferenças dependendo do conteúdo utilizado e da versão do sistema.
+The output above is abbreviated to highlight the change; the actual output included the complete line.
 
-## Interpretação do resultado
+## Interpreting the Results
 
-O comando `diff` compara o conteúdo dos arquivos e informa as diferenças encontradas.
+The `diff` command compares file contents and displays the differences it finds.
 
-* `1c1` indica uma alteração (`c`, de *change*) envolvendo a primeira linha dos arquivos.
-* `<` identifica o conteúdo presente no arquivo original `Texto.txt`.
-* `---` separa o conteúdo original do conteúdo modificado.
-* `>` identifica o conteúdo presente no arquivo `Texto_copia.txt`.
+- `1c1` indicates that line 1 in the first file differs from line 1 in the second file. The letter `c` means *change*.
+- `<` identifies the line from the original file, `Texto.txt`.
+- `---` separates the original content from the modified content.
+- `>` identifies the line from the copied file, `Texto_copia.txt`.
 
-Nesse caso, a diferença ocorreu na primeira linha, onde:
+The comparison identified the change from `Lorem` to `Porem`, demonstrating that a modification made after copying a file can be detected through direct content comparison.
 
-```text
-Lorem
-```
-
-foi alterado para:
-
-```text
-Porem
-```
-
-A comparação demonstrou, portanto, que uma alteração realizada depois da criação da cópia pode ser identificada utilizando o comando `diff`.
-
-## Comandos utilizados
+## Commands Used
 
 ```bash
 sudo -i
@@ -172,30 +161,31 @@ nano Texto_copia.txt
 diff Texto.txt Texto_copia.txt
 ```
 
-## Resultado
+## Result
 
-Foi possível verificar a integridade de um arquivo de texto comparando-o com uma cópia.
+The activity demonstrated how to compare a text file with its copy and identify content changes.
 
-Na primeira comparação, os arquivos eram idênticos e o `diff` não apresentou saída. Após a alteração do arquivo `Texto_copia.txt`, uma nova comparação identificou exatamente a linha modificada.
+The first comparison produced no output because the files were identical. After the copy was modified, the second comparison identified the changed line.
 
-## Conceitos praticados
+## Concepts Practiced
 
-* Integridade de arquivos
-* Comparação de arquivos
-* Identificação de alterações
-* Linux
-* Terminal
-* `diff`
-* `cp`
-* `ls`
-* `nano`
-* Manipulação de arquivos pela linha de comando
+- File integrity and change detection
+- Text file comparison
+- Linux command-line operations
+- File copying and editing
+- `diff`, `cp`, `ls`, and `nano`
+- Interpretation of command output
 
-## Evidência
+**Technical distinction:** `diff` identifies differences in file content. Cryptographic hashes, such as SHA-256, can provide a separate method for checking whether file contents have changed.
 
-A evidência visual solicitada pelo curso está disponível no PDF de evidências da Aula 01–02.
+## Evidence
 
-O print corresponde à execução do comando `diff` após a alteração do arquivo `Texto_copia.txt`, demonstrando a diferença encontrada entre o arquivo original e sua cópia.
+The visual evidence requested for the activity is included in the PDF for Classes 01–02.
 
-[Ver evidências — Aula 01–02](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-01/aula-01-02/evidencias.pdf)
+The relevant screenshot shows the `diff` command after `Texto_copia.txt` was modified, demonstrating the difference between the original file and its copy.
 
+[View Evidence — Classes 01–02](../evidencias.pdf)
+
+---
+
+[Back to Module 01](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
