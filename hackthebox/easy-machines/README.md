@@ -1,25 +1,23 @@
 # Hack The Box — Easy Machines
 
-Documentation of Easy-rated Hack The Box machines, focusing on enumeration, vulnerability analysis, exploitation, privilege escalation, and technical problem-solving.
+Documentation of completed Easy-rated Hack The Box machines, focusing on enumeration, vulnerability analysis, exploitation, and privilege escalation.
 
 ## Machines
 
-| Machine | Status |
-| --- | --- |
-| [Cap](./cap/) | Completed |
-| [Expressway](./expressway/) | Completed |
-| [Nibbles](./nibbles/) | Completed |
-| [TwoMillion](./two-million/) | Completed |
+| Machine | Operating System | Key Techniques | Status |
+| --- | --- | --- | --- |
+| [Cap](./cap/) | Linux | IDOR, PCAP analysis, credential exposure, Linux capabilities | Completed |
+| [Expressway](./expressway/) | Linux | IKE/IPsec enumeration, PSK cracking, sudo privilege escalation | Completed |
+| [Nibbles](./nibbles/) | Linux | Web exploitation, file upload, sudo misconfiguration | Completed |
+| [TwoMillion](./two-million/) | Linux | API authorization flaws, command injection, Linux privilege escalation | Completed |
 
 ## Skills Practiced
 
-- Service enumeration and reconnaissance
-- Vulnerability identification and analysis
-- Exploitation techniques
-- Linux and system privilege escalation
-- Troubleshooting and technical documentation
-
-Each machine directory contains its respective notes and documentation.
+- Network and service enumeration
+- Web application vulnerability analysis
+- Credential discovery and authentication analysis
+- Linux privilege escalation
+- Technical investigation and documentation
 
 ## Responsible Use
 
