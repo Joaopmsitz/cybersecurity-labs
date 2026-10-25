@@ -1,98 +1,101 @@
-# Atividade 2.6 — Explorando a criptografia de dados com Ccrypt no Kali Linux
+# Activity 2.06 — Exploring File Encryption with Ccrypt on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 02  
+> **Class:** 07–08  
+> **Environment:** Kali Linux virtual lab  
+> **Status:** Completed
 
-Explorar a ferramenta **Ccrypt** no Kali Linux para compreender, de forma prática, o processo de criptografia e descriptografia de um arquivo.
+## Objective
 
-A atividade teve como objetivo demonstrar como um arquivo de texto pode ser protegido por uma chave de criptografia, deixando seu conteúdo ilegível enquanto estiver cifrado, e posteriormente recuperado utilizando a chave correta.
+Explore the Ccrypt command-line utility on Kali Linux to understand the process of encrypting and decrypting a file.
 
-> **Aviso:** a atividade foi realizada exclusivamente para fins acadêmicos e em ambiente de laboratório. A senha utilizada foi criada somente para o exercício.
+The activity demonstrates how a text file can be protected using an encryption key, making its contents unreadable while encrypted, and subsequently recovered using the correct key.
 
-## Ambiente
+> **Safety notice:** This activity was performed exclusively for educational purposes in a laboratory environment. The password used was created specifically for the exercise.
 
-* Kali Linux
-* Terminal
-* Ccrypt
-* Nano
-* Sistema virtualizado de laboratório
+## Environment
 
-## Procedimento
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Tools:** Ccrypt and Nano
+- **Execution environment:** Virtualized laboratory
 
-### 1. Consulta sobre o Ccrypt
+## Procedure
 
-Antes de iniciar a prática no Kali Linux, foi consultado o site oficial do projeto Ccrypt para conhecer suas características e finalidade:
+### 1. Review Ccrypt
 
-```text
-https://ccrypt.sourceforge.net/
-```
+Before starting the hands-on exercise, the official Ccrypt project website was consulted to learn about the tool's purpose and functionality:
 
-O Ccrypt é uma ferramenta de linha de comando destinada à criptografia e descriptografia de arquivos e fluxos de dados.
+[Official Ccrypt Website](https://ccrypt.sourceforge.net/)
 
-### 2. Acesso ao modo administrador
+Ccrypt is a command-line utility designed to encrypt and decrypt files and data streams.
 
-O Terminal do Kali Linux foi aberto e o modo superusuário foi acessado utilizando:
+### 2. Open an Administrative Shell
+
+The Kali Linux terminal was opened, and a superuser shell was started using:
 
 ```bash
 sudo -i
 ```
 
-### 3. Acesso ao diretório de documentos
+### 3. Access the Documents Directory
 
-Em seguida, foi acessado o diretório `Documentos` do usuário:
+The user's Documents directory was accessed:
 
 ```bash
 cd /home/aluno/Documentos/
 ```
 
-O conteúdo do diretório foi verificado com:
+The contents of the directory were checked using:
 
 ```bash
 ls
 ```
 
-### 4. Criação do arquivo de texto
+### 4. Create the Text File
 
-Foi utilizado o editor de texto `nano` para criar o arquivo:
+The Nano text editor was used to create a file named `mensagem.txt`:
 
 ```bash
 nano mensagem.txt
 ```
 
-Dentro do arquivo foi inserida a mensagem:
+The following message was entered into the file:
 
 ```text
 Hackers do bem!
 ```
 
-O arquivo foi salvo utilizando `Ctrl + X`, seguido da confirmação solicitada pelo editor.
+The file was saved using `Ctrl + X`, followed by the confirmation requested by the editor.
 
-### 5. Verificação do arquivo criado
+### 5. Verify the Created File
 
-Após salvar o arquivo, o conteúdo do diretório foi novamente listado:
+After saving the file, the directory contents were listed again:
 
 ```bash
 ls
 ```
 
-A saída observada foi:
+The observed output was:
 
 ```text
 mensagem.txt
 ```
 
-A presença de `mensagem.txt` confirmou que o arquivo havia sido criado corretamente.
+The presence of `mensagem.txt` confirmed that the file had been created successfully.
 
-Nesse momento, o arquivo ainda estava em texto simples e seu conteúdo podia ser lido normalmente.
+At this stage, the file was still stored as plaintext, and its contents could be read normally.
 
-### 6. Consulta das opções do Ccrypt
+### 6. Review the Ccrypt Help Output
 
-Antes de realizar a criptografia, foram consultadas as opções disponíveis na ferramenta:
+Before encrypting the file, the available options were reviewed:
 
 ```bash
 ccrypt -h
 ```
 
-A saída apresentada foi:
+The following output was observed:
 
 ```text
 ccrypt 1.11. Secure encryption and decryption of files and streams.
@@ -125,7 +128,7 @@ Options:
     -s, --strictsuffix    refuse to encrypt files which already have suffix
     -F, --envvar2 var     as -E for second keyword (for keychange mode)
     -H, --key2 key        as -K for second keyword (for keychange mode)
-    -Q, --prompt2 prompt  as -P for second keyword
+    -Q, --prompt2 prompt  as -P for second keyword (for keychange mode)
     -t, --timid           prompt twice for encryption keys (default)
     -b, --brave           prompt only once for encryption keys
     -y, --keyref file     encryption key must match this encrypted file
@@ -136,157 +139,161 @@ Options:
     --                    end of options, filenames follow
 ```
 
-Entre as opções observadas, destacam-se:
+The following options were particularly relevant to the activity:
 
-| Opção | Função                                              |
-| ----- | --------------------------------------------------- |
-| `-e`  | Criptografar um arquivo                             |
-| `-d`  | Descriptografar um arquivo                          |
-| `-c`  | Descriptografar e exibir o conteúdo na saída padrão |
-| `-x`  | Alterar a chave de criptografia                     |
-| `-h`  | Exibir a ajuda da ferramenta                        |
-| `-V`  | Exibir informações da versão                        |
-| `-v`  | Exibir informações de progresso                     |
-| `-r`  | Processar diretórios recursivamente                 |
+| Option | Purpose |
+| --- | --- |
+| `-e` | Encrypt a file |
+| `-d` | Decrypt a file |
+| `-c` | Decrypt a file and display its contents on standard output |
+| `-x` | Change an encryption key |
+| `-h` | Display the help message |
+| `-V` | Display version information |
+| `-v` | Display progress information |
+| `-r` | Process directories recursively |
 
-### 7. Criptografia do arquivo
+The help output provided an overview of Ccrypt's supported operations and configuration options.
 
-Com o arquivo `mensagem.txt` criado, foi utilizado o parâmetro `-e` para realizar a criptografia:
+### 7. Encrypt the File
+
+With `mensagem.txt` created, the `-e` option was used to encrypt it:
 
 ```bash
 ccrypt -e mensagem.txt
 ```
 
-O Ccrypt solicitou a chave de criptografia:
+Ccrypt prompted for an encryption key:
 
 ```text
 Enter encryption key:
 Enter encryption key: (repeat)
 ```
 
-Foi utilizada uma senha criada especificamente para o laboratório.
+A password created specifically for the laboratory was entered.
 
-O parâmetro `-e` indica que a operação realizada é de **encryption**, ou seja, criptografia.
+The `-e` option specifies encryption. After the operation completed, Ccrypt replaced the plaintext file with an encrypted version using the default `.cpt` suffix.
 
-O arquivo especificado foi:
-
-```text
-mensagem.txt
-```
-
-Após a conclusão da operação, o arquivo original foi convertido para uma versão criptografada com a extensão `.cpt`.
-
-### 8. Verificação do arquivo criptografado
-
-Este foi o **print solicitado pela atividade**.
-
-O diretório foi listado novamente:
-
-```bash
-ls
-```
-
-A saída observada foi:
+The resulting filename was:
 
 ```text
 mensagem.txt.cpt
 ```
 
-Em seguida, foi utilizado `cat` para visualizar o conteúdo do arquivo cifrado:
+### 8. Verify the Encrypted File
+
+This was the screenshot requested by the activity.
+
+The directory contents were listed again:
+
+```bash
+ls
+```
+
+The observed output was:
+
+```text
+mensagem.txt.cpt
+```
+
+The `cat` command was then used to inspect the encrypted file directly:
 
 ```bash
 cat mensagem.txt.cpt
 ```
 
-O resultado apresentado foi semelhante a:
+The observed output was similar to:
 
 ```text
 Z�w�.����K��^������>�I6E9Y�i��8Z;mU�\�;X�
 ```
 
-O conteúdo deixou de apresentar a mensagem original em texto legível.
+The original message was no longer readable in the displayed output.
 
-Isso demonstra visualmente que o arquivo passou a armazenar dados cifrados.
+This demonstrated that the file contained encrypted data rather than the original plaintext message.
 
-> **Observação:** caracteres aparentemente aleatórios ou ilegíveis são esperados ao tentar visualizar diretamente um arquivo criptografado como se fosse um arquivo de texto comum.
+> **Note:** Unreadable or apparently random characters are expected when encrypted binary data is displayed directly as if it were a regular text file. Such output is not, by itself, a reliable way to validate encryption.
 
-### 9. Descriptografia do arquivo
+### 9. Decrypt the File
 
-Para recuperar o arquivo original, foi utilizado o parâmetro `-d`:
+To recover the original file, the `-d` option was used:
 
 ```bash
 ccrypt -d mensagem.txt.cpt
 ```
 
-A ferramenta solicitou novamente a chave:
+The tool requested the decryption key:
 
 ```text
 Enter decryption key:
 ```
 
-Foi informada a mesma chave utilizada anteriormente na criptografia.
+The same key used during encryption was entered.
 
-O parâmetro `-d` indica a operação de **decryption**, responsável por descriptografar o arquivo.
+The `-d` option specifies decryption, which reverses the encryption process when the correct key is provided.
 
-O arquivo utilizado como entrada foi:
+The input file was:
 
 ```text
 mensagem.txt.cpt
 ```
 
-Após a operação, o arquivo original `mensagem.txt` foi recuperado.
-
-### 10. Verificação da recuperação do arquivo
-
-O diretório foi listado novamente:
-
-```bash
-ls
-```
-
-A saída observada foi:
+After successful decryption, the original filename was restored:
 
 ```text
 mensagem.txt
 ```
 
-Em seguida, o conteúdo do arquivo foi visualizado:
+### 10. Verify the Recovered File
 
-```bash
-cat mensagem.txt
-```
-
-O resultado foi:
-
-```text
-Hackers do bem!
-```
-
-A mensagem original foi recuperada corretamente.
-
-Esse resultado confirma que o processo de descriptografia foi realizado com sucesso utilizando a chave correspondente.
-
-### 11. Remoção do arquivo
-
-Após concluir a demonstração, o arquivo de texto foi removido:
-
-```bash
-rm mensagem.txt
-```
-
-O diretório foi verificado novamente:
+The directory was listed again:
 
 ```bash
 ls
 ```
 
-O arquivo `mensagem.txt` não estava mais presente.
+The observed output was:
 
-O Terminal foi encerrado após a conclusão da atividade.
+```text
+mensagem.txt
+```
 
-## Comandos utilizados
+The file contents were then displayed:
 
-Os principais comandos executados durante a atividade foram:
+```bash
+cat mensagem.txt
+```
+
+The output was:
+
+```text
+Hackers do bem!
+```
+
+The original message was recovered successfully, demonstrating that the encrypted file could be decrypted using the corresponding key.
+
+### 11. Remove the Plaintext File
+
+After the demonstration, the plaintext file was removed:
+
+```bash
+rm mensagem.txt
+```
+
+The directory contents were checked again:
+
+```bash
+ls
+```
+
+The file `mensagem.txt` was no longer present.
+
+**Cleanup note:** This command removes the plaintext file only. It does not remove `mensagem.txt.cpt` if that encrypted file is still present. The encrypted copy should be handled separately if complete cleanup of the laboratory artifacts is required.
+
+The terminal was closed after completing the activity.
+
+## Commands Used
+
+The principal commands executed during the activity were:
 
 ```bash
 sudo -i
@@ -304,105 +311,107 @@ rm mensagem.txt
 ls
 ```
 
-## Fluxo da atividade
+## Activity Workflow
 
-O processo realizado pode ser representado da seguinte forma:
+The process can be summarized as follows:
 
 ```text
 mensagem.txt
-     │
-     │ ccrypt -e
-     ▼
+     |
+     | ccrypt -e
+     v
 mensagem.txt.cpt
-     │
-     │ conteúdo cifrado
-     ▼
-Dados ilegíveis
-     │
-     │ ccrypt -d
-     ▼
+     |
+     v
+Encrypted Data
+     |
+     | ccrypt -d
+     v
 mensagem.txt
-     │
-     ▼
+     |
+     v
 Hackers do bem!
 ```
 
-## Interpretação
+## Interpreting the Results
 
-A atividade demonstrou na prática o uso da criptografia para proteger dados armazenados em arquivos.
+The activity demonstrated the practical use of file encryption to protect stored data.
 
-Inicialmente, o arquivo continha:
+Initially, the file contained the plaintext message:
 
 ```text
 Hackers do bem!
 ```
 
-Após a utilização de:
+After the following command was executed:
 
 ```bash
 ccrypt -e mensagem.txt
 ```
 
-o arquivo passou a possuir a extensão `.cpt`:
+the file was converted to an encrypted version with the `.cpt` suffix:
 
 ```text
 mensagem.txt.cpt
 ```
 
-Ao tentar visualizar diretamente esse arquivo com `cat`, o conteúdo deixou de ser legível, demonstrando que os dados haviam sido transformados em uma representação cifrada.
+Attempting to display the encrypted file using `cat` produced unreadable output, demonstrating that its contents were no longer available as ordinary plaintext.
 
-Posteriormente, utilizando:
+The following command was then used to decrypt the file:
 
 ```bash
 ccrypt -d mensagem.txt.cpt
 ```
 
-e fornecendo a chave correta, o arquivo original foi recuperado e seu conteúdo voltou a ser:
+After the correct key was provided, the original file was recovered, and its contents were displayed as:
 
 ```text
 Hackers do bem!
 ```
 
-O experimento demonstra a importância da **confidencialidade dos dados**. A criptografia protege o conteúdo contra leitura direta por quem não possui a chave necessária para realizar a descriptografia.
+The experiment illustrated the role of encryption in protecting data confidentiality. Encryption transforms readable information into ciphertext that should remain inaccessible to someone who does not possess the appropriate key.
 
-Também foi possível observar a diferença entre o arquivo original e o arquivo cifrado através da extensão `.cpt`, utilizada pelo Ccrypt para identificar arquivos criptografados.
+It also demonstrated the difference between a plaintext file and its encrypted counterpart, identified by Ccrypt's default `.cpt` suffix.
 
-## Resultado
+## Result
 
-Foi possível:
+The activity demonstrated how to:
 
-* Consultar as funcionalidades do Ccrypt;
-* Criar um arquivo de texto no Kali Linux;
-* Inserir uma mensagem no arquivo;
-* Consultar as opções disponíveis com `ccrypt -h`;
-* Criptografar o arquivo utilizando `ccrypt -e`;
-* Observar a transformação de `mensagem.txt` em `mensagem.txt.cpt`;
-* Verificar que o conteúdo cifrado não era legível diretamente;
-* Descriptografar o arquivo utilizando `ccrypt -d`;
-* Recuperar o arquivo original;
-* Confirmar a recuperação da mensagem;
-* Remover o arquivo utilizado no laboratório.
+- Review Ccrypt's available functions and options.
+- Create a text file in Kali Linux.
+- Enter a plaintext message.
+- Inspect the command help output using `ccrypt -h`.
+- Encrypt a file using `ccrypt -e`.
+- Observe the conversion of `mensagem.txt` to `mensagem.txt.cpt`.
+- Confirm that the encrypted contents were not readable as ordinary text.
+- Decrypt the file using `ccrypt -d`.
+- Recover and verify the original message.
+- Remove the plaintext file after the demonstration.
 
-A atividade demonstrou, de forma prática, como a criptografia pode ser utilizada como **controle técnico de proteção da confidencialidade dos dados**.
+The activity provided a practical example of how file encryption can be used as a technical control to protect data confidentiality.
 
-## Conceitos praticados
+## Concepts Practiced
 
-* Criptografia
-* Descriptografia
-* Ccrypt
-* Confidencialidade
-* Dados em repouso
-* Chave de criptografia
-* Arquivos cifrados
-* Extensão `.cpt`
-* Linux
-* Linha de comando
-* Controle técnico de segurança
-* Proteção de dados
+- File encryption and decryption
+- Ccrypt
+- Data confidentiality
+- Data at rest
+- Encryption keys
+- Ciphertext
+- The `.cpt` file extension
+- Linux command-line operations
+- File handling and verification
+- Technical security controls
+- Data protection
 
-## Evidência
+## Evidence
 
-A execução da atividade foi registrada no PDF de evidências da Aula 05–06.
+The activity evidence is included in the PDF for Classes 07–08.
 
-[Ver evidências — Aula 05–06](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-02/aula-07-08/evidencias.pdf)
+The relevant screenshot documents the Ccrypt encryption process and the appearance of the encrypted file.
 
+[View Evidence — Classes 07–08](../evidencia.pdf)
+
+---
+
+[Back to Classes 07–08](../) · [Back to Module 02](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
