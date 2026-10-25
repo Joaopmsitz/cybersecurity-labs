@@ -4,18 +4,18 @@ Tier 1 builds on basic service enumeration and introduces fundamental exploitati
 
 ## Machines
 
-| Machine | Operating System | Main Focus |
-| --- | --- | --- |
-| [Appointment](./appointment/) | Linux | SQL injection and authentication bypass |
-| [Sequel](./sequel/) | Linux | MySQL/MariaDB enumeration and unauthenticated access |
-| [Crocodile](./crocrodile/) | Linux | Anonymous FTP, credential exposure, and web authentication |
-| [Responder](./responder/) | Windows | LLMNR/NBT-NS poisoning and NTLM hash capture |
-| [Three](./three/) | Linux | AWS S3 bucket misconfiguration and cloud storage |
-| [Ignition](./ignition/) | Linux | Web enumeration, virtual hosts, and weak credentials |
-| [Bike](./bike/) | Linux | Node.js and server-side template injection (SSTI) |
-| [Funnel](./funnel/) | Linux | Credential discovery, SSH tunneling, and port forwarding |
-| [Pennyworth](./pennyworth/) | Linux | Jenkins default credentials and Groovy code execution |
-| [Tactics](./tactics/) | Windows | SMB enumeration and insecure administrative access |
+| Machine | Operating System | Main Focus | Status |
+| --- | --- | --- | --- |
+| [Appointment](./appointment/) | Linux | SQL injection and authentication bypass | Completed |
+| [Sequel](./sequel/) | Linux | MariaDB enumeration and unauthenticated access | Completed |
+| [Crocodile](./crocrodile/) | Linux | Anonymous FTP, credential exposure, and web authentication | Completed |
+| [Responder](./responder/) | Windows | LLMNR/NBT-NS poisoning and NetNTLMv2 capture and cracking | Completed |
+| [Three](./three/) | Linux | S3 bucket misconfiguration and cloud storage | Completed |
+| [Ignition](./ignition/) | Linux | Web enumeration, virtual hosts, and weak credentials | Completed |
+| [Bike](./bike/) | Linux | Node.js and server-side template injection (SSTI) | Completed |
+| [Funnel](./funnel/) | Linux | Credential discovery, SSH tunneling, and port forwarding | Completed |
+| [Pennyworth](./pennyworth/) | Linux | Jenkins default credentials and Groovy code execution | Completed |
+| [Tactics](./tactics/) | Windows | SMB enumeration and insecure administrative access | Completed |
 
 ## Skills Practiced
 
@@ -23,10 +23,10 @@ Tier 1 builds on basic service enumeration and introduces fundamental exploitati
 - Web application testing and SQL injection
 - Identification of weak credentials and authentication misconfigurations
 - FTP, SMB, and database service enumeration
-- Credential exposure and NTLM hash analysis
-- Server-side template injection and remote code execution concepts
+- Credential exposure and NetNTLMv2 analysis
+- Server-Side Template Injection and remote command execution
 - SSH tunneling and port forwarding
-- Cloud storage permissions and AWS S3 enumeration
+- Cloud storage permissions and S3 enumeration
 - Security misconfiguration analysis and technical documentation
 
 ## Learning Objective
