@@ -6,17 +6,19 @@ Documented defensive investigation exercises focused on digital forensics, threa
 
 | Sherlock | Focus Area | Key Skills |
 | --- | --- | --- |
-| [Brutus](./Brutus.md) | DFIR | Linux authentication logs, SSH investigation, timeline reconstruction |
-| [PhishNet](./PhishNet.md) | Email Security | Email header analysis, phishing investigation, IOC extraction |
-| [PhantomRing](./PhantomRing.md) | Malware Analysis | Malware investigation, artifact analysis, IOC identification |
-| [FortySeven-1](./FortySeven-1.md) | Threat Intelligence | OSINT, MITRE ATT&CK, threat analysis |
+| [Brutus](./Brutus.md) | DFIR | Linux authentication logs, SSH brute-force investigation, timeline reconstruction |
+| [PhishNet](./PhishNet.md) | Email Security | Email header analysis, sender verification, attachment analysis, IOC extraction |
+| [PhantomRing](./PhantomRing.md) | Malware Analysis | Linux ELF static analysis, malware behavior analysis, IOC identification |
+| [FortySeven-1](./FortySeven-1.md) | Threat Intelligence | OSINT, APT profiling, intelligence correlation, MITRE ATT&CK |
+
+**Progress: 4 Sherlocks completed**
 
 ## Skills Practiced
 
 - Digital forensics and evidence analysis
 - Security log investigation and timeline reconstruction
 - Phishing and malicious artifact analysis
-- Indicators of Compromise (IOC) identification
+- Malware analysis and IOC identification
 - Threat intelligence and MITRE ATT&CK mapping
 - Technical reporting and investigation documentation
 
