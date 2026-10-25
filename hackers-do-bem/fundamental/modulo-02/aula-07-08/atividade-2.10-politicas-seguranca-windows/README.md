@@ -1,297 +1,341 @@
-# Atividade 2.10 — Políticas de Segurança Local no Windows Server 2022
+# Activity 2.10 — Exploring Local Security Policies in Windows Server 2022
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 02  
+> **Class:** 07–08  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Explorar as **Políticas de Segurança Local** do Windows Server 2022, identificando configurações relacionadas ao gerenciamento de contas, senhas, bloqueio de contas, auditoria, atribuição de direitos de usuário e opções de segurança.
+## Objective
 
-A atividade demonstra como essas políticas podem ser utilizadas para estabelecer controles de segurança e registrar determinadas ações realizadas no sistema.
+Explore the Local Security Policy settings in Windows Server 2022, identifying configurations related to account management, passwords, account lockout, auditing, user rights assignment, and security options.
 
-## Ambiente
+The activity demonstrates how these policies can establish security controls and record selected activities performed on the system.
 
-* Windows Server 2022
-* Local Security Policy
-* `secpol.msc`
-* Account Policies
-* Local Policies
-* Audit Policy
-* User Rights Assignment
-* Security Options
+## Environment
 
-## 1. Abrindo a Política de Segurança Local
+- Windows Server 2022
+- Local Security Policy
+- `secpol.msc`
+- Account Policies
+- Local Policies
+- Audit Policy
+- User Rights Assignment
+- Security Options
 
-No Windows Server 2022, foi realizada uma busca por:
+## Procedure
+
+### 1. Open Local Security Policy
+
+In Windows Server 2022, the following term was searched for:
 
 ```text
 secpol
 ```
 
-Em seguida, foi aberta a ferramenta:
+The following tool was then opened:
 
 ```text
 Local Security Policy
 ```
 
-A ferramenta permite visualizar e administrar diversas configurações de segurança do sistema operacional.
+This tool provides access to various security settings for the operating system.
 
-## 2. Account Policies
+### 2. Account Policies
 
-Dentro de **Local Security Policy**, foi acessado:
+Within Local Security Policy, the following category was opened:
 
 ```text
 Account Policies
 ```
 
-Essa categoria contém configurações relacionadas ao gerenciamento de contas e autenticação.
+This category contains settings related to account management and authentication.
 
-### Password Policy
+#### Password Policy
 
-Dentro de:
+Under the following path:
 
 ```text
 Account Policies → Password Policy
 ```
 
-foram observadas as seguintes políticas:
+The following policies were observed:
 
-* Enforce password history
-* Maximum password age
-* Minimum password age
-* Minimum password length
-* Password must meet complexity requirements
+- Enforce password history
+- Maximum password age
+- Minimum password age
+- Minimum password length
+- Password must meet complexity requirements
 
-Essas configurações permitem estabelecer requisitos para a criação e manutenção das senhas dos usuários.
+These settings establish requirements for creating and maintaining user passwords.
 
-### Enforce password history
+**Enforce password history**
 
-Define a quantidade de senhas anteriores que podem ser lembradas pelo sistema, dificultando a reutilização imediata de credenciais antigas.
+Defines how many previous passwords the system remembers, helping prevent users from immediately reusing older credentials.
 
-### Maximum password age
+**Maximum password age**
 
-Define por quanto tempo uma senha pode permanecer válida antes de precisar ser alterada.
+Defines how long a password may remain valid before it must be changed, according to the configured policy.
 
-### Minimum password age
+**Minimum password age**
 
-Determina o período mínimo durante o qual uma senha deve permanecer válida antes que possa ser alterada novamente.
+Defines the minimum period a password must remain unchanged before it can be changed again.
 
-### Minimum password length
+**Minimum password length**
 
-Define a quantidade mínima de caracteres exigida para uma senha.
+Defines the minimum number of characters required for a password.
 
-### Password must meet complexity requirements
+**Password must meet complexity requirements**
 
-Permite exigir que as senhas atendam aos requisitos de complexidade definidos pelo Windows.
+Controls whether passwords must satisfy the Windows password complexity requirements.
 
-## 3. Account Lockout Policy
+### 3. Account Lockout Policy
 
-Ainda dentro de:
-
-```text
-Account Policies
-```
-
-foi acessada a categoria:
+Within `Account Policies`, the following category was opened:
 
 ```text
 Account Lockout Policy
 ```
 
-Foram observadas as seguintes configurações:
+The following settings were observed:
 
-* Account lockout duration
-* Account lockout threshold
-* Reset account lockout counter after
+- Account lockout duration
+- Account lockout threshold
+- Reset account lockout counter after
 
-Essas políticas estão relacionadas ao bloqueio de contas após determinadas tentativas de autenticação malsucedidas.
+These policies control account lockout behavior after unsuccessful authentication attempts.
 
-### Account lockout threshold
+**Account lockout threshold**
 
-Define a quantidade de tentativas de logon inválidas que pode provocar o bloqueio da conta.
+Defines the number of failed logon attempts that can cause an account to be locked.
 
-Esse mecanismo pode ajudar a reduzir ataques baseados em tentativas repetidas de autenticação.
+This mechanism can help reduce attacks that rely on repeated authentication attempts.
 
-### Account lockout duration
+**Account lockout duration**
 
-Define por quanto tempo uma conta permanece bloqueada após atingir o limite configurado.
+Defines how long an account remains locked after reaching the configured threshold.
 
-### Reset account lockout counter after
+**Reset account lockout counter after**
 
-Define o período necessário para que o contador de tentativas inválidas seja reiniciado.
+Defines the period after which the counter of failed logon attempts is reset.
 
-## 4. Local Policies
+### 4. Local Policies
 
-Na sequência, foi acessada:
+Next, the following category was opened:
 
 ```text
 Local Policies
 ```
 
-Essa seção reúne diferentes controles relacionados à segurança do sistema local.
+This section contains several security controls related to the local system.
 
-Entre as categorias disponíveis está:
+One of the available categories is:
 
 ```text
 Audit Policy
 ```
 
-## 5. Audit Policy
+### 5. Audit Policy
 
-A política de auditoria permite determinar quais tipos de eventos de segurança devem ser registrados pelo Windows.
+Audit Policy settings determine which types of security events Windows should record.
 
-Durante a atividade foram observadas as seguintes categorias:
+The following categories were observed during the activity:
 
-* Audit account logon events
-* Audit account management
-* Audit directory service access
-* Audit logon events
-* Audit object access
-* Audit policy change
-* Audit privilege use
-* Audit process tracking
-* Audit system events
+- Audit account logon events
+- Audit account management
+- Audit directory service access
+- Audit logon events
+- Audit object access
+- Audit policy change
+- Audit privilege use
+- Audit process tracking
+- Audit system events
 
-Essas configurações são importantes para o monitoramento do sistema porque podem gerar registros que posteriormente serão analisados para identificar atividades administrativas, autenticações, alterações de políticas, utilização de privilégios e outros eventos.
+These settings are important for system monitoring because they can generate records that may later be analyzed to investigate administrative activity, authentication events, policy changes, privilege usage, and other events.
 
-### Exemplos
+#### Examples
 
 **Audit account logon events**
 
-Relaciona-se ao registro de eventos associados ao processo de autenticação de contas.
+Relates to auditing events associated with account authentication.
 
 **Audit account management**
 
-Permite auditar determinadas operações de gerenciamento de contas.
+Allows selected account-management operations to be audited.
 
 **Audit logon events**
 
-Relaciona-se aos eventos de logon no sistema.
+Relates to logon events on the system.
 
 **Audit object access**
 
-Pode registrar acessos a determinados objetos, conforme a configuração de auditoria e as SACLs aplicáveis.
+Can record access to selected objects when auditing is configured and applicable System Access Control Lists (SACLs) are in place.
 
 **Audit policy change**
 
-Permite registrar alterações nas políticas de auditoria.
+Allows changes to audit policies to be recorded.
 
 **Audit privilege use**
 
-Relaciona-se ao uso de determinados privilégios do sistema.
+Relates to the use of selected system privileges.
 
 **Audit process tracking**
 
-Permite acompanhar determinados eventos relacionados à execução de processos.
+Allows selected events associated with process activity to be tracked.
 
 **Audit system events**
 
-Relaciona-se a eventos importantes gerados pelo próprio sistema.
+Relates to important events generated by the operating system.
 
-## 6. User Rights Assignment
+### 6. User Rights Assignment
 
-Também foi explorada a categoria:
+The following category was also explored:
 
 ```text
 Local Policies → User Rights Assignment
 ```
 
-Essa seção define quais usuários ou grupos possuem determinados direitos no sistema.
+This section defines which users or groups have specific rights on the system.
 
-Os direitos atribuídos podem controlar, por exemplo:
+Assigned rights can control, for example:
 
-* ações permitidas localmente;
-* logon e acesso ao sistema;
-* execução de determinadas operações administrativas;
-* utilização de privilégios específicos.
+- Actions permitted locally.
+- Logon and access to the system.
+- Execution of specific administrative operations.
+- Use of particular privileges.
 
-O conceito é importante porque uma conta possuir acesso ao sistema não significa necessariamente que ela tenha todos os privilégios disponíveis.
+This concept is important because an account's ability to access the system does not automatically mean that it has every available privilege.
 
-A atribuição de direitos permite aplicar o princípio do **menor privilégio**, concedendo somente as permissões necessárias para determinada função.
+User Rights Assignment supports the **principle of least privilege** by allowing administrators to grant only the rights required for a particular role.
 
-## 7. Security Options
+### 7. Security Options
 
-Por fim, foi acessada:
+Finally, the following category was opened:
 
 ```text
 Local Policies → Security Options
 ```
 
-Entre as configurações observadas estavam:
+The following settings were observed:
+
+- Accounts: Administrator account status
+- Accounts: Guest account status
+- Devices: Allow undock without having to log on
+- Domain member: Digitally encrypt or sign secure channel data
+- Domain member: Disable machine account password changes
+- Interactive logon: Do not display last user name
+- Interactive logon: Do not require CTRL+ALT+DEL
+
+These options configure specific behaviors related to accounts, devices, domain membership, and interactive authentication.
+
+**Accounts: Administrator account status**
+
+Controls whether the built-in Windows Administrator account is enabled or disabled.
+
+**Accounts: Guest account status**
+
+Controls whether the built-in Guest account is enabled or disabled.
+
+**Devices: Allow undock without having to log on**
+
+Controls whether a portable computer can be undocked from its docking station without requiring the user to log on first.
+
+**Domain member: Digitally encrypt or sign secure channel data**
+
+Relates to protecting secure channel communications between a domain member computer and the domain.
+
+**Domain member: Disable machine account password changes**
+
+Controls whether a domain member computer is prevented from changing its machine account password automatically.
+
+**Interactive logon: Do not display last user name**
+
+Controls whether the name of the last user who logged on is displayed on the sign-in screen.
+
+**Interactive logon: Do not require CTRL+ALT+DEL**
+
+Controls whether users must press `CTRL+ALT+DEL` before interactive authentication.
+
+The security implications of these settings depend on their configured values and the system's operational requirements.
+
+### 8. Relationship to System Security
+
+Local Security Policy centralizes several controls that can be used to strengthen a Windows Server configuration.
+
+The activity covered the following layers:
+
+| Category | Purpose |
+|---|---|
+| Password Policy | Password requirements and lifecycle |
+| Account Lockout Policy | Controls for repeated failed authentication attempts |
+| Audit Policy | Recording security-related events |
+| User Rights Assignment | Defining rights for users and groups |
+| Security Options | Additional operating system security settings |
+
+These controls work together. For example, a password policy can establish requirements for credential creation, an account lockout policy can limit repeated authentication attempts, and auditing can provide records for subsequent investigation.
+
+Observing a policy in the interface does not establish that it is enabled or configured to a particular value. The effectiveness of each control depends on its actual configuration and the relevant system policies.
+
+## Commands and Tools Used
+
+The activity primarily used the Windows graphical interface.
+
+The Local Security Policy console can be opened through the Run dialog or a command prompt using:
 
 ```text
-Accounts: Administrator account status
-Accounts: Guest account status
-Devices: Allow undock without having to log on
-Domain member: Digitally encrypt or sign secure channel data
-Domain member: Disable machine account password changes
-Interactive logon: Do not display last user name
-Interactive logon: Do not require CTRL+ALT+DEL
+secpol.msc
 ```
 
-Essas opções permitem configurar comportamentos específicos relacionados às contas, dispositivos, membros de domínio e processos de autenticação interativa.
+The following policy sections were explored:
 
-### Accounts: Administrator account status
+```text
+Account Policies
+├── Password Policy
+└── Account Lockout Policy
 
-Controla o status da conta administrativa interna do Windows.
+Local Policies
+├── Audit Policy
+├── User Rights Assignment
+└── Security Options
+```
 
-### Accounts: Guest account status
+## Results
 
-Controla o status da conta de convidado.
+The activity allowed me to explore Local Security Policy in Windows Server 2022 and identify the main categories of security policies.
 
-### Devices: Allow undock without having to log on
+The following areas were examined:
 
-Define uma configuração relacionada à remoção de dispositivos de encaixe sem a necessidade de autenticação.
+- Password policies.
+- Account lockout policies.
+- Audit policies.
+- User rights assigned to accounts.
+- Additional security options.
+- Authentication-related settings.
+- Controls related to local accounts and domain members.
 
-### Domain member: Digitally encrypt or sign secure channel data
+The exercise reinforced the importance of appropriately configuring security policies and generating audit events to support monitoring and investigation activities in Windows Server.
 
-Relaciona-se à proteção das comunicações do canal seguro entre um computador membro e o domínio.
+## Concepts Practiced
 
-### Domain member: Disable machine account password changes
+- Windows Server security configuration
+- Local Security Policy
+- Password and authentication controls
+- Account lockout
+- Windows security auditing
+- User Rights Assignment
+- Principle of least privilege
+- Domain member security
+- Interactive logon settings
+- Security monitoring and investigation
 
-Controla o comportamento relacionado à alteração das senhas das contas de computador em um domínio.
+## Evidence
 
-### Interactive logon: Do not display last user name
+The activity evidence is included in the PDF for Classes 07–08.
 
-Controla se o nome do último usuário que realizou logon deve ser apresentado na tela de autenticação.
+**Recorded screenshot:** Step 7 of the activity, as required by the laboratory instructions.
 
-### Interactive logon: Do not require CTRL+ALT+DEL
+[View Evidence — Classes 07–08](../evidencia.pdf)
 
-Define se a combinação `CTRL+ALT+DEL` será exigida antes do processo de autenticação interativa.
+---
 
-## 8. Relação com a segurança do sistema
-
-A Política de Segurança Local concentra diversos controles que podem ser utilizados para fortalecer a configuração de um servidor Windows.
-
-A atividade permitiu observar diferentes camadas:
-
-| Categoria              | Finalidade                                       |
-| ---------------------- | ------------------------------------------------ |
-| Password Policy        | Requisitos e ciclo de vida das senhas            |
-| Account Lockout Policy | Controle de tentativas inválidas de autenticação |
-| Audit Policy           | Registro de eventos de segurança                 |
-| User Rights Assignment | Definição de direitos dos usuários e grupos      |
-| Security Options       | Configurações adicionais de segurança do sistema |
-
-Essas configurações trabalham em conjunto. Por exemplo, uma política de senha pode aumentar os requisitos para criação de credenciais, enquanto uma política de bloqueio pode limitar tentativas repetidas de autenticação e a auditoria pode fornecer registros para posterior investigação.
-
-## 9. Resultado
-
-A atividade permitiu explorar a ferramenta **Local Security Policy** do Windows Server 2022 e identificar as principais categorias de políticas de segurança.
-
-Foram observadas:
-
-1. Políticas de senha;
-2. Políticas de bloqueio de contas;
-3. Políticas de auditoria;
-4. Direitos atribuídos a usuários;
-5. Opções adicionais de segurança;
-6. Configurações relacionadas à autenticação;
-7. Controles relacionados a contas locais e membros de domínio.
-
-O exercício reforçou a importância da configuração adequada das políticas de segurança e da geração de eventos de auditoria para o monitoramento e investigação de atividades no Windows Server.
-
-## Evidência
-
-A evidência da atividade está no PDF geral das Aulas 7 e 8:
-
-[Ver evidências — Aulas 7 e 8](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-02/aula-07-08/evidencias.pdf)
-
-**Print registrado:** etapa 7 da atividade, conforme solicitado pelo roteiro.
+[Back to Classes 07–08](../) · [Back to Module 02](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
