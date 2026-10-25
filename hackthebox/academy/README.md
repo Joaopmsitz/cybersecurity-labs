@@ -1,130 +1,51 @@
-# 🎓 HTB Academy
+# HTB Academy
 
-Personal knowledge base for Hack The Box Academy.
+Personal knowledge base for Hack The Box Academy modules, technical notes, and hands-on exercises.
 
-This directory is organized by cybersecurity knowledge domains, with a centralized library of HTB Academy modules and separate indexes for official HTB learning paths.
+Documentation is organized by technical domain, with separate indexes for official HTB learning paths.
 
-## 📚 Module Library
+## Contents
 
-The `modules/` directory contains the actual technical documentation for individual HTB Academy modules, including notes, commands, procedures, lab write-ups, screenshots, and lessons learned.
+| Section | Description |
+| --- | --- |
+| [Module Library](./modules/) | Technical notes, commands, lab exercises, and lessons learned organized by topic. |
+| [Learning Paths](./paths/) | Indexes and progress tracking for HTB Skill Paths and Job Role Paths. |
 
-Each module is documented in one location, regardless of how many HTB Paths include it.
+## Organization
 
-### Knowledge Domains
+### Modules
 
-Modules are grouped by their primary subject rather than the learning path where they were completed.
+Modules are documented once and grouped by their primary technical subject, such as networking, web security, reconnaissance, exploitation, defensive security, and forensics.
 
-- `academy-basics/` — HTB Academy orientation, platform fundamentals, and introductory concepts
-- `networking/` — Network concepts, protocols, traffic analysis, and network tooling
-- `reconnaissance/` — Information gathering, host discovery, scanning, and enumeration
-- `web/` — Web technologies, HTTP requests, JavaScript analysis, web attacks, proxies, and web security tooling
-- `password-attacks/` — Password cracking, brute-force attacks, and password-based authentication weaknesses
-- `exploitation/` — Vulnerability exploitation, exploit development concepts, and offensive frameworks
-- `privilege-escalation/` — Linux and Windows privilege escalation techniques
-- `post-exploitation/` — Post-compromise discovery, credential access, persistence, and lateral movement, excluding modules primarily focused on privilege escalation
-- `active-directory/` — Active Directory enumeration, attacks, domain environments, and security concepts
-- `defensive/` — Blue Team operations, detection engineering, SIEM, monitoring, incident response, and security analysis
-- `forensics/` — Digital forensics, evidence acquisition, investigation, and artifact analysis
-- `cloud/` — Cloud infrastructure, services, security, and attack techniques
+Each module may contain:
 
-These domains are organizational categories, not a mandatory learning sequence. New categories should be created only when needed, and modules should be assigned to the domain that best represents their primary subject.
+- `README.md` — Technical notes and key concepts.
+- `images/` — Relevant screenshots and supporting images.
+- `labs/` — Practical exercises and lab documentation.
 
-## 🛣️ HTB Paths
+Create additional files and directories as needed.
 
-The `paths/` directory tracks official HTB Academy learning paths associated with the modules documented in this repository.
+### Learning Paths
 
-Paths serve as indexes and progress trackers rather than as a second copy of the technical content.
+Learning paths organize modules according to the official HTB curriculum.
 
-- `paths/skill/` — HTB Skill Paths
-- `paths/job-role/` — HTB Job Role Paths
+- **Skill Paths** — `paths/skill/`
+- **Job Role Paths** — `paths/job-role/`
 
-Each path README may document the path overview, module order, difficulty, progress, completion status, badge, and other path-specific information.
+Path documentation tracks the learning sequence and progress while linking to the centralized module notes instead of duplicating their content.
 
-Module entries link to the corresponding README in `modules/`. If multiple paths contain the same module, they all reference the same documentation.
+## Documentation Principles
 
-## 📝 Module Documentation
+- Keep each module's technical documentation in one location.
+- Document practical exercises and findings in your own words.
+- Include relevant commands, evidence, results, and lessons learned.
+- Add links only to directories and files that exist.
+- Preserve existing documentation when reorganizing the repository.
 
-Each documented module has its own directory under the appropriate knowledge domain.
+## Responsible Use
 
-A typical module directory follows this structure:
+All practical testing must follow Hack The Box's rules and remain within authorized environments. Do not publish flags, credentials, restricted course materials, or solutions whose disclosure is prohibited.
 
-```text
-module-name/
-├── README.md
-├── images/
-└── labs/
-```
+---
 
-- `README.md` — Concise technical reference containing key concepts, commands, workflows, configuration, techniques, troubleshooting, references, and relevant lessons learned
-- `images/` — Screenshots and supporting images referenced by the documentation
-- `labs/` — Individual lab notes, practical exercises, and detailed walkthroughs when necessary
-
-Create `images/` and `labs/` when needed rather than requiring empty directories for every module.
-
-The module README should prioritize reusable technical knowledge rather than reproduce the Academy's lesson content or simply record course completion.
-
-## 🔗 Documentation Principles
-
-1. **One module, one location.** Technical notes, labs, and screenshots belong to the module's directory.
-2. **Organize by subject.** Categorize modules according to their primary technical focus, not by their official HTB Path or difficulty level.
-3. **Link instead of duplicating.** Skill Paths and Job Role Paths reference the centralized module documentation.
-4. **Keep path-specific information separate.** Path overviews, progress, completion dates, and path badges belong to their respective path README files.
-5. **Document incrementally.** Add notes and lab files as practical work progresses; do not create unnecessary scaffolding or duplicate documentation.
-6. **Preserve existing work.** Reorganize directories and update links without rewriting completed notes or unnecessarily moving screenshots between modules.
-
-The objective is to build a reusable technical reference that remains useful beyond any individual HTB Academy course or learning path.
-
-## 📂 Structure
-
-```text
-academy/
-├── README.md
-│
-├── modules/
-│   ├── academy-basics/
-│   │   ├── getting-started/
-│   │   └── introduction-to-academy/
-│   │
-│   ├── networking/
-│   │   └── intro-to-network-traffic-analysis/
-│   │
-│   ├── reconnaissance/
-│   │   └── network-enumeration-with-nmap/
-│   │
-│   ├── web/
-│   │   ├── web-requests/
-│   │   ├── javascript-deobfuscation/
-│   │   ├── attacking-web-applications-with-ffuf/
-│   │   ├── sqlmap-essentials/
-│   │   └── using-web-proxies/
-│   │
-│   ├── password-attacks/
-│   │   ├── cracking-passwords-with-hashcat/
-│   │   └── login-brute-forcing/
-│   │
-│   ├── exploitation/
-│   ├── privilege-escalation/
-│   ├── post-exploitation/
-│   ├── active-directory/
-│   ├── defensive/
-│   │   ├── incident-handling-process/
-│   │   └── security-monitoring-siem-fundamentals/
-│   ├── forensics/
-│   └── cloud/
-│
-└── paths/
-    ├── README.md
-    ├── skill/
-    │   ├── README.md
-    │   ├── basic-toolset/
-    │   │   └── README.md
-    │   └── cracking-into-hack-the-box/
-    │       └── README.md
-    │
-    └── job-role/
-        ├── README.md
-        └── soc-analyst/
-            └── README.md
-```
-
-The tree illustrates the intended organization; create domain directories as relevant modules are documented. Individual module directories may contain their own `README.md`, `images/`, and `labs/` as needed.
+[Back to Hack The Box](../README.md) · [Back to Cybersecurity Portfolio](../../README.md)
