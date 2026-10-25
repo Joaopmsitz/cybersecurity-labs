@@ -1,44 +1,46 @@
-# Atividade 3.10 — Enumeração DNS com DIG
+# Activity 3.10 — DNS Enumeration with DIG
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 03  
+> **Class:** 11–12  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **DIG (Domain Information Groper)** para realizar consultas DNS e analisar diferentes tipos de registros de um domínio.
+## Objective
 
-A atividade explora consultas dos registros **A, NS, MX, AAAA e CNAME**, permitindo observar informações de resolução, servidores DNS, infraestrutura de e-mail, endereços IPv6 e a resposta retornada quando não existe um registro CNAME para o domínio consultado.
+Use DIG (Domain Information Groper) to perform DNS queries and analyze different types of records associated with a domain.
 
----
+The activity covers queries for A, NS, MX, AAAA, and CNAME records, allowing the observation of DNS resolution information, name servers, email infrastructure, IPv6 addresses, and the response returned when no CNAME record is provided for the queried domain name.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramenta:** `dig`
-* **Domínio analisado:** `grancursosonline.com.br`
-* **Servidor DNS utilizado:** `192.168.98.2`
+- **Operating system:** Kali Linux
+- **Tool:** `dig`
+- **Domain analyzed:** `grancursosonline.com.br`
+- **DNS server:** `192.168.98.2`
 
----
+## Procedure
 
-## 1. Consulta da ajuda do DIG
+### 1. Display DIG Help
 
-Primeiramente, foi verificada a ajuda da ferramenta:
+First, the tool's help information was requested:
 
 ```bash
 sudo -i
 dig -h
 ```
 
-A execução apresenta as opções disponíveis para realização das consultas DNS, incluindo especificação de tipos de registros, servidores DNS, opções de consulta e parâmetros de saída.
+The help output provides the available options for performing DNS queries, including record type selection, DNS server specification, query options, and output parameters.
 
----
+### 2. Query the A Record
 
-## 2. Consulta do registro A
-
-Foi realizada uma consulta padrão para o domínio:
+A standard DNS query was performed for the domain:
 
 ```bash
 dig grancursosonline.com.br
 ```
 
-Saída:
+**Observed output:**
 
 ```text
 ; <<>> DiG 9. 20.11-4+b1-Debian <<>> grancursosonline.com.br
@@ -62,60 +64,60 @@ grancursosonline.com.br. 300	IN	A	104.18.99.225
 ;; MSG SIZE  rcvd: 84
 ```
 
-O registro consultado foi o **A**, responsável por associar o domínio a endereços IPv4.
+The queried record type was **A**, which associates a domain name with IPv4 addresses.
 
-Nesse resultado foram encontrados dois endereços:
+Two addresses were returned:
 
-* `104.18.100.225`
-* `104.18.99.225`
+- `104.18.100.225`
+- `104.18.99.225`
 
-### Estrutura da resposta
+#### Understanding the Response Structure
 
-O `DIG` apresenta várias informações úteis além do resultado final:
+DIG provides useful information beyond the returned records:
 
-* `status: NOERROR` — a consulta foi processada sem erro DNS.
-* `QUERY: 1` — uma pergunta foi realizada.
-* `ANSWER: 2` — dois registros foram retornados na seção de resposta.
-* `AUTHORITY: 0` — nenhum registro foi retornado na seção de autoridade.
-* `SERVER: 192.168.98.2#53` — servidor DNS utilizado.
-* `Query time: 4 msec` — tempo de resposta observado.
-* `TTL 300` — tempo, em segundos, pelo qual a resposta pode permanecer em cache.
+- `status: NOERROR` — the DNS query completed without a DNS error.
+- `QUERY: 1` — one question was included in the query.
+- `ANSWER: 2` — two records were returned in the answer section.
+- `AUTHORITY: 0` — no records were returned in the authority section.
+- `SERVER: 192.168.98.2#53` — the DNS server used for the query.
+- `Query time: 4 msec` — the observed response time.
+- `TTL 300` — the response's time-to-live value, in seconds, which affects how long it can remain cached.
 
----
+The `NOERROR` status indicates that the DNS query completed successfully; it does not, by itself, guarantee that every requested record type exists.
 
-## 3. Consulta dos servidores DNS
+### 3. Query Name Servers
 
-Foi realizada uma consulta específica pelo registro `NS`:
+A query specifically targeting NS records was performed:
 
 ```bash
 dig grancursosonline.com.br -t ns
 ```
 
-O resultado apresentou os servidores:
+The following name servers were returned:
 
 ```text
 grancursosonline.com.br. 300	IN	NS	rita.ns.cloudflare.com.
 grancursosonline.com.br. 300	IN	NS	dan.ns.cloudflare.com.
 ```
 
-Os registros **NS (Name Server)** identificam os servidores DNS responsáveis pelo domínio.
+NS (Name Server) records identify the name servers associated with a domain's DNS delegation.
 
-Nesse resultado, os servidores encontrados foram:
+The servers returned in this laboratory query were:
 
-* `rita.ns.cloudflare.com.`
-* `dan.ns.cloudflare.com.`
+- `rita.ns.cloudflare.com.`
+- `dan.ns.cloudflare.com.`
 
----
+These results reflect the DNS configuration observed during the recorded exercise.
 
-## 4. Consulta dos servidores de e-mail
+### 4. Query Mail Servers
 
-Em seguida, foi realizada uma consulta aos registros `MX`:
+Next, an MX record query was performed:
 
 ```bash
 dig grancursosonline.com.br -t mx
 ```
 
-O resultado apresentou:
+The following output was observed:
 
 ```text
 grancursosonline.com.br. 300	IN	MX	1 aspmx.l.google.com.
@@ -125,55 +127,53 @@ grancursosonline.com.br. 300	IN	MX	10 alt3.aspmx.l.google.com.
 grancursosonline.com.br. 300	IN	MX	10 alt4.aspmx.l.google.com.
 ```
 
-Os registros **MX (Mail Exchange)** indicam os servidores responsáveis pelo recebimento de e-mails do domínio.
+MX (Mail Exchange) records identify the mail servers responsible for receiving email for a domain.
 
-A prioridade é determinada pelo número associado ao registro. Quanto **menor o valor**, maior a prioridade.
+The preference value is the number associated with each record. Lower values indicate higher preference.
 
-| Prioridade | Servidor                   |
-| ---------: | -------------------------- |
-|          1 | `aspmx.l.google.com.`      |
-|          5 | `alt1.aspmx.l.google.com.` |
-|          5 | `alt2.aspmx.l.google.com.` |
-|         10 | `alt3.aspmx.l.google.com.` |
-|         10 | `alt4.aspmx.l.google.com.` |
+| Preference | Mail server |
+|---:|---|
+| 1 | `aspmx.l.google.com.` |
+| 5 | `alt1.aspmx.l.google.com.` |
+| 5 | `alt2.aspmx.l.google.com.` |
+| 10 | `alt3.aspmx.l.google.com.` |
+| 10 | `alt4.aspmx.l.google.com.` |
 
-O resultado indica a utilização de infraestrutura de e-mail do Google para o domínio analisado.
+The results indicate that the domain's observed email configuration used Google's mail infrastructure.
 
----
+### 5. Query the AAAA Record
 
-## 5. Consulta do registro AAAA
-
-Também foi realizada uma consulta específica para registros `AAAA`:
+A query specifically targeting AAAA records was also performed:
 
 ```bash
 dig grancursosonline.com.br AAAA
 ```
 
-Resultado observado:
+**Observed output:**
 
 ```text
 grancursosonline.com.br. 300	IN	AAAA	2606:4700::6812:64e1
 grancursosonline.com.br. 300	IN	AAAA	2606:4700::6812:63e1
 ```
 
-O registro **AAAA** é utilizado para endereços IPv6.
+AAAA records associate a domain name with IPv6 addresses.
 
-Nesse caso, foram identificados dois endereços IPv6 associados ao domínio:
+Two IPv6 addresses were identified:
 
-* `2606:4700::6812:64e1`
-* `2606:4700::6812:63e1`
+- `2606:4700::6812:64e1`
+- `2606:4700::6812:63e1`
 
----
+These records demonstrate how a domain can publish IPv6 addresses alongside its IPv4 addressing information.
 
-## 6. Consulta do registro CNAME
+### 6. Query the CNAME Record
 
-Por fim, foi realizada a consulta solicitada pelo roteiro para verificar a existência de um registro `CNAME`:
+Finally, a query was performed to check for a CNAME record:
 
 ```bash
 dig grancursosonline.com.br CNAME
 ```
 
-Saída:
+**Observed output:**
 
 ```text
 ; <<>> DiG 9.20.11-4+b1-Debian <<>> grancursosonline.com.br CNAME
@@ -196,85 +196,110 @@ grancursosonline.com.br. 300	IN	SOA	dan.ns.cloudflare.com. dns.cloudflare.com. 2
 ;; MSG SIZE  rcvd: 113
 ```
 
-Nesse resultado, o campo:
+In this response, the field:
 
 ```text
 ANSWER: 0
 ```
 
-indica que nenhum registro `CNAME` foi retornado para o nome consultado.
+indicates that no CNAME record was returned for the queried name.
 
-A resposta também apresenta uma seção `AUTHORITY` contendo um registro **SOA (Start of Authority)**:
+The response also includes an authority section containing an SOA (Start of Authority) record:
 
 ```text
 grancursosonline.com.br. 300 IN SOA dan.ns.cloudflare.com. dns.cloudflare.com. 2332988706 10000 2400 604800 1800
 ```
 
-O registro SOA contém informações administrativas e de controle da zona DNS, incluindo o servidor de nomes principal, o responsável pela zona em formato DNS e parâmetros relacionados à atualização e ao cache.
+The SOA record contains administrative information about the DNS zone, including the primary name server, the responsible party's DNS-format identifier, and parameters related to zone refresh and caching.
 
-A presença do SOA na resposta, juntamente com `ANSWER: 0`, faz parte da resposta DNS utilizada para indicar que não houve um registro CNAME retornado para o nome consultado.
+The SOA record, together with `ANSWER: 0`, forms part of the DNS response indicating that no CNAME record was returned for the queried name.
 
----
+**Technical note:** The absence of a CNAME answer does not necessarily indicate a DNS error. A name that has other record types, such as A, NS, or MX records, generally cannot also be configured as a CNAME at the same owner name. The response is consistent with the domain being queried directly for a record type it does not return.
 
-## Conceitos praticados
+## Commands Used
+
+The following commands were used throughout the activity:
+
+```bash
+sudo -i
+dig -h
+dig grancursosonline.com.br
+dig grancursosonline.com.br -t ns
+dig grancursosonline.com.br -t mx
+dig grancursosonline.com.br AAAA
+dig grancursosonline.com.br CNAME
+```
+
+## Concepts Practiced
 
 ### DIG
 
-O `dig` é uma ferramenta de consulta DNS que permite analisar detalhadamente as respostas recebidas de um servidor DNS.
+DIG (Domain Information Groper) is a DNS query utility that provides detailed information about responses received from a DNS server.
 
-### A
+### A Record
 
-Registro utilizado para associar um domínio a um endereço IPv4.
+Associates a domain name with an IPv4 address.
 
-### AAAA
+### AAAA Record
 
-Registro utilizado para associar um domínio a um endereço IPv6.
+Associates a domain name with an IPv6 address.
 
-### NS
+### NS Record
 
-Identifica os servidores DNS responsáveis pela zona do domínio.
+Identifies name servers associated with a domain's DNS zone.
 
-### MX
+### MX Record
 
-Identifica os servidores responsáveis pelo recebimento de e-mails do domínio e suas respectivas prioridades.
+Identifies the mail servers responsible for receiving email for a domain and their respective preference values.
 
-### CNAME
+### CNAME Record
 
-Registro utilizado para criar um alias DNS que aponta para outro nome de domínio.
+Creates a DNS alias that points to another domain name. A CNAME record cannot normally coexist with other record types at the same DNS name.
 
-### SOA
+### SOA Record
 
-O registro **Start of Authority** contém informações administrativas da zona DNS, incluindo o servidor autoritativo principal e parâmetros de controle da zona.
+The Start of Authority record contains administrative information about a DNS zone, including its primary name server and zone-control parameters.
 
 ### TTL
 
-**Time To Live** determina por quanto tempo uma resposta DNS pode permanecer armazenada em cache antes de precisar ser consultada novamente.
+Time to Live specifies how long a DNS response may remain in a cache before it needs to be refreshed.
 
-### ANSWER / AUTHORITY
+### ANSWER and AUTHORITY Sections
 
-O `DIG` divide a resposta DNS em diferentes seções. `ANSWER` contém os registros que respondem diretamente à consulta, enquanto `AUTHORITY` pode conter informações relacionadas à autoridade da zona envolvida na resposta.
+DIG divides DNS responses into multiple sections:
+
+- **ANSWER** contains records that directly answer the query.
+- **AUTHORITY** can contain information about the authority for the relevant DNS zone, including SOA records in certain responses.
+
+### DNS Enumeration
+
+DNS enumeration involves querying DNS records to gather information about a domain's addressing, name servers, email infrastructure, and other published configuration details.
+
+## Results
+
+The activity demonstrated how DIG can be used for DNS enumeration and record analysis, allowing the identification of:
+
+- IPv4 addresses.
+- IPv6 addresses.
+- Name servers.
+- Mail servers.
+- MX preference values.
+- Zone authority information.
+- The absence of a CNAME answer in the recorded query.
+- TTL values, the DNS resolver used, and response times.
+
+Compared with a basic DNS lookup, DIG provides a more detailed output that allows analysts to inspect not only the returned records but also the metadata associated with the DNS response.
+
+The results documented here represent the records returned during the laboratory session in February 2024 and should not be treated as a current DNS inventory.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 03, Classes 11–12.
+
+**Recorded screenshot:** Step 7 of the activity, as required by the laboratory instructions, showing the CNAME query performed with DIG.
+
+[View Evidence — Classes 11–12](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-A atividade demonstrou o uso do `dig` para realizar **enumeração e análise de registros DNS**, permitindo identificar:
-
-* Endereços IPv4;
-* Endereços IPv6;
-* Servidores DNS;
-* Servidores de e-mail;
-* Prioridades dos registros MX;
-* Informações de autoridade da zona;
-* Ausência de um registro CNAME na resposta analisada;
-* Informações de TTL, servidor DNS e tempo de resposta.
-
-Em comparação com uma consulta DNS simples, o `dig` fornece uma saída mais detalhada, permitindo analisar não apenas o registro retornado, mas também os metadados da resposta DNS.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 3 / Aulas 11 e 12**](../evidencias.pdf)
-
-**Print registrado:** etapa 7 da atividade, conforme solicitado pelo roteiro, mostrando a consulta do registro CNAME com `dig`.
+[Back to Classes 11–12](../) · [Back to Module 03](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
