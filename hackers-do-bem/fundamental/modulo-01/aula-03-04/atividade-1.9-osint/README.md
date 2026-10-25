@@ -1,224 +1,235 @@
-# Atividade 1.9 — Realizando OSINT com Maltego
+# Activity 1.9 — Conducting OSINT with Maltego
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 01  
+> **Class:** 03–04  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **Maltego** para realizar uma atividade de **OSINT (Open Source Intelligence)**, partindo de um domínio público e utilizando diferentes *Transforms* para identificar informações relacionadas à infraestrutura, DNS, pessoas, endereços de e-mail e servidores de e-mail.
+## Objective
 
-A atividade foi realizada de forma passiva, utilizando informações públicas associadas ao domínio analisado.
+Use **Maltego** to conduct an Open-Source Intelligence (OSINT) investigation, starting with a public domain and applying different Transforms to identify related infrastructure, DNS information, people, email addresses, and mail servers.
 
-## Ambiente
+The activity focused on passive reconnaissance using publicly available information associated with the domain under investigation.
 
-* Kali Linux
-* Terminal
-* Maltego
-* Firefox
-* Internet
-* Domínio analisado: `ufc.br`
+## Environment
 
-## Procedimento
+- **Operating system:** Kali Linux
+- **Terminal:** Linux command line
+- **Tool:** Maltego
+- **Browser:** Firefox
+- **Internet connection:** Required
+- **Target domain:** `ufc.br`
 
-### 1. Inicialização do Maltego
+## Procedure
 
-O Maltego foi iniciado pelo Terminal utilizando:
+### 1. Launch Maltego
+
+Maltego was started from the terminal using:
 
 ```bash
 maltego
 ```
 
-Após a abertura da aplicação, foi criado um novo projeto para realizar a análise.
+After the application opened, a new project was created for the investigation.
 
-### 2. Adição do domínio ao projeto
+### 2. Add the Domain to the Project
 
-Na área **Entity Palette**, foi localizada a entidade:
+In the **Entity Palette**, the following entity type was selected:
 
 ```text
 Infrastructure → Website
 ```
 
-A entidade **Website** foi arrastada para o canvas.
+The `Website` entity was dragged onto the canvas.
 
-Inicialmente, o Maltego apresentou o domínio:
+Initially, Maltego displayed the example value:
 
 ```text
 www.maltego.com
 ```
 
-Esse valor foi alterado para:
+This value was replaced with:
 
 ```text
 ufc.br
 ```
 
-Durante a alteração, foi apresentada uma solicitação relacionada ao certificado de confiança. A opção de cancelamento foi utilizada para prosseguir com a atividade.
+During this step, a certificate trust prompt appeared. The Cancel option was selected to continue with the laboratory exercise.
 
-### 3. Consulta de domínios relacionados
+**Security note:** In real investigations, certificate trust warnings should be investigated before proceeding. Do not dismiss them without understanding their cause.
 
-Com a entidade `ufc.br` adicionada ao canvas, foi aberto o menu de contexto através do botão direito.
+### 3. Identify Related Domains
 
-Foi acessado:
+With the `ufc.br` entity on the canvas, the context menu was opened by right-clicking the entity.
+
+The following menu was selected:
 
 ```text
 + All Transforms
 ```
 
-E executado o Transform:
+The following Transform was executed:
 
 ```text
 [Utilities] To Domains [within Properties]
 ```
 
-Esse procedimento permitiu consultar informações relacionadas aos domínios presentes nas propriedades da entidade analisada.
+This Transform searches the entity's existing properties for possible domain names. The resulting entities were added to the graph for further analysis.
 
-O resultado foi adicionado ao gráfico do Maltego para continuar a investigação.
+### 4. Identify DNS Names
 
-### 4. Consulta de registros DNS
-
-Em seguida, foi utilizado novamente o menu:
-
-```text
-+ All Transforms
-```
-
-Foi executado:
+The context menu was opened again, and the following Transform was executed:
 
 ```text
 [Utilities] To DNSNames [within Properties]
 ```
 
-O Transform permitiu obter nomes relacionados ao DNS a partir das informações disponíveis na entidade.
+This Transform searches the entity's properties for possible DNS names.
 
-Essa etapa demonstrou como informações públicas de DNS podem ser utilizadas para ampliar o contexto de uma investigação de OSINT.
+The results expanded the information displayed in the graph and demonstrated how existing entity properties can provide additional leads during an OSINT investigation.
 
-### 5. Identificação de pessoas relacionadas
+**Technical distinction:** This is a property-extraction Transform, not a comprehensive DNS enumeration operation. Additional DNS-specific Transforms may be needed to retrieve or resolve DNS records.
 
-Sobre a entidade `ufc.br`, foi acessado novamente o menu de Transformações.
+### 5. Identify Potentially Related People
 
-Foi utilizado:
+The following Transform was executed on the `ufc.br` entity:
 
 ```text
 [Utilities] To Person [PGP]
 ```
 
-O Transform realizou uma busca por possíveis pessoas relacionadas ao domínio através de informações disponíveis em registros PGP públicos.
+This Transform searched public PGP key-server data for person names potentially associated with the domain.
 
-As entidades retornadas foram apresentadas no gráfico do Maltego.
+The returned entities were displayed in the Maltego graph.
 
-### 6. Identificação de endereços de e-mail
+These results represent possible relationships found in the queried data source; they should not automatically be treated as verified employees or official representatives of the organization.
 
-Também foi executado o Transform:
+### 6. Identify Email Addresses
+
+The following Transform was then executed:
 
 ```text
 [Utilities] To Email Addresses [PGP]
 ```
 
-A consulta teve como objetivo identificar endereços de e-mail associados às informações públicas encontradas através do PGP.
+The purpose was to identify email addresses associated with the domain through publicly available PGP information.
 
-Os resultados foram apresentados como novas entidades no gráfico.
+The results were added to the graph as new entities.
 
-Essa etapa demonstra como informações aparentemente separadas podem ser relacionadas durante uma investigação de OSINT.
+This step demonstrated how information from different entities and public data sources can be correlated during an OSINT investigation.
 
-### 7. Identificação dos servidores de e-mail
+### 7. Identify Mail Servers
 
-Por fim, foi utilizado o Transform:
+Finally, the following Transform was executed:
 
 ```text
 [Utilities] To DNS Name - MX (mail server)
 ```
 
-O objetivo foi identificar os servidores responsáveis pelo recebimento de e-mails do domínio.
+The objective was to identify the mail servers associated with the domain.
 
-O resultado apresentou servidores de e-mail associados ao domínio analisado. Durante a atividade, os servidores apresentados estavam relacionados à infraestrutura do **Google**.
+The results displayed mail servers associated with the analyzed domain. During this laboratory run, the returned servers were associated with Google's mail infrastructure.
 
-Registros **MX (Mail Exchange)** são utilizados pelo DNS para indicar quais servidores devem receber mensagens destinadas a um determinado domínio.
+**Technical note:** MX records identify the mail servers designated to receive email for a domain. The observed Google-related results document this exercise and should not be treated as confirmation of the domain's current mail configuration.
 
-### 8. Análise do gráfico
+### 8. Analyze the Graph
 
-Após a execução dos Transforms, o Maltego apresentou diferentes entidades relacionadas ao domínio `ufc.br`.
+After the Transforms had been executed, Maltego displayed entities associated with the `ufc.br` domain.
 
-A visualização permitiu observar relações entre:
+The graph was used to visualize the relationships investigated during the activity:
 
 ```text
-Domínio
-   ├── Domínios relacionados
-   ├── DNS
-   ├── Pessoas
-   ├── Endereços de e-mail
-   └── Servidores MX
+Domain
+  ├── Related domains
+  ├── DNS names
+  ├── Potentially related people
+  ├── Email addresses
+  └── MX mail servers
 ```
 
-O gráfico facilita a correlação das informações encontradas e demonstra uma das principais características do Maltego: representar visualmente relações entre diferentes entidades.
+This visualization demonstrated one of Maltego's main capabilities: representing relationships between different entities in a graph.
 
-### 9. Encerramento
+The relationships and entities identified by individual Transforms should be validated against reliable sources before being used in a formal investigation.
 
-Após a conclusão da análise, o Maltego foi fechado.
+### 9. Close the Application
 
-Quando solicitado pelo programa, foi utilizada a opção:
+After completing the analysis, Maltego was closed.
+
+When prompted, the following option was selected:
 
 ```text
 Discard All
 ```
 
-O Terminal também foi encerrado após o término da atividade.
+The terminal was also closed after the activity.
 
-## Comandos utilizados
+## Commands Used
 
-O comando utilizado para iniciar a ferramenta foi:
+The only terminal command used to start the application was:
 
 ```bash
 maltego
 ```
 
-As demais etapas foram realizadas através da interface gráfica do Maltego.
+All remaining steps were performed through the Maltego graphical interface.
 
-## Transforms utilizados
+## Transforms Used
 
-| Transform                                     | Finalidade                                                               |
-| --------------------------------------------- | ------------------------------------------------------------------------ |
-| `[Utilities] To Domains [within Properties]`  | Identificar domínios relacionados às propriedades da entidade            |
-| `[Utilities] To DNSNames [within Properties]` | Obter informações relacionadas a nomes DNS                               |
-| `[Utilities] To Person [PGP]`                 | Identificar possíveis pessoas relacionadas através de dados PGP públicos |
-| `[Utilities] To Email Addresses [PGP]`        | Identificar endereços de e-mail presentes nas informações PGP            |
-| `[Utilities] To DNS Name - MX (mail server)`  | Identificar servidores de e-mail associados ao domínio                   |
+| Transform | Purpose |
+| --- | --- |
+| `[Utilities] To Domains [within Properties]` | Extract possible domain names from the entity's properties |
+| `[Utilities] To DNSNames [within Properties]` | Extract possible DNS names from the entity's properties |
+| `[Utilities] To Person [PGP]` | Search public PGP data for potentially related people |
+| `[Utilities] To Email Addresses [PGP]` | Search public PGP data for associated email addresses |
+| `[Utilities] To DNS Name - MX (mail server)` | Identify mail servers associated with the domain |
 
-## Interpretação
+## Interpretation
 
-A atividade demonstrou como uma única informação inicial, nesse caso o domínio `ufc.br`, pode ser utilizada como ponto de partida para uma investigação de OSINT.
+The activity demonstrated how a single initial data point, in this case the `ufc.br` domain, can serve as the starting point for an OSINT investigation.
 
-A partir dos Transforms disponíveis no Maltego, foi possível expandir o conjunto de informações observadas e estabelecer relações entre:
+By applying different Maltego Transforms, the investigation expanded to include relationships between:
 
-* Domínios;
-* Registros DNS;
-* Pessoas;
-* Endereços de e-mail;
-* Servidores de e-mail;
-* Informações públicas de infraestrutura.
+- Domain names
+- DNS-related information
+- Potentially related people
+- Email addresses
+- Mail servers
+- Public infrastructure information
 
-O uso de diferentes fontes permite construir uma visão mais ampla sobre um determinado ativo sem realizar exploração ou alteração da infraestrutura analisada.
+Using multiple data sources can provide a broader view of a target's publicly observable digital footprint without exploiting or modifying the investigated infrastructure.
 
-## Resultado
+However, discovered relationships are leads rather than definitive proof. Their accuracy depends on the source, the Transform used, and the available data.
 
-Foi realizada uma investigação passiva utilizando o Maltego a partir do domínio `ufc.br`.
+## Result
 
-Foram executados diferentes Transforms para expandir as informações disponíveis e visualizar relações entre o domínio, DNS, pessoas, endereços de e-mail e servidores MX.
+A passive OSINT investigation was conducted in Maltego using `ufc.br` as the starting domain.
 
-A atividade permitiu praticar a coleta e correlação de informações públicas utilizando uma ferramenta de OSINT.
+Multiple Transforms were executed to expand the graph and visualize relationships involving domain names, DNS-related entities, people, email addresses, and MX mail servers.
 
-## Conceitos praticados
+The activity provided practical experience in collecting, correlating, and visualizing publicly available information through an OSINT tool.
 
-* OSINT
-* Reconhecimento passivo
-* Maltego
-* Transforms
-* DNS
-* Registros MX
-* PGP
-* Endereços de e-mail
-* Correlação de informações
-* Reconhecimento de infraestrutura
-* Inteligência de fontes abertas
+## Concepts Practiced
 
-## Evidência
+- Open-Source Intelligence (OSINT)
+- Passive reconnaissance
+- Maltego and Transforms
+- Domain and DNS-related information
+- MX records and mail infrastructure
+- Public PGP key-server data
+- Email address discovery
+- Information correlation
+- Infrastructure reconnaissance
+- Validation of intelligence findings
 
-A execução da atividade foi registrada no PDF de evidências da Aula 03–04.
+## Evidence
 
-[Ver evidências — Aula 03–04](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-01/aula-03-04/evidencias.pdf)
+The activity evidence is included in the PDF for Classes 03–04.
+
+The screenshots document the Maltego graph and the results produced by the Transforms used during the investigation.
+
+[View Evidence — Classes 03–04](../evidencias.pdf)
+
+---
+
+[Back to Classes 03–04](../) · [Back to Module 01](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
