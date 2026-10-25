@@ -1,36 +1,30 @@
-# Hack The Box — Academy, Machines & Sherlocks
+# Hack The Box — Cybersecurity Labs
 
-This section brings together my documented Hack The Box learning across **Academy modules, SOC Analyst learning, Sherlock defensive investigations, easy machines, and Starting Point**. The notes focus on methodology, relevant evidence, technical reasoning, and lessons learned.
+Documented hands-on learning from Hack The Box Academy, machines, Sherlocks, and Starting Point.
 
-## Start here
+The focus is on practical methodology, technical analysis, investigation, and lessons learned across offensive and defensive security exercises.
 
-| Area | Documentation |
-|---|---|
-| [HTB Academy overview](./academy/README.md) | Index of Academy modules and learning paths documented in this repository. |
-| [SOC Analyst Job Role Path](./academy/paths/job-role/soc-analyst/README.md) | Dedicated index for the SOC Analyst path. |
-| [Academy modules](./academy/modules/README.md) | Index of documented modules. |
-| [Security Monitoring & SIEM Fundamentals](./academy/modules/defensive/security-monitoring-siem-fundamentals/README.md) | SIEM concepts and security-monitoring practice. |
-| [Incident Handling Process](./academy/modules/defensive/incident-handling-process/README.md) | Incident-handling concepts and workflow. |
-| [Easy machines](./easy-machines/README.md) | Notes for machines documented in this section. |
-| [Sherlocks](./sherlocks/README.md) | Defensive, threat-hunting, and investigation-style exercises. |
-| [Starting Point — Tier 0](./startingpoint/tier-0/README.md) | Guided beginner labs and foundational methodology. |
-| [Starting Point — Tier 1](./startingpoint/tier-1/README.md) | Additional guided labs and techniques. |
-| [Starting Point — Tier 2](./startingpoint/tier-2/README.md) | More involved guided labs. |
+## Learning Areas
 
-## How to read a write-up
+| Area | Description |
+| --- | --- |
+| [HTB Academy](./academy/) | Structured modules, technical exercises, and cybersecurity learning paths. |
+| [Easy Machines](./easy-machines/) | Hands-on machine exercises and technical notes. |
+| [Sherlocks](./sherlocks/) | Defensive investigations, threat hunting, and digital forensics exercises. |
+| [Starting Point](./startingpoint/) | Guided labs covering foundational cybersecurity skills. |
 
-Where a machine or module has an individual README, it should describe the objective, scope, environment, key observations, tools or commands actually used, reasoning, result, and lessons learned. Defensive investigations should distinguish evidence from hypotheses and explain the final assessment.
+## Documentation
 
-## Responsible use and platform rules
+Write-ups focus on the objective, methodology, relevant evidence, tools used, technical reasoning, results, and lessons learned.
 
-All testing is limited to authorized Hack The Box environments. Before publishing or expanding a write-up, verify the current platform rules and permitted content-sharing scope. Do not disclose active-machine solutions, flags, restricted course material, credentials, or other content that the platform does not permit to be shared.
+The content distinguishes documented practice from professional experience and avoids claiming skills that have not been demonstrated in the corresponding exercises.
 
-## Navigation
+## Responsible Use
 
-- [Back to the main portfolio](../README.md)
-- [Let'sDefend investigations](../letsdefend/README.md)
-- [Networking labs](../networking/README.md)
+- All testing is limited to authorized Hack The Box environments.
+- Follow the platform's current rules for publishing write-ups and training material.
+- Do not publish flags, credentials, restricted course content, or solutions whose disclosure is prohibited.
 
 ---
 
-*Add links to new write-ups only after their paths exist and the content is ready to publish.*
+[Back to Cybersecurity Portfolio](../README.md)
