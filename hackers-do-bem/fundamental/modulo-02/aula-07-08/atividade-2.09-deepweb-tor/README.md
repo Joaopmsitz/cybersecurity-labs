@@ -1,55 +1,65 @@
-# Atividade 2.9 — Navegação na Deep Web via Tor Browser
+# Activity 2.09 — Exploring the Deep Web Through Tor Browser
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 02  
+> **Class:** 07–08  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **Tor Browser** para compreender, em um ambiente educacional controlado, o acesso a serviços disponíveis na rede Tor, observando a estrutura dos endereços `.onion` e a diferença entre a Web convencional e os serviços acessíveis exclusivamente através da rede Tor.
+## Objective
 
-A atividade foi realizada seguindo as orientações do laboratório, com foco na compreensão da tecnologia e sem interação com conteúdo ilegal ou serviços destinados a atividades criminosas.
+Use **Tor Browser** in a controlled educational environment to understand access to services available on the Tor network, examine the structure of `.onion` addresses, and distinguish the conventional Web from services accessible through the Tor network.
 
-## Ambiente
+The activity followed the laboratory instructions and focused on understanding the technology without interacting with illegal content or services intended for criminal activities.
 
-* Kali Linux
-* Firefox
-* Tor Browser
-* Rede Tor
-* Serviços `.onion`
-* The Hidden Wiki
+## Environment
 
-## 1. Acessando a referência na Web convencional
+- Kali Linux
+- Firefox
+- Tor Browser
+- Tor network
+- `.onion` services
+- The Hidden Wiki
 
-Inicialmente, foi utilizado o Firefox para acessar:
+## Procedure
+
+### 1. Access a Reference on the Conventional Web
+
+Firefox was used to access the following website:
 
 ```text
 https://thehiddenwiki.org
 ```
 
-A página apresentou uma relação de endereços e serviços associados à rede Tor.
+The page displayed a collection of addresses and services associated with the Tor network.
 
-Os endereços `.onion` são diferentes dos domínios convencionais utilizados na Internet. Eles identificam serviços que são acessados através da rede Tor.
+`.onion` addresses differ from conventional Internet domains. They identify services that are accessed through the Tor network.
 
-## 2. Identificando endereços `.onion`
+### 2. Identify `.onion` Addresses
 
-Na página consultada foi possível observar uma lista de endereços terminados em:
+The page contained a list of addresses ending in:
 
 ```text
 .onion
 ```
 
-Esses endereços são utilizados para identificar **Onion Services**, também conhecidos como serviços ocultos ou serviços onion.
+These addresses identify **Onion Services**, also known as onion services or hidden services.
 
-Diferentemente de um domínio convencional, um endereço `.onion` é resolvido e acessado dentro da própria rede Tor.
+Unlike conventional Internet domains, `.onion` addresses are resolved and accessed within the Tor network.
 
-## 3. Acessando um Onion Service pelo Tor Browser
+### 3. Access an Onion Service Through Tor Browser
 
-Em seguida, o Tor Browser foi utilizado para acessar um dos serviços `.onion` apresentados no material do curso.
+Tor Browser was then used to access one of the `.onion` services provided in the course material.
 
-O acesso foi realizado através de uma nova aba do Tor Browser, já conectado à rede Tor.
+The service was opened in a new Tor Browser tab after the browser had connected to the Tor network.
 
-O endereço utilizado no laboratório era um serviço onion fornecido pelo próprio roteiro da atividade. Por segurança e para evitar transformar o material do curso em um diretório de serviços onion ativos, o endereço não é reproduzido neste README.
+The address used during the laboratory exercise was an onion service supplied by the activity instructions. To avoid turning this documentation into a directory of active onion services, the address is not reproduced in this README.
 
-## 4. Resultado observado
+### 4. Observe the Result
 
-O serviço acessado apresentou a página **The Hidden Wiki**, com informações sobre a própria infraestrutura do serviço:
+The accessed service displayed a page titled **The Hidden Wiki**, containing information about the service itself.
+
+The following text was observed:
 
 ```text
 The Hidden Wiki
@@ -59,75 +69,91 @@ The Original Hidden Wiki - Only @ [endereço onion do laboratório]
 Update 07.2020: The old short v2 .onion hidden service links will no longer work after october 2021. We will list only v3 .onion's in the future.
 ```
 
-A mensagem também fazia referência à migração dos endereços antigos **Onion v2** para o formato **Onion v3**.
+The message referred to the transition from the older **Onion v2** address format to **Onion v3**.
 
-O resultado demonstrou que o Tor Browser conseguiu estabelecer comunicação com um serviço disponível através da rede Tor.
+The result demonstrated that Tor Browser could communicate with a service available through the Tor network during the laboratory session.
 
-## 5. Serviços Onion
+### 5. Onion Services
 
-O laboratório também apresentou outros endereços `.onion` como exemplos de serviços disponíveis na rede.
+The laboratory also presented other `.onion` addresses as examples of services available through the Tor network.
 
-A existência de um endereço `.onion` não significa, por si só, que o conteúdo disponibilizado pelo serviço seja legítimo ou seguro. Por esse motivo, a atividade foi limitada ao escopo educacional definido pelo curso.
+The existence of an `.onion` address does not, by itself, mean that the content hosted by the service is legitimate or safe. For this reason, the activity remained within the educational scope defined by the course.
 
-Não foram realizadas interações com mercados ilegais, serviços criminosos, distribuição de malware ou qualquer outro conteúdo ilícito.
+No interaction was performed with illegal marketplaces, criminal services, malware distribution, or other illicit content.
 
-## 6. Deep Web e rede Tor
+### 6. The Deep Web and the Tor Network
 
-O termo **Deep Web** normalmente se refere a conteúdos que não são indexados ou facilmente encontrados pelos mecanismos tradicionais de busca. Isso inclui diversos serviços legítimos, como sistemas privados, bancos de dados, páginas autenticadas e outros recursos que não são públicos para mecanismos de busca.
+The term **Deep Web** generally refers to content that is not indexed by, or readily discoverable through, conventional search engines. Examples include private systems, databases, authenticated pages, and other resources that are not publicly indexed.
 
-A rede Tor é uma tecnologia diferente desse conceito. Ela fornece uma infraestrutura de comunicação voltada à privacidade e também permite a existência de serviços `.onion`.
+The Tor network is a different concept. It provides a privacy-oriented communications infrastructure and also supports services using `.onion` addresses.
 
-Portanto:
+The concepts are related, but they are not interchangeable:
 
-* **Deep Web:** conteúdo que não está necessariamente indexado pelos mecanismos de busca convencionais;
-* **Dark Web:** conjunto de serviços que dependem de tecnologias específicas para serem acessados;
-* **Tor:** rede que permite comunicação através de múltiplos relays e também hospeda Onion Services;
-* **`.onion`:** domínio utilizado para identificar serviços dentro da rede Tor.
+- **Deep Web:** Content that is not necessarily indexed by conventional search engines.
+- **Dark Web:** A term commonly used for services that rely on specialized technologies or networks for access.
+- **Tor:** A network that routes communications through multiple relays and supports Onion Services.
+- **`.onion`:** A special-use domain suffix associated with services accessed through the Tor network.
 
-Esses conceitos são relacionados, mas não são sinônimos.
+Not all Deep Web content is part of the Dark Web, and not every use of Tor involves accessing hidden or illicit content.
 
-## 7. Onion Services
+### 7. Onion Services
 
-Os Onion Services são serviços projetados para serem acessados através da rede Tor.
+Onion Services are designed to be accessed through the Tor network.
 
-Entre suas características está a utilização de endereços `.onion` e a comunicação através da infraestrutura Tor, sem depender da publicação do serviço da mesma forma que um servidor Web convencional.
+Their characteristics include the use of `.onion` addresses and communication through Tor infrastructure, without requiring the service to be exposed in the same way as a conventional public web server.
 
-O modelo permite que tanto o usuário quanto o serviço tenham características de privacidade diferentes das observadas em uma conexão Web tradicional.
+This design provides privacy properties that differ from those of a traditional Web connection. However, it does not automatically establish that a service is trustworthy, secure, or anonymous in every respect.
 
-## 8. Considerações de segurança
+### 8. Security Considerations
 
-O acesso à rede Tor não significa que todos os serviços disponíveis nela sejam seguros.
+Access to the Tor network does not mean that every available service is safe.
 
-Durante uma atividade prática envolvendo Onion Services, é importante:
+When performing practical exercises involving Onion Services, it is important to:
 
-* permanecer dentro do escopo autorizado do laboratório;
-* evitar serviços de procedência desconhecida;
-* não realizar downloads suspeitos;
-* não executar arquivos obtidos de fontes não confiáveis;
-* não fornecer informações pessoais;
-* não interagir com serviços ilegais;
-* encerrar a sessão ao concluir o exercício.
+- Stay within the authorized scope of the laboratory.
+- Avoid services of unknown provenance.
+- Avoid suspicious downloads.
+- Never execute files obtained from untrusted sources.
+- Avoid submitting personal information.
+- Avoid interacting with illegal services.
+- Close the session after completing the exercise.
 
-Nesta atividade, a navegação foi utilizada para compreender a tecnologia e a estrutura dos serviços `.onion`.
+In this activity, browsing was limited to understanding the technology and the structure of `.onion` services.
 
-## 9. Resultado
+## Commands and Tools Used
 
-A atividade permitiu:
+The activity primarily used the graphical interfaces of Firefox and Tor Browser.
 
-1. Acessar uma referência relacionada à rede Tor através da Web convencional;
-2. Identificar a estrutura de endereços `.onion`;
-3. Utilizar o Tor Browser para acessar um Onion Service;
-4. Observar uma página do The Hidden Wiki;
-5. Identificar a referência aos formatos Onion v2 e Onion v3;
-6. Compreender a relação entre Tor, Deep Web, Dark Web e Onion Services;
-7. Praticar navegação controlada dentro de um ambiente educacional.
+The conventional Web reference was:
 
-O principal aprendizado foi compreender que os serviços `.onion` fazem parte da infraestrutura da rede Tor e possuem características diferentes dos sites convencionais da Web.
+```text
+https://thehiddenwiki.org
+```
 
-## Evidência
+Tor Browser was used to access an onion service supplied by the course instructions. Its address is intentionally omitted from this README.
 
-A evidência da atividade está no PDF geral das Aulas 7 e 8:
+## Results
 
-[Ver evidências — Aulas 7 e 8](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-02/aula-07-08/evidencias.pdf)
+The activity allowed me to:
 
-**Print registrado:** etapa 4 da atividade, conforme solicitado pelo roteiro.
+1. Access a reference related to the Tor network through the conventional Web.
+2. Identify the structure of `.onion` addresses.
+3. Use Tor Browser to access an Onion Service.
+4. Observe a page associated with The Hidden Wiki.
+5. Identify the page's reference to Onion v2 and Onion v3 address formats.
+6. Understand the relationship between Tor, the Deep Web, the Dark Web, and Onion Services.
+7. Practice controlled browsing in an educational environment.
+
+The main takeaway was that `.onion` services are part of the Tor network infrastructure and have different access characteristics from conventional websites.
+
+## Evidence
+
+The activity evidence is included in the PDF for Classes 07–08.
+
+**Recorded screenshot:** Step 4 of the activity, as required by the laboratory instructions.
+
+[View Evidence — Classes 07–08](../evidencia.pdf)
+
+---
+
+[Back to Classes 07–08](../) · [Back to Module 02](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
