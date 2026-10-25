@@ -1,18 +1,35 @@
-# 🐀 Nibbles — Starting Point (Easy)
+# Nibbles — Easy Machine
 
-🔗 Prova de conclusão:  
-https://labs.hackthebox.com/achievement/machine/2578759/121
+**Platform:** Hack The Box  
+**Operating System:** Linux  
+**Difficulty:** Easy  
+**Status:** Completed
 
-## ✔ O que foi praticado
-- Enumeração inicial com Nmap, identificando portas 22 (SSH) e 80 (HTTP) abertas
-- Enumeração web identificando aplicação *NibbleBlog* rodando na porta 80
-- Enumeração de diretórios e arquivos escondidos usando *gobuster/dirb*
-- Descoberta do diretório `/admin` e identificação da página de login
-- Obtenção de credenciais válidas (ex.: `admin:nibbles`) para acessar o painel administrativo
-- Upload de uma **PHP reverse shell** através da funcionalidade de upload do NibbleBlog
-- Execução da shell e obtenção de acesso ao sistema remoto
-- Transferência do **linEnum** para a máquina alvo para auxiliar na enumeração de privilégios
-- Execução do linEnum para identificar vetor de escalada
-- Identificação de **falha no sudo**, permitindo executar um script como root
-- Exploração da configuração de sudo para obter **acesso root**
-- Captura da flag como usuário root e conclusão da máquina
+## Completion Proof
+
+[View Hack The Box Achievement](https://labs.hackthebox.com/achievement/machine/2578759/121)
+
+## What I Practiced
+
+- Network enumeration with Nmap, identifying SSH (port 22) and HTTP (port 80).
+- Web enumeration to discover the NibbleBlog application and administrative interface.
+- Directory and file discovery using Gobuster/Dirb.
+- Identification of weak administrative credentials (`admin:nibbles`).
+- Exploitation of an unrestricted file upload vulnerability to obtain a PHP reverse shell.
+- Initial access to the Linux target system.
+- Transfer and execution of LinEnum for privilege-escalation enumeration.
+- Analysis of sudo permissions and identification of a privilege-escalation path.
+- Exploitation of a misconfigured sudo rule to obtain root access.
+- Retrieval of the root flag and completion of the machine.
+
+## Key Takeaways
+
+- Thorough enumeration helps identify hidden applications and exposed resources.
+- Weak credentials can compromise administrative interfaces.
+- Unrestricted file uploads can lead to remote code execution.
+- Scripts executable through misconfigured sudo rules can introduce privilege-escalation risks.
+- Proper access controls, secure file-upload validation, and least-privilege configurations help reduce these risks.
+
+---
+
+[Back to Easy Machines](../README.md) · [Back to Hack The Box](../../README.md)
