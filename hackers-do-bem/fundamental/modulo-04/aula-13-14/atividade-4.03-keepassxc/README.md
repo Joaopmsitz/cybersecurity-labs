@@ -1,199 +1,218 @@
-# Atividade 4.3 — Gerenciamento de Credenciais com KeePassXC
+# Activity 4.03 — Credential Management with KeePassXC
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 04  
+> **Class:** 13–14  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **KeePassXC** para criar um banco de dados protegido por senha e armazenar uma credencial de teste.
+## Objective
 
-A atividade teve como objetivo compreender o funcionamento de um gerenciador de senhas, incluindo a criação de um banco de dados no formato `.kdbx`, definição do algoritmo de criptografia e armazenamento de credenciais.
+Use KeePassXC to create a password-protected database and store a test credential.
 
----
+The activity aimed to demonstrate how a password manager works, including creating a database in the `.kdbx` format, selecting an encryption algorithm, and storing authentication credentials.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Aplicação:** KeePassXC
-* **Banco de dados:** `Senhas.kdbx`
-* **Local utilizado:** `/home/aluno/Documentos/`
-* **Algoritmo selecionado:** AES 256-bit
+- **Operating system:** Kali Linux
+- **Application:** KeePassXC
+- **Database file:** `Senhas.kdbx`
+- **Directory:** `/home/aluno/Documentos/`
+- **Selected encryption algorithm:** AES 256-bit
 
----
+## Procedure
 
-## 1. Inicialização do KeePassXC
+### 1. Launch KeePassXC
 
-A aplicação foi iniciada a partir do terminal:
+The application was started from the terminal:
 
 ```bash
 keepassxc
 ```
 
-O KeePassXC foi aberto normalmente com o usuário comum do laboratório.
+KeePassXC opened normally under the standard laboratory user account.
 
-A atividade não exigiu privilégios administrativos para a utilização do aplicativo.
+Administrative privileges were not required to use the application during this activity.
 
----
+### 2. Create the Database
 
-## 2. Criação do banco de dados
+On the KeePassXC welcome screen, the option to create a new database was selected.
 
-Na tela inicial do KeePassXC, foi selecionada a opção para criar um novo banco de dados.
-
-Foi definido:
+The following database name was defined:
 
 ```text
-Nome do banco: Pessoal
+Pessoal
 ```
 
-Durante a configuração avançada da criptografia, foi selecionado o algoritmo:
+During the advanced encryption configuration, the following algorithm was selected:
 
 ```text
 AES 256-bit
 ```
 
-O banco de dados foi então protegido por uma senha definida especificamente para o laboratório.
+The database was then protected with a password defined specifically for the laboratory exercise.
 
-> A senha utilizada durante o exercício não é reproduzida neste README.
+**Security note:** The password used during the exercise is not reproduced in this README.
 
-O KeePassXC apresentou o aviso relacionado à utilização de uma senha considerada fraca. Como se tratava de um ambiente acadêmico controlado, a credencial definida pelo roteiro foi utilizada apenas para a execução da atividade.
+KeePassXC displayed a warning indicating that the selected password was considered weak. Since this was a controlled academic environment, the credential specified by the laboratory instructions was used only to complete the activity.
 
----
+For real-world use, a strong, unique master password should be selected. A password manager protects stored credentials through its database encryption, but the security of the database also depends on how the master password and the database file are handled.
 
-## 3. Salvando o banco de dados
+### 3. Save the Database
 
-O banco de dados foi salvo no diretório:
+The database was saved in the following directory:
 
 ```text
 /home/aluno/Documentos/
 ```
 
-com o nome:
+The file was named:
 
 ```text
 Senhas.kdbx
 ```
 
-O formato `.kdbx` é o formato de banco de dados utilizado pelo KeePassXC.
+The `.kdbx` extension identifies the database format used by KeePassXC.
 
-Após a criação, o banco de dados ficou disponível para armazenamento das credenciais.
+After creation, the database was available for storing credentials.
 
----
+### 4. Create a Test Credential
 
-## 4. Criação de uma credencial de teste
+A new entry was created inside the `Pessoal` database to represent a service account.
 
-Dentro do banco `Pessoal`, foi criada uma nova entrada para representar uma conta de serviço.
+The fields used in the laboratory were:
 
-Os campos utilizados no laboratório foram:
+| Field | Value used |
+|---|---|
+| Title | `Netflix` |
+| Username | Test credential |
+| Password | Test credential |
+| URL | `https://www.netflix.com` |
 
-| Campo   | Valor utilizado           |
-| ------- | ------------------------- |
-| Título  | `Netflix`                 |
-| Usuário | Credencial de teste       |
-| Senha   | Credencial de teste       |
-| URL     | `https://www.netflix.com` |
+The entry was saved in the database.
 
-A entrada foi salva dentro do banco de dados.
+The purpose was to demonstrate how KeePassXC organizes authentication information in a single protected database.
 
-O objetivo foi demonstrar como o KeePassXC organiza diferentes informações de autenticação em uma única base protegida.
+The credentials used in the exercise were laboratory test data and are not reproduced in this README.
 
-As credenciais utilizadas no exercício são de laboratório e não são reproduzidas neste README.
+### 5. View the Stored Credential
 
----
+After saving the entry, it was selected in KeePassXC to verify the stored information.
 
-## 5. Visualização da credencial armazenada
-
-Após salvar a entrada, ela foi selecionada no KeePassXC para verificar as informações armazenadas.
-
-Nesse momento foi possível visualizar a entrada:
+The following entry was displayed:
 
 ```text
 Netflix
 ```
 
-e seus respectivos campos de autenticação.
+Its corresponding authentication fields were also available for inspection.
 
-A atividade demonstra que o KeePassXC funciona como um repositório centralizado para credenciais, permitindo armazenar usuários, senhas e URLs dentro de um banco de dados protegido.
+This step demonstrated how KeePassXC functions as a centralized credential repository, allowing usernames, passwords, and URLs to be stored in a protected database.
 
----
+### 6. Delete the Test Entry
 
-## 6. Exclusão da entrada de teste
+After validating the entry, the test credential was deleted from the database.
 
-Depois da validação, a entrada utilizada no exercício foi excluída do banco de dados.
+This step avoided retaining an unnecessary test credential in the activity database.
 
-Essa etapa evita manter uma credencial de teste desnecessária dentro do arquivo da atividade.
+The database was subsequently closed.
 
-O banco de dados foi posteriormente fechado.
+### 7. Remove the Database File
 
----
-
-## 7. Remoção do banco de dados
-
-Com o KeePassXC encerrado, foi acessado o diretório utilizado para salvar o banco:
+After closing KeePassXC, the directory used to save the database was accessed:
 
 ```bash
 cd /home/aluno/Documentos
 ```
 
-Em seguida, foi verificado o conteúdo do diretório:
+The directory contents were then checked:
 
 ```bash
 ls
 ```
 
-O arquivo criado durante a atividade foi identificado:
+The file created during the activity was identified:
 
 ```text
 Senhas.kdbx
 ```
 
-O arquivo foi então removido:
+The file was then removed:
 
 ```bash
 rm Senhas.kdbx
 ```
 
-A remoção foi realizada somente após a conclusão da atividade.
+The removal was performed only after the activity had been completed.
 
----
+**Note:** The `rm` command removes the file's directory entry; it does not guarantee secure erasure of all underlying data from storage media.
 
-## Conceitos praticados
+## Commands and Tools Used
+
+The following commands were used during the activity:
+
+```bash
+keepassxc
+cd /home/aluno/Documentos
+ls
+rm Senhas.kdbx
+```
+
+The database was created, configured, and managed through the KeePassXC graphical interface.
+
+## Concepts Practiced
 
 ### KeePassXC
 
-O KeePassXC é um gerenciador de senhas que permite armazenar credenciais em um banco de dados protegido.
+KeePassXC is a password manager that stores credentials in an encrypted database.
 
-### Banco KDBX
+### KDBX Database
 
-O `.kdbx` é o formato utilizado pelo KeePassXC para armazenar o banco de dados de credenciais.
+The `.kdbx` format is used by KeePassXC to store password databases and their associated entries.
 
 ### AES-256
 
-O **AES (Advanced Encryption Standard)** é um algoritmo de criptografia simétrica. No laboratório foi selecionada a variante com chave de **256 bits**.
+AES (Advanced Encryption Standard) is a symmetric encryption algorithm. The 256-bit key variant was selected during the laboratory exercise.
 
-### Gerenciamento de credenciais
+Selecting AES-256 does not, by itself, guarantee the security of a password database. The overall protection also depends on the master password, database settings, and secure handling of the file.
 
-Um gerenciador de senhas permite centralizar credenciais em vez de armazená-las em arquivos de texto ou reutilizá-las diretamente em diferentes serviços.
+### Credential Management
+
+A password manager centralizes credentials instead of requiring users to store passwords in plain-text files or manually reuse them across different services.
+
+### Master Password
+
+The master password is used to unlock the protected database. It should be strong, unique, and kept confidential.
+
+### Secure Handling of Test Credentials
+
+The activity demonstrated the creation, inspection, and removal of a test credential. Using non-production credentials in training environments helps prevent accidental exposure of real account information.
+
+## Results
+
+The activity demonstrated how to create and use a credential database in KeePassXC.
+
+The following tasks were completed:
+
+- Launched KeePassXC.
+- Created a database.
+- Selected the AES 256-bit encryption algorithm.
+- Protected the database with a password.
+- Created a credential entry.
+- Viewed the stored information.
+- Deleted the test entry.
+- Removed the `.kdbx` file at the end of the laboratory exercise.
+
+The exercise demonstrated how a password manager can organize credentials in a centralized, encrypted database.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 04, Classes 13–14.
+
+**Recorded screenshot:** Step 10 of the activity, as required by the laboratory instructions, showing the test credential stored in KeePassXC.
+
+[View Evidence — Classes 13–14](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-A atividade permitiu criar e utilizar um banco de dados de credenciais no KeePassXC.
-
-Foi possível:
-
-* iniciar o KeePassXC;
-* criar um banco de dados;
-* selecionar o algoritmo AES 256-bit;
-* proteger o banco com uma senha;
-* criar uma entrada de credencial;
-* visualizar os dados armazenados;
-* excluir a entrada de teste;
-* remover o arquivo `.kdbx` ao final do laboratório.
-
-O exercício demonstrou, na prática, como um gerenciador de senhas pode organizar credenciais de forma centralizada e protegida.
-
----
-
-## Evidência
-
-[**Evidências — Módulo 4 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Print registrado:** etapa 10 da atividade, conforme solicitado pelo roteiro, mostrando a credencial de teste armazenada no KeePassXC.
+[Back to Classes 13–14](../) · [Back to Module 04](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
