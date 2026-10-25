@@ -1,140 +1,146 @@
-# Atividade 1.10 — Adversarial Machine Learning
+# Activity 1.10 — Adversarial Machine Learning
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 01  
+> **Class:** 03–04  
+> **Environment:** Web browser  
+> **Status:** Completed
 
-Demonstrar o conceito de **Adversarial Machine Learning** utilizando uma aplicação interativa de reconhecimento de imagens.
+## Objective
 
-A atividade compara uma imagem original com uma versão modificada por uma **perturbação adversarial**, observando como uma alteração aparentemente pequena pode fazer uma rede neural classificar a imagem de maneira diferente.
+Demonstrate the concept of **Adversarial Machine Learning** using an interactive image recognition application.
 
-## Ambiente
+The activity compares an original image with a version modified by an **adversarial perturbation**, observing how a seemingly small, targeted change can cause a neural network to classify the image differently.
 
-* Navegador web
-* Aplicação Adversarial.js
-* Modelo de reconhecimento de placas de trânsito
-* Dataset GTSRB (German Traffic Sign Recognition Benchmark)
+## Environment
 
-## Procedimento
+- **Platform:** Web browser
+- **Application:** Adversarial.js
+- **Model:** Traffic sign recognition
+- **Dataset:** GTSRB (German Traffic Sign Recognition Benchmark)
 
-### 1. Acesso à aplicação
+## Procedure
 
-A atividade foi realizada através da aplicação:
+### 1. Access the Application
 
-https://kennysong.github.io/adversarial.js/
+The activity was performed using the following web application:
 
-A ferramenta permite visualizar, de forma interativa, o funcionamento de um modelo de classificação de imagens e demonstrar o efeito de exemplos adversariais.
+[Adversarial.js — Interactive Adversarial Machine Learning Demo](https://kennysong.github.io/adversarial.js/)
 
-### 2. Seleção do modelo
+The application provides an interactive way to explore image classification and demonstrate the effect of adversarial examples on a machine learning model.
 
-Na aplicação, foi selecionado o modelo:
+### 2. Select the Model
+
+The following model was selected in the application:
 
 ```text
 GTSRB (street sign recognition)
 ```
 
-Esse modelo é utilizado para reconhecimento e classificação de placas de trânsito.
+This model is designed to recognize and classify traffic signs.
 
-### 3. Seleção da imagem original
+### 3. Select the Original Image
 
-Foi selecionada uma imagem correspondente a uma placa de:
+An image representing a **STOP** traffic sign was selected.
 
-```text
-STOP
-```
+The original image served as the reference for comparing the model's classification before and after generating the adversarial example.
 
-A imagem original foi utilizada como referência para comparar a classificação antes e depois da geração do exemplo adversarial.
+### 4. Classify the Original Image
 
-### 4. Classificação da imagem original
-
-Com a imagem original selecionada, foi executada a opção:
+With the original image selected, the following option was executed:
 
 ```text
 RUN NEURAL NETWORK
 ```
 
-A rede neural analisou a imagem e realizou a classificação correspondente à placa apresentada.
+The neural network processed the image and produced a classification consistent with the displayed traffic sign, correctly identifying the STOP sign.
 
-O resultado foi compatível com a imagem original, identificando corretamente a placa de STOP.
+### 5. Generate the Adversarial Example
 
-### 5. Geração do exemplo adversarial
-
-Em seguida, foi utilizada a opção:
+The following option was then selected:
 
 ```text
 GENERATE
 ```
 
-A aplicação gerou uma nova versão da imagem contendo uma **perturbação adversarial**.
+The application generated a modified version of the image containing an **adversarial perturbation**.
 
-Essa alteração é construída de maneira a interferir no processo de classificação do modelo, mesmo mantendo a imagem visualmente semelhante à original.
+This perturbation is designed to interfere with the model's classification process while keeping the modified image visually similar to the original.
 
-### 6. Classificação da imagem adversarial
+### 6. Classify the Adversarial Image
 
-Após a geração da imagem modificada, foi executada novamente a opção:
+After generating the modified image, the following option was executed again:
 
 ```text
 RUN NEURAL NETWORK
 ```
 
-Dessa vez, o modelo produziu uma classificação diferente da classificação obtida para a imagem original.
+This time, the model produced a different classification from the one obtained with the original image.
 
-A rede neural deixou de reconhecer corretamente a placa de STOP, demonstrando o efeito da perturbação adversarial sobre o modelo.
+The network no longer correctly recognized the STOP sign, demonstrating the effect of the adversarial perturbation on the model's output.
 
-### 7. Comparação dos resultados
+### 7. Compare the Results
 
-A atividade permitiu comparar diretamente os dois casos:
+The activity allowed a direct comparison between the two classification results:
 
-| Imagem             | Resultado                              |
-| ------------------ | -------------------------------------- |
-| Imagem original    | Classificação correta da placa de STOP |
-| Imagem adversarial | Classificação incorreta pelo modelo    |
+| Input Image | Observed Result |
+| --- | --- |
+| Original image | Correct classification of the STOP sign |
+| Adversarial image | Incorrect classification by the model |
 
-O resultado demonstra que uma modificação pequena e direcionada pode alterar a saída de um modelo de Machine Learning.
+The result demonstrated that a small, targeted modification to an input can alter the output of a machine learning model.
 
-### 8. Encerramento
+### 8. Finish the Experiment
 
-Após a comparação dos resultados, a atividade foi concluída e a aplicação foi encerrada.
+After comparing the classification results, the activity was completed and the application was closed.
 
-## Comandos utilizados
+## Commands Used
 
-Não foram utilizados comandos de terminal nesta atividade.
+No terminal commands were required for this activity.
 
-Todo o procedimento foi realizado através da interface web da aplicação:
+All steps were performed through the web interface:
 
-https://kennysong.github.io/adversarial.js/
+[https://kennysong.github.io/adversarial.js/](https://kennysong.github.io/adversarial.js/)
 
-## Interpretação
+## Interpreting the Results
 
-Um **exemplo adversarial** é uma entrada modificada de forma intencional para provocar uma classificação incorreta em um modelo de Machine Learning.
+An **adversarial example** is an input intentionally modified to cause a machine learning model to produce an incorrect prediction or classification.
 
-Nesse experimento, a imagem original da placa de STOP foi corretamente classificada pela rede neural. Após a aplicação de uma perturbação adversarial, uma nova classificação foi produzida pelo mesmo modelo.
+In this experiment, the original STOP sign image was classified correctly. After an adversarial perturbation was generated, the same model produced an incorrect classification.
 
-O ponto principal da atividade é demonstrar que o desempenho de um modelo de reconhecimento não depende apenas da aparência visual percebida por uma pessoa. Alterações específicas nos dados de entrada podem explorar características utilizadas pelo modelo durante a classificação.
+The key observation is that a model's classification behavior does not always match human visual perception. Specific changes to input data can exploit characteristics learned by the model during training.
 
-Em aplicações reais, esse tipo de comportamento é relevante para a segurança de sistemas que utilizam Machine Learning, principalmente em cenários nos quais decisões automatizadas dependem de imagens ou outros dados de entrada.
+This behavior is relevant to the security of systems that depend on machine learning, particularly applications in which automated decisions are based on images or other input data.
 
-## Resultado
+The experiment illustrates a potential weakness in model robustness; it does not, by itself, establish how a real-world deployment would behave under the same conditions.
 
-Foi possível demonstrar, de forma controlada, a diferença entre a classificação de uma imagem original e de uma imagem contendo uma perturbação adversarial.
+## Result
 
-A imagem original da placa de STOP foi reconhecida corretamente. Após a geração do exemplo adversarial, o modelo apresentou uma classificação incorreta.
+The activity demonstrated, in a controlled environment, the difference between classifying an original image and classifying an image containing an adversarial perturbation.
 
-O experimento permitiu visualizar na prática o conceito de **adversarial example** e sua relação com a robustez de modelos de Machine Learning.
+The original STOP sign was correctly recognized, while the modified image produced an incorrect classification. This provided a practical demonstration of the **adversarial example** concept and its relationship to machine learning model robustness.
 
-## Conceitos praticados
+## Concepts Practiced
 
-* Machine Learning
-* Inteligência Artificial
-* Adversarial Machine Learning
-* Adversarial Examples
-* Perturbações adversariais
-* Classificação de imagens
-* Redes neurais
-* GTSRB
-* Robustez de modelos
-* Segurança em Inteligência Artificial
+- Machine Learning
+- Artificial Intelligence
+- Adversarial Machine Learning
+- Adversarial examples
+- Adversarial perturbations
+- Image classification
+- Neural networks
+- GTSRB (German Traffic Sign Recognition Benchmark)
+- Model robustness
+- AI security
 
-## Evidência
+## Evidence
 
-A execução da atividade foi registrada no PDF de evidências da Aula 03–04.
+The activity evidence is included in the PDF for Classes 03–04.
 
-[Ver evidências — Aula 03–04](https://github.com/Joaopmsitz/hackers-do-bem-labs/blob/main/fundamental/modulo-01/aula-03-04/evidencias.pdf)
+The relevant screenshots document the original image classification and the classification produced after generating the adversarial example.
+
+[View Evidence — Classes 03–04](../evidencias.pdf)
+
+---
+
+[Back to Classes 03–04](../) · [Back to Module 01](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
