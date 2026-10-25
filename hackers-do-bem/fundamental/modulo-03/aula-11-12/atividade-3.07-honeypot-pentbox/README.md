@@ -1,47 +1,49 @@
-# Atividade 3.7 — Criando um Honeypot com PentBox no Kali Linux
+# Activity 3.07 — Creating a Honeypot with PentBox on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 03  
+> **Class:** 11–12  
+> **Environment:** Kali Linux and Windows Server 2022  
+> **Status:** Completed
 
-Configurar um **honeypot** utilizando o PentBox no Kali Linux e realizar um teste controlado a partir de um Windows Server 2022.
+## Objective
 
-A atividade demonstra como um honeypot pode simular um serviço acessível na rede e registrar uma tentativa de acesso, permitindo observar informações da conexão e da requisição HTTP.
+Configure a honeypot using PentBox on Kali Linux and perform a controlled access test from a Windows Server 2022 machine.
 
-> **Observação:** todo o procedimento foi realizado em ambiente de laboratório, exclusivamente para fins acadêmicos.
+The activity demonstrates how a honeypot can simulate a network-accessible service and record an access attempt, allowing connection details and HTTP request information to be observed.
 
----
+**Laboratory scope:** All procedures were performed in a controlled environment for academic purposes.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramenta:** PentBox 1.8
-* **Sistema cliente:** Windows Server 2022
-* **IP do Kali Linux:** `192.168.98.40`
-* **Porta do honeypot:** `80`
-* **Ferramenta de acesso:** Microsoft Edge
+- **Operating system:** Kali Linux
+- **Tool:** PentBox 1.8
+- **Client system:** Windows Server 2022
+- **Kali Linux IP address:** `192.168.98.40`
+- **Honeypot port:** TCP `80`
+- **Client application:** Microsoft Edge
 
----
+## Procedure
 
-## 1. Acesso como superusuário
+### 1. Obtain Superuser Access
 
-No Kali Linux, foi aberto o Terminal e executado:
+On Kali Linux, the terminal was opened and the following command was executed:
 
 ```bash
 sudo -i
 ```
 
-Após a autenticação, o terminal passou a operar como `root`.
+After authentication, the terminal operated as the root user.
 
----
+### 2. Check the IP Address
 
-## 2. Verificação do endereço IP
-
-Foi utilizado o comando:
+The following command was used:
 
 ```bash
 ifconfig
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
@@ -67,33 +69,31 @@ lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         loop  txqueuelen 1000  (Loopback Local)
         RX packets 23  bytes 1937 (1.8 KiB)
         RX errors 0  dropped 0  overruns 0  frame 0
-        TX packets 23  bytes 1937 (1.8 KiB)
-        TX errors 0  dropped 0  overruns 0  carrier 0  collisions 0
+        TX packets 23  bytes 1937  (1.8 KiB)
+        TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
 ```
 
-A interface utilizada para a comunicação com o restante do laboratório foi a `eth0`, configurada com o endereço:
+The interface used to communicate with the rest of the laboratory environment was `eth0`, configured with the following IP address:
 
 ```text
 192.168.98.40
 ```
 
----
+### 3. Launch PentBox
 
-## 3. Acesso ao PentBox
-
-Foi acessado o diretório do PentBox:
+The PentBox directory was accessed:
 
 ```bash
 cd /curso/pentbox/pentbox-1.8
 ```
 
-Em seguida, o programa foi executado:
+The program was then launched:
 
 ```bash
 ./pentbox.rb
 ```
 
-O menu principal apresentado foi:
+The following main menu was displayed:
 
 ```text
 PenTBox 1.8 
@@ -125,19 +125,17 @@ PenTBox 1.8
    ->
 ```
 
-O PentBox reúne diferentes ferramentas, incluindo recursos relacionados a redes.
+PentBox provides several tools, including features related to network testing and security.
 
----
+### 4. Select the Network Tools
 
-## 4. Seleção das ferramentas de rede
-
-No menu principal, foi selecionada a opção:
+The following option was selected from the main menu:
 
 ```text
 2- Network tools
 ```
 
-O submenu apresentado foi:
+The submenu displayed was:
 
 ```text
 1- Net DoS Tester
@@ -150,19 +148,17 @@ O submenu apresentado foi:
 0- Back
 ```
 
-A opção `3` foi utilizada para acessar o recurso de honeypot.
+Option `3` was selected to access the honeypot feature.
 
----
+### 5. Select the Honeypot Feature
 
-## 5. Seleção do Honeypot
-
-Foi selecionada:
+The following option was selected:
 
 ```text
 3- Honeypot
 ```
 
-O PentBox apresentou:
+PentBox displayed:
 
 ```text
 // Honeypot //
@@ -175,39 +171,37 @@ You must run PenTBox with root privileges.
 2- Manual Configuration [Advanced Users, more options]
 ```
 
-Foi escolhida a configuração automática:
+The automatic configuration option was selected:
 
 ```text
 1- Fast Auto Configuration
 ```
 
----
+### 6. Activate the Honeypot
 
-## 6. Ativação do Honeypot
-
-Após a seleção, o PentBox informou:
+After the selection, PentBox reported:
 
 ```text
 HONEYPOT ACTIVATED ON PORT 80 (2024-01-24 16:52:52 -0500)
 ```
 
-O honeypot passou a aguardar conexões na porta TCP `80`.
+The honeypot began waiting for connections on TCP port `80`.
 
-A porta `80` é tradicionalmente utilizada por serviços HTTP, o que permite que uma tentativa de acesso utilizando um navegador gere uma requisição HTTP observável pelo honeypot.
+Port 80 is conventionally used for HTTP services, allowing a browser access attempt to generate an HTTP request that can be observed by the honeypot.
 
----
+**Timestamp note:** The activation message contains a timestamp different from the timestamps in the subsequent access-test output. Both outputs are preserved as recorded, but the timestamps should not be assumed to represent the same execution session.
 
-## 7. Teste a partir do Windows Server 2022
+### 7. Test Access from Windows Server 2022
 
-Com o honeypot ativo, foi acessado o Windows Server 2022 disponibilizado pelo laboratório.
+With the honeypot active, the Windows Server 2022 machine provided by the laboratory was accessed.
 
-No Windows, foi aberto o Microsoft Edge e inserido o endereço IP do Kali Linux:
+Microsoft Edge was opened, and the Kali Linux IP address was entered:
 
 ```text
 http://192.168.98.40
 ```
 
-O acesso apresentou uma resposta indicando que a tentativa havia sido registrada pelo honeypot:
+The access attempt returned a response indicating that the interaction had been recorded by the honeypot:
 
 ```text
 Access denied
@@ -216,15 +210,13 @@ IP Address login failed
 2025-09-06 11:44:50 -0300
 ```
 
-A data e o horário exibidos podem variar conforme o momento em que o laboratório é executado.
+The date and time shown by the application can vary depending on when the laboratory is run.
 
----
+### 8. Review the Access Attempt Recorded by the Honeypot
 
-## 8. Registro da tentativa de acesso pelo Honeypot
+After accessing the Kali Linux address from Windows Server, the Kali Linux terminal was checked again.
 
-Após realizar o acesso pelo Windows Server, foi retornado ao Terminal do Kali Linux.
-
-O PentBox registrou a tentativa de conexão:
+PentBox recorded the connection attempt:
 
 ```text
 INTRUSION ATTEMPT DETECTED! from 192.168.98.30:49736 (2025-09-06 11:45:58 -0300)
@@ -239,141 +231,167 @@ Accept-Encoding: gzip, deflate
 Accept-Language: en-US,en;q=0.9
 ```
 
-Esse registro demonstra algumas informações importantes da requisição HTTP.
+This record provides several useful details about the HTTP request.
 
-### Origem da conexão
+#### Connection Source
 
 ```text
 from 192.168.98.30:49736
 ```
 
-Indica o endereço IP e a porta de origem observados pelo honeypot.
+This identifies the source IP address and source port observed by the honeypot.
 
-### Método HTTP
+#### HTTP Method
 
-```text
+```http
 GET / HTTP/1.1
 ```
 
-Indica que o navegador realizou uma requisição HTTP `GET` para o caminho `/`.
+Indicates that the browser sent an HTTP `GET` request for the `/` path using HTTP/1.1.
 
-### Host
+#### Host
 
-```text
+```http
 Host: 192.168.98.40
 ```
 
-Identifica o endereço de destino utilizado na requisição HTTP.
+Identifies the destination host specified in the HTTP request.
 
-### User-Agent
+#### User-Agent
 
-```text
+```http
 User-Agent: Mozilla/5.0 (...) Edg/139.0.0.0
 ```
 
-O campo `User-Agent` fornece informações sobre o cliente que realizou a requisição. Nesse caso, o registro identifica um navegador baseado em Chromium/Microsoft Edge executando em Windows.
+The `User-Agent` field supplies information about the client making the request. In this case, the recorded string identifies a Chromium-based Microsoft Edge browser running on Windows.
 
-### Accept
+A User-Agent string describes what the client reports; it should not be treated as definitive proof of the browser or operating system identity.
 
-O campo `Accept` informa quais tipos de conteúdo o cliente declara ser capaz de receber.
+#### Accept
 
-### Accept-Encoding
+The `Accept` header indicates the content types the client declares it can receive.
 
-```text
+#### Accept-Encoding
+
+```http
 Accept-Encoding: gzip, deflate
 ```
 
-Indica os métodos de compressão de conteúdo aceitos pelo cliente.
+Specifies compression methods accepted by the client.
 
-### Accept-Language
+#### Accept-Language
 
-```text
+```http
 Accept-Language: en-US,en;q=0.9
 ```
 
-Indica as preferências de idioma enviadas pelo navegador.
+Indicates the language preferences sent by the browser.
 
----
+### 9. Interpret the Results
 
-## 9. Interpretação
+The procedure demonstrates the basic operation of a honeypot, which can simulate an available service and record interactions with it.
 
-O procedimento demonstra o funcionamento básico de um **honeypot**, que pode ser utilizado para apresentar um serviço aparentemente disponível e registrar interações com ele.
-
-Nesse laboratório:
+The laboratory flow can be represented as follows:
 
 ```text
 Windows Server 2022
-        │
-        │ HTTP
-        ▼
+        |
+        | HTTP request
+        v
 192.168.98.40:80
-        │
-        ▼
+        |
+        v
 PentBox Honeypot
-        │
-        ▼
-Registro da requisição
+        |
+        v
+Recorded request in the Kali Linux terminal
 ```
 
-O PentBox identificou a tentativa de acesso e apresentou informações da requisição HTTP no terminal.
+PentBox detected the access attempt and displayed HTTP request information in the terminal.
 
-O registro permite observar dados como:
+The record made it possible to observe:
 
-* endereço IP de origem;
-* porta de origem;
-* método HTTP;
-* caminho solicitado;
-* endereço de destino;
-* navegador utilizado;
-* sistema operacional informado pelo User-Agent;
-* tipos de conteúdo aceitos;
-* métodos de compressão aceitos;
-* idioma informado pelo cliente.
+- Source IP address.
+- Source port.
+- HTTP method.
+- Requested path.
+- Destination host.
+- Browser information reported by the client.
+- Operating system information included in the User-Agent string.
+- Accepted content types.
+- Accepted compression methods.
+- Language preferences provided by the client.
 
----
+The label `INTRUSION ATTEMPT DETECTED!` is the tool's alert wording. In this exercise, the observed activity was a request made by the authorized laboratory client; the label alone does not prove malicious intent.
 
-## Conceitos praticados
+## Concepts Practiced
 
 ### Honeypot
 
-Um honeypot é um recurso criado para atrair, observar e registrar interações com atividades que não deveriam ocorrer em determinado serviço ou ambiente.
+A honeypot is a resource designed to attract, observe, and record interactions that may be unexpected within a particular service or environment.
 
-Em contextos de segurança, registros desse tipo podem auxiliar na detecção e análise de comportamentos suspeitos.
+In security operations, such records can support the detection and analysis of suspicious behavior.
 
 ### PentBox
 
-O PentBox é um conjunto de ferramentas voltadas para atividades de segurança e testes em redes. Nesta atividade, foi utilizado especificamente o módulo de honeypot.
+PentBox is a collection of tools for security and network testing. This activity specifically used its honeypot module.
 
 ### HTTP
 
-O protocolo HTTP é utilizado para comunicação entre clientes, como navegadores, e servidores web.
+HTTP is used for communication between clients, such as web browsers, and web servers.
 
-A atividade permitiu observar diretamente uma requisição HTTP gerada pelo navegador.
+The activity allowed an HTTP request generated by a browser to be observed directly.
 
-### Logs e indicadores
+### Logs and Indicators
 
-A saída registrada pelo PentBox demonstra como informações de uma conexão podem ser utilizadas como evidência para análise de eventos de rede.
+The PentBox output demonstrates how connection information can be recorded and used as evidence during network-event analysis.
+
+### Source IP and Port
+
+The source IP and port help identify the network endpoint from which the connection was observed. These values are useful for investigation but do not, on their own, establish the identity of a person or device beyond the laboratory context.
+
+## Commands and Tools Used
+
+The following commands were used during the activity:
+
+```bash
+sudo -i
+ifconfig
+cd /curso/pentbox/pentbox-1.8
+./pentbox.rb
+```
+
+The browser test was performed from Windows Server 2022 using:
+
+```text
+http://192.168.98.40
+```
+
+## Results
+
+The honeypot was configured on Kali Linux using PentBox and activated on TCP port `80`.
+
+A request was sent from Windows Server 2022 to the Kali Linux address. PentBox detected the interaction and recorded the HTTP request in the terminal.
+
+The activity provided practical experience with:
+
+- Configuring a honeypot.
+- Using a TCP listening service.
+- Generating an HTTP request from another system.
+- Identifying the source connection information.
+- Analyzing HTTP headers.
+- Observing browser-supplied information in security logs.
+
+The laboratory demonstrated how a honeypot can record network interactions for observation and analysis in a controlled environment.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 03, Classes 11–12.
+
+**Recorded screenshot:** Step 10 of the activity, showing the access attempt recorded by the honeypot in the Kali Linux terminal.
+
+[View Evidence — Classes 11–12](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-O honeypot foi configurado com sucesso no Kali Linux utilizando o PentBox e colocado em escuta na porta `80`.
-
-A partir do Windows Server 2022, foi realizada uma requisição HTTP para o endereço do Kali Linux. O PentBox identificou a interação e registrou a requisição no terminal.
-
-A atividade permitiu praticar:
-
-1. configuração de um honeypot;
-2. utilização de um serviço de escuta em uma porta TCP;
-3. geração de uma requisição HTTP a partir de outro sistema;
-4. identificação da origem da conexão;
-5. análise de cabeçalhos HTTP;
-6. observação de informações fornecidas pelo navegador.
-
----
-## Evidência
-
-[**Evidências — Módulo 3 / Aulas 11 e 12**](../evidencias.pdf)
-
-**Print registrado:** etapa 10 da atividade, mostrando no terminal do Kali Linux a tentativa de acesso registrada pelo honeypot.
+[Back to Classes 11–12](../) · [Back to Module 03](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
