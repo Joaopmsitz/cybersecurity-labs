@@ -4,29 +4,29 @@ Tier 0 introduces fundamental penetration testing concepts through basic network
 
 ## Machines
 
-| Machine | Operating System | Main Focus |
-| --- | --- | --- |
-| [Meow](./meow/) | Linux | Telnet and unauthenticated access |
-| [Fawn](./fawn/) | Linux | FTP and anonymous file access |
-| [Dancing](./dancing/) | Windows | SMB enumeration and network shares |
-| [Redeemer](./redeemer/) | Linux | Redis and unauthenticated database access |
-| [Explosion](./explosion/) | Windows | RDP and remote desktop access |
-| [Preignition](./preignition/) | Linux | Web directory enumeration and default credentials |
-| [Mongod](./mongod/) | Linux | MongoDB enumeration and database access |
-| [Synced](./synced/) | Linux | Rsync and exposed file synchronization |
+| Machine | Operating System | Main Focus | Status |
+| --- | --- | --- | --- |
+| [Meow](./meow/) | Linux | Telnet and unauthenticated root access | Completed |
+| [Fawn](./fawn/) | Linux | FTP and anonymous file access | Completed |
+| [Dancing](./dancing/) | Windows | SMB enumeration and anonymous shares | Completed |
+| [Redeemer](./redeemer/) | Linux | Redis and unauthenticated database access | Completed |
+| [Explosion](./explosion/) | Windows | RDP and insecure authentication | Completed |
+| [Preignition](./preignition/) | Linux | Web directory enumeration and default credentials | Completed |
+| [Mongod](./mongod/) | Linux | MongoDB enumeration and unauthenticated access | Completed |
+| [Synced](./synced/) | Linux | Rsync and anonymous file access | Completed |
 
 ## Skills Practiced
 
 - Network scanning and service enumeration with Nmap
-- Identifying exposed services and their purpose
-- Interacting with FTP, Telnet, SMB, Redis, RDP, HTTP, MongoDB, and Rsync
-- Identifying anonymous access and weak configurations
-- Retrieving and analyzing files from exposed services
-- Documenting findings and understanding security risks
+- Identification of exposed services and misconfigurations
+- Interaction with FTP, Telnet, SMB, RDP, Redis, HTTP, MongoDB, and Rsync
+- Analysis of anonymous access and weak authentication
+- Retrieval and analysis of files from exposed services
+- Documentation of findings and security risks
 
 ## Learning Objective
 
-Build a strong foundation in service enumeration, protocol interaction, and basic security misconfiguration analysis before progressing to more complex challenges.
+Build a strong foundation in service enumeration, protocol interaction, and security misconfiguration analysis before progressing to more complex challenges.
 
 ---
 
