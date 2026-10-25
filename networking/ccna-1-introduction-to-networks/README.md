@@ -1,50 +1,28 @@
 # CCNA 1 — Introduction to Networks
 
-Hands-on labs completed during my studies of Cisco Networking Academy's
-CCNA: Introduction to Networks (ITN).
+Hands-on networking labs and study notes from Cisco Networking Academy's **CCNA: Introduction to Networks (ITN)** course.
 
-## 🎯 Goal
+## Goal
 
-Build strong networking fundamentals through practical Packet Tracer labs.
+Build networking fundamentals through practical exercises, configuration, and troubleshooting.
 
-## 📚 Modules
+## Modules
 
-- [ ] Module 01 — Networking Today
-- [ ] Module 02 — Basic Switch and End Device Configuration
-- [ ] Module 03 — Protocols and Models
-- [ ] Module 04 — Physical Layer
-- [ ] Module 05 — Number Systems
-- [ ] Module 06 — Data Link Layer
-- [ ] Module 07 — Ethernet Switching
-- [ ] Module 08 — Network Layer
-- [ ] Module 09 — Address Resolution
-- [ ] Module 10 — Basic Router Configuration
-- [ ] Module 11 — IPv4 Addressing
-- [ ] Module 12 — IPv6 Addressing
-- [ ] Module 13 — ICMP
-- [ ] Module 14 — Transport Layer
-- [ ] Module 15 — Application Layer
-- [ ] Module 16 — Network Security Fundamentals
-- [ ] Module 17 — Build a Small Network
+- [Module 01 — Networking Today](./module-01-networking-today/)
+- [Module 02 — Basic Switch and End Device Configuration](./module-02-basic-switch-and-end-device-configuration/)
+- [Module 03 — Network Protocols](./module-03-network-protocols/)
+  - [Investigate TCP/IP and OSI Models in Action](./module-03-network-protocols/01-investigate-tcp-ip-and-osi-models-in-action/)
+- [Module 04 — Physical Layer](./module-04-physical-layer/)
 
-## 🧪 Repository Structure
+Additional modules will be documented as the repository expands.
 
-```text
-ccna-1-introduction-to-networks/
-│
-├── module-01-networking-today/
-├── module-02-basic-switch-configuration/
-├── module-03-protocols-and-models/
-└── ...
-```
-
-## 🛠️ Tools
+## Tools
 
 - Cisco Packet Tracer
 - Cisco IOS
 - Wireshark
-- Git & GitHub
+- Git and GitHub
 
 ---
 
-⭐ Learning networking through hands-on practice.
+[Back to Networking Labs](../README.md) · [Back to Cybersecurity Portfolio](../../README.md)
