@@ -1,46 +1,29 @@
-# Networking Labs — CCNA Preparation
+# Jeremy's IT Lab — CCNA 200-301
 
-Hands-on networking exercises and notes created during CCNA preparation. This section is intended to document configuration, verification, troubleshooting, and the reasoning behind network behavior.
+Hands-on networking labs completed during my preparation for the **CCNA 200-301** certification using Jeremy's IT Lab Free CCNA course.
 
-## Contents
+## Course
 
-### Cisco Networking Academy
+**Free CCNA 200-301 Complete Course — Jeremy's IT Lab**
 
-- [CCNA 1 — Introduction to Networks](./ccna-1-introduction-to-networks/)
-- CCNA 2 — Switching, Routing, and Wireless Essentials
-- CCNA 3 — Enterprise Networking, Security, and Automation
+This repository documents practical exercises completed using Cisco Packet Tracer.
 
-### Jeremy's IT Lab
+## Labs
 
-Study and lab work from Jeremy's IT Lab. Add direct links to each documented course folder as those paths are verified in the repository.
+- [Day 4 — Basic Device Security](./day-04-basic-device-security/)
+- [Day 6 — MAC Address Table](./day-06-mac-address-table/)
+- [Day 8 — Configuring IP Addresses](./day-8-configuring-ip-address/)
 
-### Personal labs
+## Study Materials
 
-Additional Packet Tracer labs and troubleshooting exercises created to reinforce networking concepts.
-
-## Goal
-
-Build practical networking knowledge while preparing for the Cisco CCNA certification.
-
-The repository is updated as I progress through the curriculum.
-
-## Topics
-
-- Network fundamentals and TCP/IP.
-- IPv4, IPv6, and subnetting.
-- Ethernet, switching, VLANs, trunks, STP, and EtherChannel.
-- Routing and OSPF.
-- DHCP, ACLs, NAT, and wireless networking.
-- Network security, troubleshooting, and automation fundamentals.
+I also use the Anki flashcards provided by Jeremy's IT Lab for spaced-repetition review. These are third-party study materials, separate from my own lab documentation.
 
 ## Tools
 
-- Cisco Packet Tracer.
-- Cisco IOS command-line interface.
-- Anki for review.
+- Cisco Packet Tracer
+- Cisco IOS
+- Anki
 
-## Suggested lab documentation
+---
 
-For configuration labs, include the objective, topology, addressing plan, relevant configuration, verification commands and outputs, troubleshooting performed, final result, and lessons learned. Sanitize public IPs, credentials, and any information belonging to real environments.
-
-[Back to the main portfolio](../README.md)
+[Back to Networking Labs](../README.md) · [Back to Cybersecurity Portfolio](../../README.md)
