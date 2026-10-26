@@ -1,43 +1,43 @@
-# Atividade 12.6 — Ler metadados no Kali Linux
+# Activity 12.06 — Reading Metadata on Kali Linux
 
-Nesta atividade foi realizada a leitura de metadados de arquivos utilizando o **ExifTool** no Kali Linux. Foram analisados uma imagem JPEG e um documento PDF, observando informações como datas, software utilizado, autor, direitos autorais, características do arquivo e informações específicas dos formatos.
+Metadata from files was examined in this activity using ExifTool on Kali Linux. A JPEG image and a PDF document were analyzed, revealing information such as dates, software used, author, copyright, file characteristics, and format-specific information.
 
-> **Observação:** credenciais utilizadas no ambiente de laboratório não são registradas neste documento.
+> **Note:** Credentials used in the lab environment are not recorded in this document.
 
-## Objetivo
+## Objective
 
-* Identificar metadados presentes em arquivos digitais.
-* Utilizar o ExifTool para análise de arquivos.
-* Observar informações de arquivos JPEG e PDF.
-* Compreender como metadados podem fornecer informações relevantes em uma análise forense.
+- Identify metadata present in digital files.
+- Use ExifTool to analyze files.
+- Examine information from JPEG and PDF files.
+- Understand how metadata can provide relevant information during forensic analysis.
 
-## Procedimento
+## Procedure
 
-### 1. Acesso ao Kali Linux
+### 1. Accessing Kali Linux
 
-O Kali Linux foi acessado via RDP pelo endereço `192.168.98.40`.
+Kali Linux was accessed via RDP using the address `192.168.98.40`.
 
-Para obter privilégios administrativos:
+Administrative privileges were obtained using:
 
 ```bash
 sudo -i
 ```
 
-### 2. Download da imagem
+### 2. Downloading the Image
 
-Foi acessado o diretório utilizado para os arquivos da atividade:
+The directory used for the activity files was accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
-Inicialmente, o diretório estava vazio. Em seguida, a imagem foi baixada utilizando `wget`:
+Initially, the directory was empty. The image was then downloaded using `wget`:
 
 ```bash
 wget http://metadatadeluxe.pbworks.com/f/1242756531/IPTCpanel.jpg
 ```
 
-Saída:
+Output:
 
 ```text
 --2025-12-06 19:45:10--  http://metadatadeluxe.pbworks.com/f/1242756531/IPTCpanel.jpg
@@ -52,25 +52,27 @@ IPTCpanel.jpg              100%[=======================================>]  84,75
 2025-12-06 19:45:10 (603 KB/s) - “IPTCpanel.jpg” salvo [86782/86782]
 ```
 
-A presença do arquivo foi confirmada:
+The presence of the file was confirmed:
 
 ```bash
 ls
 ```
 
+Output:
+
 ```text
 IPTCpanel.jpg
 ```
 
-### 3. Análise dos metadados da imagem
+### 3. Analyzing the Image Metadata
 
-O ExifTool foi utilizado para analisar a imagem:
+ExifTool was used to analyze the image:
 
 ```bash
 exiftool IPTCpanel.jpg
 ```
 
-Entre as informações encontradas estavam:
+The information found included:
 
 ```text
 ExifTool Version Number         : 13.36
@@ -100,9 +102,9 @@ Exif Image Width               : 300
 Exif Image Height              : 379
 ```
 
-A saída também apresentou diversos campos IPTC, XMP e Photoshop, incluindo informações de autor, direitos autorais, título, descrição, localização, datas e identificadores do documento.
+The output also included several IPTC, XMP, and Photoshop fields, including information about the author, copyright, title, description, location, dates, and document identifiers.
 
-Entre os campos relevantes estavam:
+Among the relevant fields were:
 
 ```text
 Creator Tool                    : Adobe Photoshop CS2 Windows
@@ -119,7 +121,7 @@ State                           : IPTC IMAGE PANEL: STATE/PROVINCE
 Country                         : IPTC IMAGE PANEL: COUNTRY
 ```
 
-Também foram identificadas informações técnicas da imagem, como:
+Technical image information was also identified, including:
 
 ```text
 Image Width                     : 300
@@ -132,35 +134,35 @@ Image Size                      : 300x379
 Megapixels                      : 0.114
 ```
 
-### 4. Principais informações identificadas
+### 4. Main Information Identified
 
-A análise permitiu observar, entre outros dados:
+The analysis revealed, among other details:
 
-* **File Name:** `IPTCpanel.jpg`
-* **File Size:** `87 kB`
-* **File Type:** JPEG
-* **MIME Type:** `image/jpeg`
-* **JFIF Version:** `1.02`
-* **Orientation:** horizontal
-* **Resolution:** 600 × 600
-* **Software:** Adobe Photoshop CS2 Windows
-* **Image dimensions:** 300 × 379 pixels
-* **Create Date:** 19/05/2009
-* **Date Created:** 19/11/2007
-* **Copyright:** campo IPTC de direitos autorais
-* **Creator:** campo IPTC de criador
+- **File Name:** `IPTCpanel.jpg`
+- **File Size:** 87 kB
+- **File Type:** JPEG
+- **MIME Type:** `image/jpeg`
+- **JFIF Version:** 1.02
+- **Orientation:** Horizontal
+- **Resolution:** 600 × 600
+- **Software:** Adobe Photoshop CS2 Windows
+- **Image dimensions:** 300 × 379 pixels
+- **Create Date:** May 19, 2009
+- **Date Created:** November 19, 2007
+- **Copyright:** IPTC copyright notice field
+- **Creator:** IPTC creator field
 
-Esses dados demonstram que uma imagem pode carregar informações além do seu conteúdo visual.
+These details demonstrate that an image can contain information beyond its visual content.
 
-### 5. Download do PDF
+### 5. Downloading the PDF
 
-Ainda no diretório de arquivos, foi baixado um contrato do Conselho Nacional de Justiça:
+Still in the files directory, a contract from Brazil's National Council of Justice (Conselho Nacional de Justiça — CNJ) was downloaded:
 
 ```bash
 wget https://www.cnj.jus.br/wp-content/uploads/2021/07/contrato_08_2021.pdf
 ```
 
-Saída:
+Output:
 
 ```text
 --2025-12-06 19:49:57--  https://www.cnj.jus.br/wp-content/uploads/2021/07/contrato_08_2021.pdf
@@ -175,25 +177,27 @@ contrato_08_2021.pdf       100%[=======================================>]  21,05
 2025-12-06 19:49:59 (16,8 MB/s) - “contrato_08_2021.pdf” salvo [22074478/22074478]
 ```
 
-A existência dos arquivos foi confirmada:
+The presence of both files was confirmed:
 
 ```bash
 ls
 ```
 
+Output:
+
 ```text
 contrato_08_2021.pdf  IPTCpanel.jpg
 ```
 
-### 6. Análise dos metadados do PDF
+### 6. Analyzing the PDF Metadata
 
-O ExifTool foi utilizado novamente:
+ExifTool was used again:
 
 ```bash
 exiftool contrato_08_2021.pdf
 ```
 
-Saída:
+Output:
 
 ```text
 ExifTool Version Number     : 13.36
@@ -225,36 +229,40 @@ PDF Version                 : 1.7
 Format                      : application/pdf
 ```
 
-Entre os dados identificados estão o número de páginas, idioma, ferramenta utilizada na criação, datas de criação/modificação, versão do PDF e identificadores do documento.
+The identified information included the page count, language, software used to create the document, creation and modification dates, PDF version, and document identifiers.
 
-## Conceitos
+## Key Concepts
 
-* **Metadados:** informações associadas a um arquivo que descrevem características, origem ou histórico.
-* **ExifTool:** ferramenta utilizada para ler e manipular metadados de diversos formatos.
-* **EXIF/IPTC/XMP:** padrões e estruturas utilizadas para armazenar diferentes tipos de metadados.
-* **Análise forense:** metadados podem fornecer elementos auxiliares para compreender a origem e o histórico de arquivos digitais.
+- **Metadata:** Information associated with a file that describes its characteristics, origin, or history.
+- **ExifTool:** A tool used to read and manipulate metadata from various file formats.
+- **EXIF/IPTC/XMP:** Standards and structures used to store different types of metadata.
+- **Forensic analysis:** Metadata can provide supporting evidence for understanding the origin and history of digital files.
 
-## Fluxo
+## Activity Workflow
 
 ```text
-Arquivo digital
+Digital file
       ↓
-Download no Kali Linux
+Download on Kali Linux
       ↓
 ExifTool
       ↓
-Leitura dos metadados
+Read metadata
       ↓
-Identificação de datas, software,
-autor, formato e outras informações
+Identify dates, software,
+author, format, and other information
 ```
 
-## Resultado
+## Result
 
-Foi possível utilizar o ExifTool para identificar metadados de uma imagem JPEG e de um documento PDF, demonstrando como arquivos digitais podem conter informações úteis para análise técnica e forense.
+ExifTool was used to identify metadata from a JPEG image and a PDF document, demonstrating how digital files can contain information useful for technical and forensic analysis.
 
-## Evidência
+## Evidence
 
-[**Evidências — Módulo 12 / Aulas 43 e 44**](../evidencias.pdf)
+**View Evidence — Module 12 / Classes 47–48**
 
-**Print solicitado:** passo 8 — saída do `exiftool contrato_08_2021.pdf`.
+**Required screenshot:** Step 8 — the output of `exiftool contrato_08_2021.pdf`.
+
+---
+
+[Back to Classes 47–48](../README.md) · [Back to Module 12](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
