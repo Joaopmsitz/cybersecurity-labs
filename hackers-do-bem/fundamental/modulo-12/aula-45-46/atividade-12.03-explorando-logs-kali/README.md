@@ -1,47 +1,47 @@
-# Atividade 12.3 — Explorando os Logs no Kali Linux
+# Activity 12.03 — Exploring Logs on Kali Linux
 
-## Objetivo
+## Objective
 
-Explorar os principais arquivos e ferramentas de registro de eventos disponíveis no **Kali Linux**, utilizando o diretório `/var/log`, o arquivo `syslog`, o `journalctl` e o aplicativo gráfico **Logs** do GNOME.
+Explore the main event logging files and tools available on **Kali Linux**, using the `/var/log` directory, the `syslog` file, `journalctl`, and the GNOME **Logs** graphical application.
 
-A atividade também demonstra como realizar uma busca por ocorrências contendo a palavra `error` nos registros do sistema.
-
----
-
-## Ambiente
-
-* **Sistema operacional:** Kali Linux
-* **Acesso:** RDP
-* **Diretório de logs:** `/var/log`
-* **Ferramentas:** `cat`, `journalctl`, `grep` e Logs do GNOME
+The activity also demonstrates how to search for occurrences containing the word `error` in system records.
 
 ---
 
-## 1. Acessando o Kali Linux
+## Environment
 
-O Kali Linux foi iniciado e acessado através de RDP.
+- **Operating system:** Kali Linux
+- **Access:** RDP
+- **Log directory:** `/var/log`
+- **Tools:** `cat`, `journalctl`, `grep`, and GNOME Logs
 
-Após o acesso, foi aberto um terminal e obtido acesso administrativo com:
+---
 
-```bash id="v8m2qp"
+## 1. Accessing Kali Linux
+
+Kali Linux was started and accessed via RDP.
+
+After logging in, a terminal was opened and administrative privileges were obtained using:
+
+```bash
 sudo -i
 ```
 
 ---
 
-## 2. Explorando o diretório `/var/log`
+## 2. Exploring the `/var/log` Directory
 
-O diretório `/var/log` concentra diversos arquivos e diretórios utilizados pelo sistema para armazenar registros de eventos.
+The `/var/log` directory contains various files and directories used by the system to store event records.
 
-Para visualizar seu conteúdo, foi executado:
+To view its contents, the following command was executed:
 
-```bash id="n4x7cz"
+```bash
 ls -l /var/log
 ```
 
-Saída:
+Output:
 
-```text id="tna7n1"
+```text
 total 7652
 -rw-r--r--  1 root              root                  0 dez  2 23:00 alternatives.log
 -rw-r--r--  1 root              root              73040 nov 27 21:16 alternatives.log.1
@@ -124,23 +124,23 @@ drwxr-x---  2 root              adm               4096 dez  5 21:54 unattended-u
 -rw-r-----  1 xrdp              adm                 1347 jul  4  2024 xrdp.log.4.gz
 ```
 
-Entre os arquivos e diretórios observados estão registros relacionados a autenticação, inicialização, kernel, serviços, rede, Docker, Suricata, OpenVPN, sessões de usuário e outros componentes do sistema.
+The files and directories observed include records related to authentication, startup, the kernel, services, networking, Docker, Suricata, OpenVPN, user sessions, and other system components.
 
 ---
 
-## 3. Explorando o `syslog`
+## 3. Exploring `syslog`
 
-O arquivo `syslog` contém registros gerais de diversos componentes e serviços do sistema.
+The `syslog` file contains general records from various system components and services.
 
-Para visualizar seu conteúdo, foi executado:
+To view its contents, the following command was executed:
 
-```bash id="q6v3bn"
+```bash
 cat /var/log/syslog
 ```
 
-Parte da saída apresentada:
+Part of the displayed output:
 
-```text id="srz0th"
+```text
 2025-12-02T23:00:27.696849-03:00 ip-192-168-98-40 systemd[1]: rsyslog.service: Sent signal SIGHUP to main process 746 (rsyslogd) on client request.
 2025-12-02T23:00:27.697808-03:00 ip-192-168-98-40 rsyslogd: [origin software="rsyslogd" swVersion="8.2510.0" x-pid="746" x-info="https://www.rsyslog.com"] rsyslogd was HUPed
 2025-12-02T23:00:27.790481-03:00 ip-192-168-98-40 systemd[1]: logrotate.service: Deactivated successfully.
@@ -151,23 +151,23 @@ Parte da saída apresentada:
 ...
 ```
 
-A saída demonstra que diferentes componentes podem escrever informações no mesmo arquivo de log. No exemplo, aparecem eventos relacionados ao `systemd`, `rsyslogd`, `logrotate` e `cloud-init`.
+The output demonstrates that different components can write information to the same log file. In this example, events related to `systemd`, `rsyslogd`, `logrotate`, and `cloud-init` are shown.
 
 ---
 
-## 4. Consultando o journal do sistema
+## 4. Querying the System Journal
 
-Além dos arquivos tradicionais em `/var/log`, o Kali Linux utiliza o **systemd journal**, que pode ser consultado através do comando `journalctl`.
+In addition to traditional files in `/var/log`, Kali Linux uses the **systemd journal**, which can be queried using the `journalctl` command.
 
-Para visualizar os registros referentes à inicialização atual, foi executado:
+To view records from the current boot, the following command was executed:
 
-```bash id="y5r8ck"
+```bash
 journalctl -b
 ```
 
-Parte da saída:
+Part of the output:
 
-```text id="q75pkl"
+```text
 dez 06 10:45:41 kali kernel: Linux version 6.16.8+kali-cloud-amd64 (devel@kali.org) (x86_64-linux-gnu-gcc->
 dez 06 10:45:41 kali kernel: Command line: BOOT_IMAGE=/boot/vmlinuz-6.16.8+kali-cloud-amd64 root=UUID=03b8>
 dez 06 10:45:41 kali kernel: BIOS-provided physical RAM map:
@@ -191,143 +191,145 @@ dez 06 10:45:41 kali kernel: Hypervisor detected: KVM
 ...
 ```
 
-Os registros mostram informações do processo de inicialização do sistema, incluindo a versão do kernel, parâmetros de boot, memória disponível, informações de BIOS e a detecção do hypervisor KVM.
+The records show information about the system startup process, including the kernel version, boot parameters, available memory, BIOS information, and detection of the KVM hypervisor.
 
 ---
 
-## 5. Pesquisando ocorrências com `grep`
+## 5. Searching for Occurrences Using `grep`
 
-Para localizar linhas do `syslog` que contêm a palavra `error`, foi utilizado:
+To locate lines in `syslog` containing the word `error`, the following command was used:
 
-```bash id="h2m6vx"
+```bash
 grep "error" /var/log/syslog
 ```
 
-Parte da saída:
+Part of the output:
 
-```text id="t4nnc5"
+```text
 2025-12-02T23:00:28.076703-03:00 ip-192-168-98-40 containerd[1076]: time="2025-12-02T23:00:28.075234187-03:00" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.blockfile\"..." error="no scratch file generator: skip plugin" type=io.containerd.snapshotter.v1
 2025-12-02T23:00:28.076787-03:00 ip-192-168-98-40 containerd[1076]: time="2025-12-02T23:00:28.075518179-03:00" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.btrfs\"..." error="path /var/lib/containerd/io.containerd.snapshotter.v1.btrfs (ext4) must be a btrfs filesystem to be used with the btrfs snapshotter: skip plugin" type=io.containerd.snapshotter.v1
 2025-12-02T23:00:28.076870-03:00 ip-192-168-98-40 containerd[1076]: time="2025-12-02T23:00:28.075568919-03:00" level=info msg="skip loading plugin \"io.containerd.snapshotter.v1.devmapper\"..." error="devmapper not configured: skip plugin" type=io.containerd.snapshotter.v1
 ...
 ```
 
-O comando realiza uma busca textual pela sequência `error`. Portanto, encontrar a palavra na linha não significa necessariamente que o evento possua nível de severidade `error`.
+The command performs a text search for the string `error`. Therefore, finding the word in a line does not necessarily mean that the event has an `error` severity level.
 
-Nesse caso, as linhas apresentadas possuem:
+In this case, the displayed lines contain:
 
 ```text
 level=info
 ```
 
-e a palavra `error` aparece dentro dos detalhes da mensagem do `containerd`, indicando motivos pelos quais determinados plugins não foram carregados.
+The word `error` appears within the details of the `containerd` message, indicating reasons why certain plugins were not loaded.
 
 ---
 
-## 6. Acessando o aplicativo Logs
+## 6. Accessing the Logs Application
 
-Após a análise pelo terminal, foi encerrada a sessão administrativa com:
+After completing the terminal analysis, the administrative session was ended using:
 
-```bash id="u7x3pd"
+```bash
 exit
 ```
 
-Em seguida, foi aberto o aplicativo:
+Next, the following application was opened:
 
-```text id="c8m4zr"
+```text
 Logs
 ```
 
-O aplicativo **Logs**, também conhecido como **GNOME Logs**, fornece uma interface gráfica para consultar os registros do sistema.
+The **Logs** application, also known as **GNOME Logs**, provides a graphical interface for viewing system records.
 
 ---
 
-## 7. Explorando as categorias do GNOME Logs
+## 7. Exploring GNOME Logs Categories
 
-No painel do aplicativo foram observadas categorias como:
+The application panel displayed categories such as:
 
-* **Important**
-* **All**
-* **Applications**
-* **System**
-* **Security**
-* **Hardware**
+- **Important**
+- **All**
+- **Applications**
+- **System**
+- **Security**
+- **Hardware**
 
-Cada categoria permite concentrar a visualização em determinados tipos de registros.
+Each category allows users to focus on the display of particular types of records.
 
 ### Applications
 
-Apresenta registros relacionados aos aplicativos executados no sistema.
+Displays records related to applications running on the system.
 
 ### System
 
-Exibe eventos relacionados ao funcionamento do sistema operacional e seus componentes.
+Displays events related to the operating system and its components.
 
 ### Security
 
-Concentra registros relacionados à segurança e atividades relevantes para análise do sistema.
+Focuses on records related to security and activities relevant to system analysis.
 
 ### Hardware
 
-Apresenta eventos relacionados aos dispositivos e componentes de hardware reconhecidos pelo sistema.
+Displays events related to devices and hardware components recognized by the system.
 
 ---
 
-## 8. Explorando a seção Security
+## 8. Exploring the Security Section
 
-A categoria:
+The following category was selected in the **Logs** application:
 
-```text id="n9b2wk"
+```text
 Security
 ```
 
-foi selecionada no aplicativo **Logs**.
-
-Nessa seção são apresentados registros relacionados à segurança do sistema, permitindo observar eventos que podem ser relevantes durante uma investigação ou análise de comportamento do ambiente.
+This section displays records related to system security, allowing events that may be relevant during an investigation or analysis of the environment to be observed.
 
 ---
 
-## 9. Evidência
+## 9. Evidence
 
-O print obrigatório da atividade corresponde ao **passo 10**, mostrando a seção **Security** do aplicativo **Logs** do GNOME.
+The required screenshot for this activity corresponds to **Step 10**, showing the **Security** section of the GNOME **Logs** application.
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 12.3:** seção `Security` do aplicativo `Logs` do GNOME no Kali Linux, exibindo os registros relacionados à segurança do sistema.
+> Screenshot of Activity 12.03: the `Security` section of the GNOME `Logs` application on Kali Linux, displaying records related to system security.
 
-[**Evidências — Módulo 12 / Aulas 45 e 46**](../evidencias.pdf)
+[**View Evidence — Module 12 / Classes 45–46**](../evidencias.pdf)
 
 ---
 
-## Conceitos
+## Key Concepts
 
-* **`/var/log`:** diretório tradicional utilizado pelo Linux para armazenar registros.
-* **`syslog`:** registro geral de eventos gerados por diferentes componentes e serviços.
-* **`journalctl`:** ferramenta para consultar o journal mantido pelo `systemd`.
-* **`grep`:** ferramenta utilizada para pesquisar padrões em arquivos de texto.
-* **GNOME Logs:** interface gráfica para consulta de registros do sistema.
-* **Log de segurança:** registro que pode auxiliar na identificação e investigação de atividades relacionadas à segurança.
+- **`/var/log`:** The traditional directory used by Linux to store log records.
+- **`syslog`:** A general log containing events generated by different system components and services.
+- **`journalctl`:** A tool for querying the journal maintained by `systemd`.
+- **`grep`:** A tool used to search for patterns in text files.
+- **GNOME Logs:** A graphical interface for viewing system records.
+- **Security log:** A record that can help identify and investigate security-related activities.
 
-## Fluxo
+## Activity Workflow
 
-```text id="x3v7qm"
+```text
 Kali Linux
-    ↓
+     ↓
 /var/log
-    ↓
+     ↓
 syslog
-    ↓
+     ↓
 journalctl -b
-    ↓
+     ↓
 grep "error"
-    ↓
+     ↓
 GNOME Logs
-    ↓
+     ↓
 Security
 ```
 
-## Resultado
+## Result
 
-Foram explorados os principais mecanismos de registro do Kali Linux, incluindo `/var/log`, `syslog`, `journalctl` e o aplicativo **Logs** do GNOME.
+The main logging mechanisms available on Kali Linux were explored, including `/var/log`, `syslog`, `journalctl`, and the GNOME **Logs** application.
 
-Também foi realizada uma busca textual por `error` no `syslog` e analisada a categoria **Security** na interface gráfica.
+A text search for `error` was also performed in `syslog`, and the **Security** category was examined through the graphical interface.
+
+---
+
+[Back to Classes 45–46](../README.md) · [Back to Module 12](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
