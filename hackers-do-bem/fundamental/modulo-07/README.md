@@ -7,49 +7,44 @@
 
 ## Overview
 
-This module covers storage management, software RAID, file synchronization, cloud backups, local backups, filesystem formatting, and data overwriting techniques using Linux and Windows environments.
-
-The activities are organized into two class groups:
-
-- **Classes 25–26:** RAID configuration, file synchronization, and OneDrive backup.
-- **Classes 27–28:** Local backups with Duplicity, filesystem formatting, and data overwriting.
+This module covers storage management, software RAID, file synchronization, cloud backups, local backups, filesystem formatting, and data overwriting techniques in Linux and Windows environments.
 
 ## Classes 25–26 — RAID and Backup Synchronization
 
-| Activity | Topic | Description |
-|---|---|---|
-| [7.01 — Software RAID 0](aula-25-26/atividade-7.01-raid-0-kali/README.md) | Kali Linux | Create and mount a RAID 0 array using `mdadm`. |
-| [7.02 — Software RAID 1](aula-25-26/atividade-7.02-raid-1-kali/README.md) | Kali Linux | Create and verify a mirrored RAID 1 array. |
-| [7.03 — Manual Rsync](aula-25-26/atividade-7.03-rsync-manual/README.md) | Linux | Copy files between directories using `rsync`. |
-| [7.04 — Automated Rsync with Cron](aula-25-26/atividade-7.04-rsync-cron/README.md) | Linux | Automate directory synchronization with a scheduled cron job. |
-| [7.05 — OneDrive Backup and Synchronization](aula-25-26/atividade-7.05-onedrive-backup/README.md) | Windows Server 2022 | Configure OneDrive and enable folder backup and cloud synchronization. |
+| Activity | Topic | Description | |
+|---|---|---|---|
+| 7.01 | Software RAID 0 | Create and mount a RAID 0 array using `mdadm`. | [View](aula-25-26/atividade-7.01-raid-0-kali/README.md) |
+| 7.02 | Software RAID 1 | Create and verify a mirrored RAID 1 array. | [View](aula-25-26/atividade-7.02-raid-1-kali/README.md) |
+| 7.03 | Manual Rsync | Copy files between directories using `rsync`. | [View](aula-25-26/atividade-7.03-rsync-manual/README.md) |
+| 7.04 | Automated Rsync with Cron | Automate directory synchronization with a scheduled cron job. | [View](aula-25-26/atividade-7.04-rsync-cron/README.md) |
+| 7.05 | OneDrive Backup and Synchronization | Configure OneDrive folder backup on Windows Server 2022. | [View](aula-25-26/atividade-7.05-onedrive-backup/README.md) |
 
-[View Evidence — Classes 25–26](aula-25-26/evidencias.pdf)
+**Evidence:** [View PDF — Classes 25–26](aula-25-26/evidencias.pdf)
 
 ## Classes 27–28 — Local Backups and Data Erasure
 
-| Activity | Topic | Description |
-|---|---|---|
-| [7.06 — Local Full Backup with Duplicity](aula-27-28/atividade-7.06-duplicity-backup-completo/README.md) | Kali Linux | Create a local full backup and restore files for verification. |
-| [7.07 — Local Differential Backup with Duplicity](aula-27-28/atividade-7.07-duplicity-backup-diferencial/README.md) | Kali Linux | Modify files, create a subsequent backup, and verify restoration. |
-| [7.08 — Complete Formatting](aula-27-28/atividade-7.08-formatacao-completa/README.md) | Kali Linux | Manage partitions, recreate a filesystem, and remove filesystem signatures using `wipefs`. |
-| [7.09 — Simple Data Overwriting](aula-27-28/atividade-7.09-sobrescrita-simples/README.md) | Kali Linux | Demonstrate low-level overwriting with random data using `dd`. |
-| [7.10 — DoD 5220.22-M Overwrite Pattern](aula-27-28/atividade-7.10-sobrescrita-dod/README.md) | Kali Linux | Use `shred` to perform a pseudorandom-data pass followed by a zero-fill pass. |
+| Activity | Topic | Description | |
+|---|---|---|---|
+| 7.06 | Local Full Backup with Duplicity | Create a local full backup and restore files for verification. | [View](aula-27-28/atividade-7.06-duplicity-backup-completo/README.md) |
+| 7.07 | Local Differential Backup with Duplicity | Modify files, create a subsequent backup, and verify restoration. | [View](aula-27-28/atividade-7.07-duplicity-backup-diferencial/README.md) |
+| 7.08 | Complete Formatting on Kali Linux | Recreate a filesystem and remove filesystem signatures using `wipefs`. | [View](aula-27-28/atividade-7.08-formatacao-completa/README.md) |
+| 7.09 | Simple Data Overwriting | Demonstrate low-level overwriting with random data using `dd`. | [View](aula-27-28/atividade-7.09-sobrescrita-simples/README.md) |
+| 7.10 | DoD 5220.22-M Overwrite Pattern | Use `shred` for a pseudorandom-data pass followed by a zero-fill pass. | [View](aula-27-28/atividade-7.10-sobrescrita-dod/README.md) |
 
-[View Evidence — Classes 27–28](aula-27-28/evidencias.pdf)
+**Evidence:** [View PDF — Classes 27–28](aula-27-28/evidencias.pdf)
 
 ## Key Skills Practiced
 
-- Software RAID configuration and status verification.
+- Software RAID configuration and verification.
 - File synchronization with `rsync`.
 - Task scheduling and automation with `cron`.
 - Cloud backup configuration using OneDrive.
 - Local backup and restoration using Duplicity.
 - Linux partition and filesystem management.
-- Filesystem signature removal with `wipefs`.
-- Data overwriting concepts and the limitations of overwrite-based erasure.
+- Filesystem signature removal using `wipefs`.
+- Data overwriting techniques and their limitations.
 
-> **Security note:** Partition formatting, filesystem signature removal, and direct block-device overwriting are destructive operations. They should only be performed on explicitly authorized lab devices. Overwriting does not guarantee secure erasure on every type of storage media.
+> **Security note:** Formatting partitions, removing filesystem signatures, and overwriting block devices are destructive operations. Perform them only on authorized lab devices. Overwriting does not guarantee secure data erasure on every storage medium.
 
 ---
 
