@@ -1,50 +1,50 @@
-# Atividade 9.8 — Verificando Certificados Web com OCSP no Kali Linux
+# Activity 9.08 — Verifying Web Certificates with OCSP on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 09  
+> **Classes:** 35–36  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o OpenSSL no Kali Linux para analisar certificados digitais de servidores web e verificar informações relacionadas ao **OCSP (Online Certificate Status Protocol)** durante uma conexão TLS.
+## Objective
 
----
+Use OpenSSL on Kali Linux to analyze web server digital certificates and examine OCSP (Online Certificate Status Protocol) information during a TLS connection.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramenta:** OpenSSL
-* **Comando:** `openssl s_client`
-* **Servidores analisados:** `www.grancursos.com.br` e `www.google.com`
-* **Porta:** `443 (HTTPS)`
+- **Operating system:** Kali Linux
+- **Tool:** OpenSSL
+- **Command:** `openssl s_client`
+- **Servers analyzed:** `www.grancursos.com.br` and `www.google.com`
+- **Port:** 443 (HTTPS)
 
-> As credenciais utilizadas para acesso ao laboratório não são registradas neste README.
+> Credentials used to access the lab environment are not recorded in this README.
 
----
+## 1. Opening the Terminal
 
-## 1. Acesso ao terminal
-
-Foi aberto um terminal no Kali Linux e obtido acesso administrativo com:
+A terminal was opened on Kali Linux, and administrative access was obtained using:
 
 ```bash
 sudo -i
 ```
 
-Em seguida, foi acessado o diretório utilizado nas atividades:
+The directory used in the activities was then accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
----
+## 2. Checking the Server Certificate
 
-## 2. Verificação do certificado do servidor
-
-Para estabelecer uma conexão TLS com o servidor do Gran Cursos e solicitar o status OCSP, foi executado:
+To establish a TLS connection to the Gran Cursos server and request OCSP status information, the following command was executed:
 
 ```bash
 openssl s_client -connect www.grancursos.com.br:443 -status
 ```
 
-A opção `-connect` define o servidor e a porta utilizados na conexão, enquanto `-status` solicita ao servidor uma resposta de **OCSP stapling**, quando disponível.
+The `-connect` option specifies the server and port used for the connection, while `-status` requests an OCSP stapling response from the server, when available.
 
-Parte relevante da saída obtida:
+Relevant portion of the output:
 
 ```text
 Connecting to 172.67.175.92
@@ -57,13 +57,11 @@ depth=0 CN=grancursos.com.br
 verify return:1
 ```
 
-A cadeia de certificados foi validada durante a conexão.
+The certificate chain was validated during the connection.
 
----
+## 3. Analyzing the OCSP Response
 
-## 3. Análise da resposta OCSP
-
-Na saída do comando foi apresentada uma resposta OCSP:
+The command output included an OCSP response:
 
 ```text
 OCSP response:
@@ -87,21 +85,19 @@ OCSP Response Data:
     Signature Algorithm: ecdsa-with-SHA256
 ```
 
-O campo:
+The field:
 
 ```text
 Cert Status: good
 ```
 
-indica que, de acordo com a resposta OCSP apresentada, o certificado consultado estava marcado como válido naquele momento.
+indicates that, according to the OCSP response returned during the lab, the certificate was reported as not revoked at that time.
 
-Também foram observados os campos **This Update** e **Next Update**, que indicam o período de atualização associado à resposta.
+The `This Update` and `Next Update` fields were also observed. They indicate the update time associated with the response and the time by which newer status information is expected.
 
----
+## 4. Analyzing the Certificate Chain and TLS Connection
 
-## 4. Análise da cadeia e da conexão TLS
-
-A saída também apresentou a cadeia de certificados:
+The output also displayed the certificate chain:
 
 ```text
 Certificate chain
@@ -119,7 +115,7 @@ Certificate chain
    v:NotBefore: Nov 15 03:43:21 2023 GMT; NotAfter: Jan 28 00:00:42 2028 GMT
 ```
 
-Também foram identificados parâmetros da conexão TLS:
+The following TLS connection parameters were also identified:
 
 ```text
 subject=CN=grancursos.com.br
@@ -138,19 +134,17 @@ Server public key is 256 bit
 Verify return code: 0 (ok)
 ```
 
-Essas informações permitem observar o certificado apresentado pelo servidor, sua autoridade emissora, a versão do TLS utilizada e o conjunto criptográfico negociado.
+These details make it possible to examine the certificate presented by the server, its issuing authority, the TLS version used, and the negotiated cryptographic suite.
 
----
+## 5. Checking OCSP on Google
 
-## 5. Verificação do OCSP no Google
-
-Foi realizado um segundo teste utilizando o servidor do Google:
+A second test was performed using Google's server:
 
 ```bash
 openssl s_client -connect www.google.com:443 -status
 ```
 
-A saída relevante foi:
+The relevant output was:
 
 ```text
 Connecting to 192.178.155.106
@@ -164,35 +158,41 @@ verify return:1
 OCSP response: no response sent
 ```
 
-Nesse caso, a mensagem:
+In this case, the message:
 
 ```text
 OCSP response: no response sent
 ```
 
-indica que não foi enviada uma resposta OCSP stapled pelo servidor durante essa conexão.
+indicates that the server did not send an OCSP stapling response during this connection.
+
+This does not, by itself, mean that the certificate was invalid or revoked. It only indicates that an OCSP stapling response was not provided in this connection.
+
+## Evidence — Step 5
+
+Required caption before the screenshot:
+
+> Screenshot for Activity 9.8: the result of the HTTPS connection to `www.google.com` using `openssl s_client -status`, showing the message `OCSP response: no response sent`.
+
+Evidence for this activity is included in the PDF for Module 9, Classes 35–36.
+
+[View Evidence — Classes 35–36](../evidencias.pdf)
+
+## Activity Workflow
+
+| Stage | Result |
+|---|---|
+| TLS connection | `openssl s_client` |
+| OCSP stapling request | `-status` option |
+| Gran Cursos | OCSP response containing `Cert Status: good` |
+| Google | `OCSP response: no response sent` |
+
+## Result
+
+HTTPS certificates were analyzed using OpenSSL and `s_client`. The activity demonstrated both an OCSP response reporting `good` and a connection in which no OCSP stapling response was sent.
+
+The results also provided an opportunity to inspect the certificate chain, validity information, TLS protocol version, and negotiated cryptographic parameters.
 
 ---
 
-## Evidência — Passo 5
-
-**Frase obrigatória antes do print:**
-
-> **Print da atividade 9.8:** resultado da conexão HTTPS com `www.google.com` utilizando `openssl s_client -status`, evidenciando a mensagem `OCSP response: no response sent`.
-
-[**Evidências — Módulo 9 / Aulas 35 e 36**](../evidencias.pdf)
-
----
-
-## Fluxo da atividade
-
-| Etapa       | Resultado                             |
-| ----------- | ------------------------------------- |
-| Conexão TLS | `openssl s_client`                    |
-| Consulta    | Opção `-status`                       |
-| Gran Cursos | Resposta OCSP com `Cert Status: good` |
-| Google      | `OCSP response: no response sent`     |
-
-## Resultado
-
-Foi realizada a análise de certificados HTTPS utilizando OpenSSL e `s_client`. A atividade permitiu observar tanto uma resposta OCSP com status `good` quanto uma conexão em que não foi enviada resposta OCSP stapled.
+[Back to Classes 35–36](../) · [Back to Module 9](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
