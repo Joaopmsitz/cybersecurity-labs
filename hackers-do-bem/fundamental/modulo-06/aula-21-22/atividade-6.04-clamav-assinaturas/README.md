@@ -1,118 +1,116 @@
-# Atividade 6.4 — Conhecendo o Antivírus ClamAV e sua Assinatura de Malware no Kali Linux
+# Activity 6.04 — Exploring ClamAV and Its Malware Signatures on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 06  
+> **Class:** 21–22  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foi realizada uma introdução ao **ClamAV**, antivírus de código aberto utilizado em sistemas Linux, com foco nas ferramentas `clambc` e `sigtool`.
+## Objective
 
-O laboratório também abordou o funcionamento de assinaturas de malware e a identificação de vulnerabilidades associadas a assinaturas conhecidas, utilizando como exemplo a **CVE-2017-12099**.
+This activity introduces **ClamAV**, an open-source antivirus engine used on Linux systems, focusing on the `clambc` and `sigtool` utilities.
 
-A atividade teve caráter de análise e identificação. Não foi realizada a execução de malware.
+The laboratory also covers how malware signatures work and how signatures can reference known vulnerabilities, using **CVE-2017-12099** as an example.
 
----
+The activity focused on analysis and identification. No malware was executed.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.40`
-* **Usuário:** `aluno`
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this document.
 
----
+## 1. Open the Terminal
 
-## 1. Acessando o terminal
+After accessing Kali Linux through RDP, the terminal was opened, and administrative access was obtained:
 
-Após acessar o Kali Linux por RDP, foi aberto o terminal e obtido acesso administrativo:
-
-```bash id="k4v8p2"
+```bash
 sudo -i
 ```
 
----
+## 2. Explore `clambc`
 
-## 2. Conhecendo o `clambc`
+The first command used was:
 
-O primeiro comando utilizado foi:
-
-```bash id="m7x3q9"
+```bash
 clambc -h
 ```
 
-O `clambc` é uma ferramenta do ClamAV destinada ao teste de **bytecode**, permitindo consultar e analisar assinaturas desse tipo.
+`clambc` is a ClamAV utility designed for testing **bytecode**, allowing users to inspect and analyze bytecode signatures.
 
-A saída apresentada no laboratório foi:
+The output displayed in the laboratory was:
 
-```text id="r2n6w5"
+```text
                        Clam AntiVirus: Bytecode Testing Tool 1.4.3
-           By The ClamAV Team: https://www.clamav.net/about.html#credits
-           (C) 2024 Cisco Systems, Inc.
+          By The ClamAV Team: https://www.clamav.net/about.html#credits
+          (C) 2024 Cisco Systems, Inc.
 
-    clambc <file> [function] [param1 ...]
+   clambc <file> [function] [param1 ...]
 
-    --help                 -h         Show this help
-    --version              -V         Show version
-    --debug                           Show debug
-    --force-interpreter    -f         Force using the interpreter instead of the JIT
-    --trust-bytecode       -t         Trust loaded bytecode (default yes)
-    --info                 -i         Print information about bytecode
-    --printsrc             -p         Print bytecode source
-    --printbcir            -c         Print IR of bytecode signature
-    --input                -c         Input file to run the bytecode on
-    --trace <level>        -T         Set bytecode trace level 0..7 (default 7)
-    --no-trace-showsource  -s         Don't show source line during tracing
-    --statistics=bytecode             Collect and print bytecode execution statistics
-    file                              File to test
+   --help                 -h         Show this help
+   --version              -V         Show version
+   --debug                           Show debug
+   --force-interpreter    -f         Force using the interpreter instead of the JIT
+   --trust-bytecode       -t         Trust loaded bytecode (default yes)
+   --info                 -i         Print information about bytecode
+   --printsrc             -p         Print bytecode source
+   --printbcir            -c         Print IR of bytecode signature
+   --input                -c         Input file to run the bytecode on
+   --trace <level>        -T         Set bytecode trace level 0..7 (default 7)
+   --no-trace-showsource  -s         Don't show source line during tracing
+   --statistics=bytecode             Collect and print bytecode execution statistics
+   file                              File to test
 
-**Caution**: You should NEVER run bytecode signatures from untrusted sources.
+Caution: You should NEVER run bytecode signatures from untrusted sources.
 Doing so may result in arbitrary code execution.
 ```
 
-A própria ferramenta apresenta uma advertência importante: assinaturas de bytecode provenientes de fontes não confiáveis não devem ser executadas, pois isso pode resultar em execução arbitrária de código.
+The utility itself displays an important warning: bytecode signatures from untrusted sources should never be executed because doing so may result in arbitrary code execution.
 
-### Principais opções observadas
+### Main Options Observed
 
-Algumas opções disponibilizadas pelo `clambc` incluem:
+Some of the options available in `clambc` include:
 
-* `-h` — exibe a ajuda;
-* `-V` — exibe a versão;
-* `-i` — apresenta informações sobre bytecode;
-* `-p` — exibe o código-fonte do bytecode;
-* `-c` — exibe a representação intermediária da assinatura;
-* `-T` — define o nível de rastreamento;
-* `-f` — força o uso do interpretador em vez do JIT.
+- `-h` — displays the help information.
+- `-V` — displays the version.
+- `-i` — prints information about bytecode.
+- `-p` — prints the bytecode source code.
+- `-c` — prints the intermediate representation of a bytecode signature, as shown in the help output.
+- `-T` — sets the tracing level.
+- `-f` — forces the use of the interpreter instead of the JIT compiler.
 
----
+The option descriptions above reflect the recorded help output. The displayed help assigns `-c` to two options, so its precise behavior should be checked against the installed version's documentation before relying on it in automation.
 
-## 3. Conhecendo o `sigtool`
+## 3. Explore `sigtool`
 
-Em seguida, foi consultada a ajuda da ferramenta `sigtool`:
+Next, the help information for `sigtool` was requested:
 
-```bash id="v5q8k1"
+```bash
 sigtool -h
 ```
 
-O `sigtool` é uma ferramenta do conjunto do ClamAV utilizada para trabalhar com assinaturas, bases de dados e informações relacionadas ao mecanismo de detecção.
+`sigtool` is a utility included with ClamAV for working with signatures, databases, and information related to the detection engine.
 
-Entre suas funcionalidades estão operações relacionadas à criação, análise e manipulação de assinaturas utilizadas pelo ClamAV.
+Its functions include operations related to creating, inspecting, and manipulating signatures used by ClamAV.
 
-A utilização da ferramenta permite compreender que a detecção de ameaças não depende apenas da existência de um arquivo malicioso isolado, mas também das informações e padrões utilizados pelo mecanismo de antivírus para identificar determinados artefatos.
+This tool helps demonstrate that threat detection depends not only on the presence of a malicious file, but also on the patterns and information used by an antivirus engine to identify particular artifacts.
 
----
+## 4. List Bytecode Signatures
 
-## 4. Listando assinaturas de bytecode
+To inspect the available signatures, the following command was executed:
 
-Para consultar as assinaturas disponíveis, foi executado:
-
-```bash id="c9m4x7"
+```bash
 sigtool --list-sigs
 ```
 
-A saída apresentou diversas assinaturas relacionadas a exploits e outros tipos de ameaças.
+The output included several signatures associated with exploits and other types of threats.
 
-Entre as entradas observadas estavam:
+Examples observed included:
 
-```text id="a6v2p8"
+```text
 BC.Legacy.Exploit.CVE_2010_3333-5.{Exploit-CVE_2010_3333}
 BC.Legacy.Exploit.CVE_2011_0090-1.{Exploit-CVE_2011_0090}
 BC.Win.Packer.script2exe-6754169-0.{}
@@ -122,181 +120,189 @@ BC.Img.Exploit.CVE_2017_12099-6336630-0.{}
 ...
 ```
 
-A listagem demonstra que o ClamAV possui assinaturas associadas a diferentes categorias de ameaças, incluindo exploits identificados por **CVE (Common Vulnerabilities and Exposures)**.
+The listing demonstrates that ClamAV includes signatures associated with different threat categories, including exploits identified by **CVE (Common Vulnerabilities and Exposures)** identifiers.
 
----
+This output shows that the signatures are present in the listing. It does not, by itself, demonstrate that a particular file was scanned, detected, or classified as malicious.
 
-## 5. Analisando a assinatura relacionada à CVE-2017-12099
+## 5. Analyze the Signature Associated with CVE-2017-12099
 
-Entre as assinaturas observadas estava:
+One of the signatures observed was:
 
-```text id="u8q3m6"
+```text
 BC.Img.Exploit.CVE_2017_12099-6336630-0.{}
 ```
 
-A nomenclatura permite identificar alguns elementos:
+The name contains several descriptive elements:
 
-```text id="y1r7k4"
+```text
 BC
 │
-└── Bytecode
+└── Bytecode signature category
 
 Img
 │
-└── relacionada a processamento de imagem
+└── Signature category label
 
 Exploit
 │
-└── indica uma assinatura associada a exploração
+└── Indicates an exploit-related signature
 
 CVE_2017_12099
 │
-└── identificador da vulnerabilidade
+└── Identifier of the referenced vulnerability
 ```
 
-A presença da CVE na assinatura permite relacionar a detecção do ClamAV com uma vulnerabilidade documentada externamente.
+These labels provide clues about the signature's classification. The signature name alone does not fully describe the detection logic or prove that a particular exploit was detected.
 
----
+The CVE identifier provides a reference to publicly documented vulnerability information.
 
-## 6. Identificando o tipo de ataque
+**Technical clarification:** CVE-2017-12099 describes an integer overflow vulnerability in Blender 2.78c involving the upgrade of the legacy Mesh attribute `tface`. A specially crafted `.blend` file could trigger an integer overflow that results in a buffer overflow and may allow code execution when processed by the vulnerable application. This is a vulnerability in Blender, not a vulnerability in ClamAV itself.
 
-Para a **CVE-2017-12099**, a atividade solicitou a consulta de referências sobre a vulnerabilidade e a identificação do tipo de ataque.
+Reference: [Cisco Talos — TALOS-2017-0451: Blender Integer Overflow Code Execution Vulnerability](https://talos.talosintelligence.com/vulnerability_reports/TALOS-2017-0451).
 
-O ataque associado à vulnerabilidade foi identificado como:
+## 6. Identify the Type of Attack
 
-```text id="p4w9n2"
+For **CVE-2017-12099**, the activity required consulting vulnerability references and identifying the associated attack type.
+
+The attack type identified in the laboratory was:
+
+```text
 Integer Overflow
 ```
 
-**Este é o passo solicitado para a evidência da atividade.**
+**This is the step specified for the activity evidence.**
 
 ### Integer Overflow
 
-Um **Integer Overflow** ocorre quando uma operação matemática produz um valor que ultrapassa o limite representável pelo tipo inteiro utilizado.
+An **integer overflow** occurs when an arithmetic operation produces a value outside the range representable by the integer type being used.
 
-Em determinadas condições, isso pode provocar consequências de segurança quando o resultado é utilizado posteriormente em operações como:
+Under certain conditions, this can have security consequences when the resulting value is subsequently used in operations such as:
 
-* cálculo de tamanho;
-* alocação de memória;
-* processamento de arquivos;
-* cópia de dados;
-* validações de limites.
+- Size calculations.
+- Memory allocation.
+- File processing.
+- Data copying.
+- Bounds checking.
 
-No contexto de uma vulnerabilidade, um cálculo incorreto causado por overflow pode contribuir para condições que permitam corrupção de memória ou outras formas de comportamento inesperado.
+In a vulnerable application, an incorrect calculation caused by an overflow can contribute to memory corruption or other unexpected behavior.
 
----
+In the case of CVE-2017-12099, the documented integer overflow in Blender can result in a buffer overflow when a specially crafted `.blend` file is processed. See the [Cisco Talos vulnerability report](https://talos.talosintelligence.com/vulnerability_reports/TALOS-2017-0451).
 
-## 7. Relação entre CVE e assinatura do antivírus
+## 7. Relationship Between CVEs and Antivirus Signatures
 
-A atividade demonstra uma relação importante entre bases de vulnerabilidades e mecanismos de detecção.
+This activity demonstrates an important relationship between vulnerability databases and detection mechanisms.
 
-A **CVE** fornece uma identificação padronizada para uma vulnerabilidade conhecida, enquanto uma assinatura do ClamAV pode ser criada para detectar artefatos associados a uma determinada ameaça ou exploração.
+A **CVE** provides a standardized identifier for a publicly known vulnerability, while a ClamAV signature may be designed to detect artifacts associated with a particular threat or exploit.
 
-No caso observado:
+In the observed example:
 
-```text id="n3v6q1"
+```text
 CVE-2017-12099
-        │
-        ▼
-Vulnerabilidade documentada
-        │
-        ▼
-Exploit associado
-        │
-        ▼
-Assinatura do ClamAV
+       │
+       ▼
+Documented vulnerability
+       │
+       ▼
+Related exploit or artifact
+       │
+       ▼
+ClamAV signature
 BC.Img.Exploit.CVE_2017_12099-6336630-0.{}
 ```
 
-Isso permite que analistas relacionem informações de vulnerabilidades, ameaças e mecanismos de detecção durante uma investigação.
+This relationship can help analysts correlate vulnerability information, threats, and detection mechanisms during an investigation.
 
----
+However, the presence of a CVE identifier in a signature name does not establish that the vulnerable application is installed on the system or that a corresponding exploit has been detected. It identifies the association represented by the signature's naming.
 
-## 8. Pesquisa de outros exploits
+## 8. Research Other Exploits
 
-Como parte da atividade, foram pesquisadas outras assinaturas e vulnerabilidades identificadas por CVE.
+As part of the activity, other signatures and vulnerabilities identified by CVE were examined.
 
-A própria saída do:
+The output from:
 
-```bash id="e7k5r3"
+```bash
 sigtool --list-sigs
 ```
 
-apresentou exemplos como:
+included examples such as:
 
-```text id="q2w8m5"
+```text
 BC.Legacy.Exploit.CVE_2010_3333-5.{Exploit-CVE_2010_3333}
 BC.Legacy.Exploit.CVE_2011_0090-1.{Exploit-CVE_2011_0090}
 BC.Legacy.Exploit.CVE_2011_0086-1.{Exploit-CVE_2011_0086}
 BC.Legacy.Exploit.CVE_2011_4373-2
 ```
 
-Esses identificadores mostram como diferentes vulnerabilidades podem aparecer associadas a assinaturas específicas.
+These identifiers show how different vulnerabilities can be referenced by specific signatures.
 
-A utilização de CVEs como referência também facilita a correlação entre ferramentas de segurança, bases públicas de vulnerabilidades e informações de pesquisa.
+Using CVEs as references also facilitates correlation between security tools, public vulnerability databases, and research information.
 
----
-
-## Conceitos envolvidos
+## Concepts Practiced
 
 ### ClamAV
 
-O **ClamAV** é um mecanismo antivírus de código aberto utilizado principalmente em sistemas Unix/Linux.
+**ClamAV** is an open-source antivirus engine used primarily on Unix and Linux systems.
 
-Ele utiliza diferentes tipos de assinaturas e mecanismos de análise para identificar arquivos e conteúdos associados a ameaças conhecidas.
+It uses different signature types and analysis mechanisms to identify files and content associated with known threats.
 
-### Assinatura de malware
+### Malware Signature
 
-Uma assinatura representa informações utilizadas para reconhecer determinados padrões associados a uma ameaça.
+A signature represents information used to recognize specific patterns associated with a threat.
 
-No contexto do ClamAV, assinaturas podem estar relacionadas a diferentes categorias de arquivos, exploits e outros artefatos.
+In ClamAV, signatures can be associated with different file categories, exploits, and other artifacts. The presence of a signature in a database does not by itself establish that a file has been detected.
 
 ### Bytecode
 
-Bytecode é uma forma de código intermediário que pode ser utilizada pelo mecanismo do ClamAV para implementar determinadas verificações.
+Bytecode is an intermediate form of code that can be used by the ClamAV engine to implement certain checks.
 
-O `clambc` fornece recursos específicos para testar e analisar assinaturas desse tipo.
+The `clambc` utility provides functions for testing and analyzing this type of signature.
+
+**Security warning:** As indicated by the tool's own help output, bytecode from untrusted sources must not be executed because it may result in arbitrary code execution.
 
 ### CVE
 
-**CVE (Common Vulnerabilities and Exposures)** é um sistema utilizado para identificar vulnerabilidades de segurança publicamente conhecidas.
+**CVE (Common Vulnerabilities and Exposures)** is a system used to identify publicly known security vulnerabilities.
 
-Exemplo utilizado nesta atividade:
+The example used in this activity was:
 
 ```text
 CVE-2017-12099
 ```
 
+This CVE concerns an integer overflow vulnerability in Blender 2.78c, as documented in the [Cisco Talos vulnerability report](https://talos.talosintelligence.com/vulnerability_reports/TALOS-2017-0451).
+
 ### Integer Overflow
 
-É uma condição na qual um cálculo inteiro ultrapassa o limite representável pelo tipo utilizado.
+An integer overflow occurs when an integer calculation exceeds the representable range of the type being used.
 
-Em segurança da informação, esse tipo de erro pode se tornar relevante quando o valor resultante influencia operações de memória, tamanho ou processamento de dados.
+In information security, this type of error can become significant when the resulting value affects memory operations, size calculations, or data processing.
+
+## Results
+
+The activity provided hands-on exploration of ClamAV tools related to signatures and bytecode.
+
+The following tasks were performed:
+
+1. Obtained administrative access to Kali Linux.
+2. Consulted the `clambc` help information.
+3. Consulted the `sigtool` help information.
+4. Listed the available signatures.
+5. Identified signatures associated with CVEs.
+6. Located the signature associated with `CVE-2017-12099`.
+7. Researched the referenced vulnerability.
+8. Identified the attack type as **Integer Overflow**.
+9. Examined other exploit signatures referencing CVEs.
+
+The exercise demonstrated how antivirus signatures can be associated with documented vulnerabilities and known exploits, and how analysts can use these references during security investigations.
+
+No malware was executed during the activity.
+
+## Evidence
+
+The evidence for this activity corresponds to **Step 6**, documenting the identification of the attack type associated with `CVE-2017-12099`.
+
+[View Evidence — Classes 21–22](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-A atividade permitiu explorar ferramentas do ClamAV relacionadas a assinaturas e bytecode.
-
-Foram realizados:
-
-1. acesso administrativo ao Kali Linux;
-2. consulta da ajuda do `clambc`;
-3. consulta da ajuda do `sigtool`;
-4. listagem das assinaturas disponíveis;
-5. identificação de assinaturas relacionadas a CVEs;
-6. identificação da assinatura relacionada à `CVE-2017-12099`;
-7. pesquisa da vulnerabilidade;
-8. identificação do tipo de ataque como **Integer Overflow**;
-9. pesquisa de outros exploits referenciados por CVE.
-
-O exercício também demonstrou como uma ferramenta de antivírus pode relacionar assinaturas de detecção com vulnerabilidades e exploits conhecidos.
-
----
-
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 6**, contendo a identificação do tipo de ataque associado à `CVE-2017-12099`.
-
-[**Evidências — Módulo 6 / Aulas 1 e 2**](../evidencias.pdf)
+[Back to Classes 21–22](../) · [Back to Module 06](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
