@@ -1,82 +1,88 @@
-# Atividade 12.7 — Apagando metadados no Kali Linux
+# Activity 12.07 — Removing Metadata on Kali Linux
 
-Nesta atividade foi utilizado o **ExifTool** para remover metadados de uma imagem JPEG e comparar o arquivo modificado com o arquivo original preservado automaticamente pela ferramenta.
+In this activity, ExifTool was used to remove metadata from a JPEG image and compare the modified file with the original file automatically preserved by the tool.
 
-> **Observação:** credenciais utilizadas no ambiente de laboratório não são registradas neste documento.
+> **Note:** Credentials used in the lab environment are not recorded in this document.
 
-## Objetivo
+## Objective
 
-* Remover metadados de uma imagem.
-* Identificar a diferença entre o arquivo original e o arquivo tratado.
-* Utilizar o ExifTool para sanitização de metadados.
-* Observar quais informações permanecem após a remoção.
+- Remove metadata from an image.
+- Identify the differences between the original file and the processed file.
+- Use ExifTool for metadata sanitization.
+- Observe which information remains after removal.
 
-## Procedimento
+## Procedure
 
-### 1. Acesso ao Kali Linux
+### 1. Accessing Kali Linux
 
-O Kali Linux foi acessado via RDP pelo endereço `192.168.98.40`.
+Kali Linux was accessed via RDP using the address `192.168.98.40`.
 
-Foi aberto um terminal e obtido acesso administrativo:
+A terminal was opened, and administrative privileges were obtained using:
 
 ```bash
 sudo -i
 ```
 
-### 2. Verificação dos arquivos
+### 2. Checking the Files
 
-Foi acessado o diretório utilizado na atividade anterior:
+The directory used in the previous activity was accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
-Os arquivos existentes eram:
+The existing files were listed:
 
 ```bash
 ls
 ```
 
+Output:
+
 ```text
 contrato_08_2021.pdf  IPTCpanel.jpg
 ```
 
-### 3. Remoção dos metadados
+### 3. Removing the Metadata
 
-Foi utilizado o parâmetro `-all=` do ExifTool para remover os metadados da imagem:
+The ExifTool `-all=` parameter was used to remove metadata from the image:
 
 ```bash
 exiftool -all= IPTCpanel.jpg
 ```
 
-Saída:
+Output:
 
 ```text
 Warning: ICC_Profile deleted. Image colors may be affected - IPTCpanel.jpg
     1 image files updated
 ```
 
-O ExifTool atualizou a imagem e preservou automaticamente o arquivo original como `IPTCpanel.jpg_original`.
+ExifTool updated the image and automatically preserved the original file as `IPTCpanel.jpg_original`.
 
-### 4. Verificação dos arquivos
+### 4. Checking the Files
+
+The following command was executed:
 
 ```bash
 ls
 ```
 
+Output:
+
 ```text
 contrato_08_2021.pdf  IPTCpanel.jpg  IPTCpanel.jpg_original
 ```
 
-### 5. Verificação da imagem após a remoção
+### 5. Verifying the Image After Metadata Removal
 
-Foi executado:
+The following command was executed:
 
 ```bash
 exiftool IPTCpanel.jpg
 ```
 
-Saída:
+Output:
 
 ```text
 ExifTool Version Number         : 13.36
@@ -102,17 +108,17 @@ Image Size                      : 300x379
 Megapixels                     : 0.114
 ```
 
-Comparando com a análise anterior, diversos campos de EXIF, IPTC, XMP e Photoshop deixaram de aparecer.
+Compared with the previous analysis, several EXIF, IPTC, XMP, and Photoshop fields were no longer displayed.
 
-### 6. Verificação do arquivo original
+### 6. Verifying the Original File
 
-O arquivo preservado pelo ExifTool foi analisado:
+The file preserved by ExifTool was analyzed:
 
 ```bash
 exiftool IPTCpanel.jpg_original
 ```
 
-A saída manteve os metadados presentes originalmente, incluindo informações como:
+The output retained the original metadata, including information such as:
 
 ```text
 File Name                       : IPTCpanel.jpg_original
@@ -149,35 +155,39 @@ Image Width                     : 300
 Image Height                    : 379
 ```
 
-Isso permitiu comparar o arquivo sanitizado com sua cópia original.
+This made it possible to compare the sanitized file with its original copy.
 
-## Conceitos
+## Key Concepts
 
-* **Sanitização de metadados:** remoção de informações incorporadas ao arquivo.
-* **`-all=`:** instrui o ExifTool a remover os metadados que puder remover do arquivo.
-* **Arquivo original:** o ExifTool preserva uma cópia com o sufixo `_original`.
-* A remoção de metadados pode afetar componentes associados ao arquivo, como indicado pelo aviso sobre o perfil ICC.
+- **Metadata sanitization:** The removal of information embedded in a file.
+- **`-all=`:** Instructs ExifTool to remove the metadata it can remove from the file.
+- **Original file:** ExifTool preserves a copy using the `_original` suffix.
+- **Metadata removal:** Removing metadata can affect components associated with the file, as indicated by the warning about the ICC profile.
 
-## Fluxo
+## Activity Workflow
 
 ```text
-Imagem original
+Original image
       ↓
 exiftool -all=
       ↓
-Metadados removidos
+Metadata removed
       ↓
-Arquivo _original preservado
+_original file preserved
       ↓
-Comparação com ExifTool
+Comparison using ExifTool
 ```
 
-## Resultado
+## Result
 
-Foi possível remover os principais metadados da imagem `IPTCpanel.jpg` e verificar que a cópia `IPTCpanel.jpg_original` preservou as informações originais.
+The main metadata was successfully removed from `IPTCpanel.jpg`, and the `IPTCpanel.jpg_original` copy was verified to retain the original information.
 
-## Evidência
+## Evidence
 
-[**Evidências — Módulo 12 / Aulas 43 e 44**](../evidencias.pdf)
+**View Evidence — Module 12 / Classes 47–48**
 
-**Print solicitado:** passo 5 — saída do `exiftool IPTCpanel.jpg` após a remoção dos metadados.
+**Required screenshot:** Step 5 — the output of `exiftool IPTCpanel.jpg` after metadata removal.
+
+---
+
+[Back to Classes 47–48](../README.md) · [Back to Module 12](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
