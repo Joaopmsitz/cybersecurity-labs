@@ -1,44 +1,48 @@
-# Atividade 5.4 — Configurando um Cliente Windows Server 2022 no Domínio
+# Activity 5.04 — Configuring a Windows Server 2022 Domain Client
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 05  
+> **Class:** 17–18  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Configurar um segundo Windows Server 2022 como cliente do domínio **Active Directory**, utilizando o `DC01` como servidor DNS e controlador de domínio.
+## Objective
 
-Ao final da atividade, o cliente será associado ao domínio `aluno.hacker.com` e será realizado um acesso remoto utilizando o usuário criado no Active Directory.
+Configure a second Windows Server 2022 instance as an Active Directory domain client, using `DC01` as its DNS server and Domain Controller.
 
----
+At the end of the activity, the client will be joined to the `aluno.hacker.com` domain, and a remote session will be established using the user created in Active Directory.
 
-## Ambiente
+## Environment
 
-* Windows Server 2022 — servidor / Domain Controller
-* Windows Server 2022 — cliente
-* Active Directory Domain Services
-* DNS
-* Remote Desktop
-* Domínio: `aluno.hacker.com`
-* Servidor: `192.168.98.20`
-* Cliente: `192.168.98.30`
-* Usuário de domínio: `nome1`
+- Windows Server 2022 — server / Domain Controller
+- Windows Server 2022 — client
+- Active Directory Domain Services
+- DNS
+- Remote Desktop
+- **Domain:** `aluno.hacker.com`
+- **Server:** `192.168.98.20`
+- **Client:** `192.168.98.30`
+- **Domain user:** `nome1`
 
----
+## Procedure
 
-## 1. Verificando o endereço IP do servidor
+### 1. Check the Server IP Address
 
-Com o Windows Server 2022 servidor conectado, foi aberto o **Command Prompt** através da pesquisa por:
+With the Windows Server 2022 server connected, Command Prompt was opened by searching for:
 
-```text id="x2f7m1"
+```text
 cmd
 ```
 
-Foi executado:
+The following command was executed:
 
-```cmd id="q8v4n6"
+```cmd
 ipconfig
 ```
 
-Saída relevante apresentada no laboratório:
+**Relevant output observed in the laboratory:**
 
-```text id="3k6p9a"
+```text
 C:\Users\Administrator>ipconfig
 
 Windows IP Configuration
@@ -53,35 +57,29 @@ Ethernet adapter Ethernet 2:
    Default Gateway . . . . . . . . . : 192.168.98.1
 ```
 
-O endereço `192.168.98.20` corresponde ao servidor que fornecerá os serviços de domínio e DNS para o cliente.
+The address `192.168.98.20` belongs to the server that provides domain and DNS services to the client.
 
----
+### 2. Access the Windows Server 2022 Client
 
-## 2. Acessando o Windows Server 2022 cliente
+The RDP session connected to the server was minimized, and a new connection was established to the second Windows Server 2022 instance:
 
-A conexão RDP com o servidor foi minimizada e foi estabelecida uma nova conexão com o segundo Windows Server 2022:
+- **IP address:** `192.168.98.30`
 
-```text id="v5n8c2"
-IP: 192.168.98.30
-```
+The initial access was performed using the laboratory's administrative account.
 
-O acesso inicial foi realizado com a conta administrativa do laboratório.
+The following procedures were carried out on the Windows Server 2022 client.
 
-Os próximos procedimentos foram executados no Windows Server 2022 **cliente**.
+### 3. Test Connectivity to the Domain Controller
 
----
+On the client, Command Prompt was opened, and the following command was executed:
 
-## 3. Testando a comunicação com o Domain Controller
-
-No cliente, foi aberto o **Command Prompt** e executado:
-
-```cmd id="m3q7w1"
+```cmd
 ping 192.168.98.20
 ```
 
-Saída observada no material do laboratório:
+**Observed output from the laboratory:**
 
-```text id="p9x4k6"
+```text
 C:\Users\Administrator>ping 192.168.98.20
 
 Pinging 192.168.98.20 with 32 bytes of data:
@@ -96,19 +94,17 @@ Approximate round trip times in milli-seconds:
     Minimum = 0ms, Maximum = 1ms, Average = 0ms
 ```
 
-O resultado demonstra que o cliente conseguiu alcançar o servidor pela rede, com:
+The result demonstrates that the client could reach the server over the network, with no packet loss:
 
-```text id="r6c2m8"
+```text
 Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)
 ```
 
----
+### 4. Configure the Client DNS Settings
 
-## 4. Configurando o DNS do cliente
+On the client, the following navigation path was used:
 
-No cliente, foi aberto:
-
-```text id="y7p3n5"
+```text
 Control Panel
     ↓
 Network and Internet
@@ -116,133 +112,123 @@ Network and Internet
 Network and Sharing Center
 ```
 
-Foi acessada a conexão Ethernet e aberta a configuração:
+The Ethernet connection was opened, followed by the **Internet Protocol Version 4 (TCP/IPv4)** settings.
 
-```text id="f2k8q4"
-Internet Protocol Version 4 (TCP/IP)
-```
+The following option was selected:
 
-Foi selecionada a opção:
-
-```text id="c9v1x6"
+```text
 Use the following DNS server addresses
 ```
 
-O servidor DNS preferencial foi configurado para:
+The preferred DNS server was configured as:
 
-```text id="h4m7s2"
+```text
 192.168.98.20
 ```
 
-Esse endereço corresponde ao `DC01`, que fornece o serviço DNS utilizado pelo domínio.
+This address corresponds to `DC01`, which provides the DNS service used by the domain.
 
-As alterações foram confirmadas e as janelas foram fechadas.
+The changes were confirmed, and the windows were closed.
 
----
+### 5. Install Remote Assistance
 
-## 5. Instalando o Remote Assistance
+In Server Manager, the following options were selected:
 
-No **Server Manager**, foi acessado:
-
-```text id="n8q5w3"
+```text
 Manage
     ↓
 Add Roles and Features
 ```
 
-O assistente foi avançado até a tela **Features**.
+The wizard was advanced to the **Features** screen.
 
-Foi habilitado:
+The following feature was enabled:
 
-```text id="b6x2p9"
+```text
 Remote Assistance
 ```
 
-Em seguida, foi selecionado:
+The following options were then selected:
 
-```text id="j3m7c5"
+```text
 Next
     ↓
 Install
 ```
 
-Após a conclusão da instalação, foi selecionado:
+After the installation completed, the following option was selected:
 
-```text id="z4r8v1"
+```text
 Close
 ```
 
----
+### 6. Join the Client to the Domain
 
-## 6. Associando o cliente ao domínio
+On the client, the advanced system settings were opened through:
 
-No cliente, foram abertas as propriedades avançadas do sistema através de:
-
-```text id="w5k2q7"
+```text
 System
     ↓
 Advanced system settings
 ```
 
-Na janela **System Properties**, foi acessada a aba:
+In the **System Properties** window, the following tab was selected:
 
-```text id="s9c3m6"
+```text
 Computer Name
 ```
 
-Foi selecionado:
+The following option was selected:
 
-```text id="p7x1n4"
+```text
 Change
 ```
 
-Na seção de associação ao domínio, foi selecionada:
+Under the domain membership section, the following option was selected:
 
-```text id="e2v6k8"
+```text
 Domain
 ```
 
-e informado:
+The following domain name was entered:
 
-```text id="u4q9y3"
+```text
 aluno.hacker.com
 ```
 
-Foi solicitado o fornecimento das credenciais do usuário de domínio criado anteriormente.
+The credentials of the domain user created in the previous activity were requested.
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this document.
 
-Após a autenticação, o Windows confirmou a entrada do computador no domínio.
+After authentication, Windows confirmed that the computer had joined the domain.
 
-Foram confirmadas as mensagens apresentadas e o sistema foi reiniciado.
+The displayed confirmation messages were acknowledged, and the system was restarted.
 
----
+### 7. Configure Remote Access for the Domain User
 
-## 7. Configurando o acesso remoto para o usuário do domínio
+After the restart, the following window was opened again:
 
-Após a reinicialização, foi acessada novamente a janela:
-
-```text id="a8m3v6"
+```text
 System Properties
     ↓
 Remote
 ```
 
-Foi habilitada a opção:
+The option recorded in the laboratory was enabled:
 
-```text id="q5r7x2"
+```text
 Allow connections only from...
 ```
 
-Em seguida, foi selecionado:
+The following option was then selected:
 
-```text id="k1c9w4"
+```text
 Select Users...
 ```
 
-e:
+The user selection process continued through:
 
-```text id="t6p2n8"
+```text
 Add...
     ↓
 Advanced...
@@ -250,128 +236,126 @@ Advanced...
 Find Now
 ```
 
-Na lista apresentada, foi localizado:
+The following account was located in the displayed list:
 
-```text id="d4y8m1"
+```text
 Nome1 Sobrenome1
 ```
 
-O usuário foi selecionado e confirmado.
+The user was selected and confirmed.
 
-Após a configuração, o usuário de domínio apareceu na lista de usuários autorizados para acesso remoto.
+After the configuration, the domain user appeared in the list of users authorized for remote access.
 
----
+### 8. Sign Out of the Administrative Session
 
-## 8. Encerrando a sessão administrativa
+After completing the configuration, the following options were used:
 
-Após concluir as configurações, foi utilizado:
-
-```text id="g7q3v5"
+```text
 Shut down or sign out
     ↓
 Sign out
 ```
 
-A sessão administrativa foi encerrada.
+The administrative session was closed.
 
----
+### 9. Establish a New RDP Connection
 
-## 9. Estabelecendo uma nova conexão RDP
+A new RDP connection was established to the client:
 
-Foi estabelecida uma nova conexão RDP com o cliente:
-
-```text id="m2x6p9"
+```text
 192.168.98.30
 ```
 
-Foi utilizado o usuário de domínio:
+The following domain user was used:
 
-```text id="v8c4r1"
+```text
 nome1
 ```
 
-As credenciais correspondentes pertencem ao ambiente do laboratório e não são publicadas neste README.
+The corresponding credentials belong to the laboratory environment and are not published in this README.
 
-> O perfil RDP anterior não deveria ser reutilizado, pois ele continha as credenciais da conta administrativa utilizada anteriormente.
+The previous RDP profile should not be reused because it contained the credentials of the administrative account used earlier.
 
-Na conexão, foi selecionado o domínio:
+During the connection, the following domain was selected:
 
-```text id="n5w7q2"
+```text
 aluno.hacker.com
 ```
 
-Após a autenticação, o usuário de domínio conseguiu acessar o Windows Server 2022 cliente.
+After authentication, the domain user successfully accessed the Windows Server 2022 client.
 
-A evidência solicitada pelo laboratório corresponde a esta etapa.
+The evidence requested by the laboratory corresponds to this step.
 
----
+## Concepts Practiced
 
-## Conceitos
+### Domain Client
 
-### Cliente de domínio
+A computer joined to an Active Directory domain can use centralized services provided by the Domain Controller for authentication and management.
 
-Um computador associado a um domínio do Active Directory pode utilizar os serviços centralizados fornecidos pelo Domain Controller para autenticação e gerenciamento.
+In this laboratory, the Windows Server 2022 client was joined to:
 
-Neste laboratório, o Windows Server 2022 cliente foi associado ao:
-
-```text id="r3k8m5"
+```text
 aluno.hacker.com
 ```
 
-### DNS e Active Directory
+### DNS and Active Directory
 
-O DNS possui papel fundamental no funcionamento do Active Directory.
+DNS plays a fundamental role in Active Directory operations.
 
-Por isso, o cliente foi configurado para utilizar o endereço IP do `DC01` como servidor DNS:
+For this reason, the client was configured to use the IP address of `DC01` as its DNS server:
 
-```text id="y6p1q9"
+```text
 192.168.98.20
 ```
 
-Dessa forma, o cliente consegue consultar os registros DNS utilizados para localizar serviços do domínio.
+This allows the client to query DNS records used to locate domain services.
 
 ### Remote Desktop
 
-O **Remote Desktop Protocol (RDP)** permite acessar remotamente uma máquina Windows.
+The Remote Desktop Protocol (RDP) allows users to access a Windows computer remotely.
 
-Neste laboratório, o acesso remoto foi configurado para permitir que o usuário do domínio `nome1` se autenticasse no cliente.
+In this laboratory, remote access was configured to allow the domain user `nome1` to authenticate to the client.
 
-### Autenticação de domínio
+### Domain Authentication
 
-Ao utilizar uma conta do domínio, a autenticação passa a ser integrada à infraestrutura do Active Directory.
+When a domain account is used, authentication is integrated with the Active Directory infrastructure.
 
-O fluxo simplificado utilizado na atividade foi:
+The simplified workflow demonstrated in the activity was:
 
-```text id="c5v9x2"
-Cliente Windows
+```text
+Windows Client
       ↓
 DNS → DC01
       ↓
-Domínio aluno.hacker.com
+aluno.hacker.com Domain
       ↓
-Autenticação do usuário
+User Authentication
       ↓
-Sessão RDP
+RDP Session
 ```
 
----
+## Results
 
-## Resultado
+The Windows Server 2022 client was configured to use `DC01` as its DNS server and was subsequently joined to the domain:
 
-O Windows Server 2022 cliente foi configurado para utilizar o `DC01` como servidor DNS e posteriormente associado ao domínio:
-
-```text id="j8m4q6"
+```text
 aluno.hacker.com
 ```
 
-O usuário criado anteriormente no Active Directory foi configurado para acesso remoto e utilizado em uma nova conexão RDP.
+The user previously created in Active Directory was configured for remote access and used to establish a new RDP connection.
 
-A autenticação foi realizada utilizando a conta de domínio no Windows Server 2022 cliente.
+Authentication was performed with the domain account on the Windows Server 2022 client.
+
+The activity demonstrated the relationship between DNS configuration, domain membership, user authorization, and remote authentication in an Active Directory environment.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 05, Classes 17–18.
+
+**Recorded screenshot:** Step 10 — connecting to the Windows Server 2022 client through RDP using the domain user.
+
+[View Evidence — Classes 17–18](../evidencias.pdf)
 
 ---
 
-## Evidências
-
-[**Evidências — Módulo 5 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Evidência registrada:** passo 10 — conexão RDP no Windows Server 2022 cliente utilizando o usuário do domínio.
+[Back to Classes 17–18](../) · [Back to Module 05](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
