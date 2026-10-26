@@ -1,43 +1,45 @@
-# Atividade 6.5 — Automação de Tarefas com PowerShell no Windows Server
+# Activity 6.05 — Task Automation with PowerShell on Windows Server
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 06  
+> **Class:** 21–22  
+> **Environment:** Windows Server 2022 Datacenter  
+> **Status:** Completed
 
-Nesta atividade foi utilizada a **PowerShell** para automatizar tarefas de administração e coleta de informações em um ambiente Windows Server.
+## Objective
 
-Foram desenvolvidos dois scripts:
+This activity uses PowerShell to automate administrative tasks and information collection in a Windows Server environment.
 
-1. um script para coletar informações do sistema e do hardware;
-2. um script para consultar eventos relacionados à inicialização do sistema e gerar um relatório em arquivo.
+Two scripts were developed:
 
-A atividade demonstra como a PowerShell pode ser utilizada para automatizar tarefas de inventário e análise de eventos em ambientes Windows.
+- A script to collect system and hardware information.
+- A script to query events related to system startup and shutdown and generate a report file.
 
----
+The activity demonstrates how PowerShell can automate inventory and event analysis tasks in Windows environments.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Windows Server 2022 Datacenter
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.30`
-* **Computador:** `WINCLIENT`
-* **Usuário:** `WINSERVER\Administrator`
+- **Operating system:** Windows Server 2022 Datacenter
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.30`
+- **Computer name:** `WINCLIENT`
+- **User:** `WINSERVER\Administrator`
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this document.
 
----
+## Procedure
 
-## 1. Acessando o Windows PowerShell
+### 1. Open Windows PowerShell
 
-Após acessar o Windows Server por RDP, foi aberta a ferramenta **Windows PowerShell** através do menu de aplicativos do sistema.
+After accessing Windows Server through RDP, Windows PowerShell was opened from the system's application menu.
 
-A PowerShell permite executar comandos e scripts para administração, automação e coleta de informações do Windows.
+PowerShell allows administrators to execute commands and scripts for Windows administration, automation, and information gathering.
 
----
+### 2. Collect System and Hardware Information
 
-## 2. Coletando informações do sistema e hardware
+The following script was used:
 
-Foi utilizado o seguinte script:
-
-```powershell id="xzrujn"
+```powershell
 # Coleta informações do sistema e hardware
 $systemInfo = Get-CimInstance -ClassName Win32_ComputerSystem
 $osInfo = Get-CimInstance -ClassName Win32_OperatingSystem
@@ -53,26 +55,24 @@ Write-Host "Processador: $($cpuInfo.Name)"
 Write-Host "Memória Total: $($memoryInfo.Capacity / 1GB) GB"
 ```
 
-O script utiliza `Get-CimInstance` para consultar classes do Windows Management Instrumentation (WMI/CIM).
+The script uses `Get-CimInstance` to query Windows Management Instrumentation and Common Information Model (WMI/CIM) classes.
 
-As classes utilizadas foram:
+The classes used were:
 
-```text id="m6p2v9"
+```text
 Win32_ComputerSystem
 Win32_OperatingSystem
 Win32_Processor
 Win32_PhysicalMemory
 ```
 
-Cada classe fornece informações diferentes sobre o sistema.
+Each class provides different information about the system.
 
----
+### 3. Review the Information Collection Results
 
-## 3. Resultado da coleta
+After executing the commands in PowerShell, the following system information was displayed:
 
-Após executar os comandos no PowerShell, foram apresentadas as informações do sistema:
-
-```text id="0bimt5"
+```text
 PS C:\Users\Administrator> Write-Host "Informações do Sistema:"
 Informações do Sistema:
 PS C:\Users\Administrator> Write-Host "Nome do Computador: $($systemInfo.Name)"
@@ -86,24 +86,24 @@ Processador: AMD EPYC 7571
 PS C:\Users\Administrator> Write-Host "Memória Total: $($memoryInfo.Capacity / 1GB) GB"
 ```
 
-A coleta identificou:
+The collection identified the following information:
 
-| Informação          | Resultado                                  |
-| ------------------- | ------------------------------------------ |
-| Computador          | `WINCLIENT`                                |
-| Sistema operacional | `Microsoft Windows Server 2022 Datacenter` |
-| Arquitetura         | `64-bit`                                   |
-| Processador         | `AMD EPYC 7571`                            |
+| Information | Result |
+|---|---|
+| Computer | `WINCLIENT` |
+| Operating system | Microsoft Windows Server 2022 Datacenter |
+| Architecture | 64-bit |
+| Processor | AMD EPYC 7571 |
 
-> A saída fornecida no laboratório não apresenta um valor numérico após a linha `Memória Total:`. Por isso, o valor não é reproduzido como um número neste README.
+The laboratory output does not show a numeric value after `Memória Total:`. Therefore, no numeric memory total is reported in this README.
 
----
+**Technical note:** `Win32_PhysicalMemory` can return multiple objects, one for each physical memory module. To calculate the total installed memory reliably, the capacities should be summed before converting the result to gigabytes.
 
-## 4. Consultando eventos de inicialização
+### 4. Query Startup and Shutdown Events
 
-Em seguida, foi utilizado um segundo script para consultar eventos do log **System** relacionados à inicialização e desligamento do sistema:
+A second script was then used to query events in the System log related to the startup and shutdown of the event logging service:
 
-```powershell id="lkgd7i"
+```powershell
 # Coleta informações de eventos de inicialização do sistema
 $events = Get-WinEvent -LogName System | Where-Object { $_.Id -eq 6005 -or $_.Id -eq 6006 }
 
@@ -121,198 +121,178 @@ $events | ForEach-Object {
 Write-Host "Relatório de eventos de inicialização do sistema salvo em $reportFile"
 ```
 
-### Funcionamento
+#### How the Script Works
 
-Primeiro, o script consulta o log `System`:
+First, the script queries the Windows System log:
 
-```powershell id="u3k7m1"
+```powershell
 Get-WinEvent -LogName System
 ```
 
-Depois, são filtrados os eventos de ID `6005` e `6006`:
+The events with IDs 6005 and 6006 are then filtered:
 
-```powershell id="n8v4q2"
+```powershell
 Where-Object { $_.Id -eq 6005 -or $_.Id -eq 6006 }
 ```
 
-Esses eventos são utilizados no laboratório para identificar registros relacionados à inicialização e ao desligamento do serviço de log de eventos.
+These event IDs are used in the laboratory to identify records associated with the startup and shutdown of the Windows Event Log service.
 
-Os dados relevantes são armazenados nas variáveis:
+The relevant information is stored in the following variables:
 
-```powershell id="r5x2j9"
+```powershell
 $eventTime = $_.TimeCreated
 $eventMessage = $_.Message
 ```
 
-Por fim, as informações são gravadas em:
+Finally, the information is written to:
 
-```text id="w7m3p8"
+```text
 C:\Relatorio_Eventos_Inicializacao.txt
 ```
 
----
+### 5. Generate the Report
 
-## 5. Gerando o relatório
+After executing the second script, the following message was displayed:
 
-Após executar o segundo script, foi apresentada a seguinte mensagem:
-
-```text id="rohmm8"
+```text
 Relatório de eventos de inicialização do sistema salvo em C:\Relatorio_Eventos_Inicializacao.txt
 ```
 
-A mensagem confirma que o relatório foi criado no diretório raiz da unidade `C:`.
+The message confirms that the report was created in the root directory of the `C:` drive.
 
----
+### 6. View the Report
 
-## 6. Visualizando o relatório
+File Explorer was opened to access:
 
-O **File Explorer** foi aberto para acessar:
-
-```text id="f9q4s2"
+```text
 C:\Relatorio_Eventos_Inicializacao.txt
 ```
 
-O arquivo contém os registros coletados pelo script, organizados com:
+The file contains the records collected by the script, organized using the following format:
 
-```text id="a2m8v6"
+```text
 Data e Hora: ...
 Mensagem: ...
 ```
 
-Essa estrutura permite consultar os eventos de inicialização/desligamento registrados no log do sistema de forma mais organizada.
+This structure makes it easier to review startup- and shutdown-related events recorded in the system log.
 
----
+### 7. Analyze the Events
 
-## 7. Análise dos eventos
+The `Get-WinEvent` cmdlet allows PowerShell to query Windows event logs directly.
 
-O uso de `Get-WinEvent` permite consultar diretamente os logs do Windows através da PowerShell.
+In this exercise, the script filtered specific event IDs from the System log, avoiding the need to locate each record manually through the graphical interface.
 
-Neste exercício, o script filtrou eventos específicos do log `System`, evitando a necessidade de localizar manualmente cada registro pela interface gráfica.
+Automation is particularly useful for system administration and analysis because it allows administrators to:
 
-A automação é especialmente útil em administração e análise de sistemas porque permite:
+- Query large volumes of events.
+- Apply filters.
+- Extract specific fields.
+- Generate reports.
+- Repeat procedures consistently.
 
-* consultar grandes quantidades de eventos;
-* aplicar filtros;
-* extrair campos específicos;
-* gerar relatórios;
-* repetir o procedimento de forma consistente.
+In a security context, system logs can also support investigations into events related to a machine's operation and availability.
 
-Em um contexto de segurança, logs de sistema também podem auxiliar na investigação de eventos relacionados ao funcionamento e à disponibilidade de uma máquina.
+### 8. Remove the Report
 
----
+After viewing the report, the following file was deleted:
 
-## 8. Removendo o relatório
-
-Após visualizar o relatório, o arquivo:
-
-```text id="v6k1p4"
+```text
 C:\Relatorio_Eventos_Inicializacao.txt
 ```
 
-foi excluído utilizando **Shift + Delete**.
+The file was removed using **Shift + Delete**.
 
-Em seguida, o File Explorer e o Windows PowerShell foram fechados.
+File Explorer and Windows PowerShell were then closed.
 
-**Este é o passo solicitado para a evidência da atividade.**
+This is the step specified for the activity evidence.
 
----
-
-## Conceitos envolvidos
+## Concepts Practiced
 
 ### PowerShell
 
-A PowerShell é uma ferramenta de automação e gerenciamento desenvolvida pela Microsoft.
+PowerShell is an automation and management tool developed by Microsoft.
 
-Além de comandos interativos, ela permite criar scripts para automatizar tarefas administrativas e trabalhar diretamente com objetos do sistema operacional.
+In addition to interactive commands, it allows administrators to create scripts that automate administrative tasks and interact directly with operating system objects.
 
-### CIM
+### CIM — Common Information Model
 
-O **Common Information Model (CIM)** fornece uma forma padronizada de consultar informações de gerenciamento do sistema.
+The Common Information Model (CIM) provides a standardized way to query system management information.
 
-Na atividade, `Get-CimInstance` foi utilizado para consultar informações sobre:
+In this activity, `Get-CimInstance` was used to retrieve information about:
 
-```text
-Sistema
-Sistema operacional
-Processador
-Memória
-```
+- The system.
+- The operating system.
+- The processor.
+- Physical memory.
 
-### Get-WinEvent
+### `Get-WinEvent`
 
-O cmdlet:
+The `Get-WinEvent` cmdlet allows users to query events stored in Windows event logs.
 
-```powershell
-Get-WinEvent
-```
-
-permite consultar eventos armazenados nos logs do Windows.
-
-No laboratório, foi utilizado:
+In the laboratory, the following command was used to query the System log:
 
 ```powershell
 Get-WinEvent -LogName System
 ```
 
-para consultar o log do sistema.
+### `Where-Object`
 
-### Where-Object
+The `Where-Object` cmdlet filters objects according to a specified condition.
 
-O `Where-Object` permite filtrar objetos de acordo com uma condição.
-
-Neste exercício:
+In this exercise:
 
 ```powershell
 Where-Object { $_.Id -eq 6005 -or $_.Id -eq 6006 }
 ```
 
-foi utilizado para selecionar apenas os eventos com os IDs especificados.
+was used to select only events with the specified IDs.
 
-### Out-File
+### `Out-File`
 
-O `Out-File` permite direcionar a saída para um arquivo.
+The `Out-File` cmdlet redirects output to a file.
 
-No laboratório, foi utilizado:
+In the laboratory, the following command was used to append information to the report:
 
 ```powershell
 Out-File -Append -FilePath $reportFile
 ```
 
-para adicionar os dados ao relatório.
+## Results
 
----
+The activity demonstrated two PowerShell automation use cases.
 
-## Resultado
-
-A atividade demonstrou duas aplicações de automação com PowerShell.
-
-Primeiro, foi realizada uma coleta de informações do sistema e hardware, identificando:
+First, system and hardware information was collected, identifying:
 
 ```text
-Computador: WINCLIENT
-Sistema: Microsoft Windows Server 2022 Datacenter
-Arquitetura: 64-bit
-Processador: AMD EPYC 7571
+Computer: WINCLIENT
+Operating system: Microsoft Windows Server 2022 Datacenter
+Architecture: 64-bit
+Processor: AMD EPYC 7571
 ```
 
-Depois, foi criado um segundo script para consultar eventos específicos do log `System` e gerar automaticamente o arquivo:
+Next, a second script was created to query specific events from the System log and automatically generate the following file:
 
 ```text
 C:\Relatorio_Eventos_Inicializacao.txt
 ```
 
-A geração do relatório foi confirmada pela saída:
+Report generation was confirmed by the output:
 
 ```text
 Relatório de eventos de inicialização do sistema salvo em C:\Relatorio_Eventos_Inicializacao.txt
 ```
 
-Após a visualização, o arquivo foi removido para finalizar a atividade.
+After the report was viewed, the file was deleted to complete the activity.
+
+The exercise demonstrated how PowerShell can automate system inventory, query Windows event logs, filter records, and generate reports for administrative and security analysis.
+
+## Evidence
+
+The activity evidence corresponds to Step 8, after viewing and deleting the Windows Server startup event report.
+
+[View Evidence — Classes 21–22](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 8**, após a visualização e remoção do relatório de eventos de inicialização do Windows Server.
-
-[**Evidências — Módulo 6 / Aulas 1 e 2**](../evidencias.pdf)
+[Back to Classes 21–22](../) · [Back to Module 06](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
