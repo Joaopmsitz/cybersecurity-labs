@@ -1,114 +1,102 @@
-# Atividade 11.4 — QoS no Kali Linux
+# Activity 11.04 — QoS on Kali Linux
 
-## Objetivo
+## Objective
 
-Explorar mecanismos de **Quality of Service (QoS)** no Linux utilizando o comando `tc` (*Traffic Control*), criando filas e filtros para controlar o tráfego da interface `eth0` e, posteriormente, aplicando um limite de taxa de transmissão.
+Explore Quality of Service (QoS) mechanisms on Linux using the `tc` (Traffic Control) command to create queues and filters for controlling traffic on the `eth0` interface, and subsequently apply a transmission rate limit.
 
----
+## Environment
 
-## Ambiente
+- **Operating system:** Kali GNU/Linux
+- **Network interface:** `eth0`
+- **Tool:** `tc` (Traffic Control)
+- **Gateway:** `192.168.98.1`
+- **Machine IP address:** `192.168.98.40`
 
-* **Sistema:** Kali GNU/Linux
-* **Interface:** `eth0`
-* **Ferramenta:** `tc` (*Traffic Control*)
-* **Gateway:** `192.168.98.1`
-* **Endereço da máquina:** `192.168.98.40`
+## 1. Accessing Kali Linux
 
----
+The Kali Linux machine was accessed, and the Terminal was opened.
 
-## 1. Acessando o Kali Linux
+Administrative privileges were obtained using:
 
-A máquina Kali Linux foi acessada e o Terminal foi aberto.
-
-Foi obtido acesso administrativo com:
-
-```bash id="a4k7ps"
+```bash
 sudo -i
 ```
 
----
+## 2. Checking the Network Interface
 
-## 2. Verificando a interface de rede
+The network interface configuration was checked using:
 
-As configurações das interfaces foram verificadas utilizando:
-
-```bash id="m8q2vx"
+```bash
 ifconfig
 ```
 
-A interface principal utilizada na atividade foi a `eth0`.
+The main interface used in this activity was `eth0`.
 
-Entre as informações observadas, estavam:
+The observed information included:
 
-```text id="c6w9rt"
+```text
 eth0: ...
       inet 192.168.98.40
       netmask 255.255.255.0
       mtu 9001
 ```
 
-A interface `eth0` possui o endereço `192.168.98.40` e está conectada à rede utilizada no laboratório.
+The `eth0` interface has the IP address `192.168.98.40` and is connected to the network used in the lab.
 
----
+## 3. Creating a Priority Queue
 
-## 3. Criando uma fila de prioridade
+A priority queueing discipline (`qdisc`) of type `prio` was added to the `eth0` interface:
 
-Foi adicionada uma disciplina de fila (*qdisc*) do tipo `prio` à interface `eth0`:
-
-```bash id="evi9kk"
+```bash
 tc qdisc add dev eth0 root handle 1: prio
 tc filter add dev eth0 parent 1: protocol ip prio 1 u32 match ip protocol 1 0xff flowid 1:1
 ```
 
-O primeiro comando cria uma fila de prioridade:
+The first command creates a priority queue:
 
 ```bash
 tc qdisc add dev eth0 root handle 1: prio
 ```
 
-### Parâmetros principais
+### Main Parameters
 
-* `tc`: ferramenta de controle de tráfego do Linux;
-* `qdisc`: *queueing discipline*, responsável pelo gerenciamento das filas;
-* `add`: adiciona uma nova configuração;
-* `dev eth0`: aplica a configuração à interface `eth0`;
-* `root`: define a fila como principal da interface;
-* `handle 1:`: identifica a disciplina de fila;
-* `prio`: utiliza uma fila baseada em prioridades.
+- **`tc`:** Linux traffic control utility.
+- **`qdisc`:** Queueing discipline responsible for managing packet queues.
+- **`add`:** Adds a new configuration.
+- **`dev eth0`:** Applies the configuration to the `eth0` interface.
+- **`root`:** Sets the queueing discipline as the interface's root discipline.
+- **`handle 1:`:** Identifies the queueing discipline.
+- **`prio`:** Uses a priority-based queueing discipline.
 
-O segundo comando adiciona um filtro:
+The second command adds a filter:
 
 ```bash
 tc filter add dev eth0 parent 1: protocol ip prio 1 u32 match ip protocol 1 0xff flowid 1:1
 ```
 
-Nesse caso, o filtro utiliza o protocolo IP e identifica o protocolo `1`, correspondente ao **ICMP**, direcionando os pacotes para a classe `1:1`.
+In this case, the filter uses the IP protocol and matches protocol number `1`, which corresponds to ICMP, directing the matching packets to class `1:1`.
 
----
+## 4. Removing the Previous QDisc
 
-## 4. Removendo a QDisc anterior
+Since Linux allows only one root queueing discipline per interface, the previous configuration was removed:
 
-Como o Linux permite apenas uma disciplina de fila raiz por interface, a configuração anterior foi removida:
-
-```bash id="r5m9kx"
+```bash
 tc qdisc del dev eth0 root
 ```
 
-Esse comando remove a QDisc raiz configurada anteriormente na interface `eth0`.
+This command removes the root QDisc previously configured on the `eth0` interface.
 
----
+## 5. Testing Connectivity to the Gateway
 
-## 5. Testando a conectividade com o gateway
+Before configuring a new QoS policy, connectivity to the gateway was tested:
 
-Antes de configurar uma nova política de QoS, foi realizado um teste de conectividade com o gateway:
-
-```bash id="q80cbn"
+```bash
 ping 192.168.98.1
 ```
 
-Resultado:
+Result:
 
-```text id="q80cbn"
+```text
 PING 192.168.98.1 (192.168.98.1) 56(84) bytes of data.
 64 bytes from 192.168.98.1: icmp_seq=1 ttl=255 time=0.325 ms
 64 bytes from 192.168.98.1: icmp_seq=2 ttl=255 time=0.424 ms
@@ -119,144 +107,136 @@ PING 192.168.98.1 (192.168.98.1) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.325/0.399/0.450/0.053 ms
 ```
 
-O teste apresentou:
+The test results showed:
 
-* **3 pacotes transmitidos;**
-* **3 pacotes recebidos;**
-* **0% de perda;**
-* tempo médio de resposta de aproximadamente **0,399 ms**.
+- **Packets transmitted:** 3
+- **Packets received:** 3
+- **Packet loss:** 0%
+- **Average response time:** Approximately 0.399 ms
 
----
+## 6. Creating an HTB QDisc
 
-## 6. Criando uma QDisc HTB
+A Hierarchical Token Bucket (HTB) queueing discipline was configured:
 
-Foi configurada uma disciplina de fila do tipo **HTB (Hierarchical Token Bucket)**:
-
-```bash id="00aqal"
+```bash
 tc qdisc add dev eth0 root handle 1: htb
 tc class add dev eth0 parent 1: classid 1:1 htb rate 10mbit
 tc filter add dev eth0 parent 1: protocol ip prio 1 u32 match ip src 192.168.98.1 flowid 1:1
 ```
 
-A primeira linha cria a QDisc HTB:
+The first line creates the HTB QDisc:
 
 ```bash
 tc qdisc add dev eth0 root handle 1: htb
 ```
 
-A segunda cria uma classe com limite de taxa:
+The second line creates a class with a rate limit:
 
 ```bash
 tc class add dev eth0 parent 1: classid 1:1 htb rate 10mbit
 ```
 
-Nesse caso, a classe `1:1` foi configurada com uma taxa de:
+In this case, class `1:1` was configured with a rate of:
 
 ```text
 10 Mbit/s
 ```
 
-Por fim, foi criado um filtro que identifica tráfego cujo endereço IP de origem é `192.168.98.1`:
+Finally, a filter was created to match traffic whose source IP address is `192.168.98.1`:
 
 ```bash
 tc filter add dev eth0 parent 1: protocol ip prio 1 u32 match ip src 192.168.98.1 flowid 1:1
 ```
 
-Assim, o tráfego correspondente é direcionado para a classe `1:1`.
+Matching traffic is therefore directed to class `1:1`.
 
----
+## 7. Removing the HTB Configuration
 
-## 7. Removendo a configuração HTB
+Before performing the final test, the existing QDisc was removed again:
 
-Antes de realizar o teste final, a QDisc existente foi removida novamente:
-
-```bash id="r5m9kx"
+```bash
 tc qdisc del dev eth0 root
 ```
 
-Isso permitiu aplicar uma nova configuração de controle de tráfego à interface.
+This allowed a new traffic control configuration to be applied to the interface.
 
----
+## 8. Limiting the Interface to 1 Mbit/s
 
-## 8. Limitando a interface a 1 Mbit/s
+To demonstrate direct transmission rate control, a Token Bucket Filter (TBF) QDisc was configured:
 
-Para demonstrar o controle direto da taxa de transmissão, foi configurada uma QDisc **TBF (Token Bucket Filter)**:
-
-```bash id="pfif6d"
+```bash
 tc qdisc add dev eth0 root tbf rate 1mbit burst 10kb latency 50ms
 ```
 
-A configuração utiliza:
+The configuration uses the following parameters:
 
-* `tbf`: *Token Bucket Filter*;
-* `rate 1mbit`: limita a taxa a **1 Mbit/s**;
-* `burst 10kb`: define o tamanho do burst permitido;
-* `latency 50ms`: define a latência máxima utilizada no gerenciamento da fila.
+- **`tbf`:** Token Bucket Filter.
+- **`rate 1mbit`:** Sets the rate limit to 1 Mbit/s.
+- **`burst 10kb`:** Sets the permitted burst size.
+- **`latency 50ms`:** Sets the maximum latency parameter used for queue management.
 
-Com essa configuração, o tráfego da interface passa a ser submetido ao limite definido pela QDisc.
+With this configuration, traffic on the interface is subject to the rate limit imposed by the QDisc.
 
-### Evidência — Passo 8
+### Evidence — Step 8
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 11.4:** configuração da QDisc TBF na interface `eth0`, utilizando `rate 1mbit`, `burst 10kb` e `latency 50ms` para limitar a taxa de transmissão da interface.
+> Screenshot of Activity 11.04: the TBF QDisc configuration on the `eth0` interface, using `rate 1mbit`, `burst 10kb`, and `latency 50ms` to limit the interface's transmission rate.
 
-[**Evidências — Módulo 11 / Aulas 41 e 42**](../evidencias.pdf)
+[View Evidence — Classes 41–42](../evidencias.pdf)
 
----
+## 9. Removing the Rate Limit
 
-## 9. Removendo o limite de velocidade
+After recording the evidence, the QoS configuration was removed:
 
-Após o registro da evidência, a configuração de QoS foi removida:
-
-```bash id="r5m9kx"
+```bash
 tc qdisc del dev eth0 root
 ```
 
-Dessa forma, o limite de `1 Mbit/s` aplicado à interface foi removido.
+This removed the 1 Mbit/s limit previously applied to the interface.
 
----
+## 10. Closing the Activity
 
-## 10. Encerrando a atividade
+After removing the QoS configuration, the Terminal was closed.
 
-Após remover a configuração de QoS, o Terminal foi fechado.
+## Key Concepts
 
----
+- **QoS (Quality of Service):** A set of mechanisms used to control and organize network traffic.
+- **`tc`:** A Linux utility for traffic control and queue management.
+- **QDisc:** A queueing discipline that determines how packets are handled by an interface.
+- **PRIO:** A priority-based queueing discipline.
+- **HTB:** A hierarchical mechanism for controlling traffic rates and classes.
+- **TBF:** A Token Bucket-based mechanism used to limit transmission rates.
+- **ICMP:** A protocol used by `ping` to test connectivity.
 
-## Conceitos
+## Activity Workflow
 
-* **QoS (Quality of Service):** conjunto de mecanismos utilizados para controlar e organizar o tráfego de rede.
-* **`tc`:** ferramenta do Linux para controle de tráfego e gerenciamento de filas.
-* **QDisc:** disciplina responsável pelo tratamento dos pacotes em uma interface.
-* **PRIO:** QDisc baseada em prioridades.
-* **HTB:** mecanismo hierárquico para controle de taxas e classes de tráfego.
-* **TBF:** mecanismo baseado em *Token Bucket* utilizado para limitar a taxa de transmissão.
-* **ICMP:** protocolo utilizado pelo `ping` para testes de conectividade.
-
-## Fluxo da atividade
-
-```text id="n7w4cs"
-Verificar interface
+```text
+Check the network interface
        ↓
-Criar QDisc PRIO
+Create a PRIO QDisc
        ↓
-Adicionar filtro ICMP
+Add an ICMP filter
        ↓
-Remover QDisc
+Remove the QDisc
        ↓
-Testar gateway
+Test gateway connectivity
        ↓
-Criar QDisc HTB
+Create an HTB QDisc
        ↓
-Classificar tráfego
+Classify traffic
        ↓
-Remover QDisc
+Remove the QDisc
        ↓
-Aplicar TBF de 1 Mbit/s
+Apply a 1 Mbit/s TBF limit
        ↓
-Remover configuração
+Remove the configuration
 ```
 
-## Resultado
+## Result
 
-Foram exploradas diferentes formas de controle de tráfego com `tc`, incluindo **PRIO**, **HTB** e **TBF**. No teste final, a interface `eth0` foi configurada com uma taxa máxima de **1 Mbit/s**, demonstrando na prática o uso de QoS para controle de banda.
+Different traffic control mechanisms were explored using `tc`, including PRIO, HTB, and TBF. In the final test, the `eth0` interface was configured with a maximum rate of 1 Mbit/s, demonstrating the practical use of QoS for bandwidth control.
+
+---
+
+[Back to Classes 41–42](../) · [Back to Module 11](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
