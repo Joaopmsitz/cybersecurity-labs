@@ -1,58 +1,64 @@
-# Atividade 8.4 — Cifrando e decifrando um arquivo com 3DES no Linux
+# Activity 8.04 — Encrypting and Decrypting a File with 3DES on Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 08  
+> **Classes:** 29–30  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **OpenSSL** para cifrar e decifrar um arquivo utilizando **3DES (Triple DES)** no modo CFB, verificando na prática a criação do arquivo cifrado e sua posterior recuperação.
+## Objective
 
-A atividade também permite observar o comportamento do OpenSSL ao utilizar um algoritmo criptográfico considerado **legado**.
+Use **OpenSSL** to encrypt and decrypt a file using **3DES (Triple DES)** in CFB mode, verifying the creation of the encrypted file and its subsequent recovery.
 
----
-
-## Ambiente
-
-* **Sistema:** Kali Linux
-* **Ferramenta:** OpenSSL
-* **Algoritmo:** 3DES / DES-EDE3-CFB
-* **Diretório de trabalho:** `/home/aluno/Documentos/Arquivos`
-* **Arquivo original:** `Hyla_japonica_sep01.jpg`
-* **Arquivo cifrado:** `arquivo_criptografado`
-* **Arquivo recuperado:** `imagem.jpg`
-
-> A senha utilizada durante o laboratório não é registrada neste README.
+This activity also demonstrates OpenSSL's behavior when using a cryptographic algorithm considered **legacy**.
 
 ---
 
-## 1. Acesso como root
+## Environment
 
-Inicialmente, foi obtido acesso administrativo ao Kali Linux:
+- **Operating system:** Kali Linux
+- **Tool:** OpenSSL
+- **Algorithm:** 3DES / DES-EDE3-CFB
+- **Working directory:** `/home/aluno/Documentos/Arquivos`
+- **Original file:** `Hyla_japonica_sep01.jpg`
+- **Encrypted file:** `arquivo_criptografado`
+- **Recovered file:** `imagem.jpg`
 
-```bash id="c9rj4h"
+> The password used during the lab is not recorded in this README.
+
+---
+
+## 1. Switching to the Root User
+
+Administrative access to Kali Linux was obtained:
+
+```bash
 sudo -i
 ```
 
 ---
 
-## 2. Acesso ao diretório de trabalho
+## 2. Accessing the Working Directory
 
-Foi acessado o diretório utilizado para armazenar os arquivos da atividade:
+The directory used to store the files for this activity was accessed:
 
-```bash id="r6j3s8"
+```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
 ---
 
-## 3. Download da imagem
+## 3. Downloading the Image
 
-Foi utilizada uma imagem JPG obtida da Wikimedia Commons:
+A JPG image hosted on Wikimedia Commons was used:
 
-```bash id="v4q2ny"
+```bash
 wget https://upload.wikimedia.org/wikipedia/commons/5/5a/Hyla_japonica_sep01.jpg
 ```
 
-Saída registrada no laboratório:
+Output recorded during the lab:
 
-```text id="m0c4jx"
+```text
 --2024-03-03 20:56:15--  https://upload.wikimedia.org/wikipedia/commons/5/5a/Hyla_japonica_sep01.jpg
 Resolvendo upload.wikimedia.org (upload.wikimedia.org)... 208.80.154.240, 2620:0:861:ed1a::2:b
 Conectando-se a upload.wikimedia.org (upload.wikimedia.org)|208.80.154.240|:443... conectado.
@@ -65,68 +71,68 @@ Hyla_japonica_sep01.jpg        100%[============================================
 2024-03-03 20:56:15 (12,7MB/s) - “Hyla_japonica_sep01.jpg” salvo [2900468/2900468]
 ```
 
-A imagem foi aberta no **Thunar** para verificar o arquivo antes da cifragem.
+The image was opened in **Thunar** to verify the file before encryption.
 
 ---
 
-## 4. Cifragem utilizando 3DES
+## 4. Encrypting with 3DES
 
-Foi realizada a verificação inicial do arquivo:
+The initial file listing was checked:
 
-```bash id="xj5xgk"
+```bash
 ls
 ```
 
-Saída:
+Output:
 
-```text id="q6z7gk"
+```text
 Hyla_japonica_sep01.jpg
 ```
 
-Em seguida, o arquivo foi cifrado com o OpenSSL:
+The file was then encrypted using OpenSSL:
 
-```bash id="x4eq8w"
+```bash
 openssl enc -des-ede3-cfb -salt -in Hyla_japonica_sep01.jpg -out arquivo_criptografado
 ```
 
-Durante a operação, foi solicitada uma senha:
+A password was requested during the operation:
 
-```text id="7g0f2p"
+```text
 enter DES-EDE3-CFB encryption password:
 Verifying - enter DES-EDE3-CFB encryption password:
 *** WARNING : deprecated key derivation used.
 Using -iter or -pbkdf2 would be better.
 ```
 
-Após a cifragem, foi executado novamente:
+After encryption, the following command was executed again:
 
-```bash id="a2a4k8"
+```bash
 ls
 ```
 
-Resultado:
+Result:
 
-```text id="x9s1ae"
+```text
 arquivo_criptografado  Hyla_japonica_sep01.jpg
 ```
 
-### Parâmetros utilizados
+### Parameters Used
 
-* `enc` — utiliza a funcionalidade de cifragem de arquivos do OpenSSL;
-* `-des-ede3-cfb` — utiliza Triple DES (3DES), também identificado pelo algoritmo `DES-EDE3`, no modo CFB;
-* `-salt` — adiciona um salt ao processo de derivação da chave;
-* `-in Hyla_japonica_sep01.jpg` — define a imagem original como entrada;
-* `-out arquivo_criptografado` — define o arquivo cifrado como saída.
+- `enc` — invokes OpenSSL's file encryption functionality.
+- `-des-ede3-cfb` — uses Triple DES (3DES), also identified as `DES-EDE3`, in CFB mode.
+- `-salt` — adds a salt to the key derivation process.
+- `-in Hyla_japonica_sep01.jpg` — specifies the original image as the input.
+- `-out arquivo_criptografado` — specifies the encrypted output file.
 
-O OpenSSL apresentou o aviso sobre o uso de uma derivação de chave considerada legada, recomendando `-iter` ou `-pbkdf2` para usos modernos.
+OpenSSL displayed a warning about using a legacy key derivation method and recommended `-iter` or `-pbkdf2` for modern use.
 
 ---
 
-## 5. Evidência da cifragem
+## 5. Evidence of Encryption
 
-A evidência solicitada para esta atividade corresponde ao **passo 5**, contendo a verificação do arquivo original, a execução da cifragem e a confirmação da criação do arquivo cifrado:
+The evidence requested for this activity corresponds to **step 5**, showing the original file listing, the encryption command, and confirmation that the encrypted file was created:
 
-```text id="j9v3r5"
+```text
 ls
 Hyla_japonica_sep01.jpg
 
@@ -140,54 +146,58 @@ ls
 arquivo_criptografado  Hyla_japonica_sep01.jpg
 ```
 
-[**Evidências — Módulo 8 / Aulas 29 e 30**](../evidencias.pdf)
+[View Evidence — Classes 29–30](../evidencias.pdf)
 
 ---
 
-## 6. Decifragem do arquivo
+## 6. Decrypting the File
 
-Após confirmar a criação do arquivo cifrado, o arquivo original foi removido:
+After confirming that the encrypted file had been created, the original file was removed:
 
-```bash id="4q8y3b"
+```bash
 rm Hyla_japonica_sep01.jpg
 ```
 
-Em seguida, o arquivo cifrado foi decifrado:
+The encrypted file was then decrypted:
 
-```bash id="6k8j8m"
+```bash
 openssl enc -des-ede3-cfb -d -in arquivo_criptografado -out imagem.jpg
 ```
 
-Durante o processo, foi solicitada a senha utilizada na cifragem:
+The password used during encryption was requested:
 
-```text id="n1q2as"
+```text
 enter DES-EDE3-CFB decryption password:
 *** WARNING : deprecated key derivation used.
 Using -iter or -pbkdf2 would be better.
 ```
 
-Por fim, foi utilizado `ls` para verificar o arquivo recuperado:
+Finally, `ls` was used to verify the recovered file:
 
-```bash id="t6r3w1"
+```bash
 ls
 ```
 
-Saída:
+Output:
 
-```text id="z7x4c2"
+```text
 arquivo_criptografado  imagem.jpg
 ```
 
-A imagem recuperada foi aberta no **Thunar** para verificar visualmente o resultado da decifragem.
+The recovered image was opened in **Thunar** to visually verify the decryption result.
 
 ---
 
-## Observação técnica
+## Technical Note
 
-O **3DES** é um algoritmo criptográfico legado. A atividade demonstra seu funcionamento por meio do OpenSSL, mas sua utilização não representa a escolha recomendada para projetos novos. Em sistemas modernos, algoritmos mais atuais devem ser considerados conforme o caso de uso e os requisitos de segurança.
+**3DES** is a legacy cryptographic algorithm. This activity demonstrates how it works through OpenSSL, but it is not the recommended choice for new projects. More modern algorithms should be considered according to the use case and security requirements.
 
-Além disso, o comando utilizado no laboratório gera o aviso referente à derivação de chave legada. O próprio OpenSSL recomenda mecanismos como `PBKDF2` para melhorar esse processo.
+Additionally, the command used in the lab generates a warning about legacy key derivation. OpenSSL recommends mechanisms such as **PBKDF2** to improve this process.
 
 ---
 
-[**Evidências — Módulo 8 / Aulas 29 e 30**](../evidencias.pdf)
+[View Evidence — Classes 29–30](../evidencias.pdf)
+
+---
+
+[Back to Classes 29–30](../) · [Back to Module 8](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
