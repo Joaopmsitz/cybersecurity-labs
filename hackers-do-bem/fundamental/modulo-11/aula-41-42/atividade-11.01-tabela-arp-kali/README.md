@@ -1,52 +1,46 @@
-# Atividade 11.1 — Explorando a Tabela ARP no Kali Linux
+# Activity 11.01 — Exploring the ARP Table on Kali Linux
 
-## Objetivo
+## Objective
 
-Explorar a **tabela ARP** do Kali Linux, observando os endereços IP e MAC associados às máquinas da rede, limpar as entradas existentes e verificar como novas entradas são aprendidas novamente após uma conexão de rede.
+Explore the ARP table on Kali Linux by examining the IP and MAC addresses associated with devices on the network, clearing existing entries, and verifying how new entries are learned again after network communication.
 
----
+## Environment
 
-## Ambiente
+- **Operating system:** Kali GNU/Linux
+- **Access:** RDP
+- **Network interface:** `eth0`
+- **Tools:** Terminal, `arp`, and `ip`
+- **Browser:** Mozilla Firefox
 
-* **Sistema:** Kali GNU/Linux
-* **Acesso:** RDP
-* **Interface de rede:** `eth0`
-* **Ferramentas:** Terminal, `arp` e `ip`
-* **Navegador:** Mozilla Firefox
+## 1. Accessing Kali Linux
 
----
+The Kali Linux machine was started and accessed via RDP.
 
-## 1. Acessando o Kali Linux
+After connecting, a terminal was opened and administrative privileges were obtained with:
 
-A máquina Kali Linux foi inicializada e acessada via RDP.
-
-Após o acesso, foi aberto o Terminal e obtido acesso administrativo com:
-
-```bash id="h3v9pq"
+```bash
 sudo -i
 ```
 
-O sistema solicitou a senha do usuário para elevar os privilégios:
+The system requested the user's password to elevate privileges:
 
-```text id="a7k2mz"
+```text
 ┌──(aluno㉿kali)-[~]
 └─$ sudo -i
 [sudo] senha para aluno:
 ```
 
----
+## 2. Displaying the ARP Table
 
-## 2. Visualizando a tabela ARP
+The following command was used to display the current ARP table entries:
 
-Para visualizar as entradas atuais da tabela ARP, foi utilizado:
-
-```bash id="b8n4wx"
+```bash
 arp -a
 ```
 
-A saída apresentada foi:
+The output was:
 
-```text id="w1c6rd"
+```text
 ┌──(root㉿kali)-[~]
 └─# arp -a
 ip-192-168-98-201.ec2.internal (192.168.98.201) em 12:5c:9d:d7:39:31 [ether] em eth0
@@ -54,31 +48,29 @@ ip-192-168-98-1.ec2.internal (192.168.98.1) em 12:82:f4:28:c9:8d [ether] em eth0
 ip-192-168-98-2.ec2.internal (192.168.98.2) em 12:82:f4:28:c9:8d [ether] em eth0
 ```
 
-A tabela apresenta a associação entre endereços IP e endereços MAC conhecidos pelo sistema.
+The table shows the associations between IP addresses and MAC addresses known to the system.
 
-### Elementos observados
+### Observed Elements
 
-* **192.168.98.201:** endereço IP associado ao MAC `12:5c:9d:d7:39:31`;
-* **192.168.98.1:** endereço IP associado ao MAC `12:82:f4:28:c9:8d`;
-* **192.168.98.2:** endereço IP associado ao MAC `12:82:f4:28:c9:8d`;
-* **`[ether]`:** indica Ethernet como tecnologia de camada de enlace;
-* **`eth0`:** interface de rede pela qual a associação é conhecida.
+- **`192.168.98.201`:** IP address associated with MAC address `12:5c:9d:d7:39:31`.
+- **`192.168.98.1`:** IP address associated with MAC address `12:82:f4:28:c9:8d`.
+- **`192.168.98.2`:** IP address associated with MAC address `12:82:f4:28:c9:8d`.
+- **`[ether]`:** Indicates Ethernet as the link-layer technology.
+- **`eth0`:** The network interface through which the association is known.
 
-A tabela ARP permite que o sistema associe endereços IPv4 aos respectivos endereços MAC dentro da rede local.
+The ARP table allows the system to associate IPv4 addresses with their corresponding MAC addresses on the local network.
 
----
+## 3. Clearing the ARP Table
 
-## 3. Limpando a tabela ARP
+The following command was executed to remove existing entries from the neighbor table:
 
-Para remover as entradas existentes da tabela de vizinhança, foi executado:
-
-```bash id="x2f7ka"
+```bash
 ip -s -s neigh flush all
 ```
 
-A saída apresentada foi:
+The output was:
 
-```text id="q5r8nt"
+```text
 192.168.98.201 dev eth0 lladdr 12:5c:9d:d7:39:31  ref 1 used 66/0/66probes 1 REACHABLE
 192.168.98.1 dev eth0 lladdr 12:82:f4:28:c9:8d  used 419/419/376probes 1 STALE
 192.168.98.2 dev eth0 lladdr 12:82:f4:28:c9:8d  used 37/37/13probes 1 STALE
@@ -87,67 +79,59 @@ A saída apresentada foi:
 *** Flush is complete after 1 round ***
 ```
 
-O comando removeu as entradas aprendidas da tabela de vizinhança.
+The command removed the learned entries from the neighbor table.
 
-Os estados apresentados antes da remoção também mostram informações sobre o estado das associações, como:
+The states displayed before removal also provide information about the status of the associations, such as:
 
-* `REACHABLE`: vizinhança considerada alcançável;
-* `STALE`: entrada existente, mas que precisa ser validada novamente quando utilizada.
+- **`REACHABLE`:** The neighbor is considered reachable.
+- **`STALE`:** The entry exists but may need to be validated again when used.
 
----
+## 4. Checking the ARP Table Again
 
-## 4. Verificando novamente a tabela ARP
+After clearing the table, the command was executed again:
 
-Após a limpeza, o comando foi executado novamente:
-
-```bash id="m4v7zc"
+```bash
 arp -a
 ```
 
-A saída foi:
+The output was:
 
-```text id="j9q2sx"
+```text
 ┌──(root㉿kali)-[~]
 └─# arp -a
 ip-192-168-98-201.ec2.internal (192.168.98.201) em 12:5c:9d:d7:39:31 [ether] em eth0
 ip-192-168-98-2.ec2.internal (192.168.98.2) em 12:82:f4:28:c9:8d [ether] em eth0
 ```
 
-Foi possível observar que a entrada referente ao endereço `192.168.98.1` não estava mais presente naquele momento.
+The entry corresponding to `192.168.98.1` was no longer present at that moment.
 
-A ausência dessa entrada demonstra o efeito da limpeza da tabela. Outras entradas podem reaparecer caso o sistema volte a se comunicar com os respectivos destinos.
+The missing entry demonstrates the effect of clearing the table. Other entries may reappear when the system communicates with the corresponding destinations again.
 
----
+## 5. Accessing Google
 
-## 5. Acessando o Google
+Mozilla Firefox was opened through the following menu:
 
-Foi aberto o **Mozilla Firefox** através de:
-
-```text id="c6k1qp"
-Aplicativos → Navegador Web
+```text
+Applications → Web Browser
 ```
 
-No navegador, foi acessado:
+The following website was accessed:
 
-```text id="s7m3vd"
 https://www.google.com
-```
 
-Essa conexão gera tráfego de rede que pode fazer com que o sistema precise descobrir novamente informações de camada de enlace para alcançar o destino por meio da rede local.
+This connection generates network traffic that may require the system to resolve link-layer information to reach the destination through the local network.
 
----
+## 6. Checking the ARP Table Again
 
-## 6. Verificando novamente a tabela ARP
+After accessing Google, the command was executed again:
 
-Após acessar o Google, o comando foi executado novamente:
-
-```bash id="r5n8yt"
+```bash
 arp -a
 ```
 
-A saída apresentada foi:
+The output was:
 
-```text id="e2p6jk"
+```text
 ┌──(root㉿kali)-[~]
 └─# arp -a
 ip-192-168-98-1.ec2.internal (192.168.98.1) em 12:82:f4:28:c9:8d [ether] em eth0
@@ -155,51 +139,51 @@ ip-192-168-98-201.ec2.internal (192.168.98.201) em 12:5c:9d:d7:39:31 [ether] em 
 ip-192-98-2.ec2.internal (192.168.98.2) em 12:82:f4:28:c9:8d [ether] em eth0
 ```
 
-A entrada referente ao gateway `192.168.98.1` voltou a aparecer na tabela ARP.
+The entry corresponding to the gateway `192.168.98.1` appeared in the ARP table again.
 
-### Evidência — Passo 6
+### Evidence — Step 6
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 11.1:** tabela ARP do Kali Linux após o acesso ao Google, mostrando novamente a entrada do endereço `192.168.98.1` associada ao endereço MAC correspondente na interface `eth0`.
+> Screenshot of Activity 11.01: the Kali Linux ARP table after accessing Google, showing the reappearance of the `192.168.98.1` entry and its associated MAC address on the `eth0` interface.
 
-[**Evidências — Módulo 11 / Aulas 41 e 42**](../evidencias.pdf)
+[View Evidence — Classes 41–42](../evidencias.pdf)
 
-> **Observação:** o endereço `192.168.98.1` funciona como gateway da rede nesse ambiente. Para alcançar destinos externos, o tráfego precisa ser encaminhado por esse gateway, fazendo com que sua associação de camada 2 esteja novamente disponível.
+**Observation:** In this environment, `192.168.98.1` acts as the network gateway. To reach external destinations, traffic must be forwarded through this gateway, making its Layer 2 address association available again.
 
----
+## 7. Closing the Activity
 
-## 7. Encerrando a atividade
+After recording the evidence, Mozilla Firefox and the Terminal were closed.
 
-Após registrar a evidência, o Mozilla Firefox e o Terminal foram fechados.
+## Key Concepts
 
----
+- **ARP (Address Resolution Protocol):** A protocol used to discover the MAC address associated with an IPv4 address on a local network.
+- **ARP table:** Stores IP-to-MAC address mappings known to the system.
+- **MAC address:** An address used for communication at the link layer.
+- **Gateway:** A device used to forward traffic destined for other networks.
+- **`arp -a`:** Displays available ARP entries.
+- **`ip neigh`:** Allows users to inspect and manage the Linux neighbor table.
 
-## Conceitos
+## Activity Workflow
 
-* **ARP (Address Resolution Protocol):** protocolo utilizado para descobrir o endereço MAC associado a um endereço IPv4 na rede local.
-* **Tabela ARP:** mantém associações entre endereços IP e MAC conhecidas pelo sistema.
-* **MAC:** endereço utilizado na comunicação da camada de enlace.
-* **Gateway:** dispositivo utilizado para encaminhar tráfego destinado a outras redes.
-* **`arp -a`:** exibe associações ARP disponíveis.
-* **`ip neigh`:** permite consultar e manipular a tabela de vizinhança do Linux.
-
-## Fluxo da atividade
-
-```text id="u4k9ps"
-Visualizar tabela ARP
+```text
+Display the ARP table
         ↓
-Limpar entradas
+Clear existing entries
         ↓
-Verificar tabela novamente
+Check the table again
         ↓
-Acessar Google
+Access Google
         ↓
-Executar arp -a
+Run arp -a
         ↓
-Observar nova associação
+Observe the new association
 ```
 
-## Resultado
+## Result
 
-A tabela ARP foi visualizada e posteriormente limpa. Após uma nova comunicação de rede, a associação do gateway `192.168.98.1` voltou a aparecer, demonstrando que as informações de vizinhança podem ser aprendidas novamente conforme o tráfego da rede.
+The ARP table was inspected and then cleared. After further network communication, the association for the gateway `192.168.98.1` appeared again, demonstrating that neighbor information can be learned again as network traffic flows.
+
+---
+
+[Back to Classes 41–42](../) · [Back to Module 11](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
