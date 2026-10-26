@@ -1,220 +1,200 @@
-# Atividade 10.8 — Explorando uma UEFI/BIOS por Simulação
+# Activity 10.08 — Exploring a UEFI/BIOS Through Simulation
 
-## Objetivo
+## Objective
 
-Explorar uma interface **UEFI/BIOS simulada** disponibilizada pela Lenovo, identificando informações do sistema e as principais configurações relacionadas a hardware, segurança e inicialização.
+Explore a simulated UEFI/BIOS interface provided by Lenovo, identifying system information and key settings related to hardware, security, and boot configuration.
 
----
+## Environment
 
-## Ambiente
+- **System:** Personal computer
+- **Browser:** Mozilla Firefox
+- **Resource:** Lenovo UEFI/BIOS Simulator
+- **Simulated model:** Lenovo Slim Pro 9 16IRP8 (83C0)
+- **Interface:** Graphics Interface Mode
 
-* **Sistema:** computador pessoal
-* **Navegador:** Mozilla Firefox
-* **Recurso:** Lenovo UEFI/BIOS Simulator
-* **Modelo simulado:** Lenovo Slim Pro 9 16IRP8 (83C0)
-* **Interface:** Graphics Interface Mode
+## 1. Accessing the UEFI/BIOS Simulator
 
----
+The activity was performed on a personal computer, as instructed by the lab, without using the AWS VM.
 
-## 1. Acessando o simulador de UEFI/BIOS
+The following URL was accessed in the browser:
 
-A atividade foi realizada no computador pessoal, conforme orientação do laboratório, sem utilizar a VM da AWS.
-
-No navegador, foi acessado:
-
-```text id="qk0x1x"
 https://download.lenovo.com/bsco/index.html#/
-```
 
-O recurso disponibilizado pela Lenovo permite simular a interface de configuração de diferentes equipamentos.
+Lenovo provides this resource to simulate the configuration interface of different devices.
 
----
+## 2. Launching the Simulator
 
-## 2. Iniciando o simulador
+On the resource's home page, the following option was selected:
 
-Na página inicial do recurso, foi selecionado:
-
-```text id="nqj1kg"
+```text
 Launch Simulator
 ```
 
-Em seguida, foi selecionada a categoria:
+Next, the following category was selected:
 
-```text id="1q3q7e"
+```text
 Laptops
 ```
 
-Depois:
+Then:
 
-```text id="x9f4d2k"
+```text
 Lenovo Laptops
 ```
 
----
+## 3. Selecting the Device
 
-## 3. Selecionando o equipamento
+From the list of available devices, the following model was selected:
 
-Na lista de equipamentos disponíveis, foi selecionado:
-
-```text id="l8h3zw"
+```text
 Lenovo Slim Pro 9 16IRP8 (83C0)
 ```
 
-Em seguida, foi escolhida a opção:
+Next, the following option was chosen:
 
-```text id="u5w8pn"
+```text
 Graphics Interface Mode
 ```
 
-A interface da UEFI/BIOS foi então inicializada de forma simulada.
+The simulated UEFI/BIOS interface then started.
 
----
+## 4. Exploring the Information Section
 
-## 4. Explorando a seção Information
+On the initial screen of the simulated BIOS, the following section was reviewed:
 
-Na tela inicial da BIOS simulada, foi observada a seção:
-
-```text id="3o2q7m"
+```text
 Information
 ```
 
-Nessa área são apresentadas informações relacionadas ao equipamento, incluindo:
+This section displays information about the device, including:
 
-* Nome do produto;
-* Versão da BIOS;
-* CPU;
-* Memória do sistema;
-* Secure Boot.
+- Product name
+- BIOS version
+- CPU
+- System memory
+- Secure Boot
 
-Essas informações permitem consultar características básicas do equipamento diretamente pela interface de firmware.
+This information makes it possible to check the device's basic specifications directly through the firmware interface.
 
----
+## 5. Exploring the Configuration Section
 
-## 5. Explorando a seção Configuration
+In the left-hand menu, the following section was selected:
 
-Na coluna esquerda, foi selecionada:
-
-```text id="8d0z4r"
+```text
 Configuration
 ```
 
-Foram observadas configurações relacionadas ao funcionamento do equipamento, incluindo:
+Settings related to the device's operation were reviewed, including:
 
-* Time;
-* Date;
-* WLAN;
-* Graphics Device;
-* Intel(R) Virtualization Technology;
-* Always On USB;
-* Charge in Battery Mode;
-* System Performance Mode.
+- Time
+- Date
+- WLAN
+- Graphics Device
+- Intel(R) Virtualization Technology
+- Always On USB
+- Charge in Battery Mode
+- System Performance Mode
 
-A seção **Configuration** reúne opções relacionadas ao comportamento e aos recursos de hardware do equipamento.
+The Configuration section brings together options related to the device's behavior and hardware features.
 
----
+## 6. Exploring the Security Section
 
-## 6. Explorando a seção Security
+Next, the following section was selected:
 
-Em seguida, foi selecionada:
-
-```text id="n7s2x1"
+```text
 Security
 ```
 
-Foram observadas configurações de segurança da UEFI/BIOS, entre elas:
+The simulated UEFI/BIOS security settings were reviewed, including:
 
-* Set Hard Disk Password;
-* Intel Platform Trust Technology;
-* Device Guard;
-* Secure Boot;
-* Reset to Setup Mode;
-* Restore Factory Keys.
+- Set Hard Disk Password
+- Intel Platform Trust Technology
+- Device Guard
+- Secure Boot
+- Reset to Setup Mode
+- Restore Factory Keys
 
-Essas opções demonstram como a UEFI/BIOS pode participar de mecanismos relacionados à proteção do dispositivo, inicialização segura e confiança da plataforma.
+These options demonstrate how UEFI/BIOS can participate in mechanisms related to device protection, secure boot, and platform trust.
 
----
+## 7. Exploring the Boot Section
 
-## 7. Explorando a seção Boot
+In the left-hand menu, the following section was selected:
 
-Na coluna esquerda, foi selecionada:
-
-```text id="0x4k8p"
+```text
 Boot
 ```
 
-Foram observadas as opções relacionadas ao processo de inicialização do equipamento, incluindo:
+Options related to the device's startup process were reviewed, including:
 
-* USB Boot;
-* PXE Boot to LAN;
-* IPV4 PXE First;
-* EFI;
-* Windows Boot Manager;
-* EFI PXE Network.
+- USB Boot
+- PXE Boot to LAN
+- IPV4 PXE First
+- EFI
+- Windows Boot Manager
+- EFI PXE Network
 
-A seção **Boot** permite consultar e configurar diferentes mecanismos e fontes utilizadas durante a inicialização do sistema.
+The Boot section allows users to review and configure different mechanisms and sources used during system startup.
 
----
+### Evidence — Step 8
 
-## Evidência — Passo 8
+**Caption to include before the screenshot:**
 
-**Frase obrigatória antes do print:**
+> Screenshot of Activity 10.08: the Boot screen of the simulated UEFI/BIOS for the Lenovo Slim Pro 9 16IRP8 (83C0), displaying settings related to the boot process.
 
-> **Print da atividade 10.8:** tela `Boot` da UEFI/BIOS simulada do Lenovo Slim Pro 9 16IRP8 (83C0), exibindo as configurações relacionadas ao processo de inicialização.
+[View Evidence — Classes 39–40](../evidencias.pdf)
 
-[**Evidências — Módulo 10 / Aulas 39 e 40**](../evidencias.pdf)
+## 8. Exiting the Simulated UEFI/BIOS
 
----
+After exploring the settings, the following menu option was accessed:
 
-## 8. Saindo da UEFI/BIOS simulada
-
-Após concluir a exploração das configurações, foi acessado:
-
-```text id="5r7m2v"
+```text
 Exit → Exit Discarding Changes
 ```
 
-Foi selecionado:
+The following option was selected:
 
-```text id="4e9n1c"
+```text
 Yes
 ```
 
-A opção **Exit Discarding Changes** permite sair do simulador sem salvar eventuais alterações realizadas durante a exploração.
+The **Exit Discarding Changes** option closes the simulator without saving any changes made during the exploration.
 
-Por fim, o navegador foi fechado.
+Finally, the browser was closed.
 
----
+## Key Concepts
 
-## Conceitos
+- **UEFI:** Modern firmware responsible for initializing the computer and configuring hardware features.
+- **BIOS:** Traditional firmware used to initialize and configure hardware.
+- **Secure Boot:** A mechanism that helps verify authorized components during the boot process.
+- **Boot:** The system startup process and selection of boot sources.
+- **PXE:** A mechanism that enables network booting.
 
-* **UEFI:** firmware moderno responsável pela inicialização e configuração de recursos do computador.
-* **BIOS:** firmware tradicional utilizado para inicializar e configurar o hardware.
-* **Secure Boot:** mecanismo que ajuda a verificar componentes autorizados durante a inicialização.
-* **Boot:** processo de inicialização do sistema e seleção das fontes de inicialização.
-* **PXE:** mecanismo que permite inicialização pela rede.
+## Activity Workflow
 
-## Fluxo da atividade
-
-```text id="4l6k8s"
-Acessar simulador
+```text
+Access the simulator
       ↓
 Launch Simulator
       ↓
-Selecionar Laptop
+Select Laptops
       ↓
-Selecionar modelo
+Select the device model
       ↓
-Explorar Information
+Explore Information
       ↓
-Explorar Configuration
+Explore Configuration
       ↓
-Explorar Security
+Explore Security
       ↓
-Explorar Boot
+Explore Boot
       ↓
 Exit Discarding Changes
 ```
 
-## Resultado
+## Result
 
-Foi explorada uma UEFI/BIOS simulada, identificando informações do equipamento e configurações de **hardware, segurança e inicialização** sem necessidade de alterar o firmware real do computador.
+A simulated UEFI/BIOS interface was explored, identifying device information and hardware, security, and boot settings without needing to modify the computer's actual firmware.
+
+---
+
+[Back to Classes 39–40](../) · [Back to Module 10](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
