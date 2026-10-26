@@ -1,137 +1,149 @@
-# Atividade 7.5 — Backup Síncrono com OneDrive
+# Activity 7.05 — OneDrive Backup and Synchronization
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 07  
+> **Classes:** 25–26  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Configurar o OneDrive em um cliente Windows Server 2022 para realizar o backup e a sincronização de pastas do sistema com o armazenamento em nuvem.
+## Objective
+
+Configure OneDrive on a Windows Server 2022 client to back up and synchronize system folders with cloud storage.
 
 ---
 
-## 1. Acesso ao Windows Server
+## 1. Accessing Windows Server
 
-A atividade foi realizada no cliente Windows Server 2022 por meio de RDP.
+The activity was performed on the Windows Server 2022 client through RDP.
 
-Após o acesso, foi utilizado o Explorador de Arquivos para acessar:
+After connecting, File Explorer was used to access:
 
 ```text
 C:\curso
 ```
 
-Dentro desse diretório estava disponível o instalador:
+The following installer was available in this directory:
 
 ```text
 OneDriveSetup
 ```
 
-A instalação foi iniciada utilizando as permissões administrativas necessárias.
+The installation was started using the required administrative permissions.
 
-> Credenciais utilizadas durante o laboratório não são registradas neste README.
+> Credentials used during the lab are not recorded in this README.
 
 ---
 
-## 2. Configuração das Opções da Internet
+## 2. Configuring Internet Options
 
-Após a instalação, foi realizada uma configuração no Windows para adicionar o serviço utilizado pelo OneDrive aos sites confiáveis.
+After installation, a Windows setting was configured to add the service used by OneDrive to the Trusted Sites zone.
 
-No menu de pesquisa do Windows, foi pesquisado:
+In the Windows search menu, the following term was searched for:
 
 ```text
 Internet Options
 ```
 
-Na janela **Internet Properties**, foi acessada a aba:
+In the **Internet Properties** window, the following tab was opened:
 
 ```text
 Security
 ```
 
-Em seguida, foi selecionada a opção:
+Next, the following option was selected:
 
 ```text
 Trusted Sites
 ```
 
-e acessado:
+Then, the following button was selected:
 
 ```text
 Sites
 ```
 
-Foi adicionado o endereço:
+The following address was added:
 
 ```text
 https://odc.officeapps.live.com
 ```
 
-Depois, as alterações foram confirmadas utilizando **Close** e **OK**.
+The changes were then confirmed by selecting **Close** and **OK**.
 
 ---
 
-## 3. Autenticação no OneDrive
+## 3. Signing In to OneDrive
 
-Após a configuração, foi realizada uma busca pelo aplicativo **OneDrive** no Windows.
+After the configuration, the **OneDrive** application was located using Windows Search.
 
-O aplicativo foi iniciado e foi realizada a autenticação utilizando uma conta Microsoft.
+The application was launched, and sign-in was completed using a Microsoft account.
 
-Após o login, o assistente de configuração do OneDrive foi apresentado.
-
----
-
-## 4. Configuração da pasta do OneDrive
-
-No assistente de configuração, foi selecionada a opção referente à pasta do OneDrive.
-
-O procedimento foi avançado utilizando **Next**, mantendo a configuração apresentada pelo assistente.
+After signing in, the OneDrive setup wizard was displayed.
 
 ---
 
-## 5. Configuração do backup das pastas
+## 4. Configuring the OneDrive Folder
 
-Na etapa **Back up folders on this PC**, foram apresentadas as pastas disponíveis para backup.
+In the setup wizard, the option for configuring the OneDrive folder was selected.
 
-Para o laboratório, foi selecionada somente a pasta:
+The process continued by selecting **Next**, keeping the configuration presented by the wizard.
+
+---
+
+## 5. Configuring Folder Backup
+
+During the **Back up folders on this PC** step, the folders available for backup were displayed.
+
+For this lab, only the following folder was selected:
 
 ```text
 Desktop
 ```
 
-Em seguida, foi selecionado:
+Next, the following option was selected:
 
 ```text
 Start backup
 ```
 
-O assistente continuou pelas etapas seguintes utilizando **Next**.
+The wizard continued through the subsequent steps using **Next**.
 
 ---
 
-## 6. Finalização da configuração
+## 6. Completing the Configuration
 
-Após avançar pelas etapas do assistente, foi apresentada a opção relacionada ao aplicativo móvel do OneDrive.
+After proceeding through the wizard, the option related to the OneDrive mobile app was displayed.
 
-Foi selecionado:
+The following option was selected:
 
 ```text
 Later
 ```
 
-para finalizar essa etapa sem configurar o aplicativo móvel.
+This completed the step without configuring the mobile app.
 
 ---
 
-## 7. Verificação da sincronização
+## 7. Verifying Synchronization
 
-Para verificar o resultado da configuração, foi selecionada a opção:
+To verify the configuration, the following option was selected:
 
 ```text
 Open my OneDrive folder
 ```
 
-O Explorador de Arquivos foi aberto mostrando a pasta sincronizada do OneDrive.
+File Explorer opened and displayed the synchronized OneDrive folder.
 
-Essa etapa permitiu verificar visualmente que o OneDrive estava configurado no Windows Server e que a pasta estava disponível para sincronização com a nuvem.
+This step provided a visual check that OneDrive was configured on Windows Server and that the folder was available for synchronization with the cloud.
 
 ---
 
-## Evidência
+## Evidence
 
-[**Evidências — Módulo 7 / Aulas 1 e 2**](../evidencias.pdf)
+Evidence for this activity is included in the PDF for Module 7, Classes 25–26.
+
+[View Evidence — Classes 25–26](../evidencias.pdf)
+
+---
+
+[Back to Classes 25–26](../) · [Back to Module 7](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
