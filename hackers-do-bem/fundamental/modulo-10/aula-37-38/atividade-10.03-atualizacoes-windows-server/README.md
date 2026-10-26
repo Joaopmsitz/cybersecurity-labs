@@ -1,147 +1,152 @@
-# Atividade 10.3 — Explorando as Atualizações no Windows Server 2022
+# Activity 10.03 — Exploring Windows Server 2022 Updates
 
-## Objetivo
+## Objective
 
-Explorar o ambiente de atualizações do Windows Server 2022, verificando a disponibilidade de atualizações, realizando a atualização do sistema e analisando as opções avançadas de atualização e notificações.
-
----
-
-## Ambiente
-
-* **Sistema:** Windows Server 2022
-* **Recurso:** Windows Update
-* **Acesso:** RDP
-* **Máquina:** Windows Server 2022 (cliente)
-
-> As credenciais utilizadas para acesso ao laboratório não são registradas neste README.
+Explore the Windows Server 2022 update environment by checking for available updates, updating the system, and reviewing advanced update settings and notification options.
 
 ---
 
-## 1. Acesso ao Windows Server 2022
+## Environment
 
-O Windows Server 2022 (cliente) foi acessado via RDP utilizando as credenciais administrativas indicadas no laboratório.
+- **System:** Windows Server 2022
+- **Feature:** Windows Update
+- **Access:** RDP
+- **Machine:** Windows Server 2022 (client)
+
+> The credentials used to access the lab are not included in this README.
 
 ---
 
-## 2. Acesso ao Windows Update
+## 1. Accessing Windows Server 2022
 
-Na barra de tarefas, foi selecionado:
+The Windows Server 2022 client was accessed via RDP using the administrative credentials specified by the lab.
 
-```text id="q7m3va"
+---
+
+## 2. Accessing Windows Update
+
+The following search field was selected from the taskbar:
+
+```text
 Type here to search
 ```
 
-Foi pesquisado:
+The following term was searched for:
 
-```text id="x4p8kc"
+```text
 Windows Update settings
 ```
 
-e o recurso foi aberto.
+The feature was then opened.
 
 ---
 
-## 3. Verificação de atualizações
+## 3. Checking for Updates
 
-Na página do Windows Update, foi selecionado o botão:
+On the Windows Update page, the following button was selected:
 
-```text id="h6w2ry"
+```text
 Check for updates
 ```
 
-O sistema iniciou a verificação de atualizações disponíveis.
+The system started checking for available updates.
 
-Conforme orientado pelo laboratório, foi aguardado o término do processo para permitir que as atualizações encontradas fossem baixadas e instaladas.
+As instructed by the lab, the process was allowed to finish so that any detected updates could be downloaded and installed.
 
 ---
 
-## 4. Reinicialização do Windows Server
+## 4. Restarting Windows Server
 
-Ao final do processo de atualização, o sistema apresentou a opção:
+After the update process completed, the system displayed the following option:
 
-```text id="p9c5tb"
+```text
 Restart Now
 ```
 
-A reinicialização foi realizada.
+The system was restarted.
 
-Como consequência, a conexão RDP foi encerrada temporariamente.
+As a result, the RDP connection was temporarily disconnected.
 
-Foi aguardado o período indicado no laboratório e realizado novamente o acesso ao Windows Server 2022.
+After waiting for the period specified by the lab, Windows Server 2022 was accessed again.
 
-Após a reconexão, foi acessado novamente:
+After reconnecting, the following page was opened again:
 
-```text id="Windows Update settings"
+```text
+Windows Update settings
 ```
 
 ---
 
-## 5. Verificação do estado das atualizações
+## 5. Checking the Update Status
 
-Após o processo de atualização e reinicialização, foi verificada a mensagem:
+After the update and restart process, the following message was displayed:
 
-```text id="a3n8xf"
+```text
 You're up to date
 ```
 
-Essa mensagem indica que, naquele momento, o Windows Update não apresentava novas atualizações pendentes para instalação.
+This message indicates that, at that time, Windows Update had no additional pending updates to install.
 
 ---
 
-## 6. Configuração das opções avançadas
+## 6. Configuring Advanced Options
 
-Foi selecionado:
+The following option was selected:
 
-```text id="m5v7qd"
+```text
 Advanced options
 ```
 
-Na seção **Update options** e em **Update notifications**, foram ativadas as opções disponíveis conforme solicitado no laboratório.
+Under **Update options** and **Update notifications**, the available options were enabled as requested by the lab.
 
-Após a configuração, foi utilizada a seta de retorno localizada no canto superior esquerdo para voltar à página anterior.
-
----
-
-## Evidência — Passo 6
-
-**Frase obrigatória antes do print:**
-
-> **Print da atividade 10.3:** tela de configurações avançadas do Windows Update após a ativação das opções de atualização e notificações solicitadas no laboratório.
-
-[**Evidências — Módulo 10 / Aulas 37 e 38**](../evidencias.pdf)
+After completing the configuration, the back arrow in the upper-left corner was selected to return to the previous page.
 
 ---
 
-## 7. Visualização do histórico de atualizações
+## Evidence — Step 6
 
-Na página principal do Windows Update, foi selecionada a opção:
+**Caption to include before the screenshot:**
 
-```text id="v8k2ws"
+> Screenshot of Activity 10.03: the Windows Update advanced settings page after enabling the update and notification options specified by the lab.
+
+[View Evidence — Classes 37–38](../evidencias.pdf)
+
+---
+
+## 7. Viewing Update History
+
+On the main Windows Update page, the following option was selected:
+
+```text
 View update history
 ```
 
-Essa área permite consultar as atualizações instaladas anteriormente no sistema, incluindo informações relacionadas ao histórico de instalação.
+This section allows users to review previously installed updates, including information about the installation history.
 
 ---
 
-## 8. Encerramento
+## 8. Closing the Activity
 
-Após a visualização do histórico de atualizações, todas as janelas foram fechadas.
+After reviewing the update history, all windows were closed.
 
 ---
 
-## Fluxo da atividade
+## Activity Workflow
 
-| Etapa             | Resultado                                         |
-| ----------------- | ------------------------------------------------- |
-| Windows Update    | Ambiente acessado                                 |
-| Check for updates | Atualizações verificadas                          |
-| Reinicialização   | Sistema reiniciado após atualização               |
-| Advanced options  | Opções de atualização e notificações configuradas |
-| Update history    | Histórico consultado                              |
+| Step | Result |
+|---|---|
+| Windows Update | Update environment accessed |
+| Check for updates | Updates checked |
+| Restart | System restarted after the update process |
+| Advanced options | Update and notification options configured |
+| Update history | Installation history reviewed |
 
-## Resultado
+## Result
 
-O ambiente do **Windows Update** foi explorado no Windows Server 2022, incluindo a verificação e instalação de atualizações.
+The **Windows Update** environment in Windows Server 2022 was explored, including checking for and installing updates.
 
-Também foram analisadas as opções avançadas de atualização e notificações e o histórico de atualizações do sistema.
+The advanced update and notification settings were also reviewed, along with the system's update history.
+
+---
+
+[Back to Classes 37–38](../) · [Back to Module 10](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
