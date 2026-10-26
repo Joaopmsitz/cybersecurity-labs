@@ -1,57 +1,57 @@
-# Atividade 6.8 — Conhecendo o Ataque Clickjacking
+# Activity 6.08 — Understanding Clickjacking Attacks
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 06  
+> **Class:** 23–24  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foi estudado o conceito de **Clickjacking**, uma técnica na qual elementos de uma página podem ser posicionados sobre uma interface aparentemente legítima para induzir o usuário a clicar em um elemento diferente daquele que acredita estar selecionando.
+## Objective
 
-O exercício foi realizado em ambiente de laboratório, utilizando uma página HTML local. O objetivo foi observar o comportamento de um `iframe`, alterar sua transparência com CSS e verificar as proteções existentes no navegador.
+This activity explores the concept of **Clickjacking**, a technique in which elements of a web page can be positioned over an apparently legitimate interface to trick users into clicking an element different from the one they believe they are selecting.
 
-> O laboratório não envolveu a tentativa de realizar ações em uma conta real ou explorar um usuário real.
+The exercise was performed in a laboratory environment using a local HTML page. The objective was to observe iframe behavior, change its transparency using CSS, and examine the protections available in the browser.
 
----
+The laboratory did not involve attempting to perform actions on a real account or exploit a real user.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.40`
-* **Usuário:** `aluno`
-* **Navegador:** Firefox 128.14.0esr
-* **Diretório de trabalho:** `/home/aluno/Documentos`
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
+- **Browser:** Firefox 128.14.0esr
+- **Working directory:** `/home/aluno/Documentos`
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this README.
 
----
+## 1. Understanding Clickjacking
 
-## 1. Conceito de Clickjacking
+In the scenario presented by the laboratory, a malicious page could display apparently harmless content to a visitor while positioning a transparent iframe containing another website over a clickable area.
 
-No cenário apresentado pelo laboratório, uma página maliciosa poderia apresentar ao visitante um conteúdo aparentemente inofensivo, enquanto um `iframe` transparente contendo outro site seria posicionado sobre uma área clicável.
-
-A ideia conceitual é:
+The conceptual idea is:
 
 ```text
-Usuário
+User
    │
-   │ acredita clicar em:
+   │ believes they are clicking:
    ▼
-[ Botão visível ]
+[ Visible Button ]
    │
    │
-   └──────► elemento sobreposto por um iframe
+   └──────► element overlapped by an iframe
                          │
                          ▼
-                  conteúdo incorporado
+                  Embedded content
 ```
 
-Com o uso de CSS, o `iframe` pode ser posicionado sobre outros elementos da página e sua opacidade pode ser alterada.
+Using CSS, an iframe can be positioned over other page elements, and its opacity can be adjusted.
 
----
+## 2. Create the HTML Page
 
-## 2. Criando a página HTML
+Mousepad was used to create a laboratory HTML page.
 
-Foi utilizado o Mousepad para criar uma página HTML de laboratório.
-
-O conteúdo utilizado foi:
+The content used was:
 
 ```html
 <!doctype html>
@@ -88,163 +88,153 @@ O conteúdo utilizado foi:
 </html>
 ```
 
-O arquivo foi salvo como:
+The file was saved as:
 
 ```text
 /home/aluno/Documentos/teste.html
 ```
 
-Ao salvar pelo Mousepad, foi selecionada a opção para salvar o arquivo como **All files**, mantendo a extensão `.html`.
+When saving the file in Mousepad, the **All Files** option was selected to retain the `.html` extension.
 
----
+## 3. Open the Page in the Browser
 
-## 3. Abrindo a página no navegador
+The `teste.html` file was located using Thunar and opened in Firefox.
 
-O arquivo `teste.html` foi localizado através do Thunar e aberto no Firefox.
-
-Na configuração inicial:
+In the initial configuration:
 
 ```css
 opacity: 1;
 ```
 
-o conteúdo incorporado pelo `iframe` permanecia visível, apresentando inicialmente um retângulo preto na página.
+the content embedded by the iframe remained visible, initially appearing as a black rectangle on the page.
 
----
+## 4. Make the Iframe Transparent
 
-## 4. Tornando o iframe transparente
-
-O valor:
+The following value:
 
 ```css
 opacity: 1;
 ```
 
-foi alterado para:
+was changed to:
 
 ```css
 opacity: 0;
 ```
 
-Após salvar o arquivo e recarregar a página, o conteúdo do `iframe` deixou de ficar visualmente visível, enquanto o texto e o botão da página continuaram sendo apresentados.
+After saving the file and reloading the page, the iframe content was no longer visually visible, while the page text and button remained displayed.
 
-Isso demonstra como a propriedade CSS `opacity` pode alterar a visibilidade de um elemento sem necessariamente removê-lo da página.
+This demonstrates how the CSS `opacity` property changes an element's visibility without necessarily removing the element from the page.
 
----
+## 5. Test the Interaction
 
-## 5. Testando a interação
+A test was performed by clicking the button displayed on the page.
 
-Foi realizado um teste clicando no botão apresentado na página.
+The browser did not allow the click to perform the expected action through the embedded content.
 
-O navegador não permitiu que o clique fosse utilizado para realizar a ação esperada através do conteúdo incorporado.
+The laboratory scenario therefore did not work as an effective clickjacking exploit.
 
-O Firefox apresentou proteção contra esse comportamento, impedindo que o cenário do laboratório funcionasse como uma exploração real.
+**Technical note:** A website may prevent itself from being embedded by sending response headers such as `X-Frame-Options` or a Content Security Policy using `frame-ancestors`. The observed behavior alone does not establish whether the restriction came from Firefox itself or from the embedded website's anti-framing policy.
 
----
+## 6. Test Partial Opacity
 
-## 6. Testando opacidade parcial
-
-O valor da propriedade foi alterado novamente:
+The property value was changed again:
 
 ```css
 opacity: 0;
 ```
 
-para:
+to:
 
 ```css
 opacity: 0.5;
 ```
 
-Após salvar e recarregar a página, o elemento incorporado passou a ficar parcialmente visível.
+After saving and reloading the page, the embedded element became partially visible.
 
-Mesmo nessa configuração, a proteção do Firefox continuou impedindo o comportamento esperado pelo laboratório.
+Even with this configuration, the expected behavior was not achieved in Firefox during the laboratory exercise.
 
----
+This illustrates the visual effect of adjusting the opacity of an iframe, although reducing opacity alone does not make a clickjacking scenario functional.
 
-## 7. Tornando o iframe praticamente invisível
+## 7. Make the Iframe Almost Invisible
 
-A opacidade foi alterada novamente:
+The opacity was changed once more:
 
 ```css
 opacity: 0.5;
 ```
 
-para:
+to:
 
 ```css
 opacity: 0.03;
 ```
 
-Após salvar e recarregar a página, o `iframe` ficou praticamente invisível, enquanto os elementos da página continuaram aparentando ser uma interface normal.
+After saving and reloading the page, the iframe became almost invisible, while the page elements continued to resemble a normal interface.
 
-Essa etapa demonstra visualmente uma das características exploradas pelo conceito de Clickjacking: um elemento sobreposto pode permanecer presente na estrutura da página mesmo quando praticamente não é percebido visualmente pelo usuário.
+This step visually demonstrates one characteristic associated with clickjacking: an overlaid element can remain part of the page structure even when the user can barely see it.
 
----
+## 8. Browser Protection
 
-## 8. Proteção do navegador
+During the tests, the scenario did not operate as an effective exploit.
 
-Durante os testes, o Firefox impediu que o cenário funcionasse como uma exploração efetiva.
+This is important because clickjacking does not depend only on the HTML and CSS used. Modern browsers and websites may apply protections that restrict embedded content or framing behavior.
 
-Isso é importante porque o funcionamento de Clickjacking não depende apenas do HTML e do CSS utilizados. Os navegadores modernos possuem mecanismos de proteção que podem impedir determinados comportamentos de conteúdo incorporado e navegação entre frames.
+For example, anti-framing response headers can prevent a website from being embedded in an iframe. The exact cause of the observed behavior would require inspecting the relevant browser console messages and HTTP response headers.
 
----
+## 9. Display Only the Frame Content
 
-## 9. Exibindo somente o conteúdo do frame
-
-Para observar o conteúdo incorporado diretamente, foi utilizado o menu de contexto do Firefox:
+To view the embedded content directly, the Firefox context menu was used:
 
 ```text
-Clique com o botão direito
+Right-click
         ↓
 This Frame
         ↓
 Show Only This Frame
 ```
 
-Essa ação fez com que o navegador exibisse somente o conteúdo do frame selecionado.
+This action caused the browser to display only the content of the selected frame.
 
-**Este é o passo utilizado como evidência da atividade.**
+This is the step used as evidence for the activity.
 
----
-
-## Conceitos envolvidos
+## Concepts Practiced
 
 ### Clickjacking
 
-Clickjacking é uma técnica baseada na sobreposição de elementos de uma página para fazer com que a interação do usuário ocorra sobre um elemento diferente daquele que ele acredita estar selecionando.
+Clickjacking is a technique based on overlapping page elements to make user interaction occur on a different element from the one the user believes they are selecting.
 
-Um cenário típico pode utilizar:
+A typical scenario may use:
 
-* `iframe`;
-* posicionamento absoluto com CSS;
-* controle de transparência;
-* elementos sobrepostos;
-* uma interface visualmente enganosa.
+- An iframe.
+- Absolute positioning with CSS.
+- Transparency controls.
+- Overlapping elements.
+- A misleading visual interface.
 
-### `iframe`
+### Iframe
 
-O elemento:
+The HTML element:
 
 ```html
 <iframe src="https://www.facebook.com"></iframe>
 ```
 
-permite incorporar conteúdo externo dentro de uma página HTML.
+allows external content to be embedded within an HTML page.
 
-No laboratório, ele foi utilizado para demonstrar o conceito de sobreposição de conteúdo.
+In this laboratory, it was used to demonstrate the concept of content overlay.
 
 ### `opacity`
 
-A propriedade CSS:
+The CSS property:
 
 ```css
 opacity
 ```
 
-controla a transparência de um elemento.
+controls an element's transparency.
 
-Exemplos utilizados na atividade:
+The following values were used in the activity:
 
 ```css
 opacity: 1;
@@ -258,42 +248,38 @@ opacity: 0.5;
 opacity: 0.03;
 ```
 
-Quanto menor o valor, mais transparente fica o elemento.
+The lower the value, the more transparent the element becomes. A value of `0` makes the element fully transparent visually, but does not automatically remove it from the page or disable its interaction.
 
 ### `z-index`
 
-A propriedade:
+The property:
 
 ```css
 z-index: 1;
 ```
 
-define a posição do elemento no eixo de profundidade em relação a outros elementos posicionados.
+defines an element's stacking position relative to other elements in the applicable stacking context.
 
-Em conjunto com `position: absolute`, ela pode ser utilizada para posicionar elementos sobre outros conteúdos.
+Combined with `position: absolute`, it can be used to position elements over other content.
 
----
+## Results
 
-## Resultado
+The activity allowed the following behaviors to be observed in a controlled environment:
 
-A atividade permitiu observar, em um ambiente controlado:
+- The basic structure of an HTML page containing an iframe.
+- Positioning embedded content.
+- The effect of the CSS `opacity` property.
+- The behavior of an almost invisible element.
+- The browser's handling of the embedded website.
+- Viewing the content of a frame separately.
 
-1. a estrutura básica de uma página que utiliza `iframe`;
-2. o posicionamento de um conteúdo incorporado;
-3. o efeito da propriedade CSS `opacity`;
-4. o comportamento de um elemento praticamente invisível;
-5. a atuação das proteções do Firefox;
-6. a visualização isolada do conteúdo de um frame.
+The test did not produce a functional exploit against the embedded website. The expected behavior was blocked or otherwise unavailable in the laboratory, illustrating the importance of browser and website framing protections.
 
-O teste não resultou em uma exploração funcional contra o site incorporado. O navegador bloqueou o comportamento esperado pelo laboratório, demonstrando a importância das proteções implementadas nos navegadores modernos.
+## Cleanup
 
----
+After completing the tests, Firefox, Mousepad, and Thunar were closed.
 
-## Limpeza
-
-Após a conclusão dos testes, o Firefox, Mousepad e Thunar foram fechados.
-
-No terminal, o arquivo criado para o laboratório foi removido:
+In the terminal, the file created for the laboratory was removed:
 
 ```bash
 sudo -i
@@ -301,12 +287,14 @@ cd /home/aluno/Documentos
 rm teste.html
 ```
 
-A sessão RDP foi encerrada e a máquina virtual utilizada no laboratório foi interrompida.
+The RDP session was ended, and the virtual machine used in the laboratory was shut down.
+
+## Evidence
+
+The activity evidence corresponds to Step 9, showing the **This Frame → Show Only This Frame** option used to display the frame content separately.
+
+[View Evidence — Classes 23–24](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 9**, mostrando a opção **This Frame → Show Only This Frame** utilizada para visualizar o conteúdo do frame isoladamente.
-
-[**Evidências — Módulo 6 / Aulas 3 e 4**](../evidencias.pdf)
+[Back to Classes 23–24](../) · [Back to Module 06](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
