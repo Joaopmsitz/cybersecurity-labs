@@ -1,30 +1,34 @@
-# Atividade 6.1 — Reuso de Código em Python no Kali Linux
+# Activity 6.01 — Code Reuse in Python on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 06  
+> **Class:** 21–22  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foi demonstrado o conceito de **reuso de código em Python** utilizando a biblioteca Pillow para realizar o processamento de uma imagem.
+## Objective
 
-A prática consiste em baixar uma imagem para o Kali Linux, utilizar um código Python baseado em uma biblioteca já existente para redimensioná-la para `300x300` pixels e salvar o resultado em um novo arquivo.
+This activity demonstrates the concept of code reuse in Python using the Pillow library to process an image.
 
-O objetivo é compreender como componentes de software previamente desenvolvidos e testados podem ser reutilizados para implementar funcionalidades sem a necessidade de desenvolver toda a lógica de processamento de imagens do zero.
+The exercise involves downloading an image to Kali Linux, using Python code based on an existing library to resize it to 300 × 300 pixels, and saving the result to a new file.
 
----
+The objective is to understand how previously developed and tested software components can be reused to implement functionality without having to develop all the image-processing logic from scratch.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.40`
-* **Usuário:** `aluno`
-* **Diretório utilizado:** `/home/aluno/Documentos/`
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
+- **Working directory:** `/home/aluno/Documentos/`
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this document.
 
----
+## Procedure
 
-## 1. Preparação do ambiente
+### 1. Prepare the Environment
 
-Antes das atividades do módulo, foi realizada a limpeza de arquivos de cache do `apt`, pacotes que não são mais necessários e logs antigos, conforme orientação do laboratório:
+Before beginning the module activities, cached APT files, packages that were no longer needed, and old logs were cleaned up according to the laboratory instructions:
 
 ```bash
 sudo apt clean
@@ -32,43 +36,39 @@ sudo apt autoremove
 sudo journalctl --vacuum-time=1d
 ```
 
-Esses comandos têm como objetivo liberar espaço na máquina virtual antes da realização das atividades.
+These commands are intended to free up space on the virtual machine before the activities are performed.
 
----
+### 2. Open the Terminal
 
-## 2. Acessando o terminal
+After accessing Kali Linux through RDP, the terminal was opened, and administrative access was obtained:
 
-Após acessar o Kali Linux por RDP, foi aberto o terminal e obtido acesso administrativo:
-
-```bash id="u4c7m2"
+```bash
 sudo -i
 ```
 
-Em seguida, foi acessado o diretório `Documentos`:
+The Documents directory was then accessed:
 
-```bash id="p8x3n6"
+```bash
 cd /home/aluno/Documentos
 ```
 
-Foi realizada uma verificação inicial do conteúdo do diretório:
+An initial check of the directory contents was performed:
 
-```bash id="r5k9w1"
+```bash
 ls
 ```
 
----
+### 3. Download the Image
 
-## 3. Baixando a imagem
+The image `My_shoe.jpg` was downloaded directly from the terminal using `wget`:
 
-A imagem `My_shoe.jpg` foi baixada diretamente pelo terminal utilizando `wget`:
-
-```bash id="k7m2v9"
+```bash
 wget https://upload.wikimedia.org/wikipedia/commons/0/01/My_shoe.jpg
 ```
 
-Saída observada no material do laboratório:
+**Output recorded in the laboratory material:**
 
-```text id="s6q1x8"
+```text
 --2024-02-13 17:24:33--  https://upload.wikimedia.org/wikipedia/commons/0/01/My_shoe.jpg
 Resolvendo upload.wikimedia.org (upload.wikimedia.org)... 208.80.154.240, 2620:0:861:ed1a::2:b
 Conectando-se a upload.wikimedia.org (upload.wikimedia.org)|208.80.154.240|:443... conectado.
@@ -81,161 +81,153 @@ My_shoe.jpg                 100%[==========================================>]   
 2024-02-13 17:24:33 (8,28 MB/s) - “My_shoe.jpg” salvo [1297035/1297035]
 ```
 
-Depois do download, foi executado:
+After the download, the following command was executed:
 
-```bash id="n3w7f5"
+```bash
 ls
 ```
 
-Resultado:
+**Result:**
 
-```text id="d9q2m6"
+```text
 My_shoe.jpg
 ```
 
-Isso confirma que a imagem foi armazenada no diretório `/home/aluno/Documentos`.
+This confirms that the image was stored in `/home/aluno/Documentos`.
 
----
+### 4. View the Original Image
 
-## 4. Visualizando a imagem original
+With the file available on the system, Thunar, the Kali Linux file manager, was opened.
 
-Com o arquivo disponível no sistema, foi aberto o **Thunar**, gerenciador de arquivos do Kali Linux.
-
-A navegação foi realizada até:
+Navigation was performed to:
 
 ```text
 /home/aluno/Documentos
 ```
 
-O arquivo `My_shoe.jpg` foi aberto para visualizar a imagem original.
+The `My_shoe.jpg` file was opened to view the original image.
 
-Após a visualização, o visualizador de imagens foi fechado.
+After viewing it, the image viewer was closed.
 
----
+### 5. Create the Python Script
 
-## 5. Criando o código Python
-
-Foi aberto o editor de texto **Mousepad** e inserido o seguinte código:
+The Mousepad text editor was opened, and the following code was entered:
 
 ```python
 from PIL import Image
 
-# Abre uma imagem existente
+# Open an existing image
 imagem_original = Image.open("My_shoe.jpg")
 
-# Redimensiona a imagem para 300x300 pixels
+# Resize the image to 300x300 pixels
 imagem_redimensionada = imagem_original.resize((300, 300))
 
-# Salva a imagem redimensionada
+# Save the resized image
 imagem_redimensionada.save("My_shoe_redimensionado.jpg")
 
-# Fecha a imagem original
+# Close the original image
 imagem_original.close()
 ```
 
-O código utiliza a biblioteca **Pillow**, que fornece recursos para manipulação de imagens em Python.
+The code uses the Pillow library, which provides image-manipulation functionality in Python.
 
-### Importação da biblioteca
+#### Import the Library
 
 ```python
 from PIL import Image
 ```
 
-Importa a classe `Image` da biblioteca Pillow.
+This imports the `Image` class from the Pillow library.
 
-A partir dela é possível realizar operações como abertura, redimensionamento e salvamento de imagens.
+It provides methods for operations such as opening, resizing, and saving images.
 
-### Abertura da imagem
+#### Open the Image
 
 ```python
 imagem_original = Image.open("My_shoe.jpg")
 ```
 
-A função `Image.open()` abre a imagem existente e atribui o objeto resultante à variável `imagem_original`.
+The `Image.open()` function opens the existing image and assigns the resulting object to the `imagem_original` variable.
 
-### Redimensionamento
+#### Resize the Image
 
 ```python
 imagem_redimensionada = imagem_original.resize((300, 300))
 ```
 
-O método `resize()` cria uma nova versão da imagem com as dimensões:
+The `resize()` method creates a new version of the image with the following dimensions:
 
 ```text
 300 x 300 pixels
 ```
 
-O resultado é armazenado em `imagem_redimensionada`.
+The result is stored in `imagem_redimensionada`.
 
-### Salvamento
+**Note:** Resizing directly to 300 × 300 pixels can change the original image's aspect ratio if its proportions differ from a square.
+
+#### Save the Image
 
 ```python
 imagem_redimensionada.save("My_shoe_redimensionado.jpg")
 ```
 
-A imagem redimensionada é salva com o nome:
+The resized image is saved under the following filename:
 
 ```text
 My_shoe_redimensionado.jpg
 ```
 
-### Fechamento
+#### Close the Original Image
 
 ```python
 imagem_original.close()
 ```
 
-Fecha o arquivo da imagem original após a utilização.
+This closes the original image file after it has been used.
 
-O fechamento do recurso é uma boa prática para evitar manter arquivos ou recursos abertos desnecessariamente.
+Closing resources when they are no longer needed is good practice and helps avoid keeping files or resources open unnecessarily.
 
----
+### 6. Save the Script
 
-## 6. Salvando o script
-
-O código foi salvo no diretório:
+The code was saved in the following directory:
 
 ```text
 /home/aluno/Documentos
 ```
 
-com o nome:
+using the filename:
 
 ```text
 redimensionar_imagem.py
 ```
 
-No Mousepad, foi necessário selecionar a opção **Todos os arquivos** no momento do salvamento para que o arquivo fosse criado com a extensão `.py`.
+In Mousepad, the **All Files** option had to be selected when saving so that the file would be created with the `.py` extension.
 
----
+### 7. Execute the Program
 
-## 7. Executando o programa
+After closing Mousepad, the terminal was used to execute the script:
 
-Após fechar o Mousepad, o terminal foi utilizado para executar o script:
-
-```bash id="v2k8r4"
+```bash
 python redimensionar_imagem.py
 ```
 
-O script utiliza a imagem original como entrada e gera uma nova imagem redimensionada.
+The script uses the original image as input and generates a new resized image.
 
----
+### 8. Verify the Generated Files
 
-## 8. Verificando os arquivos gerados
+After the program executed, the following command was used:
 
-Após a execução do programa, foi utilizado o comando:
-
-```bash id="q5m9x1"
+```bash
 ls
 ```
 
-Saída esperada no laboratório:
+**Expected output in the laboratory:**
 
-```text id="0w7c3p"
+```text
 My_shoe.jpg  My_shoe_redimensionado.jpg  redimensionar_imagem.py
 ```
 
-A saída demonstra que três arquivos estão presentes no diretório:
+The output shows that three files are present in the directory:
 
 ```text
 My_shoe.jpg
@@ -243,89 +235,103 @@ My_shoe_redimensionado.jpg
 redimensionar_imagem.py
 ```
 
-O arquivo adicional `My_shoe_redimensionado.jpg` confirma que o script Python executou a operação de processamento da imagem e criou o novo arquivo.
+The additional file, `My_shoe_redimensionado.jpg`, confirms that the Python script performed the image-processing operation and created a new file.
 
-**Este é o passo solicitado para a evidência da atividade.**
+This is the step specified for the activity evidence.
 
----
+## Concepts Practiced
 
-## Reuso de código
+### Code Reuse
 
-O conceito principal desta atividade é o **reuso de código**.
+The main concept demonstrated in this activity is code reuse.
 
-Em vez de implementar manualmente toda a lógica necessária para interpretar um arquivo JPEG, manipular pixels e gerar uma nova imagem, o programa utiliza funcionalidades fornecidas pela biblioteca Pillow.
+Instead of manually implementing all the logic required to interpret a JPEG file, manipulate pixels, and generate a new image, the program uses functionality provided by the Pillow library.
 
-A relação pode ser representada como:
+The relationship can be represented as follows:
 
 ```text
 Python
    │
    ▼
-Biblioteca Pillow
+Pillow Library
    │
-   ├── Abrir imagem
-   ├── Redimensionar imagem
-   └── Salvar imagem
+   ├── Open image
+   ├── Resize image
+   └── Save image
 ```
 
-Dessa maneira, componentes já desenvolvidos podem ser incorporados a novos programas, reduzindo a quantidade de código necessário e permitindo que o desenvolvedor concentre seus esforços na lógica específica da aplicação.
+In this way, previously developed components can be incorporated into new programs, reducing the amount of code required and allowing developers to focus on the application's specific logic.
 
----
+### Pillow Library
 
-## Resultado
+Pillow is a Python library that provides tools for image processing.
 
-A atividade demonstrou na prática o reuso de uma biblioteca Python para processamento de imagens.
+In this activity, it was used to open an existing image, resize it, and save the result as a new JPEG file.
 
-O fluxo realizado foi:
+### Python Script Execution
+
+The command:
+
+```bash
+python redimensionar_imagem.py
+```
+
+runs the Python script from the terminal.
+
+The script performs the operations defined in the source code using the downloaded image as input.
+
+## Results
+
+The activity demonstrated the practical reuse of a Python library for image processing.
+
+The workflow was:
 
 ```text
-Baixar My_shoe.jpg
+Download My_shoe.jpg
         ↓
-Abrir imagem com Pillow
+Open image with Pillow
         ↓
-Redimensionar para 300 x 300
+Resize to 300 x 300
         ↓
-Salvar My_shoe_redimensionado.jpg
+Save My_shoe_redimensionado.jpg
         ↓
-Verificar arquivo criado
+Verify the generated file
 ```
 
-O arquivo `My_shoe_redimensionado.jpg` foi gerado a partir da imagem original utilizando o script `redimensionar_imagem.py`.
+The `My_shoe_redimensionado.jpg` file was generated from the original image using the `redimensionar_imagem.py` script.
 
----
+## Laboratory Cleanup
 
-## Limpeza do ambiente
+After completing the activity, the files used were removed from the Documents directory:
 
-Após a conclusão da atividade, os arquivos utilizados foram removidos do diretório `Documentos`:
-
-```bash id="h7p3m2"
+```bash
 rm *
 ```
 
-O laboratório solicitou a confirmação da operação antes da remoção:
+The laboratory requested confirmation before removing the files:
 
-```text id="k4v8q6"
+```text
 zsh: sure you want to delete all 3 files in /home/aluno/Documentos [yn]? y
 ```
 
-Em seguida:
+The following command was then used to verify the final directory contents:
 
-```bash id="n9c2w5"
+```bash
 ls
 ```
 
-foi utilizado para confirmar o conteúdo final do diretório.
+**Warning:** The `rm *` command is destructive and removes all files matching the pattern in the current directory. In a real environment, it is safer to inspect the directory contents beforehand and remove only the files that need to be deleted.
 
-> O comando `rm *` é destrutivo e remove todos os arquivos correspondentes ao padrão no diretório atual. Em um ambiente real, é mais seguro verificar previamente o conteúdo e remover somente os arquivos necessários.
+## Evidence
 
----
-
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 8**, mostrando a listagem dos arquivos após a execução do script:
+The evidence for this activity corresponds to Step 8, showing the file listing after the script was executed:
 
 ```text
 My_shoe.jpg  My_shoe_redimensionado.jpg  redimensionar_imagem.py
 ```
 
-[**Evidências — Módulo 6 / Aulas 1 e 2**](../evidencias.pdf)
+[View Evidence — Classes 21–22](../evidencias.pdf)
+
+---
+
+[Back to Classes 21–22](../) · [Back to Module 06](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
