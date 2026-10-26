@@ -1,206 +1,186 @@
-# Atividade 11.6 — Explorando o ACL no Firewall do Windows Server 2022
+# Activity 11.06 — Exploring ACLs in Windows Server 2022 Firewall
 
-## Objetivo
+## Objective
 
-Explorar as configurações avançadas do **Firewall do Windows Server 2022**, observando as regras de entrada e saída, regras de segurança de conexão e as opções de monitoramento relacionadas ao firewall e às associações de segurança utilizadas em conexões protegidas.
+Explore the advanced settings of Windows Server 2022 Firewall by examining inbound and outbound rules, connection security rules, and monitoring options related to the firewall and the security associations used in protected communications.
 
----
+## Environment
 
-## Ambiente
+- **Operating system:** Windows Server 2022
+- **Access:** RDP
+- **Tool:** Windows Defender Firewall with Advanced Security
+- **Server IP address:** `192.168.98.30`
 
-* **Sistema:** Windows Server 2022
-* **Acesso:** RDP
-* **Ferramenta:** Windows Defender Firewall with Advanced Security
-* **Endereço do servidor:** `192.168.98.30`
+## 1. Accessing Windows Server 2022
 
----
+Windows Server 2022 was started and accessed via RDP.
 
-## 1. Acessando o Windows Server 2022
+The machine used in the lab has the following IP address:
 
-O Windows Server 2022 foi inicializado e acessado por RDP.
-
-A máquina utilizada no laboratório possui o endereço:
-
-```text id="j8w4qn"
+```text
 192.168.98.30
 ```
 
-Após o acesso ao sistema, foi aberta a pesquisa do Windows através de:
+After accessing the system, the Windows search field was opened using:
 
 ```text
 Type here to search
 ```
 
-Foi pesquisado:
+The following tool was searched for:
 
-```text id="m5k2rx"
+```text
 Windows Defender Firewall with Advanced Security
 ```
 
-Em seguida, foi aberta a ferramenta **Windows Defender Firewall with Advanced Security**.
+The **Windows Defender Firewall with Advanced Security** tool was then opened.
 
----
+## 2. Exploring Inbound Rules
 
-## 2. Explorando as Inbound Rules
+In the tool's left-hand pane, the following option was selected:
 
-No painel esquerdo da ferramenta, foi selecionada a opção:
-
-```text id="v7p3cs"
+```text
 Inbound Rules
 ```
 
-As **Inbound Rules** são responsáveis pelo controle do tráfego que chega ao computador ou servidor.
+Inbound Rules control traffic arriving at the computer or server.
 
-As regras podem permitir ou bloquear conexões de entrada com base em diferentes critérios, como:
+These rules can allow or block incoming connections based on various criteria, such as:
 
-* aplicativo;
-* serviço;
-* protocolo;
-* porta;
-* endereço IP de origem;
-* endereço IP de destino;
-* perfil de rede;
-* ação definida pela regra.
+- Application
+- Service
+- Protocol
+- Port
+- Source IP address
+- Destination IP address
+- Network profile
+- Action defined by the rule
 
-Por exemplo, uma regra pode permitir que determinado programa aceite conexões provenientes de outros dispositivos da rede.
+For example, a rule can allow a specific program to accept connections from other devices on the network.
 
----
+## 3. Exploring Outbound Rules
 
-## 3. Explorando as Outbound Rules
+In the left-hand pane, the following option was selected:
 
-No painel esquerdo, foi selecionada:
-
-```text id="q6d9kf"
+```text
 Outbound Rules
 ```
 
-As **Outbound Rules** controlam o tráfego que sai do computador ou servidor em direção a outros dispositivos, servidores ou à Internet.
+Outbound Rules control traffic leaving the computer or server toward other devices, servers, or the Internet.
 
-Assim como nas regras de entrada, é possível criar regras baseadas em diferentes critérios para permitir ou bloquear conexões de saída.
+As with inbound rules, rules can be created using different criteria to allow or block outgoing connections.
 
-Um exemplo de aplicação é utilizar uma regra para impedir que determinado aplicativo ou serviço realize conexões com um destino específico.
+One possible use is to create a rule that prevents a specific application or service from connecting to a particular destination.
 
----
+## 4. Exploring Connection Security Rules
 
-## 4. Explorando as Connection Security Rules
+Next, the following option was selected:
 
-Em seguida, foi selecionada:
-
-```text id="n3x7mb"
+```text
 Connection Security Rules
 ```
 
-As **Connection Security Rules** são utilizadas para definir requisitos de segurança para determinadas comunicações entre dispositivos.
+Connection Security Rules define security requirements for specific communications between devices.
 
-Elas podem ser utilizadas em cenários que envolvem:
+They can be used in scenarios involving:
 
-* VPN;
-* IPsec;
-* autenticação;
-* criptografia;
-* proteção da comunicação entre hosts.
+- VPN
+- IPsec
+- Authentication
+- Encryption
+- Protection of communications between hosts
 
-Diferentemente das regras tradicionais de firewall, que controlam diretamente o tráfego permitido ou bloqueado, as regras de segurança de conexão podem definir os requisitos utilizados para estabelecer uma comunicação protegida.
+Unlike traditional firewall rules, which directly control whether traffic is allowed or blocked, connection security rules can define the requirements for establishing protected communications.
 
----
+## 5. Exploring Monitoring
 
-## 5. Explorando o Monitoring
+In the left-hand pane, the following option was selected:
 
-No painel esquerdo, foi selecionada:
-
-```text id="r8c4vz"
+```text
 Monitoring
 ```
 
-A seção **Monitoring** permite acompanhar informações relacionadas ao funcionamento do firewall e às regras de segurança configuradas no sistema.
+The Monitoring section provides information about firewall operation and the security rules configured on the system.
 
-Essa área é útil para verificar o estado das configurações e observar informações relacionadas às conexões e políticas aplicadas.
+This section is useful for checking configuration status and reviewing information related to connections and applied policies.
 
----
+## 6. Exploring Firewall Under Monitoring
 
-## 6. Explorando o Firewall dentro de Monitoring
+The Monitoring section was expanded, and the following option was selected:
 
-O campo `Monitoring` foi expandido e a opção:
-
-```text id="x2m6pa"
+```text
 Firewall
 ```
 
-foi selecionada.
+This section displays information related to the operation of firewall rules.
 
-Essa seção permite visualizar informações relacionadas ao funcionamento das regras do firewall.
+The information that can be reviewed includes:
 
-Entre as informações que podem ser observadas estão:
+### Allowed Connections
 
-### Conexões permitidas
+Displays connections permitted by the firewall's inbound or outbound rules.
 
-Mostra conexões que foram autorizadas pelas regras de entrada ou saída do firewall.
+### Blocked Connections
 
-### Conexões bloqueadas
+Displays connections prevented by firewall rules.
 
-Apresenta conexões que foram impedidas por regras de firewall.
+### Active Firewall Rules
 
-### Regras de firewall em vigor
+Allows users to review the rules currently active and applied to the system.
 
-Permite visualizar as regras que estão ativas e sendo aplicadas ao sistema.
+### Connection Details
 
-### Detalhes das conexões
+When a connection is selected, information about the communication may be displayed, including:
 
-Ao selecionar uma conexão, podem ser apresentados dados relacionados à comunicação, como:
+- Application involved
+- IP address
+- Port
+- Traffic direction
+- Other connection parameters
 
-* aplicativo envolvido;
-* endereço IP;
-* porta;
-* direção do tráfego;
-* outros parâmetros da conexão.
+## 7. Exploring Connection Security Rules in Monitoring
 
----
+Within Monitoring, the following option was expanded:
 
-## 7. Explorando Connection Security Rules no Monitoring
-
-Dentro de `Monitoring`, foi expandida a opção:
-
-```text id="a9f5jk"
+```text
 Connection Security Rules
 ```
 
-Essa seção permite visualizar informações relacionadas às conexões que utilizam regras de segurança.
+This section displays information related to connections that use security rules.
 
-Dependendo do ambiente e da existência de conexões configuradas, essa área pode estar vazia.
+Depending on the environment and whether any connections have been configured or established, this section may be empty.
 
-Entre as informações que podem ser observadas estão:
+The information that may be available includes:
 
-### Conexões estabelecidas
+### Established Connections
 
-Apresenta conexões de segurança que foram estabelecidas de acordo com as regras configuradas.
+Displays security connections established according to the configured rules.
 
-### Conexões descartadas
+### Dropped Connections
 
-Mostra tentativas de conexão que foram descartadas ou bloqueadas pelas regras de segurança.
+Displays connection attempts that were dropped or blocked by security rules.
 
-### Detalhes das conexões
+### Connection Details
 
-Quando existe uma conexão disponível, podem ser observadas informações como:
+When a connection is available, the following information may be displayed:
 
-* dispositivos envolvidos;
-* redes envolvidas;
-* método de autenticação;
-* estado da conexão;
-* parâmetros de segurança utilizados.
+- Devices involved
+- Networks involved
+- Authentication method
+- Connection state
+- Security parameters used
 
----
+## 8. Accessing Security Associations
 
-## 8. Acessando Security Associations
+Within the Monitoring section, the following option was expanded:
 
-Dentro da seção `Monitoring`, foi expandido:
-
-```text id="f4w7nc"
+```text
 Security Associations
 ```
 
-Essa seção apresenta informações relacionadas às **Associações de Segurança (Security Associations)** utilizadas em comunicações protegidas.
+This section displays information about the Security Associations (SAs) used in protected communications.
 
-Foram observadas as opções relacionadas aos modos de negociação utilizados pelo IPsec:
+The following options related to IPsec negotiation modes were observed:
 
 ```text
 Security Associations
@@ -208,116 +188,108 @@ Security Associations
 └── Quick Mode
 ```
 
----
+## 9. Exploring Main Mode
 
-## 9. Explorando o Main Mode
+The following path was accessed:
 
-Dentro de:
-
-```text id="z8k3qp"
+```text
 Monitoring
 → Security Associations
 → Main Mode
 ```
 
-foi acessada a seção **Main Mode**.
+The **Main Mode** section was opened.
 
-O **Main Mode** está relacionado ao processo de negociação inicial utilizado pelo **IKE (Internet Key Exchange)** para estabelecer parâmetros de segurança entre os dispositivos.
+Main Mode is associated with the initial negotiation process used by IKE (Internet Key Exchange) to establish security parameters between devices.
 
-Durante essa negociação, podem ocorrer etapas relacionadas a:
+This negotiation can involve the following stages:
 
-### Autenticação
+### Authentication
 
-Os dispositivos envolvidos realizam a autenticação de suas identidades para estabelecer uma relação de confiança.
+The devices involved authenticate their identities to establish a trusted relationship.
 
-### Negociação de parâmetros
+### Parameter Negotiation
 
-Os dispositivos negociam os parâmetros criptográficos que serão utilizados na comunicação segura.
+The devices negotiate the cryptographic parameters used for secure communication.
 
-Entre esses parâmetros podem estar:
+These parameters may include:
 
-* algoritmos de criptografia;
-* algoritmos de autenticação;
-* parâmetros de troca de chaves;
-* tempo de vida das associações.
+- Encryption algorithms
+- Authentication algorithms
+- Key exchange parameters
+- Security Association lifetimes
 
-### Estabelecimento da associação
+### Establishing the Security Association
 
-Após a negociação e autenticação, os parâmetros necessários para uma comunicação protegida são estabelecidos.
+After negotiation and authentication, the parameters required for protected communication are established.
 
-A seção **Main Mode** permite acompanhar informações relacionadas a essas negociações, incluindo dados dos dispositivos envolvidos, parâmetros de segurança e estado das associações.
+The Main Mode section allows users to review information related to these negotiations, including details about the devices involved, security parameters, and the state of the associations.
 
-### Evidência — Passo 9
+### Evidence — Step 9
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 11.6:** tela de monitoramento das **Security Associations → Main Mode** do Firewall do Windows Server 2022, exibindo as informações relacionadas às negociações de segurança realizadas pelo IKE.
+> Screenshot of Activity 11.06: the Security Associations → Main Mode monitoring screen in Windows Server 2022 Firewall, displaying information related to security negotiations performed by IKE.
 
-[**Evidências — Módulo 11 / Aulas 43 e 44**](../evidencias.pdf)
+[View Evidence — Classes 43–44](../evidencias.pdf)
 
-> **Observação:** dependendo do ambiente do laboratório, a lista de associações pode estar vazia caso não exista uma negociação IPsec ativa. O importante nesta etapa é apresentar a tela solicitada pelo roteiro.
+> **Observation:** Depending on the lab environment, the list of associations may be empty if no IPsec negotiation is active. The objective of this step is to display the screen requested by the lab instructions.
 
----
+## 10. Exploring Quick Mode
 
-## 10. Explorando o Quick Mode
+After recording the evidence, the following path was accessed:
 
-Depois do registro da evidência, foi acessado:
-
-```text id="s6v2md"
+```text
 Monitoring
 → Security Associations
 → Quick Mode
 ```
 
-O **Quick Mode** é utilizado após a negociação inicial do Main Mode para estabelecer ou atualizar associações de segurança específicas para o tráfego protegido.
+Quick Mode is used after the initial Main Mode negotiation to establish or update security associations specific to protected traffic.
 
-Entre suas funções estão:
+Its functions include:
 
-### Renovação de chaves
+### Key Renewal
 
-Permite estabelecer novas chaves de criptografia e autenticação quando necessário.
+Allows new encryption and authentication keys to be established when necessary.
 
-### Definição do tráfego protegido
+### Defining Protected Traffic
 
-São definidos parâmetros relacionados ao tráfego que deverá utilizar a proteção da associação de segurança.
+Parameters are defined for the traffic that will use the security association's protection.
 
-Isso pode envolver informações como:
+These may include:
 
-* endereços IP;
-* portas;
-* protocolos;
-* escopo da comunicação.
+- IP addresses
+- Ports
+- Protocols
+- Communication scope
 
-### Integridade da comunicação
+### Communication Integrity
 
-Os parâmetros negociados também podem incluir mecanismos utilizados para garantir a integridade dos dados transmitidos.
+The negotiated parameters may also include mechanisms used to ensure the integrity of transmitted data.
 
-A seção **Quick Mode** permite acompanhar informações relacionadas a essas negociações e às associações de segurança estabelecidas nesse estágio.
+The Quick Mode section allows users to review information related to these negotiations and the security associations established at this stage.
 
----
+## 11. Closing the Activity
 
-## 11. Encerrando a atividade
+After exploring the different sections of Windows Server 2022 Firewall, all windows were closed.
 
-Após explorar as diferentes seções do Firewall do Windows Server 2022, todas as janelas foram fechadas.
+## Key Concepts
 
----
+- **ACL (Access Control List):** A set of rules used to control access and network traffic.
+- **Firewall:** A mechanism that controls network connections according to configured rules.
+- **Inbound Rules:** Rules applied to incoming traffic.
+- **Outbound Rules:** Rules applied to outgoing traffic.
+- **Connection Security Rules:** Rules used to define security requirements for communications.
+- **IPsec:** A suite of protocols used to protect IP communications.
+- **IKE (Internet Key Exchange):** A protocol used to negotiate parameters and establish security associations.
+- **Main Mode:** The initial negotiation stage for security parameters.
+- **Quick Mode:** A stage used to establish or update security associations specific to traffic.
 
-## Conceitos
+## Activity Workflow
 
-* **ACL:** conjunto de regras utilizado para controlar o acesso e o tráfego de rede.
-* **Firewall:** mecanismo que controla conexões de rede de acordo com regras configuradas.
-* **Inbound Rules:** regras aplicadas ao tráfego recebido.
-* **Outbound Rules:** regras aplicadas ao tráfego de saída.
-* **Connection Security Rules:** regras utilizadas para estabelecer requisitos de segurança para comunicações.
-* **IPsec:** conjunto de protocolos utilizado para proteger comunicações IP.
-* **IKE:** protocolo utilizado para negociar parâmetros e estabelecer associações de segurança.
-* **Main Mode:** etapa de negociação inicial de parâmetros de segurança.
-* **Quick Mode:** etapa utilizada para estabelecer ou atualizar associações de segurança específicas para o tráfego.
-
-## Fluxo da atividade
-
-```text id="c9p5xr"
-Firewall Advanced Security
+```text
+Windows Defender Firewall with Advanced Security
           ↓
 Inbound Rules
           ↓
@@ -336,6 +308,10 @@ Security Associations
 Main Mode       Quick Mode
 ```
 
-## Resultado
+## Result
 
-Foram exploradas as principais seções do **Windows Defender Firewall with Advanced Security**, incluindo regras de entrada e saída, regras de segurança de conexão e o monitoramento de associações de segurança nos modos **Main Mode** e **Quick Mode**.
+The main sections of Windows Defender Firewall with Advanced Security were explored, including inbound and outbound rules, connection security rules, and the monitoring of security associations in Main Mode and Quick Mode.
+
+---
+
+[Back to Classes 43–44](../) · [Back to Module 11](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
