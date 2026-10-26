@@ -1,59 +1,61 @@
-# Atividade 6.7 — Encurtando Links e Gerando QR Code no Kali Linux
+# Activity 6.07 — Shortening URLs and Generating QR Codes on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 06  
+> **Class:** 23–24  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foi utilizado o Kali Linux para realizar duas tarefas relacionadas ao gerenciamento e compartilhamento de URLs:
+## Objective
 
-1. encurtar uma URL utilizando o serviço TinyURL;
-2. gerar um **QR Code** a partir da URL encurtada utilizando a ferramenta `qrencode`.
+This activity uses Kali Linux to perform two tasks related to URL management and sharing:
 
-O exercício demonstra como ferramentas de linha de comando podem ser utilizadas para realizar solicitações HTTP e gerar arquivos de imagem a partir de dados textuais.
+- Shorten a URL using the TinyURL service.
+- Generate a QR code from the shortened URL using the `qrencode` utility.
 
----
+The exercise demonstrates how command-line tools can be used to make HTTP requests and generate image files from text data.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.40`
-* **Usuário:** `aluno`
-* **Diretório de trabalho:** `/home/aluno/Documentos`
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
+- **Working directory:** `/home/aluno/Documentos`
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this README.
 
----
+## Procedure
 
-## 1. Acessando o terminal
+### 1. Open the Terminal
 
-Após acessar o Kali Linux por RDP, foi aberto o terminal e obtido acesso administrativo:
+After accessing Kali Linux through RDP, the terminal was opened, and administrative access was obtained:
 
-```bash id="j7m3q8"
+```bash id="w6o0a1"
 sudo -i
 ```
 
----
+### 2. Shorten a URL Using TinyURL
 
-## 2. Encurtando uma URL com TinyURL
+The `curl` utility was used to send an HTTP request to the TinyURL API.
 
-Foi utilizado o `curl` para realizar uma solicitação HTTP à API do TinyURL.
+The destination URL used in the laboratory was:
 
-A URL de destino utilizada no laboratório foi:
-
-```text id="v5r2n9"
+```text id="1tjb51"
 https://esr.rnp.br/cursos/?_formacao_cursos=seguranca
 ```
 
-O comando executado foi:
+The command executed was:
 
-```bash id="q8w4m6"
+```bash id="5y1o3q"
 curl -s -i https://tinyurl.com/api-create.php?url=https://esr.rnp.br/cursos/?_formacao_cursos=seguranca
 ```
 
-A opção `-s` reduz a saída adicional do `curl`, enquanto `-i` inclui os cabeçalhos HTTP da resposta.
+The `-s` option suppresses additional `curl` output, while `-i` includes the HTTP response headers.
 
-Saída observada:
+**Observed output:**
 
-```text id="p3x7k2"
+```text id="7j8w2w"
 HTTP/2 200 
 date: Sun, 11 Feb 2024 01:16:28 GMT
 content-type: text/plain; charset=UTF-8
@@ -71,243 +73,235 @@ alt-svc: h3=":443"; ma=86400
 http://tinyurl.com/27ldrg4o
 ```
 
-A resposta `HTTP/2 200` indica que a solicitação foi processada com sucesso.
+The `HTTP/2 200` status indicates that the request was processed successfully.
 
-O corpo da resposta apresentou a URL encurtada:
+The response body contained the shortened URL:
 
-```text id="s4v9m1"
+```text id="3m6c9y"
 http://tinyurl.com/27ldrg4o
 ```
 
----
+The HTTP headers and URL above are reproduced from the historical laboratory output.
 
-## 3. Entendendo a solicitação
+### 3. Understand the Request
 
-O comando utilizado pode ser representado da seguinte forma:
+The command can be represented as follows:
 
-```text id="a6k3p9"
+```text id="8d82sc"
 curl
  │
- ├── -s → saída silenciosa
- ├── -i → inclui cabeçalhos HTTP
+ ├── -s → Silent mode
+ ├── -i → Include HTTP response headers
  │
  └── TinyURL API
        │
-       └── URL de destino
+       └── Destination URL
              ↓
-       URL encurtada
+       Shortened URL
 ```
 
-O código de status:
+The status code:
 
-```text id="f2m7q5"
+```text id="3kqfpg"
 HTTP/2 200
 ```
 
-representa uma resposta HTTP bem-sucedida.
+represents a successful HTTP response.
 
-A URL retornada pelo serviço foi:
+The URL returned by the service was:
 
-```text id="n8c4w1"
+```text id="j94ds4"
 http://tinyurl.com/27ldrg4o
 ```
 
----
+**Security note:** The response returned an `http://` URL, while the next step used an `https://` version. HTTPS is preferable because it protects the connection between the browser and the shortening service. Always verify the destination before opening a shortened link, since a short URL can obscure the final destination.
 
-## 4. Testando o link encurtado
+### 4. Test the Shortened Link
 
-A URL encurtada foi aberta no Mozilla Firefox:
+The shortened URL was opened in Mozilla Firefox:
 
-```text id="r7x3m5"
+```text id="u6v0s1"
 https://tinyurl.com/27ldrg4o
 ```
 
-O objetivo foi verificar o funcionamento do endereço gerado pelo serviço de encurtamento.
+The purpose was to verify the behavior of the address generated by the shortening service.
 
-Após a validação, o navegador foi fechado.
+After validation, the browser was closed.
 
----
+### 5. Generate the QR Code
 
-## 5. Gerando o QR Code
+First, the working directory was accessed:
 
-Primeiramente, foi acessado o diretório de trabalho:
-
-```bash id="k2v9p6"
+```bash id="9y08x3"
 cd /home/aluno/Documentos
 ```
 
-O conteúdo do diretório foi verificado:
+The directory contents were checked:
 
-```bash id="u4m8q1"
+```bash id="8a5px1"
 ls
 ```
 
-Em seguida, foi utilizado o `qrencode` para gerar uma imagem contendo a URL encurtada:
+The `qrencode` utility was then used to generate an image containing the shortened URL:
 
-```bash id="c6x2r9"
+```bash id="0r9vgw"
 qrencode -o qr_code.png "https://tinyurl.com/27ldrg4o"
 ```
 
-Depois da geração, foi executado novamente:
+After generation, the following command was executed again:
 
-```bash id="w5n3j7"
+```bash id="p4i1c2"
 ls
 ```
 
-Resultado:
+**Result:**
 
-```text id="e8q1v4"
+```text id="2mgk2q"
 qr_code.png
 ```
 
-O arquivo `qr_code.png` contém o QR Code correspondente à URL utilizada.
+The `qr_code.png` file contains the QR code corresponding to the URL supplied to the command.
 
-**Este é o passo solicitado para a evidência da atividade.**
+This is the step specified for the activity evidence.
 
----
+### How the `qrencode` Command Works
 
-## Como o comando `qrencode` funciona
+The command used was:
 
-O comando utilizado foi:
-
-```bash id="b7m4x9"
+```bash id="e1f6vb"
 qrencode -o qr_code.png "https://tinyurl.com/27ldrg4o"
 ```
 
-Seus componentes são:
+Its components are described below.
 
-### `qrencode`
+#### `qrencode`
 
-É o programa responsável por gerar o QR Code.
+The program responsible for generating the QR code.
 
-### `-o`
+#### `-o`
 
-Define o arquivo de saída.
+Specifies the output file.
 
-Neste caso:
+In this case:
 
-```text id="z1c8p3"
+```bash id="v6x8oq"
 -o qr_code.png
 ```
 
-indica que a imagem será salva como `qr_code.png`.
+indicates that the image will be saved as `qr_code.png`.
 
-### URL
+#### URL
 
-O último argumento representa o conteúdo que será codificado:
+The final argument is the content to be encoded:
 
-```text id="j5r9k2"
+```text id="8upx1j"
 https://tinyurl.com/27ldrg4o
 ```
 
-Ao ler o QR Code, um dispositivo compatível poderá interpretar esse conteúdo como uma URL.
+When scanned, a compatible device can interpret this content as a URL.
 
----
+### View the QR Code
 
-## Visualizando o QR Code
+The following file was opened through Thunar using the image viewer:
 
-O arquivo:
-
-```text id="m4x7q1"
+```text id="qk8j3r"
 /home/aluno/Documentos/qr_code.png
 ```
 
-foi aberto através do Thunar utilizando o visualizador de imagens.
+Viewing the image allowed the creation of the QR code to be confirmed.
 
-A visualização permitiu confirmar a criação da imagem contendo o QR Code.
+A compatible device, such as a smartphone, could scan the code to access the stored URL.
 
-O código poderia ser lido por um dispositivo compatível, como um smartphone, para acessar a URL armazenada.
+## Concepts Practiced
 
----
+### Shortened URL
 
-## Conceitos envolvidos
+A URL-shortening service associates a long URL with a shorter address.
 
-### URL encurtada
+In this laboratory, the destination URL:
 
-Um serviço de encurtamento associa uma URL longa a um endereço mais curto.
-
-No laboratório, a URL de destino:
-
-```text id="s3n8v5"
+```text id="vup9su"
 https://esr.rnp.br/cursos/?_formacao_cursos=seguranca
 ```
 
-foi transformada em:
+was converted to:
 
-```text id="y6p2k9"
+```text id="4ue5o9"
 http://tinyurl.com/27ldrg4o
 ```
 
-Isso facilita a utilização da URL em situações nas quais um endereço menor é mais conveniente.
+This can make a URL more convenient to share or use in situations where a shorter address is preferable.
 
 ### QR Code
 
-Um **QR Code** é um código bidimensional capaz de armazenar informações que podem ser interpretadas por dispositivos compatíveis.
+A QR code is a two-dimensional code capable of storing information that can be interpreted by compatible devices.
 
-Neste exercício, o conteúdo armazenado foi uma URL.
+In this exercise, the stored content was a URL.
 
 ### `curl`
 
-O `curl` foi utilizado para enviar a solicitação à API do serviço de encurtamento:
+The `curl` utility was used to send the request to the URL-shortening service's API:
 
-```bash id="h4w7m2"
+```bash id="av9vqe"
 curl -s -i ...
 ```
 
-Isso demonstra que serviços web podem ser acessados diretamente pela linha de comando.
+This demonstrates how web services can be accessed directly from the command line.
 
 ### `qrencode`
 
-O `qrencode` converte o conteúdo fornecido em uma imagem QR.
+The `qrencode` utility converts supplied content into a QR-code image.
 
-Neste caso:
+In this case:
 
-```text id="n2q8c5"
+```text id="p0y0ck"
 URL → qrencode → qr_code.png
 ```
 
----
+The resulting image can be viewed or scanned by a compatible device.
 
-## Resultado
+## Results
 
-A atividade permitiu:
+The activity demonstrated how to:
 
-1. realizar uma solicitação HTTP à API do TinyURL;
-2. receber uma URL encurtada;
-3. verificar o código de resposta HTTP `200`;
-4. testar a URL encurtada no navegador;
-5. utilizar o `qrencode` para transformar a URL em um QR Code;
-6. gerar o arquivo `qr_code.png`;
-7. visualizar o QR Code no Kali Linux.
+- Send an HTTP request to the TinyURL API.
+- Receive a shortened URL.
+- Inspect the HTTP `200` response status.
+- Test the shortened URL in a browser.
+- Use `qrencode` to convert a URL into a QR code.
+- Generate the `qr_code.png` file.
+- View the QR code on Kali Linux.
 
-A URL encurtada obtida no laboratório foi:
+The shortened URL obtained in the laboratory was:
 
-```text id="p8m4x6"
+```text id="5h75x8"
 http://tinyurl.com/27ldrg4o
 ```
 
-E o arquivo gerado foi:
+The generated file was:
 
-```text id="v3k7q1"
+```text id="t10wjz"
 qr_code.png
 ```
 
----
+The exercise reinforced the use of command-line tools for URL processing and QR-code generation.
 
-## Limpeza
+## Cleanup
 
-Após a visualização do QR Code, o arquivo foi removido:
+After viewing the QR code, the generated file was removed:
 
-```bash id="q6n2m8"
+```bash id="9ttr7b"
 rm qr_code.png
 ```
 
-O visualizador de imagens, Thunar e o terminal foram então fechados.
+The image viewer, Thunar, and the terminal were then closed.
+
+## Evidence
+
+The evidence for this activity corresponds to Step 5, showing the generated QR code in the Documents directory.
+
+[View Evidence — Classes 23–24](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 5**, mostrando o QR Code gerado no diretório `Documentos`.
-
-[**Evidências — Módulo 6 / Aulas 3 e 4**](../evidencias.pdf)
+[Back to Classes 23–24](../) · [Back to Module 06](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
