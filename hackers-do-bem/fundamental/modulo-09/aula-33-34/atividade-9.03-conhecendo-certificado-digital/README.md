@@ -1,325 +1,386 @@
-# Atividade 9.3 — Conhecendo o Certificado Digital Obtido no Windows Server 2022
+# Activity 9.02 — Issuing Digital Certificates Using a Certificate Authority
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 09  
+> **Classes:** 33–34  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Acessar e analisar um certificado digital emitido pela Autoridade Certificadora configurada nas atividades anteriores.
+## Objective
 
-A atividade foi realizada em um Windows Server 2022 utilizado como cliente, verificando inicialmente a comunicação com o servidor da CA e, posteriormente, analisando o certificado `aluno-DC01-CA` instalado nas **Trusted Root Certification Authorities**.
+Use the Certificate Authority created in the previous activity to configure a certificate template, make it available on the CA, and configure auto-enrollment through a Group Policy Object (GPO).
 
-Foram observadas informações como:
+At the end of the activity, `gpupdate /force` was used to apply the configured policies and check certificate issuance in the environment.
 
-* versão do certificado;
-* algoritmo de assinatura;
-* algoritmo de hash da assinatura;
-* período de validade;
-* chave pública;
-* utilização da chave;
-* caminho de certificação;
-* finalidades do certificado;
-* informações relacionadas ao OCSP.
+## Environment
 
----
+- **Operating system:** Windows Server 2022
+- **Service:** Active Directory Certificate Services (AD CS)
+- **Certificate Authority:** `aluno-DC01-CA`
+- **Domain:** `aluno.hacker.com`
+- **Created template:** `ALUNO COMPUTADOR`
+- **GPO:** `COMPUTADOR: Politica de Inscricao de Certificado`
+- **Mechanism:** Certificate Auto-Enrollment
 
-## Ambiente
+## 1. Accessing the Certificate Authority Templates
 
-* **Sistema:** Windows Server 2022
-* **Cliente:** Windows Server 2022
-* **Autoridade Certificadora:** `aluno-DC01-CA`
-* **Domínio:** `aluno.hacker.com`
-* **Repositório do certificado:** Trusted Root Certification Authorities
-* **Certificado analisado:** `aluno-DC01-CA`
+In the **Certification Authority (Local)** window, the following authority was expanded:
 
-> As credenciais utilizadas para acesso ao ambiente de laboratório não são registradas neste README.
-
----
-
-## 1. Teste de conectividade com o servidor
-
-Inicialmente, foi aberto o **Command Prompt** no Windows Server 2022 cliente.
-
-Foi realizado um teste de conectividade com o servidor da Autoridade Certificadora utilizando:
-
-```cmd id="7s9q1m"
-ping 192.168.98.20
-```
-
-O retorno apresentado foi:
-
-```text id="v6v0bd"
-C:\Users\nome1>ping 192.168.98.20
-
-Pinging 192.168.98.20 with 32 bytes of data:
-Reply from 192.168.98.20: bytes=32 time<1ms TTL=128
-Reply from 192.168.98.20: bytes=32 time=1ms TTL=128
-```
-
-As respostas demonstram que o cliente conseguiu estabelecer comunicação com o servidor.
-
----
-
-## 2. Acesso ao gerenciamento de certificados
-
-Após o teste de conectividade, o **Command Prompt** foi fechado.
-
-No campo de pesquisa do Windows foi digitado:
-
-```text id="2w8t3u"
-Manage user certificates
-```
-
-Foi então aberto o console de gerenciamento de certificados do usuário:
-
-```text id="q0v5r4"
-certmgr
-```
-
----
-
-## 3. Localização do certificado da CA
-
-No console de certificados, foi acessado:
-
-```text id="8z5g1p"
-Trusted Root Certification Authorities
-└── Certificates
-```
-
-Nessa seção foi localizado o certificado:
-
-```text id="1m8x4v"
+```text
 aluno-DC01-CA
 ```
 
-O certificado apresentava como emissor a própria Autoridade Certificadora:
+The following option was then accessed:
 
-```text id="7f1p3k"
-Issued By: aluno-DC01-CA
+```text
+Certificate Templates → Manage
 ```
 
-Isso é esperado para uma **Root CA**, pois o certificado raiz é autoassinado.
+The **Certificate Template Console** window opened.
+
+## 2. Duplicating the Template
+
+In the list of available templates, the following template was located:
+
+```text
+Workstation Authentication
+```
+
+The template was right-clicked, and the following option was selected:
+
+```text
+Duplicate Template
+```
+
+Duplicating the template made it possible to create a new template based on the settings of the existing one.
+
+## 3. Creating the ALUNO COMPUTADOR Template
+
+In the **Properties of New Template** window, the following tab was opened:
+
+```text
+General
+```
+
+The **Template display name** field was changed to:
+
+```text
+ALUNO COMPUTADOR
+```
+
+This name identifies the new template within the certificate infrastructure.
+
+## 4. Configuring the Subject Name
+
+The following tab was opened:
+
+```text
+Subject Name
+```
+
+The following option was enabled:
+
+```text
+User principal name (UPN)
+```
+
+This setting allows the UPN to be used in the identity information associated with the issued certificate.
+
+## 5. Configuring Permissions
+
+The following group was selected in the **Security** tab:
+
+```text
+Domain Computers (ALUNO\Domain Computers)
+```
+
+The following **Allow** permissions were enabled for this group:
+
+```text
+Read
+Autoenroll
+```
+
+The changes were applied by selecting **Apply** and **OK**.
+
+After configuration, the new template appeared as:
+
+```text
+ALUNO COMPUTADOR
+```
+
+## 6. Making the Template Available on the CA
+
+Back in the **Certification Authority (Local)** window, the following option was accessed:
+
+```text
+Certificate Templates → New → Certificate Template to Issue
+```
+
+In the **Enable Certificate Templates** window, the following template was selected:
+
+```text
+ALUNO COMPUTADOR
+```
+
+The operation was confirmed by selecting **OK**.
+
+The template then became available for certificate issuance by the Certificate Authority.
+
+## 7. Verifying the Template
+
+After selecting the following folder:
+
+```text
+Certificate Templates
+```
+
+the `ALUNO COMPUTADOR` template was visible in the right-hand pane.
+
+This indicates that the CA is configured to use this template when issuing certificates.
+
+## 8. Opening Group Policy Management
+
+In Server Manager, the following option was accessed:
+
+```text
+Tools → Group Policy Management
+```
+
+The following domain tree was expanded:
+
+```text
+Forest: aluno.hacker.com
+└── Domains
+    └── aluno.hacker.com
+        └── Group Policy Objects
+```
+
+A new Group Policy Object was created.
+
+## 9. Creating the GPO
+
+The new GPO was named:
+
+```text
+COMPUTADOR: Politica de Inscricao de Certificado
+```
+
+The policy was created under:
+
+```text
+Group Policy Objects
+```
+
+## 10. Editing the Policy
+
+The newly created GPO was opened by selecting **Edit**.
+
+In the **Group Policy Management Editor**, the following path was followed:
+
+```text
+Computer Configuration
+└── Policies
+    └── Windows Settings
+        └── Security Settings
+            └── Public Key Policies
+```
+
+The following setting was selected:
+
+```text
+Certificate Services Client – Auto-Enrollment
+```
+
+## 11. Configuring Auto-Enrollment
+
+In the **Certificate Services Client – Auto-Enrollment** settings, the following field was changed:
+
+```text
+Configuration Model
+```
+
+Its value was changed from:
+
+```text
+Not configured
+```
+
+to:
+
+```text
+Enabled
+```
+
+The options related to certificate renewal and updating were also enabled:
+
+```text
+Renew expired certificates...
+Update certificates...
+```
+
+The changes were confirmed by selecting **Apply** and **OK**.
+
+## 12. Configuring the Automatic Certificate Request
+
+In the right-hand pane of the **Group Policy Management Editor**, the following option was accessed:
+
+```text
+Automatic Certificate Request Settings
+```
+
+It was right-clicked, and the following options were selected:
+
+```text
+New → Automatic Certificate Request...
+```
+
+The wizard was advanced by selecting **Next** until it was completed with **Finish**.
+
+## 13. Updating the Policies
+
+To apply the configured settings immediately, the Command Prompt was opened.
+
+The following command was executed:
+
+```cmd
+gpupdate /force
+```
+
+This command forces an update of the Group Policies applicable to the computer and user.
+
+## 14. Verifying the Policy Update
+
+After the command was executed, Windows displayed:
+
+```text
+C:\Users\Administrator>gpupdate /force
+Updating policy...
+
+Computer Policy update has completed successfully.
+User Policy update has completed successfully.
+```
+
+This result indicates that both computer policy and user policy were updated successfully.
+
+## 15. Verifying Certificate Issuance
+
+After the policy update, the following window was reopened:
+
+```text
+certsrv - [Certification Authority (Local)]
+```
+
+The following folder was inspected:
+
+```text
+Issued Certificates
+```
+
+A certificate was found in the list.
+
+This demonstrates that the configured enrollment policy had been applied and that the Certificate Authority was being used to issue a certificate.
+
+## 16. Ending the Server Session
+
+After verifying certificate issuance, the RDP session with the Windows Server 2022 machine used as the server was closed.
+
+The environment was left ready for the next activity, in which the issued certificate would be examined on the Windows Server 2022 client.
+
+## Evidence — Step 17
+
+The evidence requested for this activity corresponds to step 17 and shows the execution of `gpupdate /force` and the successful policy update.
+
+Required caption before the screenshot:
+
+> Screenshot for Activity 9.2: execution of `gpupdate /force`, demonstrating that computer and user policies were updated successfully.
+
+```text
+C:\Users\Administrator>gpupdate /force
+Updating policy...
+
+Computer Policy update has completed successfully.
+User Policy update has completed successfully.
+```
+
+Evidence for this activity is included in the PDF for Module 9, Classes 33–34.
+
+[View Evidence — Classes 33–34](../evidencias.pdf)
+
+## Concepts Applied
+
+### Certificate Template
+
+A Certificate Template defines the characteristics and rules used by a Certificate Authority to issue specific types of certificates.
+
+In this lab, the following template was created:
+
+```text
+ALUNO COMPUTADOR
+```
+
+It was based on the existing `Workstation Authentication` template.
+
+### Auto-Enrollment
+
+Auto-enrollment allows certificates to be requested and managed automatically by computers or users that meet the conditions defined in domain policies.
+
+### Group Policy
+
+Group Policies (GPOs) allow settings to be centrally distributed to computers and users belonging to a domain.
+
+In this exercise, a GPO was used to configure certificate auto-enrollment behavior.
+
+### Certificate Authority
+
+The `aluno-DC01-CA` CA, configured in the previous activity, was used to make the template available and issue certificates to domain computers.
+
+## Activity Workflow
+
+```text
+Workstation Authentication Template
+              │
+              ▼
+        Duplicate Template
+              │
+              ▼
+       ALUNO COMPUTADOR
+              │
+              ▼
+        Publish on the CA
+              │
+              ▼
+          Create GPO
+              │
+              ▼
+         Auto-Enrollment
+              │
+              ▼
+         gpupdate /force
+              │
+              ▼
+      Certificate Issuance
+```
+
+## Result
+
+The following template was created and made available on the Certificate Authority:
+
+```text
+ALUNO COMPUTADOR
+```
+
+A Group Policy Object was also configured to enable certificate auto-enrollment for `Domain Computers`.
+
+The policy application was confirmed by the following messages:
+
+```text
+Computer Policy update has completed successfully.
+User Policy update has completed successfully.
+```
+
+The CA's **Issued Certificates** folder was subsequently used to verify certificate issuance.
 
 ---
 
-## 4. Abertura do certificado
-
-O certificado `aluno-DC01-CA` foi aberto para visualizar suas propriedades.
-
-A janela de propriedades apresenta diferentes abas que permitem analisar as informações e extensões presentes no certificado.
-
----
-
-## 5. Análise da aba General
-
-Na aba **General**, foram observadas as informações gerais do certificado.
-
-Essa seção permite verificar, entre outros elementos:
-
-* para quem o certificado foi emitido;
-* quem o emitiu;
-* período de validade;
-* situação de confiança do certificado;
-* finalidade de utilização da chave.
-
-A análise dessa aba permite identificar a relação entre o certificado instalado no cliente e a Autoridade Certificadora responsável por sua emissão.
-
----
-
-## 6. Acesso aos detalhes do certificado
-
-Em seguida, foi selecionada a aba:
-
-```text id="r3k7w2"
-Details
-```
-
-Essa seção apresenta os campos individuais do certificado digital.
-
-Entre as informações disponíveis estão:
-
-```text id="d8p2n1"
-Version
-Signature algorithm
-Signature hash algorithm
-Valid to
-Public Key
-Key Usage
-```
-
-Esses campos permitem analisar tecnicamente a estrutura e as características criptográficas do certificado.
-
----
-
-## 7. Principais campos observados
-
-### Version
-
-Indica a versão do padrão de certificado utilizado.
-
-Certificados digitais baseados em X.509 utilizam esse campo para identificar a versão da estrutura do certificado.
-
-### Signature algorithm
-
-Identifica o algoritmo utilizado para gerar a assinatura digital do certificado.
-
-A assinatura permite verificar se o conteúdo do certificado foi assinado pela autoridade responsável.
-
-### Signature hash algorithm
-
-Indica o algoritmo de hash utilizado como parte do processo de assinatura.
-
-O hash transforma os dados do certificado em um resumo de tamanho definido, que é posteriormente utilizado no processo de assinatura.
-
-### Valid to
-
-Indica o limite final do período de validade do certificado.
-
-Um certificado possui um período de validade definido e, após esse período, não deve ser considerado válido para os usos correspondentes.
-
-### Public Key
-
-Apresenta a chave pública associada ao certificado.
-
-A chave pública pode ser distribuída e utilizada por terceiros para operações criptográficas ou para validação de assinaturas, dependendo da finalidade do certificado.
-
-### Key Usage
-
-Define as utilizações criptográficas permitidas para a chave de acordo com as extensões presentes no certificado.
-
----
-
-## 8. Caminho de certificação
-
-Após a análise da aba **Details**, foi acessada a seção:
-
-```text id="0p5h9q"
-Certification Path
-```
-
-Essa seção apresenta a hierarquia de confiança relacionada ao certificado.
-
-Como o certificado analisado pertence à CA raiz do laboratório, ele aparece associado à autoridade:
-
-```text id="h3c6y1"
-aluno-DC01-CA
-```
-
-O caminho de certificação é importante para entender como o sistema estabelece confiança entre certificados e autoridades certificadoras.
-
----
-
-## 9. Propriedades e finalidades do certificado
-
-O certificado foi acessado com o botão direito e selecionada a opção:
-
-```text id="u8k2r6"
-Properties
-```
-
-Na aba **General**, foi observada a seção:
-
-```text id="q4n7s0"
-Certificate purposes
-```
-
-Essa área permite identificar as finalidades para as quais o certificado pode ser utilizado.
-
-Também foi observada a aba:
-
-```text id="e6p1w5"
-OCSP
-```
-
-O **OCSP (Online Certificate Status Protocol)** é utilizado em infraestruturas de certificados para consultar informações relacionadas ao status de certificados, como sua situação de revogação.
-
----
-
-## Evidência — Passo 10
-
-A evidência solicitada para esta atividade corresponde ao **passo 10 da sequência geral**, com a aba **Details** do certificado aberta.
-
-**Frase obrigatória antes do print:**
-
-> **Print da atividade 9.3:** aba Details do certificado `aluno-DC01-CA`, apresentando os campos de versão, algoritmo de assinatura, algoritmo de hash, validade, chave pública e utilização da chave.
-
-Os principais campos esperados na tela são:
-
-```text id="7w4m2c"
-Version
-Signature algorithm
-Signature hash algorithm
-Valid to
-Public Key
-Key Usage
-```
-
-[**Evidências — Módulo 9 / Aulas 33 e 34**](../evidencias.pdf)
-
----
-
-## Conceitos aplicados
-
-### Certificado digital
-
-Um certificado digital associa uma identidade a uma chave pública e contém informações que permitem sua utilização dentro de uma infraestrutura de confiança.
-
-### X.509
-
-O certificado analisado segue a estrutura utilizada pelo padrão **X.509**, que define campos como emissor, sujeito, validade, chave pública, assinatura e extensões.
-
-### Chave pública
-
-A chave pública é armazenada no certificado e pode ser disponibilizada para outras entidades. Seu uso depende da finalidade definida no certificado.
-
-### Assinatura digital
-
-A assinatura da CA permite verificar a integridade do certificado e sua relação com a autoridade que o assinou.
-
-### Certification Path
-
-O caminho de certificação representa a cadeia de confiança entre o certificado analisado e uma autoridade certificadora confiável.
-
-### OCSP
-
-O **OCSP** é um protocolo utilizado para consultar o status de certificados digitais, especialmente para verificar informações relacionadas à revogação.
-
----
-
-## Fluxo da análise
-
-```text id="z1k5m8"
-Windows Server 2022 Cliente
-            │
-            ▼
-      Teste de conectividade
-            │
-            ▼
-       Manage user certificates
-            │
-            ▼
-Trusted Root Certification Authorities
-            │
-            ▼
-       aluno-DC01-CA
-            │
-            ├── General
-            │
-            ├── Details
-            │
-            ├── Certification Path
-            │
-            └── Certificate purposes / OCSP
-```
-
----
-
-## Resultado
-
-Foi localizado no Windows Server 2022 cliente o certificado da Autoridade Certificadora:
-
-```text id="a6s9c2"
-aluno-DC01-CA
-```
-
-A análise permitiu identificar os principais componentes de um certificado digital X.509, incluindo informações de assinatura, hash, validade, chave pública e utilização da chave.
-
-Também foi analisado o **caminho de certificação** e observada a seção de **Certificate purposes**, além da referência ao **OCSP** nas propriedades do certificado.
+[Back to Classes 33–34](../) · [Back to Module 9](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
