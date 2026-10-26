@@ -1,201 +1,197 @@
-# Atividade 5.3 — Inserindo um usuário no Domínio do Active Directory
+# Activity 5.03 — Creating a Domain User in Active Directory
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 05  
+> **Class:** 17–18  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Criar um usuário no domínio do Active Directory, configurar sua associação ao grupo **Remote Desktop Users** e criar uma **Group Policy Object (GPO)** para permitir o acesso de usuários do domínio através do Remote Desktop Services.
+## Objective
 
----
+Create a user in the Active Directory domain, add the user to the **Remote Desktop Users** group, and create a Group Policy Object (GPO) to allow domain users to log on through Remote Desktop Services.
 
-## Ambiente
+## Environment
 
-* Windows Server 2022
-* Active Directory
-* Active Directory Users and Computers
-* Group Policy Management
-* Group Policy Management Editor
-* Domínio: `aluno.hacker.com`
-* Usuário criado: `nome1`
-* Unidade Organizacional: `Rede1`
-* GPO: `Alunos`
+- Windows Server 2022
+- Active Directory
+- Active Directory Users and Computers
+- Group Policy Management
+- Group Policy Management Editor
+- **Domain:** `aluno.hacker.com`
+- **Created user:** `nome1`
+- **Organizational Unit:** `Rede1`
+- **GPO:** `Alunos`
 
----
+## Procedure
 
-## 1. Criando o usuário no Active Directory
+### 1. Create the User in Active Directory
 
-No **Server Manager**, foi acessado:
+In Server Manager, the following menu path was accessed:
 
-```text id="9g0c5x"
+```text
 Tools
     ↓
 Active Directory Users and Computers
 ```
 
-No painel esquerdo, foi expandido:
+In the left pane, the following tree was expanded:
 
-```text id="5p4k1d"
+```text
 aluno.hacker.com
 └── Users
 ```
 
-Na área de usuários, foi selecionado:
+In the users area, the following options were selected:
 
-```text id="n7m4z2"
+```text
 New
     ↓
 User
 ```
 
-Foram preenchidos os dados do novo usuário:
+The new user's information was entered:
 
-```text id="1q6x8v"
+```text
 First name: Nome1
 Last name: Sobrenome1
 User logon name: nome1
 ```
 
-Foi definida uma senha para o usuário.
+A password was set for the user.
 
-> A senha utilizada no laboratório não é registrada neste README.
+The password used in the laboratory is not recorded in this README.
 
-Também foi desmarcada a opção:
+The following option was unchecked:
 
-```text id="0h4r6k"
+```text
 User must change password at next logon
 ```
 
-e habilitada:
+The following option was enabled:
 
-```text id="3m8v2p"
+```text
 Password never expires
 ```
 
-Após concluir o assistente, o usuário **Nome1 Sobrenome1** passou a aparecer na lista de usuários do domínio.
+After completing the wizard, the user **Nome1 Sobrenome1** appeared in the domain users list.
 
----
+**Security note:** Disabling password expiration may be appropriate for a specific controlled lab exercise, but it should not be adopted as a general production policy without an explicit security requirement and compensating controls.
 
-## 2. Adicionando o usuário ao Remote Desktop Users
+### 2. Add the User to Remote Desktop Users
 
-Com o usuário criado, foram abertas suas propriedades:
+After creating the user, the following properties were opened:
 
-```text id="j6s2w9"
+```text
 Nome1 Sobrenome1
     ↓
 Properties
 ```
 
-Na aba:
+On the following tab:
 
-```text id="w1k5q8"
+```text
 Member of
 ```
 
-foi selecionado:
+the option below was selected:
 
-```text id="e9r3c7"
+```text
 Add...
 ```
 
-Na janela de seleção de grupos, foi pesquisado:
+In the group selection dialog, the following term was searched for:
 
-```text id="x4v7m2"
+```text
 remote
 ```
 
-Após utilizar **Check Names**, foi selecionado:
+After selecting **Check Names**, the following group was selected:
 
-```text id="p5n8d1"
+```text
 Remote Desktop Users
 ```
 
-A alteração foi confirmada com **OK**, seguida de **Apply** e **OK**.
+The change was confirmed using **OK**, followed by **Apply** and **OK**.
 
----
+### 3. Open Group Policy Management
 
-## 3. Abrindo o Group Policy Management
+In Server Manager, the following menu path was accessed:
 
-No **Server Manager**, foi acessado:
-
-```text id="7b3k9m"
+```text
 Tools
     ↓
 Group Policy Management
 ```
 
-No painel esquerdo, foi expandida a estrutura:
+In the left pane, the following structure was expanded:
 
-```text id="a2f6q4"
+```text
 Forest: aluno.hacker.com
 └── Domains
     └── aluno.hacker.com
 ```
 
----
+### 4. Create the Organizational Unit
 
-## 4. Criando a Organizational Unit
+The following domain was right-clicked:
 
-Com o botão direito sobre:
-
-```text id="v8j3x5"
+```text
 aluno.hacker.com
 ```
 
-foi selecionado:
+The following option was selected:
 
-```text id="r6m1k9"
+```text
 New Organizational Unit
 ```
 
-A nova unidade organizacional recebeu o nome:
+The new organizational unit was named:
 
-```text id="q3z7w2"
+```text
 Rede1
 ```
 
-Após confirmar, a OU `Rede1` passou a aparecer dentro do domínio.
+After confirming the operation, the `Rede1` OU appeared under the domain.
 
----
+### 5. Create the GPO
 
-## 5. Criando a GPO
+The following OU was right-clicked:
 
-Com o botão direito sobre a OU:
-
-```text id="n4c8y6"
+```text
 Rede1
 ```
 
-foi selecionada:
+The following option was selected:
 
-```text id="t2p5s9"
+```text
 Create a GPO in this domain, and Link it here...
 ```
 
-A política recebeu o nome:
+The policy was named:
 
-```text id="u7h3k1"
+```text
 Alunos
 ```
 
-Após a criação, a GPO passou a aparecer vinculada à OU `Rede1`.
+After creation, the GPO appeared linked to the `Rede1` OU.
 
----
+### 6. Edit the GPO
 
-## 6. Editando a GPO
+The following GPO was right-clicked:
 
-Com o botão direito sobre a GPO:
-
-```text id="d5m9q2"
+```text
 Alunos
 ```
 
-foi selecionado:
+The following option was selected:
 
-```text id="f8x4v6"
+```text
 Edit...
 ```
 
-No **Group Policy Management Editor**, foi seguida a estrutura:
+In Group Policy Management Editor, the following path was followed:
 
-```text id="s1k7w3"
+```text
 Computer Configuration
 └── Policies
     └── Windows Settings
@@ -204,25 +200,23 @@ Computer Configuration
                 └── User Rights Assignment
 ```
 
-Na lista de políticas, foi aberta:
+The following policy was opened:
 
-```text id="z6p2r8"
+```text
 Allow log on through Remote Desktop Services
 ```
 
----
+### 7. Add Domain Users
 
-## 7. Adicionando Domain Users
+In the policy window, the following option was enabled:
 
-Na janela da política, foi habilitada:
-
-```text id="c4v8n1"
+```text
 Define these policy settings
 ```
 
-Em seguida:
+The following selection path was then used:
 
-```text id="h7m3x9"
+```text
 Add User or Group...
     ↓
 Browse...
@@ -232,60 +226,58 @@ Advanced
 Find Now
 ```
 
-Na lista apresentada, foi selecionado:
+From the displayed list, the following group was selected:
 
-```text id="k2q6w5"
+```text
 Domain Users
 ```
 
----
+### 8. Add Authenticated Users
 
-## 8. Adicionando Authenticated Users
+The user and group selection process was repeated:
 
-O processo de seleção de usuários e grupos foi repetido:
-
-```text id="b9r4t7"
+```text
 Advanced
     ↓
 Find Now
 ```
 
-Foi selecionado:
+The following group was selected:
 
-```text id="m5x8c3"
+```text
 Authenticated Users
 ```
 
-As alterações foram confirmadas com:
+The changes were confirmed using:
 
-```text id="v2n6p9"
+```text
 OK
 OK
 Apply
 OK
 ```
 
-Com isso, a configuração da política passou a permitir os grupos selecionados na política de logon através do Remote Desktop Services.
+This configured the policy to include the selected groups in the **Allow log on through Remote Desktop Services** user right.
 
----
+**Security note:** Granting this right through broad groups such as `Domain Users` and `Authenticated Users` can expand remote logon access considerably. In production environments, restrict the policy to the specific users or groups that require Remote Desktop access, and ensure that the GPO is linked and scoped appropriately.
 
-## 9. Atualizando as políticas
+### 9. Update Group Policies
 
-Na barra de tarefas do Windows, foi aberto o **Command Prompt** através da pesquisa por:
+On the Windows taskbar, Command Prompt was opened by searching for:
 
-```text id="q8s1f4"
+```text
 cmd
 ```
 
-Foi executado:
+The following command was executed:
 
-```cmd id="c0m7y5"
+```cmd
 gpupdate /force
 ```
 
-Saída apresentada no laboratório:
+**Output displayed in the laboratory:**
 
-```text id="a7x3k9"
+```text
 C:\Users\Administrator>gpupdate /force
 Updating policy...
 
@@ -293,112 +285,118 @@ Computer Policy update has completed successfully.
 User Policy update has completed successfully.
 ```
 
-A evidência solicitada pelo laboratório corresponde a esta etapa.
+The evidence requested by the laboratory corresponds to this step.
 
----
+The output confirms that the computer and user Group Policy update operations completed successfully. It does not, by itself, verify that every intended setting was applied to a particular user or computer; effective policy can be checked separately when needed.
 
-## Conceitos
+## Concepts Practiced
 
 ### Active Directory Users and Computers
 
-O **Active Directory Users and Computers (ADUC)** é uma ferramenta administrativa utilizada para gerenciar objetos do domínio, como:
+Active Directory Users and Computers (ADUC) is an administrative tool used to manage domain objects, such as:
 
-* usuários;
-* grupos;
-* computadores;
-* unidades organizacionais.
+- Users
+- Groups
+- Computers
+- Organizational Units
 
-Nesta atividade, foi utilizado para criar o usuário `nome1`.
+In this activity, it was used to create the `nome1` user.
 
-### Grupo Remote Desktop Users
+### Remote Desktop Users Group
 
-O grupo **Remote Desktop Users** permite organizar usuários que possuem autorização para utilizar determinados recursos de acesso remoto, conforme as políticas configuradas no sistema.
+The **Remote Desktop Users** group organizes users who are permitted to use certain remote access capabilities, subject to the system's effective permissions and policies.
 
-O usuário criado foi adicionado a esse grupo durante a atividade.
+The newly created user was added to this group during the activity.
+
+Membership in this group alone does not guarantee successful remote access; the user must also satisfy the applicable logon rights and other security requirements.
 
 ### Group Policy Object (GPO)
 
-Uma **GPO** é um conjunto de configurações que pode ser aplicado a usuários e computadores de um domínio.
+A GPO is a collection of settings that can be applied to users and computers in a domain.
 
-Neste laboratório, foi criada a GPO:
+In this laboratory, the following GPO was created:
 
-```text id="e3j8q1"
+```text
 Alunos
 ```
 
-e vinculada à OU:
+It was linked to the following OU:
 
-```text id="n6w2r5"
+```text
 Rede1
 ```
 
 ### User Rights Assignment
 
-A seção **User Rights Assignment** permite definir direitos atribuídos a usuários e grupos no Windows.
+The **User Rights Assignment** section defines rights granted to users and groups in Windows.
 
-A política utilizada foi:
+The policy used was:
 
-```text id="p1c7v4"
+```text
 Allow log on through Remote Desktop Services
 ```
 
-Ela controla quais usuários ou grupos podem receber o direito de realizar logon através dos serviços de Remote Desktop.
+It controls which users or groups can be granted the right to log on through Remote Desktop Services. Effective access also depends on other applicable policies and security controls.
 
-### gpupdate /force
+### `gpupdate /force`
 
-O comando:
+The command:
 
-```cmd id="u9k5d2"
+```cmd
 gpupdate /force
 ```
 
-solicita a atualização imediata das políticas de grupo no computador.
+requests an immediate Group Policy update on the computer.
 
-A opção `/force` força a reaplicação das configurações de política, mesmo quando elas não aparentam ter sido alteradas desde a última atualização.
+The `/force` option forces the reapplication of policy settings, including settings that do not appear to have changed since the previous update.
 
----
+## Results
 
-## Resultado
+The following user was created:
 
-Foi criado o usuário:
-
-```text id="r4m8x6"
+```text
 Nome1 Sobrenome1
 ```
 
-no domínio:
+in the domain:
 
-```text id="y2q7n5"
+```text
 aluno.hacker.com
 ```
 
-O usuário foi associado ao grupo **Remote Desktop Users**.
+The user was added to the **Remote Desktop Users** group.
 
-Também foi criada a OU:
+The following OU was also created:
 
-```text id="c8w3p1"
+```text
 Rede1
 ```
 
-e a GPO:
+And the following GPO was created and linked to that OU:
 
-```text id="f6m2z9"
+```text
 Alunos
 ```
 
-A política **Allow log on through Remote Desktop Services** foi configurada para incluir `Domain Users` e `Authenticated Users`.
+The **Allow log on through Remote Desktop Services** policy was configured to include `Domain Users` and `Authenticated Users`.
 
-Por fim, o comando `gpupdate /force` confirmou a aplicação das políticas:
+Finally, the `gpupdate /force` command reported successful computer and user policy updates:
 
-```text id="s5v1k8"
+```text
 Computer Policy update has completed successfully.
 User Policy update has completed successfully.
 ```
 
+The activity demonstrated how to create a domain user, manage group membership, organize domain objects with an OU, configure a GPO, and request an immediate Group Policy update.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 05, Classes 17–18.
+
+**Recorded screenshot:** Step 11 — executing `gpupdate /force` and confirming the policy update results.
+
+[View Evidence — Classes 17–18](../evidencias.pdf)
+
 ---
 
-## Evidências
-
-[**Evidências — Módulo 5 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Evidência registrada:** passo 11 — execução do `gpupdate /force` e confirmação da atualização das políticas.
+[Back to Classes 17–18](../) · [Back to Module 05](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
