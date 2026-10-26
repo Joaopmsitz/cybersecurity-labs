@@ -1,38 +1,38 @@
-# Atividade 10.10 — Ubuntu em um Container Docker no Kali Linux
+# Activity 10.10 — Running Ubuntu in a Docker Container on Kali Linux
 
-## Objetivo
+## Objective
 
-Utilizar o **Docker** no Kali Linux para baixar uma imagem Ubuntu, criar e executar containers, acessar um shell interativo e acompanhar informações de execução utilizando os comandos `docker top` e `docker stats`.
+Use **Docker** on Kali Linux to download an Ubuntu image, create and run containers, access an interactive shell, and monitor runtime information using the `docker top` and `docker stats` commands.
 
-Ao final, o container utilizado na atividade foi parado e os containers inativos foram removidos.
-
----
-
-## Ambiente
-
-* **Sistema:** Kali GNU/Linux Rolling
-* **Container:** Ubuntu
-* **Runtime:** Docker
-* **Container principal:** `MeuContainer`
-* **Terminal:** Bash
+At the end of the activity, the container used in the lab was stopped and inactive containers were removed.
 
 ---
 
-## 1. Verificando o Docker
+## Environment
 
-Foi obtido acesso administrativo no terminal:
+- **Operating system:** Kali GNU/Linux Rolling
+- **Container image:** Ubuntu
+- **Runtime:** Docker
+- **Main container:** `MeuContainer`
+- **Terminal:** Bash
+
+---
+
+## 1. Verifying Docker
+
+Administrative privileges were obtained in the terminal:
 
 ```bash
 sudo -i
 ```
 
-Em seguida, foi executado:
+Next, the following command was executed:
 
 ```bash
 docker
 ```
 
-O comando apresentou a tela de ajuda do Docker:
+The command displayed the Docker help screen:
 
 ```text
 Usage:  docker [OPTIONS] COMMAND
@@ -107,19 +107,19 @@ Global Options:
 Run 'docker COMMAND --help' for more information.
 ```
 
-A saída confirma a disponibilidade dos principais comandos utilizados para gerenciamento de imagens e containers.
+The output confirms that the main commands for managing images and containers are available.
 
 ---
 
-## 2. Verificando as imagens disponíveis
+## 2. Checking Available Images
 
-Foi executado:
+The following command was executed:
 
 ```bash
 docker images
 ```
 
-Inicialmente, não havia imagens listadas:
+Initially, no images were listed:
 
 ```text
 REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
@@ -127,15 +127,15 @@ REPOSITORY   TAG       IMAGE ID   CREATED   SIZE
 
 ---
 
-## 3. Baixando a imagem Ubuntu
+## 3. Downloading the Ubuntu Image
 
-Foi utilizada a imagem oficial do Ubuntu através do comando:
+The official Ubuntu image was downloaded using:
 
 ```bash
 docker pull ubuntu
 ```
 
-A imagem foi baixada do Docker Hub:
+The image was downloaded from Docker Hub:
 
 ```text
 Using default tag: latest
@@ -146,200 +146,200 @@ Status: Downloaded newer image for ubuntu:latest
 docker.io/library/ubuntu:latest
 ```
 
-A tag `latest` foi utilizada por padrão.
+The `latest` tag was used by default.
 
 ---
 
-## 4. Verificando a imagem baixada
+## 4. Verifying the Downloaded Image
 
-Foi executado novamente:
+The following command was executed again:
 
 ```bash
 docker images
 ```
 
-A imagem Ubuntu passou a aparecer na listagem:
+The Ubuntu image then appeared in the list:
 
 ```text
 REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
 ubuntu       latest    ca2b0f26964c   10 days ago   77.9MB
 ```
 
-Dessa forma, a imagem `ubuntu:latest` estava disponível localmente para criação de containers.
+The `ubuntu:latest` image was now available locally for creating containers.
 
 ---
 
-## 5. Executando um container Ubuntu
+## 5. Running an Ubuntu Container
 
-Foi executado:
+The following command was executed:
 
 ```bash
 docker run ubuntu
 ```
 
-Esse comando cria e inicia um container utilizando a imagem Ubuntu.
+This command creates and starts a container using the Ubuntu image.
 
-Como não foi especificado um processo interativo ou um processo persistente, o container encerra sua execução após concluir o processo padrão.
+Because no interactive or persistent process was specified, the container exits after its default process finishes.
 
 ---
 
-## 6. Criando um container interativo
+## 6. Creating an Interactive Container
 
-Para manter um shell interativo, foi utilizado:
+To start an interactive shell, the following command was used:
 
 ```bash
 docker run --name MeuContainer -it ubuntu bash
 ```
 
-O container recebeu o nome:
+The container was assigned the following name:
 
 ```text
 MeuContainer
 ```
 
-O terminal passou a apresentar:
+The terminal then displayed:
 
 ```text
 root@2c6580444ba4:/#
 ```
 
-A partir desse momento, os comandos executados nesse terminal estavam sendo executados dentro do ambiente do container Ubuntu.
+From this point onward, commands entered in that terminal were executed inside the Ubuntu container.
 
 ---
 
-## 7. Explorando o sistema de arquivos do container
+## 7. Exploring the Container Filesystem
 
-Dentro do container, foi executado:
+Inside the container, the following command was executed:
 
 ```bash
 ls
 ```
 
-A saída apresentada foi:
+The output was:
 
 ```text
 bin boot dev etc home lib lib32 lib64 libx32 media mnt opt proc root run sbin srv sys tmp usr var
 ```
 
-Essa estrutura apresenta os principais diretórios presentes no sistema de arquivos do Ubuntu dentro do container.
+This directory structure shows the main directories present in the Ubuntu filesystem inside the container.
 
 ---
 
-## 8. Verificando o processo do container
+## 8. Checking the Container Processes
 
-Em um segundo terminal do Kali, foi obtido acesso administrativo:
+In a second Kali terminal, administrative privileges were obtained:
 
 ```bash
 sudo -i
 ```
 
-Em seguida, foi executado:
+Next, the following command was executed:
 
 ```bash
 docker top MeuContainer
 ```
 
-A saída apresentou o processo em execução no container:
+The output showed the process running inside the container:
 
 ```text
 UID                 PID                 PPID                C                   STIME               TTY                 TIME                CMD
 root                40370               40342               0                   16:09               pts/0               00:00:00            bash
 ```
 
-O comando `docker top` permite visualizar os processos associados a um container em execução.
+The `docker top` command displays processes associated with a running container.
 
-Nesse caso, o processo principal observado era o `bash`.
+In this case, the observed main process was `bash`.
 
 ---
 
-## 9. Verificando o consumo de recursos
+## 9. Checking Resource Consumption
 
-Ainda no segundo terminal, foi executado:
+Still in the second terminal, the following command was executed:
 
 ```bash
 docker stats
 ```
 
-A saída apresentada foi:
+The output was:
 
 ```text
 CONTAINER ID   NAME           CPU %     MEM USAGE / LIMIT   MEM %     NET I/O       BLOCK I/O   PIDS
 2c6580444ba4   MeuContainer   0.01%     916KiB / 1.926GiB   0.05%     1.16kB / 0B   0B / 0B     1
 ```
 
-O comando `docker stats` apresenta métricas de utilização dos containers em execução.
+The `docker stats` command displays resource utilization metrics for running containers.
 
-No momento da verificação, o `MeuContainer` apresentava:
+At the time of the check, `MeuContainer` had the following metrics:
 
-* **CPU:** 0.01%;
-* **Memória:** 916 KiB de 1.926 GiB;
-* **Uso de memória:** 0.05%;
-* **PIDs:** 1.
+- **CPU usage:** 0.01%
+- **Memory usage:** 916 KiB out of 1.926 GiB
+- **Memory utilization:** 0.05%
+- **PIDs:** 1
 
 ---
 
-## 10. Encerrando o shell do container
+## 10. Exiting the Container Shell
 
-Após concluir a verificação, o segundo terminal foi fechado.
+After completing the checks, the second terminal was closed.
 
-No primeiro terminal, dentro do container, foi executado:
+In the first terminal, inside the container, the following command was executed:
 
 ```bash
 exit
 ```
 
-A saída foi:
+The output was:
 
 ```text
 root@2c6580444ba4:/# exit
 exit
 ```
 
-Com isso, o shell interativo foi encerrado.
+This closed the interactive shell.
 
 ---
 
-## 11. Parando o container
+## 11. Stopping the Container
 
-O container `MeuContainer` foi parado através do comando:
+The `MeuContainer` container was stopped using:
 
 ```bash
 docker stop MeuContainer
 ```
 
-O Docker retornou:
+Docker returned:
 
 ```text
 docker stop MeuContainer
 MeuContainer
 ```
 
-### Evidência — Passo 12
+### Evidence — Step 12
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 10.10:** execução do comando `docker stop MeuContainer`, confirmando a parada do container `MeuContainer`.
+> Screenshot of Activity 10.10: execution of the `docker stop MeuContainer` command, confirming that the `MeuContainer` container was stopped.
 
-[**Evidências — Módulo 10 / Aulas 39 e 40**](../evidencias.pdf)
+[View Evidence — Classes 39–40](../evidencias.pdf)
 
 ---
 
-## 12. Removendo containers inativos
+## 12. Removing Inactive Containers
 
-Após parar o container, foi executado:
+After stopping the container, the following command was executed:
 
 ```bash
 docker container prune
 ```
 
-O Docker solicitou confirmação:
+Docker requested confirmation:
 
 ```text
 WARNING! This will remove all stopped containers.
 Are you sure you want to continue? [y/N] y
 ```
 
-Após a confirmação, os containers parados foram removidos:
+After confirmation, the stopped containers were removed:
 
 ```text
 Deleted Containers:
@@ -349,41 +349,45 @@ fab9028be5b9edd1614c872ee8cb59877b70e51c1dee2c1f28969a08ea24fd81
 Total reclaimed space: 8B
 ```
 
-O comando `docker container prune` remove containers que não estão mais em execução, liberando os recursos associados a eles.
+The `docker container prune` command removes containers that are no longer running, freeing the resources associated with them.
 
 ---
 
-## Conceitos
+## Key Concepts
 
-* **Docker:** plataforma para criação e execução de containers.
-* **Imagem:** modelo utilizado como base para criar um container.
-* **Container:** instância executável de uma imagem.
-* **`docker top`:** mostra os processos associados ao container.
-* **`docker stats`:** apresenta métricas de utilização de recursos.
-* **`docker stop`:** interrompe um container em execução.
+- **Docker:** A platform for creating and running containers.
+- **Image:** A template used as the basis for creating a container.
+- **Container:** A runnable instance of an image.
+- **`docker top`:** Displays processes associated with a container.
+- **`docker stats`:** Displays resource utilization metrics.
+- **`docker stop`:** Stops a running container.
 
-## Fluxo da atividade
+## Activity Workflow
 
 ```text
-Verificar Docker
+Verify Docker
       ↓
-Baixar imagem Ubuntu
+Download the Ubuntu image
       ↓
-Criar container
+Create a container
       ↓
-Acessar shell
+Access the shell
       ↓
-Verificar processos
+Check processes
       ↓
-Verificar recursos
+Monitor resource usage
       ↓
-Sair do container
+Exit the container
       ↓
-Parar MeuContainer
+Stop MeuContainer
       ↓
-Remover containers inativos
+Remove inactive containers
 ```
 
-## Resultado
+## Result
 
-Foi utilizada uma imagem Ubuntu no Docker para criar e executar o container `MeuContainer`. Foram verificados seus processos e consumo de recursos com `docker top` e `docker stats`, seguido da parada e limpeza dos containers inativos.
+The Ubuntu image was used with Docker to create and run the `MeuContainer` container. Its processes and resource consumption were monitored using `docker top` and `docker stats`, followed by stopping the container and cleaning up inactive containers.
+
+---
+
+[Back to Classes 39–40](../) · [Back to Module 10](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
