@@ -1,162 +1,150 @@
-# Atividade 9.7 — Cancelar a Revogação de um Certificado no Windows Server 2022
+# Activity 9.07 — Unrevoking a Certificate on Windows Server 2022
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 09  
+> **Classes:** 35–36  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Cancelar a revogação de um certificado anteriormente revogado na Autoridade Certificadora do Windows Server 2022, retornando o certificado à lista de certificados emitidos.
+## Objective
 
----
+Cancel the revocation of a previously revoked certificate in the Windows Server 2022 Certificate Authority, returning the certificate to the list of issued certificates.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Windows Server 2022
-* **Serviço:** Active Directory Certificate Services (AD CS)
-* **Autoridade Certificadora:** `aluno-DC01-CA`
-* **Console:** Certification Authority
+- **Operating system:** Windows Server 2022
+- **Service:** Active Directory Certificate Services (AD CS)
+- **Certificate Authority:** `aluno-DC01-CA`
+- **Console:** Certification Authority
 
-> As credenciais utilizadas para acesso ao laboratório não são registradas neste README.
+> Credentials used to access the lab environment are not recorded in this README.
 
----
+## 1. Opening Server Manager
 
-## 1. Acesso ao Server Manager
+The Windows search field was opened, and the following term was searched for:
 
-Foi aberto o campo de pesquisa do Windows e pesquisado:
-
-```text id="b4h7xp"
+```text
 Server Manager
 ```
 
-Em seguida, o **Server Manager** foi aberto.
+Server Manager was then opened.
 
----
+## 2. Accessing Certification Authority
 
-## 2. Acesso à Certification Authority
+In Server Manager, the following option was selected:
 
-No Server Manager, foi acessado:
-
-```text id="j7g5zs"
+```text
 Tools → Certification Authority
 ```
 
-A console de gerenciamento da Autoridade Certificadora foi aberta.
+The Certificate Authority management console opened.
 
----
+## 3. Accessing Revoked Certificates
 
-## 3. Acesso aos certificados revogados
+In the left pane, the following authority was expanded:
 
-Na coluna esquerda, foi expandida a autoridade:
-
-```text id="e3m2xq"
+```text
 aluno-DC01-CA
 ```
 
-Em seguida, foi selecionada:
+The following folder was then selected:
 
-```text id="8p4wkt"
+```text
 Revoked Certificates
 ```
 
-Essa pasta apresenta os certificados que foram revogados pela Autoridade Certificadora.
+This folder displays certificates that have been revoked by the Certificate Authority.
 
----
+## 4. Viewing the Certificate
 
-## 4. Visualização do certificado
+In the right pane, the certificate revoked in the previous activity was located.
 
-Na coluna da direita, foi localizado o certificado revogado na atividade anterior.
+The certificate was double-clicked to view the following tabs:
 
-O certificado foi aberto com duplo clique para visualizar as abas:
-
-```text id="7s6j2c"
+```text
 General
 Details
 Path
 ```
 
-Após a análise das informações, foi selecionado **OK**.
+After reviewing the information, **OK** was selected.
 
----
+## 5. Viewing Attributes and Extensions
 
-## 5. Visualização de atributos e extensões
+The certificate was right-clicked, and the following options were accessed:
 
-Com o botão direito sobre o certificado, foram acessadas as opções:
-
-```text id="1v8n5d"
+```text
 All Tasks → View Attributes/Extensions...
 ```
 
-Na janela aberta foram verificadas as abas:
+In the window that opened, the following tabs were examined:
 
-```text id="9y0x4f"
+```text
 Attributes
 Extensions
 ```
 
-Essas seções apresentam os atributos e extensões associados ao certificado.
+These sections display the attributes and extensions associated with the certificate.
 
-Após a análise, foi selecionado **OK**.
+After reviewing the information, **OK** was selected.
 
----
+## 6. Canceling the Revocation
 
-## 6. Cancelamento da revogação
+With the certificate selected, the context menu was opened, and the following option was accessed:
 
-Com o certificado selecionado, foi utilizado o botão direito e acessado:
-
-```text id="q2k6rv"
+```text
 All Tasks → Unrevoke Certificate
 ```
 
-A opção **Unrevoke Certificate** cancela a revogação registrada para o certificado.
+The **Unrevoke Certificate** option cancels the revocation recorded for the certificate.
 
----
+## 7. Verifying Revoked Certificates
 
-## 7. Verificação em Revoked Certificates
+After the operation, the following folder was checked again:
 
-Após a operação, foi verificada novamente a pasta:
-
-```text id="w5m9ca"
+```text
 Revoked Certificates
 ```
 
-O certificado deixou de aparecer nessa lista.
+The certificate no longer appeared in this list.
 
----
+## 8. Accessing Issued Certificates
 
-## 8. Acesso aos certificados emitidos
+In the left pane of the console, the following folder was selected:
 
-Na coluna esquerda da console, foi selecionada:
-
-```text id="4c8v2m"
+```text
 Issued Certificates
 ```
 
+## 9. Verifying the Certificate
+
+In the **Issued Certificates** folder, the certificate whose revocation had been canceled was located again.
+
+This demonstrates that the certificate returned to the list of issued certificates after the **Unrevoke Certificate** operation.
+
+## Evidence — Step 9
+
+Required caption before the screenshot:
+
+> Screenshot for Activity 9.7: the certificate whose revocation was canceled, appearing again in the Issued Certificates folder of the Certificate Authority.
+
+Evidence for this activity is included in the PDF for Module 9, Classes 35–36.
+
+[View Evidence — Classes 35–36](../evidencias.pdf)
+
+## Activity Workflow
+
+| Stage | Result |
+|---|---|
+| Certificate | Located in `Revoked Certificates` |
+| Action | `Unrevoke Certificate` |
+| Verification | Removed from `Revoked Certificates` |
+| Final result | Returned to `Issued Certificates` |
+
+## Result
+
+The certificate's revocation was successfully canceled, causing it to appear again in the `Issued Certificates` folder of `aluno-DC01-CA`.
+
 ---
 
-## 9. Verificação do certificado
-
-Na pasta **Issued Certificates**, foi localizado novamente o certificado cuja revogação havia sido cancelada.
-
-Isso demonstra que o certificado retornou à lista de certificados emitidos após a operação de **Unrevoke Certificate**.
-
----
-
-## Evidência — Passo 9
-
-**Frase obrigatória antes do print:**
-
-> **Print da atividade 9.7:** certificado com a revogação cancelada novamente presente na pasta `Issued Certificates` da Autoridade Certificadora.
-
-[**Evidências — Módulo 9 / Aulas 35 e 36**](../evidencias.pdf)
-
----
-
-## Fluxo da atividade
-
-| Etapa           | Resultado                            |
-| --------------- | ------------------------------------ |
-| Certificado     | Localizado em `Revoked Certificates` |
-| Ação            | `Unrevoke Certificate`               |
-| Verificação     | Removido de `Revoked Certificates`   |
-| Resultado final | Retornado para `Issued Certificates` |
-
-## Resultado
-
-A revogação do certificado foi cancelada com sucesso, fazendo com que ele voltasse a aparecer na pasta **Issued Certificates** da `aluno-DC01-CA`.
+[Back to Classes 35–36](../) · [Back to Module 9](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
