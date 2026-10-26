@@ -1,247 +1,219 @@
-# Atividade 9.10 — Recuperando uma Carteira Bitcoin e Gerando QR Code no Electrum
+# Activity 9.10 — Recovering a Bitcoin Wallet and Generating a QR Code in Electrum
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 09  
+> **Classes:** 35–36  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Simular a perda de uma carteira Bitcoin no Electrum, recuperar a carteira utilizando sua **seed phrase** e gerar uma solicitação de pagamento utilizando um endereço Bitcoin e QR Code.
+## Objective
 
----
+Simulate the loss of a Bitcoin wallet in Electrum, recover it using its seed phrase, and generate a payment request using a Bitcoin address and QR code.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Aplicativo:** Electrum
-* **Carteira:** `default_wallet`
-* **Tipo:** Standard wallet
-* **Valor solicitado:** `1 mBTC` (`0,001 BTC`)
-* **Expiração da solicitação:** 1 dia
-* **Método:** On-chain
+- **Operating system:** Kali Linux
+- **Application:** Electrum
+- **Wallet:** `default_wallet`
+- **Wallet type:** Standard wallet
+- **Requested amount:** 1 mBTC (0.001 BTC)
+- **Request expiration:** 1 day
+- **Payment method:** On-chain
 
-> A seed phrase utilizada para recuperar a carteira é uma informação extremamente sensível e não é registrada neste README. Ela deve permanecer privada e nunca ser publicada no GitHub.
+> The seed phrase used to recover the wallet is extremely sensitive information and is not recorded in this README. It must remain private and must never be published on GitHub.
 
----
+## 1. Opening Electrum
 
-## 1. Abrindo o Electrum
-
-O Electrum foi iniciado pelo terminal:
+Electrum was launched from the terminal:
 
 ```bash
 electrum
 ```
 
-A aplicação foi aberta para realizar o processo de recuperação da carteira.
+The application opened to begin the wallet recovery process.
 
----
+## 2. Simulating Wallet Loss
 
-## 2. Simulando a perda da carteira
+With Electrum open, the following menu option was accessed:
 
-Com o Electrum aberto, foi acessado o menu:
-
-```text id="e8s4kp"
+```text
 File → Delete
 ```
 
-A exclusão foi confirmada selecionando:
+The deletion was confirmed by selecting:
 
-```text id="w6c2ra"
+```text
 Yes
 ```
 
-A carteira local foi excluída, simulando uma situação de perda do arquivo da carteira.
+The local wallet was deleted, simulating a situation in which the wallet file had been lost.
 
----
+## 3. Restarting Electrum
 
-## 3. Reabrindo o Electrum
+After the deletion, Electrum was launched again to begin the wallet recovery process.
 
-Após a exclusão, o Electrum foi iniciado novamente para realizar o processo de recuperação da carteira.
+## 4. Selecting the Wallet
 
----
+On the initial screen, the following name was retained:
 
-## 4. Selecionando a carteira
-
-Na tela inicial, foi mantido o nome:
-
-```text id="n7f3vx"
+```text
 default_wallet
 ```
 
-Em seguida, foi selecionado:
+Then, the following option was selected:
 
-```text id="q5k9mb"
+```text
 Next
 ```
 
----
+## 5. Selecting the Wallet Type
 
-## 5. Selecionando o tipo de carteira
+The following wallet type was selected again:
 
-Foi selecionado novamente o tipo:
-
-```text id="r4j8tc"
+```text
 Standard wallet
 ```
 
-Depois, foi selecionado **Next**.
+Then, **Next** was selected.
 
----
+## 6. Indicating That a Seed Already Exists
 
-## 6. Informando que a seed já existe
+On the wallet configuration screen, the following option was selected:
 
-Na tela de configuração da carteira, foi selecionada a opção:
-
-```text id="u2d6zs"
+```text
 I already have a seed
 ```
 
-Essa opção informa ao Electrum que a carteira será recuperada a partir de uma seed existente.
+This option informs Electrum that the wallet will be restored from an existing seed.
 
-Em seguida, foi selecionado **Next**.
+Then, **Next** was selected.
 
----
+## 7. Recovering the Wallet Using the Seed
 
-## 7. Recuperando a carteira pela seed
+Electrum requested the seed phrase used in the previous activity.
 
-O Electrum solicitou a seed phrase utilizada na atividade anterior.
+The seed was entered in the corresponding field, and the following option was selected:
 
-A seed foi digitada no campo correspondente e foi selecionado:
-
-```text id="c9m5hf"
+```text
 Next
 ```
 
-> A seed phrase não é reproduzida neste documento. Ela deve ser mantida exclusivamente em local seguro e privado.
+> The seed phrase is not reproduced in this document. It must be kept exclusively in a secure, private location.
 
----
+## 8. Configuring the Password
 
-## 8. Configuração da senha
+Electrum requested the wallet password configuration.
 
-O Electrum solicitou a configuração da senha da carteira.
+The same configuration used previously was retained. Since the original wallet did not have an additional password, the field was left without a password.
 
-Foi utilizada a mesma configuração definida anteriormente. Como a carteira original não possuía senha adicional, o campo permaneceu sem senha.
+Then, the following option was selected:
 
-Em seguida, foi selecionado:
-
-```text id="k3p7yw"
+```text
 Finish
 ```
 
----
+## 9. Verifying the Recovery
 
-## 9. Verificação da recuperação
+After the process was completed, the wallet was restored and loaded again in Electrum.
 
-Após a conclusão do processo, a carteira foi recuperada e carregada novamente no Electrum.
+The recovery demonstrates that the seed phrase can be used to restore the wallet and its associated keys, provided it is entered correctly and the wallet uses the corresponding seed format.
 
-A recuperação demonstra que a **seed phrase** é suficiente para restaurar a carteira e seus dados associados, desde que seja utilizada corretamente.
+## 10. Accessing the Receive Tab
 
----
+In Electrum, the following tab was accessed:
 
-## 10. Acesso à aba Receive
-
-No Electrum, foi acessada a aba:
-
-```text id="m8v2qa"
+```text
 Receive
 ```
 
-Essa área permite criar solicitações de pagamento e obter um endereço para recebimento de Bitcoin.
+This section allows payment requests to be created and provides an address for receiving Bitcoin.
 
----
+## 11. Setting the Description
 
-## 11. Definindo a descrição
+The following example was entered in the request description field:
 
-No campo de descrição da solicitação foi inserido um exemplo:
-
-```text id="s5n4jx"
+```text
 Pagamento de aposta de futebol
 ```
 
-A descrição serve para identificar a finalidade da solicitação dentro da carteira.
+The description identifies the purpose of the payment request within the wallet.
 
----
+## 12. Setting the Amount and Expiration
 
-## 12. Definindo o valor e a validade
+The following requested amount was entered:
 
-No campo de valor solicitado foi informado:
-
-```text id="t7c1bz"
+```text
 1 mBTC
 ```
 
-A conversão utilizada é:
+The conversion used was:
 
 ```text
-1 mBTC = 0,001 BTC
+1 mBTC = 0.001 BTC
 ```
 
-Também foi configurada a expiração da solicitação para:
+The request expiration was also configured as:
 
-```text id="y6r3wd"
+```text
 1 day
 ```
 
----
+## 13. Selecting the On-chain Method
 
-## 13. Selecionando o método On-chain
+The following option was selected:
 
-A opção:
-
-```text id="p4h8nk"
+```text
 Onchain
 ```
 
-foi selecionada para utilizar uma transação Bitcoin convencional na rede.
+This option uses a conventional Bitcoin transaction on the blockchain.
 
-Após a configuração, o Electrum apresentou o endereço correspondente à solicitação.
+After the configuration, Electrum displayed the address associated with the request.
+
+## 14. Copying the Address
+
+The field containing the Bitcoin address was selected to copy the address.
+
+This address can be provided to the person making the payment so that they can send the requested Bitcoin.
+
+> A Bitcoin address is not equivalent to a seed phrase. However, there is no need to record the real address in the README.
+
+## 15. Generating the QR Code
+
+In the payment request, the QR code icon was used to generate a visual representation of the request information.
+
+The QR code allows another person to scan the payment details using a compatible wallet.
+
+## Evidence — QR Code
+
+Required caption before the screenshot:
+
+> Screenshot for Activity 9.10: the QR code generated by Electrum for the 1 mBTC payment request, demonstrating the creation of a Bitcoin receiving request.
+
+Evidence for this activity is included in the PDF for Module 9, Classes 35–36.
+
+> **Important:** Never record or publish the seed phrase. Before making evidence publicly available, verify that no private wallet information is exposed.
+
+## 16. Closing the Application
+
+After capturing the evidence, Electrum was closed along with the terminal.
+
+## Activity Workflow
+
+| Stage | Result |
+|---|---|
+| Simulation | Local wallet deleted |
+| Recovery | `default_wallet` restored using the seed phrase |
+| Payment request | 1 mBTC / 0.001 BTC |
+| Expiration | 1 day |
+| Receiving method | On-chain request with a QR code |
+
+## Result
+
+The Bitcoin wallet was successfully recovered using the seed phrase, and a new receiving request was created in Electrum.
+
+The configured amount was 1 mBTC (0.001 BTC), with an expiration period of one day and a generated QR code to facilitate payment.
 
 ---
 
-## 14. Copiando o endereço
-
-O campo contendo o endereço Bitcoin foi selecionado para realizar a cópia do endereço.
-
-Esse endereço pode ser fornecido ao responsável pelo pagamento para que ele possa enviar os bitcoins solicitados.
-
-> O endereço Bitcoin não é equivalente à seed phrase. Ainda assim, não é necessário registrar o endereço real no README.
-
----
-
-## 15. Gerando o QR Code
-
-Na solicitação de pagamento, foi utilizado o ícone de **QR Code** para gerar a representação visual dos dados da solicitação.
-
-O QR Code permite que outra pessoa escaneie as informações da solicitação utilizando uma carteira compatível.
-
----
-
-## Evidência — QR Code
-
-**Frase obrigatória antes do print:**
-
-> **Print da atividade 9.10:** QR Code gerado pelo Electrum para a solicitação de pagamento de `1 mBTC`, demonstrando a geração da solicitação de recebimento.
-
-[**Evidências — Módulo 9 / Aulas 35 e 36**](../evidencias.pdf)
-
-> **Importante:** nunca registre ou publique a seed phrase. Antes de disponibilizar evidências publicamente, verifique se nenhum dado privado da carteira foi exposto.
-
----
-
-## 16. Encerramento
-
-Após a geração da evidência, o Electrum foi fechado juntamente com o terminal.
-
----
-
-## Fluxo da atividade
-
-| Etapa       | Resultado                             |
-| ----------- | ------------------------------------- |
-| Simulação   | Carteira local excluída               |
-| Recuperação | `default_wallet` restaurada pela seed |
-| Solicitação | `1 mBTC` / `0,001 BTC`                |
-| Validade    | 1 dia                                 |
-| Recebimento | Solicitação On-chain com QR Code      |
-
-## Resultado
-
-A carteira Bitcoin foi recuperada com sucesso utilizando a seed phrase e uma nova solicitação de recebimento foi criada no Electrum.
-
-O valor configurado foi de **1 mBTC (0,001 BTC)**, com validade de um dia e geração de um **QR Code** para facilitar o pagamento.
+[Back to Classes 35–36](../) · [Back to Module 9](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
