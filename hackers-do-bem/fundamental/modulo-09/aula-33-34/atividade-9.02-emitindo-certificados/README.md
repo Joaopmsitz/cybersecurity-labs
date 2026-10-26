@@ -1,177 +1,153 @@
-# Atividade 9.2 — Emitindo Certificados Digitais usando uma Autoridade Certificadora
+# Activity 9.02 — Issuing Digital Certificates Using a Certificate Authority
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 09  
+> **Classes:** 33–34  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Utilizar a Autoridade Certificadora criada na atividade anterior para configurar um **template de certificado**, disponibilizá-lo na CA e configurar o **autoenrollment** por meio de uma política de grupo.
+## Objective
 
-Ao final, foi utilizado o comando `gpupdate /force` para aplicar as políticas configuradas e verificar a emissão de um certificado para o ambiente.
+Use the Certificate Authority created in the previous activity to configure a certificate template, make it available on the CA, and configure auto-enrollment through a Group Policy Object (GPO).
 
----
+At the end of the activity, `gpupdate /force` was used to apply the configured policies and check certificate issuance in the environment.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Windows Server 2022
-* **Serviço:** Active Directory Certificate Services (AD CS)
-* **Autoridade Certificadora:** `aluno-DC01-CA`
-* **Domínio:** `aluno.hacker.com`
-* **Template criado:** `ALUNO COMPUTADOR`
-* **GPO:** `COMPUTADOR: Politica de Inscricao de Certificado`
-* **Mecanismo:** Certificate Auto-Enrollment
+- **Operating system:** Windows Server 2022
+- **Service:** Active Directory Certificate Services (AD CS)
+- **Certificate Authority:** `aluno-DC01-CA`
+- **Domain:** `aluno.hacker.com`
+- **Created template:** `ALUNO COMPUTADOR`
+- **GPO:** `COMPUTADOR: Politica de Inscricao de Certificado`
+- **Mechanism:** Certificate Auto-Enrollment
 
----
+## 1. Accessing the Certificate Authority Templates
 
-## 1. Acesso aos templates da Autoridade Certificadora
-
-Na janela **Certification Authority (Local)**, foi expandida a autoridade:
+In the **Certification Authority (Local)** window, the following authority was expanded:
 
 ```text
 aluno-DC01-CA
 ```
 
-Em seguida, foi acessada a opção:
+The following option was then accessed:
 
 ```text
 Certificate Templates → Manage
 ```
 
-Foi aberta a janela **Certificate Template Console**.
+The **Certificate Template Console** window opened.
 
----
+## 2. Duplicating the Template
 
-## 2. Duplicação do template
-
-Na lista de templates disponíveis, foi localizado:
+In the list of available templates, the following template was located:
 
 ```text
 Workstation Authentication
 ```
 
-O template foi selecionado com o botão direito e utilizada a opção:
+The template was right-clicked, and the following option was selected:
 
 ```text
 Duplicate Template
 ```
 
-A duplicação permitiu criar um novo template baseado nas configurações do modelo existente.
+Duplicating the template made it possible to create a new template based on the settings of the existing one.
 
----
+## 3. Creating the ALUNO COMPUTADOR Template
 
-## 3. Criação do template ALUNO COMPUTADOR
-
-Na janela **Properties of New Template**, foi acessada a aba:
+In the **Properties of New Template** window, the following tab was opened:
 
 ```text
 General
 ```
 
-O campo **Template display name** foi alterado para:
+The **Template display name** field was changed to:
 
 ```text
 ALUNO COMPUTADOR
 ```
 
-Esse será o nome utilizado para identificar o novo template dentro da infraestrutura de certificados.
+This name identifies the new template within the certificate infrastructure.
 
----
+## 4. Configuring the Subject Name
 
-## 4. Configuração do Subject Name
-
-Na aba:
+The following tab was opened:
 
 ```text
 Subject Name
 ```
 
-foi habilitada a opção:
+The following option was enabled:
 
 ```text
 User principal name (UPN)
 ```
 
-Essa configuração permite que o UPN seja utilizado na identificação associada ao certificado emitido.
+This setting allows the UPN to be used in the identity information associated with the issued certificate.
 
----
+## 5. Configuring Permissions
 
-## 5. Configuração das permissões
-
-Na aba:
-
-```text
-Security
-```
-
-foi selecionado:
+The following group was selected in the **Security** tab:
 
 ```text
 Domain Computers (ALUNO\Domain Computers)
 ```
 
-Para esse grupo, foram habilitadas as permissões **Allow** para:
+The following **Allow** permissions were enabled for this group:
 
 ```text
 Read
 Autoenroll
 ```
 
-As alterações foram aplicadas utilizando **Apply** e **OK**.
+The changes were applied by selecting **Apply** and **OK**.
 
-Após a configuração, o novo template passou a aparecer como:
+After configuration, the new template appeared as:
 
 ```text
 ALUNO COMPUTADOR
 ```
 
----
+## 6. Making the Template Available on the CA
 
-## 6. Disponibilização do template na CA
-
-De volta à janela **Certification Authority (Local)**, foi acessada a opção:
+Back in the **Certification Authority (Local)** window, the following option was accessed:
 
 ```text
 Certificate Templates → New → Certificate Template to Issue
 ```
 
-Na janela **Enable Certificate Templates**, foi selecionado:
+In the **Enable Certificate Templates** window, the following template was selected:
 
 ```text
 ALUNO COMPUTADOR
 ```
 
-e confirmada a operação com **OK**.
+The operation was confirmed by selecting **OK**.
 
-O template passou então a estar disponível para emissão pela Autoridade Certificadora.
+The template then became available for certificate issuance by the Certificate Authority.
 
----
+## 7. Verifying the Template
 
-## 7. Verificação do template
-
-Ao selecionar a pasta:
+After selecting the following folder:
 
 ```text
 Certificate Templates
 ```
 
-foi possível verificar o template:
+the `ALUNO COMPUTADOR` template was visible in the right-hand pane.
 
-```text
-ALUNO COMPUTADOR
-```
+This indicates that the CA is configured to use this template when issuing certificates.
 
-na coluna da direita.
+## 8. Opening Group Policy Management
 
-Isso indica que a CA está configurada para utilizar esse template na emissão de certificados.
-
----
-
-## 8. Acesso ao Group Policy Management
-
-No **Server Manager**, foi acessado:
+In Server Manager, the following option was accessed:
 
 ```text
 Tools → Group Policy Management
 ```
 
-Na árvore do domínio, foi expandido:
+The following domain tree was expanded:
 
 ```text
 Forest: aluno.hacker.com
@@ -180,31 +156,27 @@ Forest: aluno.hacker.com
         └── Group Policy Objects
 ```
 
-Foi criada uma nova política de grupo.
+A new Group Policy Object was created.
 
----
+## 9. Creating the GPO
 
-## 9. Criação da GPO
-
-A nova GPO recebeu o nome:
+The new GPO was named:
 
 ```text
 COMPUTADOR: Politica de Inscricao de Certificado
 ```
 
-A política foi criada dentro de:
+The policy was created under:
 
 ```text
 Group Policy Objects
 ```
 
----
+## 10. Editing the Policy
 
-## 10. Edição da política
+The newly created GPO was opened by selecting **Edit**.
 
-A GPO recém-criada foi aberta com **Edit**.
-
-No **Group Policy Management Editor**, foi seguido o caminho:
+In the **Group Policy Management Editor**, the following path was followed:
 
 ```text
 Computer Configuration
@@ -214,80 +186,72 @@ Computer Configuration
             └── Public Key Policies
 ```
 
-Foi selecionado:
+The following setting was selected:
 
 ```text
 Certificate Services Client – Auto-Enrollment
 ```
 
----
+## 11. Configuring Auto-Enrollment
 
-## 11. Configuração do Auto-Enrollment
-
-Na configuração de **Certificate Services Client – Auto-Enrollment**, o campo:
+In the **Certificate Services Client – Auto-Enrollment** settings, the following field was changed:
 
 ```text
 Configuration Model
 ```
 
-foi alterado de:
+Its value was changed from:
 
 ```text
 Not configured
 ```
 
-para:
+to:
 
 ```text
 Enabled
 ```
 
-Também foram habilitadas as opções relacionadas à renovação e atualização dos certificados:
+The options related to certificate renewal and updating were also enabled:
 
 ```text
 Renew expired certificates...
 Update certificates...
 ```
 
-As alterações foram confirmadas com **Apply** e **OK**.
+The changes were confirmed by selecting **Apply** and **OK**.
 
----
+## 12. Configuring the Automatic Certificate Request
 
-## 12. Configuração do Automatic Certificate Request
-
-Na coluna da direita do **Group Policy Management Editor**, foi acessada:
+In the right-hand pane of the **Group Policy Management Editor**, the following option was accessed:
 
 ```text
 Automatic Certificate Request Settings
 ```
 
-Com o botão direito, foi selecionado:
+It was right-clicked, and the following options were selected:
 
 ```text
 New → Automatic Certificate Request...
 ```
 
-O assistente foi avançado utilizando **Next** até a conclusão com **Finish**.
+The wizard was advanced by selecting **Next** until it was completed with **Finish**.
 
----
+## 13. Updating the Policies
 
-## 13. Atualização das políticas
+To apply the configured settings immediately, the Command Prompt was opened.
 
-Para aplicar imediatamente as configurações realizadas, foi aberto o **Command Prompt**.
-
-Foi executado:
+The following command was executed:
 
 ```cmd
 gpupdate /force
 ```
 
-O comando força a atualização das políticas de grupo aplicáveis ao computador e ao usuário.
+This command forces an update of the Group Policies applicable to the computer and user.
 
----
+## 14. Verifying the Policy Update
 
-## 14. Resultado da atualização
-
-Após a execução do comando, o Windows apresentou:
+After the command was executed, Windows displayed:
 
 ```text
 C:\Users\Administrator>gpupdate /force
@@ -297,45 +261,39 @@ Computer Policy update has completed successfully.
 User Policy update has completed successfully.
 ```
 
-Esse resultado indica que tanto a política do computador quanto a política do usuário foram atualizadas com sucesso.
+This result indicates that both computer policy and user policy were updated successfully.
 
----
+## 15. Verifying Certificate Issuance
 
-## 15. Verificação da emissão
-
-Após a atualização das políticas, foi retornada a janela:
+After the policy update, the following window was reopened:
 
 ```text
 certsrv - [Certification Authority (Local)]
 ```
 
-Na pasta:
+The following folder was inspected:
 
 ```text
 Issued Certificates
 ```
 
-foi verificada a emissão de um certificado.
+A certificate was found in the list.
 
-Isso demonstra a aplicação da política de inscrição configurada e a utilização da Autoridade Certificadora para emissão do certificado.
+This demonstrates that the configured enrollment policy had been applied and that the Certificate Authority was being used to issue a certificate.
 
----
+## 16. Ending the Server Session
 
-## 16. Encerramento da sessão do servidor
+After verifying certificate issuance, the RDP session with the Windows Server 2022 machine used as the server was closed.
 
-Após a verificação da emissão, a sessão RDP com o Windows Server 2022 utilizado como servidor foi encerrada.
+The environment was left ready for the next activity, in which the issued certificate would be examined on the Windows Server 2022 client.
 
-O ambiente ficou preparado para a próxima atividade, na qual o certificado emitido será analisado no Windows Server 2022 utilizado como cliente.
+## Evidence — Step 17
 
----
+The evidence requested for this activity corresponds to step 17 and shows the execution of `gpupdate /force` and the successful policy update.
 
-## Evidência — Passo 17
+Required caption before the screenshot:
 
-A evidência solicitada para esta atividade corresponde ao **passo 17**, contendo a execução do `gpupdate /force` e o resultado positivo da atualização das políticas.
-
-**Frase obrigatória antes do print:**
-
-> **Print da atividade 9.2:** execução do comando `gpupdate /force`, demonstrando que as políticas do computador e do usuário foram atualizadas com sucesso.
+> Screenshot for Activity 9.2: execution of `gpupdate /force`, demonstrating that computer and user policies were updated successfully.
 
 ```text
 C:\Users\Administrator>gpupdate /force
@@ -345,84 +303,84 @@ Computer Policy update has completed successfully.
 User Policy update has completed successfully.
 ```
 
-[**Evidências — Módulo 9 / Aulas 33 e 34**](../evidencias.pdf)
+Evidence for this activity is included in the PDF for Module 9, Classes 33–34.
 
----
+[View Evidence — Classes 33–34](../evidencias.pdf)
 
-## Conceitos aplicados
+## Concepts Applied
 
 ### Certificate Template
 
-Um **Certificate Template** define as características e regras utilizadas pela Autoridade Certificadora para emitir determinados tipos de certificados.
+A Certificate Template defines the characteristics and rules used by a Certificate Authority to issue specific types of certificates.
 
-Neste laboratório, o template:
+In this lab, the following template was created:
 
 ```text
 ALUNO COMPUTADOR
 ```
 
-foi criado a partir do template `Workstation Authentication`.
+It was based on the existing `Workstation Authentication` template.
 
 ### Auto-Enrollment
 
-O **autoenrollment** permite que certificados sejam automaticamente solicitados e gerenciados pelos computadores ou usuários que atendem às condições definidas nas políticas do domínio.
+Auto-enrollment allows certificates to be requested and managed automatically by computers or users that meet the conditions defined in domain policies.
 
 ### Group Policy
 
-As **Group Policies (GPOs)** permitem distribuir configurações de forma centralizada para computadores e usuários pertencentes ao domínio.
+Group Policies (GPOs) allow settings to be centrally distributed to computers and users belonging to a domain.
 
-Neste exercício, uma GPO foi utilizada para configurar o comportamento de inscrição automática de certificados.
+In this exercise, a GPO was used to configure certificate auto-enrollment behavior.
 
 ### Certificate Authority
 
-A CA `aluno-DC01-CA`, configurada na atividade anterior, foi utilizada para disponibilizar o template e emitir certificados para os computadores do domínio.
+The `aluno-DC01-CA` CA, configured in the previous activity, was used to make the template available and issue certificates to domain computers.
 
----
-
-## Fluxo da atividade
+## Activity Workflow
 
 ```text
-Template Workstation Authentication
+Workstation Authentication Template
               │
               ▼
-       Duplicate Template
+        Duplicate Template
               │
               ▼
-      ALUNO COMPUTADOR
+       ALUNO COMPUTADOR
               │
               ▼
-      Publicação na CA
+        Publish on the CA
               │
               ▼
-       Criação da GPO
+          Create GPO
               │
               ▼
-       Auto-Enrollment
+         Auto-Enrollment
               │
               ▼
-        gpupdate /force
+         gpupdate /force
               │
               ▼
-      Emissão do certificado
+      Certificate Issuance
 ```
 
----
+## Result
 
-## Resultado
-
-Foi criado e disponibilizado na Autoridade Certificadora o template:
+The following template was created and made available on the Certificate Authority:
 
 ```text
 ALUNO COMPUTADOR
 ```
 
-Também foi configurada uma política de grupo para permitir o **autoenrollment** de certificados para `Domain Computers`.
+A Group Policy Object was also configured to enable certificate auto-enrollment for `Domain Computers`.
 
-A aplicação da política foi confirmada com:
+The policy application was confirmed by the following messages:
 
 ```text
 Computer Policy update has completed successfully.
 User Policy update has completed successfully.
 ```
 
-Posteriormente, a pasta **Issued Certificates** da CA foi utilizada para verificar a emissão do certificado.
+The CA's **Issued Certificates** folder was subsequently used to verify certificate issuance.
+
+---
+
+[Back to Classes 33–34](../) · [Back to Module 9](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
