@@ -1,47 +1,41 @@
-# Atividade 12.5 — Analisando Pacotes TLS com tcpdump e Wireshark
+# Activity 12.05 — Analyzing TLS Packets with tcpdump and Wireshark
 
-## Objetivo
+## Objective
 
-Capturar e analisar tráfego HTTPS utilizando o **tcpdump** e o **Wireshark**, identificando uma conexão TLS e verificando a versão do protocolo utilizada na comunicação.
+Capture and analyze HTTPS traffic using `tcpdump` and Wireshark, identify a TLS connection, and verify the protocol version used in the communication.
 
-A atividade utiliza o endereço IPv4 obtido através de uma consulta DNS ao domínio `gov.br` para limitar a captura ao tráfego HTTPS destinado a esse endereço.
+The activity uses the IPv4 address obtained through a DNS query for the `gov.br` domain to restrict the capture to HTTPS traffic destined for that address.
 
----
+## Environment
 
-## Ambiente
+- **Operating system:** Kali Linux
+- **Tools:** `nslookup`, `tcpdump`, and Wireshark
+- **Network interface:** `eth0`
+- **Domain analyzed:** `gov.br`
+- **Port:** `443`
+- **Protocol:** TLS
 
-* **Sistema operacional:** Kali Linux
-* **Ferramentas:** `nslookup`, `tcpdump` e Wireshark
-* **Interface de rede:** `eth0`
-* **Domínio analisado:** `gov.br`
-* **Porta:** `443`
-* **Protocolo:** TLS
+## 1. Accessing Kali Linux
 
----
+Kali Linux was started and accessed via RDP.
 
-## 1. Acessando o Kali Linux
+After logging in, a terminal was opened, and administrative privileges were obtained using:
 
-O Kali Linux foi iniciado e acessado através de RDP.
-
-Após o acesso, foi aberto um terminal e obtido acesso administrativo com:
-
-```bash id="r6v2mq"
+```bash
 sudo -i
 ```
 
----
+## 2. Looking Up the IP Address of gov.br
 
-## 2. Consultando o endereço IP de `gov.br`
+Before starting the capture, a DNS query was performed to identify the IP address associated with the domain:
 
-Antes de iniciar a captura, foi realizada uma consulta DNS para identificar o endereço IP associado ao domínio:
-
-```bash id="k8p3wc"
+```bash
 nslookup gov.br
 ```
 
-Saída:
+Output:
 
-```text id="trg7na"
+```text
 Server:         192.168.98.2
 Address:        192.168.98.2#53
 
@@ -52,269 +46,249 @@ Name:   gov.br
 Address: 2804:151:3:2:161:148:164:31
 ```
 
-A consulta retornou:
+The query returned:
 
-```text id="z4m7xp"
+```text
 IPv4: 161.148.164.31
 IPv6: 2804:151:3:2:161:148:164:31
 ```
 
-Para a captura realizada na atividade, foi utilizado o endereço IPv4:
+For the capture performed in this activity, the following IPv4 address was used:
 
-```text id="n5c9vr"
+```text
 161.148.164.31
 ```
 
----
+## 3. Preparing tcpdump
 
-## 3. Preparando o tcpdump
+The command used to capture traffic was:
 
-O comando utilizado para capturar o tráfego foi:
-
-```bash id="p7x4km"
+```bash
 tcpdump -i eth0 -s 0 host 161.148.164.31 and port 443 -w capture.pcap
 ```
 
-O comando foi preparado no terminal, mas a execução foi aguardada até o momento correto da atividade.
+The command was prepared in the terminal, but execution was postponed until the appropriate moment in the activity.
 
-### Parâmetros utilizados
+### Parameters Used
 
-* `tcpdump`: ferramenta de captura e análise de pacotes.
-* `-i eth0`: captura o tráfego da interface `eth0`.
-* `-s 0`: utiliza o tamanho máximo do pacote, evitando truncamento do conteúdo capturado pelo snaplen.
-* `host 161.148.164.31`: restringe a captura ao endereço IPv4 identificado para `gov.br`.
-* `and port 443`: limita a captura ao tráfego associado à porta `443`.
-* `-w capture.pcap`: salva os pacotes capturados no arquivo `capture.pcap`.
+- **`tcpdump`:** A tool for capturing and analyzing packets.
+- **`-i eth0`:** Captures traffic on the `eth0` interface.
+- **`-s 0`:** Uses the maximum packet snapshot length, avoiding truncation of captured packet data by the snap length setting.
+- **`host 161.148.164.31`:** Restricts the capture to the IPv4 address identified for `gov.br`.
+- **`and port 443`:** Limits the capture to traffic associated with port `443`.
+- **`-w capture.pcap`:** Saves the captured packets to the `capture.pcap` file.
 
-Dessa forma, a captura fica concentrada no tráfego HTTPS destinado ao endereço IPv4 identificado durante a consulta DNS.
+This configuration focuses the capture on HTTPS traffic destined for the IPv4 address identified during the DNS query.
 
----
+## 4. Preparing to Access the Website
 
-## 4. Preparando o acesso ao site
+With the `tcpdump` command prepared in the terminal, Firefox was opened.
 
-Com o comando `tcpdump` preparado no terminal, o Firefox foi aberto.
+The following address was entered in the browser:
 
-No navegador, foi digitado:
-
-```text id="h6q2vn"
+```text
 gov.br
 ```
 
-O endereço foi digitado, mas o acesso não foi iniciado imediatamente.
+The address was entered, but access was not initiated immediately.
 
----
+## 5. Starting the Capture
 
-## 5. Iniciando a captura
+Focus was returned to the terminal where the `tcpdump` command had been prepared.
 
-O foco foi retornado para o terminal onde o comando `tcpdump` estava preparado.
+The command was executed:
 
-O comando foi executado:
-
-```bash id="d3w8qs"
+```bash
 tcpdump -i eth0 -s 0 host 161.148.164.31 and port 443 -w capture.pcap
 ```
 
-O `tcpdump` iniciou a captura e apresentou:
+`tcpdump` started capturing packets and displayed:
 
-```text id="5ks8zj"
+```text
 ┌──(root㉿kali)-[~]
 └─# tcpdump -i eth0 -s 0 host 161.148.164.31 and port 443 -w capture.pcap
 tcpdump: listening on eth0, link-type EN10MB (Ethernet), snapshot length 262144 bytes
 ```
 
-Nesse momento, o `tcpdump` permaneceu em execução aguardando os pacotes correspondentes ao filtro configurado.
+At this point, `tcpdump` remained running, waiting for packets matching the configured filter.
 
----
+## 6. Generating HTTPS Traffic
 
-## 6. Gerando o tráfego HTTPS
+After starting the capture, focus was returned to Firefox.
 
-Após iniciar a captura, o foco foi retornado para o Firefox.
+Enter was pressed to access the domain:
 
-Foi pressionado **Enter** para acessar o domínio:
-
-```text id="b9v5mx"
+```text
 gov.br
 ```
 
-O site foi carregado enquanto o `tcpdump` registrava os pacotes da comunicação HTTPS.
+The website loaded while `tcpdump` recorded packets associated with the HTTPS communication.
 
-Após o carregamento da página, o navegador foi fechado.
+After the page finished loading, the browser was closed.
 
----
+## 7. Stopping the Capture
 
-## 7. Encerrando a captura
+Focus was returned to the terminal, and the capture was interrupted using:
 
-O foco foi retornado ao terminal e a captura foi interrompida com:
-
-```text id="c4n7kp"
+```text
 Ctrl+C
 ```
 
-O resultado apresentado foi:
+The displayed result was:
 
-```text id="5ks8zj"
+```text
 ^C3935 packets captured
 3935 packets received by filter
 0 packets dropped by kernel
 ```
 
-A captura registrou:
+The capture recorded:
 
-* **3935 pacotes capturados**
-* **3935 pacotes recebidos pelo filtro**
-* **0 pacotes descartados pelo kernel**
+- 3935 packets captured.
+- 3935 packets received by the filter.
+- 0 packets dropped by the kernel.
 
-O arquivo da captura foi salvo como:
+The capture file was saved as:
 
-```text id="m2x8rz"
+```text
 capture.pcap
 ```
 
----
+## 8. Verifying the Capture File
 
-## 8. Verificando o arquivo de captura
+To verify that the file had been created, the following command was executed:
 
-Para verificar se o arquivo havia sido criado, foi executado:
-
-```bash id="q9v4cs"
+```bash
 ls
 ```
 
-Saída:
+Output:
 
-```text id="4s8qo0"
+```text
 ┌──(root㉿kali)-[~]
 └─# ls
 capture.pcap  Desktop    Downloads          Music     Public     Templates          Videos
 curso        Documents   inicializacao.log  Pictures  Ransomware thinclient_drives
 ```
 
-A presença de:
+The presence of:
 
-```text id="w6k3px"
+```text
 capture.pcap
 ```
 
-confirma que a captura foi armazenada no diretório atual.
+confirms that the capture was stored in the current directory.
 
----
+## 9. Opening the Capture in Wireshark
 
-## 9. Abrindo a captura no Wireshark
+The Wireshark application was opened.
 
-O aplicativo **Wireshark** foi aberto.
+From the top menu, the following option was selected:
 
-No menu superior, foi selecionado:
-
-```text id="x3r8mv"
+```text
 File → Open
 ```
 
-Em seguida, foi localizado e aberto o arquivo:
+The following file was then located and opened:
 
-```text id="a7p5cn"
+```text
 capture.pcap
 ```
 
-O Wireshark carregou os pacotes registrados pelo `tcpdump`.
+Wireshark loaded the packets recorded by `tcpdump`.
 
----
+## 10. Filtering TLS Packets
 
-## 10. Filtrando os pacotes TLS
+The following filter was entered in the Wireshark filter bar:
 
-Na barra de filtro do Wireshark, foi utilizado:
-
-```text id="j4m8qx"
+```text
 tls
 ```
 
-O filtro restringe a visualização aos pacotes que o Wireshark identifica como pertencentes ao protocolo TLS.
+The filter restricts the display to packets that Wireshark identifies as belonging to the TLS protocol.
 
----
+## 11. Analyzing TLS Connections
 
-## 11. Analisando as conexões TLS
+After applying the filter, TLS connections present in the capture were examined.
 
-Após a aplicação do filtro, foram observadas conexões TLS presentes na captura.
+For the packets analyzed, Wireshark may identify information related to TLS negotiation, including versions such as:
 
-Nos pacotes analisados, o Wireshark pode identificar informações relacionadas à negociação TLS, incluindo versões como:
-
-```text id="c8v2mr"
+```text
 TLS 1.2
 TLS 1.3
 ```
 
-A identificação da versão permite verificar qual versão do protocolo TLS está presente nos pacotes capturados.
+Identifying the protocol version makes it possible to determine which TLS version is present in the captured packets.
 
-Além da versão do protocolo, o Wireshark pode apresentar outras informações da sessão, como endereços IP, portas, mensagens do handshake e parâmetros relacionados à negociação criptográfica.
+In addition to the protocol version, Wireshark may display other session information, such as IP addresses, ports, handshake messages, and parameters related to cryptographic negotiation.
 
-A captura foi realizada especificamente para o endereço IPv4 `161.148.164.31` na porta `443`, conforme o filtro utilizado no `tcpdump`.
+The capture was performed specifically for the IPv4 address `161.148.164.31` on port `443`, according to the filter used in `tcpdump`.
 
----
+## 12. Evidence
 
-## 12. Evidência
+The required screenshot corresponds to Step 12, showing the `capture.pcap` file open in Wireshark with the following filter:
 
-O print obrigatório corresponde ao **passo 12**, mostrando o arquivo `capture.pcap` aberto no Wireshark com o filtro:
-
-```text id="q6x3vb"
+```text
 tls
 ```
 
-A tela deve apresentar os pacotes TLS identificados na captura e as respectivas informações disponíveis, incluindo a versão do protocolo quando exibida pelo Wireshark.
+The screen should display the TLS packets identified in the capture and their available information, including the protocol version when displayed by Wireshark.
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 12.5:** captura `capture.pcap` aberta no Wireshark com o filtro `tls`, exibindo conexões que utilizam TLS e suas versões, como TLS 1.2 e/ou TLS 1.3.
+> Screenshot of Activity 12.05: the `capture.pcap` file open in Wireshark with the `tls` filter applied, displaying TLS connections and their versions, such as TLS 1.2 and/or TLS 1.3.
 
-[**Evidências — Módulo 12 / Aulas 45 e 46**](../evidencias.pdf)
+[**View Evidence — Module 12 / Classes 45–46**](../evidencias.pdf)
 
----
+## 13. Removing the Capture File
 
-## 13. Removendo a captura
+After completing the analysis, Wireshark was closed.
 
-Após concluir a análise, o Wireshark foi fechado.
+The temporary capture file was removed using:
 
-O arquivo temporário da captura foi removido com:
-
-```bash id="v8m4kc"
+```bash
 rm capture.pcap
 ```
 
-A remoção evita manter desnecessariamente o arquivo de captura no ambiente utilizado no laboratório.
+Removing the file prevents the capture from being unnecessarily retained in the lab environment.
 
----
+## Key Concepts
 
-## Conceitos
+- **`tcpdump`:** A tool for capturing packets on network interfaces.
+- **PCAP:** A file format used to store network traffic captures.
+- **TLS:** A cryptographic protocol used to protect communications such as HTTPS.
+- **Port 443:** The port commonly used for HTTPS.
+- **Wireshark:** A graphical tool for detailed packet analysis.
+- **`tls` filter:** A display filter used to focus on packets identified as TLS.
 
-* **tcpdump:** ferramenta de captura de pacotes em interfaces de rede.
-* **PCAP:** formato utilizado para armazenar capturas de tráfego.
-* **TLS:** protocolo criptográfico utilizado para proteger comunicações como HTTPS.
-* **Porta 443:** porta normalmente utilizada para HTTPS.
-* **Wireshark:** ferramenta gráfica para análise detalhada de pacotes.
-* **Filtro `tls`:** utilizado para concentrar a visualização nos pacotes identificados como TLS.
+## Activity Workflow
 
-## Fluxo
-
-```text id="r5c9vx"
+```text
 nslookup gov.br
         ↓
 161.148.164.31
         ↓
-tcpdump na eth0
+tcpdump on eth0
         ↓
 host 161.148.164.31 + port 443
         ↓
-Acesso ao gov.br
+Access gov.br
         ↓
 capture.pcap
         ↓
 Wireshark
         ↓
-Filtro: tls
+Filter: tls
         ↓
-Análise das conexões TLS
+Analyze TLS connections
 ```
 
-## Resultado
+## Result
 
-Foi realizada uma captura de tráfego HTTPS destinada ao endereço IPv4 `161.148.164.31`, obtido através de `nslookup gov.br`.
+HTTPS traffic destined for the IPv4 address `161.148.164.31`, obtained through `nslookup gov.br`, was captured.
 
-O `tcpdump` registrou **3935 pacotes**, sem perdas reportadas pelo kernel, e armazenou os dados em `capture.pcap`. O arquivo foi posteriormente aberto no Wireshark e analisado com o filtro `tls`, permitindo observar as conexões TLS presentes na captura e suas versões identificadas.
+`tcpdump` recorded 3935 packets, with no packet drops reported by the kernel, and stored the data in `capture.pcap`. The file was subsequently opened in Wireshark and analyzed using the `tls` filter, allowing the TLS connections present in the capture and their identified protocol versions to be examined.
+
+---
+
+[Back to Classes 45–46](../README.md) · [Back to Module 12](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
