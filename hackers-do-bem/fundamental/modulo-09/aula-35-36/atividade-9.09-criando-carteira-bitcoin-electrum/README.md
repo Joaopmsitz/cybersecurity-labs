@@ -1,188 +1,170 @@
-# Atividade 9.9 — Criando uma Carteira Bitcoin com Electrum
+# Activity 9.09 — Creating a Bitcoin Wallet with Electrum
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 09  
+> **Classes:** 35–36  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Criar uma carteira Bitcoin utilizando o **Electrum** no Kali Linux, configurando uma carteira padrão e verificando suas informações após a criação.
+## Objective
 
----
+Create a Bitcoin wallet using Electrum on Kali Linux, configure a standard wallet, and review its information after creation.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Aplicativo:** Electrum
-* **Tipo de carteira:** Standard wallet
-* **Nome da carteira:** `default_wallet`
+- **Operating system:** Kali Linux
+- **Application:** Electrum
+- **Wallet type:** Standard wallet
+- **Wallet name:** `default_wallet`
 
-> A seed phrase da carteira é uma informação privada e não deve ser registrada, compartilhada ou publicada. Por segurança, ela foi omitida deste README.
+> The wallet's seed phrase is private information and must not be recorded, shared, or published. For security reasons, it has been omitted from this README.
 
----
+## 1. Opening Electrum
 
-## 1. Abrindo o Electrum
+Electrum was launched from the terminal:
 
-O Electrum foi iniciado pelo terminal:
-
-```bash id="g7lq4p"
+```bash
 electrum
 ```
 
-O aplicativo foi aberto para iniciar o processo de criação da carteira.
+The application opened to begin the wallet creation process.
 
----
+## 2. Accepting the Terms
 
-## 2. Aceitando os termos
+On the initial Electrum screen, the following option was selected:
 
-Na primeira tela do Electrum, foi selecionada a opção:
-
-```text id="v3n8sx"
+```text
 I Accept
 ```
 
-Em seguida, foi selecionado **Next** para continuar.
+Next, **Next** was selected to continue.
 
----
+## 3. Setting the Wallet Name
 
-## 3. Definindo o nome da carteira
+On the wallet file selection screen, the default name was retained:
 
-Na tela de escolha do arquivo da carteira, foi mantido o nome padrão:
-
-```text id="j4p2ka"
+```text
 default_wallet
 ```
 
-Depois, foi selecionado **Next**.
+Then, **Next** was selected.
 
----
+## 4. Selecting the Wallet Type
 
-## 4. Selecionando o tipo de carteira
+On the wallet type configuration screen, the following option was selected:
 
-Na tela de configuração do tipo de carteira, foi selecionada:
-
-```text id="m8w5de"
+```text
 Standard wallet
 ```
 
-Em seguida, foi selecionado **Next**.
+Then, **Next** was selected.
 
----
+## 5. Creating a New Seed
 
-## 5. Criando uma nova seed
+On the next screen, the following option was selected:
 
-Na tela seguinte, foi selecionada a opção:
-
-```text id="r2c9hf"
+```text
 Create a new seed
 ```
 
-Depois, foi selecionado **Next**.
+Then, **Next** was selected.
 
-O Electrum apresentou uma **seed phrase** em inglês para a carteira.
+Electrum displayed an English seed phrase for the wallet.
 
-Essa sequência é utilizada para recuperar a carteira caso o arquivo local seja perdido. A seed foi anotada para utilização na atividade seguinte.
+This sequence can be used to recover the wallet if the local wallet file is lost. The seed phrase was written down for use in the next activity.
 
-> **Importante:** a seed phrase é equivalente a uma credencial de controle da carteira. Ela não deve ser colocada no GitHub, README, prints públicos ou compartilhada com terceiros.
+> **Important:** The seed phrase is equivalent to a credential that grants control over the wallet. It must never be included in GitHub repositories, READMEs, public screenshots, or shared with third parties.
 
----
+## 6. Confirming the Seed
 
-## 6. Confirmação da seed
+After generating the seed, Electrum requested that it be entered again to confirm that it had been recorded correctly.
 
-Após a geração, o Electrum solicitou que a seed phrase fosse informada novamente para confirmar que ela havia sido anotada corretamente.
+The sequence was entered in the requested field, and the following option was selected:
 
-A sequência foi digitada no campo solicitado e foi selecionado:
-
-```text id="a6u1pz"
+```text
 Next
 ```
 
-A seed utilizada nesta atividade não é reproduzida neste documento.
+The seed used in this activity is not reproduced in this document.
 
----
+## 7. Configuring the Password
 
-## 7. Configuração da senha
+Electrum presented the option to set a password to protect the local wallet.
 
-O Electrum apresentou a opção de definir uma senha para proteger a carteira local.
+As requested in the lab, no additional password was configured.
 
-Conforme solicitado no laboratório, não foi configurada uma senha adicional.
+Then, the following option was selected:
 
-Em seguida, foi selecionado:
-
-```text id="k9s3qw"
+```text
 Finish
 ```
 
-A carteira foi criada.
+The wallet was created.
 
----
+## 8. Completing Wallet Creation
 
-## 8. Finalização da criação da carteira
+After the configuration was completed, Electrum loaded the wallet:
 
-Após a conclusão da configuração, o Electrum carregou a carteira:
-
-```text id="p6d4xm"
+```text
 default_wallet
 ```
 
-A carteira estava disponível para utilização no aplicativo.
+The wallet was available for use in the application.
 
----
+## 9. Update Notifications
 
-## 9. Notificações de atualização
+Electrum displayed an option related to update notifications.
 
-O Electrum apresentou uma opção relacionada às notificações de atualização.
+The following option was selected:
 
-Foi selecionada:
-
-```text id="h5v7rc"
+```text
 No
 ```
 
-para não receber essas notificações durante o laboratório.
+This disabled these notifications during the lab.
 
----
+## 10. Viewing Wallet Information
 
-## 10. Visualização das informações da carteira
+In Electrum's top menu, the following option was accessed:
 
-No menu superior do Electrum, foi acessado:
-
-```text id="q8z2nb"
+```text
 Wallet → Information
 ```
 
-A janela de informações apresentou os dados associados à carteira criada.
+The information window displayed details associated with the newly created wallet.
 
-Essa tela permite consultar informações da carteira sem precisar expor a seed phrase utilizada durante sua criação.
+This screen allows wallet information to be reviewed without exposing the seed phrase used during creation.
+
+## Evidence — Step 10
+
+Required caption before the screenshot:
+
+> Screenshot for Activity 9.9: the Electrum **Wallet → Information** window, showing information about the wallet created during the activity.
+
+Evidence for this activity is included in the PDF for Module 9, Classes 35–36.
+
+> **Warning:** The seed phrase must not appear in the screenshot or be recorded in the repository. If any sensitive information is visible in the evidence, it must be concealed before publishing the material on GitHub.
+
+## 11. Closing the Application
+
+After capturing the evidence, Electrum was closed along with the terminal.
+
+## Activity Workflow
+
+| Stage | Result |
+|---|---|
+| Electrum | Application launched |
+| Wallet | `default_wallet` created |
+| Type | Standard wallet |
+| Recovery | Seed phrase generated and stored privately |
+| Verification | `Wallet → Information` |
+
+## Result
+
+A standard Bitcoin wallet was successfully created in Electrum, and its information was reviewed using **Wallet → Information**.
+
+The seed phrase was kept out of the documentation to preserve wallet security.
 
 ---
 
-## Evidência — Passo 10
-
-**Frase obrigatória antes do print:**
-
-> **Print da atividade 9.9:** janela `Wallet → Information` do Electrum, demonstrando as informações da carteira criada durante a atividade.
-
-[**Evidências — Módulo 9 / Aulas 35 e 36**](../evidencias.pdf)
-
-> **Atenção:** a seed phrase não deve aparecer no print nem ser registrada no repositório. Caso alguma informação sensível seja exibida na evidência, ela deve ser ocultada antes de publicar o material no GitHub.
-
----
-
-## 11. Encerramento
-
-Após a realização da evidência, o Electrum foi fechado juntamente com o terminal.
-
----
-
-## Fluxo da atividade
-
-| Etapa       | Resultado                                        |
-| ----------- | ------------------------------------------------ |
-| Electrum    | Aplicativo iniciado                              |
-| Carteira    | `default_wallet` criada                          |
-| Tipo        | `Standard wallet`                                |
-| Recuperação | Seed phrase gerada e armazenada de forma privada |
-| Verificação | `Wallet → Information`                           |
-
-## Resultado
-
-Uma carteira Bitcoin padrão foi criada com sucesso no Electrum e suas informações foram consultadas pela opção **Wallet → Information**.
-
-A seed phrase foi mantida fora da documentação para preservar a segurança da carteira.
+[Back to Classes 35–36](../) · [Back to Module 9](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
