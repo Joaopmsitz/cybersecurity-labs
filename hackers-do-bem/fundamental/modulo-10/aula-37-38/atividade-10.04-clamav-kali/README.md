@@ -1,75 +1,65 @@
-# Atividade 10.4 — ClamAV no Kali Linux
+# Activity 10.04 — ClamAV on Kali Linux
 
-## Objetivo
+## Objective
 
-Instalar, atualizar e utilizar o **ClamAV** no Kali Linux para realizar uma verificação de arquivos, analisando também a versão do mecanismo, a atualização das bases de assinaturas e as informações de configuração do antivírus.
+Install, update, and use ClamAV on Kali Linux to scan files, while also examining the engine version, signature database updates, and antivirus configuration information.
 
----
+## Environment
 
-## Ambiente
+- **System:** Kali GNU/Linux Rolling
+- **Tool:** ClamAV
+- **Version:** 1.4.3
+- **Access:** RDP
+- **Machine:** Kali Linux
+- **Scanned directory:** `/home`
 
-* **Sistema:** Kali GNU/Linux Rolling
-* **Ferramenta:** ClamAV
-* **Versão:** 1.4.3
-* **Acesso:** RDP
-* **Máquina:** Kali Linux
-* **Diretório analisado:** `/home`
+The credentials used to access the lab are not included in this README.
 
-> As credenciais utilizadas para acesso ao laboratório não são registradas neste README.
+## 1. Opening the Terminal as Root
 
----
-
-## 1. Acesso ao terminal como root
-
-Após acessar a máquina Kali Linux, foi aberto um terminal e executado:
+After accessing the Kali Linux machine, a terminal was opened and the following command was executed:
 
 ```bash
 sudo -i
 ```
 
-O terminal passou a operar com privilégios de `root`.
+The terminal was then operating with root privileges.
 
----
+## 2. Checking the ClamAV Version
 
-## 2. Verificação da versão do ClamAV
-
-Foi executado:
+The following command was executed:
 
 ```bash
 clamscan --version
 ```
 
-Saída:
+**Output:**
 
 ```text
 ClamAV 1.4.3/27833/Thu Nov 27 06:13:22 2025
 ```
 
-A saída apresenta a versão do mecanismo do ClamAV e a versão da base de dados de assinaturas disponível inicialmente no ambiente.
+The output shows the ClamAV engine version and the signature database version initially available in the environment.
 
----
+## 3. Stopping the Automatic Update Service
 
-## 3. Parada do serviço de atualização automática
-
-Antes de realizar a atualização manual da base de assinaturas, foi interrompido o serviço `clamav-freshclam`:
+Before manually updating the signature database, the `clamav-freshclam` service was stopped:
 
 ```bash
 systemctl stop clamav-freshclam.service
 ```
 
-Essa etapa evita que o serviço de atualização automática entre em conflito com a execução manual do `freshclam`.
+This step helps prevent the automatic update service from conflicting with the manual execution of `freshclam`.
 
----
+## 4. Updating the Signature Database
 
-## 4. Atualização da base de assinaturas
-
-Foi executado:
+The following command was executed:
 
 ```bash
 freshclam
 ```
 
-Saída:
+**Output:**
 
 ```text
 Fri Dec  5 17:43:00 2025 -> ClamAV update process started at Fri Dec  5 17:43:00 2025
@@ -99,35 +89,33 @@ Fri Dec  5 17:43:13 2025 -> bytecode.cld database is up-to-date (version: 339, s
 WARNING: Fri Dec  5 17:43:13 2025 -> Clamd was NOT notified: Can't connect to clamd through /var/run/clamav/clamd.ctl: No such file or directory
 ```
 
-A base `daily.cld` foi atualizada da versão **27833** para a **27841**, totalizando **8 versões de diferença**.
+The `daily.cld` database was updated from version `27833` to `27841`, an increase of eight versions.
 
-O teste da nova base foi concluído com:
+The new database passed its validation test:
 
 ```text
 Database test passed.
 ```
 
-Foi apresentada também uma mensagem de aviso informando que o `clamd` não foi notificado porque o socket `/var/run/clamav/clamd.ctl` não estava disponível. Isso não impediu a atualização da base de assinaturas.
+A warning also indicated that `clamd` was not notified because the socket `/var/run/clamav/clamd.ctl` was unavailable. This did not prevent the signature database from being updated successfully.
 
----
+## 5. Scanning the `/home` Directory
 
-## 5. Verificação do diretório `/home`
-
-Com a base atualizada, foi executado:
+After updating the database, the following command was executed:
 
 ```bash
 clamscan -r /home
 ```
 
-A opção `-r` realiza a verificação de forma recursiva, permitindo que o ClamAV percorra os diretórios e subdiretórios encontrados em `/home`.
+The `-r` option enables recursive scanning, allowing ClamAV to process the directories and subdirectories found under `/home`.
 
-Parte da saída apresentada durante a análise:
+Part of the output displayed during the scan:
 
 ```text
 ┌──(root㉿kali)-[~]
 └─# clamscan -r /home
-Loading:    21s, ETA:   0s [========================>]    8.71M/8.71M sigs       
-Compiling:   5s, ETA:   0s [========================>]       41/41 tasks 
+Loading:    21s, ETA:   0s [========================>]    8.71M/8.71M sigs
+Compiling:   5s, ETA:   0s [========================>]       41/41 tasks
 
 /home/aluno/.zshrc: OK
 /home/aluno/.xsession-errors: OK
@@ -135,7 +123,7 @@ Compiling:   5s, ETA:   0s [========================>]       41/41 tasks
 /home/aluno/.local/share/keyrings/login.keyring: OK
 /home/aluno/.local/share/keyrings/user.keystore: OK
 /home/aluno/.local/share/xrdp/xrdp-chansrv.10.log: OK
-/home/aluno/.local/share/torbrowser/tbb/x86_64/tor-browser/start-tor-browser.desktop: OK 
+/home/aluno/.local/share/torbrowser/tbb/x86_64/tor-browser/start-tor-browser.desktop: OK
 
 ...
 
@@ -152,9 +140,9 @@ Start Date: 2025:12:05 17:45:28
 End Date:   2025:12:05 17:55:12
 ```
 
-O `clamscan` verificou recursivamente o diretório `/home`.
+ClamAV recursively scanned the `/home` directory.
 
-O resultado mais importante do resumo foi:
+The most important results from the summary were:
 
 ```text
 Scanned directories: 1015
@@ -165,49 +153,43 @@ Data read: 1553.00 MB (ratio 0.85:1)
 Time: 583.507 sec (9 m 43 s)
 ```
 
-Portanto, **nenhum arquivo foi identificado como infectado pelo ClamAV durante essa verificação**.
+No files were identified as infected by ClamAV during this scan.
 
----
+### Evidence — Step 5
 
-## Evidência — Passo 5
+**Caption to include before the screenshot:**
 
-**Frase obrigatória antes do print:**
+> Screenshot of Activity 10.04: the results of the recursive scan of the `/home` directory performed by ClamAV, including the `SCAN SUMMARY` with the number of files analyzed and the infection detection results.
 
-> **Print da atividade 10.4:** resultado da verificação recursiva do diretório `/home` realizada pelo ClamAV, incluindo o `SCAN SUMMARY` com a quantidade de arquivos analisados e o resultado de arquivos infectados.
+[View Evidence — Classes 37–38](../evidencias.pdf)
 
-[**Evidências — Módulo 10 / Aulas 37 e 38**](../evidencias.pdf)
+## 6. Analyzing the Scan Summary
 
----
+After `clamscan` finished, the information displayed in the `SCAN SUMMARY` was reviewed.
 
-## 6. Análise do resumo da verificação
+The main results were:
 
-Após a conclusão do `clamscan`, foram analisadas as informações apresentadas no `SCAN SUMMARY`.
+| Information | Result |
+|---|---|
+| Engine version | 1.4.3 |
+| Directories scanned | 1015 |
+| Files scanned | 6128 |
+| Infected files | 0 |
+| Data scanned | 1319.81 MB |
+| Data read | 1553.00 MB |
+| Execution time | 9 min 43 sec |
 
-Os principais dados observados foram:
+## 7. Checking ClamAV Configuration
 
-| Informação            |  Resultado |
-| --------------------- | ---------: |
-| Versão do mecanismo   |      1.4.3 |
-| Diretórios analisados |       1015 |
-| Arquivos analisados   |       6128 |
-| Arquivos infectados   |          0 |
-| Dados analisados      | 1319.81 MB |
-| Dados lidos           | 1553.00 MB |
-| Tempo de execução     | 9 min 43 s |
-
----
-
-## 7. Verificação das configurações do ClamAV
-
-Foi executado:
+The following command was executed:
 
 ```bash
 clamconf
 ```
 
-O comando apresentou as configurações existentes no ambiente, além das informações relacionadas ao mecanismo e às bases de assinaturas.
+The command displayed the configuration settings available in the environment, along with information about the engine and signature databases.
 
-Parte relevante da saída:
+Relevant output:
 
 ```text
 Checking configuration files in /etc/clamav
@@ -231,7 +213,7 @@ clamav-milter.conf not found
 Software settings
 -----------------
 Version: 1.4.3
-Optional features supported: MEMPOOL AUTOIT_EA06 ICONV 
+Optional features supported: MEMPOOL AUTOIT_EA06 ICONV
 
 Database information
 --------------------
@@ -256,48 +238,48 @@ sizeof(void*) = 8
 Engine flevel: 213, dconf: 213
 ```
 
-A saída confirmou, entre outros dados, que:
+The output confirmed, among other details, that:
 
-* O ClamAV utilizado era a versão **1.4.3**.
-* A base `daily.cld` estava na versão **27841** após a atualização.
-* O diretório das bases era `/var/lib/clamav`.
-* O total informado era de **8.724.776 assinaturas**.
-* O sistema utilizado era **Kali GNU/Linux Rolling**, arquitetura `x86_64`.
+- The installed ClamAV engine version was `1.4.3`.
+- The `daily.cld` database was at version `27841` after the update.
+- The database directory was `/var/lib/clamav`.
+- The reported total was `8,724,776` signatures.
+- The operating system was Kali GNU/Linux Rolling, running on the `x86_64` architecture.
 
----
+## 8. Closing the Activity
 
-## 8. Encerramento
+After reviewing the ClamAV configuration, the activity was completed.
 
-Após a análise das configurações do ClamAV, a atividade foi encerrada.
+## Key Concepts
 
----
+- **ClamAV:** An open-source antivirus engine used to detect malware.
+- **Freshclam:** A tool responsible for updating ClamAV signature databases.
+- **Clamscan:** A command-line utility used to scan files and directories.
+- **Signatures:** Data used by the detection engine to identify known threats.
+- **Recursive scan:** A scan that processes a directory and its subdirectories.
 
-## Conceitos
-
-* **ClamAV:** antivírus de código aberto utilizado para detecção de malware.
-* **Freshclam:** ferramenta responsável pela atualização das bases de assinaturas.
-* **Clamscan:** utilitário de linha de comando utilizado para realizar verificações.
-* **Assinaturas:** informações utilizadas pelo mecanismo para identificar ameaças conhecidas.
-* **Scan recursivo:** permite verificar um diretório e seus subdiretórios.
-
-## Fluxo da atividade
+## Activity Workflow
 
 ```text
-Verificar versão
+Check the version
       ↓
-Parar atualização automática
+Stop automatic updates
       ↓
-Atualizar assinaturas
+Update signatures
       ↓
-Verificar /home
+Scan /home
       ↓
-Analisar SCAN SUMMARY
+Analyze the SCAN SUMMARY
       ↓
-Consultar configurações
+Review the configuration
 ```
 
-## Resultado
+## Result
 
-O ClamAV foi atualizado e utilizado para analisar recursivamente o diretório `/home`.
+ClamAV was updated and used to recursively scan the `/home` directory.
 
-Foram verificados **6128 arquivos**, sem identificação de arquivos infectados na análise realizada.
+A total of 6,128 files were scanned, and no infected files were detected during the scan.
+
+---
+
+[Back to Classes 37–38](../) · [Back to Module 10](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
