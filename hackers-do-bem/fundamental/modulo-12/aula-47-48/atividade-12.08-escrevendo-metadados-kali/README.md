@@ -1,72 +1,76 @@
-# Atividade 12.8 — Escrevendo metadados no Kali Linux
+# Activity 12.08 — Writing Metadata on Kali Linux
 
-Nesta atividade foi utilizado o **ExifTool** para adicionar e modificar metadados de uma imagem JPEG, incluindo informações de direitos autorais, autor e datas.
+In this activity, ExifTool was used to add and modify metadata in a JPEG image, including copyright information, authorship, and dates.
 
-> **Observação:** credenciais utilizadas no ambiente de laboratório não são registradas neste documento.
+> **Note:** Credentials used in the lab environment are not recorded in this document.
 
-## Objetivo
+## Objective
 
-* Escrever metadados em arquivos digitais.
-* Alterar informações de direitos autorais e autoria.
-* Modificar datas armazenadas nos metadados.
-* Observar o resultado das alterações utilizando o ExifTool.
+- Write metadata to digital files.
+- Modify copyright and authorship information.
+- Change dates stored in metadata.
+- Examine the results of these changes using ExifTool.
 
-## Procedimento
+## Procedure
 
-### 1. Acesso ao Kali Linux
+### 1. Accessing Kali Linux
 
-O Kali Linux foi acessado via RDP pelo endereço `192.168.98.40`.
+Kali Linux was accessed via RDP using the address `192.168.98.40`.
 
-Foi obtido acesso administrativo:
+Administrative privileges were obtained using:
 
 ```bash
 sudo -i
 ```
 
-### 2. Verificação dos arquivos
+### 2. Checking the Files
 
-Foi acessado o diretório das atividades:
+The directory used for the activities was accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
-Os arquivos disponíveis eram:
+The available files were listed using:
 
 ```bash
 ls
 ```
 
+Output:
+
 ```text
 contrato_08_2021.pdf  IPTCpanel.jpg IPTCpanel.jpg_original
 ```
 
-### 3. Adição de informações de direitos autorais
+### 3. Adding Copyright Information
 
-Como a imagem `IPTCpanel.jpg` havia sido sanitizada na atividade anterior, foram adicionados novos metadados:
+Because `IPTCpanel.jpg` had been sanitized during the previous activity, new metadata was added:
 
 ```bash
 exiftool -rights="Direitos autorais do Professor" -CopyrightNotice="Direitos autorais do Professor" IPTCpanel.jpg
 ```
 
-Saída:
+Output:
 
 ```text
     1 image files updated
 ```
 
-Foram utilizados dois campos diferentes para representar a informação de direitos autorais:
+Two different fields were used to represent the copyright information:
 
-* `-rights`
-* `-CopyrightNotice`
+- `-rights`
+- `-CopyrightNotice`
 
-### 4. Verificação dos metadados
+### 4. Verifying the Metadata
+
+The metadata was inspected using:
 
 ```bash
 exiftool IPTCpanel.jpg
 ```
 
-Trecho relevante:
+Relevant output:
 
 ```text
 ExifTool Version Number         : 13.36
@@ -84,29 +88,29 @@ Image Width                     : 300
 Image Height                    : 379
 ```
 
-Os dois campos foram registrados no arquivo.
+Both fields were recorded in the file.
 
-### 5. Adição do autor
+### 5. Adding the Author
 
-Foi adicionado o nome do autor utilizando XMP:
+The author's name was added using XMP:
 
 ```bash
 exiftool -XMP-dc:Creator="Prof. Max" "IPTCpanel.jpg"
 ```
 
-Saída:
+Output:
 
 ```text
     1 image files updated
 ```
 
-A alteração foi verificada:
+The change was verified using:
 
 ```bash
 exiftool IPTCpanel.jpg
 ```
 
-Trecho relevante:
+Relevant output:
 
 ```text
 ExifTool Version Number         : 13.36
@@ -122,27 +126,27 @@ Image Width                     : 300
 Image Height                    : 379
 ```
 
-### 6. Alteração das datas
+### 6. Modifying the Dates
 
-Foi utilizada a opção `-AllDates` para definir as datas armazenadas nos metadados:
+The `-AllDates` option was used to set the dates stored in the metadata:
 
 ```bash
 exiftool -AllDates="1917:12:12 06:00:00" "IPTCpanel.jpg"
 ```
 
-Saída:
+Output:
 
 ```text
     1 image files updated
 ```
 
-Em seguida, os metadados foram consultados novamente:
+The metadata was then queried again:
 
 ```bash
 exiftool IPTCpanel.jpg
 ```
 
-Trecho principal:
+Main output:
 
 ```text
 ExifTool Version Number         : 13.36
@@ -170,54 +174,58 @@ Image Size                      : 300x379
 Megapixels                     : 0.114
 ```
 
-O comando alterou os campos de data suportados pelo `-AllDates`, enquanto as datas do sistema de arquivos continuaram correspondendo ao momento da modificação do arquivo.
+The command modified the date fields supported by `-AllDates`, while the filesystem dates continued to reflect the time when the file was modified.
 
-### 7. Limpeza dos arquivos
+### 7. Cleaning Up the Files
 
-Ao final da atividade, os arquivos foram removidos:
+At the end of the activity, the files were removed using:
 
 ```bash
 rm -r *.*
 ```
 
-Em seguida:
+The following command was then executed:
 
 ```bash
 ls
 ```
 
-O diretório ficou sem os arquivos utilizados na atividade.
+The directory was left without the files used in the activity.
 
-## Conceitos
+## Key Concepts
 
-* **Metadados:** informações armazenadas dentro ou associadas ao arquivo.
-* **XMP/IPTC/EXIF:** diferentes estruturas utilizadas para armazenar informações sobre arquivos de mídia.
-* **`-rights` / `-CopyrightNotice`:** campos relacionados a direitos autorais.
-* **`-XMP-dc:Creator`:** campo utilizado para registrar o criador.
-* **`-AllDates`:** altera os principais campos de data suportados pelo ExifTool.
+- **Metadata:** Information stored within or associated with a file.
+- **XMP/IPTC/EXIF:** Different structures used to store information about media files.
+- **`-rights` / `-CopyrightNotice`:** Fields associated with copyright information.
+- **`-XMP-dc:Creator`:** A field used to record the creator.
+- **`-AllDates`:** Modifies the main date fields supported by ExifTool.
 
-## Fluxo
+## Activity Workflow
 
 ```text
-Imagem sem metadados
+Image without metadata
         ↓
-Adicionar direitos autorais
+Add copyright information
         ↓
-Adicionar autor
+Add author
         ↓
-Alterar datas
+Modify dates
         ↓
-Consultar com ExifTool
+Inspect with ExifTool
         ↓
-Remover arquivos utilizados
+Remove the files used
 ```
 
-## Resultado
+## Result
 
-Foi possível escrever e alterar metadados da imagem utilizando o ExifTool, incluindo direitos autorais, autoria e datas.
+ExifTool was used to write and modify metadata in the image, including copyright information, authorship, and dates.
 
-## Evidência
+## Evidence
 
-[**Evidências — Módulo 12 / Aulas 43 e 44**](../evidencias.pdf)
+**View Evidence — Module 12 / Classes 47–48**
 
-**Print solicitado:** passo 7 — saída do `exiftool IPTCpanel.jpg` após a alteração das datas.
+**Required screenshot:** Step 7 — the output of `exiftool IPTCpanel.jpg` after modifying the dates.
+
+---
+
+[Back to Classes 47–48](../README.md) · [Back to Module 12](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
