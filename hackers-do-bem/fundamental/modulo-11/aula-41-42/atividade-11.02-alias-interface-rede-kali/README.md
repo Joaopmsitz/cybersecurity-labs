@@ -1,44 +1,38 @@
-# Atividade 11.2 — Alias de Interface de Rede no Kali Linux
+# Activity 11.02 — Network Interface Aliases on Kali Linux
 
-## Objetivo
+## Objective
 
-Configurar **aliases de endereço IP** na interface de rede `eth0` do Kali Linux, atribuindo os endereços `192.168.98.41` e `192.168.98.42` à mesma interface física e validando a comunicação por meio de ICMP e SSH.
+Configure IP address aliases on the `eth0` network interface in Kali Linux by assigning the addresses `192.168.98.41` and `192.168.98.42` to the same physical interface, then validate connectivity using ICMP and SSH.
 
----
+## Environment
 
-## Ambiente
+- **Operating system:** Kali GNU/Linux
+- **Access:** RDP
+- **Network interface:** `eth0`
+- **Primary IP address:** `192.168.98.40/24`
+- **Aliases:** `192.168.98.41/24` and `192.168.98.42/24`
 
-* **Sistema:** Kali GNU/Linux
-* **Acesso:** RDP
-* **Interface:** `eth0`
-* **Endereço principal:** `192.168.98.40/24`
-* **Aliases:** `192.168.98.41/24` e `192.168.98.42/24`
+## 1. Accessing Kali Linux
 
----
+The Kali Linux machine was accessed via RDP, and the Terminal was opened.
 
-## 1. Acessando o Kali Linux
+Administrative privileges were obtained using:
 
-A máquina Kali Linux foi acessada por RDP e o Terminal foi aberto.
-
-Foi obtido acesso administrativo com:
-
-```bash id="p4m7qx"
+```bash
 sudo -i
 ```
 
----
+## 2. Editing the Network Configuration
 
-## 2. Editando a configuração de rede
+The network interface configuration file was opened using:
 
-O arquivo de configuração das interfaces de rede foi aberto com:
-
-```bash id="v8k2ns"
+```bash
 nano /etc/network/interfaces
 ```
 
-Foram adicionadas as configurações dos dois aliases:
+The following configurations were added for the two aliases:
 
-```text id="r6c3wf"
+```text
 auto eth0:1
 iface eth0:1 inet static
     address 192.168.98.41
@@ -50,12 +44,12 @@ iface eth0:2 inet static
     netmask 255.255.255.0
 ```
 
-A configuração define duas interfaces lógicas associadas à interface `eth0`.
+This configuration defines two logical interfaces associated with the `eth0` interface.
 
-* `eth0:1` → `192.168.98.41/24`
-* `eth0:2` → `192.168.98.42/24`
+- `eth0:1` → `192.168.98.41/24`
+- `eth0:2` → `192.168.98.42/24`
 
-Após inserir as configurações, o arquivo foi salvo com:
+After entering the configurations, the file was saved using:
 
 ```text
 Ctrl + X
@@ -63,43 +57,37 @@ S
 ENTER
 ```
 
----
+## 3. Restarting the System
 
-## 3. Reiniciando o sistema
+To apply the configuration, Kali Linux was restarted:
 
-Para aplicar a configuração, o Kali Linux foi reiniciado:
-
-```bash id="n1d5zr"
+```bash
 reboot
 ```
 
-Foi aguardado o tempo necessário para que a máquina voltasse a ficar disponível.
+The necessary time was allowed for the machine to become available again.
 
----
+## 4. Reconnecting to Kali Linux
 
-## 4. Reconectando ao Kali Linux
+After the restart, the RDP connection was established again.
 
-Após a reinicialização, a conexão RDP foi realizada novamente.
+Administrative access was restored using:
 
-O acesso administrativo foi recuperado:
-
-```bash id="k7w3mh"
+```bash
 sudo -i
 ```
 
----
+## 5. Verifying the Interface Addresses
 
-## 5. Verificando os endereços da interface
+The configuration of the `eth0` interface was checked using:
 
-A configuração da interface `eth0` foi verificada com:
-
-```bash id="t9f4bc"
+```bash
 ip addr show eth0
 ```
 
-A saída apresentada foi:
+The output was:
 
-```text id="yh38bq"
+```text
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP group default qlen 1000
     link/ether 12:4d:70:f0:ab:8b brd ff:ff:ff:ff:ff:ff
     inet 192.168.98.40/24 brd 192.168.98.255 scope global dynamic eth0
@@ -112,39 +100,37 @@ A saída apresentada foi:
        valid_lft forever preferred_lft forever
 ```
 
-A saída confirma que os dois novos endereços foram associados à interface.
+The output confirms that both new IP addresses were associated with the interface.
 
-### Endereços configurados
+### Configured Addresses
 
-| Interface | Endereço           |
-| --------- | ------------------ |
-| `eth0`    | `192.168.98.40/24` |
-| `eth0:1`  | `192.168.98.41/24` |
-| `eth0:2`  | `192.168.98.42/24` |
+| Interface | Address |
+|---|---|
+| `eth0` | `192.168.98.40/24` |
+| `eth0:1` | `192.168.98.41/24` |
+| `eth0:2` | `192.168.98.42/24` |
 
-Os aliases aparecem como endereços `secondary` da interface `eth0`.
+The aliases appear as secondary addresses on the `eth0` interface.
 
-Também é possível observar:
+The output also shows:
 
-* `BROADCAST,MULTICAST,UP,LOWER_UP`: características e estado operacional da interface;
-* `mtu 9001`: tamanho máximo configurado para o quadro;
-* `link/ether`: endereço MAC da interface;
-* `scope global`: endereço IPv4 válido para comunicação na rede;
-* `scope link`: endereço IPv6 utilizado no escopo do enlace.
+- **`BROADCAST,MULTICAST,UP,LOWER_UP`:** Interface capabilities and operational state.
+- **`mtu 9001`:** Maximum Transmission Unit configured for the interface.
+- **`link/ether`:** MAC address of the interface.
+- **`scope global`:** IPv4 address scope for network communication.
+- **`scope link`:** IPv6 address used within the local link scope.
 
----
+## 6. Testing the First Alias
 
-## 6. Testando o primeiro alias
+The address `192.168.98.41` was tested using:
 
-O endereço `192.168.98.41` foi testado com:
-
-```bash id="q2v6kd"
+```bash
 ping 192.168.98.41
 ```
 
-Resultado:
+Result:
 
-```text id="pfhng8"
+```text
 PING 192.168.98.41 (192.168.98.41) 56(84) bytes of data.
 64 bytes from 192.168.98.41: icmp_seq=1 ttl=64 time=0.045 ms
 64 bytes from 192.168.98.41: icmp_seq=2 ttl=64 time=0.044 ms
@@ -154,21 +140,19 @@ PING 192.168.98.41 (192.168.98.41) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.044/0.044/0.045/0.000 ms
 ```
 
-Foram recebidas respostas nos dois pacotes enviados, com **0% de perda**.
+Both packets received responses, with **0% packet loss**.
 
----
+## 7. Testing the Second Alias
 
-## 7. Testando o segundo alias
+The second address was tested using:
 
-O segundo endereço foi testado com:
-
-```bash id="c8r5mx"
+```bash
 ping 192.168.98.42
 ```
 
-Resultado:
+Result:
 
-```text id="8spd8z"
+```text
 PING 192.168.98.42 (192.168.98.42) 56(84) bytes of data.
 64 bytes from 192.168.98.42: icmp_seq=1 ttl=64 time=0.038 ms
 64 bytes from 192.168.98.42: icmp_seq=2 ttl=64 time=0.044 ms
@@ -178,21 +162,19 @@ PING 192.168.98.42 (192.168.98.42) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.038/0.041/0.044/0.003 ms
 ```
 
-Novamente, os dois pacotes receberam resposta e houve **0% de perda**.
+Again, both packets received responses, with **0% packet loss**.
 
----
+## 8. Testing SSH Through the Second Alias
 
-## 8. Testando SSH através do segundo alias
+An SSH connection was established using the address `192.168.98.42`:
 
-Foi realizada uma conexão SSH utilizando o endereço `192.168.98.42`:
-
-```bash id="d3n7kp"
+```bash
 ssh aluno@192.168.98.42
 ```
 
-Na primeira conexão, foi apresentada a confirmação da chave do host:
+During the first connection, the host key confirmation prompt was displayed:
 
-```text id="818ju3"
+```text
 The authenticity of host '192.168.98.42 (192.168.98.42)' can't be established.
 ED25519 key fingerprint is SHA256:hsrbT/3IfQ22bAUQPUE8T3dpJA/aBVyt3wcyb6zKgO0.
 This key is not known by any other names.
@@ -221,29 +203,27 @@ sair
 Connection to 192.168.98.42 closed.
 ```
 
-A conexão foi estabelecida com sucesso utilizando o segundo endereço IP configurado como alias.
+The connection was successfully established using the second IP address configured as an alias.
 
-### Evidência — Passo 8
+### Evidence — Step 8
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 11.2:** conexão SSH realizada com sucesso utilizando o endereço `192.168.98.42`, demonstrando que o alias configurado na interface `eth0` pode ser utilizado para acesso ao serviço SSH.
+> Screenshot of Activity 11.02: a successful SSH connection using the address `192.168.98.42`, demonstrating that the alias configured on the `eth0` interface can be used to access the SSH service.
 
-[**Evidências — Módulo 11 / Aulas 41 e 42**](../evidencias.pdf)
+[View Evidence — Classes 41–42](../evidencias.pdf)
 
----
+## 9. Removing the Aliases
 
-## 9. Removendo os aliases
+After validation, the configuration file was opened again:
 
-Após a validação, o arquivo de configuração foi aberto novamente:
-
-```bash id="f5j8rc"
+```bash
 nano /etc/network/interfaces
 ```
 
-Foram removidas as configurações adicionadas anteriormente:
+The previously added configurations were removed:
 
-```text id="rsik8d"
+```text
 auto eth0:1
 iface eth0:1 inet static
     address 192.168.98.41
@@ -255,7 +235,7 @@ iface eth0:2 inet static
     netmask 255.255.255.0
 ```
 
-O arquivo foi salvo com:
+The file was saved using:
 
 ```text
 Ctrl + X
@@ -263,50 +243,50 @@ S
 ENTER
 ```
 
----
+## 10. Restarting the System Again
 
-## 10. Reiniciando novamente o sistema
+To apply the removal of the aliases, the following command was executed:
 
-Para aplicar a remoção dos aliases:
-
-```bash id="w2c9mv"
+```bash
 reboot
 ```
 
-Após a reinicialização, a configuração retorna ao estado anterior, sem os dois endereços adicionais.
+After the restart, the configuration returned to its previous state without the two additional addresses.
+
+## Key Concepts
+
+- **Interface alias:** Allows multiple IP addresses to be associated with the same network interface.
+- **`eth0:1` and `eth0:2`:** Identifiers used in this lab to represent aliases of the `eth0` interface.
+- **Secondary IP address:** An additional address configured on the same physical interface.
+- **ICMP:** A protocol used by `ping` to test connectivity.
+- **SSH:** A protocol used for secure remote access to another system.
+- **`ip addr`:** A command used to display interface addresses and configuration details.
+
+## Activity Workflow
+
+```text
+Edit /etc/network/interfaces
+          ↓
+Add 192.168.98.41
+Add 192.168.98.42
+          ↓
+Restart Kali Linux
+          ↓
+Verify with ip addr
+          ↓
+Test with ping
+          ↓
+Test SSH
+          ↓
+Remove the aliases
+          ↓
+Restart the system
+```
+
+## Result
+
+Two secondary IP addresses were configured on the `eth0` interface. Both `192.168.98.41` and `192.168.98.42` responded successfully to ICMP tests, and the second alias was also used successfully to establish an SSH connection.
 
 ---
 
-## Conceitos
-
-* **Alias de interface:** permite associar múltiplos endereços IP a uma mesma interface de rede.
-* **`eth0:1` e `eth0:2`:** identificadores utilizados no laboratório para representar os aliases da interface `eth0`.
-* **IP secundário:** endereço adicional configurado na mesma interface física.
-* **ICMP:** protocolo utilizado pelo `ping` para verificar conectividade.
-* **SSH:** protocolo utilizado para acesso remoto seguro a outro sistema.
-* **`ip addr`:** comando utilizado para visualizar endereços e configurações das interfaces.
-
-## Fluxo da atividade
-
-```text
-Editar /etc/network/interfaces
-          ↓
-Adicionar 192.168.98.41
-Adicionar 192.168.98.42
-          ↓
-Reiniciar Kali
-          ↓
-Verificar com ip addr
-          ↓
-Testar com ping
-          ↓
-Testar SSH
-          ↓
-Remover aliases
-          ↓
-Reiniciar
-```
-
-## Resultado
-
-Foram configurados dois endereços IP secundários na interface `eth0`. Os endereços `192.168.98.41` e `192.168.98.42` responderam aos testes de ICMP, e o segundo alias também foi utilizado com sucesso para uma conexão SSH.
+[Back to Classes 41–42](../) · [Back to Module 11](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
