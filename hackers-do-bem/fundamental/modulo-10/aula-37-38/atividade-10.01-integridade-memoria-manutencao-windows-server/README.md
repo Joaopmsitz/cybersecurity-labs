@@ -1,246 +1,209 @@
-# Atividade 10.1 — Integridade de Memória e Manutenção no Windows Server 2022
+# Activity 10.01 — Memory Integrity and Maintenance in Windows Server 2022
 
-## Objetivo
+## Objective
 
-Explorar os recursos de segurança **Memory Integrity**, **Core Isolation** e **Security and Maintenance** no Windows Server 2022, verificando também o histórico de confiabilidade e os recursos de manutenção automática do sistema.
+Explore the Memory Integrity, Core Isolation, and Security and Maintenance features in Windows Server 2022, while also reviewing the reliability history and automatic maintenance capabilities of the system.
 
----
+## Environment
 
-## Ambiente
+- **System:** Windows Server 2022
+- **Features explored:** Windows Security and Security and Maintenance
+- **Access:** RDP
+- **Machine:** Windows Server 2022 (client)
 
-* **Sistema:** Windows Server 2022
-* **Funções exploradas:** Windows Security e Security and Maintenance
-* **Acesso:** RDP
-* **Máquina:** Windows Server 2022 (cliente)
+The credentials used to access the lab are not included in this README.
 
-> As credenciais utilizadas para acesso ao laboratório não são registradas neste README.
+## 1. Accessing Windows Server 2022
 
----
+The Windows Server 2022 client was accessed via RDP.
 
-## 1. Acesso ao Windows Server 2022
+The administrative user specified by the lab was used on the authentication screen.
 
-O Windows Server 2022 (cliente) foi acessado via RDP.
+## 2. Accessing Device Security
 
-Na tela de autenticação foi utilizado o usuário administrativo indicado no laboratório.
+On the taskbar, the following search field was selected:
 
----
-
-## 2. Acesso ao Device Security
-
-Na barra de tarefas, foi selecionado:
-
-```text id="w3q8mf"
+```text
 Type here to search
 ```
 
-Foi pesquisado:
+The following term was searched for:
 
-```text id="c6r1yp"
+```text
 Device security
 ```
 
-e o recurso **Device security** foi aberto.
+The **Device security** feature was then opened.
 
----
+## 3. Checking Core Isolation
 
-## 3. Verificação do Core Isolation
+In the Device security window, the following section was located:
 
-Na janela **Device security**, foi localizada a seção:
-
-```text id="v9m2kd"
+```text
 Core Isolation
 ```
 
-O **Core Isolation** utiliza recursos de virtualização baseados em hardware para criar uma camada de isolamento para componentes críticos do sistema, especialmente processos relacionados ao kernel.
+Core Isolation uses hardware-based virtualization features to create an isolation layer for critical system components, particularly those associated with the kernel.
 
-Esse mecanismo ajuda a reduzir a superfície de ataque e dificulta técnicas que procuram comprometer componentes de baixo nível do sistema operacional.
+This mechanism helps reduce the attack surface and makes it more difficult for techniques targeting low-level operating system components to compromise them.
 
----
+## 4. Accessing Core Isolation Details
 
-## 4. Acesso aos detalhes do Core Isolation
+The following link was selected to view the available settings:
 
-Foi selecionado o link:
-
-```text id="p5x7ta"
+```text
 Core isolation details
 ```
 
-para visualizar as configurações disponíveis.
+## 5. Checking Memory Integrity
 
----
+On the details page, the following option was located:
 
-## 5. Verificação do Memory Integrity
-
-Na página de detalhes foi localizada a opção:
-
-```text id="h8n4zs"
+```text
 Memory integrity
 ```
 
-O recurso tem como objetivo proteger a integridade da memória do sistema, dificultando alterações indevidas no código executado em componentes protegidos do Windows.
+This feature is designed to protect system memory integrity by making unauthorized modifications to code running in protected Windows components more difficult.
 
----
+## 6. Enabling Memory Integrity
 
-## 6. Habilitação do Memory Integrity
+The Memory integrity toggle was initially set to:
 
-O interruptor de **Memory integrity** estava em:
-
-```text id="j2k6rw"
+```text
 Off
 ```
 
-Foi alterado para:
+It was changed to:
 
-```text id="r7m3vc"
+```text
 On
 ```
 
-Com isso, o recurso foi habilitado.
+The feature was therefore enabled in the settings.
 
----
+## 7. Restarting the Server
 
-## 7. Reinicialização do servidor
+After the feature was enabled, Windows displayed a notification indicating that the system needed to be restarted.
 
-Após habilitar o recurso, o Windows apresentou um aviso informando que seria necessário reiniciar o sistema.
+The following options were selected from the taskbar:
 
-Na barra de tarefas foi utilizado:
-
-```text id="n4p9yb"
+```text
 Windows → Shut down or sign out → Restart → Continue
 ```
 
-A máquina foi reiniciada e a conexão RDP foi perdida durante o processo.
+The machine restarted, and the RDP connection was interrupted during the process.
 
----
+## 8. Reconnecting After the Restart
 
-## 8. Novo acesso após a reinicialização
+After waiting for the period specified by the lab, the Windows Server 2022 machine was accessed again via RDP.
 
-Foi aguardado o período indicado pelo laboratório e realizado novamente o acesso ao Windows Server 2022 via RDP.
+The status of Memory integrity was checked after reconnecting.
 
-Após o acesso, foi verificado o estado do recurso **Memory integrity**.
+> The lab material notes that, because of how the virtual machine is managed in this environment, the feature may continue to appear as **Off** even after an attempt to enable it.
 
-> O material informa que, devido à natureza do gerenciamento da máquina virtual utilizada no laboratório, o recurso pode continuar aparecendo como `Off` mesmo após a tentativa de habilitação.
+## 9. Accessing Security and Maintenance
 
----
+The following term was searched for from the taskbar:
 
-## 9. Acesso ao Security and Maintenance
-
-Na barra de tarefas, foi pesquisado:
-
-```text id="z5v8hx"
+```text
 Security and Maintenance
 ```
 
-O recurso foi aberto para explorar as opções de manutenção e confiabilidade do sistema.
+The feature was opened to explore the system's maintenance and reliability options.
 
----
+## 10. Viewing the Reliability History
 
-## 10. Visualização do histórico de confiabilidade
+In the Security and Maintenance window, the following section was selected:
 
-Na janela **Security and Maintenance**, foi selecionado o texto:
-
-```text id="q3n7wm"
+```text
 Maintenance
 ```
 
-Após expandir a seção, foi selecionado:
+After expanding the section, the following option was selected:
 
-```text id="f6k2pa"
+```text
 View reliability history
 ```
 
-O **Reliability Monitor** permite consultar um histórico de eventos relacionados à estabilidade do sistema, incluindo falhas de aplicativos, problemas e outros eventos relevantes.
+Reliability Monitor provides a history of events related to system stability, including application failures, problems, and other relevant events.
 
----
+## 11. Viewing Problem Reports
 
-## 11. Visualização dos relatórios de problemas
+In the Reliability History window, the following option was selected:
 
-Na janela do histórico de confiabilidade, foi selecionado:
-
-```text id="m8r4yc"
+```text
 View all problem reports
 ```
 
-Essa opção permite consultar relatórios relacionados a problemas registrados no sistema, como falhas de aplicativos e outros eventos que podem afetar sua confiabilidade.
+This option allows users to review reports of problems recorded by the system, such as application failures and other events that may affect system reliability.
 
-Após a visualização, foram selecionados **OK** nas janelas necessárias para retornar à tela anterior.
+After reviewing the reports, **OK** was selected in the necessary windows to return to the previous screen.
 
----
+## 12. Configuring Automatic Maintenance
 
-## 12. Configuração da manutenção automática
+Back in the **Maintenance** section, the following option was selected:
 
-Novamente na seção:
-
-```text id="Maintenance"
-```
-
-foi selecionada a opção:
-
-```text id="t7w2nb"
+```text
 Change Maintenance Settings
 ```
 
-Essa configuração permite ajustar o agendamento da manutenção automática do Windows e definir o período em que essas atividades podem ser executadas.
+This setting allows users to adjust the Windows automatic maintenance schedule and define when these activities can run.
 
-Após visualizar as configurações, foi selecionado:
+After reviewing the settings, the following option was selected:
 
-```text id="y4c9ks"
+```text
 Cancel
 ```
 
-para sair sem alterar as configurações.
+This closed the settings without making any changes.
 
----
+## 13. Starting Maintenance
 
-## 13. Início da manutenção
+In the **Maintenance** section, the following option was selected:
 
-Na seção **Maintenance**, foi selecionado:
-
-```text id="a6p3vd"
+```text
 Start maintenance
 ```
 
-Essa opção inicia manualmente as atividades de manutenção disponíveis no sistema.
+This option manually starts the maintenance activities available on the system.
 
-A ação pode envolver tarefas relacionadas à manutenção e à verificação do estado do sistema.
+The process may involve tasks related to system maintenance and health checks.
 
----
+### Evidence — Step 13
 
-## Evidência — Passo 13
+Caption to include before the screenshot:
 
-**Frase obrigatória antes do print:**
+> Screenshot of Activity 10.01: the **Start maintenance** option in the Maintenance section of Windows Server 2022, demonstrating the option to manually start system maintenance.
 
-> **Print da atividade 10.1:** recurso `Start maintenance` da seção `Maintenance` do Windows Server 2022, demonstrando a opção de iniciar manualmente a manutenção do sistema.
+[View Evidence — Classes 37–38](../evidencias.pdf)
 
-[**Evidências — Módulo 10 / Aulas 37 e 38**](../evidencias.pdf)
+## 14. Checking the Maintenance Status
 
----
+After starting maintenance, the following notification was observed:
 
-## 14. Verificação da manutenção em andamento
-
-Após iniciar a manutenção, foi verificado o aviso:
-
-```text id="s8k5qx"
+```text
 Maintenance in progress
 ```
 
-Esse aviso indica que o processo de manutenção foi iniciado.
+This notification indicates that the maintenance process has started.
 
-Após a verificação, as janelas foram fechadas.
+After checking the status, the windows were closed.
+
+## Activity Workflow
+
+| Step | Result |
+|---|---|
+| Device Security | Explored Core Isolation and Memory Integrity |
+| Memory Integrity | Attempted to enable the feature and restarted the system |
+| Security and Maintenance | Explored the maintenance features |
+| Start maintenance | Started the maintenance process |
+
+## Result
+
+The Core Isolation, Memory Integrity, and Security and Maintenance features in Windows Server 2022 were explored.
+
+The system maintenance process was also started manually, and the **Maintenance in progress** status was verified.
 
 ---
 
-## Fluxo da atividade
-
-| Etapa                    | Resultado                                    |
-| ------------------------ | -------------------------------------------- |
-| Device Security          | Core Isolation e Memory Integrity explorados |
-| Memory Integrity         | Habilitação e reinicialização realizadas     |
-| Security and Maintenance | Recursos de manutenção explorados            |
-| Start maintenance        | Processo de manutenção iniciado              |
-
-## Resultado
-
-Foram explorados os recursos de **Core Isolation**, **Memory Integrity** e **Security and Maintenance** do Windows Server 2022.
-
-Também foi iniciado manualmente o processo de manutenção e verificado o estado **Maintenance in progress**.
+[Back to Classes 37–38](../) · [Back to Module 10](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
