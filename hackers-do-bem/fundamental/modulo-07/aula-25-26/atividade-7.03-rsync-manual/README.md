@@ -1,14 +1,20 @@
-# Atividade 7.3 — Rsync Manual
+# Activity 7.03 — Manual Rsync
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 07  
+> **Classes:** 25–26  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Realizar uma cópia manual de arquivo entre dois diretórios utilizando o `rsync`, entendendo os principais parâmetros do comando e verificando a integridade da cópia.
+## Objective
+
+Perform a manual file copy between two directories using `rsync`, understand the command's main parameters, and verify the integrity of the copied file.
 
 ---
 
-## 1. Preparação dos diretórios
+## 1. Preparing the Directories
 
-Foi utilizado o diretório `/home/aluno/Documentos/` como base para o laboratório.
+The directory `/home/aluno/Documentos/` was used as the base directory for the lab.
 
 ```bash
 sudo -i
@@ -17,13 +23,13 @@ mkdir -m 777 PastaA PastaB
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 PastaA  PastaB
 ```
 
-A estrutura utilizada ficou:
+The resulting directory structure was:
 
 ```text
 /home/aluno/Documentos/
@@ -33,53 +39,53 @@ A estrutura utilizada ficou:
 
 ---
 
-## 2. Criação do arquivo de teste
+## 2. Creating the Test File
 
-Dentro da `PastaA`, foi criado o arquivo `Teste.txt`:
+The file `Teste.txt` was created inside `PastaA`:
 
 ```bash
 cd PastaA
 nano Teste.txt
 ```
 
-Conteúdo:
+Content:
 
 ```text
 Teste de Pasta A para Pasta B
 ```
 
-Após salvar o arquivo:
+After saving the file, its presence was verified:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 Teste.txt
 ```
 
-Em seguida, foi acessado o diretório de destino:
+The destination directory was then accessed:
 
 ```bash
 cd /home/aluno/Documentos/PastaB
 ls
 ```
 
-Neste momento, a `PastaB` estava vazia.
+At this point, `PastaB` was empty.
 
 ---
 
-## 3. Cópia utilizando Rsync
+## 3. Copying the File Using Rsync
 
-Foi utilizado o seguinte comando para copiar o arquivo da `PastaA` para a `PastaB`:
+The following command was used to copy the file from `PastaA` to `PastaB`:
 
 ```bash
 rsync -avz /home/aluno/Documentos/PastaA/Teste.txt /home/aluno/Documentos/PastaB
 ```
 
-Saída:
+Output:
 
 ```text
 sending incremental file list
@@ -89,75 +95,80 @@ sent 140 bytes  received 35 bytes  350,00 bytes/sec
 total size is 30  speedup is 0,17
 ```
 
-### Parâmetros utilizados
+### Parameters Used
 
-* `rsync` — ferramenta utilizada para sincronização e transferência de arquivos.
-* `-a` — modo *archive*, mantendo atributos como permissões, proprietários, grupos e timestamps, além de permitir cópia recursiva.
-* `-v` — modo *verbose*, exibindo informações sobre a operação.
-* `-z` — utiliza compressão durante a transferência.
-* `/home/aluno/Documentos/PastaA/Teste.txt` — arquivo de origem.
-* `/home/aluno/Documentos/PastaB` — diretório de destino.
+- `rsync` — a tool used for synchronizing and transferring files.
+- `-a` — archive mode, preserving attributes such as permissions, ownership, groups, and timestamps, while enabling recursive copying.
+- `-v` — verbose mode, displaying information about the operation.
+- `-z` — enables compression during data transfer.
+- `/home/aluno/Documentos/PastaA/Teste.txt` — source file.
+- `/home/aluno/Documentos/PastaB` — destination directory.
 
 ---
 
-## 4. Verificação da cópia
+## 4. Verifying the Copy
 
-Após a execução do `rsync`, foi verificado o conteúdo da `PastaB`:
+After `rsync` finished running, the contents of `PastaB` were checked:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 Teste.txt
 ```
 
-Em seguida, o conteúdo do arquivo foi conferido:
+The file contents were then checked:
 
 ```bash
 cat Teste.txt
 ```
 
-Resultado:
+Result:
 
 ```text
 Teste de Pasta A para Pasta B
 ```
 
-A cópia foi realizada corretamente e o conteúdo permaneceu igual ao arquivo original.
+The file was copied successfully, and its contents matched the original file.
 
 ---
 
-## 5. Limpeza do diretório de destino
+## 5. Cleaning Up the Destination Directory
 
-Para preparar o ambiente para a próxima atividade, o arquivo copiado foi removido somente da `PastaB`:
+To prepare the environment for the next activity, the copied file was removed only from `PastaB`:
 
 ```bash
 ls
-Teste.txt
 rm *
 ```
 
-O sistema solicitou confirmação:
+The system requested confirmation:
 
 ```text
 zsh: sure you want to delete the only file in /home/aluno/Documentos/PastaB [yn]? y
 ```
 
-Depois:
+Then, the directory was checked again:
 
 ```bash
 ls
 ```
 
-A `PastaB` ficou novamente vazia.
+`PastaB` was empty again.
 
-O arquivo `Teste.txt` da `PastaA` foi mantido, pois será utilizado na atividade seguinte.
+The `Teste.txt` file in `PastaA` was retained because it would be used in the next activity.
 
 ---
 
-## Evidência
+## Evidence
 
-[**Evidências — Módulo 7 / Aulas 1 e 2**](../evidencias.pdf)
+Evidence for this activity is included in the PDF for Module 7, Classes 25–26.
+
+[View Evidence — Classes 25–26](../evidencias.pdf)
+
+---
+
+[Back to Classes 25–26](../) · [Back to Module 7](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
