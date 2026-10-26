@@ -1,34 +1,30 @@
-# Atividade 11.10 — Bloqueando Pacotes ICMP Provenientes do Windows Server 2022 no Kali Linux
+# Activity 11.10 — Blocking ICMP Packets from Windows Server 2022 on Kali Linux
 
-## Objetivo
+## Objective
 
-Utilizar o **iptables** no Kali Linux para bloquear requisições **ICMP echo-request** provenientes do Windows Server 2022, verificando o efeito da regra através do comando `ping` e, posteriormente, removendo a regra para restaurar a comunicação.
+Use `iptables` on Kali Linux to block ICMP echo-request packets originating from Windows Server 2022, verify the effect of the rule using the `ping` command, and subsequently remove the rule to restore communication.
 
----
+## Environment
 
-## Ambiente
+- **Kali Linux:** `192.168.98.40`
+- **Windows Server 2022:** `192.168.98.30`
+- **Tool:** `iptables`
+- **Protocol:** ICMP
+- **Blocked ICMP type:** `echo-request`
 
-* **Kali Linux:** `192.168.98.40`
-* **Windows Server 2022:** `192.168.98.30`
-* **Ferramenta:** `iptables`
-* **Protocolo:** ICMP
-* **Tipo de ICMP bloqueado:** `echo-request`
+## 1. Checking the Windows Server 2022 IP Address
 
----
+Windows Server 2022 was accessed via RDP.
 
-## 1. Verificando o endereço IP do Windows Server 2022
+The following command was executed in Command Prompt:
 
-O Windows Server 2022 foi acessado por RDP.
-
-No Prompt de Comando, foi executado:
-
-```cmd id="7h7udd"
+```cmd
 ipconfig
 ```
 
-A saída apresentada foi:
+The displayed output was:
 
-```text id="7h7udd"
+```text
 C:\Users\Administrator>ipconfig
 
 Windows IP Configuration
@@ -43,78 +39,72 @@ Ethernet adapter Ethernet 2:
    Default Gateway . . . . . . . . . : 192.168.98.1
 ```
 
-O endereço IPv4 do Windows Server utilizado no laboratório é:
+The IPv4 address of the Windows Server used in the lab is:
 
-```text id="q6m2vr"
+```text
 192.168.98.30
 ```
 
----
+## 2. Accessing Kali Linux
 
-## 2. Acessando o Kali Linux
+The Windows Server RDP window was minimized, and Kali Linux was accessed using the following address:
 
-A janela do RDP do Windows Server foi minimizada e o Kali Linux foi acessado através do endereço:
-
-```text id="k8w4pn"
+```text
 192.168.98.40
 ```
 
-No Kali Linux, foi aberto o Terminal e obtido acesso administrativo com:
+On Kali Linux, the Terminal was opened, and administrative privileges were obtained using:
 
-```bash id="p3r7xm"
+```bash
 sudo -i
 ```
 
----
+## 3. Checking Kali Linux Network Interfaces
 
-## 3. Verificando as interfaces de rede do Kali
+The following command was executed:
 
-Foi executado:
-
-```bash id="n5c9vk"
+```bash
 ifconfig
 ```
 
-A interface `eth0` apresentou o endereço IPv4:
+The `eth0` interface displayed the following IPv4 address:
 
-```text id="b1ocbt"
+```text
 eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 9001
         inet 192.168.98.40  netmask 255.255.255.0  broadcast 192.168.98.255
 ```
 
-A interface `docker0` também estava presente:
+The `docker0` interface was also present:
 
-```text id="r8m4qx"
+```text
 docker0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
         inet 172.17.0.1  netmask 255.255.0.0  broadcast 172.17.255.255
 ```
 
-A interface de loopback também estava disponível:
+The loopback interface was also available:
 
-```text id="v7k2mp"
+```text
 lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
         inet 127.0.0.1
 ```
 
-O endereço utilizado pelo Kali na rede do laboratório é:
+The address used by Kali Linux on the lab network is:
 
-```text id="x4n8cq"
+```text
 192.168.98.40
 ```
 
----
+## 4. Testing Communication Before Blocking
 
-## 4. Testando a comunicação antes do bloqueio
+The following command was executed on Windows Server 2022:
 
-No Windows Server 2022, foi executado:
-
-```cmd id="m6p3wx"
+```cmd
 ping 192.168.98.40
 ```
 
-A comunicação funcionou normalmente:
+Communication worked normally:
 
-```text id="yatahm"
+```text
 C:\Users\Administrator>ping 192.168.98.40
 
 Pinging 192.168.98.40 with 32 bytes of data:
@@ -123,11 +113,11 @@ Reply from 192.168.98.40: bytes=32 time=1ms TTL=64
 Reply from 192.168.98.40: bytes=32 time<1ms TTL=64
 ```
 
-Esse teste confirmou que, antes da aplicação da regra de firewall, o Windows Server conseguia enviar requisições ICMP para o Kali Linux e receber as respostas correspondentes.
+This test confirmed that, before the firewall rule was applied, Windows Server could send ICMP requests to Kali Linux and receive the corresponding replies.
 
-O fluxo inicial era:
+The initial traffic flow was:
 
-```text id="c8v5mz"
+```text
 Windows Server
 192.168.98.30
       │
@@ -141,87 +131,83 @@ Kali Linux
 Windows Server
 ```
 
----
+## 5. Creating the ICMP Blocking Rule
 
-## 5. Criando a regra de bloqueio ICMP
+The following rule was created on Kali Linux:
 
-No Kali Linux, foi criada a seguinte regra:
-
-```bash id="h1refw"
+```bash
 iptables -A INPUT -p icmp --icmp-type echo-request -j DROP
 ```
 
-A regra atua sobre os pacotes ICMP recebidos pelo Kali Linux.
+The rule applies to ICMP packets received by Kali Linux.
 
-### Parâmetros utilizados
+### Parameters Used
 
 #### `iptables`
 
-Ferramenta utilizada para configurar regras de filtragem de pacotes através do Netfilter.
+A tool used to configure packet-filtering rules through Netfilter.
 
 #### `-A INPUT`
 
-Adiciona uma regra à chain `INPUT`.
+Adds a rule to the `INPUT` chain.
 
-A chain `INPUT` processa pacotes destinados ao próprio Kali Linux.
+The `INPUT` chain processes packets destined for Kali Linux itself.
 
 #### `-p icmp`
 
-Define que a regra será aplicada ao protocolo:
+Specifies that the rule applies to the following protocol:
 
-```text id="w4n7cz"
+```text
 ICMP
 ```
 
 #### `--icmp-type echo-request`
 
-Especifica o tipo de mensagem ICMP que será bloqueado:
+Specifies the type of ICMP message to be blocked:
 
-```text id="s9m2vk"
+```text
 echo-request
 ```
 
-Esse é o tipo de mensagem utilizado pelo `ping` para solicitar uma resposta do host de destino.
+This is the message type used by `ping` to request a response from the destination host.
 
 #### `-j DROP`
 
-Define a ação aplicada aos pacotes correspondentes.
+Defines the action applied to matching packets.
 
-`DROP` descarta o pacote, impedindo que ele seja processado normalmente pelo sistema.
+`DROP` discards the packet, preventing it from being processed normally by the system.
 
-Portanto, a regra pode ser interpretada como:
+Therefore, the rule can be interpreted as follows:
 
-```text id="q5r8xm"
-Pacote recebido
+```text
+Incoming packet
       ↓
-      ICMP
+     ICMP
       ↓
 echo-request?
       ↓
-     SIM
+     YES
       ↓
      DROP
       ↓
-Pacote descartado
+Packet discarded
 ```
 
-> **Importante:** essa regra não bloqueia todo o protocolo ICMP. Ela corresponde especificamente a mensagens `echo-request`.
+> **Important:** This rule does not block the entire ICMP protocol. It specifically matches `echo-request` messages.
 
----
+## 6. Testing the Blocking Rule
 
-## 6. Testando o bloqueio
+After creating the rule, Windows Server 2022 was used again to execute:
 
-Após a criação da regra, o Windows Server 2022 foi utilizado novamente para executar:
-
-```cmd id="d9k4vp"
+```cmd
 ping 192.168.98.40
 ```
 
-As requisições não receberam mais respostas do Kali Linux.
+The requests no longer received responses from Kali Linux.
 
-O resultado observado foi:
+The observed result was:
 
-```text id="rsx7j0"
+```text
 C:\Users\Administrator>ping 192.168.98.40
 
 Pinging 192.168.98.40 with 32 bytes of data:
@@ -234,51 +220,47 @@ Ping statistics for 192.168.98.40:
     Packets: Sent = 4, Received = 0, Lost = 4 (100% loss),
 ```
 
-O `100% loss` demonstra que as quatro requisições enviadas pelo Windows Server não receberam respostas.
+The 100% packet loss demonstrates that the four requests sent by Windows Server did not receive responses.
 
-Isso ocorreu porque os pacotes `ICMP echo-request` foram descartados pelo `iptables` no Kali Linux.
+This occurred because the ICMP echo-request packets were discarded by `iptables` on Kali Linux.
 
-### Evidência — Passo 10
+### Evidence — Step 10
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 11.10:** resultado do `ping 192.168.98.40` executado no Windows Server 2022 após a aplicação da regra `iptables`, mostrando `100% loss` e ausência de respostas do Kali Linux.
+> Screenshot of Activity 11.10: the result of `ping 192.168.98.40` executed on Windows Server 2022 after applying the `iptables` rule, showing 100% packet loss and no responses from Kali Linux.
 
-[**Evidências — Módulo 11 / Aulas 43 e 44**](../evidencias.pdf)
+[**View Evidence — Module 11 / Classes 43–44**](../evidencias.pdf)
 
----
+## 7. Removing the Blocking Rule
 
-## 7. Removendo a regra de bloqueio
+After confirming that the blocking rule worked, it was removed on Kali Linux using:
 
-Após confirmar o funcionamento do bloqueio, a regra foi removida no Kali Linux com:
-
-```bash id="x7c3mp"
+```bash
 iptables -D INPUT -p icmp --icmp-type echo-request -j DROP
 ```
 
-O parâmetro:
+The parameter:
 
-```text id="f2n8vk"
+```text
 -D
 ```
 
-remove uma regra existente.
+removes an existing rule.
 
-Os demais parâmetros correspondem à regra que havia sido criada anteriormente.
+The remaining parameters correspond to the rule that was created previously.
 
----
+## 8. Confirming Communication Again
 
-## 8. Confirmando a comunicação novamente
+After removing the rule, the following command was executed again on Windows Server:
 
-Após remover a regra, o comando foi executado novamente no Windows Server:
-
-```cmd id="j4p9wx"
+```cmd
 ping 192.168.98.40
 ```
 
-A comunicação voltou a funcionar:
+Communication was restored:
 
-```text id="xpiov4"
+```text
 C:\Users\Administrator>ping 192.168.98.40
 
 Pinging 192.168.98.40 with 32 bytes of data:
@@ -293,57 +275,57 @@ Approximate round trip times in milli-seconds:
     Minimum = 0ms, Maximum = 1ms, Average = 0ms
 ```
 
-O resultado mostra:
+The result shows:
 
-```text id="v6k2mq"
+```text
 Packets: Sent = 4
 Received = 4
 Lost = 0 (0% loss)
 ```
 
-Assim, após a remoção da regra, as requisições ICMP voltaram a receber respostas normalmente.
+Therefore, after removing the rule, ICMP requests started receiving responses normally again.
 
----
+## 9. Completing the Activity
 
-## 9. Encerrando a atividade
+After confirming that communication was working, the windows used during the lab were closed.
 
-Após confirmar o funcionamento da comunicação, as janelas utilizadas durante o laboratório foram fechadas.
+## Key Concepts
 
----
+- **ICMP:** A protocol used for control and diagnostic messages in IP networks.
+- **Echo Request:** An ICMP message used by `ping` to request a response.
+- **Echo Reply:** The response corresponding to an echo-request.
+- **iptables:** A tool used to configure Netfilter rules.
+- **INPUT:** A chain responsible for processing packets destined for the local system.
+- **DROP:** An action that discards packets matching a rule.
+- **Ping:** A tool used to test connectivity through ICMP messages.
 
-## Conceitos
+## Activity Workflow
 
-* **ICMP:** protocolo utilizado para mensagens de controle e diagnóstico em redes IP.
-* **Echo Request:** mensagem ICMP utilizada pelo `ping` para solicitar uma resposta.
-* **Echo Reply:** resposta correspondente ao `echo-request`.
-* **iptables:** ferramenta utilizada para configurar regras do Netfilter.
-* **INPUT:** chain responsável pelo processamento de pacotes destinados ao próprio sistema.
-* **DROP:** ação que descarta os pacotes correspondentes à regra.
-* **Ping:** ferramenta utilizada para testar a conectividade através de mensagens ICMP.
-
-## Fluxo da atividade
-
-```text id="m8q3zr"
+```text
 Windows Server
 192.168.98.30
       ↓
 ping 192.168.98.40
       ↓
-Kali responde
+Kali responds
       ↓
-Criar regra ICMP DROP
+Create ICMP DROP rule
       ↓
-ping novamente
+Run ping again
       ↓
-100% loss
+100% packet loss
       ↓
-Remover regra
+Remove the rule
       ↓
-ping novamente
+Run ping again
       ↓
-0% loss
+0% packet loss
 ```
 
-## Resultado
+## Result
 
-Foi criada uma regra `iptables` para descartar **ICMP echo-request** recebidos pelo Kali Linux. Após a aplicação da regra, o Windows Server apresentou `100% loss` ao executar `ping` contra `192.168.98.40`. A regra foi removida posteriormente e a comunicação foi restaurada, apresentando `0% loss`.
+An `iptables` rule was created to discard ICMP echo-request packets received by Kali Linux. After applying the rule, Windows Server showed 100% packet loss when executing `ping` against `192.168.98.40`. The rule was subsequently removed, and communication was restored, with 0% packet loss.
+
+---
+
+[Back to Classes 43–44](../README.md) · [Back to Module 11](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
