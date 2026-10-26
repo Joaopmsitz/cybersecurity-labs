@@ -1,216 +1,202 @@
-# Atividade 8.10 — RSA-2048 e Assinatura Digital
+# Activity 8.10 — RSA-2048 and Digital Signatures
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 08  
+> **Classes:** 31–32  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar **RSA-2048** para criar e verificar uma assinatura digital utilizando o OpenSSL.
+## Objective
 
-A atividade demonstra como uma assinatura digital pode ser utilizada para verificar:
+Use RSA-2048 to create and verify a digital signature with OpenSSL.
 
-* a integridade de um arquivo;
-* a correspondência entre a mensagem e a assinatura;
-* a autenticidade associada à posse da chave privada.
+This activity demonstrates how a digital signature can be used to verify:
 
-Também será realizada uma tentativa de validação utilizando uma mensagem modificada, demonstrando que a assinatura não corresponde ao conteúdo alterado.
+- The integrity of a file.
+- The correspondence between a message and its signature.
+- Authenticity associated with possession of the private key.
 
----
+A verification attempt using a modified message is also performed to demonstrate that the original signature does not match the altered content.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramenta:** OpenSSL
-* **Algoritmo assimétrico:** RSA
-* **Tamanho da chave:** 2048 bits
-* **Algoritmo de hash:** SHA-256
-* **Diretório:** `/home/aluno/Documentos/Arquivos`
-* **Mensagem original:** `mensagem.txt`
+- **Operating system:** Kali Linux
+- **Tool:** OpenSSL
+- **Asymmetric algorithm:** RSA
+- **Key size:** 2048 bits
+- **Hash algorithm:** SHA-256
+- **Working directory:** `/home/aluno/Documentos/Arquivos`
+- **Original message:** `mensagem.txt`
 
-> As credenciais utilizadas para acesso ao ambiente de laboratório não são registradas neste README.
+> Credentials used to access the lab environment are not recorded in this README.
 
----
+## 1. Switching to the Root User
 
-## 1. Acesso como root
+Administrative access to Kali Linux was obtained:
 
-Inicialmente, foi obtido acesso administrativo ao Kali Linux:
-
-```bash id="8y2n5k"
+```bash
 sudo -i
 ```
 
----
+## 2. Accessing the Directory and Verifying the Message
 
-## 2. Acesso ao diretório e verificação da mensagem
+The directory used for this activity was accessed:
 
-Foi acessado o diretório utilizado na atividade:
-
-```bash id="4m7p2q"
+```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
-Em seguida, foi verificada a presença da mensagem:
+The presence of the message file was then verified:
 
-```bash id="r6k3vx"
+```bash
 ls
 ```
 
-Saída:
+Output:
 
-```text id="d9w1az"
+```text
 mensagem.txt
 ```
 
----
+## 3. Generating the RSA-2048 Private Key
 
-## 3. Geração da chave privada RSA-2048
+An RSA private key with a size of 2048 bits was generated:
 
-Foi gerada uma chave privada RSA com 2048 bits:
-
-```bash id="q2f8mc"
+```bash
 openssl genpkey -algorithm RSA -out chave_privada.pem -pkeyopt rsa_keygen_bits:2048
 ```
 
-O OpenSSL apresentou caracteres de progresso durante a geração da chave.
+OpenSSL displayed progress characters while generating the key.
 
-A chave privada foi armazenada em:
+The private key was stored in:
 
-```text id="u5j7bn"
+```text
 chave_privada.pem
 ```
 
-Essa chave deve permanecer protegida, pois é utilizada para produzir as assinaturas digitais.
+This key must remain protected because it is used to produce digital signatures.
 
----
+## 4. Generating the Public Key
 
-## 4. Geração da chave pública
+The corresponding public key was extracted from the private key:
 
-A chave pública correspondente foi extraída da chave privada:
-
-```bash id="m9c4yt"
+```bash
 openssl rsa -pubout -in chave_privada.pem -out chave_publica.pem
 ```
 
-Saída:
+Output:
 
-```text id="p7v2kx"
+```text
 writing RSA key
 ```
 
-A estrutura dos arquivos passou a ser:
+The resulting file structure was:
 
-```bash id="a1z6qw"
+```bash
 ls
 ```
 
-Saída:
+Output:
 
-```text id="n3h8sd"
+```text
 chave_privada.pem  chave_publica.pem  mensagem.txt
 ```
 
-A chave pública será utilizada posteriormente para verificar a assinatura.
+The public key will be used later to verify the signature.
 
----
+## 5. Creating the Digital Signature
 
-## 5. Criação da assinatura digital
+The signature was created using the RSA private key and SHA-256:
 
-A assinatura foi criada utilizando a chave privada RSA e o hash SHA-256:
-
-```bash id="c8m2vp"
+```bash
 openssl dgst -sha256 -sign chave_privada.pem -out assinatura.bin mensagem.txt
 ```
 
-Foi realizada uma verificação dos arquivos:
+The files were then checked:
 
-```bash id="x4q7ls"
+```bash
 ls
 ```
 
-Saída:
+Output:
 
-```text id="k6b1rz"
+```text
 assinatura.bin  chave_privada.pem  chave_publica.pem  mensagem.txt
 ```
 
-O arquivo `assinatura.bin` contém a assinatura digital calculada sobre o conteúdo de `mensagem.txt`.
+The `assinatura.bin` file contains the digital signature calculated over the contents of `mensagem.txt`.
 
----
+## 6. Verifying the Original Signature
 
-## 6. Verificação da assinatura original
+The signature was verified using the public key:
 
-A assinatura foi validada utilizando a chave pública:
-
-```bash id="t9f3wd"
+```bash
 openssl dgst -sha256 -verify chave_publica.pem -signature assinatura.bin mensagem.txt
 ```
 
-Saída:
+Output:
 
-```text id="e2v5jc"
+```text
 Verified OK
 ```
 
-O resultado `Verified OK` indica que a assinatura corresponde ao conteúdo atual de `mensagem.txt` e à chave pública utilizada na verificação.
+The `Verified OK` result indicates that the signature matches the current contents of `mensagem.txt` and the public key used for verification.
 
----
+## 7. Creating a Modified Message
 
-## 7. Criação de uma mensagem modificada
+To demonstrate how a change in content affects signature verification, a second message was created:
 
-Para demonstrar o comportamento da assinatura diante de uma alteração no conteúdo, foi criada uma segunda mensagem:
-
-```bash id="s5k8mn"
+```bash
 nano mensagem_errada.txt
 ```
 
-O conteúdo utilizado foi:
+The following content was used:
 
-```text id="h7q1xp"
+```text
 Hackers do mal!
 ```
 
-Essa mensagem é diferente do conteúdo utilizado para gerar `assinatura.bin`.
+This message differs from the content used to generate `assinatura.bin`.
 
----
+## 8. Preparing to Verify the Modified Message
 
-## 8. Preparação para a verificação da mensagem alterada
+The original signature was retained, but verification would now be performed using `mensagem_errada.txt`.
 
-A assinatura original foi mantida, enquanto a verificação passou a ser realizada utilizando `mensagem_errada.txt`.
+The signature was originally calculated over:
 
-A assinatura foi originalmente calculada sobre:
-
-```text id="w3n6rb"
+```text
 mensagem.txt
 ```
 
-Enquanto a nova verificação utiliza:
+The new verification uses:
 
-```text id="v8c2qy"
+```text
 mensagem_errada.txt
 ```
 
-Como os conteúdos são diferentes, o resumo criptográfico utilizado na verificação também não corresponde ao resumo que originou a assinatura.
+Because the contents differ, the cryptographic digest calculated during verification does not match the digest that was signed.
 
----
+## 9. Verifying the Signature Against the Modified Message
 
-## 9. Verificação da assinatura utilizando a mensagem alterada
+An attempt was made to verify the original signature against the modified message:
 
-Foi realizada a tentativa de validar a assinatura original contra a mensagem modificada:
-
-```bash id="j4m9zt"
+```bash
 openssl dgst -sha256 -verify chave_publica.pem -signature assinatura.bin mensagem_errada.txt
 ```
 
-Saída:
+Output:
 
-```text id="p2x7kc"
+```text
 Verification failure
 4047DDE3B77F0000:error:02000068:rsa routines:ossl_rsa_verify:bad signature:../crypto/rsa/rsa_sign.c:430:
 4047DDE3B77F0000:error:1C880004:Provider routines:rsa_verify:RSA lib:../providers/implementations/signature/rsa_sig.c:774
 ```
 
-### Evidência solicitada
+### Requested Evidence
 
-O **passo 9** é a evidência solicitada pela atividade. Ele demonstra que a assinatura gerada para a mensagem original não pode ser validada quando o conteúdo é alterado:
+Step 9 is the evidence requested for this activity. It demonstrates that a signature generated for the original message cannot be verified when the content is modified:
 
-```text id="z6r1qb"
+```text
 ┌──(root㉿kali)-[/home/aluno/Documentos/Arquivos]
 └─# openssl dgst -sha256 -verify chave_publica.pem -signature assinatura.bin mensagem_errada.txt
 Verification failure
@@ -218,54 +204,51 @@ Verification failure
 4047DDE3B77F0000:error:1C880004:Provider routines:rsa_verify:RSA lib:../providers/implementations/signature/rsa_sig.c:774
 ```
 
-[**Evidências — Módulo 8 / Aulas 31 e 32**](../evidencias.pdf)
+Evidence for this activity is included in the PDF for Module 8, Classes 31–32.
 
----
+[View Evidence — Classes 31–32](../evidencias.pdf)
 
-## Conceito aplicado
+## Concept Applied
 
-O processo pode ser representado da seguinte forma:
+The process can be represented as follows:
 
 ```text
-                 MENSAGEM ORIGINAL
+                 ORIGINAL MESSAGE
                         │
                         ▼
-                    SHA-256
+                     SHA-256
                         │
                         ▼
-               Resumo criptográfico
+                 Cryptographic digest
                         │
                         ▼
-              CHAVE PRIVADA RSA
+                 RSA PRIVATE KEY
                         │
                         ▼
-                ASSINATURA DIGITAL
-                        │
+                  DIGITAL SIGNATURE
                         │
                         ▼
-              ┌───────────────────┐
-              │   Verificação     │
-              │   com chave       │
-              │     pública       │
-              └─────────┬─────────┘
+              ┌────────────────────┐
+              │    Verification    │
+              │   using the       │
+              │   public key      │
+              └─────────┬──────────┘
                         │
                  ┌──────┴──────┐
                  ▼             ▼
-             Mensagem       Mensagem
-             original       alterada
+             Original       Modified
+              message        message
                  │             │
                  ▼             ▼
              Verified OK   Verification
                               failure
 ```
 
-A assinatura digital não tem como objetivo esconder o conteúdo da mensagem. Seu objetivo é permitir a verificação de que o conteúdo apresentado corresponde ao conteúdo utilizado no processo de assinatura.
+The purpose of a digital signature is not to hide the message's contents. Instead, it allows verification that the presented content matches the content used during the signing process.
 
----
+## Integrity and Authenticity
 
-## Integridade e autenticidade
-
-No primeiro teste:
+In the first test:
 
 ```text
 mensagem.txt
@@ -275,9 +258,9 @@ assinatura.bin
 Verified OK
 ```
 
-A assinatura corresponde à mensagem original.
+The signature matches the original message.
 
-Quando `mensagem_errada.txt` foi utilizada:
+When `mensagem_errada.txt` was used:
 
 ```text
 mensagem_errada.txt
@@ -287,64 +270,62 @@ assinatura.bin
 Verification failure
 ```
 
-A alteração do conteúdo faz com que a verificação da assinatura falhe.
+Changing the message causes signature verification to fail.
 
-Isso demonstra a propriedade de **integridade** proporcionada pelo mecanismo de assinatura. A associação da assinatura a uma identidade também depende da proteção da chave privada e da confiança estabelecida na chave pública.
+This demonstrates the integrity property provided by the signature mechanism. Associating a signature with a specific identity also depends on protecting the private key and establishing trust in the public key.
 
----
+## Technical Note
 
-## Observação técnica
-
-O comando utilizado foi:
+The command used was:
 
 ```bash
 openssl dgst -sha256 -sign chave_privada.pem -out assinatura.bin mensagem.txt
 ```
 
-Assim, o processo utiliza **SHA-256** para produzir o resumo da mensagem e RSA para gerar a assinatura.
+The process uses SHA-256 to calculate the message digest and RSA to generate the signature.
 
-A assinatura digital é diferente da criptografia utilizada para confidencialidade: **assinar uma mensagem não a torna secreta**. Qualquer pessoa que tenha acesso ao conteúdo e à chave pública poderá verificar a assinatura.
+A digital signature differs from encryption used for confidentiality: signing a message does not make it secret. Anyone with access to the message and the public key can verify the signature.
 
----
+## 10. Cleaning Up the Environment
 
-## 10. Limpeza do ambiente
+After completing the activity, the generated files were removed:
 
-Após a conclusão da atividade, os arquivos gerados foram removidos:
-
-```bash id="q8w4mf"
+```bash
 rm -r *
 ```
 
-O terminal solicitou confirmação:
+The terminal requested confirmation:
 
-```text id="b5n7cx"
+```text
 zsh: sure you want to delete all 5 files in /home/aluno/Documentos/Arquivos [yn]? y
 ```
 
-Após a confirmação, foi utilizado:
+After confirmation, the following command was used:
 
-```bash id="k2v9pd"
+```bash
 ls
 ```
 
-O diretório ficou sem os arquivos utilizados na atividade.
+The directory no longer contained the files used in the activity.
 
----
+## Result
 
-## Resultado
+An RSA-2048 key pair was generated, and a SHA-256 digital signature was created for `mensagem.txt`.
 
-Foi gerado um par de chaves RSA-2048 e criada uma assinatura digital SHA-256 para `mensagem.txt`.
-
-A verificação da mensagem original retornou:
+Verification of the original message returned:
 
 ```text
 Verified OK
 ```
 
-Quando a mesma assinatura foi utilizada com `mensagem_errada.txt`, a verificação retornou:
+When the same signature was used with `mensagem_errada.txt`, verification returned:
 
 ```text
 Verification failure
 ```
 
-O resultado demonstra, na prática, que uma alteração no conteúdo da mensagem faz com que a assinatura digital deixe de ser válida.
+The result demonstrates that modifying the message content causes the digital signature verification to fail.
+
+---
+
+[Back to Classes 31–32](../) · [Back to Module 8](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
