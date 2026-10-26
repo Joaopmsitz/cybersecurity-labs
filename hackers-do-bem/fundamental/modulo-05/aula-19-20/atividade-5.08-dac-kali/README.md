@@ -1,56 +1,58 @@
-# Atividade 5.8 — DAC no Kali Linux
+# Activity 5.08 — Discretionary Access Control (DAC) on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 05  
+> **Class:** 19–20  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foi realizada uma prática de **Controle de Acesso Discricionário (DAC — Discretionary Access Control)** no Kali Linux, utilizando as permissões tradicionais de arquivos do Linux.
+## Objective
 
-O objetivo é observar as permissões inicialmente atribuídas a um arquivo e, em seguida, modificá-las utilizando o comando `chmod`, concedendo ao proprietário do arquivo permissões de leitura, escrita e execução.
+This activity demonstrates Discretionary Access Control (DAC) on Kali Linux using traditional Linux file permissions.
 
----
+The objective is to inspect the permissions initially assigned to a file and then modify them using the `chmod` command, granting the file owner read, write, and execute permissions.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.40`
-* **Usuário:** `aluno`
-* **Diretório utilizado:** `/home/aluno/Documentos/`
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
+- **Working directory:** `/home/aluno/Documentos/`
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this document.
 
----
+## Procedure
 
-## 1. Acessando o terminal
+### 1. Open the Terminal
 
-Após acessar a máquina Kali Linux por RDP, foi aberto o terminal e obtido acesso administrativo com:
+After accessing the Kali Linux machine through RDP, the terminal was opened, and administrative access was obtained using:
 
 ```bash
 sudo -i
 ```
 
-Em seguida, foi acessado o diretório `Documentos` do usuário:
+The user's Documents directory was then accessed:
 
 ```bash
 cd /home/aluno/Documentos/
 ```
 
----
+### 2. Create the File
 
-## 2. Criando o arquivo
-
-Foi utilizado o editor `nano` para criar o arquivo `texto.txt`:
+The `nano` editor was used to create the `texto.txt` file:
 
 ```bash
 nano texto.txt
 ```
 
-O conteúdo inserido no arquivo foi:
+The following content was entered into the file:
 
 ```text
 Teste1
 ```
 
-O arquivo foi salvo utilizando:
+The file was saved using:
 
 ```text
 Ctrl + X
@@ -58,110 +60,102 @@ S
 Enter
 ```
 
----
+### 3. Verify the File
 
-## 3. Verificando o arquivo
-
-Após salvar o arquivo, foi utilizado o comando `ls` para confirmar sua existência:
+After saving the file, the `ls` command was used to confirm that it existed:
 
 ```bash
 ls
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 ┌──(root㉿kali)-[/home/aluno/Documentos]
-└─# ls            
+└─# ls
 texto.txt
 ```
 
-O resultado confirma que o arquivo `texto.txt` foi criado no diretório `/home/aluno/Documentos/`.
+The output confirms that `texto.txt` was created in `/home/aluno/Documentos/`.
 
----
+### 4. Inspect the Current Permissions
 
-## 4. Verificando as permissões atuais
-
-Para visualizar as permissões detalhadas do arquivo, foi executado:
+To view the file's detailed permissions, the following command was executed:
 
 ```bash
 ls -l
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 ┌──(root㉿kali)-[/home/aluno/Documentos]
-└─# ls -l         
+└─# ls -l
 total 4
 -rw-r--r-- 1 root root 7 fev 10 18:10 texto.txt
 ```
 
-A saída pode ser interpretada da seguinte forma:
+The output can be interpreted as follows:
 
 ```text
 -rw-r--r-- 1 root root 7 fev 10 18:10 texto.txt
 │││││││││
-││││││││└── arquivo
-│││││││└─── permissões de outros usuários
-││││││└──── permissões do grupo
-│││││└───── permissões do proprietário
+││││││││└── file
+│││││││└─── permissions for other users
+││││││└──── group permissions
+│││││└───── owner permissions
 ```
 
-A sequência:
+The permission string:
 
 ```text
 -rw-r--r--
 ```
 
-representa:
+represents:
 
-* `-` → arquivo regular;
-* `rw-` → o proprietário possui leitura e escrita;
-* `r--` → o grupo possui apenas leitura;
-* `r--` → outros usuários possuem apenas leitura.
+- `-` — regular file.
+- `rw-` — the owner has read and write permissions.
+- `r--` — the group has read-only permission.
+- `r--` — other users have read-only permission.
 
-Também é possível observar que:
+The output also shows that:
 
-* o proprietário é `root`;
-* o grupo associado é `root`;
-* o arquivo possui 7 bytes;
-* o nome do arquivo é `texto.txt`.
+- The owner is `root`.
+- The associated group is `root`.
+- The file is 7 bytes in size.
+- The filename is `texto.txt`.
 
----
+### 5. Modify Permissions with `chmod`
 
-## 5. Modificando as permissões com chmod
-
-Para demonstrar o controle de acesso discricionário, foi utilizado o comando:
+To demonstrate discretionary access control, the following command was used:
 
 ```bash
 chmod u+rwx texto.txt
 ```
 
-O comando `chmod` permite modificar as permissões de acesso de arquivos e diretórios.
+The `chmod` command modifies access permissions for files and directories.
 
-Neste caso:
+In this command:
 
-* `u` → **user**, ou seja, o proprietário do arquivo;
-* `+` → adiciona permissões;
-* `r` → leitura (**read**);
-* `w` → escrita (**write**);
-* `x` → execução (**execute**);
-* `texto.txt` → arquivo que terá suas permissões modificadas.
+- `u` — user, meaning the file owner.
+- `+` — adds permissions.
+- `r` — read permission.
+- `w` — write permission.
+- `x` — execute permission.
+- `texto.txt` — the file whose permissions will be modified.
 
-Assim, o comando adiciona as permissões de **leitura, escrita e execução ao proprietário** do arquivo.
+The command therefore adds read, write, and execute permissions for the file owner.
 
----
+### 6. Verify the Updated Permissions
 
-## 6. Verificando a nova permissão
-
-Após executar o `chmod`, foi utilizado novamente:
+After executing `chmod`, the following command was run again:
 
 ```bash
 ls -l
 ```
 
-Saída observada:
+**Observed output:**
 
 ```text
 ┌──(root㉿kali)-[/home/aluno/Documentos]
@@ -170,63 +164,63 @@ total 4
 -rwxr--r-- 1 root root 7 fev 10 18:10 texto.txt
 ```
 
-A alteração pode ser observada na primeira parte da permissão:
+The change can be observed in the permission string.
 
-Antes:
+**Before:**
 
 ```text
 -rw-r--r--
 ```
 
-Depois:
+**After:**
 
 ```text
 -rwxr--r--
 ```
 
-A permissão `x` foi adicionada ao proprietário. Dessa forma, o proprietário `root` passou a possuir:
+The `x` permission was added for the owner. As a result, the `root` owner now has:
 
 ```text
 rwx
 ```
 
-ou seja:
+This represents:
 
-* leitura;
-* escrita;
-* execução.
+- Read
+- Write
+- Execute
 
-Enquanto as permissões do grupo e dos demais usuários permaneceram:
+The group and other users retain their previous permissions:
 
 ```text
 r--
 ```
 
----
+**Technical note:** Adding the execute permission sets the file's executable permission bit. It does not, by itself, make a plain text file into an executable program.
 
-## Conceitos envolvidos
+## Concepts Practiced
 
 ### DAC — Discretionary Access Control
 
-O **DAC (Discretionary Access Control)** é um modelo de controle de acesso no qual o proprietário de um recurso possui autoridade para definir ou modificar as permissões de acesso.
+Discretionary Access Control (DAC) is an access control model in which the owner of a resource has authority to define or modify access permissions.
 
-No Linux, esse modelo é representado principalmente pelas permissões associadas a:
+In Linux, this model is primarily represented by permissions associated with:
 
-* proprietário (**user/owner**);
-* grupo (**group**);
-* outros usuários (**others**).
+- Owner (`user`/`owner`)
+- Group (`group`)
+- Other users (`others`)
 
-### Permissões Linux
+### Linux File Permissions
 
-As três permissões básicas utilizadas são:
+The three basic permissions used in this activity are:
 
-| Permissão | Símbolo | Significado       |
-| --------- | ------- | ----------------- |
-| Read      | `r`     | Permite leitura   |
-| Write     | `w`     | Permite alteração |
-| Execute   | `x`     | Permite execução  |
+| Permission | Symbol | Meaning |
+|---|---|---|
+| Read | `r` | Allows reading |
+| Write | `w` | Allows modification |
+| Execute | `x` | Allows execution |
 
-Essas permissões são organizadas em três grupos:
+These permissions are organized into three groups:
 
 ```text
 rwx rwx rwx
@@ -236,48 +230,52 @@ rwx rwx rwx
 └────────── owner
 ```
 
-### chmod
+Each group has its own combination of read, write, and execute permissions.
 
-O comando `chmod` é utilizado para alterar as permissões de arquivos e diretórios.
+### `chmod`
 
-Nesta atividade foi utilizado:
+The `chmod` command is used to change file and directory permissions.
+
+In this activity, the following command was used:
 
 ```bash
 chmod u+rwx texto.txt
 ```
 
-O comando modificou somente as permissões do proprietário, sem alterar as permissões atribuídas ao grupo ou aos demais usuários.
+The command modified only the owner's permissions without changing those assigned to the group or other users.
 
----
+## Results
 
-## Resultado
+The activity demonstrated how DAC works in Linux through traditional file permissions.
 
-A atividade demonstrou, na prática, como o **DAC funciona no Linux** por meio das permissões tradicionais de arquivos.
-
-O arquivo inicialmente possuía:
+Initially, the file had the following permissions:
 
 ```text
 -rw-r--r--
 ```
 
-Após a execução de:
+After executing:
 
 ```bash
 chmod u+rwx texto.txt
 ```
 
-passou a possuir:
+the permissions became:
 
 ```text
 -rwxr--r--
 ```
 
-A alteração mostra que o proprietário do arquivo recebeu a permissão de execução, mantendo as permissões de leitura e escrita que já possuía.
+This change shows that the file owner was granted execute permission while retaining the read and write permissions already assigned.
+
+The group and other users continued to have read-only access.
+
+## Evidence
+
+The evidence for this activity corresponds to Step 7, after executing `chmod` and verifying the updated permissions using `ls -l`.
+
+[View Evidence — Classes 19–20](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 7**, após a execução do `chmod` e a verificação das novas permissões com `ls -l`.
-
-[**Evidências — Módulo 5 / Aulas 3 e 4**](../evidencias.pdf)
+[Back to Classes 19–20](../) · [Back to Module 05](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
