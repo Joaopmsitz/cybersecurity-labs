@@ -1,300 +1,290 @@
-# Atividade 5.7 — Criando uma Organizational Unit (OU) no Windows Server 2022
+# Activity 5.07 — Creating an Organizational Unit (OU) in Windows Server 2022
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 05  
+> **Class:** 19–20  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Criar uma **Organizational Unit (OU)** no Active Directory e adicionar um novo usuário dentro dessa estrutura.
+## Objective
 
-Nesta atividade, foi criada a OU `TI` no domínio `aluno.hacker.com` e, dentro dela, um usuário chamado `usuarioti`.
+Create an Organizational Unit (OU) in Active Directory and add a new user within that structure.
 
-O exercício demonstra a utilização de **Organizational Units (OUs)** e do **Common Name (CN)** na organização de objetos do Active Directory.
+In this activity, an OU named `TI` was created in the `aluno.hacker.com` domain, and a user named `usuarioti` was created inside it.
 
----
+The exercise demonstrates the use of Organizational Units (OUs) and the Common Name (CN) in organizing Active Directory objects.
 
-## Ambiente
+## Environment
 
-* Windows Server 2022 — servidor / Domain Controller
-* Active Directory Users and Computers
-* Domínio: `aluno.hacker.com`
-* OU criada: `TI`
-* Usuário criado: `usuarioti`
-* Nome do usuário: `Usuario TI`
+- Windows Server 2022 — server / Domain Controller
+- Active Directory Users and Computers
+- **Domain:** `aluno.hacker.com`
+- **Created OU:** `TI`
+- **Created user:** `usuarioti`
+- **User's name:** `Usuario TI`
 
----
+## Procedure
 
-## 1. Acessando o Windows Server 2022
+### 1. Access Windows Server 2022
 
-Foi estabelecida uma conexão RDP com o Windows Server 2022 servidor:
+An RDP connection was established to the Windows Server 2022 server:
 
-```text id="8k2m4p"
+```text
 192.168.98.20
 ```
 
-O acesso foi realizado utilizando uma conta administrativa do domínio.
+Access was performed using a domain administrative account.
 
-As credenciais utilizadas no laboratório não são registradas neste README.
+The credentials used in the laboratory are not recorded in this README.
 
----
+### 2. Open Active Directory Users and Computers
 
-## 2. Abrindo o Active Directory Users and Computers
+The following search field was used on the taskbar:
 
-Na barra de tarefas, foi utilizado o campo:
-
-```text id="m6q9v2"
+```text
 Type here to search
 ```
 
-e pesquisado:
+The following application was searched for:
 
-```text id="r3w7c1"
+```text
 Active Directory Users and Computers
 ```
 
-O aplicativo foi aberto a partir dos resultados da pesquisa.
+The application was opened from the search results.
 
----
+### 3. Locate the Domain
 
-## 3. Localizando o domínio
+In the left pane of Active Directory Users and Computers, the following domain was located:
 
-No painel esquerdo do **Active Directory Users and Computers**, foi localizado o domínio:
-
-```text id="x5n8j4"
+```text
 aluno.hacker.com
 ```
 
-O domínio foi selecionado para visualizar os objetos existentes no Active Directory.
+The domain was selected to view the existing Active Directory objects.
 
----
+### 4. Create the Organizational Unit
 
-## 4. Criando a Organizational Unit
+The following domain was right-clicked:
 
-Com o botão direito sobre:
-
-```text id="p7k2m9"
+```text
 aluno.hacker.com
 ```
 
-foi selecionado:
+The following options were selected:
 
-```text id="v4c8q1"
+```text
 New
     ↓
 Organizational Unit
 ```
 
-Na janela apresentada, foi informado o nome:
+In the dialog that appeared, the following name was entered:
 
-```text id="t6x3w8"
+```text
 TI
 ```
 
-e confirmado com:
+The operation was confirmed using:
 
-```text id="n9m5r2"
+```text
 OK
 ```
 
-A nova OU passou a aparecer na estrutura do domínio.
+The new OU then appeared in the domain structure.
 
----
+### 5. Verify the Created OU
 
-## 5. Verificando a OU criada
+In the left pane of Active Directory Users and Computers, the structure now displayed:
 
-No painel esquerdo do **Active Directory Users and Computers**, a estrutura passou a apresentar:
-
-```text id="h2q7c5"
+```text
 aluno.hacker.com
 └── TI
 ```
 
-A OU `TI` será utilizada para organizar o usuário criado nesta atividade.
+The `TI` OU would be used to organize the user created in this activity.
 
----
+### 6. Create a User Inside the OU
 
-## 6. Criando um usuário dentro da OU
+The following OU was selected:
 
-Foi selecionada a OU:
-
-```text id="j8w4p1"
+```text
 TI
 ```
 
-Com o botão direito, foi acessado:
+It was right-clicked, and the following options were selected:
 
-```text id="f3m9x6"
+```text
 New
     ↓
 User
 ```
 
-Foi aberta a janela de criação de um novo usuário.
+The new user creation dialog opened.
 
----
+### 7. Enter the User Information
 
-## 7. Preenchendo os dados do usuário
+The following identification fields were completed:
 
-Nos campos de identificação foram inseridos:
-
-```text id="c5v2n8"
+```text
 First name:
 Usuario
-```
 
-```text id="q1r7m4"
 Last name:
 TI
 ```
 
-No campo:
+In the following field:
 
-```text id="z6x3p9"
+```text
 User logon name
 ```
 
-foi informado:
+the value below was entered:
 
-```text id="w8k4c2"
+```text
 usuarioti
 ```
 
-O valor `usuarioti` corresponde ao nome de logon utilizado pelo novo usuário e representa o **Common Name (CN)** considerado no exercício.
+The value `usuarioti` is the logon name used by the new account. The user's displayed name is `Usuario TI`; in Active Directory, the Common Name (CN) is a directory object attribute and is not necessarily the same as the user logon name.
 
-**Esta é a etapa solicitada como evidência da atividade.**
+This is the step specified as the activity evidence.
 
----
+### 8. Configure the Password
 
-## 8. Configurando a senha
+The following option was selected:
 
-Foi selecionado:
-
-```text id="g5n2v7"
+```text
 Next
 ```
 
-Na etapa seguinte, foi definida a senha do usuário conforme as instruções do laboratório.
+On the next screen, a password was configured according to the laboratory instructions.
 
-A opção:
+The following option was unchecked:
 
-```text id="a9c4x1"
+```text
 User must change password at next logon
 ```
 
-foi desmarcada.
+The following option was also enabled:
 
-Também foi habilitada:
-
-```text id="s7m3q8"
+```text
 Password never expires
 ```
 
-A senha utilizada no laboratório não é registrada neste README.
+The password used in the laboratory is not recorded in this README.
 
----
+**Security note:** The `Password never expires` setting was used as part of this laboratory exercise. In production environments, password expiration and credential management should follow the organization's security policy and applicable identity security guidance.
 
-## 9. Finalizando a criação do usuário
+### 9. Finish Creating the User
 
-Foi selecionado:
+The following options were selected:
 
-```text id="d2k8w5"
+```text
 Next
     ↓
 Finish
 ```
 
-O usuário foi criado com sucesso dentro da OU `TI`.
+The user was successfully created inside the `TI` OU.
 
-A estrutura resultante ficou semelhante a:
+The resulting structure was similar to:
 
-```text id="v6p1x9"
+```text
 aluno.hacker.com
 └── TI
     └── Usuario TI
 ```
 
-O usuário pode posteriormente ser administrado através do próprio **Active Directory Users and Computers**, permitindo alterações de propriedades, grupos, permissões e outras configurações relacionadas à conta.
+The user can subsequently be managed through Active Directory Users and Computers, where administrators can modify account properties, group membership, permissions, and other account-related settings.
 
----
-
-## Conceitos
+## Concepts Practiced
 
 ### Organizational Unit (OU)
 
-Uma **Organizational Unit** é um objeto do Active Directory utilizado para organizar usuários, computadores e outros objetos dentro de uma estrutura lógica.
+An Organizational Unit is an Active Directory object used to organize users, computers, and other objects within a logical structure.
 
-As OUs também podem ser utilizadas como escopo para aplicação e organização de **Group Policy Objects (GPOs)**.
+OUs can also be used as scopes for applying and organizing Group Policy Objects (GPOs).
 
-Neste laboratório foi criada:
+In this laboratory, the following OU was created:
 
-```text id="m8q4c7"
+```text
 OU: TI
 ```
 
-dentro do domínio:
+within the domain:
 
-```text id="x2v9p5"
+```text
 aluno.hacker.com
 ```
 
 ### Common Name (CN)
 
-O **Common Name (CN)** identifica um objeto dentro da estrutura do diretório.
+The Common Name (CN) is an attribute used to identify an object within a directory's distinguished name.
 
-No exercício, o usuário foi criado com:
+In this exercise, the user was created with the display name:
 
-```text id="r4k1w8"
+```text
+Usuario TI
+```
+
+and the logon name:
+
+```text
 usuarioti
 ```
 
-como nome de logon.
+These values serve different purposes in Active Directory and should not be assumed to be interchangeable.
 
 ### Active Directory Users and Computers
 
-O **Active Directory Users and Computers (ADUC)** é uma ferramenta administrativa utilizada para gerenciar objetos do Active Directory, incluindo:
+Active Directory Users and Computers (ADUC) is an administrative tool used to manage Active Directory objects, including:
 
-* usuários;
-* grupos;
-* computadores;
-* Organizational Units;
-* propriedades das contas;
-* associação de objetos a grupos.
+- Users
+- Groups
+- Computers
+- Organizational Units
+- Account properties
+- Group membership
 
----
+### Created Structure
 
-## Estrutura criada
+At the end of the activity, the domain organization was:
 
-Ao final da atividade, a organização do domínio ficou:
-
-```text id="c9m5x2"
+```text
 aluno.hacker.com
 └── TI
     └── Usuario TI
 ```
 
-Essa estrutura permite separar objetos de acordo com departamentos ou funções, facilitando posteriormente a administração do ambiente.
+This structure allows objects to be separated according to departments or functions, making the environment easier to administer.
 
----
+## Results
 
-## Resultado
+The `TI` Organizational Unit was created within the `aluno.hacker.com` domain.
 
-Foi criada a **Organizational Unit `TI`** dentro do domínio `aluno.hacker.com`.
+The following user was then created inside that OU:
 
-Em seguida, foi criado dentro dessa OU o usuário:
-
-```text id="y7q3n6"
+```text
 Usuario TI
 ```
 
-com o nome de logon:
+with the logon name:
 
-```text id="p5c8m1"
+```text
 usuarioti
 ```
 
-A atividade demonstrou a criação e organização de objetos utilizando o Active Directory Users and Computers.
+The activity demonstrated how to create and organize Active Directory objects using Active Directory Users and Computers.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 05, Classes 19–20.
+
+**Recorded screenshot:** Step 9 — completing the creation of the `usuarioti` user inside the `TI` OU.
+
+[View Evidence — Classes 19–20](../evidencias.pdf)
 
 ---
 
-## Evidências
-
-[**Evidências — Módulo 5 / Aulas 3 e 4**](../evidencias.pdf)
-
-**Evidência registrada:** passo 9 — finalização da criação do usuário `usuarioti` dentro da OU `TI`.
+[Back to Classes 19–20](../) · [Back to Module 05](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
