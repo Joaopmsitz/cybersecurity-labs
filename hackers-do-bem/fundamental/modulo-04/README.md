@@ -3,7 +3,7 @@
 > **Program:** Hackers do Bem  
 > **Stage:** Fundamental  
 > **Module:** 04  
-> **Status:** Completed activities documented
+> **Status:** Activities documented
 
 ## Module Overview
 
@@ -15,13 +15,13 @@ The module contains ten activities organized into two class groups.
 
 **[Browse Classes 13–14](./aula-13-14/)**
 
-| Activity | Topic |
-|---|---|
-| 4.01 | Linux Authentication and User Management |
-| 4.02 | SELinux — Security-Enhanced Linux |
-| 4.03 | KeePassXC — Password Management |
-| 4.04 | Password Auditing with John the Ripper |
-| 4.05 | Windows Credential Manager |
+| Activity | Topic | Documentation |
+|---|---|---|
+| 4.01 | Linux Authentication and User Management | [View README](./aula-13-14/atividade-4.01-autenticacao-linux/README.md) |
+| 4.02 | SELinux — Security-Enhanced Linux | [View README](./aula-13-14/atividade-4.02-selinux/README.md) |
+| 4.03 | KeePassXC — Password Management | [View README](./aula-13-14/atividade-4.03-keepassxc/README.md) |
+| 4.04 | Password Auditing with John the Ripper | [View README](./aula-13-14/atividade-4.04-john-the-ripper/README.md) |
+| 4.05 | Windows Credential Manager | [View README](./aula-13-14/atividade-4.05-gerenciador-credenciais-windows/README.md) |
 
 **Evidence:** [View Evidence — Classes 13–14](./aula-13-14/evidencias.pdf)
 
@@ -56,7 +56,7 @@ The module contains ten activities organized into two class groups.
 
 Upon completing the documented activities, learners practiced inspecting security configurations, managing authentication credentials, auditing test passwords, configuring centralized authentication, generating and validating TOTP codes, and examining hardware security capabilities in a virtualized environment.
 
-The exercises were performed in controlled laboratory environments. Secrets, passwords, recovery codes, and other sensitive authentication material should not be included in public repository documentation.
+The exercises were performed in controlled laboratory environments. Passwords, secrets, recovery codes, and other sensitive authentication material should not be included in public repository documentation.
 
 ---
 
