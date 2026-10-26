@@ -1,40 +1,34 @@
-# Atividade 12.2 — Habilitando o NTP no Windows Server 2022
+# Activity 12.02 — Enabling NTP on Windows Server 2022
 
-## Objetivo
+## Objective
 
-Configurar o serviço **Windows Time (W32Time)** no Windows Server 2022 para utilizar o **NTP (Network Time Protocol)**, habilitando o servidor e o cliente NTP por meio da Política de Grupo e configurando o servidor `time.google.com`.
+Configure the Windows Time (W32Time) service on Windows Server 2022 to use NTP (Network Time Protocol), enabling the NTP server and client through Group Policy and configuring the server `time.google.com`.
 
-Ao final, o estado do serviço será consultado com o comando `w32tm /query /status`.
+At the end of the activity, the service status is queried using the command `w32tm /query /status`.
 
----
+## Environment
 
-## Ambiente
+- **Operating system:** Windows Server 2022
+- **Access:** RDP
+- **Service:** Windows Time (W32Time)
+- **Protocol:** NTP
+- **Configured NTP server:** `time.google.com`
 
-* **Sistema operacional:** Windows Server 2022
-* **Acesso:** RDP
-* **Serviço:** Windows Time (`W32Time`)
-* **Protocolo:** NTP
-* **Servidor NTP configurado:** `time.google.com`
+## 1. Opening the Group Policy Editor
 
----
+In the Windows Server 2022 taskbar search field, the following command was entered:
 
-## 1. Abrindo o Editor de Política de Grupo
-
-No campo de pesquisa da barra de tarefas do Windows Server 2022, foi digitado:
-
-```text id="f4k8mz"
+```text
 gpedit.msc
 ```
 
-Em seguida, foi aberto o **Local Group Policy Editor**.
+The Local Group Policy Editor was then opened.
 
----
+## 2. Accessing Windows Time Settings
 
-## 2. Acessando as configurações do Windows Time
+In the Group Policy Editor, the following path was followed:
 
-No Editor de Política de Grupo, foi seguido o caminho:
-
-```text id="j7p2qx"
+```text
 Computer Configuration
 → Administrative Templates
 → System
@@ -42,142 +36,128 @@ Computer Configuration
 → Time Providers
 ```
 
-A seção **Time Providers** contém as configurações relacionadas aos provedores de tempo utilizados pelo Windows.
+The Time Providers section contains settings related to the time providers used by Windows.
 
----
+## 3. Enabling the Windows NTP Server
 
-## 3. Habilitando o Windows NTP Server
+In the right pane of the window, the following policy was located:
 
-Na área direita da janela, foi localizada a política:
-
-```text id="w8c3nr"
+```text
 Enable Windows NTP Server
 ```
 
-A política foi aberta com duplo clique.
+The policy was opened by double-clicking it.
 
-Em seguida:
+Next, the following actions were performed:
 
-1. Selecionado **Enabled**.
-2. Clicado em **OK**.
+- Selected **Enabled**.
+- Clicked **OK**.
 
-Essa configuração habilita a funcionalidade de servidor NTP do Windows.
+This setting enables the Windows NTP server functionality.
 
----
+## 4. Enabling the Windows NTP Client
 
-## 4. Habilitando o Windows NTP Client
+In the same section, the following policy was located:
 
-Na mesma seção, foi localizada a política:
-
-```text id="m5v9kt"
+```text
 Enable Windows NTP Client
 ```
 
-A política foi aberta e configurada como:
+The policy was opened and configured as follows:
 
-```text id="x2q6wp"
+```text
 Enabled
 ```
 
-Depois, foi clicado em **OK**.
+Then, **OK** was clicked.
 
-Essa configuração habilita o cliente NTP do Windows para realizar sincronização de horário.
+This setting enables the Windows NTP client to synchronize the system clock.
 
----
+## 5. Configuring the NTP Server
 
-## 5. Configurando o servidor NTP
+Still in Time Providers, the following policy was opened:
 
-Ainda em **Time Providers**, foi aberta a política:
-
-```text id="r9d4vb"
+```text
 Configure Windows NTP Client
 ```
 
-A configuração foi definida como:
+The setting was configured as follows:
 
-```text id="n6x3cz"
+```text
 Enabled
 ```
 
-No campo **NtpServer**, foi informado:
+In the `NtpServer` field, the following value was entered:
 
-```text id="k4p8ws"
+```text
 time.google.com,0x9
 ```
 
-Em seguida, foi clicado em **OK**.
+Then, **OK** was clicked.
 
-O valor `time.google.com` define o servidor de referência configurado para o cliente NTP. O parâmetro `0x9` faz parte da configuração do provedor de tempo do Windows.
+The value `time.google.com` specifies the reference server configured for the NTP client. The parameter `0x9` is part of the Windows Time provider configuration.
 
----
+## 6. Opening PowerShell as Administrator
 
-## 6. Abrindo o PowerShell como administrador
+In the taskbar search field, the following term was entered:
 
-No campo de pesquisa da barra de tarefas, foi digitado:
-
-```text id="c7m2vx"
+```text
 Windows PowerShell
 ```
 
-Em seguida, foi clicado com o botão direito sobre **Windows PowerShell** e selecionada a opção:
+Next, Windows PowerShell was right-clicked, and the following option was selected:
 
-```text id="z5r9qp"
+```text
 Run as administrator
 ```
 
----
+## 7. Restarting the Windows Time Service
 
-## 7. Reiniciando o serviço Windows Time
+To apply the settings to the service, the following command was executed:
 
-Para que as configurações fossem aplicadas ao serviço, foi executado:
-
-```powershell id="b3n7kf"
+```powershell
 net stop w32time
 ```
 
-Resultado:
+Output:
 
-```text id="6qv2md"
+```text
 PS C:\Users\Administrator> net stop w32time
 The Windows Time service is stopping.
 The Windows Time service was stopped successfully.
 ```
 
-O serviço foi interrompido com sucesso.
+The service was successfully stopped.
 
----
+## 8. Starting Windows Time Again
 
-## 8. Iniciando novamente o Windows Time
+Next, the service was started again:
 
-Em seguida, o serviço foi iniciado novamente:
-
-```powershell id="h8p4rs"
+```powershell
 net start w32time
 ```
 
-Resultado:
+Output:
 
-```text id="2m7xvc"
+```text
 PS C:\Users\Administrator> net start w32time
 The Windows Time service is starting.
 The Windows Time service was started successfully.
 ```
 
-O serviço **Windows Time** voltou a funcionar.
+The Windows Time service resumed operation.
 
----
+## 9. Querying the NTP Service Status
 
-## 9. Consultando o estado do serviço NTP
+To check the current status of the time service, the following command was executed:
 
-Para verificar o estado atual do serviço de horário, foi executado:
-
-```powershell id="v6k3qp"
+```powershell
 w32tm /query /status
 ```
 
-A saída apresentada pelo laboratório foi:
+The output provided by the lab was:
 
-```text id="a4r9xz"
+```text
 PS C:\Users\Administrator> w32tm /query /status
 Leap Indicator: 0(no warning)
 Stratum: 1 (primary reference - syncd by radio clock)
@@ -190,7 +170,7 @@ Source: Local CMOS Clock
 Poll Interval: 6 (64s)
 ```
 
-### Interpretação dos campos
+### Interpreting the Fields
 
 #### Leap Indicator
 
@@ -198,7 +178,7 @@ Poll Interval: 6 (64s)
 Leap Indicator: 0(no warning)
 ```
 
-Indica o estado relacionado a ajustes de segundos intercalares. O valor apresentado não indica nenhum aviso.
+Indicates the status related to leap-second adjustments. The displayed value does not indicate any warning.
 
 #### Stratum
 
@@ -206,7 +186,7 @@ Indica o estado relacionado a ajustes de segundos intercalares. O valor apresent
 Stratum: 1
 ```
 
-Representa o nível hierárquico da fonte de tempo indicada pelo serviço.
+Represents the hierarchical level of the time source reported by the service.
 
 #### Precision
 
@@ -214,7 +194,7 @@ Representa o nível hierárquico da fonte de tempo indicada pelo serviço.
 Precision: -23 (119.209ns per tick)
 ```
 
-Representa a precisão estimada do relógio do sistema.
+Represents the estimated precision of the system clock.
 
 #### Root Delay
 
@@ -222,7 +202,7 @@ Representa a precisão estimada do relógio do sistema.
 Root Delay: 0.0000000s
 ```
 
-Indica o atraso associado à comunicação com a referência de tempo.
+Indicates the delay associated with communication with the time reference.
 
 #### Root Dispersion
 
@@ -230,7 +210,7 @@ Indica o atraso associado à comunicação com a referência de tempo.
 Root Dispersion: 10.0000000s
 ```
 
-Representa a dispersão estimada em relação à referência de tempo.
+Represents the estimated dispersion relative to the time reference.
 
 #### ReferenceId
 
@@ -238,7 +218,7 @@ Representa a dispersão estimada em relação à referência de tempo.
 ReferenceId: 0x4C4F434C (source name:  "LOCL")
 ```
 
-Identifica a referência de tempo indicada pelo serviço. Nesse resultado, `LOCL` corresponde à referência local.
+Identifies the time reference reported by the service. In this output, `LOCL` corresponds to the local time reference.
 
 #### Last Successful Sync Time
 
@@ -246,7 +226,7 @@ Identifica a referência de tempo indicada pelo serviço. Nesse resultado, `LOCL
 Last Successful Sync Time: 3/18/2024 5:18:04 PM
 ```
 
-Indica a data e hora registradas pelo serviço como última sincronização bem-sucedida.
+Indicates the date and time recorded by the service as the last successful synchronization.
 
 #### Source
 
@@ -254,9 +234,9 @@ Indica a data e hora registradas pelo serviço como última sincronização bem-
 Source: Local CMOS Clock
 ```
 
-Indica que, **no resultado apresentado**, a fonte de tempo reportada pelo serviço era o relógio local.
+Indicates that, in the displayed output, the reported time source was the local clock.
 
-Isso é importante porque a atividade configura `time.google.com`, mas a saída fornecida pelo laboratório **não demonstra que a sincronização efetiva naquele momento tenha ocorrido com o servidor do Google**. A configuração e o estado efetivamente reportado pelo `w32tm` são informações distintas.
+This is important because the activity configures `time.google.com`, but the output provided by the lab does not demonstrate that synchronization with Google's server actually occurred at that moment. The configured settings and the status reported by `w32tm` are distinct pieces of information.
 
 #### Poll Interval
 
@@ -264,45 +244,39 @@ Isso é importante porque a atividade configura `time.google.com`, mas a saída 
 Poll Interval: 6 (64s)
 ```
 
-Indica o intervalo utilizado para as consultas de sincronização.
+Indicates the interval used for synchronization queries.
 
----
+## 10. Evidence
 
-## 10. Evidência
-
-O print obrigatório corresponde ao **passo 10**, mostrando a saída do comando:
+The required screenshot corresponds to Step 10 and shows the output of the following command:
 
 ```powershell
 w32tm /query /status
 ```
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 12.2:** saída do comando `w32tm /query /status` no Windows Server 2022, exibindo o estado atual do serviço Windows Time e os parâmetros relacionados à sincronização de horário.
+> Screenshot of Activity 12.02: the output of `w32tm /query /status` on Windows Server 2022, displaying the current Windows Time service status and parameters related to time synchronization.
 
-[**Evidências — Módulo 12 / Aulas 45 e 46**](../evidencias.pdf)
+[**View Evidence — Module 12 / Classes 45–46**](../evidencias.pdf)
 
----
+## 11. Completion
 
-## 11. Encerramento
+After querying the service status, the windows used during the activity were closed.
 
-Após a consulta do estado do serviço, as janelas utilizadas na atividade foram fechadas.
+## Key Concepts
 
----
+- **NTP (Network Time Protocol):** A protocol used to synchronize clocks across networks.
+- **W32Time:** The Windows service responsible for time synchronization functionality.
+- **NTP Client:** A component used by Windows to query time sources.
+- **NTP Server:** A feature that allows Windows to act as a time source for other clients.
+- **w32tm:** A command-line tool used to configure and query the Windows Time service.
+- **Stratum:** Indicates the hierarchical position of a time source within an NTP infrastructure.
 
-## Conceitos
-
-* **NTP (Network Time Protocol):** protocolo utilizado para sincronização de relógios em redes.
-* **W32Time:** serviço do Windows responsável pelas funcionalidades de sincronização de horário.
-* **NTP Client:** componente utilizado pelo Windows para consultar fontes de tempo.
-* **NTP Server:** funcionalidade que permite ao Windows atuar como fonte de tempo para outros clientes.
-* **`w32tm`:** ferramenta de linha de comando utilizada para configurar e consultar o serviço Windows Time.
-* **Stratum:** indica a posição hierárquica de uma fonte de tempo dentro da infraestrutura NTP.
-
-## Fluxo
+## Activity Workflow
 
 ```text
-Configuração da Política de Grupo
+Configure Group Policy
               ↓
 Enable Windows NTP Server
               ↓
@@ -312,15 +286,19 @@ Configure Windows NTP Client
               ↓
 time.google.com,0x9
               ↓
-Reiniciar W32Time
+Restart W32Time
               ↓
 w32tm /query /status
               ↓
-Consultar estado do serviço
+Query the service status
 ```
 
-## Resultado
+## Result
 
-O Windows Server 2022 foi configurado para habilitar as funcionalidades de cliente e servidor NTP, com `time.google.com,0x9` definido como servidor NTP. O serviço **Windows Time** foi reiniciado e seu estado foi consultado com `w32tm /query /status`.
+Windows Server 2022 was configured to enable the NTP client and server functionalities, with `time.google.com,0x9` specified as the NTP server. The Windows Time service was restarted, and its status was queried using `w32tm /query /status`.
 
-A saída apresentada pelo laboratório, entretanto, reportou `Local CMOS Clock` como fonte atual, portanto ela não deve ser interpretada como comprovação de uma sincronização efetiva com `time.google.com` naquele momento.
+However, the output provided by the lab reported `Local CMOS Clock` as the current time source. Therefore, it should not be interpreted as confirmation that synchronization with `time.google.com` actually occurred at that moment.
+
+---
+
+[Back to Classes 45–46](../README.md) · [Back to Module 12](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
