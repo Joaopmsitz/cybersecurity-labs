@@ -1,78 +1,74 @@
-# Atividade 8.1 — Usando a Esteganografia no Kali Linux
+# Activity 8.01 — Using Steganography on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 08  
+> **Classes:** 29–30  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar **esteganografia** para ocultar o conteúdo de um arquivo de texto dentro de uma imagem JPG e, posteriormente, recuperar o arquivo oculto a partir da imagem.
+## Objective
 
-Para isso, foi utilizado o `steghide`, ferramenta capaz de incorporar dados em arquivos de cobertura, como imagens e arquivos de áudio.
+Use steganography to hide the contents of a text file inside a JPG image and then recover the hidden file from the image.
 
----
+For this purpose, `steghide` was used, a tool capable of embedding data in cover files such as images and audio files.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramenta:** Steghide
-* **Diretório de trabalho:** `/home/aluno/Documentos/Arquivos`
-* **Arquivo de texto:** `mensagem.txt`
-* **Arquivo de cobertura:** `Marcel_Proust_1895-cropped.jpg`
+- **Operating system:** Kali Linux
+- **Tool:** Steghide
+- **Working directory:** `/home/aluno/Documentos/Arquivos`
+- **Text file:** `mensagem.txt`
+- **Cover file:** `Marcel_Proust_1895-cropped.jpg`
 
-> As credenciais e senhas utilizadas no ambiente de laboratório não são registradas neste README.
+> Credentials and passwords used in the lab environment are not recorded in this README.
 
----
+## 1. Switching to the Root User
 
-## 1. Acesso como root
-
-Inicialmente, foi aberto o Terminal e obtido acesso administrativo:
+First, the terminal was opened and administrative access was obtained:
 
 ```bash
 sudo -i
 ```
 
----
+## 2. Creating the Working Directory
 
-## 2. Criação do diretório de trabalho
-
-Foi criado o diretório `Arquivos` dentro de `Documentos`:
+The `Arquivos` directory was created inside `Documentos`:
 
 ```bash
 mkdir -m 777 /home/aluno/Documentos/Arquivos
 ```
 
-Em seguida, o diretório foi acessado:
+The directory was then accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
----
+## 3. Creating the Message
 
-## 3. Criação da mensagem
-
-Foi criado o arquivo `mensagem.txt`:
+The `mensagem.txt` file was created:
 
 ```bash
 nano mensagem.txt
 ```
 
-O conteúdo inserido foi:
+The following content was entered:
 
 ```text
 Hackers do bem com Esteganografia!
 ```
 
-Esse arquivo será utilizado como conteúdo oculto dentro da imagem.
+This file would be used as the hidden content embedded in the image.
 
----
+## 4. Downloading the Image
 
-## 4. Download da imagem
-
-Foi utilizada uma imagem JPG obtida da Wikimedia:
+A JPG image hosted on Wikimedia was used:
 
 ```bash
 wget https://upload.wikimedia.org/wikipedia/commons/1/1b/Marcel_Proust_1895-cropped.jpg
 ```
 
-Saída registrada no laboratório:
+Output recorded during the lab:
 
 ```text
 --2024-03-03 20:07:52--  https://upload.wikimedia.org/wikipedia/commons/1/1b/Marcel_Proust_1895-cropped.jpg
@@ -87,37 +83,33 @@ Marcel_Proust_1895-cropped.jpg 100%[============================================
 2024-03-03 20:07:52 (4,62 MB/s) - “Marcel_Proust_1895-cropped.jpg” salvo [657966/657966]
 ```
 
----
+## 5. Verifying the Files
 
-## 5. Verificação dos arquivos
-
-Foi utilizado `ls` para confirmar que tanto a imagem quanto o arquivo de texto estavam presentes:
+The `ls` command was used to confirm that both the image and the text file were present:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 Marcel_Proust_1895-cropped.jpg  mensagem.txt
 ```
 
-Neste ponto, os dois arquivos necessários para a atividade estavam disponíveis no diretório.
+At this point, both files required for the activity were available in the directory.
 
----
+## 6. Hiding the Message in the Image
 
-## 6. Ocultação da mensagem na imagem
-
-O `steghide` foi utilizado para incorporar `mensagem.txt` dentro da imagem:
+`steghide` was used to embed `mensagem.txt` inside the image:
 
 ```bash
 steghide embed -cf Marcel_Proust_1895-cropped.jpg -ef mensagem.txt
 ```
 
-Durante a execução, foi solicitada uma senha para proteger o conteúdo incorporado.
+During execution, a passphrase was requested to protect the embedded content.
 
-Saída:
+Output:
 
 ```text
 Enter passphrase: 
@@ -125,97 +117,95 @@ Re-Enter passphrase:
 embedding "mensagem.txt" in "Marcel_Proust_1895-cropped.jpg"... done
 ```
 
-O comando utiliza:
+The command uses the following parameters:
 
-* `embed` — indica que será realizado o processo de incorporação dos dados;
-* `-cf` — **cover file**, arquivo de cobertura utilizado para esconder os dados;
-* `-ef` — **embed file**, arquivo que será incorporado à imagem.
+- `embed` — indicates that data will be embedded in the cover file.
+- `-cf` — *cover file*, the file used to conceal the data.
+- `-ef` — *embed file*, the file to be embedded in the image.
 
-Após a operação, a própria imagem `Marcel_Proust_1895-cropped.jpg` passou a conter os dados ocultos.
+After the operation, `Marcel_Proust_1895-cropped.jpg` contained the hidden data.
 
----
+## 7. Removing the Original File
 
-## 7. Remoção do arquivo original
-
-Para demonstrar a recuperação posterior da mensagem a partir da imagem, o arquivo original `mensagem.txt` foi removido:
+To demonstrate that the message could later be recovered from the image, the original `mensagem.txt` file was deleted:
 
 ```bash
 rm mensagem.txt
 ```
 
-Depois, foi verificado o conteúdo do diretório:
+The directory contents were then checked:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 Marcel_Proust_1895-cropped.jpg
 ```
 
-Nesse momento, o arquivo de texto original não estava mais presente no diretório. A única cópia da mensagem estava incorporada à imagem.
+At this point, the original text file was no longer present in the directory. The only remaining copy of the message was embedded in the image.
 
----
+## 8. Extracting the Hidden Message
 
-## 8. Extração da mensagem oculta
-
-Para recuperar o conteúdo escondido, foi utilizado:
+To recover the hidden content, the following command was used:
 
 ```bash
 steghide extract -sf Marcel_Proust_1895-cropped.jpg
 ```
 
-Foi solicitada a senha utilizada durante o processo de incorporação.
+The passphrase used during the embedding process was requested.
 
-Saída:
+Output:
 
 ```text
 Enter passphrase: 
 wrote extracted data to "mensagem.txt".
 ```
 
-O parâmetro utilizado foi:
+The parameter used was:
 
-* `-sf` — **stego file**, arquivo que contém os dados ocultos.
+- `-sf` — *stego file*, the file containing the hidden data.
 
-O `steghide` identificou os dados incorporados na imagem e recriou o arquivo `mensagem.txt`.
+`steghide` identified the data embedded in the image and recreated the `mensagem.txt` file.
 
----
+## 9. Verifying the Recovered Message
 
-## 9. Verificação da mensagem recuperada
-
-Após a extração, foi verificado o conteúdo do diretório:
+After extraction, the directory contents were checked:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 Marcel_Proust_1895-cropped.jpg  mensagem.txt
 ```
 
-Em seguida, o conteúdo do arquivo recuperado foi exibido:
+The contents of the recovered file were then displayed:
 
 ```bash
 cat mensagem.txt
 ```
 
-Saída:
+Output:
 
 ```text
 Hackers do bem com Esteganografia!
 ```
 
-A mensagem original foi recuperada corretamente a partir da imagem, demonstrando o funcionamento da esteganografia utilizada no laboratório.
+The original message was successfully recovered from the image, demonstrating how the steganography technique used in the lab works.
+
+## Evidence
+
+The evidence requested for this activity corresponds to step 9, showing the presence of `mensagem.txt` after extraction and the recovered content.
+
+Evidence for this activity is included in the PDF for Module 8, Classes 29–30.
+
+[View Evidence — Classes 29–30](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-A evidência solicitada para esta atividade corresponde ao **passo 9**, mostrando a presença do arquivo `mensagem.txt` após a extração e o conteúdo recuperado.
-
-[**Evidências — Módulo 8 / Aulas 1 e 2**](../evidencias.pdf)
+[Back to Classes 29–30](../) · [Back to Module 8](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
