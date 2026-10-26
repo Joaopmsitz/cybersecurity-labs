@@ -1,46 +1,46 @@
-# Atividade 7.9 — Sobrescrita Simples no Kali Linux
+# Activity 7.09 — Simple Overwrite on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 07  
+> **Classes:** 27–28  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Realizar uma **sobrescrita simples** em uma partição no Kali Linux utilizando dados aleatórios, preenchendo o dispositivo até que não haja mais espaço disponível.
+## Objective
 
-A atividade demonstra uma técnica de sobrescrita física de dados utilizando o comando `dd` e permite observar o estado do sistema de arquivos após a operação.
+Perform a simple overwrite on a partition in Kali Linux using random data, writing to the device until no space is available.
 
----
+This activity demonstrates a low-level data overwrite technique using the `dd` command and allows observation of the filesystem's state after the operation.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Disco utilizado:** `/dev/nvme1n1`
-* **Partição utilizada:** `/dev/nvme1n1p1`
-* **Sistema de arquivos:** `ext4`
-* **Ferramentas:** `mkfs.ext4`, `mount`, `dd` e `df`
+- **Operating system:** Kali Linux
+- **Disk used:** `/dev/nvme1n1`
+- **Partition used:** `/dev/nvme1n1p1`
+- **Filesystem:** ext4
+- **Tools:** `mkfs.ext4`, `mount`, `dd`, and `df`
 
-> A operação de sobrescrita foi realizada somente na partição disponibilizada para o laboratório.
+> The overwrite operation was performed only on the partition provided for the lab. Writing directly to a block device is destructive and can destroy filesystem metadata and make existing data inaccessible.
 
----
+## 1. Switching to the Root User
 
-## 1. Acesso como root
+Administrative access was obtained:
 
-Inicialmente, foi obtido acesso administrativo:
-
-```bash id="q4m1sv"
+```bash
 sudo -i
 ```
 
----
+## 2. Formatting and Mounting the Partition
 
-## 2. Formatação e montagem da partição
+The partition used in the previous activity was formatted again with ext4:
 
-A partição utilizada na atividade anterior foi formatada novamente com `ext4`:
-
-```bash id="7m5q1n"
+```bash
 mkfs.ext4 /dev/nvme1n1p1
 ```
 
-Saída:
+Output:
 
-```text id="8h1x5c"
+```text
 mke2fs 1.47.2 (1-Jan-2025)
 Creating filesystem with 102400 1k blocks and 25584 inodes
 Filesystem UUID: 9623bee1-0ab5-41cb-8a04-56c8a19893e6
@@ -53,119 +53,113 @@ Creating journal (4096 blocks): done
 Writing superblocks and filesystem accounting information: done
 ```
 
-Em seguida, foi criado o diretório que será utilizado como ponto de montagem:
+Next, the directory used as the mount point was created:
 
-```bash id="xq3j8f"
+```bash
 mkdir -m 777 /home/aluno/Documentos/MeuHD
 mount /dev/nvme1n1p1 /home/aluno/Documentos/MeuHD
 ```
 
-A partição passou a estar disponível através do diretório:
+The partition then became accessible through the following directory:
 
 ```text
 /home/aluno/Documentos/MeuHD
 ```
 
----
+## 3. Creating the Test File
 
-## 3. Criação do arquivo de teste
+The mount point was accessed:
 
-Foi acessado o ponto de montagem:
-
-```bash id="1w5r9c"
+```bash
 cd /home/aluno/Documentos/MeuHD
 ```
 
-Em seguida, foi criado o arquivo:
+The following file was then created:
 
-```bash id="v2z8k4"
+```bash
 nano Teste.txt
 ```
 
-Conteúdo inserido:
+Content entered:
 
 ```text
 Teste
 ```
 
-Antes da sobrescrita, o conteúdo do diretório foi verificado:
+Before the overwrite, the directory contents were checked:
 
-```bash id="r6t0pf"
+```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 lost+found  Teste.txt
 ```
 
-O arquivo `Teste.txt` representa um dado existente na partição antes da execução da sobrescrita.
+The `Teste.txt` file represents data that existed on the partition before the overwrite operation.
 
----
+## 4. Overwriting with Random Data
 
-## 4. Sobrescrita com dados aleatórios
+The following command was used to fill the partition with data from `/dev/urandom`:
 
-Para preencher a partição com dados provenientes de `/dev/urandom`, foi utilizado:
-
-```bash id="c9m4wx"
+```bash
 dd if=/dev/urandom of=/dev/nvme1n1p1 bs=10M
 ```
 
-Saída:
+Output:
 
-```text id="7bq3dz"
+```text
 dd: erro de escrita de '/dev/nvme1n1p1': Não há espaço disponível no dispositivo
 11+0 records in
 10+0 records out
 104857600 bytes (105 MB, 100 MiB) copied, 0,938747 s, 112 MB/s
 ```
 
-### Interpretação
+### Interpretation
 
-O comando utilizado foi:
+The command used was:
 
-```text
+```bash
 dd if=/dev/urandom of=/dev/nvme1n1p1 bs=10M
 ```
 
-Cada parâmetro possui uma função específica:
+Each parameter has a specific purpose:
 
-* `dd` — realiza cópia de dados em baixo nível;
-* `if=/dev/urandom` — define `/dev/urandom` como origem dos dados aleatórios;
-* `of=/dev/nvme1n1p1` — define a partição como destino;
-* `bs=10M` — utiliza blocos de 10 MiB por operação.
+- `dd` — performs low-level data copying.
+- `if=/dev/urandom` — specifies `/dev/urandom` as the source of random data.
+- `of=/dev/nvme1n1p1` — specifies the partition as the destination.
+- `bs=10M` — uses 10 MiB blocks for each operation.
 
-A execução continuou até que o dispositivo não tivesse mais espaço disponível para receber novos dados:
+Execution continued until the device could no longer accept additional data:
 
 ```text
 dd: erro de escrita de '/dev/nvme1n1p1': Não há espaço disponível no dispositivo
 ```
 
-A própria saída indica:
+The output also indicates:
 
 ```text
 10+0 records out
 104857600 bytes (105 MB, 100 MiB) copied
 ```
 
-Ou seja, foram efetivamente gravados **10 blocos de 10 MiB**, totalizando **100 MiB**.
+In other words, 10 blocks of 10 MiB were successfully written, totaling 100 MiB.
 
-O erro final ocorreu porque o comando tentou continuar escrevendo depois que o espaço disponível na partição foi preenchido.
+The final error occurred because the command attempted to continue writing after the available space on the partition had been exhausted.
 
----
+## 5. Checking Space Usage
 
-## 5. Verificação do espaço utilizado
+After the overwrite, the following command was executed:
 
-Após a sobrescrita, foi executado o comando:
-
-```bash id="n7c2vp"
+```bash
 df -h
 ```
 
-Saída registrada no laboratório:
+Output recorded during the lab:
 
-```text id="w6p3sa"
+```text
 Sist. Arq.       Tam. Usado Disp. Uso% Montado em
 udev             1,9G     0  1,9G   0% /dev
 tmpfs            388M  964K  387M   1% /run
@@ -186,40 +180,42 @@ tmpfs            388M  128K  388M   1% /run/user/1001
 /dev/nvme1n1p1   948G  948G     0 100% /home/aluno/Documentos/MeuHD
 ```
 
-A saída registrada mostra a partição `/dev/nvme1n1p1` com:
+The recorded output shows the `/dev/nvme1n1p1` partition with the following values:
 
 ```text
 948G  948G     0 100%
 ```
 
-indicando que, de acordo com a saída obtida durante o laboratório, o dispositivo estava completamente ocupado.
+According to the output recorded during the lab, the device was completely full.
 
-> **Observação:** os valores de capacidade apresentados acima foram preservados conforme a saída registrada durante o laboratório, mesmo havendo uma inconsistência aparente com o tamanho de aproximadamente 100 MiB informado anteriormente para a partição.
+> **Note:** The capacity values above have been preserved as recorded during the lab, even though they appear inconsistent with the approximately 100 MiB partition size reported earlier.
 
----
+## 6. System Behavior After the Overwrite
 
-## 6. Comportamento do sistema após a sobrescrita
-
-Após o preenchimento da partição, a tentativa de listar novamente seu conteúdo apresentou a seguinte mensagem no ambiente do laboratório:
+After the partition had been filled, attempting to list its contents again produced the following message in the lab environment:
 
 ```text
 ls: lendo o diretório '.': A estrutura necessita de limpeza
 ```
 
-Isso demonstra que a sobrescrita direta no dispositivo alterou as estruturas que anteriormente pertenciam ao sistema de arquivos.
+This indicates that the direct write to the device altered structures that previously belonged to the filesystem.
 
-A operação foi realizada diretamente sobre:
+The operation was performed directly on:
 
 ```text
 /dev/nvme1n1p1
 ```
 
-e não através de um arquivo comum dentro do sistema de arquivos montado.
+It was not performed through an ordinary file within the mounted filesystem.
+
+## Evidence
+
+The evidence requested for this activity corresponds to step 7, showing the output of `df -h` after the overwrite.
+
+Evidence for this activity is included in the PDF for Module 7, Classes 27–28.
+
+[View Evidence — Classes 27–28](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-A evidência solicitada para esta atividade corresponde ao **passo 7**, apresentando a saída do comando `df -h` após a sobrescrita.
-
-[**Evidências — Módulo 7 / Aulas 27 e 28**](../evidencias.pdf)
+[Back to Classes 27–28](../) · [Back to Module 7](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
