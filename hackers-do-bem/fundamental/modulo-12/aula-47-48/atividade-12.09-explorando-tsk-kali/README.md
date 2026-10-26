@@ -1,37 +1,37 @@
-# Atividade 12.9 — Explorando The Sleuth Kit (TSK) no Kali Linux
+# Activity 12.09 — Exploring The Sleuth Kit (TSK) on Kali Linux
 
-Nesta atividade foi realizada uma introdução ao **The Sleuth Kit (TSK)** no Kali Linux, utilizando comandos de análise forense para examinar uma partição e seus inodes.
+This activity introduces **The Sleuth Kit (TSK)** on Kali Linux, using forensic analysis commands to examine a partition and its inodes.
 
-> **Observação:** credenciais utilizadas no ambiente de laboratório não são registradas neste documento.
+> **Note:** Credentials used in the lab environment are not recorded in this document.
 
-## Objetivo
+## Objective
 
-* Identificar partições disponíveis no sistema.
-* Utilizar ferramentas do The Sleuth Kit.
-* Listar arquivos e diretórios de uma partição.
-* Consultar informações relacionadas a inodes e seus timestamps.
+- Identify available disk partitions.
+- Use The Sleuth Kit tools.
+- List files and directories within a partition.
+- Query information related to inodes and their timestamps.
 
-## Procedimento
+## Procedure
 
-### 1. Acesso ao Kali Linux
+### 1. Accessing Kali Linux
 
-O Kali Linux foi acessado via RDP pelo endereço `192.168.98.40`.
+Kali Linux was accessed via RDP using the address `192.168.98.40`.
 
-Foi obtido acesso administrativo:
+Administrative privileges were obtained using:
 
 ```bash
 sudo -i
 ```
 
-### 2. Identificação dos discos e partições
+### 2. Identifying Disks and Partitions
 
-Foi utilizado:
+The following command was used:
 
 ```bash
 fdisk -l
 ```
 
-Saída:
+Output:
 
 ```text
 Disk /dev/nvme0n1: 22 GiB, 23622320128 bytes, 46137344 sectors
@@ -62,29 +62,30 @@ Device         Boot  Start    End Sectors  Size Id Type
 /dev/nvme1n1p1        2048 206847  204800  100M 83 Linux
 /dev/nvme1n1p2      206848 411647  204800  100M 83 Linux
 /dev/nvme1n1p3      411648 821247  409600  200M 83 Linux
+
 ```
 
-A partição principal utilizada pelo sistema é:
+The main partition used by the system is:
 
 ```text
 /dev/nvme0n1p1
 ```
 
-### 3. Conceito de inode
+### 3. Understanding Inodes
 
-No Linux, um **inode** é uma estrutura utilizada pelo sistema de arquivos para armazenar informações sobre um arquivo ou diretório, como identificador, permissões, proprietário, tamanho e timestamps.
+In Linux, an **inode** is a structure used by the filesystem to store information about a file or directory, such as its identifier, permissions, owner, size, and timestamps.
 
-Em análise forense, informações de inode podem auxiliar na reconstrução de eventos relacionados aos arquivos.
+In forensic analysis, inode information can help reconstruct events associated with files.
 
-### 4. Listagem com `fls`
+### 4. Listing Files with `fls`
 
-Foi utilizado o comando:
+The following command was used:
 
 ```bash
 fls /dev/nvme0n1p1
 ```
 
-Saída:
+Output:
 
 ```text
 d/d 524461:     home
@@ -111,92 +112,100 @@ d/d 524560:     media
 r/r 64113:      .autorelabel
 d/d 410038:     snap
 V/V 1433601:    $OrphanFiles
+
 ```
 
-O `fls` lista arquivos e diretórios presentes no sistema de arquivos, associando-os aos respectivos identificadores de inode.
+The `fls` command lists files and directories found in the filesystem and associates them with their respective inode identifiers.
 
-Também foi observada a entrada:
+The following entry was also observed:
 
 ```text
 V/V 1433601:    $OrphanFiles
+
 ```
 
-indicando a presença de estruturas associadas a arquivos órfãos identificadas pelo TSK.
+This indicates the presence of structures associated with orphaned files identified by TSK.
 
-### 5. Consulta de informações do inode
+### 5. Querying Inode Information
 
-Foi executado:
+The following command was executed:
 
 ```bash
 ils /dev/nvme0n1p1 2
 ```
 
-Saída:
+Output:
 
 ```text
 class|host|device|start_time
 ils|kali||1765063051
 st_ino|st_alloc|st_uid|st_gid|st_mtime|st_atime|st_ctime|st_crtime|st_mode|st_nlink|st_size
+
 ```
 
-O valor `1765063051` corresponde ao momento em que a coleta foi iniciada. A conversão foi realizada com:
+The value `1765063051` corresponds to the time when the collection started. The timestamp was converted using:
 
 ```bash
 date -d @1765063051
 ```
 
-Resultado:
+Result:
 
 ```text
 sáb 06 dez 2025 20:17:31 -03
+
 ```
 
-A saída do `ils` apresenta campos relacionados ao inode, incluindo:
+The `ils` output presents fields related to inodes, including:
 
-* `st_ino`: número do inode.
-* `st_alloc`: informação de alocação do inode.
-* `st_uid`: identificador do usuário proprietário.
-* `st_gid`: identificador do grupo.
-* `st_mtime`: timestamp de modificação.
-* `st_atime`: timestamp de acesso.
-* `st_ctime`: timestamp de alteração dos metadados.
-* `st_crtime`: timestamp de criação, quando suportado pelo sistema de arquivos.
-* `st_mode`: tipo e permissões.
-* `st_nlink`: quantidade de links.
-* `st_size`: tamanho associado ao inode.
+- **`st_ino`:** Inode number.
+- **`st_alloc`:** Information about inode allocation.
+- **`st_uid`:** User ID of the owner.
+- **`st_gid`:** Group ID.
+- **`st_mtime`:** Modification timestamp.
+- **`st_atime`:** Access timestamp.
+- **`st_ctime`:** Metadata change timestamp.
+- **`st_crtime`:** Creation timestamp, when supported by the filesystem.
+- **`st_mode`:** File type and permissions.
+- **`st_nlink`:** Number of links.
+- **`st_size`:** Size associated with the inode.
 
-## Conceitos
+## Key Concepts
 
-* **The Sleuth Kit (TSK):** conjunto de ferramentas para análise forense de sistemas de arquivos e mídias.
-* **`fls`:** lista arquivos e diretórios identificados em uma imagem ou sistema de arquivos.
-* **`ils`:** apresenta informações relacionadas aos inodes.
-* **Inode:** estrutura que mantém metadados de arquivos e diretórios.
-* **Timestamps:** informações temporais importantes para análise de eventos.
+- **The Sleuth Kit (TSK):** A collection of tools for forensic analysis of filesystems and storage media.
+- **`fls`:** Lists files and directories identified in a disk image or filesystem.
+- **`ils`:** Displays information related to inodes.
+- **Inode:** A structure that stores file and directory metadata.
+- **Timestamps:** Temporal information that is important for event analysis.
 
-## Fluxo
+## Activity Workflow
 
 ```text
-Partição
+Partition
    ↓
 fdisk -l
    ↓
-Identificação de /dev/nvme0n1p1
+Identify /dev/nvme0n1p1
    ↓
 fls
    ↓
-Listagem de arquivos/diretórios
+List files and directories
    ↓
 ils
    ↓
-Informações de inode e timestamps
+Inode information and timestamps
 ```
 
-## Resultado
+## Result
 
-Foi possível utilizar ferramentas do TSK para listar estruturas do sistema de arquivos e consultar informações relacionadas a inodes, demonstrando uma base para análise forense de sistemas Linux.
+The TSK tools were used to list filesystem structures and query inode-related information, providing an introduction to forensic analysis of Linux filesystems.
 
-## Evidência
+## Evidence
 
-[**Evidências — Módulo 12 / Aulas 43 e 44**](../evidencias.pdf)
+[**View Evidence — Module 12 / Classes 47–48**](../evidencias.pdf)
 
-**Print solicitado:** passo 5 — saída do `ils /dev/nvme0n1p1 2`.
+**Required screenshot:** Step 5 — output of `ils /dev/nvme0n1p1 2`.
+
+---
+
+[Back to Classes 47–48](../README.md) · [Back to Module 12](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
