@@ -1,32 +1,38 @@
-# Atividade 8.7 — Computando Hash SHA-1, SHA-2 e SHA-3
+# Activity 8.07 — Computing SHA-1, SHA-2, and SHA-3 Hashes
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 08  
+> **Classes:** 31–32  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Calcular o **hash** de um arquivo utilizando diferentes algoritmos da família SHA no Kali Linux:
+## Objective
 
-* SHA-1;
-* SHA-2 de 512 bits;
-* SHA-3 de 512 bits.
+Calculate the **hash** of a file using different algorithms from the SHA family on Kali Linux:
 
-A atividade demonstra a utilização de diferentes ferramentas para gerar resumos criptográficos e permite comparar os tamanhos e valores produzidos pelos algoritmos.
+- SHA-1
+- 512-bit SHA-2
+- 512-bit SHA-3
 
----
-
-## Ambiente
-
-* **Sistema:** Kali Linux
-* **Ferramentas:** `sha1sum`, `sha512sum` e `sha3sum`
-* **Diretório de trabalho:** `/home/aluno/Documentos/Arquivos`
-* **Arquivo analisado:** `mensagem.txt`
-* **Conteúdo:** `Hackers do bem!`
-
-> As credenciais utilizadas para acesso ao ambiente de laboratório não são registradas neste README.
+This activity demonstrates the use of different tools to generate cryptographic digests and compares the lengths and values produced by the algorithms.
 
 ---
 
-## 1. Acesso como root
+## Environment
 
-Inicialmente, foi obtido acesso administrativo ao Kali Linux:
+- **Operating system:** Kali Linux
+- **Tools:** `sha1sum`, `sha512sum`, and `sha3sum`
+- **Working directory:** `/home/aluno/Documentos/Arquivos`
+- **File analyzed:** `mensagem.txt`
+- **Content:** `Hackers do bem!`
+
+> Credentials used to access the lab environment are not recorded in this README.
+
+---
+
+## 1. Switching to the Root User
+
+Administrative access to Kali Linux was obtained:
 
 ```bash
 sudo -i
@@ -34,92 +40,92 @@ sudo -i
 
 ---
 
-## 2. Acesso ao diretório e verificação do arquivo
+## 2. Accessing the Directory and Verifying the File
 
-Foi acessado o diretório utilizado na atividade:
+The directory used for this activity was accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
-Em seguida, foi verificada a presença do arquivo `mensagem.txt`:
+The presence of `mensagem.txt` was then verified:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 mensagem.txt
 ```
 
-O mesmo arquivo utilizado na atividade anterior foi utilizado para calcular os hashes da família SHA.
+The same file used in the previous activity was used to calculate hashes from the SHA family.
 
 ---
 
-## 3. Cálculo do SHA-1
+## 3. Calculating the SHA-1 Hash
 
-Foi utilizado o comando `sha1sum`:
+The `sha1sum` command was used:
 
 ```bash
 sha1sum mensagem.txt
 ```
 
-Saída:
+Output:
 
 ```text
 287f168af5acf44b3b06a07fb6f3a4e882a9baab  mensagem.txt
 ```
 
-O SHA-1 produz um resumo de **160 bits**, representado por **40 caracteres hexadecimais**.
+SHA-1 produces a **160-bit** digest represented by **40 hexadecimal characters**.
 
-Apesar de ainda aparecer em ferramentas e sistemas legados, o SHA-1 não é recomendado para novos usos que dependam de resistência a colisões.
+Although it is still found in legacy tools and systems, SHA-1 is not recommended for new use cases that require collision resistance.
 
 ---
 
-## 4. Cálculo do SHA-2 de 512 bits
+## 4. Calculating the 512-bit SHA-2 Hash
 
-Para calcular o SHA-2 de 512 bits, foi utilizado:
+To calculate the 512-bit SHA-2 hash, the following command was used:
 
 ```bash
 sha512sum mensagem.txt
 ```
 
-Saída:
+Output:
 
 ```text
 d0774282912bf4b5479165a9b316f23fea1f9ae3f620f400618813347a13c8d1e297fb51196def065dafe0aa21239d719f51a8cf58410bac22fc4b40b29efeab  mensagem.txt
 ```
 
-O SHA-512 produz um resumo de **512 bits**, representado por **128 caracteres hexadecimais**.
+SHA-512 produces a **512-bit** digest represented by **128 hexadecimal characters**.
 
 ---
 
-## 5. Cálculo do SHA-3 de 512 bits
+## 5. Calculating the 512-bit SHA-3 Hash
 
-Por fim, foi utilizado o `sha3sum` para calcular o SHA-3 de 512 bits:
+Finally, `sha3sum` was used to calculate the 512-bit SHA-3 hash:
 
 ```bash
 sha3sum -b -a 512 mensagem.txt
 ```
 
-Saída:
+Output:
 
 ```text
 07ad8830012228703f01d1961a759c907214a617c2c42fade253af6bf42bf4500a54038f1fb960165e6cb4985fed141ed90b949f7915d2379c7a67d5484930f1 *mensagem.txt
 ```
 
-Nesse comando:
+In this command:
 
-* `-b` indica a utilização do modo binário;
-* `-a 512` seleciona a variante SHA-3 com saída de 512 bits.
+- `-b` specifies binary mode.
+- `-a 512` selects the SHA-3 variant with a 512-bit output.
 
-O resultado possui **128 caracteres hexadecimais**, correspondentes a 512 bits.
+The result contains **128 hexadecimal characters**, corresponding to 512 bits.
 
-### Evidência solicitada
+### Requested Evidence
 
-A evidência da atividade corresponde ao **passo 5**, referente ao cálculo do SHA-3 de 512 bits:
+The evidence for this activity corresponds to **step 5**, which calculates the 512-bit SHA-3 hash:
 
 ```text
 ┌──(root㉿kali)-[/home/aluno/Documentos/Arquivos]
@@ -127,24 +133,28 @@ A evidência da atividade corresponde ao **passo 5**, referente ao cálculo do S
 07ad8830012228703f01d1961a759c907214a617c2c42fade253af6bf42bf4500a54038f1fb960165e6cb4985fed141ed90b949f7915d2379c7a67d5484930f1 *mensagem.txt
 ```
 
-[**Evidências — Módulo 8 / Aulas 31 e 32**](../evidencias.pdf)
+[View Evidence — Classes 31–32](../evidencias.pdf)
 
 ---
 
-## Comparação dos resultados
+## Comparison of Results
 
-| Algoritmo        | Tamanho do resumo | Hash obtido                                                                                                                        |
-| ---------------- | ----------------: | ---------------------------------------------------------------------------------------------------------------------------------- |
-| SHA-1            |          160 bits | `287f168af5acf44b3b06a07fb6f3a4e882a9baab`                                                                                         |
-| SHA-2 / SHA-512  |          512 bits | `d0774282912bf4b5479165a9b316f23fea1f9ae3f620f400618813347a13c8d1e297fb51196def065dafe0aa21239d719f51a8cf58410bac22fc4b40b29efeab` |
-| SHA-3 / SHA3-512 |          512 bits | `07ad8830012228703f01d1961a759c907214a617c2c42fade253af6bf42bf4500a54038f1fb960165e6cb4985fed141ed90b949f7915d2379c7a67d5484930f1` |
+| Algorithm | Digest Length | Computed Hash |
+|---|---:|---|
+| SHA-1 | 160 bits | `287f168af5acf44b3b06a07fb6f3a4e882a9baab` |
+| SHA-2 / SHA-512 | 512 bits | `d0774282912bf4b5479165a9b316f23fea1f9ae3f620f400618813347a13c8d1e297fb51196def065dafe0aa21239d719f51a8cf58410bac22fc4b40b29efeab` |
+| SHA-3 / SHA3-512 | 512 bits | `07ad8830012228703f01d1961a759c907214a617c2c42fade253af6bf42bf4500a54038f1fb960165e6cb4985fed141ed90b949f7915d2379c7a67d5484930f1` |
 
-Os três algoritmos produziram resumos distintos para o mesmo arquivo.
+All three algorithms produced distinct digests for the same file.
 
-O SHA-1 possui limitações conhecidas relacionadas à resistência a colisões, enquanto SHA-2 e SHA-3 fazem parte de famílias mais modernas de funções de hash criptográfico.
+SHA-1 has known limitations regarding collision resistance, whereas SHA-2 and SHA-3 belong to more modern families of cryptographic hash functions.
 
 ---
 
-## Resultado
+## Result
 
-A atividade demonstrou como calcular hashes utilizando diferentes gerações da família SHA. Os valores obtidos podem ser utilizados para verificar a integridade de arquivos, comparando o resumo calculado em momentos diferentes para identificar alterações no conteúdo.
+This activity demonstrated how to calculate hashes using different generations of the SHA family. The resulting values can be used to verify file integrity by comparing digests calculated at different times to identify changes in the content.
+
+---
+
+[Back to Classes 31–32](../) · [Back to Module 8](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
