@@ -1,134 +1,122 @@
-# Atividade 11.7 — Bloqueando Sites usando iptables no Kali Linux
+# Activity 11.07 — Blocking Websites Using iptables on Kali Linux
 
-## Objetivo
+## Objective
 
-Utilizar o **iptables** no Kali Linux para criar uma regra de firewall capaz de bloquear o acesso ao domínio `globo.com.br`, verificar a regra criada e posteriormente removê-la para restaurar o acesso ao site.
+Use `iptables` on Kali Linux to create a firewall rule that blocks access to the `globo.com.br` domain, verify the rule, and subsequently remove it to restore access to the website.
 
----
+## Environment
 
-## Ambiente
+- **Operating system:** Kali GNU/Linux
+- **Access:** RDP
+- **Network interface:** `eth0`
+- **Tool:** `iptables`
+- **Website used for testing:** `globo.com.br`
 
-* **Sistema:** Kali GNU/Linux
-* **Acesso:** RDP
-* **Interface:** `eth0`
-* **Ferramenta:** `iptables`
-* **Site utilizado no teste:** `globo.com.br`
+## 1. Accessing Kali Linux
 
----
+Kali Linux was started and accessed via RDP.
 
-## 1. Acessando o Kali Linux
+After opening the Terminal, administrative privileges were obtained using:
 
-O Kali Linux foi inicializado e acessado via RDP.
-
-Após abrir o Terminal, foi obtido acesso administrativo com:
-
-```bash id="a8f3km"
+```bash
 sudo -i
 ```
 
-A autenticação foi realizada com a senha do usuário.
+Authentication was completed using the user's password.
 
----
+## 2. Opening the Browser in Private Browsing Mode
 
-## 2. Abrindo o navegador em modo anônimo
+Mozilla Firefox was opened through the following menu:
 
-O Mozilla Firefox foi aberto através de:
-
-```text id="k5w2pn"
-Aplicativos → Navegador Web
+```text
+Applications → Web Browser
 ```
 
-Em seguida, foi utilizado:
+Next, the following keyboard shortcut was used:
 
-```text id="r7m4xc"
+```text
 Ctrl + Shift + P
 ```
 
-para abrir uma janela de navegação anônima.
+This opened a private browsing window.
 
----
+## 3. Testing Website Access
 
-## 3. Testando o acesso ao site
+In the Firefox private browsing window, the following website was accessed:
 
-Na janela anônima do Firefox, foi acessado:
-
-```text id="v3q9mb"
+```text
 www.globo.com.br
 ```
 
-O site foi carregado normalmente antes da aplicação da regra de bloqueio.
+The website loaded normally before the blocking rule was applied.
 
-Esse teste estabelece o funcionamento normal da conexão antes da alteração do firewall.
+This test established that the connection was working normally before the firewall configuration was changed.
 
----
+## 4. Closing the Browser and Creating the Blocking Rule
 
-## 4. Fechando o navegador e criando a regra de bloqueio
+After confirming that the website was accessible, all Mozilla Firefox windows were closed.
 
-Após verificar o acesso normal ao site, as janelas do Mozilla Firefox foram fechadas.
+The following `iptables` rule was created in the Terminal:
 
-No Terminal, foi criada uma regra no `iptables`:
-
-```bash id="n6c4yt"
+```bash
 iptables -A INPUT -s globo.com.br -j DROP
 ```
 
-A regra adicionada atua sobre a chain `INPUT`.
+The added rule applies to the `INPUT` chain.
 
-### Parâmetros utilizados
+### Parameters Used
 
-#### `iptables`
+**`iptables`**
 
-Ferramenta utilizada para configurar regras de filtragem do **Netfilter**, o framework de firewall do kernel Linux.
+A tool used to configure packet-filtering rules for Netfilter, the Linux kernel's firewall framework.
 
-#### `-A INPUT`
+**`-A INPUT`**
 
-O parâmetro `-A` significa **Append** e adiciona uma nova regra à chain `INPUT`.
+The `-A` parameter stands for Append and adds a new rule to the `INPUT` chain.
 
-A chain `INPUT` processa pacotes destinados ao próprio sistema.
+The `INPUT` chain processes packets destined for the local system.
 
-#### `-s globo.com.br`
+**`-s globo.com.br`**
 
-O parâmetro `-s` define a origem (*source*) dos pacotes aos quais a regra será aplicada.
+The `-s` parameter specifies the source of the packets to which the rule applies.
 
-Nesse laboratório, foi utilizado o nome de host:
+In this lab, the following hostname was used:
 
-```text id="w4x8fz"
+```text
 globo.com.br
 ```
 
-O `iptables` resolve o nome para o endereço correspondente no momento da configuração da regra.
+`iptables` resolves the hostname to its corresponding address when the rule is configured.
 
-#### `-j DROP`
+**`-j DROP`**
 
-Define a ação da regra.
+Specifies the action taken by the rule.
 
-`DROP` faz com que os pacotes correspondentes sejam descartados, sem serem aceitos pelo sistema.
+`DROP` causes matching packets to be discarded rather than accepted by the system.
 
-A regra completa pode ser interpretada como:
+The complete rule can be represented as follows:
 
-```text id="u2k7dq"
-Pacotes de origem globo.com.br
+```text
+Packets originating from globo.com.br
               ↓
-          Chain INPUT
+          INPUT chain
               ↓
              DROP
               ↓
-       Pacote descartado
+       Packet discarded
 ```
 
----
+## 5. Displaying the iptables Rules
 
-## 5. Visualizando as regras do iptables
+To verify the current firewall configuration, the following command was executed:
 
-Para verificar a configuração atual do firewall, foi executado:
-
-```bash id="c9p4vr"
+```bash
 iptables -L
 ```
 
-A saída apresentada foi:
+The output was:
 
-```text id="f2m7kx"
+```text
 ┌──(root㉿kali)-[~]
 └─# iptables -L
 Chain INPUT (policy ACCEPT)
@@ -165,146 +153,140 @@ target     prot opt source               destination
 RETURN     all  --  anywhere             anywhere
 ```
 
-Na chain `INPUT`, a regra criada aparece como:
+In the `INPUT` chain, the added rule appeared as:
 
-```text id="q5v9nx"
+```text
 DROP       all  --  186-192-83-5.prt.globo.com  anywhere
 ```
 
-Isso demonstra que foi adicionada uma regra para descartar os pacotes correspondentes à origem resolvida para o domínio utilizado no laboratório.
+This shows that a rule was added to discard packets matching the source address resolved from the hostname used in the lab.
 
-### Evidência — Passo 6
+### Evidence — Step 6
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 11.7:** listagem das regras do `iptables`, mostrando a regra `DROP` adicionada à chain `INPUT` para bloquear o tráfego relacionado ao domínio `globo.com.br`.
+> Screenshot of Activity 11.07: the `iptables` rule listing, showing the `DROP` rule added to the `INPUT` chain to block traffic associated with the `globo.com.br` domain.
 
-[**Evidências — Módulo 11 / Aulas 43 e 44**](../evidencias.pdf)
+[View Evidence — Classes 43–44](../evidencias.pdf)
 
----
+## 6. Testing Website Access Again
 
-## 6. Testando novamente o acesso ao site
+After creating the rule, Mozilla Firefox was opened again in private browsing mode.
 
-Após a criação da regra, o Mozilla Firefox foi aberto novamente em modo anônimo.
+The following website was accessed:
 
-Foi acessado:
-
-```text id="d7w3mq"
+```text
 www.globo.com.br
 ```
 
-Diferentemente do primeiro teste, o site não carregou normalmente.
+Unlike the first test, the website did not load normally.
 
-Isso ocorre porque a regra adicionada ao `iptables` descarta os pacotes correspondentes à origem especificada.
+According to the lab results, this behavior occurred because the `iptables` rule discarded packets matching the specified source address.
 
-O comportamento observado demonstra o efeito da regra de filtragem criada durante a atividade.
+The observed behavior demonstrated the effect attributed to the filtering rule created during the activity.
 
----
+## 7. Removing the Blocking Rule
 
-## 7. Removendo a regra de bloqueio
+After verifying the reported blocking behavior, the Terminal was opened again, and the rule was removed using:
 
-Após verificar o bloqueio, o Terminal foi aberto novamente e a regra foi removida com:
-
-```bash id="k2p8wf"
+```bash
 iptables -D INPUT -s globo.com.br -j DROP
 ```
 
-O parâmetro:
+The parameter:
 
-```text id="n5x7cs"
+```text
 -D
 ```
 
-significa **Delete**, ou seja, remove uma regra existente da chain.
+stands for Delete and removes an existing rule from the chain.
 
-Os demais parâmetros correspondem à regra que havia sido adicionada anteriormente:
+The remaining parameters correspond to the rule previously added:
 
-```text id="r3m6vk"
+```text
 INPUT
 -s globo.com.br
 -j DROP
 ```
 
-Assim, o comando remove especificamente a regra criada no início da atividade.
+Therefore, the command removes the specific rule created at the beginning of the activity.
 
----
+## 8. Verifying the Rules Again
 
-## 8. Verificando novamente as regras
+After removing the blocking rule, the following command was executed:
 
-Após remover o bloqueio, foi executado:
-
-```bash id="p4c8yt"
+```bash
 iptables -L
 ```
 
-A chain `INPUT` voltou a não apresentar a regra `DROP` criada para o domínio:
+The `INPUT` chain no longer displayed the `DROP` rule created for the domain:
 
-```text id="j8m2qx"
+```text
 Chain INPUT (policy ACCEPT)
 target     prot opt source               destination
 ```
 
-As demais chains relacionadas ao ambiente Docker continuaram presentes.
+The other chains associated with the Docker environment remained present.
 
----
+## 9. Confirming Website Access Again
 
-## 9. Confirmando o acesso novamente
+After removing the rule, Mozilla Firefox was opened again, and the following address was accessed:
 
-Com a regra removida, o Mozilla Firefox foi aberto novamente e o endereço:
-
-```text id="s6q3vk"
+```text
 www.globo.com.br
 ```
 
-foi acessado.
+The website loaded normally again, demonstrating that the blocking rule had been removed.
 
-O site voltou a carregar normalmente, demonstrando que a regra de bloqueio havia sido removida.
+After verifying access, the browser was closed.
 
-Após a verificação, o navegador foi fechado.
+## 10. Restarting Kali Linux
 
----
+To finish the activity, the system was restarted using:
 
-## 10. Reiniciando o Kali Linux
-
-Para finalizar a atividade, o sistema foi reiniciado com:
-
-```bash id="w9f4mb"
+```bash
 reboot
 ```
 
----
+## Key Concepts
 
-## Conceitos
+- **`iptables`:** A tool for configuring the Netfilter firewall on Linux.
+- **Netfilter:** A framework in the Linux kernel for packet filtering and processing.
+- **`INPUT`:** A chain that processes traffic destined for the local system.
+- **`OUTPUT`:** A chain that processes traffic generated by the local system.
+- **`DROP`:** Discards packets matching a rule.
+- **`-A`:** Adds a rule to a chain.
+- **`-D`:** Removes a rule from a chain.
+- **`-s`:** Specifies the source address of packets.
 
-* **iptables:** ferramenta de configuração do firewall Netfilter no Linux.
-* **Netfilter:** framework de filtragem e processamento de pacotes do kernel Linux.
-* **INPUT:** chain responsável por processar tráfego destinado ao próprio sistema.
-* **OUTPUT:** chain responsável pelo tráfego gerado pelo próprio sistema.
-* **DROP:** descarta pacotes que correspondem à regra.
-* **`-A`:** adiciona uma regra.
-* **`-D`:** remove uma regra.
-* **`-s`:** especifica a origem dos pacotes.
+## Activity Workflow
 
-## Fluxo da atividade
-
-```text id="c7m5zn"
-Acessar globo.com.br
+```text
+Access globo.com.br
         ↓
-Site funciona normalmente
+Website loads normally
         ↓
-Criar regra DROP
+Create the DROP rule
         ↓
-iptables -L
+Run iptables -L
         ↓
-Site deixa de carregar
+Website stops loading
         ↓
-Remover regra
+Remove the rule
         ↓
-iptables -L
+Run iptables -L
         ↓
-Site volta a carregar
+Website loads again
 ```
 
-## Resultado
+## Result
 
-Foi criada uma regra no `iptables` para descartar tráfego associado ao `globo.com.br`. Após a aplicação da regra, o acesso ao site foi bloqueado. Em seguida, a regra foi removida e o acesso ao site voltou ao funcionamento normal.
+An `iptables` rule was created to discard traffic associated with `globo.com.br`. After the rule was applied, access to the website was reported as blocked. The rule was then removed, and website access returned to normal.
+
+### Technical Note
+
+The command used in this activity adds a rule to the `INPUT` chain, which filters packets arriving at Kali Linux. It does not directly block outgoing requests from Kali Linux to the website. For reliable outbound blocking, a rule generally needs to target the `OUTPUT` chain and the destination IP address. Additionally, a hostname supplied to `iptables` is resolved when the rule is created, so the rule may not cover other addresses returned by DNS later.
+
+---
+
+[Back to Classes 43–44](../) · [Back to Module 11](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
