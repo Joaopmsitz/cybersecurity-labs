@@ -1,214 +1,182 @@
-# Atividade 10.2 — Controle de Aplicativos e Navegadores no Windows Server 2022
+# Activity 10.02 — App and Browser Control in Windows Server 2022
 
-## Objetivo
+## Objective
 
-Explorar os recursos de **App & browser control**, **Reputation-based protection** e **Exploit Protection** do Windows Security no Windows Server 2022, verificando as principais configurações de proteção contra aplicativos maliciosos e técnicas de exploração.
+Explore the **App & browser control**, **Reputation-based protection**, and **Exploit Protection** features in Windows Security on Windows Server 2022, reviewing the main security settings designed to protect against malicious applications and exploitation techniques.
 
----
+## Environment
 
-## Ambiente
+- **System:** Windows Server 2022
+- **Tool:** Windows Security
+- **Features:** App & browser control, Reputation-based protection, and Exploit Protection
+- **Access:** RDP
+- **Machine:** Windows Server 2022 (client)
 
-* **Sistema:** Windows Server 2022
-* **Ferramenta:** Windows Security
-* **Recursos:** App & browser control, Reputation-based protection e Exploit Protection
-* **Acesso:** RDP
-* **Máquina:** Windows Server 2022 (cliente)
+The credentials used to access the lab are not included in this README.
 
-> As credenciais utilizadas para acesso ao laboratório não são registradas neste README.
+## 1. Accessing Windows Server 2022
 
----
+The Windows Server 2022 client was accessed via RDP using the administrative credentials specified by the lab.
 
-## 1. Acesso ao Windows Server 2022
+## 2. Accessing App & browser control
 
-O Windows Server 2022 (cliente) foi acessado via RDP utilizando as credenciais administrativas indicadas no laboratório.
+The following search field was selected from the taskbar:
 
----
-
-## 2. Acesso ao App & browser control
-
-Na barra de tarefas, foi selecionado:
-
-```text id="x6m2qp"
+```text
 Type here to search
 ```
 
-Foi pesquisado:
+The following term was searched for:
 
-```text id="r8v4kc"
+```text
 App & browser control
 ```
 
-e o recurso foi aberto.
+The feature was then opened.
 
----
+## 3. Checking Reputation-based protection
 
-## 3. Verificação do Reputation-based protection
+In the **App & browser control** window, the following section was located:
 
-Na janela **App & browser control**, foi localizada a seção:
-
-```text id="h5n9wb"
+```text
 Reputation-based protection
 ```
 
-No estado inicial observado durante a atividade, a funcionalidade estava desabilitada e apresentava a opção:
+In the initial state observed during the activity, the feature was disabled and displayed the following option:
 
-```text id="p3c7yf"
+```text
 Turn on
 ```
 
-A proteção baseada em reputação utiliza informações sobre arquivos, aplicativos e suas origens para ajudar a identificar conteúdos potencialmente maliciosos.
+Reputation-based protection uses information about files, applications, and their sources to help identify potentially malicious content.
 
----
+## 4. Accessing Reputation-based Protection Settings
 
-## 4. Acesso às configurações de proteção baseada em reputação
+The following link was selected to view the available settings:
 
-Foi selecionado o link:
-
-```text id="v2k8sd"
+```text
 Reputation-based protection settings
 ```
 
-para visualizar as configurações disponíveis.
+## 5. Checking Check apps and files
 
----
+On the settings page, the following option was located:
 
-## 5. Verificação do Check apps and files
-
-Na tela de configurações, foi localizada a opção:
-
-```text id="m7q4xa"
+```text
 Check apps and files
 ```
 
-Essa configuração permite verificar aplicativos e arquivos com base em informações de reputação, ajudando a identificar conteúdos potencialmente perigosos antes de sua execução ou abertura.
+This setting allows applications and files to be checked against reputation information, helping identify potentially dangerous content before it is executed or opened.
 
----
+## 6. Enabling Potentially unwanted app blocking
 
-## 6. Habilitação do Potentially unwanted app blocking
+The following option was located:
 
-Foi localizada a opção:
-
-```text id="Potentially unwanted app blocking"
+```text
+Potentially unwanted app blocking
 ```
 
-O recurso estava inicialmente em:
+The feature was initially set to:
 
-```text id="Off"
+```text
+Off
 ```
 
-e foi alterado para:
+It was changed to:
 
-```text id="On"
+```text
+On
 ```
 
-Esse mecanismo ajuda a bloquear aplicativos potencialmente indesejados, que podem apresentar comportamentos indesejáveis mesmo sem necessariamente serem classificados como malware tradicional.
+This mechanism helps block potentially unwanted applications (PUAs), which may exhibit undesirable behavior even when they are not necessarily classified as traditional malware.
 
----
+## 7. Returning to the Previous Page
 
-## 7. Retorno à página anterior
+The back button in the upper-left corner was used to return to the main **App & browser control** page.
 
-Foi utilizado o botão de retorno localizado no canto superior esquerdo para retornar à página principal de:
+## 8. Verifying Reputation-based Protection
 
-```text id="App & browser control"
+After the previous change, the status of **Reputation-based protection** was checked.
+
+The feature was now displayed as enabled.
+
+## 9. Accessing Exploit Protection
+
+On the **App & browser control** page, the **Exploit protection** section was located.
+
+Exploit Protection provides mitigation mechanisms designed to make it more difficult to exploit vulnerabilities in applications and the operating system itself.
+
+The following link was selected:
+
+```text
+Exploit protection settings
 ```
 
----
+## 10. Reviewing System Protections
 
-## 8. Verificação do Reputation-based protection
+On the Exploit protection page, the following tab was selected:
 
-Após a alteração realizada anteriormente, foi verificado que o recurso:
-
-```text id="Reputation-based protection"
+```text
+System settings
 ```
 
-passou a aparecer como habilitado.
-
----
-
-## 9. Acesso ao Exploit Protection
-
-Na página **App & browser control**, foi localizada a seção:
-
-```text id="Exploit Protection"
-```
-
-O **Exploit Protection** fornece mecanismos de mitigação destinados a dificultar técnicas de exploração de vulnerabilidades em aplicativos e no próprio sistema operacional.
-
-Foi selecionado o link:
-
-```text id="Exploit protection settings"
-```
-
----
-
-## 10. Verificação das proteções de sistema
-
-Na tela **Exploit protection**, foi acessada a aba:
-
-```text id="System settings"
-```
-
-Foram observadas diversas proteções de sistema habilitadas por padrão.
-
-Entre elas:
+Several system protections that were enabled by default were observed.
 
 ### Control Flow Guard (CFG)
 
-O **Control Flow Guard** ajuda a proteger aplicações contra técnicas que tentam alterar ou desviar o fluxo normal de execução do programa.
+Control Flow Guard helps protect applications against techniques that attempt to alter or redirect a program's normal execution flow.
 
 ### Data Execution Prevention (DEP)
 
-O **Data Execution Prevention** ajuda a impedir a execução de código em determinadas regiões de memória destinadas a dados, reduzindo o impacto de algumas técnicas de exploração.
+Data Execution Prevention helps prevent code from executing in certain memory regions designated for data, reducing the impact of some exploitation techniques.
 
 ### Force randomization for images (Mandatory ASLR)
 
-Essa configuração utiliza **ASLR (Address Space Layout Randomization)** para dificultar a previsão dos endereços de memória utilizados por módulos de programas.
+This setting uses Address Space Layout Randomization (ASLR) to make the memory addresses used by program modules more difficult to predict.
 
 ### Randomize memory allocations (Bottom-up ASLR)
 
-Realiza a aleatorização das alocações de memória, dificultando que um atacante dependa de endereços previsíveis durante uma exploração.
+This setting randomizes memory allocations, making it more difficult for an attacker to rely on predictable memory addresses during an exploit.
 
 ### High-entropy ASLR
 
-Amplia a quantidade de aleatoriedade utilizada na disposição dos endereços de memória, aumentando a dificuldade de previsibilidade em determinados ambientes.
+This setting increases the amount of randomness used in memory address allocation, making addresses more difficult to predict in supported environments.
 
 ### Validate exception chains (SEHOP)
 
-O **SEHOP (Structured Exception Handling Overwrite Protection)** ajuda a validar as cadeias de tratamento de exceções, dificultando determinadas técnicas de exploração baseadas em corrupção dessas estruturas.
+Structured Exception Handling Overwrite Protection (SEHOP) helps validate exception-handling chains, making certain exploitation techniques that rely on corruption of these structures more difficult.
 
 ### Validate heap integrity
 
-Realiza verificações relacionadas à integridade das estruturas do heap, ajudando a detectar condições associadas à corrupção de memória.
+This setting performs checks related to the integrity of heap structures, helping detect conditions associated with memory corruption.
+
+### Evidence — Step 10
+
+Caption to include before the screenshot:
+
+> Screenshot of Activity 10.02: the **Exploit protection settings** screen, on the **System settings** tab, showing the settings designed to mitigate exploitation techniques in Windows Server 2022.
+
+[View Evidence — Classes 37–38](../evidencias.pdf)
+
+## 11. Closing the Activity
+
+After reviewing the settings, all windows were closed.
+
+## Activity Workflow
+
+| Step | Result |
+|---|---|
+| App & browser control | Feature explored |
+| Reputation-based protection | Settings reviewed |
+| Potentially unwanted app blocking (PUA Blocking) | Enabled |
+| Exploit Protection | System protection settings reviewed |
+
+## Result
+
+The application and browser protection mechanisms in Windows Security were explored.
+
+The main Exploit Protection mitigations were also reviewed, including CFG, DEP, ASLR, SEHOP, and heap integrity validation.
 
 ---
 
-## Evidência — Passo 10
-
-**Frase obrigatória antes do print:**
-
-> **Print da atividade 10.2:** tela `Exploit protection settings`, na aba `System settings`, apresentando as configurações de proteção contra técnicas de exploração do Windows Server 2022.
-
-[**Evidências — Módulo 10 / Aulas 37 e 38**](../evidencias.pdf)
-
----
-
-## 11. Encerramento
-
-Após a visualização das configurações, todas as janelas foram fechadas.
-
----
-
-## Fluxo da atividade
-
-| Etapa                       | Resultado                           |
-| --------------------------- | ----------------------------------- |
-| App & browser control       | Recurso explorado                   |
-| Reputation-based protection | Configurações verificadas           |
-| PUA Blocking                | Habilitado                          |
-| Exploit Protection          | Configurações de sistema analisadas |
-
-## Resultado
-
-Foram explorados os mecanismos de proteção de aplicativos e navegadores do Windows Security.
-
-Também foram analisadas as principais mitigações do **Exploit Protection**, incluindo CFG, DEP, ASLR, SEHOP e validação da integridade do heap.
+[Back to Classes 37–38](../) · [Back to Module 10](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
