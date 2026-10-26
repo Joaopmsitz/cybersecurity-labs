@@ -1,46 +1,40 @@
-# Atividade 11.3 — MAC Cloning no Kali Linux
+# Activity 11.03 — MAC Cloning on Kali Linux
 
-## Objetivo
+## Objective
 
-Explorar a alteração do endereço MAC de uma interface de rede no Kali Linux, realizando um **MAC cloning** temporário na interface `docker0` e restaurando posteriormente o endereço MAC original.
+Explore how to change the MAC address of a network interface on Kali Linux by temporarily cloning the MAC address of the `docker0` interface and then restoring its original MAC address.
 
-A atividade demonstra como o endereço físico de uma interface pode ser alterado em software e como verificar a alteração utilizando ferramentas de rede do Linux.
+This activity demonstrates how a network interface's hardware address can be changed in software and how to verify the change using Linux networking tools.
 
----
+## Environment
 
-## Ambiente
+- **Operating system:** Kali GNU/Linux
+- **Interface under examination:** `docker0`
+- **Tools:** `ip link` and `ifconfig`
+- **Original `docker0` MAC address:** `02:42:4c:36:59:3d`
+- **MAC address used for testing:** `08:00:27:8b:c0:05`
 
-* **Sistema:** Kali GNU/Linux
-* **Interface analisada:** `docker0`
-* **Ferramentas:** `ip link` e `ifconfig`
-* **MAC original da `docker0`:** `02:42:4c:36:59:3d`
-* **MAC utilizado no teste:** `08:00:27:8b:c0:05`
+## 1. Accessing Kali Linux
 
----
+The Kali Linux machine was accessed, and the Terminal was opened.
 
-## 1. Acessando o Kali Linux
+Administrative privileges were obtained using:
 
-A máquina Kali Linux foi acessada e o Terminal foi aberto.
-
-Foi obtido acesso administrativo com:
-
-```bash id="f7k3qm"
+```bash
 sudo -i
 ```
 
----
+## 2. Displaying Network Interfaces
 
-## 2. Visualizando as interfaces de rede
+The available interfaces were checked using:
 
-As interfaces disponíveis foram verificadas com:
-
-```bash id="m2v8xc"
+```bash
 ip link show
 ```
 
-A saída apresentada foi:
+The output was:
 
-```text id="ysiu2p"
+```text
 1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
     link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
 2: eth0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9001 qdisc mq state UP mode DEFAULT group default qlen 1000
@@ -49,196 +43,182 @@ A saída apresentada foi:
     link/ether 02:42:4c:36:59:3d brd ff:ff:ff:ff:ff:ff
 ```
 
-A interface `docker0` estava configurada com o endereço MAC:
+The `docker0` interface was configured with the following MAC address:
 
-```text id="c5n9rv"
+```text
 02:42:4c:36:59:3d
 ```
 
-Esse endereço foi registrado para que pudesse ser restaurado ao final da atividade.
+This address was recorded so it could be restored at the end of the activity.
 
-### Interfaces observadas
+### Observed Interfaces
 
-* `lo`: interface de loopback;
-* `eth0`: interface de rede principal;
-* `docker0`: bridge virtual utilizada pelo Docker.
+- **`lo`:** Loopback interface.
+- **`eth0`:** Main network interface.
+- **`docker0`:** Virtual bridge used by Docker.
 
----
+## 3. Displaying Interfaces with ifconfig
 
-## 3. Visualizando as interfaces com ifconfig
+The following command was also used:
 
-Também foi utilizado:
-
-```bash id="p8x4kt"
+```bash
 ifconfig
 ```
 
-A saída permitiu confirmar as informações das interfaces de rede, incluindo o endereço MAC da `docker0`:
+The output confirmed the network interface information, including the `docker0` MAC address:
 
-```text id="w6r2jd"
+```text
 docker0: ...
           ether 02:42:4c:36:59:3d
 ```
 
-O endereço MAC original da interface `docker0` foi mantido como referência para a etapa de restauração.
+The original MAC address of the `docker0` interface was retained as a reference for the restoration step.
 
-> **Importante:** o MAC original pode variar de acordo com a máquina ou ambiente. Neste laboratório, o endereço original observado foi `02:42:4c:36:59:3d`.
+> **Important:** The original MAC address may vary depending on the machine or environment. In this lab, the observed original address was `02:42:4c:36:59:3d`.
 
----
+## 4. Disabling the docker0 Interface
 
-## 4. Desativando a interface docker0
+Before changing the MAC address, the interface was disabled:
 
-Antes de alterar o endereço MAC, a interface foi desativada:
-
-```bash id="q9m5bx"
+```bash
 ip link set docker0 down
 ```
 
-A desativação evita realizar a alteração enquanto a interface está operacional.
+Disabling the interface allows the address change to be performed while the interface is administratively down.
 
----
+## 5. Changing the MAC Address
 
-## 5. Alterando o endereço MAC
+A new MAC address was assigned to the `docker0` interface:
 
-Foi definido um novo endereço MAC para a interface `docker0`:
-
-```bash id="r3k7nv"
+```bash
 ip link set dev docker0 address 08:00:27:8b:c0:05
 ```
 
-Nesse momento, o endereço MAC da interface foi alterado temporariamente para:
+At this point, the interface's MAC address was temporarily changed to:
 
-```text id="x8d2pf"
+```text
 08:00:27:8b:c0:05
 ```
 
-Essa técnica é conhecida como **MAC cloning** ou **MAC spoofing**, pois permite fazer uma interface utilizar um endereço MAC diferente daquele originalmente configurado.
+This technique is known as **MAC cloning** or **MAC spoofing**, because it allows an interface to use a MAC address different from the one originally configured.
 
----
+## 6. Re-enabling the Interface
 
-## 6. Reativando a interface
+After the change, the interface was enabled again:
 
-Após a alteração, a interface foi ativada novamente:
-
-```bash id="t4c6mz"
+```bash
 ip link set docker0 up
 ```
 
----
+## 7. Verifying the New MAC Address
 
-## 7. Verificando o novo endereço MAC
+The change was verified using:
 
-A alteração foi confirmada com:
-
-```bash id="n7v2ks"
+```bash
 ip link show
 ```
 
-A interface `docker0` passou a apresentar:
+The `docker0` interface then displayed:
 
-```text id="3k729l"
+```text
 3: docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN mode DEFAULT group default
     link/ether 08:00:27:8b:c0:05 brd ff:ff:ff:ff:ff:ff
 ```
 
-O endereço MAC exibido passou de:
+The displayed MAC address changed from:
 
 ```text
 02:42:4c:36:59:3d
 ```
 
-para:
+to:
 
 ```text
 08:00:27:8b:c0:05
 ```
 
-Isso confirma que a alteração foi aplicada à interface.
+This confirms that the MAC address change was applied to the interface.
 
----
+## 8. Restoring the Original MAC Address
 
-## 8. Restaurando o endereço MAC original
+After completing the test, the original MAC address was restored.
 
-Após concluir o teste, o endereço MAC original foi restaurado.
+First, the interface was disabled:
 
-Primeiro, a interface foi desativada:
-
-```bash id="u5p8wc"
+```bash
 ip link set docker0 down
 ```
 
-Em seguida, foi configurado novamente o endereço MAC original observado no início da atividade:
+Next, the original MAC address recorded at the beginning of the activity was assigned again:
 
-```bash id="k3r9fm"
+```bash
 ip link set dev docker0 address 02:42:4c:36:59:3d
 ```
 
-Por fim, a interface foi reativada:
+Finally, the interface was enabled again:
 
-```bash id="z6n4qt"
+```bash
 ip link set docker0 up
 ```
 
-### Evidência — Passo 8
+### Evidence — Step 8
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 11.3:** restauração do endereço MAC original da interface `docker0`, após o teste de MAC cloning, utilizando novamente o endereço `02:42:4c:36:59:3d`.
+> Screenshot of Activity 11.03: restoration of the original MAC address of the `docker0` interface after the MAC cloning test, using the address `02:42:4c:36:59:3d` again.
 
-[**Evidências — Módulo 11 / Aulas 41 e 42**](../evidencias.pdf)
+[View Evidence — Classes 41–42](../evidencias.pdf)
 
-> **Observação:** caso o endereço MAC original seja diferente em outra máquina, deve ser utilizado o valor registrado antes da alteração, e não necessariamente `02:42:4c:36:59:3d`.
+> **Observation:** If the original MAC address differs on another machine, use the value recorded before the change rather than assuming it is `02:42:4c:36:59:3d`.
 
----
+## 9. Verifying the Restoration
 
-## 9. Verificando a restauração
+After restoring the address, the interface configuration was checked again:
 
-Após a restauração, a configuração da interface foi verificada novamente:
-
-```bash id="b8m5qx"
+```bash
 ip link show
 ```
 
-A interface `docker0` deve voltar a apresentar o MAC original registrado no início da atividade:
+The `docker0` interface should once again display the original MAC address recorded at the beginning of the activity:
 
 ```text
 link/ether 02:42:4c:36:59:3d
 ```
 
----
+## 10. Closing the Activity
 
-## 10. Encerrando a atividade
+After confirming that the original MAC address had been restored, the Terminal was closed.
 
-Após confirmar a restauração do endereço MAC, o Terminal foi fechado.
+## Key Concepts
 
----
+- **MAC address:** An identifier used at the link layer to identify a network interface.
+- **MAC cloning:** Changing the MAC address presented by an interface to another address.
+- **`ip link`:** A Linux utility used to display and modify network interfaces.
+- **`docker0`:** A virtual bridge created by Docker for communication between containers.
+- **MAC spoofing:** A technique for changing the MAC address used by a network interface.
 
-## Conceitos
+## Activity Workflow
 
-* **Endereço MAC:** identificador utilizado na camada de enlace para identificar uma interface de rede.
-* **MAC cloning:** alteração do endereço MAC apresentado por uma interface para outro endereço.
-* **`ip link`:** ferramenta do Linux para visualizar e modificar interfaces de rede.
-* **`docker0`:** bridge virtual criada pelo Docker para comunicação de containers.
-* **MAC spoofing:** técnica de alteração do endereço MAC utilizado por uma interface.
-
-## Fluxo da atividade
-
-```text id="v9c2la"
-Verificar MAC original
+```text
+Check the original MAC address
         ↓
-Desativar docker0
+Disable docker0
         ↓
-Alterar endereço MAC
+Change the MAC address
         ↓
-Reativar interface
+Re-enable the interface
         ↓
-Verificar alteração
+Verify the change
         ↓
-Restaurar MAC original
+Restore the original MAC address
         ↓
-Verificar restauração
+Verify the restoration
 ```
 
-## Resultado
+## Result
 
-O endereço MAC da interface `docker0` foi alterado temporariamente para `08:00:27:8b:c0:05` e a alteração foi confirmada com `ip link show`. Ao final, o endereço MAC original `02:42:4c:36:59:3d` foi restaurado.
+The MAC address of the `docker0` interface was temporarily changed to `08:00:27:8b:c0:05`, and the change was confirmed using `ip link show`. Finally, the original MAC address, `02:42:4c:36:59:3d`, was restored.
+
+---
+
+[Back to Classes 41–42](../) · [Back to Module 11](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
