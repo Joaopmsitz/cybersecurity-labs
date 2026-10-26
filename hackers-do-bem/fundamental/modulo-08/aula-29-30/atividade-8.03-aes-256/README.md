@@ -1,28 +1,34 @@
-# Atividade 8.3 — Cifrando e decifrando um arquivo com AES-256 no Kali Linux
+# Activity 8.03 — Encrypting and Decrypting a File with AES-256 on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 08  
+> **Classes:** 29–30  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **OpenSSL** para cifrar e decifrar um arquivo utilizando **AES-256 no modo CTR**, demonstrando o processo de proteção de um arquivo e sua posterior recuperação mediante a chave utilizada na cifragem.
+## Objective
 
----
-
-## Ambiente
-
-* **Sistema:** Kali Linux
-* **Ferramenta:** OpenSSL
-* **Algoritmo:** AES-256-CTR
-* **Diretório de trabalho:** `/home/aluno/Documentos/Arquivos`
-* **Arquivo original:** `My_shoe.jpg`
-* **Arquivo cifrado:** `arquivo_criptografado`
-* **Arquivo recuperado:** `My_shoe2.jpg`
-
-> A senha utilizada durante o laboratório não é registrada neste README.
+Use **OpenSSL** to encrypt and decrypt a file using **AES-256 in CTR mode**, demonstrating how to protect a file and subsequently recover it using the password provided during encryption.
 
 ---
 
-## 1. Acesso como root
+## Environment
 
-Inicialmente, foi obtido acesso administrativo ao Kali Linux:
+- **Operating system:** Kali Linux
+- **Tool:** OpenSSL
+- **Algorithm:** AES-256-CTR
+- **Working directory:** `/home/aluno/Documentos/Arquivos`
+- **Original file:** `My_shoe.jpg`
+- **Encrypted file:** `arquivo_criptografado`
+- **Recovered file:** `My_shoe2.jpg`
+
+> The password used during the lab is not recorded in this README.
+
+---
+
+## 1. Switching to the Root User
+
+Administrative access to Kali Linux was obtained:
 
 ```bash
 sudo -i
@@ -30,9 +36,9 @@ sudo -i
 
 ---
 
-## 2. Acesso ao diretório de trabalho
+## 2. Accessing the Working Directory
 
-Foi acessado o diretório utilizado para armazenar os arquivos da atividade:
+The directory used to store the files for this activity was accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
@@ -40,15 +46,15 @@ cd /home/aluno/Documentos/Arquivos
 
 ---
 
-## 3. Download do arquivo utilizado no laboratório
+## 3. Downloading the File Used in the Lab
 
-Foi baixada uma imagem JPG da Wikimedia Commons para ser utilizada como arquivo de entrada:
+A JPG image was downloaded from Wikimedia Commons to serve as the input file:
 
 ```bash
 wget https://upload.wikimedia.org/wikipedia/commons/0/01/My_shoe.jpg
 ```
 
-Saída registrada:
+Recorded output:
 
 ```text
 --2024-03-03 20:42:50--  https://upload.wikimedia.org/wikipedia/commons/0/01/My_shoe.jpg
@@ -63,31 +69,31 @@ My_shoe.jpg                    100%[============================================
 2024-03-03 20:42:51 (7,35 MB/s) - “My_shoe.jpg” salvo [1297035/1297035]
 ```
 
-A imagem foi aberta no **Thunar** para confirmar visualmente o arquivo antes da cifragem.
+The image was opened in **Thunar** to visually confirm the file before encryption.
 
 ---
 
-## 4. Cifragem utilizando AES-256-CTR
+## 4. Encrypting with AES-256-CTR
 
-Primeiramente, foi verificado o conteúdo do diretório:
+First, the directory contents were checked:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 arquivo_criptografado  My_shoe.jpg
 ```
 
-Em seguida, foi utilizado o OpenSSL para cifrar a imagem:
+OpenSSL was then used to encrypt the image:
 
 ```bash
 openssl enc -aes-256-ctr -salt -in My_shoe.jpg -out arquivo_criptografado
 ```
 
-Durante o processo, foi solicitada uma senha para a cifragem:
+During the process, a password was requested for encryption:
 
 ```text
 enter AES-256-CTR encryption password:
@@ -96,47 +102,47 @@ Verifying - enter AES-256-CTR encryption password:
 Using -iter or -pbkdf2 would be better.
 ```
 
-Após a execução, o arquivo cifrado foi criado.
+After execution, the encrypted file was created.
 
-### Parâmetros utilizados
+### Parameters Used
 
-* `enc` — utiliza o módulo de cifragem de arquivos do OpenSSL;
-* `-aes-256-ctr` — utiliza AES com chave de 256 bits no modo CTR;
-* `-salt` — adiciona um salt ao processo de derivação da chave;
-* `-in My_shoe.jpg` — define o arquivo original como entrada;
-* `-out arquivo_criptografado` — define o arquivo de saída cifrado.
+- `enc` — invokes the OpenSSL file encryption and decryption command.
+- `-aes-256-ctr` — uses AES with a 256-bit key in CTR mode.
+- `-salt` — adds a salt to the key derivation process.
+- `-in My_shoe.jpg` — specifies the original file as the input.
+- `-out arquivo_criptografado` — specifies the encrypted output file.
 
-O OpenSSL também apresentou um aviso sobre a **derivação de chave legada**, recomendando o uso de `-iter` ou `-pbkdf2` em operações modernas.
+OpenSSL also displayed a warning about **legacy key derivation**, recommending the use of `-iter` or `-pbkdf2` for modern operations.
 
 ---
 
-## 5. Remoção do original e decifragem
+## 5. Removing the Original File and Decrypting
 
-Para verificar se o arquivo poderia ser recuperado a partir da versão cifrada, o arquivo original foi removido:
+To verify whether the file could be recovered from its encrypted version, the original file was deleted:
 
 ```bash
 rm My_shoe.jpg
 ```
 
-Em seguida, foi confirmado que restava apenas o arquivo cifrado:
+The directory was then checked to confirm that only the encrypted file remained:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 arquivo_criptografado
 ```
 
-O arquivo foi então decifrado utilizando o OpenSSL:
+The file was then decrypted using OpenSSL:
 
 ```bash
 openssl enc -d -aes-256-ctr -in arquivo_criptografado -out My_shoe2.jpg
 ```
 
-Foi solicitada a senha utilizada anteriormente:
+The password used previously was requested:
 
 ```text
 enter AES-256-CTR decryption password:
@@ -144,27 +150,27 @@ enter AES-256-CTR decryption password:
 Using -iter or -pbkdf2 would be better.
 ```
 
-Por fim, foi utilizado `ls` para verificar o arquivo recuperado:
+Finally, `ls` was used to verify the recovered file:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 arquivo_criptografado  My_shoe2.jpg
 ```
 
-A presença de `My_shoe2.jpg` demonstra que o conteúdo foi recuperado a partir do arquivo cifrado.
+The presence of `My_shoe2.jpg` demonstrates that the content was recovered from the encrypted file.
 
-A imagem recuperada também foi aberta no **Thunar** para verificar visualmente o resultado da decifragem.
+The recovered image was also opened in **Thunar** to visually verify the decryption result.
 
 ---
 
-## Evidência
+## Evidence
 
-A evidência solicitada para esta atividade corresponde ao **passo 6**, demonstrando a remoção do arquivo original, a existência do arquivo cifrado, a execução da decifragem e a criação da imagem recuperada:
+The evidence requested for this activity corresponds to **step 6**, demonstrating the removal of the original file, the presence of the encrypted file, the decryption process, and the creation of the recovered image:
 
 ```text
 rm My_shoe.jpg
@@ -180,4 +186,8 @@ ls
 arquivo_criptografado  My_shoe2.jpg
 ```
 
-[**Evidências — Módulo 8 / Aulas 29 e 30**](../evidencias.pdf)
+[View Evidence — Classes 29–30](../evidencias.pdf)
+
+---
+
+[Back to Classes 29–30](../) · [Back to Module 8](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
