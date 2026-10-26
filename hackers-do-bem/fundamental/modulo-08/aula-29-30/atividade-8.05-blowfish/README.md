@@ -1,58 +1,64 @@
-# Atividade 8.5 — Cifrando e decifrando um arquivo com Blowfish no Linux
+# Activity 8.05 — Encrypting and Decrypting a File with Blowfish on Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 08  
+> **Classes:** 29–30  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o **OpenSSL** para cifrar e decifrar um arquivo utilizando o algoritmo **Blowfish** no modo CFB, verificando na prática a criação de um arquivo cifrado e sua posterior recuperação.
+## Objective
 
-A atividade também permite observar o comportamento do OpenSSL ao trabalhar com um algoritmo criptográfico considerado legado.
+Use **OpenSSL** to encrypt and decrypt a file using the **Blowfish** algorithm in CFB mode, verifying the creation of an encrypted file and its subsequent recovery.
 
----
-
-## Ambiente
-
-* **Sistema:** Kali Linux
-* **Ferramenta:** OpenSSL
-* **Algoritmo:** Blowfish (BF-CFB)
-* **Diretório de trabalho:** `/home/aluno/Documentos/Arquivos`
-* **Arquivo original:** `CRS-20_Dragon–Enhanced.jpg`
-* **Arquivo cifrado:** `arquivo_criptografado`
-* **Arquivo recuperado:** `imagem.jpg`
-
-> A senha utilizada durante o laboratório não é registrada neste README.
+This activity also demonstrates OpenSSL's behavior when working with a cryptographic algorithm considered legacy.
 
 ---
 
-## 1. Acesso como root
+## Environment
 
-Inicialmente, foi obtido acesso administrativo ao Kali Linux:
+- **Operating system:** Kali Linux
+- **Tool:** OpenSSL
+- **Algorithm:** Blowfish (BF-CFB)
+- **Working directory:** `/home/aluno/Documentos/Arquivos`
+- **Original file:** `CRS-20_Dragon–Enhanced.jpg`
+- **Encrypted file:** `arquivo_criptografado`
+- **Recovered file:** `imagem.jpg`
 
-```bash id="w7n3fc"
+> The password used during the lab is not recorded in this README.
+
+---
+
+## 1. Switching to the Root User
+
+Administrative access to Kali Linux was obtained:
+
+```bash
 sudo -i
 ```
 
 ---
 
-## 2. Acesso ao diretório de trabalho
+## 2. Accessing the Working Directory
 
-Foi acessado o diretório utilizado na atividade:
+The directory used in this activity was accessed:
 
-```bash id="q5p2md"
+```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
 ---
 
-## 3. Download da imagem
+## 3. Downloading the Image
 
-Foi utilizada uma imagem JPG obtida da Wikimedia Commons:
+A JPG image hosted on Wikimedia Commons was used:
 
-```bash id="n2x8va"
+```bash
 wget https://upload.wikimedia.org/wikipedia/commons/9/9e/CRS-20_Dragon%E2%80%93Enhanced.jpg
 ```
 
-Saída registrada:
+Recorded output:
 
-```text id="j3m8ks"
+```text
 --2024-03-04 16:10:22--  https://upload.wikimedia.org/wikipedia/commons/9/9e/CRS-20_Dragon%E2%80%93Enhanced.jpg
 Resolvendo upload.wikimedia.org (upload.wikimedia.org)... 208.80.154.240, 2620:0:861:ed1a::2:b
 Conectando-se a upload.wikimedia.org (upload.wikimedia.org)|208.80.154.240|:443... conectado.
@@ -65,68 +71,68 @@ CRS-20_Dragon–Enhanced.jpg     100%[==========================================
 2024-03-04 16:10:22 (10,6MB/s) - “CRS-20_Dragon–Enhanced.jpg” salvo [2092509/2092509]
 ```
 
-A imagem foi aberta no **Thunar** para confirmar visualmente o arquivo antes da cifragem.
+The image was opened in **Thunar** to visually verify the file before encryption.
 
 ---
 
-## 4. Cifragem utilizando Blowfish
+## 4. Encrypting with Blowfish
 
-Primeiramente, foi verificado o conteúdo do diretório:
+First, the directory contents were checked:
 
-```bash id="g4d6pw"
+```bash
 ls
 ```
 
-Saída:
+Output:
 
-```text id="v2m7qn"
+```text
 CRS-20_Dragon–Enhanced.jpg
 ```
 
-Em seguida, foi utilizado o OpenSSL para cifrar a imagem:
+OpenSSL was then used to encrypt the image:
 
-```bash id="c8y4xr"
+```bash
 openssl enc -bf-cfb -salt -in CRS-20_Dragon–Enhanced.jpg -out arquivo_criptografado
 ```
 
-Durante a operação, foi solicitada uma senha:
+A password was requested during the operation:
 
-```text id="k2z9ht"
+```text
 enter BF-CFB encryption password:
 Verifying - enter BF-CFB encryption password:
 *** WARNING : deprecated key derivation used.
 Using -iter or -pbkdf2 would be better.
 ```
 
-Após a cifragem, o conteúdo do diretório foi novamente verificado:
+After encryption, the directory contents were checked again:
 
-```bash id="m8s4pc"
+```bash
 ls
 ```
 
-Saída:
+Output:
 
-```text id="r5q1bv"
+```text
 arquivo_criptografado  CRS-20_Dragon–Enhanced.jpg
 ```
 
-### Parâmetros utilizados
+### Parameters Used
 
-* `enc` — utiliza a funcionalidade de cifragem de arquivos do OpenSSL;
-* `-bf-cfb` — utiliza o algoritmo Blowfish no modo CFB;
-* `-salt` — adiciona um salt ao processo de derivação da chave;
-* `-in CRS-20_Dragon–Enhanced.jpg` — define a imagem original como entrada;
-* `-out arquivo_criptografado` — define o arquivo cifrado como saída.
+- `enc` — invokes OpenSSL's file encryption functionality.
+- `-bf-cfb` — uses the Blowfish algorithm in CFB mode.
+- `-salt` — adds a salt to the key derivation process.
+- `-in CRS-20_Dragon–Enhanced.jpg` — specifies the original image as the input.
+- `-out arquivo_criptografado` — specifies the encrypted output file.
 
-O OpenSSL também apresentou um aviso indicando que a derivação de chave utilizada é legada e recomendando o uso de `-iter` ou `-pbkdf2`.
+OpenSSL also displayed a warning indicating that the key derivation method being used is legacy and recommending `-iter` or `-pbkdf2`.
 
 ---
 
-## 5. Evidência da cifragem
+## 5. Evidence of Encryption
 
-A evidência solicitada para esta atividade corresponde ao **passo 5**, mostrando o arquivo original, a execução do comando de cifragem e a criação do arquivo cifrado:
+The evidence requested for this activity corresponds to **step 5**, showing the original file, the encryption command, and the creation of the encrypted file:
 
-```text id="b7f4mx"
+```text
 ls
 CRS-20_Dragon–Enhanced.jpg
 
@@ -140,56 +146,60 @@ ls
 arquivo_criptografado  CRS-20_Dragon–Enhanced.jpg
 ```
 
-[**Evidências — Módulo 8 / Aulas 29 e 30**](../evidencias.pdf)
+[View Evidence — Classes 29–30](../evidencias.pdf)
 
 ---
 
-## 6. Remoção do original e decifragem
+## 6. Removing the Original File and Decrypting
 
-Para verificar a recuperação do conteúdo, o arquivo original foi removido:
+To verify that the content could be recovered, the original file was deleted:
 
-```bash id="p3w8za"
+```bash
 rm CRS-20_Dragon–Enhanced.jpg
 ```
 
-Em seguida, o arquivo cifrado foi utilizado para realizar a decifragem:
+The encrypted file was then used for decryption:
 
-```bash id="h6q2vt"
+```bash
 openssl enc -bf-cfb -d -in arquivo_criptografado -out imagem.jpg
 ```
 
-Durante o processo, foi solicitada a senha utilizada anteriormente:
+The previously used password was requested:
 
-```text id="s4j9kc"
+```text
 enter BF-CFB decryption password:
 *** WARNING : deprecated key derivation used.
 Using -iter or -pbkdf2 would be better.
 ```
 
-Após a decifragem, foi utilizado `ls`:
+After decryption, `ls` was used:
 
-```bash id="d8m2qy"
+```bash
 ls
 ```
 
-Resultado:
+Result:
 
-```text id="x5r7hn"
+```text
 arquivo_criptografado  imagem.jpg
 ```
 
-A imagem recuperada foi aberta no **Thunar** para verificar visualmente o resultado da decifragem.
+The recovered image was opened in **Thunar** to visually verify the decryption result.
 
 ---
 
-## Observação técnica
+## Technical Note
 
-O **Blowfish** é um algoritmo de cifragem simétrica de chave variável e hoje é considerado uma opção legada para novos projetos. A atividade demonstra seu funcionamento com o OpenSSL, mas algoritmos e modos mais modernos devem ser considerados em implementações atuais.
+**Blowfish** is a symmetric-key encryption algorithm with a variable-length key and is now considered a legacy option for new projects. This activity demonstrates its operation through OpenSSL, but more modern algorithms and modes should be considered for current implementations.
 
-Também é importante observar que o comando utilizado no laboratório não especifica um tamanho de chave de 128 bits; o parâmetro `-bf-cfb` apenas seleciona o Blowfish no modo CFB.
+It is also important to note that the command used in this lab does not specify a 128-bit key length; the `-bf-cfb` parameter selects Blowfish in CFB mode.
 
-Assim como nas atividades anteriores, o OpenSSL exibiu um aviso sobre a derivação de chave legada, recomendando mecanismos como `PBKDF2` para usos modernos.
+As in the previous activities, OpenSSL displayed a warning about legacy key derivation and recommended mechanisms such as **PBKDF2** for modern use.
 
 ---
 
-[**Evidências — Módulo 8 / Aulas 29 e 30**](../evidencias.pdf)
+[View Evidence — Classes 29–30](../evidencias.pdf)
+
+---
+
+[Back to Classes 29–30](../) · [Back to Module 8](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
