@@ -1,14 +1,18 @@
-# Atividade 7.4 — Rsync Automático com Cron
+# Activity 7.04 — Automated Rsync with Cron
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 07  
+> **Classes:** 25–26  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Automatizar a sincronização entre dois diretórios utilizando `rsync` e `cron`. O objetivo é configurar um script que execute a cópia automaticamente a cada minuto, permitindo que arquivos adicionados à `PastaA` sejam sincronizados para a `PastaB`.
+## Objective
 
----
+Automate synchronization between two directories using `rsync` and `cron`. The goal is to configure a script that runs the copy operation automatically every minute, allowing files added to `PastaA` to be synchronized to `PastaB`.
 
-## 1. Verificação dos diretórios
+## 1. Checking the Directories
 
-Primeiro, foi acessado o diretório utilizado no laboratório:
+First, the directory used in the lab was accessed:
 
 ```bash
 sudo -i
@@ -16,44 +20,42 @@ cd /home/aluno/Documentos
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 PastaA  PastaB
 ```
 
-Em seguida, foi verificado o conteúdo da `PastaA`:
+Next, the contents of `PastaA` were checked:
 
 ```bash
 cd PastaA
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 Teste.txt
 ```
 
-A `PastaB` estava inicialmente vazia:
+`PastaB` was initially empty:
 
 ```bash
 cd /home/aluno/Documentos/PastaB
 ls
 ```
 
----
+## 2. Creating the Synchronization Script
 
-## 2. Criação do script de sincronização
-
-O script foi criado no diretório `/home/aluno/Documentos/`:
+The script was created in `/home/aluno/Documentos/`:
 
 ```bash
 cd /home/aluno/Documentos
 nano sync_script.sh
 ```
 
-Conteúdo do arquivo:
+File contents:
 
 ```bash
 #!/bin/bash
@@ -61,37 +63,33 @@ Conteúdo do arquivo:
 rsync -avz /home/aluno/Documentos/PastaA/ /home/aluno/Documentos/PastaB/
 ```
 
-O script utiliza o `rsync` para sincronizar todo o conteúdo da `PastaA` com a `PastaB`.
+The script uses `rsync` to synchronize all contents from `PastaA` to `PastaB`.
 
-### Parâmetros utilizados
+### Parameters Used
 
-* `-a` — modo *archive*, preservando atributos dos arquivos e realizando a cópia de forma recursiva.
-* `-v` — exibe informações sobre os arquivos processados.
-* `-z` — utiliza compressão durante a transferência.
-* `/home/aluno/Documentos/PastaA/` — origem.
-* `/home/aluno/Documentos/PastaB/` — destino.
+- `-a` — archive mode, preserving file attributes and enabling recursive copying.
+- `-v` — displays information about the files being processed.
+- `-z` — enables compression during transfer.
+- `/home/aluno/Documentos/PastaA/` — source directory.
+- `/home/aluno/Documentos/PastaB/` — destination directory.
 
----
+## 3. Making the Script Executable
 
-## 3. Tornando o script executável
-
-Após salvar o script, foi concedida permissão de execução:
+After saving the script, execute permission was granted:
 
 ```bash
 chmod +x sync_script.sh
 ```
 
----
+## 4. Configuring Cron
 
-## 4. Configuração do Cron
-
-Foi aberto o agendador de tarefas do usuário `root`:
+The root user's task scheduler was opened:
 
 ```bash
 crontab -e
 ```
 
-Como não havia uma configuração anterior de `crontab`, o sistema apresentou:
+Because there was no existing crontab configuration, the system displayed:
 
 ```text
 no crontab for root - using an empty one
@@ -105,33 +103,31 @@ no crontab for root - using an empty one
 crontab: installing new crontab
 ```
 
-Foi adicionada a seguinte entrada:
+The following entry was added:
 
 ```cron
 * * * * * /home/aluno/Documentos/sync_script.sh
 ```
 
-Essa expressão agenda a execução do script **a cada minuto**.
+This expression schedules the script to run every minute.
 
-### Estrutura da expressão
+### Cron Expression Structure
 
 ```text
-* * * * * comando
+* * * * * command
 │ │ │ │ │
-│ │ │ │ └── Dia da semana
-│ │ │ └──── Mês
-│ │ └────── Dia do mês
-│ └──────── Hora
-└────────── Minuto
+│ │ │ │ └── Day of the week
+│ │ │ └──── Month
+│ │ └────── Day of the month
+│ └──────── Hour
+└────────── Minute
 ```
 
-Como todos os campos possuem `*`, o script é executado uma vez por minuto, independentemente da hora, dia ou mês.
+Because every field contains `*`, the script runs once per minute, regardless of the hour, day, or month.
 
----
+## 5. Verifying Automatic Synchronization
 
-## 5. Verificação da sincronização automática
-
-Após aguardar a execução programada do `cron`, foi acessado o diretório de destino em um segundo terminal:
+After waiting for the scheduled cron job to run, the destination directory was accessed in a second terminal:
 
 ```bash
 sudo -i
@@ -139,28 +135,26 @@ cd /home/aluno/Documentos/PastaB
 ls
 ```
 
-O arquivo presente na `PastaA` foi sincronizado automaticamente para a `PastaB`.
+The file in `PastaA` was automatically synchronized to `PastaB`.
 
----
+## 6. Testing with a Second File
 
-## 6. Teste com um segundo arquivo
-
-Para verificar novamente o funcionamento da automação, foi criado um segundo arquivo na `PastaA`:
+To verify the automation again, a second file was created in `PastaA`:
 
 ```bash
 cd /home/aluno/Documentos/PastaA
 nano Teste2.txt
 ```
 
-Conteúdo:
+Content:
 
 ```text
 Novo teste!
 ```
 
-Após a próxima execução do `cron`, o arquivo foi disponibilizado na `PastaB`, demonstrando que a sincronização não dependia de uma execução manual do `rsync`.
+After the next cron execution, the file became available in `PastaB`, demonstrating that synchronization did not require manually running `rsync`.
 
-A saída registrada no laboratório foi:
+The output recorded during the lab was:
 
 ```text
 ┌──(root㉿kali)-[/home/aluno/Documentos/PastaB]
@@ -168,57 +162,57 @@ A saída registrada no laboratório foi:
 Teste1.txt  Teste2.txt
 ```
 
-> A saída acima foi mantida conforme registrada durante a atividade.
+The output above has been preserved as recorded during the activity.
 
----
+## 7. Cleaning Up the Environment
 
-## 7. Limpeza do ambiente
-
-Após os testes, foi retornado ao diretório principal:
+After testing, the session returned to the main directory:
 
 ```bash
 cd /home/aluno/Documentos/
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 PastaA  PastaB  sync_script.sh
 ```
 
-O conteúdo utilizado no laboratório foi removido:
+The contents used in the lab were removed:
 
 ```bash
 rm -r *
 ```
 
-O sistema solicitou confirmação:
+The system requested confirmation:
 
 ```text
 zsh: sure you want to delete all 3 files in /home/aluno/Documentos [yn]? y
 ```
 
-Por fim:
+Finally:
 
 ```bash
 ls
 ```
 
-O diretório ficou vazio.
+The directory was empty.
 
----
+## 8. Restarting the System
 
-## 8. Reinicialização
-
-Ao final da atividade, a máquina foi reinicializada:
+At the end of the activity, the machine was restarted:
 
 ```bash
 reboot
 ```
 
+## Evidence
+
+Evidence for this activity is included in the PDF for Module 7, Classes 25–26.
+
+[View Evidence — Classes 25–26](../evidencias.pdf)
+
 ---
 
-## Evidência
-
-[**Evidências — Módulo 7 / Aulas 1 e 2**](../evidencias.pdf)
+[Back to Classes 25–26](../) · [Back to Module 7](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
