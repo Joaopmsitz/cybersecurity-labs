@@ -1,283 +1,261 @@
-# Atividade 9.1 — Criando uma Autoridade Certificadora no Windows Server 2022
+# Activity 9.01 — Creating a Certificate Authority on Windows Server 2022
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 09  
+> **Classes:** 33–34  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Implementar uma **Autoridade Certificadora (CA)** utilizando o Windows Server 2022 e o serviço **Active Directory Certificate Services (AD CS)**.
+## Objective
 
-Durante a atividade foi configurada uma CA corporativa do tipo **Enterprise Root CA**, utilizando:
+Implement a Certificate Authority (CA) using Windows Server 2022 and the Active Directory Certificate Services (AD CS) role.
 
-* RSA de 2048 bits;
-* SHA-256;
-* chave privada nova;
-* validade dos certificados de 10 anos;
-* base de dados padrão do serviço de certificados.
+During this activity, an **Enterprise Root CA** was configured using:
 
-Ao final, a autoridade certificadora foi disponibilizada no servidor com o nome `aluno-DC01-CA`.
+- RSA with a 2048-bit key.
+- SHA-256.
+- A new private key.
+- A CA certificate validity period of 10 years.
+- The default certificate database location.
 
----
+At the end of the activity, the Certificate Authority was available on the server under the name `aluno-DC01-CA`.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Windows Server 2022
-* **Serviço:** Active Directory Certificate Services (AD CS)
-* **Função:** Certification Authority
-* **Tipo de CA:** Enterprise CA
-* **Hierarquia:** Root CA
-* **Criptografia:** RSA 2048 bits
-* **Hash:** SHA-256
-* **Validade configurada:** 10 anos
-* **Base de dados:** `C:\Windows\system32\CertLog`
+- **Operating system:** Windows Server 2022
+- **Service:** Active Directory Certificate Services (AD CS)
+- **Role service:** Certification Authority
+- **CA type:** Enterprise CA
+- **Hierarchy:** Root CA
+- **Cryptography:** RSA 2048-bit
+- **Hash algorithm:** SHA-256
+- **Configured validity period:** 10 years
+- **Database location:** `C:\Windows\system32\CertLog`
 
-> As credenciais utilizadas para acesso ao ambiente de laboratório não são registradas neste README.
+> Credentials used to access the lab environment are not recorded in this README.
 
----
+## 1. Opening Server Manager
 
-## 1. Acesso ao Server Manager
+After starting Windows Server 2022, Server Manager was opened using the Windows search field.
 
-Após inicializar o Windows Server 2022, foi aberto o **Server Manager** por meio do campo de pesquisa do Windows.
-
-Na interface do Server Manager, foi acessado:
+In the Server Manager interface, the following option was selected:
 
 ```text
 Manage → Add Roles and Features
 ```
 
----
+## 2. Starting the Role Installation
 
-## 2. Início da instalação da função
+In the **Add Roles and Features Wizard**, the default options were retained, and the initial steps were completed by selecting **Next**.
 
-No assistente **Add Roles and Features Wizard**, foram mantidas as opções padrão e avançadas as etapas iniciais utilizando **Next**.
-
-Na seção **Server Roles**, foi localizada a função:
+Under **Server Roles**, the following role was located:
 
 ```text
 Active Directory Certificate Services
 ```
 
-A função foi selecionada e, quando solicitado, foi utilizada a opção **Add Features**.
+The role was selected, and **Add Features** was chosen when prompted.
 
-Depois disso, o assistente foi avançado até a configuração dos serviços da função.
+The wizard was then advanced to configure the role services.
 
----
+## 3. Selecting the Certification Authority Service
 
-## 3. Seleção do serviço Certification Authority
-
-Na seção **Role Services**, foi verificado que o serviço:
+Under **Role Services**, the following service was verified as selected:
 
 ```text
 Certification Authority
 ```
 
-estava selecionado.
+The installation was started by selecting **Install**.
 
-A instalação foi iniciada utilizando **Install**.
-
-Durante o processo, o Server Manager apresentou a mensagem:
+During the process, Server Manager displayed the following message:
 
 ```text
 Installation started on DC01.aluno.hacker.com
 ```
 
-A instalação foi aguardada até sua conclusão.
+The process was allowed to continue until the installation was complete.
 
----
+## 4. Configuring Active Directory Certificate Services
 
-## 4. Configuração do Active Directory Certificate Services
-
-Após a instalação da função, foi selecionada a opção:
+After the role installation, the following option was selected:
 
 ```text
 Configure Active Directory Certificate Services on the Destination server
 ```
 
-Na janela **AD CS Configuration**, foi avançada a primeira etapa e selecionado o serviço:
+In the **AD CS Configuration** window, the first step was completed, and the following service was selected:
 
 ```text
 Certification Authority
 ```
 
----
+## 5. Selecting the CA Type
 
-## 5. Seleção do tipo de CA
-
-No tipo de instalação, foi selecionada:
+Under the setup type, the following option was selected:
 
 ```text
 Enterprise CA
 ```
 
-Essa opção permite integrar a Autoridade Certificadora ao ambiente do Active Directory.
+This option integrates the Certificate Authority with the Active Directory environment.
 
-Em seguida, foi selecionada a opção:
+Next, the following option was selected:
 
 ```text
 Root CA
 ```
 
-Dessa forma, a autoridade configurada atua como uma CA raiz dentro da hierarquia de certificação do laboratório.
+The configured authority therefore serves as a root CA within the lab's certificate hierarchy.
 
----
+## 6. Creating the Private Key
 
-## 6. Criação da chave privada
-
-Na configuração da chave privada, foi selecionada:
+Under private key configuration, the following option was selected:
 
 ```text
 Create a new private key
 ```
 
-Foi mantido o provedor criptográfico padrão apresentado pelo laboratório:
+The default cryptographic settings presented by the lab were retained:
 
 ```text
 RSA 2048 bits
 SHA-256
 ```
 
-A chave privada gerada é utilizada pela Autoridade Certificadora para assinar os certificados emitidos por ela.
+The generated private key is used by the Certificate Authority to sign the certificates it issues.
 
----
+## 7. Configuring the CA Name
 
-## 7. Configuração do nome da CA
-
-Foi mantido o nome comum sugerido pelo ambiente:
+The common name suggested by the environment was retained:
 
 ```text
 aluno-DC01-CA
 ```
 
-Os demais campos foram mantidos conforme as opções padrão apresentadas pelo assistente.
+The remaining fields were left at the default values presented by the wizard.
 
-Esse nome identifica a Autoridade Certificadora que posteriormente será utilizada para emissão e gerenciamento de certificados.
+This name identifies the Certificate Authority that will subsequently be used to issue and manage certificates.
 
----
+## 8. Setting the Validity Period
 
-## 8. Definição da validade
+The default validity period presented by the wizard was five years.
 
-A validade padrão apresentada pelo assistente era de 5 anos.
-
-Esse período foi alterado para:
+It was changed to:
 
 ```text
-10 anos
+10 years
 ```
 
-A configuração define o período de validade da autoridade certificadora.
+This setting defines the validity period of the CA certificate.
 
----
+## 9. Setting the Database Location
 
-## 9. Localização da base de dados
-
-Foi mantida a localização padrão da base de dados da CA:
+The default location for the CA database was retained:
 
 ```text
 C:\Windows\system32\CertLog
 ```
 
-Esse diretório é utilizado pelo serviço de certificados para armazenar informações relacionadas à Autoridade Certificadora.
+This directory is used by the Certificate Services role to store information related to the Certificate Authority.
 
----
+## 10. Applying the Configuration
 
-## 10. Aplicação da configuração
-
-Após revisar o resumo das configurações, foi selecionada a opção:
+After reviewing the configuration summary, the following option was selected:
 
 ```text
 Configure
 ```
 
-Ao término do processo, a configuração foi concluída com sucesso e o assistente apresentou o indicador de sucesso:
+The process completed successfully, and the wizard displayed the following status:
 
 ```text
 Configuration succeeded
 ```
 
-As janelas do assistente foram então fechadas.
+The wizard windows were then closed.
 
----
+## 11. Opening Certification Authority
 
-## 11. Acesso à Certification Authority
-
-No menu do Windows, foi expandida a pasta:
+In the Windows menu, the following folder was expanded:
 
 ```text
 Windows Administrative Tools
 ```
 
-e selecionado:
+The following tool was then selected:
 
 ```text
 Certification Authority
 ```
 
-Foi aberta a console de gerenciamento da Autoridade Certificadora.
+The Certificate Authority management console opened.
 
----
+## 12. Verifying the Certificate Authority
 
-## 12. Verificação da Autoridade Certificadora
-
-Na console **Certification Authority (Local)**, foi verificada a existência da CA:
+In the **Certification Authority (Local)** console, the following CA was found:
 
 ```text
 aluno-DC01-CA
 ```
 
-A presença dessa autoridade confirma que a função **Certification Authority** foi instalada e configurada no Windows Server 2022.
+The presence of this authority confirms that the Certification Authority role was installed and configured on Windows Server 2022.
 
----
+## Evidence — Step 16
 
-## Evidência — Passo 16
-
-A evidência solicitada para a atividade corresponde ao **passo 16**, no qual deve ser apresentada a console **Certification Authority (Local)** contendo a autoridade:
+The evidence requested for this activity corresponds to step 16, which requires a screenshot of the **Certification Authority (Local)** console displaying the authority:
 
 ```text
 aluno-DC01-CA
 ```
 
-**Frase obrigatória antes do print:**
+Required caption before the screenshot:
 
-> **Print da atividade 9.1:** console Certification Authority (Local) exibindo a Autoridade Certificadora `aluno-DC01-CA` configurada no Windows Server 2022.
+> Screenshot for Activity 9.1: the Certification Authority (Local) console displaying the `aluno-DC01-CA` Certificate Authority configured on Windows Server 2022.
 
-[**Evidências — Módulo 9 / Aulas 33 e 34**](../evidencias.pdf)
+Evidence for this activity is included in the PDF for Module 9, Classes 33–34.
 
----
+[View Evidence — Classes 33–34](../evidencias.pdf)
 
-## Conceitos aplicados
+## Concepts Applied
 
-### Autoridade Certificadora
+### Certificate Authority
 
-Uma **Autoridade Certificadora (CA)** é responsável por emitir e assinar certificados digitais, estabelecendo uma relação de confiança entre a identidade representada pelo certificado e sua chave pública.
+A Certificate Authority (CA) is responsible for issuing and signing digital certificates, establishing a trust relationship between the identity represented by a certificate and its public key.
 
 ### Active Directory Certificate Services
 
-O **AD CS** é o conjunto de serviços do Windows Server utilizado para implementar uma infraestrutura de chave pública (**PKI**) no ambiente Windows.
+AD CS is the set of Windows Server services used to implement a public key infrastructure (PKI) in a Windows environment.
 
 ### Enterprise CA
 
-Uma **Enterprise CA** é integrada ao Active Directory, permitindo utilizar recursos do domínio para emissão, gerenciamento e distribuição de certificados.
+An Enterprise CA is integrated with Active Directory, allowing domain resources to be used for certificate issuance, management, and distribution.
 
 ### Root CA
 
-A **Root CA** ocupa o topo de uma hierarquia de certificação. Sua chave é utilizada para assinar seu próprio certificado e, em estruturas hierárquicas, pode ser utilizada para estabelecer confiança em CAs subordinadas.
+A Root CA sits at the top of a certificate hierarchy. Its key is used to sign its own certificate and, in hierarchical structures, can establish trust in subordinate CAs.
 
-### Chave privada
+### Private Key
 
-A chave privada da CA é um dos componentes mais sensíveis da infraestrutura. Ela é utilizada para assinar certificados emitidos pela autoridade e deve ser protegida contra acesso não autorizado.
+The CA's private key is one of the most sensitive components of the infrastructure. It is used to sign certificates issued by the authority and must be protected against unauthorized access.
+
+## Result
+
+An **Enterprise Root CA** was installed and configured on Windows Server 2022 using Active Directory Certificate Services.
+
+The configuration used:
+
+| Setting | Value |
+|---|---|
+| CA name | `aluno-DC01-CA` |
+| Type | Enterprise CA |
+| Hierarchy | Root CA |
+| Key | RSA 2048 bits |
+| Hash algorithm | SHA-256 |
+| Validity period | 10 years |
+
+The **Certification Authority (Local)** console confirmed the presence of the `aluno-DC01-CA` authority, completing the lab's Certificate Authority implementation.
 
 ---
 
-## Resultado
-
-Foi instalada e configurada uma **Autoridade Certificadora Enterprise Root CA** no Windows Server 2022 por meio do **Active Directory Certificate Services**.
-
-A configuração utilizou:
-
-```text
-CA:       aluno-DC01-CA
-Tipo:     Enterprise CA
-Hierarquia: Root CA
-Chave:    RSA 2048 bits
-Hash:     SHA-256
-Validade: 10 anos
-```
-
-A console **Certification Authority (Local)** confirmou a presença da CA `aluno-DC01-CA`, concluindo a implementação da autoridade certificadora do laboratório.
+[Back to Classes 33–34](../) · [Back to Module 9](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
