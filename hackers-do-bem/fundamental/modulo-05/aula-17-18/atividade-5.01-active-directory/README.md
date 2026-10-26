@@ -1,68 +1,66 @@
-# Atividade 5.1 — Criando o Active Directory no Windows Server 2022
+# Activity 5.01 — Installing Active Directory on Windows Server 2022
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 05  
+> **Class:** 17–18  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Instalar e preparar o **Active Directory Domain Services (AD DS)** no Windows Server 2022, configurando o servidor que posteriormente será promovido a **Domain Controller**.
+## Objective
 
-Nesta etapa também são instaladas as funções relacionadas ao **DNS** e aos recursos de gerenciamento necessários para as próximas atividades.
+Install and prepare Active Directory Domain Services (AD DS) on Windows Server 2022, configuring the server that will subsequently be promoted to a Domain Controller.
 
----
+This stage also installs the DNS-related role and the management tools required for the next activities.
 
-## Ambiente
+## Environment
 
-* Windows Server 2022
-* Server Manager
-* Active Directory Domain Services (AD DS)
-* DNS Server
-* Group Policy Management
-* Remote Server Administration Tools
+- Windows Server 2022
+- Server Manager
+- Active Directory Domain Services (AD DS)
+- DNS Server
+- Group Policy Management
+- Remote Server Administration Tools
 
----
+## Procedure
 
-## 1. Acesso ao Windows Server 2022
+### 1. Access Windows Server 2022
 
-O Windows Server 2022 utilizado no laboratório foi acessado por RDP.
+The Windows Server 2022 virtual machine used in the laboratory was accessed through RDP.
 
-```text
-IP: 192.168.98.20
-Usuário: Administrator
-```
+- **IP address:** `192.168.98.20`
+- **Username:** `Administrator`
 
-As credenciais utilizadas para acesso pertencem ao ambiente do laboratório e não são registradas neste documento.
+The credentials used to access the server belong to the laboratory environment and are not recorded in this document.
 
-Após a conexão, foi aberto o **Server Manager**.
+After connecting, Server Manager was opened.
 
----
+### 2. Rename the Server
 
-## 2. Alterando o nome do servidor
-
-No **Server Manager**, foi acessado:
+In Server Manager, the following section was accessed:
 
 ```text
 Local Server
 ```
 
-Em seguida, foi selecionado o nome atual do computador e aberta a opção:
+The current computer name was selected, and the following option was opened:
 
 ```text
 Change...
 ```
 
-O nome do computador foi alterado para:
+The computer name was changed to:
 
 ```text
 DC01
 ```
 
-Após confirmar a alteração, o Windows Server foi reiniciado para aplicar o novo nome.
+After confirming the change, Windows Server was restarted to apply the new computer name.
 
-Depois da reinicialização, o **Server Manager** foi aberto novamente para confirmar a alteração.
+After the restart, Server Manager was opened again to verify the change.
 
----
+### 3. Add Server Roles
 
-## 3. Adicionando as funções do servidor
-
-No canto superior direito do **Server Manager**, foi acessado:
+In the upper-right corner of Server Manager, the following options were selected:
 
 ```text
 Manage
@@ -70,151 +68,143 @@ Manage
 Add Roles and Features
 ```
 
-O assistente de instalação foi iniciado.
+The installation wizard was started.
 
-Foi avançado pelas etapas iniciais até chegar à tela:
+The initial steps were completed until the following screen was reached:
 
 ```text
 Server Roles
 ```
 
----
+### 4. Install Active Directory Domain Services
 
-## 4. Instalando o Active Directory Domain Services
-
-Na tela **Server Roles**, foi selecionada a função:
+On the **Server Roles** screen, the following role was selected:
 
 ```text
 Active Directory Domain Services
 ```
 
-Ao aparecer a janela solicitando recursos adicionais, foi selecionado:
+When the dialog requesting additional features appeared, the following option was selected:
 
 ```text
 Add Features
 ```
 
-Essa função fornece os componentes necessários para posteriormente configurar o servidor como controlador de domínio.
+This role provides the components required to configure the server as a Domain Controller in a subsequent step.
 
----
+### 5. Install DNS Server
 
-## 5. Instalando o DNS Server
-
-Ainda na seleção de funções, foi ativada a opção:
+While still on the role selection screen, the following option was enabled:
 
 ```text
 DNS Server
 ```
 
-Em seguida, foi selecionado:
+The following option was then selected:
 
 ```text
 Add Features
 ```
 
-Foi confirmada a janela apresentada e o assistente continuou para as próximas etapas.
+The displayed dialog was confirmed, and the wizard continued to the next steps.
 
----
+### 6. Verify Additional Features
 
-## 6. Verificando os recursos adicionais
+On the **Features** screen, the options related to server management were reviewed.
 
-Na tela **Features**, foram verificadas as opções relacionadas ao gerenciamento do servidor.
-
-Entre elas estavam:
+These included:
 
 ```text
 Group Policy Management
 Remote Server Administration Tools
 ```
 
-Esses componentes serão utilizados posteriormente para administração do domínio e das políticas do Active Directory.
+These components will be used later to administer the domain and manage Active Directory policies.
 
-O assistente foi avançado até a etapa:
+The wizard was advanced to the following stage:
 
 ```text
 Confirmation
 ```
 
----
+### 7. Install the Server Roles
 
-## 7. Instalando as funções
+On the **Confirmation** screen, the selected roles were reviewed.
 
-Na tela **Confirmation**, foram verificadas as funções selecionadas.
-
-A instalação foi iniciada através do botão:
+The installation was started by clicking:
 
 ```text
 Install
 ```
 
-A evidência solicitada pelo laboratório corresponde a esta etapa.
+This was the stage specified by the laboratory instructions for the evidence screenshot.
 
-Após o início da instalação, o assistente apresentou a barra de progresso da instalação das funções.
+After the installation began, the wizard displayed a progress bar indicating the installation status of the selected roles.
 
----
-
-## Conceitos
+## Concepts Practiced
 
 ### Active Directory Domain Services (AD DS)
 
-O **Active Directory Domain Services** é o serviço de diretório do Windows Server utilizado para organizar e administrar recursos de uma rede baseada em domínio.
+Active Directory Domain Services is the Windows Server directory service used to organize and manage resources in a domain-based network.
 
-Ele permite centralizar informações relacionadas a:
+It enables centralized management of:
 
-* usuários;
-* computadores;
-* grupos;
-* autenticação;
-* permissões;
-* políticas de segurança.
+- Users
+- Computers
+- Groups
+- Authentication
+- Permissions
+- Security policies
 
-Nesta atividade, o AD DS foi instalado, mas o servidor ainda será promovido a **Domain Controller** na atividade 5.2.
+In this activity, AD DS was installed, but the server had not yet been promoted to a Domain Controller. That operation is covered in Activity 5.02.
 
 ### Domain Controller
 
-Um **Domain Controller (DC)** é um servidor que executa os serviços necessários para autenticar usuários e administrar um domínio do Active Directory.
+A Domain Controller (DC) is a server running the services required to authenticate users and administer an Active Directory domain.
 
-A instalação do AD DS é uma etapa necessária antes da promoção do servidor a Domain Controller.
+Installing AD DS is a prerequisite for promoting a server to a Domain Controller.
 
 ### DNS
 
-O **Domain Name System (DNS)** traduz nomes de domínio em informações utilizadas pelos dispositivos da rede.
+The Domain Name System (DNS) translates domain and host names into information used by network devices.
 
-No Active Directory, o DNS possui papel fundamental na localização dos serviços do domínio. Por isso, a função **DNS Server** também foi instalada durante esta atividade.
+In Active Directory environments, DNS plays a fundamental role in locating domain services. For this reason, the DNS Server role was also installed during this activity.
 
 ### Group Policy Management
 
-O **Group Policy Management** fornece ferramentas para criação e administração de **Group Policy Objects (GPOs)**.
+Group Policy Management provides tools for creating and administering Group Policy Objects (GPOs).
 
-As GPOs serão utilizadas posteriormente no laboratório para aplicar configurações de segurança e políticas aos usuários e computadores do domínio.
+GPOs will be used later in the laboratory to apply security settings and policies to domain users and computers.
 
----
+## Results
 
-## Resultado
+Windows Server 2022 was prepared to serve as part of the Active Directory infrastructure.
 
-O Windows Server 2022 foi preparado para funcionar como infraestrutura de Active Directory.
-
-Foram instaladas as funções:
+The following roles were selected for installation:
 
 ```text
 Active Directory Domain Services
 DNS Server
 ```
 
-Além dos recursos de gerenciamento necessários para as próximas etapas.
+The additional management tools required for subsequent activities were also reviewed in the installation wizard.
 
-O servidor foi identificado como:
+The server was renamed:
 
 ```text
 DC01
 ```
 
-A próxima atividade utilizará essa instalação para promover o servidor a **Domain Controller** e criar uma nova floresta do Active Directory.
+The next activity will use this installation to promote the server to a Domain Controller and create a new Active Directory forest.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 05, Classes 17–18.
+
+**Recorded screenshot:** Step 9 — the installation wizard's **Confirmation** screen, before the server roles were installed.
+
+[View Evidence — Classes 17–18](../evidencias.pdf)
 
 ---
 
-## Evidências
-
-[**Evidências — Módulo 5 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Evidência registrada:** passo 9 — tela **Confirmation** do assistente de instalação, antes da instalação das funções do servidor.
+[Back to Classes 17–18](../) · [Back to Module 05](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
