@@ -1,72 +1,74 @@
-# Atividade 5.9 — RBAC no Kali Linux
+# Activity 5.09 — Role-Based Access Control (RBAC) on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 05  
+> **Class:** 19–20  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foi realizada uma prática relacionada ao **RBAC (Role-Based Access Control)** no Kali Linux.
+## Objective
 
-O exercício consiste em criar um grupo específico para uma função, adicionar um usuário a esse grupo e associar o grupo ao arquivo utilizado na atividade. Dessa forma, o acesso ao recurso pode ser administrado por meio da associação do usuário ao grupo responsável pela função.
+This activity demonstrates access control concepts related to Role-Based Access Control (RBAC) on Kali Linux.
 
----
+The exercise involves creating a group representing a specific function, adding a user to that group, and assigning the group as the group owner of a file used in the activity. This allows access to the resource to be managed through the user's membership in the group associated with the function.
 
-## Ambiente
+**Technical note:** The exercise uses traditional Linux groups and file permissions to illustrate a role-based access concept. This is not, by itself, a complete RBAC implementation.
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.40`
-* **Usuário:** `aluno`
-* **Diretório utilizado:** `/home/aluno/Documentos/`
+## Environment
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
+- **Working directory:** `/home/aluno/Documentos/`
 
----
+The credentials used in the laboratory are not recorded in this document.
 
-## 1. Acessando o terminal
+## Procedure
 
-Após acessar a máquina Kali Linux por RDP, foi aberto o terminal e obtido acesso administrativo:
+### 1. Open the Terminal
 
-```bash id="7j1s5f"
+After accessing the Kali Linux machine through RDP, the terminal was opened, and administrative access was obtained:
+
+```bash
 sudo -i
 ```
 
-Em seguida, foi acessado o diretório utilizado na atividade:
+The directory used in the activity was then accessed:
 
-```bash id="5g7p8d"
+```bash
 cd /home/aluno/Documentos/
 ```
 
----
+### 2. Verify the Existing File
 
-## 2. Verificando o arquivo existente
+The `ls` command was used to inspect the files in the directory:
 
-Foi utilizado o comando `ls` para verificar os arquivos presentes no diretório:
-
-```bash id="j3x8pw"
+```bash
 ls
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="pg1g2u"
+```text
 ┌──(root㉿kali)-[/home/aluno/Documentos]
-└─# ls            
+└─# ls
 texto.txt
 ```
 
-O arquivo `texto.txt` corresponde ao arquivo criado na atividade anterior e será utilizado nesta prática para demonstrar a associação de permissões a um grupo.
+The `texto.txt` file was created in the previous activity and was used here to demonstrate assigning permissions through a group.
 
----
+### 3. List the System Users
 
-## 3. Listando os usuários do sistema
+To view the users available on the system, the following command was executed:
 
-Para visualizar os usuários existentes no sistema, foi executado:
-
-```bash id="9b2h6q"
+```bash
 getent passwd | cut -d: -f1
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="0be9x0"
+```text
 root
 daemon
 bin
@@ -121,35 +123,33 @@ statd
 teste1
 ```
 
-O comando utilizado combina duas operações:
+The command combines two operations:
 
-```text id="8k3xj4"
+```bash
 getent passwd
 ```
 
-consulta as entradas de usuários disponíveis através das bases configuradas no sistema.
+This retrieves user entries from the databases configured on the system.
 
-Já:
+The following command:
 
-```text id="f8v1q2"
+```bash
 cut -d: -f1
 ```
 
-separa os campos utilizando `:` como delimitador e exibe somente o primeiro campo, que corresponde ao nome do usuário.
+splits each entry using `:` as the delimiter and displays only the first field, which corresponds to the username.
 
----
+### 4. List the System Groups
 
-## 4. Listando os grupos do sistema
+To view the existing groups, the following command was executed:
 
-Para visualizar os grupos existentes, foi executado:
-
-```bash id="4m0r7x"
+```bash
 getent group | cut -d: -f1
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="x9ftzw"
+```text
 root
 daemon
 bin
@@ -237,105 +237,95 @@ clock
 teste1
 ```
 
-Assim como no comando anterior, `getent group` consulta as informações de grupos e `cut -d: -f1` exibe somente o nome de cada grupo.
+As in the previous command, `getent group` retrieves group information, while `cut -d: -f1` displays only each group's name.
 
----
+### 5. Create the Functional Group
 
-## 5. Criando o grupo de função
+To represent a specific function within the environment, the following group was created:
 
-Para representar uma função específica dentro do ambiente, foi criado o grupo `contabilidade`:
-
-```bash id="e4h8s2"
+```bash
 groupadd contabilidade
 ```
 
-O comando `groupadd` cria um novo grupo no sistema.
+The `groupadd` command creates a new group on the system.
 
-Neste caso, o grupo utilizado no laboratório foi:
+In this laboratory, the group was named:
 
-```text id="p7m3kc"
+```text
 contabilidade
 ```
 
-A utilização de grupos permite organizar usuários de acordo com uma determinada função ou responsabilidade.
+Groups can be used to organize users according to a particular function or responsibility.
 
----
+### 6. Confirm Group Creation
 
-## 6. Confirmando a criação do grupo
+After creating the group, the group listing was executed again:
 
-Após criar o grupo, a listagem de grupos foi executada novamente:
-
-```bash id="r5k2w9"
+```bash
 getent group | cut -d: -f1
 ```
 
-Ao final da saída, foi possível observar:
+At the end of the output, the following group was visible:
 
-```text id="p0rey3"
+```text
 contabilidade
 ```
 
-Isso confirma que o novo grupo foi criado no sistema.
+This confirms that the new group was created on the system.
 
----
+### 7. Add the User to the Group
 
-## 7. Adicionando o usuário ao grupo
+The `teste1` user was added to the `contabilidade` group using:
 
-O usuário `teste1` foi adicionado ao grupo `contabilidade` utilizando:
-
-```bash id="c9v4n6"
+```bash
 usermod -aG contabilidade teste1
 ```
 
-O comando possui os seguintes elementos:
+The command consists of the following elements:
 
-* `usermod` → modifica uma conta de usuário;
-* `-a` → adiciona a nova associação sem remover as associações existentes;
-* `-G` → define grupos suplementares;
-* `contabilidade` → grupo ao qual o usuário será adicionado;
-* `teste1` → usuário que receberá a associação.
+- `usermod` — modifies a user account.
+- `-a` — appends the new group membership without removing existing supplementary group memberships.
+- `-G` — specifies supplementary groups.
+- `contabilidade` — the group to which the user will be added.
+- `teste1` — the user receiving the group membership.
 
-O uso de `-aG` é importante porque permite adicionar o usuário ao novo grupo preservando suas demais associações.
+Using `-aG` is important because it adds the user to the new group while preserving other supplementary group memberships.
 
----
+### 8. Assign the Group to the File
 
-## 8. Associando o arquivo ao grupo
+After creating the group and adding the user, the `contabilidade` group was assigned to `texto.txt`:
 
-Depois de criar o grupo e adicionar o usuário, o grupo `contabilidade` foi associado ao arquivo `texto.txt`:
-
-```bash id="t8w3k1"
+```bash
 chown :contabilidade texto.txt
 ```
 
-O comando `chown` é utilizado para alterar o proprietário e/ou grupo associado a um arquivo.
+The `chown` command changes the owner and/or group associated with a file.
 
-Nesse caso, a sintaxe:
+In this case, the syntax:
 
-```text id="h5q2z7"
+```bash
 chown :contabilidade texto.txt
 ```
 
-indica que somente o **grupo** do arquivo será alterado, mantendo o proprietário existente.
+indicates that only the file's group ownership is being changed, while the existing owner is retained.
 
-Assim, o arquivo passa a estar associado ao grupo:
+The file is therefore associated with the following group:
 
-```text id="n2d6x4"
+```text
 contabilidade
 ```
 
----
+### 9. Change the File Permissions
 
-## 9. Alterando as permissões do arquivo
+To complete the access configuration, the following command was executed:
 
-Para finalizar a configuração de acesso ao recurso, foi executado:
-
-```bash id="uln16c"
+```bash
 chmod 770 texto.txt
 ```
 
-A permissão `770` pode ser dividida da seguinte maneira:
+The `770` permission can be represented as follows:
 
-```text id="x7r3p9"
+```text
 7    7    0
 │    │    │
 │    │    └── others
@@ -343,80 +333,80 @@ A permissão `770` pode ser dividida da seguinte maneira:
 └──────────── owner
 ```
 
-Cada número é formado pela combinação das permissões:
+Each number is formed by combining permission values:
 
-```text id="m4z8q1"
-4 = leitura   (r)
-2 = escrita    (w)
-1 = execução   (x)
+```text
+4 = read    (r)
+2 = write   (w)
+1 = execute (x)
 ```
 
-Portanto:
+Therefore:
 
-```text id="d9c2v5"
+```text
 7 = 4 + 2 + 1 = rwx
 ```
 
-Com `770`, o resultado é:
+With mode `770`, the resulting permissions are:
 
-```text id="a6k1s8"
+```text
 owner  → rwx
 group  → rwx
 others → ---
 ```
 
-Ou seja:
+This means:
 
-* o proprietário possui leitura, escrita e execução;
-* os membros do grupo possuem leitura, escrita e execução;
-* outros usuários não possuem permissões sobre o arquivo.
+- The owner has read, write, and execute permissions.
+- Members of the group have read, write, and execute permissions.
+- Other users have no permissions on the file.
 
-Essa configuração permite utilizar o grupo como mecanismo de controle do acesso ao recurso.
+This configuration allows the group to be used as a mechanism for controlling access to the resource.
 
----
+**Technical note:** For a text file, the execute bit grants execution permission at the filesystem level, but does not make the file a functioning executable program. The `770` mode also applies to the file's owner and group; access still depends on the user's effective identity and the applicable filesystem permissions.
 
-## Conceitos envolvidos
+## Concepts Practiced
 
 ### RBAC — Role-Based Access Control
 
-O **RBAC (Role-Based Access Control)** é um modelo de controle de acesso no qual as permissões são associadas a funções ou papéis, e os usuários recebem acesso aos recursos por meio da sua associação a essas funções.
+Role-Based Access Control (RBAC) is an access control model in which permissions are associated with roles, and users receive access to resources through their membership in those roles.
 
-Em um ambiente real, por exemplo, poderia existir uma função:
+In a real environment, for example, a role could be defined as:
 
 ```text
-Contabilidade
+Accounting
 ```
 
-e os usuários responsáveis por essa função seriam associados ao grupo correspondente.
+Users responsible for that function would then be assigned to the corresponding group or role.
 
-Nesta atividade, o grupo:
+In this activity, the following group was used to represent that function:
 
 ```text
 contabilidade
 ```
 
-foi utilizado para representar essa função.
+**Clarification:** A Linux group can serve as a practical way to represent a role, but traditional Unix file permissions are primarily based on the owner, owning group, and other users. The exercise illustrates role-based access concepts rather than implementing a full RBAC system.
 
-### Grupos no Linux
+### Linux Groups
 
-Os grupos permitem organizar usuários e controlar o acesso a recursos compartilhados.
+Groups allow users to be organized and access to shared resources to be controlled.
 
-Neste exercício:
+In this exercise:
 
-```text id="e1f4u8"
-Usuário:
+```text
+User:
 teste1
 
-Grupo:
+Group:
 contabilidade
 
-Arquivo:
+File:
 texto.txt
 ```
 
-A associação pode ser representada conceitualmente como:
+The relationship can be represented conceptually as:
 
-```text id="s3v7n2"
+```text
 teste1
    │
    ▼
@@ -426,48 +416,48 @@ contabilidade
 texto.txt
 ```
 
-### chmod 770
+### `chmod 770`
 
-A permissão `770` garante acesso completo ao proprietário e ao grupo, enquanto remove as permissões dos demais usuários.
+The `770` permission grants full read, write, and execute permissions to the owner and the group, while removing permissions from other users.
 
-```text id="z5k9q2"
+```text
 Owner   → rwx
 Group   → rwx
 Others  → ---
 ```
 
-Isso permite restringir o acesso ao recurso aos usuários autorizados por meio do proprietário ou do grupo.
+This restricts access according to the file's owner and group permissions.
 
----
+## Results
 
-## Resultado
+The activity demonstrated how to create a dedicated group, add a user to that group, and assign the group as the owner of the file used in the laboratory.
 
-A atividade demonstrou a criação de um grupo específico, a associação de um usuário a esse grupo e a atribuição do grupo ao arquivo utilizado no laboratório.
+The workflow was:
 
-O fluxo realizado foi:
-
-```text id="b2m7x6"
-Criar grupo
+```text
+Create group
     ↓
 contabilidade
     ↓
-Adicionar usuário teste1
+Add user teste1
     ↓
-Associar grupo ao arquivo texto.txt
+Assign group to texto.txt
     ↓
-Aplicar chmod 770
+Apply chmod 770
 ```
 
-Dessa forma, o arquivo foi configurado para permitir acesso completo ao proprietário e aos membros do grupo `contabilidade`, enquanto os demais usuários não possuem permissões.
+The file was configured to grant read, write, and execute permissions to its owner and members of the `contabilidade` group, while other users received no permissions.
 
----
+## Evidence
 
-## Evidência
+The evidence for this activity corresponds to Step 9, after executing the following command:
 
-A evidência desta atividade corresponde ao **passo 9**, após a execução do comando:
-
-```bash id="r8w3m1"
+```bash
 chmod 770 texto.txt
 ```
 
-[**Evidências — Módulo 5 / Aulas 3 e 4**](../evidencias.pdf)
+[View Evidence — Classes 19–20](../evidencias.pdf)
+
+---
+
+[Back to Classes 19–20](../) · [Back to Module 05](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
