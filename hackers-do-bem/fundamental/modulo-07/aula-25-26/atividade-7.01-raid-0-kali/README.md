@@ -1,18 +1,24 @@
-# Atividade 7.1 — Aplicando o Software RAID 0 no Kali Linux
+# Activity 7.01 — Implementing Software RAID 0 on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 07  
+> **Class:** 25–26  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Implementar um **Software RAID 0** no Kali Linux utilizando duas partições de 100 MiB criadas em um segundo disco da máquina virtual.
+## Objective
 
-O RAID 0 utiliza **striping**, distribuindo os dados entre os dispositivos que compõem o array. Neste laboratório, o array será criado com o utilitário `mdadm`, formatado com `ext4` e montado em `/mnt/raid0`.
+Implement a software RAID 0 array on Kali Linux using two 100 MiB partitions created on a secondary disk attached to the virtual machine.
 
-> **Observação:** o laboratório utiliza o disco secundário `/dev/nvme1n1`. O disco principal `/dev/nvme0n1` não deve ser utilizado para a criação do RAID.
+RAID 0 uses **striping**, distributing data across the devices that make up the array. In this laboratory, the array was created using `mdadm`, formatted with the ext4 filesystem, and mounted at `/mnt/raid0`.
 
----
+**Important:** The laboratory uses the secondary disk `/dev/nvme1n1`. The primary disk `/dev/nvme0n1` must not be used to create the RAID array.
 
-## 1. Identificação dos discos
+RAID 0 improves aggregate storage performance in some workloads but provides no redundancy. If either member fails, the entire array may become unavailable and its data may be lost.
 
-Inicialmente, foi utilizado o comando `fdisk -l` para verificar os discos disponíveis na máquina virtual.
+## 1. Identify the Disks
+
+Initially, the `fdisk -l` command was used to inspect the disks available in the virtual machine.
 
 ```text
 ┌──(root㉿kali)-[~]
@@ -40,21 +46,19 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 4096 bytes / 4096 bytes
 ```
 
-O disco utilizado para o laboratório foi o `/dev/nvme1n1`, um segundo volume EBS de 2 GiB anexado à máquina virtual.
+The disk used for the laboratory was `/dev/nvme1n1`, a secondary 2 GiB EBS volume attached to the virtual machine.
 
-O `/dev/nvme0n1` contém o sistema operacional e suas partições, enquanto o `/dev/nvme1n1` foi utilizado exclusivamente para os testes do RAID.
+The `/dev/nvme0n1` disk contains the operating system and its partitions, while `/dev/nvme1n1` was used exclusively for the RAID tests.
 
----
+## 2. Create the Partitions for RAID 0
 
-## 2. Criação das partições para o RAID 0
-
-Foi utilizado o `fdisk` no disco `/dev/nvme1n1`:
+The `fdisk` utility was used on `/dev/nvme1n1`:
 
 ```bash
 fdisk /dev/nvme1n1
 ```
 
-Foram criadas duas partições primárias de 100 MiB cada, utilizando os valores padrão nos campos em que somente `Enter` era solicitado.
+Two primary partitions of 100 MiB each were created, accepting the default values whenever only Enter was requested.
 
 ```text
 ┌──(root㉿kali)-[~]
@@ -95,7 +99,7 @@ Last sector, +/-sectors or +/-size{K,M,G,T,P} (206848-4194303, default 4194303):
 Created a new partition 2 of type 'Linux' and of size 100 MiB.
 ```
 
-Após a criação, foi utilizado `p` dentro do `fdisk` para conferir a tabela de partições:
+After creating the partitions, the `p` command was entered in `fdisk` to inspect the partition table:
 
 ```text
 Command (m for help): p
@@ -112,35 +116,36 @@ Device         Boot  Start    End Sectors  Size Id Type
 /dev/nvme1n1p2      206848 411647  204800  100M 83 Linux
 ```
 
-As duas partições utilizadas pelo RAID 0 ficaram, portanto:
+The two partitions used by RAID 0 were therefore:
 
-* `/dev/nvme1n1p1` — 100 MiB
-* `/dev/nvme1n1p2` — 100 MiB
+- `/dev/nvme1n1p1` — 100 MiB
+- `/dev/nvme1n1p2` — 100 MiB
 
-Para gravar a nova tabela de partições, foi utilizado `w`:
+The `w` command was used to write the new partition table:
 
 ```text
 Command (m for help): w
 The partition table has been altered.
 Syncing disks.
-
-┌──(root㉿kali)-[~]
-└─# partprobe /dev/nvme1n1
 ```
 
-O `partprobe` faz com que o kernel reconheça a alteração na tabela de partições sem precisar reiniciar a máquina.
+The following command was then executed:
 
----
+```bash
+partprobe /dev/nvme1n1
+```
 
-## 3. Criação do RAID 0 com mdadm
+`partprobe` asks the kernel to recognize changes to the partition table without requiring a system reboot.
 
-Com as duas partições disponíveis, foi criado o array `/dev/md0` utilizando o `mdadm`.
+## 3. Create the RAID 0 Array with `mdadm`
+
+With both partitions available, the `/dev/md0` array was created using `mdadm`.
 
 ```bash
 mdadm --create /dev/md0 --level=0 --raid-devices=2 /dev/nvme1n1p1 /dev/nvme1n1p2
 ```
 
-Saída:
+**Output:**
 
 ```text
 ┌──(root㉿kali)-[~]
@@ -149,15 +154,13 @@ mdadm: Defaulting to version 1.2 metadata
 mdadm: array /dev/md0 started.
 ```
 
-O parâmetro `--level=0` define o nível RAID utilizado, enquanto `--raid-devices=2` informa que o array será composto por dois dispositivos.
+The `--level=0` parameter defines the RAID level, while `--raid-devices=2` specifies that the array consists of two devices.
 
-O array criado recebeu o nome `/dev/md0`.
+The resulting array was named `/dev/md0`.
 
----
+## 4. Verify the RAID Device
 
-## 4. Verificação do dispositivo RAID
-
-Foi utilizado `ls -l` para confirmar a criação do dispositivo:
+The `ls -l` command was used to confirm that the device had been created:
 
 ```text
 ┌──(root㉿kali)-[~]
@@ -165,19 +168,17 @@ Foi utilizado `ls -l` para confirmar a criação do dispositivo:
 brw-rw---- 1 root disk 9, 0 fev 18 12:04 /dev/md0
 ```
 
-A presença de `/dev/md0` confirma que o dispositivo RAID foi criado pelo sistema.
+The presence of `/dev/md0` confirms that the RAID device was created by the system.
 
----
+## 5. Format the RAID 0 Array
 
-## 5. Formatação do RAID 0
-
-O dispositivo `/dev/md0` foi formatado utilizando o sistema de arquivos `ext4`:
+The `/dev/md0` device was formatted with the ext4 filesystem:
 
 ```bash
 mkfs.ext4 /dev/md0
 ```
 
-Saída:
+**Output:**
 
 ```text
 ┌──(root㉿kali)-[~]
@@ -194,31 +195,29 @@ Creating journal (4096 blocks): done
 Writing superblocks and filesystem accounting information: done
 ```
 
-A saída mostra que o sistema de arquivos `ext4` foi criado com sucesso no array `/dev/md0`.
+The output shows that the ext4 filesystem was successfully created on the `/dev/md0` array.
 
----
+## 6. Mount the RAID 0 Array
 
-## 6. Montagem do RAID 0
-
-Foi criado o diretório `/mnt/raid0` para servir como ponto de montagem:
+The `/mnt/raid0` directory was created as the mount point:
 
 ```bash
 mkdir /mnt/raid0
 ```
 
-Em seguida, o dispositivo RAID foi montado:
+The RAID device was then mounted:
 
 ```bash
 mount /dev/md0 /mnt/raid0
 ```
 
-Para verificar o espaço disponível e confirmar a montagem, foi executado:
+To check the available space and confirm the mount, the following command was executed:
 
 ```bash
 df -h
 ```
 
-Resultado:
+**Result:**
 
 ```text
 ┌──(root㉿kali)-[~]
@@ -235,7 +234,6 @@ tmpfs             1,0M     0  1,9G   0% /run/credentials/systemd-udev-load-crede
 tmpfs             1,0M     0  1,9G   0% /run/credentials/systemd-sysctl.service
 tmpfs             1,0M     0  1,9G   0% /run/credentials/systemd-tmpfiles-setup-dev-early.service
 tmpfs             1,0M     0  1,9G   0% /run/credentials/systemd-tmpfiles-setup-dev.service
-/dev/nvme0n1p15  124M  286K  124M   1% /boot/efi
 tmpfs             1,0M     0  1,9G   0% /run/credentials/systemd-tmpfiles-setup.service
 tmpfs             1,0M     0  1,9G   0% /run/credentials/serial-getty@ttyS0.service
 tmpfs             1,0M     0  1,9G   0% /run/credentials/getty@tty1.service
@@ -244,15 +242,13 @@ tmpfs             388M   128K  388M   0% /run/user/1001
 /dev/md0          179M    63K  165M   1% /mnt/raid0
 ```
 
-A última linha confirma que o `/dev/md0` está montado em `/mnt/raid0`.
+The last line confirms that `/dev/md0` is mounted at `/mnt/raid0`.
 
-O espaço disponível ficou em aproximadamente **179 MiB**, com cerca de **165 MiB livres**, devido ao espaço utilizado pelo sistema de arquivos e seus metadados.
+The filesystem reports approximately 179 MiB of total space, with about 165 MiB available. Some capacity is used by the filesystem and its metadata.
 
----
+## 7. Verify the Final Configuration
 
-## 7. Verificação final da configuração
-
-Por fim, foi executado novamente o `fdisk -l` para visualizar as partições utilizadas e o dispositivo RAID criado.
+Finally, `fdisk -l` was executed again to inspect the partitions used and the created RAID device.
 
 ```text
 ┌──(root㉿kali)-[~]
@@ -288,19 +284,44 @@ Partition table entries are not in disk order.
 
 
 Disk /dev/md0: 196 MiB, 205520896 bytes, 401408 sectors
-Units: sectors of 1 * 512 = 512 bytes
-Sector size (logical/physical): 512 bytes / 512 bytes
+Units: sectors of 1 * 512 bytes, 4096 bytes
 I/O size (minimum/optimal): 524288 bytes / 1048576 bytes
 ```
 
-O resultado final mostra:
+The final output shows:
 
-* `/dev/nvme1n1p1` — 100 MiB
-* `/dev/nvme1n1p2` — 100 MiB
-* `/dev/md0` — array RAID 0 criado a partir das duas partições
-* Sistema de arquivos `ext4`
-* Ponto de montagem: `/mnt/raid0`
+- `/dev/nvme1n1p1` — 100 MiB
+- `/dev/nvme1n1p2` — 100 MiB
+- `/dev/md0` — RAID 0 array created from the two partitions
+- **Filesystem:** ext4
+- **Mount point:** `/mnt/raid0`
 
-## Evidência
+The reported array capacity is approximately 196 MiB, while the mounted ext4 filesystem reports about 179 MiB. The difference reflects filesystem formatting overhead and the way the tools report available capacity.
 
-[**Evidências — Módulo 7 / Aulas 1 e 2**](../evidencias.pdf)
+## Results
+
+The activity demonstrated how to create a software RAID 0 array on Kali Linux using two partitions on a secondary disk.
+
+The process included:
+
+1. Identifying the available disks.
+2. Creating two 100 MiB partitions on `/dev/nvme1n1`.
+3. Creating the RAID 0 array `/dev/md0` with `mdadm`.
+4. Verifying the RAID device.
+5. Formatting the array with ext4.
+6. Mounting it at `/mnt/raid0`.
+7. Verifying the final device and partition configuration.
+
+The resulting array was successfully created and mounted.
+
+**Security and availability note:** RAID 0 provides no fault tolerance or redundancy. Because data is striped across both partitions, the failure of either member can make the entire array inaccessible. RAID 0 should not be used as a substitute for backups or redundancy when data availability matters.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 07, Classes 25–26.
+
+[View Evidence — Classes 25–26](../evidencias.pdf)
+
+---
+
+[Back to Classes 25–26](../) · [Back to Module 07](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
