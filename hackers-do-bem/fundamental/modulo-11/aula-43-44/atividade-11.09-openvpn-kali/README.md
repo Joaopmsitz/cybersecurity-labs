@@ -1,98 +1,87 @@
-# Atividade 11.9 — Usando OpenVPN no Kali Linux
 
-## Objetivo
+# Activity 11.09 — Using OpenVPN on Kali Linux
 
-Configurar e estabelecer uma conexão **VPN utilizando OpenVPN** no Kali Linux, verificar a alteração do endereço IP público durante a conexão e comparar o endereço apresentado antes e depois da desconexão.
+## Objective
 
----
+Configure and establish a VPN connection using OpenVPN on Kali Linux, verify the change in the public IP address during the connection, and compare the address displayed before and after disconnection.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali GNU/Linux
-* **Ferramenta:** OpenVPN
-* **Serviço utilizado no laboratório:** VPNBook
-* **Arquivo de configuração:** `vpnbook-ca149-tcp80.ovpn`
-* **Servidor VPN utilizado:** CA149
-* **Protocolo:** TCP
-* **Porta:** `80`
+- **Operating system:** Kali GNU/Linux
+- **Tool:** OpenVPN
+- **Service used in the lab:** VPNBook
+- **Configuration file:** `vpnbook-ca149-tcp80.ovpn`
+- **VPN server used:** CA149
+- **Protocol:** TCP
+- **Port:** 80
 
-> **Observação:** as credenciais utilizadas para autenticação no VPNBook não são registradas neste documento.
+> **Note:** The credentials used to authenticate with VPNBook are not recorded in this document.
 
----
+## 1. Obtaining the Configuration File
 
-## 1. Obtendo o arquivo de configuração
+The VPNBook website was accessed:
 
-Foi acessado o site do VPNBook:
-
-```text
 https://www.vpnbook.com/
-```
 
-Na página do serviço, foi selecionado um servidor OpenVPN gratuito diferente dos servidores localizados nos Estados Unidos.
+On the service page, a free OpenVPN server located outside the United States was selected.
 
-Para esta atividade, foi utilizado o servidor:
+The following server was used for this activity:
 
 ```text
 CA149
 ```
 
-Foi realizado o download do pacote de configuração do OpenVPN.
+The OpenVPN configuration package was downloaded.
 
-O arquivo compactado foi extraído no diretório:
+The compressed file was extracted into the following directory:
 
 ```text
 /home/aluno/Downloads/
 ```
 
-Após a extração, foi criado o diretório:
+After extraction, the following directory was created:
 
 ```text
 /home/aluno/Downloads/vpnbook-openvpn-ca149/
 ```
 
-Nesse diretório estavam os arquivos necessários para realizar a conexão com o servidor VPN.
+This directory contained the files required to establish a connection to the VPN server.
 
----
+## 2. Obtaining Administrative Access
 
-## 2. Obtendo acesso administrativo
+The Kali Linux Terminal was opened, and administrative privileges were obtained using:
 
-O Terminal do Kali Linux foi aberto e foi obtido acesso administrativo com:
-
-```bash id="n6w3kp"
+```bash
 sudo -i
 ```
 
----
+## 3. Accessing the Configuration Files
 
-## 3. Acessando os arquivos de configuração
+The directory containing the extracted files was accessed:
 
-Foi acessado o diretório contendo os arquivos extraídos:
-
-```bash id="r8m5vq"
+```bash
 cd /home/aluno/Downloads/vpnbook-openvpn-ca149/
 ```
 
-O arquivo de configuração utilizado na atividade foi:
+The configuration file used in the activity was:
 
-```text id="c4x7nz"
+```text
 vpnbook-ca149-tcp80.ovpn
 ```
 
----
+## 4. Starting the OpenVPN Connection
 
-## 4. Iniciando a conexão OpenVPN
+The connection was started using:
 
-A conexão foi iniciada com:
-
-```bash id="w9k2fp"
+```bash
 openvpn --config vpnbook-ca149-tcp80.ovpn
 ```
 
-Durante a inicialização, o OpenVPN apresentou alguns avisos relacionados à configuração utilizada pelo arquivo.
+During initialization, OpenVPN displayed several warnings related to the configuration used by the file.
 
-A saída inicial foi:
+The initial output was:
 
-```text id="p7m4xc"
+```text
 2025-12-05 23:19:51 DEPRECATED: --persist-key option ignored. Keys are now always persisted across restarts.
 2025-12-05 23:19:51 WARNING: Compression for receiving enabled. Compression has been used in the past to break encryption. Compression support is deprecated and we recommend to disable it completely.
 2025-12-05 23:19:51 DEPRECATED OPTION: --cipher set to 'AES-256-CBC' but missing in --data-ciphers (DEFAULT). OpenVPN ignores --cipher for cipher negotiations.
@@ -104,26 +93,26 @@ Enter Auth Username: vpnbook
 Enter Auth Password: •••••••
 ```
 
-A autenticação foi realizada utilizando as credenciais fornecidas pelo VPNBook.
+Authentication was performed using the credentials provided by VPNBook.
 
-A saída seguinte apresentou um aviso importante sobre a verificação do certificado do servidor:
+The following output displayed an important warning about server certificate verification:
 
-```text id="q5v8mb"
+```text
 2025-12-05 23:20:12 WARNING: No server certificate verification method has been enabled.  See http://openvpn.net/howto.html#mitm for more info.
 ```
 
-Esse aviso indica que a configuração utilizada no laboratório não possuía um método de verificação do certificado do servidor habilitado.
+This warning indicates that the configuration used in the lab did not have a server certificate verification method enabled.
 
-Em seguida, o OpenVPN estabeleceu a conexão com o servidor remoto:
+OpenVPN then established the connection to the remote server:
 
-```text id="x3k6rp"
+```text
 2025-12-05 23:20:12 TCP/UDP: Preserving recently used remote address: [AF_INET]144.217.253.149:80
 2025-12-05 23:20:12 Socket Buffers: R=[131072->131072] S=[16384->16384]
 ```
 
-Após a negociação, foram configurados o DNS e o canal de dados:
+After negotiation, DNS and the data channel were configured:
 
-```text id="m8v2cq"
+```text
 2025-12-05 23:20:13 /usr/libexec/openvpn/dns-updown
 setting DNS using resolv.conf file
 2025-12-05 23:20:13 dns up command exited with status 0
@@ -132,9 +121,9 @@ setting DNS using resolv.conf file
 2025-12-05 23:20:13 Protocol options: protocol-flags cc-exit tls-ekm dyn-tls-crypt
 ```
 
-Também foram adicionadas rotas para direcionar o tráfego através da VPN:
+Routes were also added to direct traffic through the VPN:
 
-```text id="v5n9xt"
+```text
 2025-12-05 23:20:15 net_route_v4_add: 144.217.253.149/32 via 192.168.98.1 dev [NULL] table 0 metric -1
 2025-12-05 23:20:15 net_route_v4_add: 0.0.0.0/1 via 10.12.0.57 dev [NULL] table 0 metric -1
 2025-12-05 23:20:15 net_route_v4_add: 128.0.0.0/1 via 10.12.0.57 dev [NULL] table 0 metric -1
@@ -142,27 +131,23 @@ Também foram adicionadas rotas para direcionar o tráfego através da VPN:
 2025-12-05 23:20:15 Initialization Sequence Completed
 ```
 
-A mensagem:
+The message:
 
-```text id="k4p7cz"
+```text
 Initialization Sequence Completed
 ```
 
-indica que a sequência de inicialização do OpenVPN foi concluída e a conexão VPN estava estabelecida.
+indicates that the OpenVPN initialization sequence was completed and the VPN connection was established.
 
----
+## 5. Verifying the Public IP Address
 
-## 5. Verificando o endereço IP público
+With the VPN active, a browser was opened and the following website was accessed:
 
-Com a VPN ativa, foi aberto o navegador e acessado:
+https://whatismyipaddress.com/
+
+The public IP address displayed during the VPN connection was:
 
 ```text
-https://whatismyipaddress.com/
-```
-
-O endereço IP público apresentado durante a conexão VPN foi:
-
-```text id="z6m3qw"
 My IP Address is:
 IPv4: ? 144.217.253.149
 IPv6: ? Not detected
@@ -176,49 +161,41 @@ Region: Quebec
 Country: Canada
 ```
 
-O resultado demonstra que, durante a conexão com o servidor VPN, o serviço de consulta identificou o endereço público:
+The result shows that, during the connection to the VPN server, the lookup service identified the following public IP address:
 
-```text id="f8c2mp"
+```text
 144.217.253.149
 ```
 
-e associou o endereço à infraestrutura da OVH no Canadá.
+and associated the address with OVH infrastructure in Canada.
 
-### Evidência — Passo 13
+### Evidence — Step 13
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 11.9:** página de consulta de IP após o estabelecimento da conexão OpenVPN, mostrando o endereço IP público e as informações de localização associadas à saída da VPN.
+> Screenshot of Activity 11.09: the IP lookup page after the OpenVPN connection was established, showing the public IP address and the location information associated with the VPN exit point.
 
-[**Evidências — Módulo 11 / Aulas 43 e 44**](../evidencias.pdf)
+[**View Evidence — Module 11 / Classes 43–44**](../evidencias.pdf)
 
----
+## 6. Terminating the VPN Connection
 
-## 6. Encerrando a conexão VPN
+After verifying the IP address, the OpenVPN process was interrupted using:
 
-Após a verificação do endereço IP, o processo do OpenVPN foi interrompido utilizando:
-
-```text id="b5r9vx"
+```text
 Ctrl + C
 ```
 
-Isso encerrou a conexão com o servidor VPN.
+This terminated the connection to the VPN server.
 
----
+## 7. Verifying the IP Address Again
 
-## 7. Verificando novamente o endereço IP
+After disconnecting from the VPN, the following page was refreshed:
 
-Depois de desconectar da VPN, a página:
+https://whatismyipaddress.com/
+
+The result displayed in the lab environment was:
 
 ```text
-https://whatismyipaddress.com/
-```
-
-foi atualizada.
-
-O resultado apresentado no ambiente do laboratório foi:
-
-```text id="j7c4zn"
 My IP Address is:
 IPv4: ? 18.234.103.188
 IPv6: ? Not detected
@@ -231,140 +208,138 @@ Region: Virginia
 Country: United States
 ```
 
-Nesse momento, o endereço público apresentado foi:
+At this point, the public IP address displayed was:
 
-```text id="q2m8vk"
+```text
 18.234.103.188
 ```
 
-O resultado foi diferente do endereço apresentado durante a conexão VPN.
+The result differed from the address displayed during the VPN connection.
 
----
+## 8. Removing the Lab Files
 
-## 8. Removendo os arquivos do laboratório
+After completing the tests, the Downloads directory was accessed:
 
-Após finalizar os testes, foi acessado o diretório de downloads:
-
-```bash id="c9x5mp"
+```bash
 cd /home/aluno/Downloads
 ```
 
-Os arquivos existentes foram listados:
+The existing files were listed:
 
-```bash id="n4v7qs"
+```bash
 ls
 ```
 
-Resultado:
+The result was:
 
-```text id="t8k2fz"
+```text
 cacert.der vpnbook-openvpn-ca149 vpnbook-openvpn-ca149.zip
 ```
 
-Os arquivos utilizados na atividade foram então removidos:
+The files used in the activity were then removed:
 
-```bash id="m6p3wr"
+```bash
 rm -r *
 ```
 
-O sistema solicitou confirmação para a remoção:
+The system requested confirmation before proceeding with the removal:
 
-```text id="y5q9kc"
+```text
 zsh: sure you want to delete all 2 files in /home/aluno/Downloads [yn]? y
 ```
 
-A confirmação foi realizada com:
+The confirmation was provided using:
 
-```text id="v3n8mx"
+```text
 y
 ```
 
----
+## Security Observations
 
-## Observações de segurança
+During VPN initialization, OpenVPN displayed several warnings that are relevant to the analysis of this activity.
 
-Durante a inicialização da VPN, o OpenVPN apresentou alguns avisos que são relevantes para a análise da atividade.
+### Compression Enabled
 
-### Compressão habilitada
-
-O log apresentou:
+The log displayed:
 
 ```text
 WARNING: Compression for receiving enabled.
 ```
 
-O próprio OpenVPN informa que a compressão possui histórico de problemas relacionados a ataques contra canais criptografados e recomenda desabilitá-la.
+OpenVPN itself indicates that compression has a history of issues related to attacks against encrypted channels and recommends disabling it.
 
-### Verificação do certificado
+### Certificate Verification
 
-Também foi apresentado:
+The following warning was also displayed:
 
 ```text
 WARNING: No server certificate verification method has been enabled.
 ```
 
-Isso significa que a configuração utilizada no laboratório não habilitou um método de verificação do certificado do servidor.
+This means that the configuration used in the lab did not enable a server certificate verification method.
 
-### Cipher configurado no arquivo
+### Cipher Configured in the File
 
-O OpenVPN também informou:
+OpenVPN also reported:
 
 ```text
 DEPRECATED OPTION: --cipher set to 'AES-256-CBC' but missing in --data-ciphers (DEFAULT).
 ```
 
-O aviso indica que a opção `--cipher` presente no arquivo utiliza uma configuração considerada obsoleta para a negociação atual.
+This warning indicates that the `--cipher` option in the file uses a configuration considered obsolete for current negotiation procedures.
 
-Apesar dos avisos, o log mostrou que o canal de dados estabelecido utilizou:
+Despite these warnings, the log showed that the established data channel used:
 
 ```text
 AES-256-GCM
 ```
 
-Esses avisos são importantes porque demonstram que uma conexão VPN estabelecida não significa, por si só, que toda a configuração esteja seguindo as recomendações de segurança mais atuais.
+These warnings are important because they demonstrate that an established VPN connection does not, by itself, mean that the entire configuration follows the most current security recommendations.
 
----
+## Key Concepts
 
-## Conceitos
+- **VPN:** Creates a communication tunnel between a client and a VPN server.
+- **OpenVPN:** Software used to establish VPN connections.
+- **Public IP address:** An address used to identify a device's Internet-facing connection.
+- **Routing:** Determines the paths through which packets are sent.
+- **DNS:** Name resolution used during the connection.
+- **AES-256-GCM:** A cryptographic algorithm/mode used by the data channel observed in the lab.
+- **Initialization Sequence Completed:** A message indicating that the OpenVPN connection initialization has been completed.
 
-* **VPN:** cria um túnel de comunicação entre o cliente e um servidor VPN.
-* **OpenVPN:** software utilizado para estabelecer conexões VPN.
-* **IP público:** endereço utilizado para identificar a saída do dispositivo na Internet.
-* **Roteamento:** determina por quais caminhos os pacotes devem ser enviados.
-* **DNS:** resolução de nomes utilizada durante a conexão.
-* **AES-256-GCM:** algoritmo/modo criptográfico utilizado pelo canal de dados observado no laboratório.
-* **`Initialization Sequence Completed`:** mensagem que indica a conclusão da inicialização da conexão OpenVPN.
+## Activity Workflow
 
-## Fluxo da atividade
-
-```text id="r7m4cx"
-Baixar configuração VPNBook
+```text
+Download the VPNBook configuration
           ↓
-Executar OpenVPN
+Run OpenVPN
           ↓
-Autenticar
+Authenticate
           ↓
-Estabelecer túnel VPN
+Establish the VPN tunnel
           ↓
-Configurar DNS e rotas
+Configure DNS and routes
           ↓
 Initialization Sequence Completed
           ↓
-Consultar IP público
+Check the public IP address
           ↓
-IP da saída VPN
+VPN exit IP address
           ↓
 Ctrl + C
           ↓
-Desconectar VPN
+Disconnect from the VPN
           ↓
-Consultar IP novamente
+Check the IP address again
           ↓
-IP da saída original
+Original exit IP address
 ```
 
-## Resultado
+## Result
 
-Foi estabelecida uma conexão OpenVPN utilizando o servidor CA149 do VPNBook. Durante a conexão, o endereço público observado foi `144.217.253.149`, associado à saída da VPN no Canadá. Após a desconexão, o ambiente voltou a apresentar o endereço público `18.234.103.188`.
+An OpenVPN connection was established using the VPNBook CA149 server. During the connection, the observed public IP address was `144.217.253.149`, associated with the VPN exit point in Canada. After disconnection, the environment displayed the public IP address `18.234.103.188` again.
 
-A atividade também permitiu observar avisos de segurança presentes na configuração utilizada pelo laboratório, incluindo compressão habilitada, ausência de método de verificação do certificado do servidor e uso de uma opção `--cipher` obsoleta.
+The activity also provided an opportunity to observe security warnings in the configuration used by the lab, including enabled compression, the absence of a server certificate verification method, and the use of an obsolete `--cipher` option.
+
+---
+
+[Back to Classes 43–44](../README.md) · [Back to Module 11](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
