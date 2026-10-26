@@ -1,277 +1,141 @@
-# Atividade 5.10 — Rotação de Senha no Kali Linux
+# Activity 5.10 — Password Rotation on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 05  
+> **Class:** 19–20  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foi realizada uma configuração de **política de rotação de senhas** no Kali Linux.
+## Objective
 
-O exercício utiliza o comando `passwd -S` para consultar informações relacionadas à senha dos usuários e, posteriormente, modifica o arquivo `/etc/login.defs` para estabelecer parâmetros de validade, intervalo mínimo entre alterações e período de aviso antes da expiração.
+This activity demonstrates how to configure password aging policy on Kali Linux.
 
-A prática permite observar como políticas de senha podem ser configuradas diretamente no sistema Linux.
+The exercise uses `passwd -S` to inspect information about user passwords and then modifies `/etc/login.defs` to configure password validity, the minimum interval between password changes, and the warning period before expiration.
 
----
+The exercise illustrates how password policy parameters can be configured directly in a Linux system.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.40`
-* **Usuário:** `aluno`
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this README.
 
----
+## Procedure
 
-## 1. Acessando o terminal
+### 1. Open the Terminal
 
-Após acessar a máquina Kali Linux por RDP, foi aberto o terminal e obtido acesso administrativo:
+After accessing the Kali Linux machine through RDP, the terminal was opened, and administrative access was obtained:
 
-```bash id="c7m2v8"
+```bash
 sudo -i
 ```
 
-O acesso administrativo é necessário porque a atividade envolve a consulta e alteração de configurações do sistema.
+Administrative access was required because the activity involved inspecting and modifying system configuration settings.
 
----
+### 2. Inspect the Root User's Password Policy
 
-## 2. Consultando a política da senha do usuário root
+With administrative privileges, the following command was executed:
 
-Com privilégios administrativos, foi utilizado:
-
-```bash id="r4n8k1"
+```bash
 passwd -S
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="9jtq3a"
+```text
 ┌──(root㉿kali)-[~]
-└─# passwd -S   
+└─# passwd -S
 root P 2024-07-02 0 99999 7 -1
 ```
 
-O comando `passwd -S` exibe informações resumidas sobre o status da senha do usuário.
+The `passwd -S` command displays a summary of the user's password status.
 
-A saída:
+The output:
 
-```text id="x6p3q9"
+```text
 root P 2024-07-02 0 99999 7 -1
 ```
 
-pode ser interpretada como:
+can be interpreted as follows:
 
-| Campo            | Valor        | Significado                                   |
-| ---------------- | ------------ | --------------------------------------------- |
-| Usuário          | `root`       | Conta consultada                              |
-| Status           | `P`          | Senha definida                                |
-| Última alteração | `2024-07-02` | Data da última alteração da senha             |
-| Mínimo           | `0`          | Dias mínimos antes de permitir nova alteração |
-| Máximo           | `99999`      | Número máximo de dias de validade             |
-| Aviso            | `7`          | Dias de antecedência para aviso de expiração  |
-| Inatividade      | `-1`         | Configuração de inatividade após expiração    |
+| Field | Value | Meaning |
+|---|---|---|
+| User | `root` | Account being inspected |
+| Status | `P` | Password is set |
+| Last change | `2024-07-02` | Date of the last password change |
+| Minimum | `0` | Minimum number of days before another password change is permitted |
+| Maximum | `99999` | Maximum password validity period in days |
+| Warning | `7` | Number of days before expiration when a warning begins |
+| Inactive | `-1` | Password inactivity period is disabled |
 
-Esses valores representam a política existente para a conta no momento da consulta.
+These values represent the policy information reported for the account at the time of the query.
 
----
+### 3. Inspect the `aluno` User's Password Policy
 
-## 3. Consultando a política da senha do usuário aluno
+After checking the root account, the administrative session was ended:
 
-Após a consulta da conta `root`, foi encerrada a sessão administrativa:
-
-```bash id="q5v9r2"
+```bash
 exit
 ```
 
-Em seguida, foi executado novamente:
+The following command was then executed again:
 
-```bash id="h8k3w6"
+```bash
 passwd -S
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="35gooa"
+```text
 ┌──(aluno㉿kali)-[~]
 └─$ passwd -S
 aluno P 2025-09-06 0 99999 7 -1
 ```
 
-A saída apresenta a mesma estrutura de informações, desta vez referente ao usuário `aluno`:
+The output has the same structure but refers to the `aluno` user:
 
-```text id="u2m7x4"
+```text
 aluno P 2025-09-06 0 99999 7 -1
 ```
 
-Os principais valores observados são:
+The main values observed were:
 
-* usuário: `aluno`;
-* status da senha: `P`;
-* última alteração registrada: `2025-09-06`;
-* período mínimo: `0` dias;
-* período máximo: `99999` dias;
-* aviso de expiração: `7` dias;
-* inatividade após expiração: `-1`.
+- **User:** `aluno`
+- **Password status:** `P`
+- **Last recorded change:** `2025-09-06`
+- **Minimum interval:** 0 days
+- **Maximum validity period:** 99,999 days
+- **Expiration warning:** 7 days
+- **Inactivity period after expiration:** Disabled (`-1`)
 
-> A data exibida corresponde à saída observada no material do laboratório e pode variar conforme a máquina utilizada.
+The date shown corresponds to the output recorded in the laboratory material and may vary depending on the machine used.
 
----
+### 4. Edit the Configuration File
 
-## 4. Editando o arquivo de configuração
+To configure the password policy parameters, the `nano` editor was used with administrative privileges:
 
-Para configurar os parâmetros da política de senha, foi utilizado o editor `nano` com privilégios administrativos:
-
-```bash id="m9x4q7"
+```bash
 sudo nano /etc/login.defs
 ```
 
-O arquivo `/etc/login.defs` contém configurações utilizadas por ferramentas relacionadas ao gerenciamento de contas e senhas em sistemas Linux.
+The `/etc/login.defs` file contains configuration settings used by tools related to account and password management on Linux systems.
 
-No arquivo, foram localizados os seguintes parâmetros:
+The following parameters were located in the file:
 
-```text id="y590cv"
+```text
 PASS_MAX_DAYS   99999
 PASS_MIN_DAYS   0
 PASS_WARN_AGE   7
 ```
 
-Esses valores representam a configuração anterior observada no laboratório.
+These values represent the previous configuration observed in the laboratory.
 
----
+### 5. Configure Password Aging
 
-## 5. Configurando a rotação de senha
-
-Os parâmetros foram alterados para:
-
-```text id="ei8ksn"
-PASS_MAX_DAYS   270
-PASS_MIN_DAYS   90
-PASS_WARN_AGE   10
-```
-
-Esses valores estabelecem:
-
-### PASS_MAX_DAYS
-
-```text id="j8q3v6"
-PASS_MAX_DAYS   270
-```
-
-Define o número máximo de dias durante os quais uma senha pode permanecer válida antes de exigir alteração.
-
-Neste laboratório, a validade máxima configurada foi de **270 dias**.
-
-### PASS_MIN_DAYS
-
-```text id="p6r2w9"
-PASS_MIN_DAYS   90
-```
-
-Define a quantidade mínima de dias que deve passar antes que o usuário possa alterar novamente sua senha.
-
-Neste laboratório, foi configurado um intervalo mínimo de **90 dias**.
-
-### PASS_WARN_AGE
-
-```text id="z4m7k2"
-PASS_WARN_AGE   10
-```
-
-Define com quantos dias de antecedência o sistema deve avisar o usuário sobre a proximidade da expiração da senha.
-
-Neste laboratório, o aviso foi configurado para ocorrer **10 dias antes da expiração**.
-
----
-
-## 6. Salvando a configuração
-
-Após realizar as alterações no arquivo `/etc/login.defs`, o arquivo foi salvo pelo `nano` utilizando:
-
-```text id="s5x8n3"
-Ctrl + X
-S
-Enter
-```
-
-Depois disso, o terminal foi fechado.
-
----
-
-## Conceitos envolvidos
-
-### Rotação de senhas
-
-A rotação de senhas consiste em estabelecer regras que determinam quando uma senha deve ser alterada.
-
-Em ambientes corporativos, políticas desse tipo podem fazer parte dos controles de gerenciamento de identidade e acesso, ajudando a estabelecer requisitos administrativos para as credenciais.
-
-### `/etc/login.defs`
-
-O arquivo:
-
-```text id="a7k2m5"
-/etc/login.defs
-```
-
-é utilizado para armazenar diversos parâmetros relacionados ao gerenciamento de contas no Linux.
-
-Nesta atividade, foram utilizados especificamente:
-
-```text id="v9p4x1"
-PASS_MAX_DAYS
-PASS_MIN_DAYS
-PASS_WARN_AGE
-```
-
-### Política configurada
-
-A configuração final utilizada no laboratório foi:
-
-```text id="n3w8q6"
-PASS_MAX_DAYS   270
-PASS_MIN_DAYS   90
-PASS_WARN_AGE   10
-```
-
-Representando:
-
-```text id="c6r1t8"
-Senha
- │
- ├── Validade máxima: 270 dias
- │
- ├── Intervalo mínimo para alteração: 90 dias
- │
- └── Aviso antes da expiração: 10 dias
-```
-
----
-
-## Resultado
-
-A atividade permitiu consultar os parâmetros de validade das senhas utilizando `passwd -S` e configurar novos valores no arquivo `/etc/login.defs`.
-
-A configuração anterior observada era:
-
-```text id="f2k7m4"
-PASS_MAX_DAYS   99999
-PASS_MIN_DAYS   0
-PASS_WARN_AGE   7
-```
-
-Após a alteração, os parâmetros definidos no laboratório foram:
-
-```text id="ei8ksn"
-PASS_MAX_DAYS   270
-PASS_MIN_DAYS   90
-PASS_WARN_AGE   10
-```
-
-Com isso, foi estabelecida uma política de rotação de senha com validade máxima de 270 dias, intervalo mínimo de 90 dias entre alterações e aviso de expiração com 10 dias de antecedência.
-
----
-
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 5**, mostrando a configuração dos parâmetros no arquivo `/etc/login.defs`:
+The parameters were changed to the following values:
 
 ```text
 PASS_MAX_DAYS   270
@@ -279,4 +143,138 @@ PASS_MIN_DAYS   90
 PASS_WARN_AGE   10
 ```
 
-[**Evidências — Módulo 5 / Aulas 3 e 4**](../evidencias.pdf)
+These values establish the following settings.
+
+#### PASS_MAX_DAYS
+
+```text
+PASS_MAX_DAYS   270
+```
+
+Defines the maximum number of days a password may remain valid before a change is required.
+
+In this laboratory, the configured maximum validity period was 270 days.
+
+#### PASS_MIN_DAYS
+
+```text
+PASS_MIN_DAYS   90
+```
+
+Defines the minimum number of days that must elapse before the user is permitted to change the password again.
+
+In this laboratory, the minimum interval was set to 90 days.
+
+#### PASS_WARN_AGE
+
+```text
+PASS_WARN_AGE   10
+```
+
+Defines how many days in advance the system should warn the user that the password is approaching expiration.
+
+In this laboratory, the warning period was set to 10 days before expiration.
+
+### 6. Save the Configuration
+
+After modifying `/etc/login.defs`, the file was saved in `nano` using:
+
+```text
+Ctrl + X
+S
+Enter
+```
+
+The terminal was then closed.
+
+## Concepts Practiced
+
+### Password Rotation
+
+Password rotation involves establishing rules that determine when a password must be changed.
+
+In corporate environments, such policies may form part of identity and access management controls by defining administrative requirements for credentials.
+
+Password expiration policies should be aligned with the organization's security requirements. Periodic password changes are not a substitute for strong passwords, multifactor authentication, monitoring, or changing credentials when compromise is suspected.
+
+### `/etc/login.defs`
+
+The file:
+
+```text
+/etc/login.defs
+```
+
+stores various parameters related to Linux account management.
+
+The following parameters were used in this activity:
+
+```text
+PASS_MAX_DAYS
+PASS_MIN_DAYS
+PASS_WARN_AGE
+```
+
+**Technical note:** These settings generally define default password-aging values used by account-management tools when creating accounts. Editing `/etc/login.defs` does not necessarily change the existing password-aging values of users who are already configured. Existing account settings can be inspected and managed separately with tools such as `chage`.
+
+### Configured Policy
+
+The final configuration entered in the laboratory was:
+
+```text
+PASS_MAX_DAYS   270
+PASS_MIN_DAYS   90
+PASS_WARN_AGE   10
+```
+
+It can be represented as follows:
+
+```text
+Password
+ │
+ ├── Maximum validity: 270 days
+ │
+ ├── Minimum interval between changes: 90 days
+ │
+ └── Expiration warning: 10 days
+```
+
+## Results
+
+The activity demonstrated how to inspect password-aging information using `passwd -S` and configure new default values in `/etc/login.defs`.
+
+The previous configuration observed in the laboratory was:
+
+```text
+PASS_MAX_DAYS   99999
+PASS_MIN_DAYS   0
+PASS_WARN_AGE   7
+```
+
+After editing the file, the configured values were:
+
+```text
+PASS_MAX_DAYS   270
+PASS_MIN_DAYS   90
+PASS_WARN_AGE   10
+```
+
+This established the intended default password-aging policy for a maximum validity period of 270 days, a minimum interval of 90 days between changes, and an expiration warning 10 days in advance.
+
+The configuration file was updated during the activity. The recorded procedure did not include a subsequent verification showing that the new values had been applied to the existing `root` and `aluno` accounts.
+
+## Evidence
+
+The evidence for this activity corresponds to Step 5, showing the configured parameters in `/etc/login.defs`:
+
+```text
+PASS_MAX_DAYS   270
+PASS_MIN_DAYS   90
+PASS_WARN_AGE   10
+```
+
+[View Evidence — Classes 19–20](../evidencias.pdf)
+
+---
+
+[Back to Classes 19–20](../) · [Back to Module 05](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
