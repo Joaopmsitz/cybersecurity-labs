@@ -1,160 +1,152 @@
-# Atividade 8.8 — RSA-2048 para Confidencialidade
+# Activity 8.08 — RSA-2048 for Confidentiality
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 08  
+> **Classes:** 31–32  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Utilizar o algoritmo **RSA-2048** para demonstrar um processo de criptografia assimétrica, utilizando:
+## Objective
 
-* uma **chave privada**;
-* uma **chave pública**;
-* a chave pública para criptografar uma mensagem;
-* a chave privada para recuperar a mensagem original.
+Use the RSA-2048 algorithm to demonstrate an asymmetric encryption process involving:
 
-A atividade demonstra o princípio de **confidencialidade** da criptografia assimétrica: o conteúdo criptografado com a chave pública pode ser recuperado utilizando a chave privada correspondente.
+- A private key.
+- A public key.
+- The public key to encrypt a message.
+- The private key to recover the original message.
 
----
+This activity demonstrates the confidentiality principle of asymmetric cryptography: content encrypted with a public key can be recovered using the corresponding private key.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Ferramenta:** OpenSSL
-* **Algoritmo:** RSA
-* **Tamanho da chave:** 2048 bits
-* **Diretório de trabalho:** `/home/aluno/Documentos/Arquivos`
-* **Arquivo original:** `mensagem.txt`
+- **Operating system:** Kali Linux
+- **Tool:** OpenSSL
+- **Algorithm:** RSA
+- **Key size:** 2048 bits
+- **Working directory:** `/home/aluno/Documentos/Arquivos`
+- **Original file:** `mensagem.txt`
 
-> As credenciais utilizadas para acesso ao ambiente de laboratório não são registradas neste README.
+> Credentials used to access the lab environment are not recorded in this README.
 
----
+## 1. Switching to the Root User
 
-## 1. Acesso como root
-
-Inicialmente, foi obtido acesso administrativo ao Kali Linux:
+Administrative access to Kali Linux was obtained:
 
 ```bash
 sudo -i
 ```
 
----
+## 2. Accessing the Directory and Verifying the File
 
-## 2. Acesso ao diretório e verificação do arquivo
-
-Foi acessado o diretório utilizado para os arquivos da atividade:
+The directory used to store the files for this activity was accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
-Em seguida, foi verificada a presença do arquivo que seria criptografado:
+The presence of the file to be encrypted was then verified:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 mensagem.txt
 ```
 
----
+## 3. Generating the RSA Private Key
 
-## 3. Geração da chave privada RSA
-
-Foi gerada uma chave privada utilizando o algoritmo RSA:
+A private key was generated using the RSA algorithm:
 
 ```bash
 openssl genpkey -algorithm RSA -out chave_privada.pem
 ```
 
-O OpenSSL realizou a geração da chave, apresentando caracteres de progresso no terminal durante o processo.
+OpenSSL generated the key, displaying progress characters in the terminal during the process.
 
-A chave privada foi armazenada no arquivo:
+The private key was stored in the following file:
 
 ```text
 chave_privada.pem
 ```
 
-A chave privada é o componente que deve permanecer protegido e não deve ser compartilhado.
+The private key must remain protected and should not be shared.
 
----
+## 4. Generating the Public Key
 
-## 4. Geração da chave pública
-
-A partir da chave privada, foi extraída a chave pública:
+The public key was extracted from the private key:
 
 ```bash
 openssl rsa -pubout -in chave_privada.pem -out chave_publica.pem
 ```
 
-Saída:
+Output:
 
 ```text
 writing RSA key
 ```
 
-A estrutura de arquivos passou a ser:
+The resulting file structure was:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 chave_privada.pem  chave_publica.pem  mensagem.txt
 ```
 
-A chave pública pode ser compartilhada e será utilizada para realizar a criptografia da mensagem.
+The public key can be shared and will be used to encrypt the message.
 
----
+## 5. Encrypting the Message
 
-## 5. Criptografia da mensagem
-
-A mensagem foi criptografada utilizando a chave pública:
+The message was encrypted using the public key:
 
 ```bash
 openssl pkeyutl -encrypt -pubin -inkey chave_publica.pem -in mensagem.txt -out arquivo_criptografado
 ```
 
-Após a operação, foi realizada uma nova verificação:
+After the operation, the directory contents were checked again:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 arquivo_criptografado  chave_privada.pem  chave_publica.pem  mensagem.txt
 ```
 
-O arquivo `arquivo_criptografado` contém o resultado da operação de criptografia e não corresponde mais ao conteúdo legível de `mensagem.txt`.
+The `arquivo_criptografado` file contains the result of the encryption operation and is no longer the readable content of `mensagem.txt`.
 
----
+## 6. Recovering the Message with the Private Key
 
-## 6. Recuperação da mensagem com a chave privada
-
-Para recuperar o conteúdo original, foi utilizada a chave privada correspondente:
+To recover the original content, the corresponding private key was used:
 
 ```bash
 openssl pkeyutl -decrypt -inkey chave_privada.pem -in arquivo_criptografado -out mensagem_recuperada.txt
 ```
 
-Em seguida, foi verificada a estrutura dos arquivos:
+The file structure was then checked:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 arquivo_criptografado  chave_privada.pem  chave_publica.pem  mensagem_recuperada.txt  mensagem.txt
 ```
 
-### Evidência solicitada
+### Requested Evidence
 
-O **passo 5 da atividade** solicita o registro da etapa de recuperação da mensagem:
+Step 5 of the activity requests evidence of the message recovery process:
 
 ```text
 ┌──(root㉿kali)-[/home/aluno/Documentos/Arquivos]
@@ -165,94 +157,94 @@ O **passo 5 da atividade** solicita o registro da etapa de recuperação da mens
 arquivo_criptografado  chave_privada.pem  chave_publica.pem  mensagem_recuperada.txt  mensagem.txt
 ```
 
-[**Evidências — Módulo 8 / Aulas 31 e 32**](../evidencias.pdf)
+Evidence for this activity is included in the PDF for Module 8, Classes 31–32.
 
----
+[View Evidence — Classes 31–32](../evidencias.pdf)
 
-## 7. Verificação da mensagem recuperada
+## 7. Verifying the Recovered Message
 
-Para confirmar que a descriptografia recuperou o conteúdo original, foi utilizado:
+To confirm that decryption recovered the original content, the following command was used:
 
 ```bash
 cat mensagem_recuperada.txt
 ```
 
-Saída:
+Output:
 
 ```text
 Hackers do bem!
 ```
 
-O conteúdo recuperado corresponde ao conteúdo da mensagem original.
+The recovered content matches the original message.
 
----
+## 8. Cleaning Up the Environment
 
-## 8. Limpeza do ambiente
-
-Após a conclusão do exercício, os arquivos gerados durante a atividade foram removidos:
+After completing the exercise, the files generated during the activity were removed:
 
 ```bash
 rm arquivo_criptografado chave_privada.pem chave_publica.pem mensagem_recuperada.txt
 ```
 
-A verificação final deixou apenas o arquivo original:
+The final check showed that only the original file remained:
 
 ```bash
 ls
 ```
 
-Saída:
+Output:
 
 ```text
 mensagem.txt
 ```
 
----
+## Concept Applied
 
-## Conceito aplicado
-
-O exercício demonstra o funcionamento básico da **criptografia assimétrica**:
+The exercise demonstrates the basic operation of asymmetric encryption:
 
 ```text
-                CHAVE PÚBLICA
-                      │
-                      ▼
-              ┌───────────────┐
-              │   Mensagem    │
-              └───────┬───────┘
-                      │
-                      ▼
-                Criptografia
-                      │
-                      ▼
-           arquivo_criptografado
-                      │
-                      │
-                CHAVE PRIVADA
-                      │
-                      ▼
-                Descriptografia
-                      │
-                      ▼
-              mensagem original
+                 PUBLIC KEY
+                     │
+                     ▼
+             ┌───────────────┐
+             │    Message    │
+             └───────┬───────┘
+                     │
+                     ▼
+                 Encryption
+                     │
+                     ▼
+          arquivo_criptografado
+                     │
+                     │
+                 PRIVATE KEY
+                     │
+                     ▼
+                 Decryption
+                     │
+                     ▼
+              Original message
 ```
 
-A chave pública e a chave privada formam um par. Neste laboratório, a chave pública foi utilizada na criptografia e a chave privada correspondente na recuperação do conteúdo.
+The public and private keys form a pair. In this lab, the public key was used for encryption, and the corresponding private key was used to recover the content.
 
-### Observação técnica
+## Technical Note
 
-O exercício utiliza RSA diretamente sobre a mensagem para fins didáticos. Na prática, RSA não é normalmente utilizado para criptografar arquivos grandes diretamente devido às limitações de tamanho e desempenho. Sistemas reais costumam utilizar **criptografia híbrida**, na qual uma chave simétrica é utilizada para os dados e o RSA é utilizado para proteger essa chave. Também é comum utilizar esquemas modernos de preenchimento, como **RSA-OAEP**, em vez de depender de configurações implícitas.
+This exercise uses RSA directly on the message for educational purposes. In practice, RSA is not normally used to encrypt large files directly because of message-size limitations and performance considerations.
 
----
+Real-world systems typically use **hybrid encryption**, in which a symmetric key encrypts the data and RSA protects that key. Modern padding schemes such as **RSA-OAEP** are also commonly used instead of relying on implicit settings.
 
-## Resultado
+## Result
 
-Foi gerado um par de chaves RSA, utilizada a chave pública para criptografar `mensagem.txt` e, posteriormente, utilizada a chave privada correspondente para recuperar o conteúdo.
+An RSA key pair was generated, the public key was used to encrypt `mensagem.txt`, and the corresponding private key was subsequently used to recover its contents.
 
-A mensagem recuperada foi:
+The recovered message was:
 
 ```text
 Hackers do bem!
 ```
 
-Isso demonstrou, no ambiente de laboratório, o uso de RSA para proteção de confidencialidade por meio de criptografia assimétrica.
+This demonstrated, in the lab environment, how RSA can provide confidentiality through asymmetric encryption.
+
+---
+
+[Back to Classes 31–32](../) · [Back to Module 8](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
