@@ -1,299 +1,269 @@
-# Atividade 11.5 — QoS no Windows Server 2022
+# Activity 11.05 — QoS on Windows Server 2022
 
-## Objetivo
+## Objective
 
-Configurar uma política de **Quality of Service (QoS)** no Windows Server 2022 utilizando o **Editor de Política de Grupo Local**, definindo um limite de taxa de saída e verificando o impacto da configuração por meio de um teste de velocidade.
+Configure a **Quality of Service (QoS)** policy on Windows Server 2022 using the **Local Group Policy Editor**, set an outbound traffic rate limit, and verify the configuration's impact through a speed test.
 
----
+## Environment
 
-## Ambiente
+- **Operating system:** Windows Server 2022
+- **Access:** RDP
+- **Tool:** Local Group Policy Editor
+- **Configuration:** Policy-based QoS
+- **Policy name:** `Teste`
+- **Configured limit:** `1 MBps`
 
-* **Sistema:** Windows Server 2022
-* **Acesso:** RDP
-* **Ferramenta:** Editor de Política de Grupo Local
-* **Configuração:** Policy-based QoS
-* **Nome da política:** `Teste`
-* **Limite configurado:** `1 MBps`
+> A limit of `1 MBps` is approximately equivalent to `8 Mbps`, considering the conversion between bytes and bits.
 
-> A configuração de `1 MBps` corresponde aproximadamente a `8 Mbps`, considerando a conversão entre bytes e bits.
+## 1. Performing the Initial Speed Test
 
----
+Windows Server 2022 was accessed via RDP.
 
-## 1. Realizando o teste inicial de velocidade
-
-O Windows Server 2022 foi acessado através de RDP.
-
-Inicialmente, foi aberto o navegador Microsoft Edge e acessado o site:
+First, Microsoft Edge was opened and the following website was accessed:
 
 ```text
 https://www.minhaconexao.com.br/
 ```
 
-Foi realizado um teste de velocidade para estabelecer uma referência antes da configuração de QoS.
+A speed test was performed to establish a baseline before configuring QoS.
 
-No teste inicial, a velocidade de **upload estava acima de 20 Mbps**.
+In the initial test, the **upload speed was above 20 Mbps**.
 
-Após o teste, o navegador foi fechado.
+After the test, the browser was closed.
 
----
+## 2. Opening the Local Group Policy Editor
 
-## 2. Abrindo o Editor de Política de Grupo Local
-
-Foi utilizado o menu de pesquisa do Windows para localizar:
+The Windows search menu was used to locate:
 
 ```text
 gpedit.msc
 ```
 
-O **Editor de Política de Grupo Local** foi aberto.
+The **Local Group Policy Editor** was opened.
 
----
+## 3. Accessing the QoS Settings
 
-## 3. Acessando as configurações de QoS
-
-No Editor de Política de Grupo Local, foi acessado o seguinte caminho:
+In the Local Group Policy Editor, the following path was accessed:
 
 ```text
-Configuração do Computador
-└── Configurações do Windows
+Computer Configuration
+└── Windows Settings
     └── Policy-based QoS
 ```
 
-Na opção **Policy-based QoS**, foi utilizado o botão direito do mouse e selecionado:
+Under **Policy-based QoS**, the context menu was opened with a right-click, and the following option was selected:
 
 ```text
 Create new policy
 ```
 
----
+## 4. Creating the Policy
 
-## 4. Criando a política
+The wizard for creating a new QoS policy was launched.
 
-Foi iniciado o assistente de criação de uma nova política de QoS.
-
-No campo de nome da política, foi definido:
+The following name was entered in the policy name field:
 
 ```text
 Teste
 ```
 
-A política foi criada com esse nome para facilitar sua identificação posteriormente.
+The policy was created with this name to make it easier to identify later.
 
----
+## 5. Configuring the DSCP Value
 
-## 5. Configurando o valor DSCP
-
-Na etapa de configuração do DSCP, foi mantido o valor:
+During the DSCP configuration step, the following value was retained:
 
 ```text
 0
 ```
 
-O DSCP (*Differentiated Services Code Point*) é utilizado para marcar pacotes de acordo com diferentes classes de serviço.
+DSCP (*Differentiated Services Code Point*) is used to mark packets according to different service classes.
 
-Neste laboratório, não foi aplicada uma marcação DSCP específica.
+In this lab, no specific DSCP marking was applied.
 
----
+## 6. Enabling the Outbound Rate Limit
 
-## 6. Ativando o limite de saída
-
-Na etapa seguinte, foi habilitada a opção:
+On the next screen, the following option was enabled:
 
 ```text
 Specify Outbound Throttle Rate
 ```
 
-Foi definido o valor:
+The following value was entered:
 
 ```text
 1 MBps
 ```
 
-Essa configuração estabelece uma limitação para a taxa de tráfego de saída associada à política.
+This setting establishes an outbound traffic rate limit associated with the policy.
 
-Como referência:
+For reference:
 
 ```text
-1 Byte = 8 bits
+1 byte = 8 bits
 1 MB/s ≈ 8 Mb/s
 ```
 
-Portanto, o limite configurado representa aproximadamente **8 Mbps** quando convertido para megabits por segundo.
+Therefore, the configured limit represents approximately **8 Mbps** when converted to megabits per second.
 
----
+## 7. Defining the Applications
 
-## 7. Definindo os aplicativos
-
-Na etapa de seleção dos aplicativos, foi escolhida a opção:
+On the application selection screen, the following option was selected:
 
 ```text
 All applications
 ```
 
-Dessa forma, a política não ficou restrita a um aplicativo específico.
+This ensured that the policy was not restricted to a specific application.
 
----
+## 8. Defining the Source IP Address
 
-## 8. Definindo o endereço IP de origem
-
-Na configuração dos endereços IP de origem, foi selecionada:
+On the source IP address configuration screen, the following option was selected:
 
 ```text
 Any source IP address
 ```
 
-Assim, a política pode ser aplicada independentemente do endereço IP de origem.
+This allows the policy to apply regardless of the source IP address.
 
----
+## 9. Defining the Ports
 
-## 9. Definindo as portas
-
-Na configuração das portas, foram mantidas as opções:
+On the port configuration screen, the following options were retained:
 
 ```text
 From any source port
 To any destination port
 ```
 
-A política, portanto, não foi limitada a uma porta de origem ou destino específica.
+The policy was therefore not restricted to a specific source or destination port.
 
----
+## 10. Completing the Policy
 
-## 10. Finalizando a política
+After reviewing the configuration, the wizard was completed.
 
-Após revisar as configurações, o assistente foi finalizado.
+The resulting policy had the following characteristics:
 
-A política criada possui as seguintes características:
+| Setting | Value |
+|---|---|
+| Name | `Teste` |
+| DSCP | `0` |
+| Outbound rate limit | `1 MBps` |
+| Applications | All |
+| Source IP address | Any |
+| Source port | Any |
+| Destination port | Any |
 
-| Configuração     | Valor    |
-| ---------------- | -------- |
-| Nome             | `Teste`  |
-| DSCP             | `0`      |
-| Limite de saída  | `1 MBps` |
-| Aplicativos      | Todos    |
-| IP de origem     | Qualquer |
-| Porta de origem  | Qualquer |
-| Porta de destino | Qualquer |
+## 11. Verifying the Created Policy
 
----
-
-## 11. Verificando a política criada
-
-No **Editor de Política de Grupo Local**, foi acessado novamente:
+In the **Local Group Policy Editor**, the following path was accessed again:
 
 ```text
-Configuração do Computador
-→ Configurações do Windows
+Computer Configuration
+→ Windows Settings
 → Policy-based QoS
 ```
 
-A política `Teste` foi exibida na lista de políticas configuradas.
+The `Teste` policy appeared in the list of configured policies.
 
----
+## 12. Performing Another Speed Test
 
-## 12. Realizando novamente o teste de velocidade
-
-O Microsoft Edge foi aberto novamente e o site abaixo foi acessado:
+Microsoft Edge was opened again, and the following website was accessed:
 
 ```text
 https://www.minhaconexao.com.br/
 ```
 
-Foi realizado um novo teste de velocidade para verificar o comportamento da conexão após a aplicação da política.
+Another speed test was performed to evaluate the connection's behavior after the policy was applied.
 
----
+## 13. Comparing the Results with the Initial Test
 
-## 13. Comparando com o teste inicial
+In the first test, conducted before the policy was created, the upload speed was above **20 Mbps**.
 
-No primeiro teste, realizado antes da política, o upload estava acima de **20 Mbps**.
-
-Após a configuração da política `Teste`, o upload observado ficou aproximadamente na faixa de:
+After configuring the `Teste` policy, the observed upload speed was approximately:
 
 ```text
 7–10 Mbps
 ```
 
-Essa redução é compatível com o objetivo do laboratório de aplicar um limite de tráfego de aproximadamente `1 MBps`, embora o resultado efetivo do teste possa variar conforme as condições da conexão e do próprio servidor de teste.
+This reduction is consistent with the lab's objective of applying a traffic limit of approximately `1 MBps`. However, actual speed test results may vary depending on connection conditions and the test server itself.
 
----
+## 14. Recording the Speed Test Evidence
 
-## 14. Evidência do teste de velocidade
+A speed test was performed again after the QoS policy was configured.
 
-O teste de velocidade foi realizado novamente após a configuração da política de QoS.
+### Evidence — Step 14
 
-### Evidência — Passo 14
+**Caption to include before the screenshot:**
 
-**Frase obrigatória antes do print:**
+> Screenshot of Activity 11.05: the speed test performed after creating the `Teste` QoS policy, showing the upload speed behavior after applying the configured traffic rate limit.
 
-> **Print da atividade 11.5:** teste de velocidade realizado após a criação da política de QoS `Teste`, mostrando o comportamento da velocidade de upload após a aplicação do limite de tráfego configurado.
+[View Evidence — Classes 41–42](../evidencias.pdf)
 
-[**Evidências — Módulo 11 / Aulas 41 e 42**](../evidencias.pdf)
+## 15. Removing the QoS Policy
 
----
+After recording the evidence, the browser was closed.
 
-## 15. Removendo a política de QoS
-
-Após o registro da evidência, o navegador foi fechado.
-
-No **Editor de Política de Grupo Local**, a política `Teste` foi localizada em:
+In the **Local Group Policy Editor**, the `Teste` policy was located under:
 
 ```text
-Configuração do Computador
-→ Configurações do Windows
+Computer Configuration
+→ Windows Settings
 → Policy-based QoS
 ```
 
-A política foi selecionada com o botão direito e removida através da opção:
+The policy was right-clicked and removed by selecting:
 
 ```text
 Delete
 ```
 
-A confirmação foi realizada selecionando:
+The deletion was confirmed by selecting:
 
 ```text
 Yes
 ```
 
-Com isso, a política de limitação criada durante o laboratório foi removida.
+The traffic-limiting policy created during the lab was then removed.
 
----
+## Key Concepts
 
-## Conceitos
+- **QoS (Quality of Service):** A mechanism used to control and organize network traffic.
+- **Policy-based QoS:** Allows traffic control policies to be applied through Windows Group Policy settings.
+- **DSCP:** A field used for IP traffic classification.
+- **Outbound Throttle:** A mechanism for limiting the outbound traffic rate.
+- **Mbps:** Megabits per second.
+- **MBps/MB/s:** Megabytes per second.
 
-* **QoS:** mecanismo utilizado para controlar e organizar o tráfego de rede.
-* **Policy-based QoS:** permite aplicar políticas de controle de tráfego por meio das políticas do Windows.
-* **DSCP:** campo utilizado para classificação de tráfego IP.
-* **Outbound Throttle:** mecanismo de limitação da taxa de tráfego de saída.
-* **Mbps:** megabits por segundo.
-* **MBps/MB/s:** megabytes por segundo.
-
-## Fluxo da atividade
+## Activity Workflow
 
 ```text
-Teste de velocidade inicial
+Perform the initial speed test
           ↓
-Abrir gpedit.msc
+Open gpedit.msc
           ↓
-Policy-based QoS
+Access Policy-based QoS
           ↓
-Criar política "Teste"
+Create the "Teste" policy
           ↓
 DSCP = 0
           ↓
-Limite = 1 MBps
+Rate limit = 1 MBps
           ↓
-Aplicar a todos os aplicativos
+Apply to all applications
           ↓
-Qualquer IP e qualquer porta
+Any IP address and any port
           ↓
-Novo teste de velocidade
+Perform another speed test
           ↓
-Comparar resultados
+Compare the results
           ↓
-Remover política
+Remove the policy
 ```
 
-## Resultado
+## Result
 
-Foi criada uma política **Policy-based QoS** chamada `Teste`, configurada para limitar o tráfego de saída a `1 MBps`. Após sua aplicação, o teste de velocidade apresentou upload na faixa de **7–10 Mbps**, em comparação com mais de **20 Mbps** no teste inicial. Ao final, a política foi removida.
+A **Policy-based QoS** policy named `Teste` was created and configured to limit outbound traffic to `1 MBps`. After the policy was applied, the speed test showed an upload speed in the range of **7–10 Mbps**, compared with more than **20 Mbps** in the initial test. The policy was removed at the end of the activity.
+
+---
+
+[Back to Classes 41–42](../) · [Back to Module 11](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
