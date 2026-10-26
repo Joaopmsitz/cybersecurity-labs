@@ -1,33 +1,33 @@
-# Atividade 10.9 — Full Disk Encryption em uma Partição no Kali Linux
+# Activity 10.09 — Full Disk Encryption on a Partition in Kali Linux
 
-## Objetivo
+## Objective
 
-Implementar criptografia em uma partição no Kali Linux utilizando **LUKS (Linux Unified Key Setup)**, criando uma partição dedicada, protegendo-a com senha, formatando-a com ext4 e realizando sua montagem e desmontagem.
+Implement partition encryption on Kali Linux using **LUKS (Linux Unified Key Setup)** by creating a dedicated partition, protecting it with a password, formatting it with ext4, and mounting and unmounting it.
 
-> Apesar de o laboratório utilizar o termo **Full Disk Encryption (FDE)**, nesta atividade a criptografia foi aplicada especificamente à partição `/dev/nvme1n1p3`, e não ao disco inteiro.
-
----
-
-## Ambiente
-
-* **Sistema:** Kali GNU/Linux Rolling
-* **Acesso:** RDP
-* **Disco principal:** `/dev/nvme0n1`
-* **Disco utilizado na atividade:** `/dev/nvme1n1`
-* **Partição criada:** `/dev/nvme1n1p3`
-* **Tamanho da nova partição:** 200 MiB
-* **Tecnologia de criptografia:** LUKS
-* **Sistema de arquivos:** ext4
-* **Mapeamento criptográfico:** `Teste`
-* **Ponto de montagem:** `/mnt/encrypted`
+> Although the lab uses the term **Full Disk Encryption (FDE)**, this activity specifically encrypts the partition `/dev/nvme1n1p3`, not the entire disk.
 
 ---
 
-## 1. Acessando o Kali Linux
+## Environment
 
-A máquina Kali Linux foi iniciada e acessada remotamente.
+- **Operating system:** Kali GNU/Linux Rolling
+- **Access:** RDP
+- **Main disk:** `/dev/nvme0n1`
+- **Disk used in the activity:** `/dev/nvme1n1`
+- **Created partition:** `/dev/nvme1n1p3`
+- **New partition size:** 200 MiB
+- **Encryption technology:** LUKS
+- **Filesystem:** ext4
+- **Cryptographic mapping:** `Teste`
+- **Mount point:** `/mnt/encrypted`
 
-Após o acesso, foi aberto um terminal e obtido acesso administrativo:
+---
+
+## 1. Accessing Kali Linux
+
+The Kali Linux machine was started and accessed remotely.
+
+After connecting, a terminal was opened and administrative privileges were obtained:
 
 ```bash
 sudo -i
@@ -35,19 +35,19 @@ sudo -i
 
 ---
 
-## 2. Identificando os discos e partições
+## 2. Identifying Disks and Partitions
 
-Foi utilizado o comando:
+The following command was used:
 
 ```bash
 fdisk -l
 ```
 
-A saída apresentou dois discos. O disco principal era `/dev/nvme0n1`, enquanto o disco utilizado na atividade era `/dev/nvme1n1`.
+The output showed two disks. The main disk was `/dev/nvme0n1`, while the disk used in this activity was `/dev/nvme1n1`.
 
-A saída referente ao disco utilizado foi:
+The output for the disk used in the activity was:
 
-```text id="qa904k"
+```text
 Disk /dev/nvme1n1: 2 GiB, 2147483648 bytes, 4194304 sectors
 Disk model: Amazon Elastic Block Store
 Units: sectors of 1 * 512 = 512 bytes
@@ -61,21 +61,21 @@ Device         Boot  Start    End Sectors  Size Id Type
 /dev/nvme1n1p2      206848 411647  204800  100M 83 Linux
 ```
 
-Foi identificado que `/dev/nvme1n1` possuía espaço disponível para a criação de uma nova partição.
+The `/dev/nvme1n1` disk had available space for creating a new partition.
 
 ---
 
-## 3. Acessando o disco pelo fdisk
+## 3. Accessing the Disk with fdisk
 
-Foi utilizado:
+The following command was used:
 
 ```bash
 fdisk /dev/nvme1n1
 ```
 
-Dentro do `fdisk`, foi utilizado `p` para visualizar a tabela de partições:
+Inside `fdisk`, the `p` command was used to display the partition table:
 
-```text id="mebhb5"
+```text
 Welcome to fdisk (util-linux 2.41.2).
 Changes will remain in memory only, until you decide to write them.
 Be careful before using the write command.
@@ -96,49 +96,49 @@ Device         Boot  Start    End Sectors  Size Id Type
 
 ---
 
-## 4. Criando uma nova partição
+## 4. Creating a New Partition
 
-Foi utilizada a opção `n` para criar uma nova partição primária.
+The `n` option was used to create a new primary partition.
 
-A configuração utilizada foi:
+The following settings were used:
 
-* Número da partição: `3`
-* Primeiro setor: padrão
-* Último setor: `+200M`
-* Tipo: Linux
+- **Partition number:** `3`
+- **First sector:** Default
+- **Last sector:** `+200M`
+- **Type:** Linux
 
-A saída apresentada foi:
+The resulting output was:
 
-```text id="498rxr"
+```text
 Command (m for help): n
 Partition type
    p   primary (2 primary, 0 extended, 2 free)
    e   extended (container for logical partitions)
-Select (default p): 
+Select (default p):
 
 Using default response p.
-Partition number (3,4, default 3): 
-First sector (411648-4194303, default 411648): 
+Partition number (3,4, default 3):
+First sector (411648-4194303, default 411648):
 Last sector, +/-sectors or +/-size{K,M,G,T,P} (411648-4194303, default 4194303): +200M
 
 Created a new partition 3 of type 'Linux' and of size 200 MiB.
 ```
 
-A nova partição criada foi:
+The newly created partition was:
 
 ```text
 /dev/nvme1n1p3
 ```
 
-com tamanho de aproximadamente **200 MiB**.
+Its size was approximately **200 MiB**.
 
 ---
 
-## 5. Verificando e gravando a tabela de partições
+## 5. Verifying and Writing the Partition Table
 
-Foi utilizado novamente `p` para verificar a configuração:
+The `p` command was used again to verify the configuration:
 
-```text id="jqjw87"
+```text
 Command (m for help): p
 Disk /dev/nvme1n1: 2 GiB, 2147483648 bytes, 4194304 sectors
 Disk model: Amazon Elastic Block Store
@@ -159,53 +159,53 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 ```
 
-Depois de sair do `fdisk`, foi executado:
+After exiting `fdisk`, the following command was executed:
 
 ```bash
 partprobe /dev/nvme1n1
 ```
 
-O `partprobe` solicita ao sistema que releia a tabela de partições, permitindo que a nova partição seja reconhecida sem reinicializar a máquina.
+The `partprobe` command asks the system to reread the partition table, allowing the new partition to be recognized without restarting the machine.
 
 ---
 
-## 6. Inicializando a criptografia LUKS
+## 6. Initializing LUKS Encryption
 
-A partição criada foi configurada para utilizar LUKS através do comando:
+The newly created partition was configured to use LUKS with the following command:
 
 ```bash
 cryptsetup luksFormat /dev/nvme1n1p3
 ```
 
-O `cryptsetup` apresentou um aviso informando que a operação sobrescreveria permanentemente os dados existentes na partição.
+`cryptsetup` displayed a warning that the operation would permanently overwrite existing data on the partition.
 
-```text id="2nvjxk"
+```text
 WARNING!
 ========
-Isto vai sobrescrever dados em /dev/nvme1n1p3 permanentemente.
+This will overwrite data on /dev/nvme1n1p3 permanently.
 
 Are you sure? (Type 'yes' in capital letters): YES
-Digite a senha para /dev/nvme1n1p3: 
-Verificar senha:
+Enter passphrase for /dev/nvme1n1p3:
+Verify passphrase:
 ```
 
-Foi definida uma senha para proteger o volume criptografado.
+A password was set to protect the encrypted volume.
 
-> A senha utilizada no laboratório não é registrada neste README.
+> The password used in the lab is not recorded in this README.
 
 ---
 
-## 7. Abrindo o volume criptografado
+## 7. Opening the Encrypted Volume
 
-Após a inicialização do LUKS, a partição foi aberta com:
+After initializing LUKS, the partition was opened using:
 
 ```bash
 cryptsetup luksOpen /dev/nvme1n1p3 Teste
 ```
 
-O nome `Teste` foi utilizado como identificador do mapeamento do dispositivo criptografado.
+The name `Teste` was used as the identifier for the encrypted device mapping.
 
-Com isso, o volume passou a ser acessível através de:
+The volume then became accessible through:
 
 ```text
 /dev/mapper/Teste
@@ -213,17 +213,17 @@ Com isso, o volume passou a ser acessível através de:
 
 ---
 
-## 8. Criando o sistema de arquivos ext4
+## 8. Creating the ext4 Filesystem
 
-O volume criptografado foi formatado utilizando ext4:
+The encrypted volume was formatted with ext4:
 
 ```bash
 mkfs.ext4 /dev/mapper/Teste
 ```
 
-A saída apresentada foi:
+The resulting output was:
 
-```text id="a6ghof"
+```text
 mke2fs 1.47.2 (1-Jan-2025)
 Creating filesystem with 188416 1k blocks and 47104 inodes
 Filesystem UUID: 5a8348f9-b7d0-4cf6-8d4d-7dd8e59fe7f0
@@ -237,31 +237,33 @@ Writing superblocks and filesystem accounting information:
 done
 ```
 
-Nesse momento, o sistema de arquivos ext4 foi criado sobre o dispositivo mapeado pelo LUKS.
+At this stage, the ext4 filesystem was created on the device mapped by LUKS.
 
 ---
 
-## 9. Criando o ponto de montagem
+## 9. Creating the Mount Point
 
-Foi criado o diretório que seria utilizado para acessar o volume:
+The directory used to access the volume was created with:
 
 ```bash
 mkdir -m 777 /mnt/encrypted
 ```
 
-A opção `-m 777` definiu as permissões do diretório de acordo com o procedimento proposto no laboratório.
+The `-m 777` option set the directory permissions according to the procedure specified by the lab.
+
+**Security note:** Permissions of `777` allow all local users to read, write, and access the directory. This is generally not recommended for sensitive data in a production environment.
 
 ---
 
-## 10. Montando o volume criptografado
+## 10. Mounting the Encrypted Volume
 
-O volume foi montado utilizando:
+The volume was mounted using:
 
 ```bash
 mount /dev/mapper/Teste /mnt/encrypted
 ```
 
-Com isso, o conteúdo do sistema de arquivos criptografado passou a estar disponível através de:
+The contents of the encrypted filesystem then became accessible through:
 
 ```text
 /mnt/encrypted
@@ -269,68 +271,72 @@ Com isso, o conteúdo do sistema de arquivos criptografado passou a estar dispon
 
 ---
 
-## 11. Desmontando o volume
+## 11. Unmounting the Volume
 
-Após a utilização do volume, ele foi desmontado com:
+After the volume was used, it was unmounted with:
 
 ```bash
 umount /mnt/encrypted
 ```
 
-Esse procedimento encerra o acesso ao sistema de arquivos através do ponto de montagem.
+This step ends access to the filesystem through the mount point. The LUKS mapping remains open until it is explicitly closed.
 
 ---
 
-## 12. Verificando o volume pelo ambiente gráfico
+## 12. Verifying the Volume in the Graphical Environment
 
-Após a desmontagem, foi observada no desktop a unidade:
+After unmounting, the following drive label was observed on the desktop:
 
 ```text
 Volume de 193MB
 ```
 
-O volume foi acessado pelo ambiente gráfico, abrindo o ícone correspondente para visualizar a pasta no **Thunar**.
+The volume was accessed through the graphical environment by opening its corresponding icon and viewing the folder in **Thunar**.
 
-### Evidência — Passo 12
+### Evidence — Step 12
 
-**Frase obrigatória antes do print:**
+**Caption to include before the screenshot:**
 
-> **Print da atividade 10.9:** volume criptografado `Volume de 193MB` exibido no desktop do Kali Linux e acessado pelo gerenciador de arquivos Thunar.
+> Screenshot of Activity 10.09: the encrypted volume labeled `Volume de 193MB` displayed on the Kali Linux desktop and accessed through the Thunar file manager.
 
-[**Evidências — Módulo 10 / Aulas 39 e 40**](../evidencias.pdf)
+[View Evidence — Classes 39–40](../evidencias.pdf)
 
-Após o registro da evidência, o Thunar e o terminal foram fechados.
+After capturing the evidence, Thunar and the terminal were closed.
 
 ---
 
-## Conceitos
+## Key Concepts
 
-* **LUKS:** padrão utilizado no Linux para implementar criptografia de dispositivos de bloco.
-* **cryptsetup:** ferramenta utilizada para configurar e abrir volumes LUKS.
-* **`/dev/mapper/Teste`:** dispositivo lógico disponibilizado após abrir o volume criptografado.
-* **ext4:** sistema de arquivos criado sobre o volume criptografado.
-* **mount/umount:** comandos utilizados para montar e desmontar o sistema de arquivos.
+- **LUKS:** A standard used on Linux to implement encryption for block devices.
+- **cryptsetup:** A utility used to configure and open LUKS volumes.
+- **`/dev/mapper/Teste`:** The logical device made available after opening the encrypted volume.
+- **ext4:** The filesystem created on top of the encrypted volume.
+- **`mount` / `umount`:** Commands used to mount and unmount a filesystem.
 
-## Fluxo da atividade
+## Activity Workflow
 
 ```text
-Identificar disco
+Identify the disk
       ↓
-Criar /dev/nvme1n1p3
+Create /dev/nvme1n1p3
       ↓
-Configurar LUKS
+Configure LUKS
       ↓
-Abrir volume criptografado
+Open the encrypted volume
       ↓
-Criar filesystem ext4
+Create the ext4 filesystem
       ↓
-Montar em /mnt/encrypted
+Mount at /mnt/encrypted
       ↓
-Desmontar
+Unmount the filesystem
       ↓
-Verificar volume no Thunar
+Verify the volume in Thunar
 ```
 
-## Resultado
+## Result
 
-Foi criada a partição `/dev/nvme1n1p3`, configurada com **LUKS**, aberta através do `cryptsetup` e formatada com **ext4**. O volume foi montado, desmontado e posteriormente identificado no ambiente gráfico do Kali Linux.
+The `/dev/nvme1n1p3` partition was created, configured with **LUKS**, opened using `cryptsetup`, and formatted with **ext4**. The volume was mounted, unmounted, and subsequently identified in the Kali Linux graphical environment.
+
+---
+
+[Back to Classes 39–40](../) · [Back to Module 10](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
