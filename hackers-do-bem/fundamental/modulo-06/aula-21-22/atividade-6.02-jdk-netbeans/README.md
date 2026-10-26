@@ -1,116 +1,114 @@
-# Atividade 6.2 — Conhecendo o SDK do Java (JDK) e um IDE no Kali Linux
+# Activity 6.02 — Exploring the Java Development Kit (JDK) and an IDE on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 06  
+> **Class:** 21–22  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foi realizada a instalação e verificação do ambiente de desenvolvimento Java no Kali Linux, utilizando o **Java Development Kit (JDK)** e o **Apache NetBeans** como IDE.
+## Objective
 
-O exercício demonstra a relação entre o JDK, responsável por fornecer as ferramentas necessárias para desenvolvimento Java, e uma IDE, que oferece um ambiente integrado para criação e desenvolvimento de aplicações.
+This activity covers the installation and verification of the Java development environment on Kali Linux using the Java Development Kit (JDK) and Apache NetBeans as the IDE.
 
----
+The exercise demonstrates the relationship between the JDK, which provides tools required for Java development, and an IDE, which provides an integrated environment for creating and developing applications.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.40`
-* **Usuário:** `aluno`
-* **Diretório do NetBeans:** `/curso/netbeans`
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
+- **NetBeans directory:** `/curso/netbeans`
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this document.
 
----
+## Procedure
 
-## 1. Acessando o terminal
+### 1. Open the Terminal
 
-Após acessar o Kali Linux por RDP, foi aberto o terminal e obtido acesso administrativo:
+After accessing Kali Linux through RDP, the terminal was opened, and administrative access was obtained:
 
-```bash id="n4x7p2"
+```bash
 sudo -i
 ```
 
-O acesso administrativo foi utilizado para realizar a verificação e instalação do pacote do Apache NetBeans.
+Administrative access was used to inspect and install the Apache NetBeans package.
 
----
+### 2. Check the JDK
 
-## 2. Verificando o JDK
+The laboratory already provided an installed JDK. To check the available Java version, the following command was executed:
 
-O laboratório já disponibilizava o JDK instalado. Para verificar a versão disponível, foi executado:
-
-```bash id="q8m3v6"
+```bash
 java --version
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="7k2p9x"
+```text
 openjdk 23-ea 2024-09-17
 OpenJDK Runtime Environment (build 23-ea+20-Debian-1)
 OpenJDK 64-Bit Server VM (build 23-ea+20-Debian-1, mixed mode, sharing)
 ```
 
-A saída confirma que o ambiente possui uma versão do **OpenJDK** disponível para utilização.
+The output confirms that an OpenJDK version was available in the environment.
 
-### OpenJDK
+#### OpenJDK
 
-O OpenJDK é uma implementação de código aberto da plataforma Java.
+OpenJDK is an open-source implementation of the Java platform.
 
-A instalação do JDK fornece componentes necessários para desenvolvimento Java, incluindo ferramentas utilizadas para compilar e executar aplicações.
+The JDK provides components required for Java development, including tools used to compile and run applications.
 
-A versão observada no laboratório foi:
+The version reported in the laboratory was:
 
 ```text
 OpenJDK 23-ea
 ```
 
----
+**Technical note:** The `java --version` command confirms that the Java runtime is available. To verify the Java compiler specifically, the `javac --version` command can also be used.
 
-## 3. Acessando o diretório do NetBeans
+### 3. Access the NetBeans Directory
 
-O pacote do Apache NetBeans utilizado na atividade estava armazenado no diretório:
+The Apache NetBeans package used in the activity was stored in the following directory:
 
-```text id="x6r1m8"
+```text
 /curso/netbeans
 ```
 
-Foi utilizado:
+The directory was accessed using:
 
-```bash id="m9v4q2"
+```bash
 cd /curso/netbeans
 ```
 
----
+### 4. Check the Installation Package
 
-## 4. Verificando o pacote de instalação
+After entering the directory, the following command was executed:
 
-Após acessar o diretório, foi executado:
-
-```bash id="w5k8n3"
+```bash
 ls
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="c2x7m9"
+```text
 apache-netbeans_19-1_all.deb
 ```
 
-O arquivo `.deb` corresponde ao pacote utilizado para instalação do Apache NetBeans no sistema.
+The `.deb` file is the package used to install Apache NetBeans on the system.
 
-O formato `.deb` é utilizado em distribuições baseadas em Debian, como o Kali Linux.
+The `.deb` format is used by Debian-based distributions, including Kali Linux.
 
----
+### 5. Install Apache NetBeans
 
-## 5. Instalando o Apache NetBeans
+The installation was performed using `dpkg`:
 
-A instalação foi realizada utilizando o `dpkg`:
-
-```bash id="f8q3v1"
+```bash
 dpkg -i apache-netbeans_19-1_all.deb
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="2m7x5q"
+```text
 Selecionando pacote previamente não selecionado apache-netbeans.
 (Lendo banco de dados ... 364754 arquivos e diretórios atualmente instalados).
 Preparando para desempacotar apache-netbeans_19-1_all.deb ...
@@ -121,154 +119,144 @@ Processando gatilhos para desktop-file-utils (0.28-1) ...
 Processando gatilhos para hicolor-icon-theme (0.18-2) ...
 ```
 
-A saída indica as principais etapas realizadas pelo `dpkg`:
+The output indicates the main stages performed by `dpkg`:
 
-1. identificação do pacote;
-2. preparação do pacote para instalação;
-3. desempacotamento dos arquivos;
-4. configuração do Apache NetBeans;
-5. processamento dos gatilhos relacionados ao menu do Kali;
-6. atualização dos arquivos de desktop;
-7. processamento dos ícones do sistema.
+- Identifying the package.
+- Preparing the package for installation.
+- Unpacking the files.
+- Configuring Apache NetBeans.
+- Processing triggers related to the Kali menu.
+- Updating desktop files.
+- Processing the system icon theme.
 
----
+### 6. Open Apache NetBeans
 
-## 6. Abrindo o Apache NetBeans
+After installation, Apache NetBeans was launched through the Kali Linux application menu:
 
-Após a instalação, o Apache NetBeans foi iniciado através do menu do Kali Linux:
-
-```text id="r6k1v4"
+```text
 Aplicativos
 └── Aplicativos habituais
     └── Desenvolvimento
         └── Apache NetBeans
 ```
 
-A aplicação foi aberta para verificar o funcionamento da IDE.
+The application was opened to verify that the IDE was available and could be launched.
 
----
+### 7. Explore NetBeans
 
-## 7. Explorando o NetBeans
+With Apache NetBeans open, the integrated development environment was displayed.
 
-Com o Apache NetBeans aberto, foi possível visualizar o ambiente integrado de desenvolvimento.
+NetBeans is an IDE (Integrated Development Environment).
 
-O NetBeans é uma **IDE (Integrated Development Environment)**, ou Ambiente Integrado de Desenvolvimento.
+An IDE combines tools that support software development in one application, including:
 
-Uma IDE reúne em uma única aplicação ferramentas que auxiliam no desenvolvimento de software, como:
+- Code editing.
+- Project organization.
+- Application execution.
+- Debugging.
+- File management.
+- Integration with development tools.
 
-* edição de código;
-* organização de projetos;
-* execução de aplicações;
-* depuração;
-* gerenciamento de arquivos;
-* integração com ferramentas de desenvolvimento.
+This is the step specified for the activity evidence.
 
-**Este é o passo solicitado para a evidência da atividade.**
-
----
-
-## Conceitos envolvidos
+## Concepts Practiced
 
 ### JDK — Java Development Kit
 
-O **JDK** é o kit de desenvolvimento utilizado para criar aplicações Java.
+The JDK is the development kit used to create Java applications.
 
-Ele fornece ferramentas necessárias para trabalhar com o ecossistema Java, incluindo componentes utilizados na compilação e execução de programas.
+It provides tools required to work with the Java ecosystem, including components used to compile and run programs.
 
-Na atividade, a disponibilidade do JDK foi confirmada através de:
+In this activity, Java availability was checked using:
 
-```bash id="b7m2x8"
+```bash
 java --version
 ```
 
-Resultado:
+The reported result was:
 
-```text id="9k4v1p"
+```text
 openjdk 23-ea 2024-09-17
 ```
 
 ### IDE — Integrated Development Environment
 
-Uma IDE fornece um ambiente integrado para desenvolvimento de software.
+An IDE provides an integrated environment for software development.
 
-Em vez de utilizar diferentes ferramentas separadas para editar, executar e organizar o código, o desenvolvedor pode realizar essas tarefas dentro de uma única aplicação.
+Instead of using separate tools to edit, execute, and organize code, developers can perform these tasks within a single application.
 
 ### Apache NetBeans
 
-O Apache NetBeans é uma IDE que oferece suporte ao desenvolvimento de aplicações, incluindo projetos Java.
+Apache NetBeans is an IDE that supports application development, including Java projects.
 
-Nesta atividade, ele foi instalado através do pacote:
+In this activity, it was installed using the package:
 
-```text id="c5x9m3"
+```text
 apache-netbeans_19-1_all.deb
 ```
 
-utilizando:
+The installation command was:
 
-```bash id="w2k7q4"
+```bash
 dpkg -i apache-netbeans_19-1_all.deb
 ```
 
-### dpkg
+### `dpkg`
 
-O `dpkg` é uma ferramenta de baixo nível utilizada para instalação, remoção e gerenciamento de pacotes `.deb` em sistemas baseados em Debian.
+`dpkg` is a low-level tool used to install, remove, and manage `.deb` packages on Debian-based systems.
 
-Na atividade:
+In this activity, it was used to install the local Apache NetBeans package:
 
-```bash id="p3v8n6"
+```bash
 dpkg -i apache-netbeans_19-1_all.deb
 ```
 
-foi utilizado para instalar o pacote local do Apache NetBeans.
+### Relationship Between the JDK and an IDE
 
----
+The JDK and NetBeans have different but complementary roles:
 
-## Relação entre JDK e IDE
-
-O JDK e o NetBeans possuem funções diferentes, mas complementares:
-
-```text id="x4q8m1"
+```text
 JDK
  │
- ├── Ferramentas da plataforma Java
- ├── Compilação
- └── Execução
+ ├── Java platform tools
+ ├── Compilation
+ └── Execution
        │
        ▼
 Apache NetBeans
  │
  ├── Editor
- ├── Projetos
- ├── Execução
- └── Ferramentas de desenvolvimento
+ ├── Projects
+ ├── Execution
+ └── Development tools
 ```
 
-O JDK fornece a base necessária para trabalhar com Java, enquanto a IDE disponibiliza uma interface integrada para facilitar o desenvolvimento.
+The JDK provides the underlying tools needed to work with Java, while the IDE provides an integrated interface to facilitate development.
 
----
+## Results
 
-## Resultado
+The activity confirmed that Java was available on Kali Linux and installed Apache NetBeans using a `.deb` package.
 
-A atividade confirmou a disponibilidade do JDK no Kali Linux e realizou a instalação do Apache NetBeans através de um pacote `.deb`.
+Java availability was checked with:
 
-O JDK foi verificado com:
-
-```bash id="j6m2w9"
+```bash
 java --version
 ```
 
-e o pacote do NetBeans foi instalado com:
+The NetBeans package was installed using:
 
-```bash id="r8x4p3"
+```bash
 dpkg -i apache-netbeans_19-1_all.deb
 ```
 
-Após a instalação, o Apache NetBeans foi aberto e explorado, confirmando a disponibilidade do ambiente de desenvolvimento no sistema.
+After installation, Apache NetBeans was opened and explored, confirming that the IDE was available in the system.
+
+## Evidence
+
+The evidence for this activity corresponds to Step 7, showing Apache NetBeans open after installation and displaying the IDE interface.
+
+[View Evidence — Classes 21–22](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 7**, mostrando o Apache NetBeans aberto após a instalação e permitindo visualizar a interface da IDE.
-
-[**Evidências — Módulo 6 / Aulas 1 e 2**](../evidencias.pdf)
+[Back to Classes 21–22](../) · [Back to Module 06](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
