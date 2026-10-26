@@ -1,127 +1,133 @@
-# Atividade 4.9 — TPM e USB
+# Activity 4.09 — TPM and USB
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 04  
+> **Class:** 15–16  
+> **Environment:** Kali Linux virtual machine  
+> **Status:** Completed
 
-Verificar a disponibilidade de um **TPM (Trusted Platform Module)** no Kali Linux e identificar dispositivos USB disponíveis no ambiente do laboratório.
+## Objective
 
-A atividade também demonstra como o ambiente virtualizado pode apresentar limitações em relação ao hardware físico da máquina.
+Check whether a **TPM (Trusted Platform Module)** is available in Kali Linux and identify USB devices available in the laboratory environment.
 
----
+The activity also demonstrates how a virtualized environment may have limitations when accessing the physical machine's hardware.
 
-## Ambiente
+## Environment
 
-* Kali Linux em máquina virtual
-* Kernel Linux
-* TPM
-* USB
-* `journalctl`
-* `usbview`
+- Kali Linux running in a virtual machine
+- Linux kernel
+- TPM
+- USB
+- `journalctl`
+- `usbview`
 
----
+## Procedure
 
-## 1. Verificando o TPM
+### 1. Check for TPM Availability
 
-Primeiramente, foi obtido acesso administrativo:
+First, administrative access was obtained:
 
 ```bash
 sudo -i
 ```
 
-Em seguida, foi consultado o log do kernel procurando por mensagens relacionadas ao TPM:
+The kernel log was then queried for messages related to the TPM:
 
 ```bash
 journalctl -k --grep=tpm
 ```
 
-Saída observada:
+**Observed output:**
 
-```text id="youj7b"
+```text
 fev 09 22:01:37 kali kernel: ima: No TPM chip found, activating TPM-bypass!
 fev 09 22:01:37 kali systemd[1]: systemd 252.6-1 running in system mode (+PAM +AUDIT +SELINUX +APPARMOR +IMA +>
 ```
 
-### Interpretação
+#### Interpretation
 
-A mensagem:
+The message:
 
 ```text
 No TPM chip found
 ```
 
-indica que o sistema não encontrou um dispositivo TPM disponível para a máquina virtual.
+indicates that the system did not find a TPM device available to the virtual machine.
 
-Como consequência, o **IMA (Integrity Measurement Architecture)** ativou um mecanismo de bypass para funcionar sem a presença do TPM.
+As a consequence, the **IMA (Integrity Measurement Architecture)** activated a bypass mechanism to operate without a TPM.
 
-Isso é uma característica do ambiente utilizado no laboratório e não significa, por si só, que exista uma vulnerabilidade no sistema.
+This reflects a characteristic of the laboratory environment and does not, by itself, indicate that a system vulnerability exists.
 
----
+### 2. Return to the Normal User
 
-## 2. Retornando ao usuário normal
-
-Após a verificação:
+After completing the verification, the following command was used:
 
 ```bash
 exit
 ```
 
----
+This ended the elevated shell session and returned to the previous user context.
 
-## 3. Verificando dispositivos USB
+### 3. Check USB Devices
 
-Foi utilizado o `usbview`, ferramenta gráfica para visualizar informações sobre dispositivos USB:
+The graphical `usbview` utility was launched to inspect information about USB devices:
 
 ```bash
 usbview
 ```
 
-No terminal foi apresentada a mensagem:
+The following message appeared in the terminal:
 
-```text id="tgvmy8"
+```text
 /sys/bus/usb/devices/ must be present, exiting...
 ```
 
-Apesar dessa mensagem inicial, a interface gráfica do **USBView** foi aberta durante a atividade.
+Despite this initial message, the **USBView** graphical interface opened during the activity.
 
-Como o Kali estava sendo executado em uma máquina virtual, os dispositivos USB físicos do computador não estavam necessariamente disponíveis para o sistema convidado.
+Because Kali Linux was running in a virtual machine, the physical computer's USB devices were not necessarily available to the guest operating system.
 
----
-
-## Conceitos
+## Concepts Practiced
 
 ### TPM
 
-O **Trusted Platform Module (TPM)** é um componente de segurança baseado em hardware utilizado para operações relacionadas a chaves criptográficas, integridade da inicialização e armazenamento protegido de informações sensíveis.
+The **Trusted Platform Module (TPM)** is a hardware-based security component used for operations involving cryptographic keys, boot integrity, and protected storage of sensitive information.
 
-Em computadores físicos compatíveis, o TPM pode ser utilizado por recursos de segurança do sistema operacional.
+On compatible physical computers, the TPM can support operating system security features.
 
 ### IMA
 
-O **Integrity Measurement Architecture (IMA)** é um mecanismo do kernel Linux utilizado para medir e verificar a integridade de arquivos e componentes do sistema.
+The **Integrity Measurement Architecture (IMA)** is a Linux kernel mechanism used to measure and verify the integrity of files and system components.
 
-No laboratório, o log mostrou que o IMA identificou a ausência de um TPM e ativou o modo de bypass correspondente.
+In this laboratory, the log showed that IMA detected the absence of a TPM and activated the corresponding bypass mode.
 
 ### USBView
 
-O `usbview` permite visualizar dispositivos conectados ao barramento USB e informações relacionadas a eles.
+The `usbview` utility displays USB bus devices and related information.
 
-Em máquinas virtuais, a disponibilidade desses dispositivos depende da configuração de passthrough/compartilhamento de hardware entre o sistema hospedeiro e a máquina virtual.
+In virtual machines, device availability depends on how hardware passthrough or USB sharing is configured between the host system and the virtual machine.
 
----
+The terminal message alone does not establish that the physical USB hardware is unavailable in every circumstance; access depends on the guest environment and its configuration.
 
-## Resultado
+## Results
 
-A consulta ao log do kernel confirmou que **não havia um chip TPM disponível para o Kali Linux no ambiente virtualizado**:
+The kernel log indicated that **no TPM chip was available to Kali Linux in the virtualized environment**:
 
 ```text
 ima: No TPM chip found, activating TPM-bypass!
 ```
 
-Também foi executado o `usbview` para verificar o barramento USB. A atividade evidenciou uma limitação comum de ambientes virtualizados: o sistema convidado pode não possuir acesso direto ao hardware físico do computador.
+The `usbview` utility was also executed to inspect the USB bus. The activity demonstrated a common limitation of virtualized environments: the guest operating system may not have direct access to the physical computer's hardware.
+
+These observations apply to the laboratory environment and do not necessarily describe the capabilities of the physical host.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 04, Classes 15–16.
+
+**Recorded screenshot:** Step 5 — running `usbview` and viewing its interface in the laboratory environment.
+
+[View Evidence — Classes 15–16](../evidencias.pdf)
 
 ---
 
-## Evidências
-
-[**Evidências — Módulo 4 / Aulas 3 e 4**](../evidencias.pdf)
-
-**Evidência registrada:** passo 5 — execução do `usbview` e visualização da interface no ambiente do laboratório.
+[Back to Classes 15–16](../) · [Back to Module 04](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
