@@ -1,20 +1,24 @@
-# Atividade 7.2 — Aplicando o Software RAID 1 no Kali Linux
+# Activity 7.02 — Implementing Software RAID 1 on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 07  
+> **Classes:** 25–26  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Implementar um **Software RAID 1** no Kali Linux utilizando duas novas partições de 100 MiB no disco secundário `/dev/nvme1n1`.
+## Objective
 
-O RAID 1 utiliza **espelhamento (mirroring)**, mantendo uma cópia dos dados em cada dispositivo que compõe o array. Neste laboratório, o array será criado com o `mdadm`, formatado com `ext4` e montado em `/mnt/raid1`.
+Implement a Software RAID 1 array on Kali Linux using two new 100 MiB partitions on the secondary disk `/dev/nvme1n1`.
 
-A atividade aproveita o mesmo disco secundário utilizado anteriormente no RAID 0, criando as partições `/dev/nvme1n1p3` e `/dev/nvme1n1p4`.
+RAID 1 uses mirroring, maintaining a copy of the data on each device that makes up the array. In this lab, the array is created with `mdadm`, formatted with ext4, and mounted at `/mnt/raid1`.
 
----
+This activity reuses the same secondary disk used in the previous RAID 0 activity, creating the partitions `/dev/nvme1n1p3` and `/dev/nvme1n1p4`.
 
-## 1. Verificação dos discos e arrays existentes
+## 1. Checking Existing Disks and Arrays
 
-Inicialmente, foi utilizado o comando `fdisk -l` para verificar a configuração atual dos discos e dos arrays criados anteriormente.
+First, the `fdisk -l` command was used to check the current disk configuration and the arrays created previously.
 
-```text id="c9w2km"
+```text
 ┌──(root㉿kali)-[~]
 └─# fdisk -l
 
@@ -54,33 +58,31 @@ Sector size (logical/physical): 512 bytes / 512 bytes
 I/O size (minimum/optimal): 524288 bytes / 1048576 bytes
 ```
 
-O disco `/dev/nvme1n1` já possuía as duas partições de 100 MiB utilizadas na atividade anterior:
+The disk `/dev/nvme1n1` already contained the two 100 MiB partitions used in the previous activity:
 
-* `/dev/nvme1n1p1`
-* `/dev/nvme1n1p2`
+- `/dev/nvme1n1p1`
+- `/dev/nvme1n1p2`
 
-Também estava presente o array `/dev/md0`, correspondente ao RAID 0 criado anteriormente.
+The `/dev/md0` array, corresponding to the previously created RAID 0, was also present.
 
-As novas partições para o RAID 1 serão criadas a partir do espaço disponível após `/dev/nvme1n1p2`.
+The new RAID 1 partitions would be created from the available space after `/dev/nvme1n1p2`.
 
----
+## 2. Creating the RAID 1 Partitions
 
-## 2. Criação das partições do RAID 1
+The `fdisk` utility was used on the secondary disk:
 
-Foi utilizado o `fdisk` no disco secundário:
-
-```bash id="n7k1ve"
+```bash
 fdisk /dev/nvme1n1
 ```
 
-Foram criadas duas novas partições primárias de 100 MiB cada:
+Two new primary partitions of 100 MiB each were created:
 
-* `/dev/nvme1n1p3`
-* `/dev/nvme1n1p4`
+- `/dev/nvme1n1p3`
+- `/dev/nvme1n1p4`
 
-Saída do procedimento:
+Procedure output:
 
-```text id="a8x3qp"
+```text
 ┌──(root㉿kali)-[~]
 └─# fdisk /dev/nvme1n1
 
@@ -118,15 +120,13 @@ Last sector, +/-sectors or +/-size{K,M,G,T,P} (616448-4194303, default 4194303):
 Created a new partition 4 of type 'Linux' and of size 100 MiB.
 ```
 
-A opção `p` foi utilizada para garantir que a quarta partição também fosse criada como uma partição primária.
+The `p` option was selected to ensure that the fourth partition was also created as a primary partition.
 
----
+## 3. Verifying the New Partitions
 
-## 3. Verificação das novas partições
+Inside `fdisk`, the `p` command was used to display the updated partition table:
 
-Dentro do `fdisk`, foi utilizado o comando `p` para visualizar a tabela atualizada:
-
-```text id="q2v6rt"
+```text
 Command (m for help): p
 Disk /dev/nvme1n1: 2 GiB, 2147483648 bytes, 4194304 sectors
 Disk model: Amazon Elastic Block Store              
@@ -143,39 +143,38 @@ Device         Boot  Start    End Sectors  Size Id Type
 /dev/nvme1n1p4      616448 821247  204800  100M 83 Linux
 ```
 
-As quatro partições do disco secundário ficaram organizadas da seguinte forma:
+The four partitions on the secondary disk were organized as follows:
 
-| Partição         | Tamanho | Utilização |
-| ---------------- | ------: | ---------- |
-| `/dev/nvme1n1p1` | 100 MiB | RAID 0     |
-| `/dev/nvme1n1p2` | 100 MiB | RAID 0     |
-| `/dev/nvme1n1p3` | 100 MiB | RAID 1     |
-| `/dev/nvme1n1p4` | 100 MiB | RAID 1     |
+| Partition | Size | Purpose |
+|---|---:|---|
+| `/dev/nvme1n1p1` | 100 MiB | RAID 0 |
+| `/dev/nvme1n1p2` | 100 MiB | RAID 0 |
+| `/dev/nvme1n1p3` | 100 MiB | RAID 1 |
+| `/dev/nvme1n1p4` | 100 MiB | RAID 1 |
 
-A tabela foi gravada com `w` e, posteriormente, o kernel foi atualizado com `partprobe`:
+The partition table was written using `w`, and the kernel was subsequently updated using `partprobe`:
 
-```text id="z7j4mx"
+```text
 Command (m for help): w
 The partition table has been altered.
 Syncing disks.
-
-┌──(root㉿kali)-[~]
-└─# partprobe /dev/nvme1n1
 ```
 
----
+```bash
+partprobe /dev/nvme1n1
+```
 
-## 4. Criação do RAID 1
+## 4. Creating the RAID 1 Array
 
-Com as duas novas partições disponíveis, foi criado o array `/dev/md1` utilizando o `mdadm`.
+With the two new partitions available, the `/dev/md1` array was created using `mdadm`.
 
-```bash id="k4t8pw"
+```bash
 mdadm --create /dev/md1 --level=1 --raid-devices=2 /dev/nvme1n1p3 /dev/nvme1n1p4
 ```
 
-Saída completa:
+Complete output:
 
-```text id="r6c1za"
+```text
 ┌──(root㉿kali)-[~]
 └─# mdadm --create /dev/md1 --level=1 --raid-devices=2 /dev/nvme1n1p3 /dev/nvme1n1p4
 To optimalize recovery speed, it is recommended to enable write-indent bitmap, do you want to enable it now? [y/N]? y
@@ -189,51 +188,47 @@ mdadm: Defaulting to version 1.2 metadata
 mdadm: array /dev/md1 started.
 ```
 
-O parâmetro:
+The parameter:
 
-```text
+```bash
 --level=1
 ```
 
-define o RAID 1.
+specifies RAID 1.
 
-Já:
+The parameter:
 
-```text
+```bash
 --raid-devices=2
 ```
 
-indica que o array será composto por dois dispositivos.
+indicates that the array consists of two devices.
 
-O `mdadm` também informou que o array utilizaria metadata versão 1.2 e iniciou o dispositivo `/dev/md1`.
+`mdadm` also reported that the array would use version 1.2 metadata and confirmed that `/dev/md1` had started.
 
----
+## 5. Verifying the RAID Device
 
-## 5. Verificação do dispositivo RAID
+The `ls -l` command was used to confirm that the `/dev/md1` device had been created:
 
-Foi utilizado `ls -l` para confirmar que o dispositivo `/dev/md1` foi criado:
-
-```text id="m5h2yv"
+```text
 ┌──(root㉿kali)-[~]
 └─# ls -l /dev/md1
 brw-rw---- 1 root disk 9, 1 out 6 16:53 /dev/md1
 ```
 
-A presença de `/dev/md1` confirma que o dispositivo RAID 1 foi disponibilizado pelo sistema.
+The presence of `/dev/md1` confirms that the RAID 1 device was made available by the system.
 
----
+## 6. Checking the Array Status
 
-## 6. Verificação do estado dos arrays
+The status of the RAID arrays present on the system was checked using `/proc/mdstat`:
 
-O estado dos arrays RAID presentes no sistema foi consultado através do arquivo `/proc/mdstat`:
-
-```bash id="c3q8nf"
+```bash
 cat /proc/mdstat
 ```
 
-Saída:
+Output:
 
-```text id="v1m7ks"
+```text
 ┌──(root㉿kali)-[~]
 └─# cat /proc/mdstat
 Personalities : [raid0] [raid1] [raid6] [raid5] [raid4] [raid10] 
@@ -247,39 +242,37 @@ md0 : active raid0 nvme1n1p2[1] nvme1n1p1[0]
 unused devices: <none>
 ```
 
-A saída confirma que o novo array `md1` está ativo como **RAID 1**:
+The output confirms that the new `md1` array is active as RAID 1:
 
 ```text
 md1 : active raid1 nvme1n1p4[1] nvme1n1p3[0]
 ```
 
-A indicação:
+The indicator:
 
 ```text
 [2/2] [UU]
 ```
 
-mostra que os dois dispositivos esperados estão presentes e ativos no array.
+shows that both expected devices are present and active in the array.
 
-Também é possível observar que o RAID 0 anterior (`md0`) continua presente:
+The previously created RAID 0 array (`md0`) is also still present:
 
 ```text
 md0 : active raid0 nvme1n1p2[1] nvme1n1p1[0]
 ```
 
----
+## 7. Formatting the RAID 1 Array
 
-## 7. Formatação do RAID 1
+After creating and verifying the array, `/dev/md1` was formatted with the ext4 filesystem:
 
-Após a criação e verificação do array, o `/dev/md1` foi formatado utilizando `ext4`:
-
-```bash id="w3j9qb"
+```bash
 mkfs.ext4 /dev/md1
 ```
 
-Saída:
+Output:
 
-```text id="p8s4kd"
+```text
 ┌──(root㉿kali)-[~]
 └─# mkfs.ext4 /dev/md1
 mke2fs 1.47.2 (1-Jan-2025)
@@ -294,35 +287,31 @@ Creating journal (4096 blocks): done
 Writing superblocks and filesystem accounting information: done
 ```
 
-O sistema de arquivos `ext4` foi criado com sucesso no array `/dev/md1`.
+The ext4 filesystem was successfully created on the `/dev/md1` array.
 
----
+## 8. Mounting the RAID 1 Array
 
-## 8. Montagem do RAID 1
+The mount point was created:
 
-Foi criado o ponto de montagem:
-
-```bash id="z8v5nc"
+```bash
 mkdir /mnt/raid1
 ```
 
-Em seguida, o array foi montado:
+The array was then mounted:
 
-```bash id="q9r2ls"
+```bash
 mount /dev/md1 /mnt/raid1
 ```
 
-Para verificar o espaço disponível e confirmar a montagem, foi executado:
+To check the available space and confirm the mount, the following command was run:
 
-```bash id="u6c4xf"
+```bash
 df -h
 ```
 
-Resultado:
+Output:
 
-```text id="d2k8wv"
-┌──(root㉿kali)-[~]
-└─# df -h
+```text
 Sist. Arq.       Tam. Usado Disp. Uso% Montado em
 udev             1,9G     0  1,9G   0% /dev
 tmpfs            388M 1008K  387M   1% /run
@@ -337,24 +326,28 @@ tmpfs             1,0M     0  1,9G   0% /run/credentials/systemd-tmpfiles-setup-
 tmpfs             1,0M     0  1,9G   0% /run/credentials/systemd-tmpfiles-setup-dev.service
 /dev/nvme0n1p15  124M  286K  124M   1% /boot/efi
 tmpfs             1,0M     0  1,9G   0% /run/credentials/serial-getty@ttyS0.service
-tmpfs             388M   120K  388M   1% /run/user/0
+tmpfs             388M   120K  388M   0% /run/user/0
 tmpfs             388M   128K  388M   0% /run/user/1001
 /dev/md0          179M    63K  165M   1% /mnt/raid0
 /dev/md1           88M    46K   81M   1% /mnt/raid1
 ```
 
-A última linha confirma a montagem do RAID 1:
+The final line confirms that the RAID 1 array is mounted:
 
 ```text
 /dev/md1           88M    46K   81M   1% /mnt/raid1
 ```
 
-O espaço disponível ficou em aproximadamente **88 MiB**, com cerca de **81 MiB livres**, devido ao espaço utilizado pelo sistema de arquivos e seus metadados.
+The filesystem reports approximately 88 MiB of total space, with about 81 MiB available. Some capacity is used by the filesystem and its metadata.
 
-No RAID 1, embora duas partições de 100 MiB sejam utilizadas, a capacidade útil é baseada em apenas um dos dispositivos, pois os dados são espelhados entre eles.
+With RAID 1, although two 100 MiB partitions are used, the usable capacity is based on only one member because the data is mirrored across both devices.
+
+## Evidence
+
+Evidence for this activity is included in the PDF for Module 7, Classes 25–26.
+
+[View Evidence — Classes 25–26](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-[**Evidências — Módulo 7 / Aulas 1 e 2**](../evidencias.pdf)
+[Back to Classes 25–26](../) · [Back to Module 7](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
