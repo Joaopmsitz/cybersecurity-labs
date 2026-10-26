@@ -1,236 +1,208 @@
-# Atividade 10.7 — Criando uma VM em um Hypervisor Tipo 2 no Kali Linux
+# Activity 10.07 — Creating a VM on a Type 2 Hypervisor on Kali Linux
 
-## Objetivo
+## Objective
 
-Criar uma máquina virtual utilizando o **Oracle VM VirtualBox** no Kali Linux, configurando uma instalação baseada na imagem **Debian 12.5.0 AMD64 Netinst**.
+Create a virtual machine using Oracle VM VirtualBox on Kali Linux, configuring an installation based on the Debian 12.5.0 AMD64 Netinst image.
 
-A atividade demonstra o processo de criação de uma VM em um **Hypervisor Tipo 2**, incluindo a seleção da imagem ISO, configuração de usuário, memória e armazenamento.
+This activity demonstrates the process of creating a VM on a Type 2 hypervisor, including ISO image selection, user configuration, memory allocation, and storage configuration.
 
----
+## Environment
 
-## Ambiente
+- **Host operating system:** Kali GNU/Linux
+- **Hypervisor:** Oracle VM VirtualBox
+- **Guest operating system:** Debian Netinst
+- **ISO image:** `debian-12.5.0-amd64-netinst.iso`
+- **Configured memory:** 512 MB
+- **Configured disk:** 10 GB
+- **VM name:** `DebianNetinst`
 
-* **Sistema hospedeiro:** Kali GNU/Linux
-* **Hypervisor:** Oracle VM VirtualBox
-* **Sistema convidado:** Debian Netinst
-* **Imagem:** `debian-12.5.0-amd64-netinst.iso`
-* **Memória configurada:** 512 MB
-* **Disco configurado:** 10 GB
-* **Nome da VM:** `DebianNetinst`
+## 1. Starting the Virtual Machine Creation Process
 
----
-
-## 1. Iniciando a criação da máquina virtual
-
-Com o VirtualBox aberto da atividade anterior, foi fechada a janela contendo a mensagem:
+With VirtualBox still open from the previous activity, the window displaying the following message was closed:
 
 ```text
-Não foi possível enumerar os dispositivos USB...
+Could not enumerate USB devices...
 ```
 
-Em seguida, na barra superior do VirtualBox, foi acessado:
+Next, the following menu option was selected from the VirtualBox menu bar:
 
 ```text
-Máquina → Novo
+Machine → New
 ```
 
-Isso abriu o assistente de criação de uma nova máquina virtual.
+This opened the wizard for creating a new virtual machine.
 
----
+## 2. Defining the VM Name
 
-## 2. Definindo o nome da VM
+The following name was entered in the virtual machine identification field:
 
-No campo de identificação da máquina virtual, foi informado:
-
-```text id="8u1f4e"
+```text
 DebianNetinst
 ```
 
-Esse será o nome utilizado pelo VirtualBox para identificar a máquina virtual.
+This is the name VirtualBox will use to identify the virtual machine.
 
----
+## 3. Selecting the ISO Image
 
-## 3. Selecionando a imagem ISO
-
-No campo **Imagem ISO**, foi selecionada a opção:
+In the **ISO Image** field, the following option was selected:
 
 ```text
-Outro
+Other
 ```
 
-Na janela de seleção de arquivos, foram acessadas as pastas:
+In the file selection window, the following locations were accessed:
 
-```text id="1e6e4m"
-Outros locais
-→ Computador
+```text
+Other Locations
+→ Computer
 → curso
 ```
 
-Foi localizada a imagem:
+The following image was located:
 
-```text id="v1p8ma"
+```text
 debian-12.5.0-amd64-netinst.iso
 ```
 
-A imagem foi selecionada com dois cliques.
+The image was selected by double-clicking it.
 
----
+## 4. Proceeding Through the Wizard
 
-## 4. Avançando no assistente
-
-Após selecionar a imagem ISO do Debian, foi clicado:
+After selecting the Debian ISO image, the following button was clicked:
 
 ```text
-Próximo(N)
+Next (N)
 ```
 
-O assistente avançou para as configurações de usuário.
+The wizard proceeded to the user configuration screen.
 
----
+## 5. Configuring the User
 
-## 5. Configurando o usuário
+In the **Username** field, the default name was changed to:
 
-No campo **Nome do Usuário**, o nome padrão foi alterado para:
-
-```text id="qym8ml"
+```text
 DebianNetinst
 ```
 
-Também foi verificada a senha apresentada pelo laboratório:
+The password provided by the lab was also reviewed.
+
+After completing the configuration, the following button was clicked:
 
 ```text
-changeme
+Next (N)
 ```
 
-Após a configuração, foi clicado:
+The lab credentials are not reproduced here beyond what is necessary to document the configuration.
+
+## 6. Configuring Memory
+
+On the hardware configuration screen, the **Base Memory** value was set to:
 
 ```text
-Próximo(N)
-```
-
-As credenciais do laboratório não são reproduzidas além do necessário para documentar a configuração.
-
----
-
-## 6. Configurando a memória
-
-Na etapa de configuração de hardware, foi definida a **Memória Base** para:
-
-```text id="bdq8m4"
 512 MB
 ```
 
-Em seguida, foi clicado:
+The following button was then clicked:
 
 ```text
-Próximo(N)
+Next (N)
 ```
 
----
+## 7. Configuring Storage
 
-## 7. Configurando o armazenamento
+On the virtual disk configuration screen, the disk size was changed to:
 
-Na configuração do disco virtual, o tamanho foi alterado para:
-
-```text id="q0k7ap"
+```text
 10 GB
 ```
 
-Em seguida, foi clicado:
+The following button was then clicked:
 
 ```text
-Próximo(N)
+Next (N)
 ```
 
----
+## 8. Completing the VM Creation Process
 
-## 8. Finalizando a criação da VM
+VirtualBox displayed a summary of the selected configuration.
 
-O VirtualBox apresentou o sumário com as configurações selecionadas.
+After reviewing the information, the following button was clicked:
 
-Após verificar as informações, foi clicado:
-
-```text id="l4r9br"
-Finalizar
+```text
+Finish
 ```
 
-A máquina virtual foi então criada no VirtualBox.
+The virtual machine was then created in VirtualBox.
 
----
+### Evidence — Step 9
 
-## Evidência — Passo 9
+**Caption to include before the screenshot:**
 
-**Frase obrigatória antes do print:**
+> Screenshot of Activity 10.07: the newly created DebianNetinst virtual machine displayed in the left-hand pane of Oracle VM VirtualBox.
 
-> **Print da atividade 10.7:** máquina virtual `DebianNetinst` criada e apresentada na coluna esquerda do Oracle VM VirtualBox.
+[View Evidence — Classes 39–40](../evidencias.pdf)
 
-[**Evidências — Módulo 10 / Aulas 39 e 40**](../evidencias.pdf)
+## 9. Verifying the Created Virtual Machine
 
----
+After the wizard was completed, the following VM appeared in the left-hand pane of VirtualBox:
 
-## 9. Verificando a máquina virtual criada
-
-Após a finalização do assistente, a VM:
-
-```text id="xv8q34"
+```text
 DebianNetinst
 ```
 
-passou a aparecer na coluna esquerda do VirtualBox.
+The virtual machine was created with the settings specified in the wizard, including the Debian Netinst ISO image, 512 MB of memory, and 10 GB of storage.
 
-A máquina foi criada com as configurações definidas durante o assistente, incluindo a imagem ISO do Debian Netinst, **512 MB de memória** e **10 GB de armazenamento**.
+The lab also states that the AWS VM environment does not have a virtualization driver available. Therefore, it is not necessary to start the DebianNetinst virtual machine in this environment.
 
-O laboratório também informa que o ambiente da VM da AWS **não possui driver de virtualização**. Portanto, não é necessário iniciar a máquina virtual `DebianNetinst` nesse ambiente.
-
-Caso a VM seja executada nesse ambiente, poderá ocorrer o erro:
+If the VM is started in this environment, the following error may occur:
 
 ```text
 Kernel driver not installed
 ```
 
-A criação da máquina virtual, entretanto, foi concluída normalmente.
+The virtual machine creation process was completed successfully despite this limitation.
 
----
+## 10. Closing the Activity
 
-## 10. Encerramento
+The DebianNetinst virtual machine was created and remained available in VirtualBox for a potential Debian installation.
 
-A máquina virtual `DebianNetinst` foi criada e permaneceu disponível no VirtualBox para uma eventual instalação do Debian.
+Starting the virtual machine or installing the operating system was not required for this activity.
 
-Para esta atividade, não foi necessário iniciar a máquina virtual nem realizar a instalação do sistema operacional.
+After completion, the windows were closed, the RDP connection was terminated, and the AWS VM session was stopped, as instructed by the lab.
 
-Após a conclusão, as janelas foram fechadas, a conexão RDP foi encerrada e a sessão da VM da AWS foi interrompida, conforme orientação do laboratório.
+## Key Concepts
 
----
+- **Virtual machine (VM):** An isolated computing environment running on a hypervisor.
+- **Netinst ISO:** A minimal Debian installation image used to start the installation process and obtain the required components.
+- **Type 2 hypervisor:** Virtualization software that runs on top of a host operating system.
+- **VirtualBox:** A hypervisor used to create and manage virtual machines.
 
-## Conceitos
+## Activity Workflow
 
-* **Máquina virtual:** ambiente computacional isolado executado sobre um hypervisor.
-* **ISO Netinst:** imagem mínima de instalação do Debian, utilizada para iniciar o processo de instalação e obter os componentes necessários.
-* **Hypervisor Tipo 2:** software de virtualização executado sobre um sistema operacional hospedeiro.
-* **VirtualBox:** hypervisor utilizado para criar e gerenciar a máquina virtual.
-
-## Fluxo da atividade
-
-```text id="b5e9zn"
-Abrir VirtualBox
+```text
+Open VirtualBox
       ↓
-Máquina → Novo
+Machine → New
       ↓
-Definir DebianNetinst
+Set the name to DebianNetinst
       ↓
-Selecionar ISO
+Select the ISO image
       ↓
-Configurar usuário
+Configure the user
       ↓
-512 MB RAM
+Allocate 512 MB RAM
       ↓
-10 GB de disco
+Configure a 10 GB disk
       ↓
-Finalizar
+Finish
       ↓
-VM criada
+VM created
 ```
 
-## Resultado
+## Result
 
-A máquina virtual **DebianNetinst** foi criada com a imagem Debian Netinst, **512 MB de memória** e **10 GB de armazenamento**, ficando disponível na interface do VirtualBox.
+The `DebianNetinst` virtual machine was created using the Debian Netinst image, with 512 MB of memory and 10 GB of storage, and became available in the VirtualBox interface.
+
+---
+
+[Back to Classes 39–40](../) · [Back to Module 10](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
