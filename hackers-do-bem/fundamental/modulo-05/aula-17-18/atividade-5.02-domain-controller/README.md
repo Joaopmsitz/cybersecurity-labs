@@ -1,374 +1,348 @@
-# Atividade 5.2 — Criando o Domain Controller do Active Directory
+# Activity 5.02 — Configuring the Active Directory Domain Controller
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 05  
+> **Class:** 17–18  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Promover o servidor **Windows Server 2022** a **Domain Controller (DC)** do Active Directory, criando uma nova floresta e configurando o DNS do domínio.
+## Objective
 
-Nesta atividade também é criada uma **Reverse Lookup Zone** para a rede utilizada pelo laboratório.
+Promote the Windows Server 2022 server to an Active Directory Domain Controller (DC), creating a new forest and configuring the domain's DNS.
 
----
+This activity also includes creating a Reverse Lookup Zone for the network used in the laboratory.
 
-## Ambiente
+## Environment
 
-* Windows Server 2022
-* Active Directory Domain Services
-* Domain Controller
-* DNS Server
-* DNS Manager
-* Domínio: `aluno.hacker.com`
-* NetBIOS: `ALUNO`
-* Rede do laboratório: `192.168.98.0/24`
+- Windows Server 2022
+- Active Directory Domain Services
+- Domain Controller
+- DNS Server
+- DNS Manager
+- **Domain:** `aluno.hacker.com`
+- **NetBIOS name:** `ALUNO`
+- **Laboratory network:** `192.168.98.0/24`
 
----
+## Procedure
 
-## 1. Iniciando a promoção do servidor
+### 1. Start the Server Promotion Process
 
-Após a instalação do AD DS na atividade anterior, o **Server Manager** apresentou uma notificação indicando que era necessário configurar o serviço.
+After AD DS was installed in the previous activity, Server Manager displayed a notification indicating that additional configuration was required.
 
-No canto superior direito, foi selecionado o ícone de notificação e, em seguida:
+In the upper-right corner, the notification icon was selected, followed by:
 
-```text id="tqyk5q"
+```text
 Promote this server to a domain controller
 ```
 
-Foi iniciado o assistente de configuração do Active Directory Domain Services.
+The Active Directory Domain Services configuration wizard was launched.
 
----
+### 2. Create a New Forest
 
-## 2. Criando uma nova floresta
+On the **Deployment Configuration** screen, the following option was selected:
 
-No **Deployment Configuration**, foi selecionada a opção:
-
-```text id="h0c9jf"
+```text
 Add a new forest
 ```
 
-No campo **Root domain name**, foi informado:
+The following value was entered in the **Root domain name** field:
 
-```text id="v48kpo"
+```text
 aluno.hacker.com
 ```
 
-Em seguida, o assistente foi avançado.
+The wizard was then advanced to the next step.
 
----
+### 3. Configure the Directory Services Restore Mode Password
 
-## 3. Configurando a senha do Directory Services Restore Mode
+On the **Domain Controller Options** screen, a password was configured for:
 
-Na etapa **Domain Controller Options**, foi definida a senha do:
-
-```text id="y4ib2g"
+```text
 Directory Services Restore Mode (DSRM)
 ```
 
-A mesma senha foi informada nos campos **Password** e **Confirm Password**.
+The same password was entered in the **Password** and **Confirm Password** fields.
 
-> A senha utilizada no laboratório não é registrada neste README.
+The password used in the laboratory is not recorded in this README.
 
-Após a configuração, o assistente foi avançado para as próximas etapas.
+After configuring the password, the wizard was advanced to the next steps.
 
----
+### 4. Verify the NetBIOS Name
 
-## 4. Verificando o nome NetBIOS
+On the **Additional Options** screen, the domain's NetBIOS name was verified.
 
-Na etapa **Additional Options**, foi verificado o nome NetBIOS do domínio.
+The displayed value was:
 
-O valor apresentado foi:
-
-```text id="1w4j4e"
+```text
 ALUNO
 ```
 
-O assistente foi avançado pelas etapas seguintes até chegar à verificação dos pré-requisitos.
+The wizard was advanced through the remaining steps until the prerequisite checks were reached.
 
----
+### 5. Check the Prerequisites
 
-## 5. Verificando os pré-requisitos
+On the **Prerequisites Check** screen, the validation results were reviewed.
 
-Na tela **Prerequisites Check**, foi verificado o resultado da validação.
+Windows Server displayed a green indicator and the following message:
 
-O Windows Server apresentou o indicador verde e a mensagem:
-
-```text id="9b5r6c"
+```text
 All prerequisite checks passed successfully....
 ```
 
-Após a validação, foi selecionado:
+After validation, the following option was selected:
 
-```text id="qj9n9g"
+```text
 Install
 ```
 
-A instalação iniciou a configuração do domínio e a promoção do servidor a Domain Controller.
+The installation process began configuring the domain and promoting the server to a Domain Controller.
 
-Após a conclusão, o servidor foi reiniciado automaticamente.
+After completion, the server restarted automatically.
 
----
+### 6. Access the Server Again
 
-## 6. Acessando novamente o servidor
+After waiting for Windows Server to start, the RDP connection was re-established using:
 
-Após aguardar a inicialização do Windows Server, foi estabelecida novamente a conexão RDP com:
-
-```text id="jpm8vr"
+```text
 192.168.98.20
 ```
 
-O acesso foi realizado com a conta administrativa do laboratório.
+Access was performed using the laboratory's administrative account.
 
-Após a autenticação, o **Server Manager** foi aberto novamente.
+After authentication, Server Manager was opened again.
 
-Foi verificado que os serviços relacionados ao domínio estavam disponíveis, incluindo:
+The availability of the domain-related services was verified, including:
 
-```text id="8m2x89"
+```text
 AD DS
 DNS
 File and Storage Services
 ```
 
----
+### 7. Open DNS Manager
 
-## 7. Abrindo o DNS Manager
+In Server Manager, the following menu path was selected:
 
-No **Server Manager**, foi acessado:
-
-```text id="7j1y4x"
+```text
 Tools
     ↓
 DNS
 ```
 
-No **DNS Manager**, foi expandido:
+In DNS Manager, the following tree was expanded:
 
-```text id="h3a3z7"
+```text
 DC01
 └── Forward Lookup Zones
     └── aluno.hacker.com
 ```
 
-A zona de pesquisa direta do domínio estava disponível.
+The domain's forward lookup zone was available.
 
----
+### 8. Create the Reverse Lookup Zone
 
-## 8. Criando a Reverse Lookup Zone
+In DNS Manager, the following item was selected:
 
-No **DNS Manager**, foi selecionado:
-
-```text id="x4k8x1"
+```text
 Reverse Lookup Zones
 ```
 
-Com o botão direito, foi selecionado:
+The item was right-clicked, and the following option was selected:
 
-```text id="x9n7jj"
+```text
 New Zone...
 ```
 
-O assistente foi avançado mantendo as opções indicadas pelo laboratório.
+The wizard was advanced using the options specified by the laboratory instructions.
 
-No campo **Network ID**, foi informado:
+The following value was entered in the **Network ID** field:
 
-```text id="h7wq5f"
+```text
 192.168.98
 ```
 
-O assistente foi concluído através de:
+The wizard was completed by selecting:
 
-```text id="kq4r6x"
+```text
 Finish
 ```
 
-A zona reversa passou então a aparecer dentro de:
+The reverse lookup zone then appeared under **Reverse Lookup Zones**.
 
-```text id="w0m2gi"
-Reverse Lookup Zones
-```
+### 9. Verify the Reverse Lookup Zone
 
----
+The newly created zone was opened:
 
-## 9. Verificando a Reverse Lookup Zone
-
-A zona recém-criada foi aberta:
-
-```text id="2wqz4j"
+```text
 Reverse Lookup Zones
 └── 98.168.192.in-addr.arpa
 ```
 
-Esta configuração representa a rede:
+This configuration represents the network:
 
-```text id="5h0o8m"
+```text
 192.168.98.0/24
 ```
 
-A criação da zona reversa permite realizar consultas DNS que partem de um endereço IP para obter informações de nome associadas.
+Creating a reverse lookup zone allows DNS queries to start with an IP address and retrieve associated name information when the relevant reverse DNS records exist.
 
-A evidência solicitada pelo laboratório corresponde a esta etapa.
+The evidence requested by the laboratory corresponds to this step.
 
----
+### 10. Verify the Start of Authority Record
 
-## 10. Verificando o Start of Authority
+Within the zone:
 
-Dentro da zona:
-
-```text id="l0y0qv"
+```text
 98.168.192.in-addr.arpa
 ```
 
-foi acessado:
+the following item was opened:
 
-```text id="6m3q0j"
+```text
 Start of Authority (SOA)
 ```
 
-Na janela aberta, foi acessada a aba:
+In the window that opened, the following tab was selected:
 
-```text id="3w8j7r"
+```text
 Name Servers
 ```
 
-Foi selecionado o servidor e utilizada a opção:
+The server was selected, and the following option was used:
 
-```text id="1a4q8x"
+```text
 Edit...
 ```
 
-Em seguida, foi selecionado:
+The following option was then selected:
 
-```text id="c5x7dp"
+```text
 Resolve
 ```
 
-O servidor apresentou a resolução com o indicador verde de sucesso.
+The server displayed the resolution result with a green success indicator.
 
----
+### 11. Update the PTR Record
 
-## 11. Atualizando o registro PTR
+Still in DNS Manager, the forward lookup zone was accessed:
 
-Ainda no **DNS Manager**, foi acessada a zona direta:
-
-```text id="v5q9gk"
+```text
 DC01
 └── Forward Lookup Zones
     └── aluno.hacker.com
 ```
 
-Foi selecionado o registro do servidor `dc01`.
+The `dc01` server record was selected.
 
-Na janela de propriedades, foi habilitada a opção:
+In the properties window, the following option was enabled:
 
-```text id="x8o6g3"
+```text
 Update associated pointer (PTR) record
 ```
 
-A alteração foi confirmada.
+The change was confirmed.
 
----
+### 12. Verify the Record in the Reverse Lookup Zone
 
-## 12. Verificando o registro na zona reversa
+Finally, the following zone was accessed again:
 
-Por fim, foi retornada a:
-
-```text id="q1v6n8"
+```text
 Reverse Lookup Zones
 └── 98.168.192.in-addr.arpa
 ```
 
-Foi utilizado o botão **Refresh** para atualizar a visualização.
+The **Refresh** button was used to update the displayed information.
 
-Após a atualização, apareceu um novo elemento relacionado ao endereço IP do servidor.
+After refreshing the view, a new entry associated with the server's IP address appeared.
 
----
-
-## Conceitos
+## Concepts Practiced
 
 ### Domain Controller
 
-O **Domain Controller** é o servidor responsável por fornecer os serviços centrais de autenticação e gerenciamento de um domínio do Active Directory.
+A Domain Controller is a server responsible for providing the central authentication and domain management services of Active Directory.
 
-Nesta atividade, o `DC01` foi promovido a controlador do domínio:
+In this activity, `DC01` was promoted to a Domain Controller for:
 
-```text id="t4w2o9"
+```text
 aluno.hacker.com
 ```
 
-### Floresta
+### Forest
 
-Uma **forest** é a estrutura de nível mais alto do Active Directory que agrupa um ou mais domínios e compartilha elementos como esquema e configuração.
+A forest is the highest-level structure in Active Directory. It groups one or more domains and shares elements such as the directory schema and configuration.
 
-Nesta atividade foi criada uma nova floresta através da opção:
+In this activity, a new forest was created using the option:
 
-```text id="s0h2r5"
+```text
 Add a new forest
 ```
 
 ### DNS Forward Lookup Zone
 
-A zona de pesquisa direta é utilizada para resolver nomes para endereços IP.
+A forward lookup zone is used to resolve names to IP addresses.
 
-No laboratório:
+In the laboratory, the following domain was configured as a forward lookup zone:
 
-```text id="6c4t9a"
+```text
 aluno.hacker.com
 ```
-
-foi configurada como zona direta.
 
 ### Reverse Lookup Zone
 
-A zona de pesquisa reversa realiza o processo inverso, permitindo consultar informações DNS a partir de um endereço IP.
+A reverse lookup zone supports DNS queries that start with an IP address and retrieve an associated name when a corresponding record is available.
 
-Para a rede do laboratório, foi criada:
+For the laboratory network, the following zone was created:
 
-```text id="n8f5b2"
+```text
 98.168.192.in-addr.arpa
 ```
 
-correspondente à rede:
+It corresponds to the network:
 
-```text id="h4z2x6"
+```text
 192.168.98.0/24
 ```
 
-### Registro PTR
+### PTR Record
 
-O registro **PTR (Pointer)** é utilizado em consultas DNS reversas para associar um endereço IP a um nome.
+A PTR (Pointer) record is used in reverse DNS lookups to associate an IP address with a name.
 
-A opção:
+The following option enables the update of the associated PTR record:
 
-```text id="3s6n4w"
+```text
 Update associated pointer (PTR) record
 ```
 
-permite atualizar o registro PTR relacionado ao servidor.
+### SOA Record
 
-### Registro SOA
+The Start of Authority (SOA) record contains administrative information about a DNS zone, including information about the authoritative server and parameters used to maintain the zone.
 
-O **Start of Authority (SOA)** contém informações administrativas sobre uma zona DNS, como o servidor autoritativo e parâmetros relacionados à manutenção da zona.
+## Results
 
----
+The `DC01` server was promoted to a Domain Controller, and a new forest was created using the domain:
 
-## Resultado
-
-O servidor `DC01` foi promovido a **Domain Controller** e uma nova floresta foi criada utilizando o domínio:
-
-```text id="c7m3w1"
+```text
 aluno.hacker.com
 ```
 
-Também foi configurada a zona DNS reversa:
+The reverse DNS zone was also configured:
 
-```text id="9z4x6k"
+```text
 98.168.192.in-addr.arpa
 ```
 
-correspondente à rede `192.168.98.0/24`.
+This zone corresponds to the network `192.168.98.0/24`.
 
-Por fim, foi verificada a resolução do servidor e habilitada a atualização do registro PTR associado ao endereço IP do `DC01`.
+Finally, the server's name resolution was checked, and the option to update the PTR record associated with the `DC01` IP address was enabled.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 05, Classes 17–18.
+
+**Recorded screenshot:** Step 9 — creating and viewing the `98.168.192.in-addr.arpa` Reverse Lookup Zone.
+
+[View Evidence — Classes 17–18](../evidencias.pdf)
 
 ---
 
-## Evidências
-
-[**Evidências — Módulo 5 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Evidência registrada:** passo 9 — criação e visualização da **Reverse Lookup Zone** `98.168.192.in-addr.arpa`.
+[Back to Classes 17–18](../) · [Back to Module 05](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
