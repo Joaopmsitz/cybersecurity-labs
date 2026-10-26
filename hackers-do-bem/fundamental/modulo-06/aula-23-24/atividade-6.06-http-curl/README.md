@@ -1,48 +1,50 @@
-# Atividade 6.6 — Explorando Solicitações HTTP e Codificação Percentual no Kali Linux
+# Activity 6.06 — Exploring HTTP Requests and Percent-Encoding on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 06  
+> **Class:** 23–24  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Nesta atividade foram exploradas solicitações HTTP utilizando o comando `curl` no Kali Linux, incluindo a obtenção de conteúdo de páginas web, download de arquivos e utilização de **codificação percentual (Percent-Encoding)** em parâmetros de uma URL.
+## Objective
 
-O exercício também demonstrou como uma página HTML pode ser obtida diretamente pelo terminal e posteriormente aberta no navegador.
+This activity explores HTTP requests using the `curl` command on Kali Linux, including retrieving web page content, downloading files, and using Percent-Encoding in URL parameters.
 
----
+The exercise also demonstrates how an HTML page can be retrieved directly from the terminal and subsequently opened in a web browser.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Acesso:** RDP
-* **IP da máquina:** `192.168.98.40`
-* **Usuário:** `aluno`
-* **Diretório de trabalho:** `/home/aluno/Documentos`
+- **Operating system:** Kali Linux
+- **Access method:** RDP
+- **Machine IP address:** `192.168.98.40`
+- **User:** `aluno`
+- **Working directory:** `/home/aluno/Documentos`
 
-> As credenciais utilizadas no laboratório não são registradas neste documento.
+The credentials used in the laboratory are not recorded in this README.
 
----
+## Procedure
 
-## 1. Acessando o terminal
+### 1. Open the Terminal
 
-Após acessar o Kali Linux por RDP, foi aberto o terminal e obtido acesso administrativo:
+After accessing Kali Linux through RDP, the terminal was opened, and administrative access was obtained:
 
 ```bash
 sudo -i
 ```
 
----
+### 2. Make an HTTP Request Using `curl`
 
-## 2. Realizando uma solicitação HTTP com `curl`
+`curl` is a command-line tool used to make requests to servers and transfer data over various protocols, including HTTP and HTTPS.
 
-O `curl` é uma ferramenta de linha de comando utilizada para realizar solicitações a servidores e transferir dados através de diversos protocolos, incluindo HTTP e HTTPS.
-
-Foi executado:
+The following command was executed:
 
 ```bash
 curl https://www.example.com
 ```
 
-A resposta retornou o conteúdo HTML da página:
+The response returned the page's HTML content:
 
-```text
+```html
 <!doctype html>
 <html>
 <head>
@@ -91,33 +93,31 @@ A resposta retornou o conteúdo HTML da página:
 </html>
 ```
 
-Isso demonstra que o `curl` conseguiu realizar a solicitação HTTPS e imprimir no terminal o conteúdo retornado pelo servidor.
+This demonstrates that `curl` successfully made the HTTPS request and printed the content returned by the server directly in the terminal.
 
----
+### 3. Download the Content to a File
 
-## 3. Baixando o conteúdo para um arquivo
-
-Primeiramente, foi acessado o diretório `Documentos`:
+First, the Documents directory was accessed:
 
 ```bash
 cd /home/aluno/Documentos
 ```
 
-Em seguida, foi verificado o conteúdo:
+The directory contents were then checked:
 
 ```bash
 ls
 ```
 
-O diretório estava inicialmente vazio.
+The directory was initially empty.
 
-O conteúdo de `example.com` foi então salvo em um arquivo utilizando:
+The content from `example.com` was then saved to a file using:
 
 ```bash
 curl -o output.html https://www.example.com
 ```
 
-Saída:
+**Output:**
 
 ```text
   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
@@ -125,189 +125,184 @@ Saída:
 100  1256  100  1256    0     0   1805      0 --:--:-- --:--:-- --:--:--  1820
 ```
 
-Após o download:
+After the download, the following command was executed:
 
 ```bash
 ls
 ```
 
-Resultado:
+**Result:**
 
 ```text
 output.html
 ```
 
-A opção `-o` define o nome do arquivo no qual o conteúdo recebido será salvo.
+The `-o` option specifies the filename to which the received content will be saved.
 
-Portanto:
+Therefore:
 
 ```bash
 curl -o output.html https://www.example.com
 ```
 
-realiza a requisição e grava a resposta em `output.html`.
+sends the request and saves the response to `output.html`.
 
----
+### 4. Open the HTML File
 
-## 4. Abrindo o arquivo HTML
-
-O arquivo `output.html` foi localizado através do Thunar em:
+The `output.html` file was located using Thunar at:
 
 ```text
 /home/aluno/Documentos
 ```
 
-Ao abrir o arquivo, seu conteúdo foi interpretado pelo navegador Firefox, permitindo visualizar a página HTML obtida anteriormente através do `curl`.
+When the file was opened, its contents were rendered by the Firefox browser, allowing the HTML page previously retrieved using `curl` to be viewed.
 
-Após a verificação, o Firefox e o Thunar foram fechados.
+After verification, Firefox and Thunar were closed.
 
----
+### 5. Use Percent-Encoding in a URL
 
-## 5. Utilizando codificação percentual em uma URL
-
-Em seguida, foi realizada uma solicitação ao Google utilizando um parâmetro de pesquisa codificado:
+Next, a request was made to Google using an encoded search parameter:
 
 ```bash
 curl "https://www.google.com/search?q=Ol%C3%A1%2C%20mundo%21"
 ```
 
-Nesse endereço, o parâmetro:
+In this URL, the parameter:
 
 ```text
 q=Ol%C3%A1%2C%20mundo%21
 ```
 
-representa o texto:
+represents the text:
 
 ```text
 Olá, mundo!
 ```
 
-A codificação utilizada é conhecida como **Percent-Encoding** ou codificação percentual.
+This encoding method is known as **Percent-Encoding**.
 
-Alguns exemplos presentes na URL:
+Some examples from the URL are:
 
-| Código   | Caractere |
-| -------- | --------- |
-| `%C3%A1` | `á`       |
-| `%2C`    | `,`       |
-| `%20`    | espaço    |
-| `%21`    | `!`       |
+| Encoded value | Character |
+|---|---|
+| `%C3%A1` | `á` |
+| `%2C` | `,` |
+| `%20` | Space |
+| `%21` | `!` |
 
-A resposta retornada pelo Google foi um documento HTML, demonstrando que a URL codificada foi aceita pelo servidor.
+The `á` character is represented by the UTF-8 byte sequence `%C3%A1`.
 
----
+The response returned by Google was an HTML document, demonstrating that the encoded URL was accepted by the server.
 
-## 6. Testando a URL codificada no navegador
+### 6. Test the Encoded URL in the Browser
 
-A mesma URL utilizada no `curl` foi aberta no Firefox:
+The same URL used with `curl` was opened in Firefox:
 
 ```text
 https://www.google.com/search?q=Ol%C3%A1%2C%20mundo%21
 ```
 
-O navegador apresentou o resultado correspondente à pesquisa pelo texto:
+The browser displayed results corresponding to the search text:
 
 ```text
 Olá, mundo!
 ```
 
-**Este é o passo solicitado para a evidência da atividade.**
+This is the step specified for the activity evidence.
 
-O objetivo desse passo é demonstrar visualmente a utilização da codificação percentual em uma URL e o resultado obtido pelo navegador.
+The objective of this step is to visually demonstrate the use of Percent-Encoding in a URL and the resulting search in the browser.
 
----
-
-## Conceitos envolvidos
+## Concepts Practiced
 
 ### HTTP
 
-HTTP é um protocolo utilizado para comunicação entre clientes e servidores web.
+HTTP is a protocol used for communication between web clients and servers.
 
-No exercício, o `curl` atuou como cliente, enviando solicitações para servidores HTTP/HTTPS e recebendo suas respostas.
+In this exercise, `curl` acted as a client, sending requests to HTTP/HTTPS servers and receiving their responses.
 
 ### `curl`
 
-O `curl` permite realizar requisições diretamente pelo terminal.
+`curl` allows requests to be made directly from the terminal.
 
-No laboratório foi utilizado para:
+In this laboratory, it was used to:
+
+- Request a web page.
+- View HTML content directly in the terminal.
+- Download content.
+- Save a response to a file.
+- Submit a URL containing encoded parameters.
+
+### Percent-Encoding
+
+Percent-Encoding allows certain characters to be represented in a URL through sequences beginning with the `%` character.
+
+For example:
 
 ```text
-Solicitar uma página web
-Baixar conteúdo
-Salvar uma resposta em arquivo
-Enviar uma URL com parâmetros codificados
+Space → %20
+,     → %2C
+!     → %21
 ```
 
-### Codificação percentual
-
-A codificação percentual permite representar determinados caracteres dentro de uma URL através de sequências iniciadas pelo caractere `%`.
-
-Por exemplo:
-
-```text
-espaço → %20
-,      → %2C
-!      → %21
-```
-
-Caracteres que possuem representação específica em UTF-8, como `á`, também podem aparecer como uma sequência de bytes codificados:
+Characters represented using multibyte UTF-8 sequences, such as `á`, can also appear as encoded byte sequences:
 
 ```text
 á → %C3%A1
 ```
 
----
+Percent-Encoding makes it possible to represent characters in URL components while preserving the intended parameter value.
 
-## Resultado
+## Results
 
-A atividade permitiu utilizar o `curl` para:
+The activity demonstrated how to use `curl` to:
 
-1. realizar uma requisição HTTPS;
-2. visualizar diretamente o HTML retornado por um servidor;
-3. baixar uma página para `output.html`;
-4. abrir o conteúdo baixado no navegador;
-5. construir uma URL contendo parâmetros em Percent-Encoding;
-6. realizar uma pesquisa utilizando a URL codificada.
+- Make an HTTPS request.
+- Display HTML returned by a server directly in the terminal.
+- Download a page to `output.html`.
+- Open the downloaded content in a browser.
+- Construct a URL containing Percent-Encoding.
+- Perform a search using the encoded URL.
 
-A URL utilizada no teste final foi:
+The URL used in the final test was:
 
 ```text
 https://www.google.com/search?q=Ol%C3%A1%2C%20mundo%21
 ```
 
-e corresponde à pesquisa por:
+It corresponds to a search for:
 
 ```text
 Olá, mundo!
 ```
 
----
+The exercise reinforced the relationship between HTTP requests, server responses, file downloads, and URL parameter encoding.
 
-## Limpeza
+## Cleanup
 
-Após a conclusão da atividade, o arquivo criado foi removido:
+After completing the activity, the created file was checked:
 
 ```bash
 ls
 ```
 
-Saída:
+**Output:**
 
 ```text
 output.html
 ```
 
-Em seguida:
+The file was then removed:
 
 ```bash
 rm output.html
 ```
 
+## Evidence
+
+The evidence for this activity corresponds to Step 6, showing the Percent-Encoding URL in Firefox and the search results for `Olá, mundo!`.
+
+[View Evidence — Classes 23–24](../evidencias.pdf)
+
 ---
 
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 6**, mostrando no Firefox a URL com codificação percentual e o resultado da pesquisa por `Olá, mundo!`.
-
-[**Evidências — Módulo 6 / Aulas 3 e 4**](../evidencias.pdf)
+[Back to Classes 23–24](../) · [Back to Module 06](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
