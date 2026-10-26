@@ -1,43 +1,43 @@
-# Atividade 7.8 — Formatação Completa no Kali Linux
+# Activity 7.08 — Complete Formatting on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 07  
+> **Classes:** 27–28  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Realizar o processo de preparação e formatação de uma partição no Kali Linux, removendo a configuração anterior de RAID, recriando o sistema de arquivos e, por fim, removendo as assinaturas do sistema de arquivos com `wipefs`.
+## Objective
 
-O laboratório utiliza o disco `/dev/nvme1n1`, que não contém o sistema operacional principal da máquina virtual.
+Prepare and format a partition on Kali Linux by removing the previous RAID configuration, recreating the filesystem, and finally removing filesystem signatures using `wipefs`.
 
----
+The lab uses the disk `/dev/nvme1n1`, which does not contain the virtual machine's primary operating system.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Kali Linux
-* **Disco utilizado:** `/dev/nvme1n1`
-* **Partição trabalhada:** `/dev/nvme1n1p1`
-* **Ferramentas:** `mdadm`, `fdisk`, `partprobe`, `mkfs.ext4` e `wipefs`
+- **Operating system:** Kali Linux
+- **Disk used:** `/dev/nvme1n1`
+- **Partition:** `/dev/nvme1n1p1`
+- **Tools:** `mdadm`, `fdisk`, `partprobe`, `mkfs.ext4`, and `wipefs`
 
-> As operações abaixo são destrutivas e foram realizadas somente no disco disponibilizado para o laboratório.
+> The operations described below are destructive and were performed only on the disk provided for the lab.
 
----
+## 1. Switching to the Root User
 
-## 1. Acesso como root
-
-Inicialmente, foi obtido acesso administrativo:
+Administrative access was obtained:
 
 ```bash
 sudo -i
 ```
 
----
+## 2. Identifying the Disks
 
-## 2. Identificação dos discos
-
-Foi utilizado o comando `fdisk -l` para verificar os discos e partições disponíveis:
+The `fdisk -l` command was used to identify the available disks and partitions:
 
 ```bash
 fdisk -l
 ```
 
-Saída registrada no laboratório:
+Output recorded during the lab:
 
 ```text
 Disk /dev/nvme0n1: 22 GiB, 23622320128 bytes, 46137344 sectors
@@ -71,25 +71,21 @@ Device         Boot  Start    End Sectors  Size Id Type
 /dev/nvme1n1p4      616448 821247  204800  100M 83 Linux
 ```
 
-O disco utilizado no laboratório é o `/dev/nvme1n1`, enquanto o sistema operacional está instalado no `/dev/nvme0n1`.
+The disk used in the lab is `/dev/nvme1n1`, while the operating system is installed on `/dev/nvme0n1`.
 
----
+## 3. Stopping the RAID Device
 
-## 3. Parada do dispositivo RAID
-
-Como o disco secundário havia sido utilizado nas atividades anteriores para os arrays RAID, foi executado:
+Because the secondary disk had been used for RAID arrays in previous activities, the following command was run:
 
 ```bash
 mdadm --stop /dev/nvme1n1
 ```
 
-O objetivo dessa etapa é interromper a configuração RAID antes de realizar a limpeza e alteração das partições.
+The purpose of this step is to stop the RAID configuration before cleaning and modifying the partitions.
 
----
+## 4. Removing RAID Metadata
 
-## 4. Remoção dos metadados RAID
-
-Para remover as assinaturas de RAID das quatro partições existentes, foram executados:
+To remove RAID superblock signatures from the four existing partitions, the following commands were executed:
 
 ```bash
 mdadm --zero-superblock /dev/nvme1n1p1
@@ -98,21 +94,19 @@ mdadm --zero-superblock /dev/nvme1n1p3
 mdadm --zero-superblock /dev/nvme1n1p4
 ```
 
-O comando `mdadm --zero-superblock` remove os metadados de superbloco utilizados pelo RAID, permitindo que as partições deixem de ser identificadas como membros do array anterior.
+The `mdadm --zero-superblock` command removes the superblock metadata used by RAID, allowing the partitions to stop being identified as members of the previous array.
 
----
+## 5. Deleting the Existing Partitions
 
-## 5. Exclusão das partições antigas
-
-Foi aberto o particionador do disco:
+The disk partitioning utility was opened:
 
 ```bash
 fdisk /dev/nvme1n1
 ```
 
-As partições `p4`, `p3` e `p2` foram removidas, mantendo inicialmente a `p1`.
+Partitions `p4`, `p3`, and `p2` were deleted, initially leaving `p1` in place.
 
-Saída registrada:
+Recorded output:
 
 ```text
 Welcome to fdisk (util-linux 2.41.2).                                                                      
@@ -152,25 +146,23 @@ Calling ioctl() to re-read partition table.
 Syncing disks.
 ```
 
-Depois das alterações, foi executado:
+After the changes, the following command was executed:
 
 ```bash
 partprobe /dev/nvme1n1
 ```
 
-O `partprobe` solicita ao kernel que releia a tabela de partições atualizada.
+`partprobe` asks the kernel to reread the updated partition table.
 
----
+## 6. Formatting the Partition
 
-## 6. Formatação da partição
-
-Com a partição `nvme1n1p1` disponível, foi criado um novo sistema de arquivos `ext4`:
+With the `nvme1n1p1` partition available, a new ext4 filesystem was created:
 
 ```bash
 mkfs.ext4 /dev/nvme1n1p1
 ```
 
-Saída:
+Output:
 
 ```text
 mke2fs 1.47.2 (1-Jan-2025)
@@ -185,34 +177,36 @@ Creating journal (4096 blocks): done
 Writing superblocks and filesystem accounting information: done
 ```
 
-O comando `mkfs.ext4` criou uma nova estrutura de sistema de arquivos `ext4` na partição.
+The `mkfs.ext4` command created a new ext4 filesystem structure on the partition.
 
----
+## 7. Removing Filesystem Signatures
 
-## 7. Remoção das assinaturas do sistema de arquivos
-
-Após a formatação, foi utilizado o `wipefs` para remover as assinaturas reconhecidas do sistema de arquivos:
+After formatting, `wipefs` was used to remove the recognized filesystem signatures:
 
 ```bash
 wipefs -a /dev/nvme1n1p1
 ```
 
-Saída:
+Output:
 
 ```text
 /dev/nvme1n1p1: 2 bytes were erased at offset 0x00000438 (ext4): 53 ef
 ```
 
-A saída indica que o `wipefs` identificou uma assinatura `ext4` no deslocamento `0x00000438` e removeu os dois bytes correspondentes (`53 ef`).
+The output indicates that `wipefs` identified an ext4 signature at offset `0x00000438` and removed the corresponding two bytes (`53 ef`).
 
-O parâmetro `-a` solicita a remoção de todas as assinaturas de sistemas de arquivos reconhecidas no dispositivo.
+The `-a` parameter requests the removal of all recognized filesystem signatures on the device.
 
-> **Observação:** `wipefs -a` remove assinaturas e metadados identificadores do sistema de arquivos. Ele não deve ser interpretado como uma técnica de apagamento seguro de todos os dados existentes no dispositivo.
+> **Note:** `wipefs -a` removes signatures and identifying filesystem metadata. It should not be interpreted as a secure method for erasing all existing data from a device.
+
+## Evidence
+
+The evidence requested for this activity corresponds to step 7, documenting the execution of `wipefs` and the removal of the ext4 signature.
+
+Evidence for this activity is included in the PDF for Module 7, Classes 27–28.
+
+[View Evidence — Classes 27–28](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-A evidência solicitada para esta atividade corresponde ao **passo 7**, registrando a execução do comando `wipefs` e a remoção da assinatura `ext4`.
-
-[**Evidências — Módulo 7 / Aulas 27 e 28**](../evidencias.pdf)
+[Back to Classes 27–28](../) · [Back to Module 7](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
