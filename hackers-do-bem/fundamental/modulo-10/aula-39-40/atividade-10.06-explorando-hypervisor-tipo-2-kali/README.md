@@ -1,189 +1,171 @@
-# Atividade 10.6 — Explorando um Hypervisor Tipo 2 no Kali Linux
+# Activity 10.06 — Exploring a Type 2 Hypervisor on Kali Linux
 
-## Objetivo
+## Objective
 
-Explorar o **Oracle VM VirtualBox** no Kali Linux, identificando suas principais configurações e recursos disponíveis nas preferências do hypervisor.
+Explore Oracle VM VirtualBox on Kali Linux by identifying its main settings and the features available in the hypervisor preferences.
 
-O VirtualBox é um **Hypervisor Tipo 2**, pois é executado sobre um sistema operacional hospedeiro e permite criar e gerenciar máquinas virtuais.
+VirtualBox is a **Type 2 hypervisor** because it runs on top of a host operating system and allows users to create and manage virtual machines.
 
----
+## Environment
 
-## Ambiente
+- **System:** Kali GNU/Linux
+- **Hypervisor:** Oracle VM VirtualBox
+- **Access:** RDP
+- **VM IP address:** `192.168.98.40`
 
-* **Sistema:** Kali GNU/Linux
-* **Hypervisor:** Oracle VM VirtualBox
-* **Acesso:** RDP
-* **IP da VM:** `192.168.98.40`
+## 1. Opening VirtualBox
 
----
+Kali Linux was accessed via RDP.
 
-## 1. Abrindo o VirtualBox
-
-O acesso ao Kali Linux foi realizado via RDP.
-
-Na barra de tarefas superior, foi acessado:
+The following menu path was used from the top taskbar:
 
 ```text
-Aplicativos
-→ Aplicações habituais
-→ Sistema
+Applications
+→ Usual Applications
+→ System
 → Oracle VM VirtualBox
 ```
 
-Após a seleção, a janela principal do VirtualBox foi aberta.
+After selecting the application, the main VirtualBox window opened.
 
----
+## 2. Accessing Preferences
 
-## 2. Acessando as preferências
-
-Na janela principal do VirtualBox, foi acessado:
+In the main VirtualBox window, the following menu option was selected:
 
 ```text
-Arquivo → Preferências...
+File → Preferences...
 ```
 
-Uma nova janela contendo as configurações gerais do VirtualBox foi apresentada.
+A new window displaying the general VirtualBox settings appeared.
 
----
+## 3. Checking the Default Virtual Machine Folder
 
-## 3. Verificando a pasta padrão das máquinas virtuais
+Under the **General** tab, the **Default Machine Folder** setting was checked.
 
-Na aba **Geral**, foi verificada a opção **Pasta Padrão para Máquinas**.
-
-O caminho apresentado foi:
+The displayed path was:
 
 ```text
 /home/aluno/VirtualBox VMs
 ```
 
-Esse diretório é utilizado como local padrão para armazenamento das máquinas virtuais criadas pelo VirtualBox.
+This directory is used as the default storage location for virtual machines created with VirtualBox.
 
----
+## 4. Checking the VRDP Authentication Library
 
-## 4. Verificando a biblioteca de autenticação VRDP
+Still within the general settings, the option related to the **VRDP Authentication Library** was examined.
 
-Ainda nas configurações gerais, foi observada a opção relacionada à **Biblioteca de Autenticação VRDP**.
+VRDP (VirtualBox Remote Desktop Protocol) is used to enable remote desktop connections to VirtualBox virtual machines.
 
-O VRDP (**VirtualBox Remote Desktop Protocol**) é utilizado para permitir conexões remotas com máquinas virtuais do VirtualBox.
-
-A opção padrão apresentada no laboratório foi:
+The default option displayed in the lab was:
 
 ```text
 VBoxAuth
 ```
 
----
+## 5. Exploring Input Settings
 
-## 5. Explorando as configurações de entrada
-
-Na coluna esquerda das preferências, foi selecionada a opção:
+In the left-hand preferences panel, the following option was selected:
 
 ```text
-Entrada
+Input
 ```
 
-Na aba referente ao **Gerenciador do VirtualBox**, foram observados os comandos disponíveis para gerenciamento do VirtualBox e seus respectivos atalhos de teclado.
+Under the tab for the VirtualBox Manager, the available VirtualBox management commands and their corresponding keyboard shortcuts were reviewed.
 
-Em seguida, foi selecionada a opção:
+Next, the following option was selected:
 
 ```text
-Máquina Virtual
+Virtual Machine
 ```
 
-Nessa seção foram observados os comandos e atalhos relacionados ao gerenciamento das máquinas virtuais.
+This section displayed commands and shortcuts related to virtual machine management.
 
----
+## 6. Accessing Language Settings
 
-## 6. Acessando as configurações de idioma
-
-Na coluna esquerda das preferências, foi selecionada:
+In the left-hand preferences panel, the following option was selected:
 
 ```text
-Idioma
+Language
 ```
 
-Na área direita foram apresentados os idiomas disponíveis para a interface do VirtualBox.
+The right-hand panel displayed the languages available for the VirtualBox interface.
 
-A opção utilizada estava configurada como:
+The selected setting was:
 
 ```text
-Padrão
+Default
 ```
 
-Nesse modo, o VirtualBox utiliza o idioma definido pelo sistema operacional hospedeiro. Como o Kali Linux utilizado no laboratório estava em português, a interface do VirtualBox também foi apresentada em português.
+In this mode, VirtualBox uses the language configured in the host operating system. Since the Kali Linux environment used in the lab was set to Portuguese, the VirtualBox interface was also displayed in Portuguese.
 
----
+### Evidence — Step 6
 
-## Evidência — Passo 7
+**Caption to include before the screenshot:**
 
-**Frase obrigatória antes do print:**
+> Screenshot of Activity 10.06: the Oracle VM VirtualBox language settings screen, showing the available languages and the selected Default option.
 
-> **Print da atividade 10.6:** tela de configurações de idioma do Oracle VM VirtualBox, exibindo os idiomas disponíveis e a opção padrão selecionada.
+[View Evidence — Classes 39–40](../evidencias.pdf)
 
-[**Evidências — Módulo 10 / Aulas 39 e 40**](../evidencias.pdf)
+## 7. Exploring Display Settings
 
----
-
-## 7. Explorando as configurações de tela
-
-Após a verificação do idioma, foi selecionada a opção:
+After checking the language settings, the following option was selected:
 
 ```text
-Tela
+Display
 ```
 
-Foram observadas as configurações disponíveis para a interface gráfica, incluindo:
+The available settings for the graphical interface were reviewed, including:
 
-* Tamanho Máximo da Tela do Sistema Convidado;
-* Fator de Escalonamento;
-* Recursos Estendidos;
-* Escalonamento de Fontes.
+- Maximum Guest Screen Size
+- Scale Factor
+- Extended Features
+- Font Scaling
 
-Essas opções permitem ajustar aspectos relacionados à exibição das máquinas virtuais e da interface gráfica.
+These options allow users to adjust aspects of virtual machine display and the graphical interface.
 
----
+## 8. Closing Preferences
 
-## 8. Encerrando as preferências
-
-Após a exploração das configurações, foi selecionado:
+After exploring the settings, the following option was selected:
 
 ```text
 OK
 ```
 
-A janela **VirtualBox - Preferências** foi fechada.
+The **VirtualBox - Preferences** window closed.
 
-O VirtualBox permaneceu aberto para continuidade da atividade seguinte.
+VirtualBox remained open so the next activity could continue.
+
+## Key Concepts
+
+- **Type 2 Hypervisor:** Virtualization software that runs on top of a host operating system.
+- **VirtualBox:** A platform used to create and manage virtual machines.
+- **VRDP:** A protocol used by VirtualBox to provide remote access to virtual machines.
+- **Preferences:** A collection of general settings used to configure VirtualBox.
+
+## Activity Workflow
+
+```text
+Open VirtualBox
+      ↓
+Access Preferences
+      ↓
+Explore Settings
+      ↓
+Review Input
+      ↓
+Review Virtual Machine
+      ↓
+Review Language
+      ↓
+Review Display
+      ↓
+Close Preferences
+```
+
+## Result
+
+The main VirtualBox preference settings were explored, including virtual machine storage, VRDP authentication, keyboard shortcuts, language, and display adjustments.
 
 ---
 
-## Conceitos
-
-* **Hypervisor Tipo 2:** software de virtualização executado sobre um sistema operacional hospedeiro.
-* **VirtualBox:** plataforma utilizada para criar e gerenciar máquinas virtuais.
-* **VRDP:** protocolo utilizado pelo VirtualBox para acesso remoto a máquinas virtuais.
-* **Preferências:** conjunto de configurações gerais utilizadas pelo VirtualBox.
-
-## Fluxo da atividade
-
-```text
-Abrir VirtualBox
-      ↓
-Acessar Preferências
-      ↓
-Explorar configurações
-      ↓
-Verificar Entrada
-      ↓
-Verificar Máquina Virtual
-      ↓
-Verificar Idioma
-      ↓
-Verificar Tela
-      ↓
-Fechar Preferências
-```
-
-## Resultado
-
-Foram exploradas as principais configurações das preferências do VirtualBox, incluindo armazenamento, autenticação VRDP, atalhos, idioma e ajustes de tela.
+[Back to Classes 39–40](../) · [Back to Module 10](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
