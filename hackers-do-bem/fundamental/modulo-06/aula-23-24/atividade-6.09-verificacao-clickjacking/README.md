@@ -1,93 +1,89 @@
-# Atividade 6.9 — Verificando Sites com Vulnerabilidade ao Clickjacking
+# Activity 6.09 — Checking Websites for Clickjacking Vulnerabilities
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 06  
+> **Class:** 23–24  
+> **Environment:** Local computer and web browser  
+> **Status:** Completed
 
-Nesta atividade foi utilizado o serviço **Clickjacker** para verificar as proteções contra Clickjacking configuradas em diferentes sites.
+## Objective
 
-Foram analisados principalmente os cabeçalhos HTTP:
+This activity used the Clickjacker service to inspect the clickjacking protections configured on different websites.
 
-* `X-Frame-Options`;
-* `Content-Security-Policy`, especificamente a diretiva `frame-ancestors`.
+The analysis focused primarily on the following HTTP security headers and directives:
 
-O objetivo foi comparar as configurações apresentadas pelo serviço e identificar se os sites possuíam mecanismos de proteção contra incorporação em `iframe`.
+- `X-Frame-Options`
+- `Content-Security-Policy`, specifically the `frame-ancestors` directive
 
----
+The objective was to compare the configurations reported by the service and determine whether the tested websites had mechanisms to restrict embedding in iframes.
 
-## Ambiente
+## Environment
 
-* **Sistema:** computador local
-* **Navegador:** navegador web
-* **Serviço utilizado:** Clickjacker
-* **URL:** `https://clickjacker.io/`
+- **System:** Local computer
+- **Browser:** Web browser
+- **Service:** Clickjacker
+- **URL:** `https://clickjacker.io/`
 
-> Nesta atividade foi utilizado o computador local, e não a máquina virtual da AWS.
+The local computer was used for this activity rather than the AWS virtual machine.
 
----
+## 1. Access Clickjacker
 
-## 1. Acessando o Clickjacker
-
-O navegador foi aberto e acessado o endereço:
+The browser was opened, and the following address was accessed:
 
 ```text
 https://clickjacker.io/
 ```
 
-A página disponibiliza um campo para informar o site que será analisado e apresenta informações relacionadas às proteções contra Clickjacking.
+The website provides a field for entering the site to be analyzed and displays information related to clickjacking protections.
 
-Entre os dados apresentados estão:
+The information presented includes:
 
-* **IP Address:** endereço IP associado ao site analisado;
-* **Time:** horário em que o teste foi realizado;
-* **X-Frame-Options:** cabeçalho HTTP utilizado para controlar a possibilidade de uma página ser carregada em `frame` ou `iframe`;
-* **CSP Header (Frame-Ancestors):** configuração da diretiva `frame-ancestors` da Content Security Policy.
+- **IP Address:** The IP address associated with the tested website.
+- **Time:** The time when the test was performed.
+- **X-Frame-Options:** An HTTP response header used to control whether a page can be loaded in a frame or iframe.
+- **CSP Header (Frame-Ancestors):** Information about the `frame-ancestors` directive in the Content Security Policy (CSP).
 
----
-
-## 2. Entendendo os mecanismos de proteção
+## 2. Understand the Protection Mechanisms
 
 ### X-Frame-Options
 
-O cabeçalho `X-Frame-Options` controla se uma página pode ser incorporada em um `frame` ou `iframe`.
+The `X-Frame-Options` HTTP response header controls whether a page can be embedded in a frame or iframe.
 
-Entre os valores relevantes estão:
+Two relevant values are:
 
-```text
-DENY
-```
+**`DENY`**
 
-Impede que a página seja incorporada em frames.
+Prevents the page from being embedded in frames.
 
-```text
-SAMEORIGIN
-```
+**`SAMEORIGIN`**
 
-Permite a incorporação somente quando a origem do conteúdo incorporado corresponde à origem permitida.
+Allows the page to be embedded only when the embedding page has the same origin, subject to the browser's enforcement of the policy.
 
-A ausência desse cabeçalho não significa, isoladamente, que um site seja vulnerável, pois outras políticas, principalmente CSP, também podem fornecer proteção.
+The absence of this header does not, by itself, prove that a website is vulnerable, because other policies—particularly CSP—can also provide protection.
 
-### CSP — frame-ancestors
+### CSP — `frame-ancestors`
 
-A diretiva:
+The directive:
 
 ```text
 frame-ancestors
 ```
 
-faz parte da **Content Security Policy (CSP)** e permite definir quais origens podem incorporar uma página em `frame` ou `iframe`.
+is part of the Content Security Policy (CSP). It specifies which origins are permitted to embed a page in a frame or iframe.
 
-Essa política pode fornecer uma camada adicional de proteção contra Clickjacking.
+This policy can provide an additional layer of protection against clickjacking.
 
----
+When supported and correctly configured, `frame-ancestors` can restrict embedding to specified origins or prevent it entirely.
 
-## 3. Testando o site esr.rnp.br
+## 3. Test `esr.rnp.br`
 
-No campo **Test for Clickjacking now**, foi informado:
+In the **Test for Clickjacking now** field, the following website was entered:
 
 ```text
 esr.rnp.br
 ```
 
-O teste apresentou:
+The test returned:
 
 ```text
 Test Results:
@@ -99,35 +95,33 @@ X-Frame-Options: SAMEORIGIN
 CSP Header (Frame-Ancestors)	Missing anti-framing policy
 ```
 
-O resultado mostra que o site apresentava:
+The result showed that the website returned the following policy:
 
 ```text
 X-Frame-Options: SAMEORIGIN
 ```
 
-Isso restringe a incorporação da página a uma determinada relação de origem.
+This restricts embedding to pages with the same origin.
 
-Embora o resultado do campo CSP informe:
+Although the CSP field reported:
 
 ```text
 Missing anti-framing policy
 ```
 
-a presença de `X-Frame-Options: SAMEORIGIN` já representa um mecanismo de proteção contra incorporação indevida em frames.
+the presence of `X-Frame-Options: SAMEORIGIN` provides an anti-framing protection mechanism.
 
-Portanto, a ausência da diretiva `frame-ancestors` não deve ser interpretada isoladamente como comprovação de vulnerabilidade.
+Therefore, the absence of the `frame-ancestors` directive should not be interpreted in isolation as proof of a vulnerability.
 
----
+## 4. Test `www.hackthissite.org`
 
-## 4. Testando o site [www.hackthissite.org](http://www.hackthissite.org)
-
-Em seguida, foi realizado o teste com:
+The following website was tested next:
 
 ```text
 www.hackthissite.org
 ```
 
-O resultado apresentado pelo Clickjacker foi:
+Clickjacker displayed the following results:
 
 ```text
 Test Results:
@@ -140,128 +134,131 @@ CSP Header (Frame-Ancestors)	Missing anti-framing policy
 Total scans so far: 3,548,984
 ```
 
-Nesse resultado, o serviço informou:
+In this result, the service reported:
 
 ```text
 X-Frame-Options: Missing header
 ```
 
-e:
+and:
 
 ```text
-CSP Header (Frame-Ancestors): Missing anti-framing policy
+CSP Header (Frame-Ancestors)	Missing anti-framing policy
 ```
 
-Ou seja, o teste não identificou um `X-Frame-Options` nem uma política `frame-ancestors` utilizada para restringir a incorporação da página.
+In other words, the test did not identify an `X-Frame-Options` header or a `frame-ancestors` policy restricting the website's embedding.
 
-De acordo com a interpretação apresentada pelo laboratório, essa configuração caracteriza o site como vulnerável ao Clickjacking.
+Based on the laboratory's interpretation, this configuration was classified as potentially vulnerable to clickjacking.
 
-É importante diferenciar a ausência desses mecanismos de uma exploração efetivamente realizada: o teste verifica as políticas de proteção apresentadas pelo site, não executa um ataque contra usuários.
+**Important distinction:** The absence of these two protections indicates that the tested response did not expose those anti-framing controls. It does not, by itself, demonstrate a successful exploit or prove that an actual attack is possible in every context. This test inspected reported security policies; it did not perform an attack against users.
 
-**Este é o passo solicitado para a evidência da atividade.**
+This is the step specified for the activity evidence.
 
----
+## Comparison of Results
 
-## Comparação dos resultados
+| Website | X-Frame-Options | CSP `frame-ancestors` | Observed result |
+|---|---|---|---|
+| `esr.rnp.br` | `SAMEORIGIN` | Missing | Protection provided by `X-Frame-Options` |
+| `www.hackthissite.org` | Missing | Missing | Neither of these anti-framing policies was identified by the test |
 
-| Site                   | X-Frame-Options | CSP `frame-ancestors` | Resultado observado                                       |
-| ---------------------- | --------------- | --------------------- | --------------------------------------------------------- |
-| `esr.rnp.br`           | `SAMEORIGIN`    | Ausente               | Possui proteção por `X-Frame-Options`                     |
-| `www.hackthissite.org` | Ausente         | Ausente               | Sem essas políticas anti-framing identificadas pelo teste |
+The comparison demonstrates the importance of evaluating anti-framing protections together.
 
-A comparação demonstra a importância de analisar os mecanismos de proteção em conjunto.
+In the first case, even though the `frame-ancestors` directive was absent, the website had an `X-Frame-Options: SAMEORIGIN` policy.
 
-No primeiro caso, mesmo sem uma política `frame-ancestors`, havia uma política `X-Frame-Options: SAMEORIGIN`.
+In the second case, the service did not identify either mechanism.
 
-No segundo caso, o serviço não identificou nenhum dos dois mecanismos.
+These findings reflect the results recorded during the laboratory on September 30, 2025. Website configurations can change over time, so the results should not be treated as a statement about the websites' current security posture.
 
----
-
-## Conceitos envolvidos
+## Concepts Practiced
 
 ### Clickjacking
 
-Clickjacking é uma técnica que pode utilizar elementos sobrepostos ou conteúdo incorporado para induzir o usuário a realizar uma ação diferente daquela que acredita estar executando.
+Clickjacking is a technique that can use overlapping elements or embedded content to trick a user into performing an action different from the one they believe they are performing.
 
-Uma das formas de mitigação é impedir que páginas sejam incorporadas em frames de origens não autorizadas.
+One mitigation is to prevent pages from being embedded in frames by unauthorized origins.
 
 ### X-Frame-Options
 
-É um cabeçalho HTTP utilizado para controlar a possibilidade de uma página ser carregada dentro de `frame` ou `iframe`.
+This HTTP response header controls whether a page can be loaded inside a frame or iframe.
 
-No laboratório foram observados dois cenários:
+The laboratory observed two scenarios:
 
 ```text
 SAMEORIGIN
 ```
 
-e:
+and:
 
 ```text
 Missing header
 ```
 
-### Content Security Policy
+The `SAMEORIGIN` value restricts embedding to pages from the same origin, while a missing header means that this particular protection was not identified in the response.
 
-A CSP permite estabelecer políticas de segurança para diferentes tipos de conteúdo.
+### Content Security Policy (CSP)
 
-A diretiva:
+CSP allows websites to define security policies for different types of content.
+
+The directive:
 
 ```text
 frame-ancestors
 ```
 
-especifica quais origens podem incorporar a página em frames.
+specifies which origins are allowed to embed the page in frames.
 
-### Anti-framing
+Unlike `frame-src`, which controls the frames a page can load, `frame-ancestors` controls which pages are allowed to embed the protected page.
 
-Uma política anti-framing restringe a possibilidade de uma página ser incorporada por outras páginas.
+### Anti-Framing Protections
 
-Essas políticas são importantes para reduzir o risco de ataques baseados em Clickjacking.
+Anti-framing policies restrict the ability of other pages to embed a website.
 
----
+These policies are important for reducing the risk of clickjacking attacks. Correctly configured `X-Frame-Options` or CSP `frame-ancestors` directives can help mitigate this risk.
 
-## Resultado
+## Results
 
-Foram analisados dois sites utilizando o Clickjacker.
+Two websites were analyzed using Clickjacker.
 
-No primeiro:
+For the first website:
 
 ```text
 esr.rnp.br
 ```
 
-foi identificado:
+the service identified:
 
 ```text
 X-Frame-Options: SAMEORIGIN
 ```
 
-No segundo:
+For the second website:
 
 ```text
 www.hackthissite.org
 ```
 
-o serviço informou ausência de:
+the service reported that the following protections were missing:
 
 ```text
 X-Frame-Options
 ```
 
-e:
+and:
 
 ```text
 CSP Header (Frame-Ancestors)
 ```
 
-A atividade permitiu compreender como cabeçalhos HTTP e políticas CSP podem ser utilizados para identificar e mitigar riscos relacionados à incorporação de páginas em `iframe`.
+The activity demonstrated how HTTP response headers and CSP policies can be used to assess and mitigate risks associated with embedding web pages in iframes.
+
+The results also reinforced that a missing header is an indicator to investigate rather than, by itself, conclusive proof of an exploitable vulnerability.
+
+## Evidence
+
+The evidence for this activity corresponds to **Step 4**, in which `www.hackthissite.org` was tested and the results for `X-Frame-Options` and `CSP Header (Frame-Ancestors)` were displayed.
+
+[View Evidence — Classes 23–24](../evidencias.pdf)
 
 ---
 
-## Evidência
-
-A evidência desta atividade corresponde ao **passo 4**, no qual foi realizado o teste de `www.hackthissite.org` e apresentados os resultados de `X-Frame-Options` e `CSP Header (Frame-Ancestors)`.
-
-[**Evidências — Módulo 6 / Aulas 3 e 4**](../evidencias.pdf)
-
+[Back to Classes 23–24](../) · [Back to Module 06](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
