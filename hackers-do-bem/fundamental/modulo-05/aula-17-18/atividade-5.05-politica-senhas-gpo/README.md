@@ -1,110 +1,106 @@
-# Atividade 5.5 — Configurando Política de Senhas no GPO do Windows Server 2022
+# Activity 5.05 — Configuring a Password Policy GPO in Windows Server 2022
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 05  
+> **Class:** 17–18  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Criar e configurar uma **Group Policy Object (GPO)** para estabelecer uma política de senhas no domínio do Active Directory.
+## Objective
 
-Nesta atividade foram configurados requisitos relacionados à validade, comprimento, complexidade e histórico das senhas.
+Create and configure a Group Policy Object (GPO) to establish a password policy for the Active Directory domain.
 
----
+This activity configures requirements related to password expiration, minimum length, complexity, and password history.
 
-## Ambiente
+## Environment
 
-* Windows Server 2022
-* Active Directory
-* Group Policy Management
-* Group Policy Management Editor
-* Domínio: `aluno.hacker.com`
-* GPO: `Politica de senhas`
+- Windows Server 2022
+- Active Directory
+- Group Policy Management
+- Group Policy Management Editor
+- **Domain:** `aluno.hacker.com`
+- **GPO:** `Politica de senhas`
 
----
+## Procedure
 
-## 1. Abrindo o Group Policy Management
+### 1. Open Group Policy Management
 
-O Windows Server 2022 servidor foi acessado através de RDP.
+The Windows Server 2022 server was accessed through RDP.
 
-```text id="n4q8w2"
-IP: 192.168.98.20
-Usuário: Administrator
-```
+- **IP address:** `192.168.98.20`
+- **Username:** `Administrator`
 
-As credenciais utilizadas pertencem ao ambiente do laboratório e não são registradas neste documento.
+The credentials used belong to the laboratory environment and are not recorded in this document.
 
-No **Server Manager**, foi acessado:
+In Server Manager, the following menu path was accessed:
 
-```text id="c7m3x9"
+```text
 Tools
     ↓
 Group Policy Management
 ```
 
----
+### 2. Locate the Domain
 
-## 2. Localizando o domínio
+In the left pane of Group Policy Management, the following structure was expanded:
 
-No painel esquerdo do **Group Policy Management**, foi expandida a estrutura:
-
-```text id="v2p6k8"
+```text
 Forest: aluno.hacker.com
 └── Domains
     └── aluno.hacker.com
 ```
 
-Dentro do domínio foi localizada a pasta:
+The following folder was located within the domain:
 
-```text id="j5r9w3"
+```text
 Group Policy Objects
 ```
 
----
+### 3. Create the GPO
 
-## 3. Criando a GPO
+The following item was right-clicked:
 
-Com o botão direito sobre:
-
-```text id="a8q4m1"
+```text
 Group Policy Objects
 ```
 
-foi selecionada a opção:
+The following option was selected:
 
-```text id="x6n2c7"
+```text
 New
 ```
 
-A nova política recebeu o nome:
+The new policy was named:
 
-```text id="f3v8p5"
+```text
 Politica de senhas
 ```
 
-Após confirmar, a GPO passou a aparecer na lista de objetos de política do domínio.
+After confirming the creation, the GPO appeared in the domain's list of policy objects.
 
----
+The original Portuguese name was retained as configured in the laboratory.
 
-## 4. Abrindo o editor da GPO
+### 4. Open the GPO Editor
 
-Com o botão direito sobre:
+The following GPO was right-clicked:
 
-```text id="y7k1q4"
+```text
 Politica de senhas
 ```
 
-foi selecionado:
+The following option was selected:
 
-```text id="m9c5x2"
+```text
 Edit
 ```
 
-Foi aberta a janela **Group Policy Management Editor**.
+The **Group Policy Management Editor** window opened.
 
----
+### 5. Locate the Password Settings
 
-## 5. Localizando as configurações de senha
+In the left pane, the following path was followed:
 
-No painel esquerdo, foi seguida a estrutura:
-
-```text id="p4w8n6"
+```text
 Computer Configuration
 └── Policies
     └── Windows Settings
@@ -113,165 +109,147 @@ Computer Configuration
                 └── Password Policy
 ```
 
-Nessa seção estão disponíveis configurações relacionadas ao gerenciamento das senhas do domínio.
+This section contains settings related to password management for the domain.
 
----
+### 6. Configure Maximum Password Age
 
-## 6. Configurando a idade máxima da senha
+The following policy was opened:
 
-Foi aberta a política:
-
-```text id="q2m7v9"
+```text
 Maximum password age
 ```
 
-A opção:
+The following option was enabled:
 
-```text id="r5x1c8"
+```text
 Define this policy setting
 ```
 
-foi habilitada.
+The value was set to:
 
-Foi definido:
-
-```text id="k6p3w4"
-120 dias
+```text
+120 days
 ```
 
-A configuração foi aplicada através de:
+The configuration was applied using:
 
-```text id="s8n2q5"
+```text
 Apply
     ↓
 OK
 ```
 
-Essa configuração determina o período máximo antes que uma senha precise ser alterada.
+This setting defines the maximum period before a password must be changed.
 
----
+### 7. Configure Minimum Password Length
 
-## 7. Configurando o comprimento mínimo
+The following policy was opened:
 
-Foi aberta:
-
-```text id="u4c9m7"
+```text
 Minimum password length
 ```
 
-A configuração foi habilitada e definida como:
+The setting was enabled and configured as:
 
-```text id="d1x6p8"
-9 caracteres
+```text
+9 characters
 ```
 
-Após a definição, foi selecionado:
+After setting the value, the following options were selected:
 
-```text id="g5r2v9"
+```text
 Apply
     ↓
 OK
 ```
 
-A configuração estabelece o número mínimo de caracteres exigidos para as senhas.
+This setting establishes the minimum number of characters required for passwords.
 
----
+### 8. Enable Password Complexity
 
-## 8. Ativando a complexidade da senha
+The following setting was opened:
 
-Foi aberta a configuração:
-
-```text id="w3k8q1"
+```text
 Password must meet complexity requirements
 ```
 
-A opção de definição da política foi habilitada e o valor:
+The policy definition option was enabled, and the following value was selected:
 
-```text id="b7m4x6"
+```text
 Enabled
 ```
 
-foi selecionado.
+The change was applied and confirmed.
 
-A alteração foi aplicada e confirmada.
+With this setting enabled, Windows requires passwords to meet the system's password complexity rules.
 
-Com essa configuração, o Windows passa a exigir que as senhas atendam aos requisitos de complexidade definidos pelo sistema.
+### 9. Configure Password History
 
----
+The following policy was opened:
 
-## 9. Configurando o histórico de senhas
-
-Foi aberta:
-
-```text id="n2p5c9"
+```text
 Enforce password history
 ```
 
-A política foi habilitada e configurada com:
+The policy was enabled and configured with the value:
 
-```text id="f8v3m1"
+```text
 3
 ```
 
-Isso faz com que o Windows mantenha o histórico das últimas três senhas para impedir a reutilização imediata dessas credenciais.
+This setting prevents the immediate reuse of previously used passwords by retaining password history for the configured number of passwords.
 
-A alteração foi aplicada e confirmada.
+The change was applied and confirmed.
 
----
+### 10. Link the GPO to the Domain
 
-## 10. Vinculando a GPO ao domínio
+Back in Group Policy Management, the following domain was selected:
 
-De volta à janela **Group Policy Management**, foi selecionado o domínio:
-
-```text id="q6x9w2"
+```text
 aluno.hacker.com
 ```
 
-Com o botão direito, foi escolhida:
+The domain was right-clicked, and the following option was selected:
 
-```text id="h4m7p1"
+```text
 Link an Existing GPO
 ```
 
-Na lista de GPOs disponíveis, foi selecionada:
+From the list of available GPOs, the following policy was selected:
 
-```text id="z8c3r5"
+```text
 Politica de senhas
 ```
 
-e confirmado com:
+The selection was confirmed using:
 
-```text id="t1v6k9"
+```text
 OK
 ```
 
-A GPO passou a estar vinculada ao domínio.
+The GPO was then linked to the domain.
 
----
+### 11. Update Group Policy
 
-## 11. Verificando a aplicação da GPO
+After linking the policy, Command Prompt was opened by searching for:
 
-Após o vínculo da política, foi aberto o **Command Prompt** através da pesquisa por:
-
-```text id="e5q2m8"
+```text
 cmd
 ```
 
-Foi executado:
+The following command was executed:
 
-```cmd id="y9k4c6"
+```cmd
 gpupdate /force
 ```
 
-O comando foi utilizado para forçar a atualização das políticas de grupo.
+This command was used to force a Group Policy update.
 
----
+### 12. Verify the Policy Update Result
 
-## 12. Resultado da atualização das políticas
+The output displayed in the laboratory was:
 
-A saída apresentada no laboratório foi:
-
-```text id="r7x2p5"
+```text
 C:\Users\Administrator>gpupdate /force
 Updating policy...
 
@@ -279,106 +257,104 @@ Computer Policy update has completed successfully.
 User Policy update has completed successfully.
 ```
 
-A mensagem confirma que as políticas de computador e de usuário foram atualizadas com sucesso.
+The message confirms that the computer and user Group Policy update operations completed successfully.
 
-A evidência solicitada pelo laboratório corresponde a esta etapa.
+The evidence requested by the laboratory corresponds to this step.
 
----
+## Applied Configuration
 
-## Configurações aplicadas
+The `Politica de senhas` GPO was configured with the following parameters:
 
-A GPO **Politica de senhas** foi configurada com os seguintes parâmetros:
+| Setting | Value |
+|---|---|
+| Maximum password age | 120 days |
+| Minimum password length | 9 characters |
+| Password complexity | Enabled |
+| Enforce password history | 3 passwords |
 
-| Configuração             |        Valor |
-| ------------------------ | -----------: |
-| Maximum password age     |     120 dias |
-| Minimum password length  | 9 caracteres |
-| Password complexity      |   Habilitada |
-| Enforce password history |     3 senhas |
+The GPO was linked to the following domain:
 
-A GPO foi vinculada ao domínio:
-
-```text id="c4m8q1"
+```text
 aluno.hacker.com
 ```
 
----
-
-## Conceitos
+## Concepts Practiced
 
 ### Group Policy Object (GPO)
 
-Uma **GPO** é um conjunto de configurações administrativas que pode ser aplicado a usuários e computadores de um ambiente Windows.
+A GPO is a collection of administrative settings that can be applied to users and computers in a Windows environment.
 
-Em um domínio Active Directory, as GPOs permitem centralizar diversas configurações de segurança e administração.
+In an Active Directory domain, GPOs provide centralized management of various security and administrative settings.
 
 ### Password Policy
 
-A **Password Policy** reúne configurações que determinam requisitos para as senhas utilizadas no domínio.
+The Password Policy contains settings that define requirements for passwords used in the domain.
 
-Nesta atividade foram configurados:
+The following settings were configured in this activity:
 
-* tempo máximo de validade;
-* tamanho mínimo;
-* complexidade;
-* histórico de senhas.
+- Maximum password age
+- Minimum password length
+- Password complexity
+- Password history
 
 ### Password History
 
-O histórico de senhas impede que o usuário reutilize imediatamente credenciais anteriores.
+Password history prevents users from immediately reusing previous credentials.
 
-No laboratório, foram configuradas as últimas:
-
-```text id="m6w3k8"
-3 senhas
-```
+In this laboratory, the policy was configured to retain a history of three passwords.
 
 ### Password Complexity
 
-A configuração de complexidade determina requisitos adicionais para as senhas, aumentando a variedade de caracteres necessária de acordo com as regras do Windows.
+The password complexity setting establishes additional requirements for passwords, increasing the variety of characters required according to Windows rules.
 
-### gpupdate /force
+### `gpupdate /force`
 
-O comando:
+The command:
 
-```cmd id="s3q7n2"
+```cmd
 gpupdate /force
 ```
 
-força uma atualização das políticas de grupo no computador.
+forces a Group Policy refresh on the computer.
 
-A saída:
+The output:
 
-```text id="v8p4x6"
+```text
 Computer Policy update has completed successfully.
 User Policy update has completed successfully.
 ```
 
-indica que a atualização das políticas foi concluída com sucesso.
+indicates that the computer and user policy update operations completed successfully.
 
----
+A successful refresh does not, by itself, prove that every intended setting is effective for every user. The resulting policy can be verified separately when necessary.
 
-## Resultado
+## Results
 
-Foi criada a GPO:
+The following GPO was created:
 
-```text id="j2c6m9"
+```text
 Politica de senhas
 ```
 
-com requisitos de:
+It was configured with the following requirements:
 
-* validade máxima de 120 dias;
-* comprimento mínimo de 9 caracteres;
-* complexidade habilitada;
-* histórico das últimas 3 senhas.
+- Maximum password age of 120 days
+- Minimum password length of 9 characters
+- Password complexity enabled
+- Password history set to 3 passwords
 
-A GPO foi vinculada ao domínio `aluno.hacker.com` e as políticas foram atualizadas com sucesso utilizando `gpupdate /force`.
+The GPO was linked to the `aluno.hacker.com` domain, and the Group Policy update command completed successfully.
+
+The activity demonstrated how to create a GPO, configure domain password requirements, link the policy to a domain, and initiate a policy refresh using `gpupdate /force`.
+
+## Evidence
+
+The activity evidence is included in the PDF for Module 05, Classes 17–18.
+
+**Recorded screenshot:** Step 12 — executing `gpupdate /force` and confirming the computer and user policy update results.
+
+[View Evidence — Classes 17–18](../evidencias.pdf)
 
 ---
 
-## Evidências
-
-[**Evidências — Módulo 5 / Aulas 1 e 2**](../evidencias.pdf)
-
-**Evidência registrada:** passo 12 — execução do `gpupdate /force` e confirmação da atualização das políticas de computador e usuário.
+[Back to Classes 17–18](../) · [Back to Module 05](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
