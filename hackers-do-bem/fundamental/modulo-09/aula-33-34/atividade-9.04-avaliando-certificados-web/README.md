@@ -1,72 +1,68 @@
-# Atividade 9.4 — Avaliando Certificados Web no Windows Server 2022
+# Activity 9.04 — Evaluating Web Certificates on Windows Server 2022
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 09  
+> **Classes:** 33–34  
+> **Environment:** Windows Server 2022  
+> **Status:** Completed
 
-Analisar um certificado digital utilizado por um site web e observar suas principais informações de segurança e identificação.
+## Objective
 
-Durante a atividade foi acessado o site `https://www.google.com/` pelo Microsoft Edge, analisado o certificado apresentado pela conexão HTTPS e, posteriormente, o certificado foi exportado e aberto no Notepad para visualizar sua estrutura em formato PEM.
+Analyze a digital certificate used by a website and examine its main security and identification properties.
 
-Foram observadas informações como:
+During this activity, `https://www.google.com/` was accessed using Microsoft Edge. The certificate presented by the HTTPS connection was examined, then exported and opened in Notepad to inspect its structure in PEM format.
 
-* entidade para a qual o certificado foi emitido;
-* autoridade certificadora emissora;
-* período de validade;
-* fingerprints;
-* hierarquia de certificação;
-* campos do certificado;
-* representação PEM.
+The following information was examined:
 
----
+- Entity to which the certificate was issued.
+- Issuing Certificate Authority.
+- Validity period.
+- Fingerprints.
+- Certificate hierarchy.
+- Certificate fields.
+- PEM representation.
 
-## Ambiente
+## Environment
 
-* **Sistema:** Windows Server 2022
-* **Navegador:** Microsoft Edge
-* **Protocolo analisado:** HTTPS
-* **Site utilizado:** `https://www.google.com/`
-* **Formato analisado após exportação:** PEM
+- **Operating system:** Windows Server 2022
+- **Browser:** Microsoft Edge
+- **Protocol analyzed:** HTTPS
+- **Website:** `https://www.google.com/`
+- **Format examined after export:** PEM
 
----
+## 1. Accessing the Website
 
-## 1. Acesso ao site
+Microsoft Edge was opened on Windows Server 2022.
 
-Foi aberto o **Microsoft Edge** no Windows Server 2022.
-
-No navegador, foi acessado:
+The following website was accessed in the browser:
 
 ```text
 https://www.google.com/
 ```
 
-O site foi carregado utilizando uma conexão HTTPS.
+The website loaded over an HTTPS connection.
 
----
+## 2. Verifying the Secure Connection
 
-## 2. Verificação da conexão segura
+The security icon associated with the connection was selected in the browser's address bar.
 
-Na barra de endereço do navegador, foi selecionado o ícone de segurança referente à conexão.
-
-Foi apresentada a indicação:
+The following indication was displayed:
 
 ```text
 Connection is secure
 ```
 
-Essa informação indica que o navegador estabeleceu uma conexão HTTPS e realizou as verificações correspondentes ao certificado apresentado pelo servidor.
+This indicates that the browser established an HTTPS connection and performed the corresponding checks on the certificate presented by the server.
 
----
+## 3. Accessing the Certificate
 
-## 3. Acesso ao certificado
+From the secure connection information, the certificate-related icon was selected.
 
-A partir das informações da conexão segura, foi selecionado o ícone relacionado ao certificado.
+The digital certificate information used by the website was displayed.
 
-Foi aberta a visualização das informações do certificado digital utilizado pelo site.
+## 4. Examining the General Information
 
----
-
-## 4. Análise das informações gerais
-
-Na seção **General**, foram observadas informações relacionadas ao certificado, incluindo:
+The following certificate details were observed in the **General** section:
 
 ```text
 Issued To
@@ -77,134 +73,124 @@ Fingerprints
 
 ### Issued To
 
-Identifica a entidade ou os nomes associados ao certificado.
+Identifies the entity or names associated with the certificate.
 
 ### Issued By
 
-Identifica a Autoridade Certificadora responsável pela emissão do certificado.
+Identifies the Certificate Authority responsible for issuing the certificate.
 
 ### Validity Period
 
-Apresenta o período durante o qual o certificado é considerado válido.
+Displays the period during which the certificate is considered valid.
 
 ### Fingerprints
 
-São identificadores derivados do conteúdo do certificado por meio de funções de hash. Eles podem ser utilizados para comparar ou identificar um certificado específico.
+Fingerprints are identifiers derived from certificate content using hash functions. They can be used to compare or identify a specific certificate.
 
----
+## 5. Examining the Certificate Details
 
-## 5. Análise dos detalhes
-
-Na seção de detalhes do certificado foram observados:
+The following sections were examined in the certificate details view:
 
 ```text
 Certificate Hierarchy
 Certificate Fields
 ```
 
-A **Certificate Hierarchy** apresenta a cadeia de confiança utilizada para validar o certificado.
+**Certificate Hierarchy** displays the chain of trust used to validate the certificate.
 
-Os **Certificate Fields** apresentam os campos que compõem a estrutura do certificado digital, incluindo informações relacionadas ao sujeito, emissor, validade, chave pública, assinatura e extensões.
+**Certificate Fields** displays the fields that make up the digital certificate structure, including information about the subject, issuer, validity, public key, signature, and extensions.
 
----
+## 6. Exporting the Certificate
 
-## 6. Exportação do certificado
+The certificate was exported to the computer using the export option provided by the browser.
 
-O certificado foi exportado para o computador utilizando a opção de exportação disponibilizada pelo navegador.
-
-O arquivo foi salvo no diretório:
+The file was saved in the following directory:
 
 ```text
 Downloads
 ```
 
-Essa etapa permitiu analisar posteriormente o conteúdo do certificado fora da interface gráfica do navegador.
+This step made it possible to examine the certificate contents outside the browser's graphical interface.
 
----
+## 7. Opening the Certificate in Notepad
 
-## 7. Abertura do certificado no Notepad
+After exporting the certificate, Notepad was opened.
 
-Após a exportação, foi aberto o **Notepad**.
-
-No menu:
+From the menu, the following option was selected:
 
 ```text
 File → Open
 ```
 
-foi acessada a pasta:
+The following folder was accessed:
 
 ```text
 Downloads
 ```
 
-A visualização de arquivos foi alterada para:
+The file filter was changed to:
 
 ```text
 All files
 ```
 
-Dessa forma, foi possível localizar e abrir o arquivo de certificado exportado.
+This made it possible to locate and open the exported certificate file.
 
----
+## 8. PEM Structure
 
-## 8. Estrutura PEM
+When the exported certificate was opened in Notepad, its representation in PEM (**Privacy-Enhanced Mail**) format became visible.
 
-Ao abrir o certificado exportado no Notepad, foi possível visualizar sua representação em formato **PEM (Privacy-Enhanced Mail)**.
-
-Um certificado PEM normalmente possui uma estrutura semelhante a:
+A PEM-encoded certificate typically has a structure similar to the following:
 
 ```text
 -----BEGIN CERTIFICATE-----
-[conteúdo codificado em Base64]
+[Base64-encoded content]
 -----END CERTIFICATE-----
 ```
 
-O conteúdo entre os marcadores corresponde à representação Base64 do certificado.
+The content between the markers is the Base64 representation of the certificate.
 
-A codificação Base64 não é uma forma de criptografia. Ela serve para representar dados binários em texto, facilitando seu armazenamento e transporte em ambientes que trabalham com conteúdo textual.
+Base64 encoding is not encryption. It represents binary data as text, facilitating storage and transport in environments that work with textual content.
 
----
+## Evidence — Step 14
 
-## Evidência — Passo 14
+The evidence requested for this activity corresponds to step 14, showing the exported certificate open in Notepad with its PEM structure visible.
 
-A evidência solicitada para a atividade corresponde ao **passo 14**, com o certificado exportado aberto no Notepad e sua estrutura PEM visível.
+Required caption before the screenshot:
 
-**Frase obrigatória antes do print:**
+> Screenshot for Activity 9.4: the exported web digital certificate opened in Notepad, displaying its PEM structure with the `BEGIN CERTIFICATE` and `END CERTIFICATE` markers.
 
-> **Print da atividade 9.4:** certificado digital web exportado e aberto no Notepad, apresentando sua estrutura em formato PEM com os marcadores `BEGIN CERTIFICATE` e `END CERTIFICATE`.
+The screenshot should clearly show the structure of the exported certificate.
 
-A tela deve permitir visualizar a estrutura do certificado exportado.
+Evidence for this activity is included in the PDF for Module 9, Classes 33–34.
 
-[**Evidências — Módulo 9 / Aulas 33 e 34**](../evidencias.pdf)
+[View Evidence — Classes 33–34](../evidencias.pdf)
 
----
-
-## Conceitos aplicados
+## Concepts Applied
 
 ### HTTPS
 
-O **HTTPS** utiliza TLS para proteger a comunicação entre cliente e servidor. O certificado digital apresentado pelo servidor participa do processo de autenticação da identidade do servidor e estabelecimento da conexão segura.
+HTTPS uses TLS to protect communication between a client and a server. The digital certificate presented by the server participates in server identity authentication and in establishing a secure connection.
 
-### Certificado X.509
+### X.509 Certificate
 
-Os certificados utilizados em conexões TLS normalmente seguem o padrão X.509 e contêm informações sobre o sujeito, emissor, validade, chave pública, assinatura e extensões.
+Certificates used in TLS connections generally follow the X.509 standard and contain information about the subject, issuer, validity, public key, signature, and extensions.
 
-### Autoridade Certificadora
+### Certificate Authority
 
-A Autoridade Certificadora assina certificados digitais para estabelecer uma cadeia de confiança.
+A Certificate Authority signs digital certificates to establish a chain of trust.
 
-O navegador utiliza as informações presentes no certificado e na cadeia de certificação para realizar as verificações necessárias.
+The browser uses the information contained in the certificate and its certification chain to perform the required validation checks.
 
 ### Fingerprint
 
-O fingerprint é um resumo criptográfico do certificado. Ele pode ser utilizado para identificar e comparar certificados.
+A fingerprint is a cryptographic digest of a certificate. It can be used to identify and compare certificates.
 
 ### PEM
 
-O formato PEM representa dados criptográficos binários em texto utilizando Base64 e delimitadores.
+PEM represents binary cryptographic data as text using Base64 encoding and delimiters.
 
-Exemplo:
+Example:
 
 ```text
 -----BEGIN CERTIFICATE-----
@@ -212,17 +198,9 @@ Exemplo:
 -----END CERTIFICATE-----
 ```
 
-e:
+The Base64 content can subsequently be decoded back into its original binary representation.
 
-```text
------END CERTIFICATE-----
-```
-
-O conteúdo Base64 pode posteriormente ser convertido novamente para sua representação binária original.
-
----
-
-## Fluxo da atividade
+## Activity Workflow
 
 ```text
 Microsoft Edge
@@ -231,10 +209,10 @@ Microsoft Edge
 https://www.google.com/
       │
       ▼
-Conexão HTTPS
+HTTPS Connection
       │
       ▼
-Certificado do servidor
+Server Certificate
       │
       ├── Issued To
       ├── Issued By
@@ -244,24 +222,26 @@ Certificado do servidor
       └── Certificate Fields
               │
               ▼
-        Exportação
+            Export
               │
               ▼
-          Downloads
+           Downloads
               │
               ▼
-           Notepad
+            Notepad
               │
               ▼
-        Estrutura PEM
+         PEM Structure
 ```
+
+## Result
+
+A digital certificate used in an HTTPS connection was examined, allowing its general information, issuing authority, validity period, fingerprints, hierarchy, and certificate fields to be reviewed.
+
+After export, the certificate was opened in Notepad, and its PEM representation, containing the `BEGIN CERTIFICATE` and `END CERTIFICATE` delimiters, was identified.
+
+The activity demonstrated the relationship between digital certificates, server authentication in HTTPS connections, and the structure used to represent certificates in a text-based format.
 
 ---
 
-## Resultado
-
-Foi analisado um certificado digital utilizado em uma conexão HTTPS, permitindo observar suas informações gerais, autoridade emissora, validade, fingerprints, hierarquia e campos do certificado.
-
-Após a exportação, o certificado foi aberto no Notepad e sua representação em **PEM**, contendo os delimitadores `BEGIN CERTIFICATE` e `END CERTIFICATE`, foi identificada.
-
-A atividade demonstrou a relação entre os certificados digitais, a autenticação de servidores em conexões HTTPS e a estrutura utilizada para representar certificados em formato textual.
+[Back to Classes 33–34](../) · [Back to Module 9](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
