@@ -1,26 +1,32 @@
-# Atividade 9.5 — Criando Certificados Digitais Autoassinados no Kali Linux
+# Activity 9.05 — Creating Self-Signed Digital Certificates on Kali Linux
 
-## Objetivo
+> **Program:** Hackers do Bem  
+> **Stage:** Fundamental — Module 09  
+> **Classes:** 33–34  
+> **Environment:** Kali Linux  
+> **Status:** Completed
 
-Criar um certificado digital autoassinado no Kali Linux utilizando o OpenSSL, realizando a geração de uma chave privada RSA, criação de uma solicitação de assinatura de certificado (CSR) e emissão do certificado.
+## Objective
 
----
-
-## Ambiente
-
-* **Sistema:** Kali Linux
-* **Ferramenta:** OpenSSL
-* **Algoritmo:** RSA 2048 bits
-* **Certificado:** X.509 autoassinado
-* **Validade:** 365 dias
-
-> As senhas utilizadas durante o laboratório não são registradas neste README.
+Create a self-signed digital certificate on Kali Linux using OpenSSL by generating an RSA private key, creating a Certificate Signing Request (CSR), and issuing the certificate.
 
 ---
 
-## 1. Acesso ao diretório
+## Environment
 
-Após abrir o terminal e obter privilégios administrativos, foi acessado o diretório utilizado no laboratório:
+- **Operating system:** Kali Linux
+- **Tool:** OpenSSL
+- **Algorithm:** RSA 2048-bit
+- **Certificate:** Self-signed X.509
+- **Validity period:** 365 days
+
+> Passwords used during the lab are not recorded in this README.
+
+---
+
+## 1. Accessing the Working Directory
+
+After opening the terminal and obtaining administrative privileges, the directory used in the lab was accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
@@ -28,23 +34,23 @@ cd /home/aluno/Documentos/Arquivos
 
 ---
 
-## 2. Geração da chave privada
+## 2. Generating the Private Key
 
-Foi gerada uma chave privada RSA de 2048 bits protegida com AES-256:
+An RSA private key with a size of 2048 bits was generated and protected with AES-256:
 
 ```bash
 openssl genpkey -algorithm RSA -out private.key -aes256
 ```
 
-O OpenSSL solicitou uma senha para proteger a chave privada.
+OpenSSL prompted for a password to protect the private key.
 
-Após a geração, foi utilizado:
+After the key was generated, the following command was used:
 
 ```bash
 ls
 ```
 
-Resultado:
+Output:
 
 ```text
 ┌──(root㉿kali)-[/home/aluno/Documentos/Arquivos]
@@ -54,17 +60,17 @@ private.key
 
 ---
 
-## 3. Criação da solicitação de certificado
+## 3. Creating the Certificate Signing Request
 
-A partir da chave privada foi criada uma **Certificate Signing Request (CSR)**:
+A **Certificate Signing Request (CSR)** was created from the private key:
 
 ```bash
 openssl req -new -key private.key -out request.csr
 ```
 
-O OpenSSL solicitou as informações que seriam incorporadas à solicitação.
+OpenSSL requested the information to be included in the request.
 
-Foram preenchidos os seguintes campos:
+The following fields were entered:
 
 ```text
 Country Name (2 letter code) [AU]:BR
@@ -76,21 +82,21 @@ Common Name (e.g. server FQDN or YOUR name) []:esr.rnp.br
 Email Address []:a@a.com.br
 ```
 
-Também foram solicitados atributos adicionais da requisição.
+Additional request attributes were also requested.
 
-As informações da CSR identificam a entidade para a qual o certificado será criado.
+The CSR information identifies the entity for which the certificate will be created.
 
 ---
 
-## 4. Geração do certificado autoassinado
+## 4. Generating the Self-Signed Certificate
 
-A CSR foi utilizada para gerar o certificado, sendo a própria chave privada utilizada para realizar a assinatura:
+The CSR was used to generate the certificate, with the same private key used to sign it:
 
 ```bash
 openssl x509 -req -in request.csr -signkey private.key -out certificate.crt -days 365
 ```
 
-O OpenSSL solicitou novamente a senha da chave privada e confirmou a assinatura:
+OpenSSL requested the private key password again and confirmed the signature:
 
 ```text
 Enter pass phrase for private.key:
@@ -98,13 +104,13 @@ Certificate request self-signature ok
 subject=C = BR, ST = DF, L = Brasilia, O = RNP, OU = ESR, CN = esr.rnp.br, emailAddress = a@a.com.br
 ```
 
-Em seguida, foi executado:
+The following command was then executed:
 
 ```bash
 ls
 ```
 
-Resultado:
+Output:
 
 ```text
 ┌──(root㉿kali)-[/home/aluno/Documentos/Arquivos]
@@ -114,29 +120,33 @@ certificate.crt  private.key  request.csr
 
 ---
 
-## Evidência — Passo 5
+## Evidence — Step 5
 
-**Frase obrigatória antes do print:**
+**Required caption before the screenshot:**
 
-> **Print da atividade 9.5:** certificado digital autoassinado criado com sucesso, exibindo os arquivos `certificate.crt`, `private.key` e `request.csr`.
+> Screenshot for Activity 9.5: the self-signed digital certificate was successfully created, showing the `certificate.crt`, `private.key`, and `request.csr` files.
 
-[**Evidências — Módulo 9 / Aulas 33 e 34**](../evidencias.pdf)
-
----
-
-## Fluxo da atividade
-
-| Etapa                      | Arquivo/Resultado |
-| -------------------------- | ----------------- |
-| Chave privada RSA          | `private.key`     |
-| Solicitação de certificado | `request.csr`     |
-| Certificado autoassinado   | `certificate.crt` |
-| Validade                   | 365 dias          |
+[View Evidence — Classes 33–34](../evidencias.pdf)
 
 ---
 
-## Resultado
+## Activity Workflow
 
-Foi criado com sucesso um certificado X.509 autoassinado a partir de uma chave RSA de 2048 bits.
+| Stage | File or Result |
+|---|---|
+| RSA private key | `private.key` |
+| Certificate Signing Request | `request.csr` |
+| Self-signed certificate | `certificate.crt` |
+| Validity period | 365 days |
 
-O certificado `certificate.crt` foi gerado utilizando a própria `private.key` para realizar a assinatura.
+---
+
+## Result
+
+A self-signed X.509 certificate was successfully created using a 2048-bit RSA key.
+
+The `certificate.crt` certificate was generated using `private.key` to sign the certificate.
+
+---
+
+[Back to Classes 33–34](../) · [Back to Module 9](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
