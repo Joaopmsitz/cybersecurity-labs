@@ -1,37 +1,37 @@
-# Atividade 12.10 — Aquisição de imagem de disco no Kali Linux
+# Activity 12.10 — Acquiring a Disk Image on Kali Linux
 
-Nesta atividade foi realizada a aquisição de uma partição utilizando o comando **dd**, criando uma cópia em nível de bloco da partição `/dev/nvme1n1p3` em um arquivo.
+In this activity, a partition was acquired using the `dd` command, creating a block-level copy of partition `/dev/nvme1n1p3` in a file.
 
-> **Observação:** credenciais utilizadas no ambiente de laboratório não são registradas neste documento.
+> **Note:** Credentials used in the lab environment are not recorded in this document.
 
-## Objetivo
+## Objective
 
-* Identificar partições disponíveis no sistema.
-* Utilizar o `dd` para realizar uma cópia em nível de bloco.
-* Criar uma imagem da partição em um arquivo.
-* Verificar o tamanho e os atributos do arquivo adquirido.
+- Identify available disk partitions.
+- Use `dd` to perform a block-level copy.
+- Create a partition image in a file.
+- Verify the size and attributes of the acquired file.
 
-## Procedimento
+## Procedure
 
-### 1. Acesso ao Kali Linux
+### 1. Accessing Kali Linux
 
-O Kali Linux foi acessado via RDP pelo endereço `192.168.98.40`.
+Kali Linux was accessed via RDP using the address `192.168.98.40`.
 
-Foi obtido acesso administrativo:
+Administrative privileges were obtained using:
 
 ```bash
 sudo -i
 ```
 
-### 2. Identificação das partições
+### 2. Identifying Partitions
 
-Foi executado:
+The following command was executed:
 
 ```bash
 fdisk -l
 ```
 
-Saída:
+Output:
 
 ```text
 Disk /dev/nvme0n1: 22 GiB, 23622320128 bytes, 46137344 sectors
@@ -64,21 +64,21 @@ Device         Boot  Start    End Sectors  Size Id Type
 /dev/nvme1n1p3      411648 821247  409600  200M 83 Linux
 ```
 
-A partição escolhida para a aquisição foi:
+The partition selected for acquisition was:
 
 ```text
 /dev/nvme1n1p3
 ```
 
-### 3. Aquisição da partição
+### 3. Acquiring the Partition
 
-Foi utilizado o `dd` para copiar o conteúdo da partição para um arquivo:
+The `dd` command was used to copy the partition's contents into a file:
 
 ```bash
 dd if=/dev/nvme1n1p3 of=/home/aluno/Documentos/Arquivos/Backup_nvme1n1p3
 ```
 
-Saída:
+Output:
 
 ```text
 409600+0 registos entrados
@@ -86,43 +86,43 @@ Saída:
 209715200 bytes (210 MB, 200 MiB) copiados, 1,58606 s, 132 MB/s
 ```
 
-Os principais parâmetros utilizados foram:
+The main parameters used were:
 
-* `dd`: ferramenta para operações de cópia em nível de bloco.
-* `if=/dev/nvme1n1p3`: dispositivo de entrada, correspondente à partição analisada.
-* `of=/home/aluno/Documentos/Arquivos/Backup_nvme1n1p3`: arquivo de saída que recebeu a cópia.
+- **`dd`:** A tool for performing block-level copy operations.
+- **`if=/dev/nvme1n1p3`:** The input device, corresponding to the partition being examined.
+- **`of=/home/aluno/Documentos/Arquivos/Backup_nvme1n1p3`:** The output file that received the copy.
 
-O resultado indica que foram processados `209715200` bytes, equivalentes a aproximadamente **200 MiB**, com taxa média de transferência de `132 MB/s`.
+The result indicates that 209715200 bytes were processed, equivalent to approximately 200 MiB, at an average transfer rate of 132 MB/s.
 
-### 4. Verificação do arquivo
+### 4. Verifying the File
 
-Foi acessado o diretório de destino:
+The destination directory was accessed:
 
 ```bash
 cd /home/aluno/Documentos/Arquivos
 ```
 
-Em seguida:
+The following command was then executed:
 
 ```bash
 ls
 ```
 
-Resultado:
+Output:
 
 ```text
 Backup_nvme1n1p3
 ```
 
-### 5. Análise dos atributos do arquivo
+### 5. Analyzing the File Attributes
 
-Foi utilizado o comando `stat`:
+The `stat` command was used:
 
 ```bash
 stat Backup_nvme1n1p3
 ```
 
-Saída:
+Output:
 
 ```text
 Arquivo: Backup_nvme1n1p3
@@ -135,37 +135,37 @@ Modificação: 2025-12-06 20:21:41.364764169 -0300
     Criação: 2025-12-06 20:21:39.792758433 -0300
 ```
 
-A saída permite observar o tamanho da imagem, quantidade de blocos, inode, permissões, proprietário e timestamps do arquivo criado.
+The output provides information about the image size, number of blocks, inode, permissions, owner, and timestamps of the created file.
 
-### 6. Remoção da imagem
+### 6. Removing the Image
 
-Após a verificação, o arquivo de aquisição foi removido:
+After verification, the acquired file was removed:
 
 ```bash
 rm Backup_nvme1n1p3
 ```
 
-A pasta foi conferida novamente:
+The directory was checked again:
 
 ```bash
 ls
 ```
 
-O arquivo de backup não estava mais presente.
+The backup file was no longer present.
 
-## Conceitos
+## Key Concepts
 
-* **Aquisição de imagem:** criação de uma cópia dos dados de uma mídia ou partição para análise.
-* **`dd`:** realiza cópia em nível de bloco.
-* **`if`:** define a origem dos dados.
-* **`of`:** define o destino.
-* **`stat`:** apresenta atributos e timestamps do arquivo.
-* **Imagem forense:** pode ser utilizada como fonte para análise sem trabalhar diretamente sobre a mídia original.
+- **Image acquisition:** Creating a copy of data from storage media or a partition for analysis.
+- **`dd`:** Performs block-level copying.
+- **`if`:** Specifies the source of the data.
+- **`of`:** Specifies the destination.
+- **`stat`:** Displays file attributes and timestamps.
+- **Forensic image:** Can be used as a source for analysis without working directly on the original media.
 
-## Fluxo
+## Activity Workflow
 
 ```text
-Partição
+Partition
    ↓
 fdisk -l
    ↓
@@ -177,17 +177,21 @@ Backup_nvme1n1p3
    ↓
 stat
    ↓
-Verificação da aquisição
+Verify the acquisition
    ↓
-Remoção do arquivo
+Remove the file
 ```
 
-## Resultado
+## Result
 
-Foi realizada uma cópia em nível de bloco da partição `/dev/nvme1n1p3`, gerando um arquivo de `209715200` bytes. O arquivo foi posteriormente verificado com `stat` e removido ao final da atividade.
+A block-level copy of partition `/dev/nvme1n1p3` was created, producing a file containing 209715200 bytes. The file was subsequently examined using `stat` and removed at the end of the activity.
 
-## Evidência
+## Evidence
 
-[**Evidências — Módulo 12 / Aulas 43 e 44**](../evidencias.pdf)
+**View Evidence — Module 12 / Classes 47–48**
 
-**Print solicitado:** passo 5 — saída do comando `stat Backup_nvme1n1p3`.
+**Required screenshot:** Step 5 — output of the `stat Backup_nvme1n1p3` command.
+
+---
+
+[Back to Classes 47–48](../README.md) · [Back to Module 12](../../README.md) · [Back to Fundamental](../../../README.md) · [Back to Hackers do Bem](../../../../README.md)
