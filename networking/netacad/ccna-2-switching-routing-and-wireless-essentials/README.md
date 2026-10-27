@@ -4,17 +4,19 @@
 
 ## Overview
 
-This directory contains notes, Packet Tracer activities, and practical evidence from CCNA 2: Switching, Routing, and Wireless Essentials.
+Hands-on networking labs and study notes covering switching, routing, wireless networking, device configuration, and Packet Tracer activities.
 
-## Labs and Activities
+## Labs
 
-### Lab 01 — Logical and Physical Mode Exploration
+| Lab | Description |
+|---|---|
+| [01 — Logical and Physical Mode Exploration](./01-logical-and-physical-mode-exploration/README.md) | Explore Packet Tracer's Logical and Physical workspaces, inspect devices in a wiring closet, connect end devices to networking equipment, install and power on a backup router, establish a USB console connection, configure the hostname `Edge_Router_Backup`, and explore the wider network topology. |
 
-Explore Packet Tracer's Logical and Physical workspaces, inspect devices in a wiring closet, connect end devices, install a backup router, and configure a hostname.
+## Tools
 
-[Open Lab 01 — Logical and Physical Mode Exploration](./01-logical-and-physical-mode-exploration/README.md)
-
-**Status:** Completed — 100%.
+- Cisco Packet Tracer
+- Cisco IOS
+- Git and GitHub
 
 ---
 
