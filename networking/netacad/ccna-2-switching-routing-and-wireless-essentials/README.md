@@ -1,43 +1,21 @@
 # CCNA 2 — Switching, Routing, and Wireless Essentials
 
-Hands-on labs and study notes from Cisco Networking Academy's Switching, Routing, and Wireless Essentials (SRWE) course.
+> Cisco Networking Academy — CCNA 2 (SRWE)
 
-## Goal
+## Overview
 
-Develop practical skills in switching, routing, VLANs, network services, and wireless networking.
+This directory contains notes, Packet Tracer activities, and practical evidence from CCNA 2: Switching, Routing, and Wireless Essentials.
 
-## Course Information
+## Labs and Activities
 
-| Field | Details |
-|---|---|
-| Provider | Cisco Networking Academy |
-| Course | Switching, Routing, and Wireless Essentials |
-| Abbreviation | SRWE |
-| Learning status | In Progress |
+### Lab 01 — Logical and Physical Mode Exploration
 
-## Topics
+Explore Packet Tracer's Logical and Physical workspaces, inspect devices in a wiring closet, connect end devices, install a backup router, and configure a hostname.
 
-Topics will be documented as the course progresses, following the official course structure.
+[Open Lab 01 — Logical and Physical Mode Exploration](./01-logical-and-physical-mode-exploration/README.md)
 
-- Switching concepts and VLANs
-- Inter-VLAN routing
-- Spanning Tree Protocol (STP)
-- EtherChannel
-- DHCP and SLAAC
-- Static routing
-- Wireless LAN concepts
-- Network security and troubleshooting
-
-## Labs and Notes
-
-Add links to documented modules and practical activities as they are completed.
-
-## Tools
-
-- Cisco Packet Tracer
-- Cisco IOS
-- Wireshark
+**Status:** Completed — 100%.
 
 ---
 
-[Back to NetAcad Courses](../README.md) · [Back to Networking Labs](../../README.md)
+[Back to NetAcad Courses](../README.md) · [Back to Networking](../../README.md)
