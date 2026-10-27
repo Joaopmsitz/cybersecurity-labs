@@ -1,8 +1,8 @@
-![Initial activity view](./images/PKT1.png)
-
 # Packet Tracer — Logical and Physical Mode Exploration
 
 > Cisco Networking Academy — CCNA 2: Switching, Routing, and Wireless Essentials (SRWE)
+
+![Initial activity view](./images/PKT1.png)
 
 ## Overview
 
