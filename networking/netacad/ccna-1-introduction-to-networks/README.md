@@ -8,20 +8,18 @@ Hands-on networking labs and study notes covering networking fundamentals, devic
 
 ## Labs
 
-| Lab | Activity |
-|---|---|
-| [1.1](./1.1-physical-and-logical-mode-exploration/README.md) | Physical and Logical Mode Exploration |
-| [1.2](./1.2-network-representation/README.md) | Network Representation |
-| [1.3](./1.3-navigate-the-ios/README.md) | Navigate the IOS |
-| [1.4](./1.4-console-connectivity-with-terminal-client/README.md) | Console Connectivity with Terminal Client |
-| [1.5](./1.5-initial-switch-configuration/README.md) | Initial Switch Configuration |
-| [1.6](./1.6-basic-connectivity-implementation/README.md) | Basic Connectivity Implementation |
-| [1.7](./1.7-basic-switch-and-end-device-configuration/README.md) | Basic Switch and End Device Configuration |
-| [1.8](./1.8-basic-switch-and-end-device-configuration-physical-mode/README.md) | Basic Switch and End Device Configuration — Physical Mode |
-| [1.9](./1.9-investigate-tcp-ip-and-osi-models-in-action/README.md) | Investigate the TCP/IP and OSI Models in Action |
-| [1.10](./1.10-connect-a-wired-and-wireless-lan/README.md) | Connect a Wired and Wireless LAN |
-| [1.11](./1.11-physical-layer-exploration-physical-mode/README.md) | Physical Layer Exploration — Physical Mode |
-| [1.12](./1.12-connect-the-physical-layer/README.md) | Connect the Physical Layer |
+- [ — Physical and Logical Mode Exploration](./01-physical-and-logical-mode-exploration/README.md)
+- [ — Network Representation](./02-network-representation/README.md)
+- [ — Navigate the IOS](./03-navigate-the-ios/README.md)
+- [ — Console Connectivity with Terminal Client](./04-console-connectivity-with-terminal-client/README.md)
+- [ — Initial Switch Configuration](./05-initial-switch-configuration/README.md)
+- [ — Basic Connectivity Implementation](./06-basic-connectivity-implementation/README.md)
+- [ — Basic Switch and End Device Configuration](./07-basic-switch-and-end-device-configuration/README.md)
+- [ — Basic Switch and End Device Configuration — Physical Mode](./08-basic-switch-and-end-device-configuration-physical-mode/README.md)
+- [ — Investigate the TCP/IP and OSI Models in Action](./09-investigate-tcp-ip-and-osi-models-in-action/README.md)
+- [ — Connect a Wired and Wireless LAN](./10-connect-a-wired-and-wireless-lan/README.md)
+- [ — Physical Layer Exploration — Physical Mode](./11-physical-layer-exploration-physical-mode/README.md)
+- [ — Connect the Physical Layer](./12-connect-the-physical-layer/README.md)
 
 ## Tools
 
