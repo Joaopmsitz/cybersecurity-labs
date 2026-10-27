@@ -1,27 +1,21 @@
-# Jeremy's IT Lab
+# Jeremy's IT Lab — CCNA Preparation
 
-Hands-on networking exercises from Jeremy's IT Lab Free CCNA course, documented using Cisco Packet Tracer.
+Supplementary study notes and practical exercises following Jeremy's IT Lab Free CCNA 200-301 course.
 
-## Course
+## Learning Path
 
-**Free CCNA 200-301 Complete Course — Jeremy's IT Lab**
+- [CCNA 200-301 — Lessons and Labs](ccna-200-301/README.md)
 
-## Labs
+## Documented Activities
 
-- [Day 4 — Basic Device Security](./day-04-basic-device-security/)
-- [Day 6 — MAC Address Table](./day-06-mac-address-table/)
-- [Day 8 — Configuring IP Addresses](./day-8-configuring-ip-address/)
+- [Day 4 — Basic Device Security](ccna-200-301/day-04-basic-device-security/)
+- [Day 6 — MAC Address Table](ccna-200-301/day-06-mac-address-table/)
+- [Day 8 — Configuring IP Addresses](ccna-200-301/day-8-configuring-ip-address/)
 
-## Study Materials
+## Documentation Guidelines
 
-Anki flashcards from Jeremy's IT Lab are used for spaced-repetition review. These are third-party materials and are separate from my own lab documentation.
-
-## Tools
-
-- Cisco Packet Tracer
-- Cisco IOS
-- Anki
+Keep lesson numbers and titles consistent with the corresponding study materials. Add new activities as they are documented.
 
 ---
 
-[Back to Networking Labs](../README.md) · [Back to Cybersecurity Portfolio](../../README.md)
+[Back to Networking Labs](../README.md)

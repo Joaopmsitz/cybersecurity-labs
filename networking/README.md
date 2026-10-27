@@ -1,44 +1,30 @@
 # Networking Labs — CCNA Preparation
 
-Hands-on networking labs and study notes documenting my preparation for the Cisco CCNA certification.
+Hands-on networking labs, practical exercises, and study notes for the Cisco CCNA 200-301 certification.
 
 ## Learning Status
 
-| Certification | Status |
-| --- | --- |
-| Cisco CCNA 200-301 | In Progress |
+| Learning Resource | Status |
+|---|---|
+| Cisco Networking Academy — CCNA 1 | In Progress |
+| Cisco Networking Academy — CCNA 2 | In Progress |
+| Jeremy's IT Lab — CCNA 200-301 | In Progress |
 
 ## Learning Paths
 
-### Cisco Networking Academy — CCNA 1
+### Cisco Networking Academy (NetAcad)
 
-**Introduction to Networks**
+Official course materials and hands-on activities organized by course.
 
-Labs and study materials covering networking fundamentals, network protocols, physical media, and basic device configuration.
+- [CCNA 1 — Introduction to Networks](netacad/ccna-1-introduction-to-networks/README.md)
+- [CCNA 2 — Switching, Routing, and Wireless Essentials](netacad/ccna-2-switching-routing-and-wireless-essentials/README.md)
 
-[Browse CCNA 1 Labs](./ccna-1-introduction-to-networks/)
+### Jeremy's IT Lab
 
-### Jeremy's IT Lab — CCNA 200-301
+Independent study path following Jeremy's IT Lab Free CCNA 200-301 course.
 
-Practical exercises using Cisco Packet Tracer as part of Jeremy's IT Lab Free CCNA course.
-
-Documented labs include:
-
-- [Day 4 — Basic Device Security](./jeremys-it-lab/day-04-basic-device-security/)
-- [Day 6 — MAC Address Table](./jeremys-it-lab/day-06-mac-address-table/)
-- [Day 8 — Configuring IP Addresses](./jeremys-it-lab/day-8-configuring-ip-address/)
-
-[Browse Jeremy's IT Lab](./jeremys-it-lab/)
-
-## Topics
-
-- Networking fundamentals and TCP/IP
-- OSI and TCP/IP models
-- Switch and end-device configuration
-- MAC address tables and Ethernet switching
-- IP addressing
-- Basic device security
-- Network troubleshooting
+- [Jeremy's IT Lab — CCNA 200-301](jeremys-it-lab/README.md)
+- [Documented lessons and labs](jeremys-it-lab/ccna-200-301/README.md)
 
 ## Tools and Study Resources
 
@@ -46,6 +32,7 @@ Documented labs include:
 - Cisco IOS
 - Wireshark
 - Anki
+- Git and GitHub
 
 ---
 
