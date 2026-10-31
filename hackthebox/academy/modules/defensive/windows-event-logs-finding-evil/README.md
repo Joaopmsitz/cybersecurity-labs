@@ -222,7 +222,7 @@ The route should use the active HTB VPN interface.
 
 Personal lab evidence is retained locally and excluded from this public repository.
 
-![Windows Event Viewer — XML Filtering](./images/event-viewer-xml-filter.png)
+Practical exercises and evidence are organized in the [Labs directory](./labs/).
 
 ---
 
