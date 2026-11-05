@@ -4,9 +4,11 @@ HTB Academy modules focused on networking concepts and traffic analysis.
 
 ## Modules
 
-| Module | Description |
-| --- | --- |
-| [Introduction to Network Traffic Analysis](./intro-to-network-traffic-analysis/) | Network traffic analysis, protocol inspection, and practical network investigation fundamentals. |
+<!-- AUTO:MODULES:START -->
+| Module | Description | Status |
+|---|---|---|
+| [Intro to Network Traffic Analysis](./intro-to-network-traffic-analysis/) | Network traffic analysis, protocol inspection, and practical network investigation fundamentals. | Completed |
+<!-- AUTO:MODULES:END -->
 
 ---
 

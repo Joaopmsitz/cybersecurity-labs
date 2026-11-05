@@ -4,9 +4,11 @@ HTB Academy modules focused on information gathering, network scanning, and enum
 
 ## Modules
 
-| Module | Description |
-| --- | --- |
-| [Network Enumeration with Nmap](./network-enumeration-with-nmap/) | Network scanning, service discovery, and enumeration using Nmap. |
+<!-- AUTO:MODULES:START -->
+| Module | Description | Status |
+|---|---|---|
+| [Network Enumeration With Nmap](./network-enumeration-with-nmap/) | Network scanning, service discovery, and enumeration using Nmap. | Completed |
+<!-- AUTO:MODULES:END -->
 
 ---
 

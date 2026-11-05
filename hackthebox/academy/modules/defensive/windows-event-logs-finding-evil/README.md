@@ -90,6 +90,125 @@ Security Descriptor comparisons can help identify modifications to auditing conf
 
 ---
 
+
+## Sysmon & Endpoint Telemetry
+
+Sysmon extends Windows endpoint visibility by recording detailed system activity in its Operational event log.
+
+| Event ID | Event | Investigation Use |
+|---|---|---|
+| 1 | Process Create | Process execution and parent-child relationships |
+| 3 | Network Connect | Network connections and potential C2 activity |
+| 7 | Image Loaded | DLL loading and suspicious module execution |
+| 8 | CreateRemoteThread | Remote thread creation and process injection |
+| 10 | Process Access | Access to sensitive processes, including LSASS |
+
+### Event Correlation
+
+Useful Sysmon Event ID 1 fields:
+
+- Image and CommandLine
+- ParentImage and ParentCommandLine
+- ProcessGuid and ParentProcessGuid
+- ProcessId and ParentProcessId
+- User and Hashes
+
+For Event ID 7, investigate Image, ImageLoaded, Signed and SignatureStatus.
+
+For Event ID 8, correlate SourceImage and TargetImage to identify the process initiating remote thread creation.
+
+For Event ID 10, inspect SourceImage, TargetImage, GrantedAccess and CallTrace. An access event alone does not prove that a credential dump occurred.
+
+### Detection Considerations
+
+- Unexpected DLLs loaded from writable directories may indicate DLL hijacking.
+- Loading clr.dll and clrjit.dll in unusual processes may indicate unexpected .NET execution.
+- Event ID 8 can reveal certain process injection techniques.
+- Access to lsass.exe should be investigated in context, including access rights and related telemetry.
+- Unexpected parent-child relationships can indicate parent PID spoofing or unusual execution chains.
+
+---
+
+## Event Tracing for Windows (ETW)
+
+Event Tracing for Windows (ETW) is a high-performance Windows tracing facility that collects telemetry from user-mode applications and kernel-mode components.
+
+Unlike traditional event log analysis alone, ETW allows investigators to enable specific providers and collect detailed runtime information.
+
+### ETW Architecture
+
+| Component | Responsibility |
+|---|---|
+| Controllers | Manage tracing sessions and enable providers |
+| Providers | Generate events |
+| Consumers | Receive and process events |
+| Channels | Organize events for event log consumption |
+| ETL files | Store event trace data for later analysis |
+
+### Logman
+
+Logman is a built-in Windows utility for inspecting and managing ETW sessions and providers.
+
+```cmd
+logman.exe query -ets
+logman.exe query "EventLog-System" -ets
+logman.exe query providers
+logman.exe query providers | findstr "Process"
+```
+
+The `-ets` parameter queries active Event Tracing Sessions.
+
+Provider metadata includes GUIDs, available keywords, event levels and associated processes.
+
+### Relevant ETW Providers
+
+| Provider | Security Visibility |
+|---|---|
+| Microsoft-Windows-Kernel-Process | Process creation and termination |
+| Microsoft-Windows-Kernel-File | File system operations |
+| Microsoft-Windows-Kernel-Network | Kernel-level network activity |
+| Microsoft-Windows-DotNETRuntime | .NET runtime and assembly activity |
+| Microsoft-Windows-Kernel-Registry | Registry operations |
+| Microsoft-Windows-PowerShell | PowerShell activity |
+| Microsoft-Windows-DNS-Client | DNS client activity |
+
+Some high-value providers are restricted. Microsoft-Windows-Threat-Intelligence, for example, requires privileged access associated with Protected Process Light (PPL).
+
+### SilkETW
+
+SilkETW is a collection tool that captures ETW telemetry and can write events to JSON files.
+
+Example: collect process telemetry:
+
+```cmd
+SilkETW.exe -t user -pn Microsoft-Windows-Kernel-Process -ot file -p C:\Windows\Temp\kernel-process.json
+```
+
+Example: collect .NET runtime telemetry:
+
+```cmd
+SilkETW.exe -t user -pn Microsoft-Windows-DotNETRuntime -uk 0x2038 -ot file -p C:\Windows\Temp\dotnet-runtime.json
+```
+
+The keyword mask `0x2038` selects:
+
+| Keyword | Purpose |
+|---|---|
+| JIT | Just-In-Time compilation |
+| Interop | Managed and unmanaged code interaction |
+| Loader | Assembly loading |
+| NGen | Native Image Generator activity |
+
+### Sysmon and ETW Complement Each Other
+
+Sysmon Event ID 1 may report a spoofed parent process in a Parent PID Spoofing scenario. ETW telemetry from Microsoft-Windows-Kernel-Process can provide additional visibility into the actual process creation activity.
+
+Sysmon Event ID 7 records DLL loading, including .NET runtime libraries such as clr.dll and mscoree.dll. The Microsoft-Windows-DotNETRuntime provider provides deeper runtime visibility, including assembly loading and method-related events.
+
+ETW provider selection should be targeted to the investigation objective because some providers can generate substantial event volumes.
+
+---
+
 ## XML Event Filtering
 
 Event Viewer supports custom XML queries for more precise filtering.
@@ -174,6 +293,22 @@ Select-Object TimeCreated, Id, Message
 
 ---
 
+
+### Query Exported EVTX Files
+
+Get-WinEvent can also query exported event files recursively.
+
+```powershell
+Get-ChildItem -Path 'C:\Logs' -Filter *.evtx -Recurse -File |
+ForEach-Object {
+    Get-WinEvent -Path $_.FullName -MaxEvents 200 -ErrorAction SilentlyContinue
+} |
+Where-Object { $_.Id -in 1, 7, 8, 10 } |
+Select-Object TimeCreated, Id, ProviderName, Message
+```
+
+Use targeted filters whenever possible to reduce noise and improve investigation efficiency.
+
 ## Investigation Workflow
 
 ```text
@@ -239,18 +374,20 @@ Practical exercises and evidence are organized in the [Labs directory](./labs/).
 
 ---
 
+- Sysmon Event IDs 1, 3, 7, 8 and 10 provide useful endpoint telemetry.
+- ETW extends visibility through configurable event providers and tracing sessions.
+- SilkETW enables collection of ETW telemetry for offline investigation.
+- Get-WinEvent supports filtering and querying local logs and exported EVTX files.
+
 ## Completion
 
-**Status:** In progress
-
-<!-- Add the official badge and completion date after finishing the module.
-
-<a href="OFFICIAL_BADGE_URL">
-  <img src="./images/htb-windows-event-logs-finding-evil-badge.png" width="120" alt="HTB Academy — Windows Event Logs & Finding Evil Badge">
+<a href="https://academy.hackthebox.com/achievement/badge/435d5dca-d967-11f1-8591-0affe7dfeb45">
+  <img src="./images/htb-windows-event-logs-finding-evil-badge.png" width="120" alt="HTB Academy — Windows Event Logs &amp; Finding Evil Badge">
 </a>
 
-**Completed:** DD Month YYYY
--->
+**Completed:** 5 November 2026
+
+**Status:** In progress
 
 ---
 

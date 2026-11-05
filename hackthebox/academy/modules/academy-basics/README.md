@@ -4,10 +4,12 @@ Introductory HTB Academy modules covering platform navigation and foundational c
 
 ## Modules
 
-| Module | Description |
-| --- | --- |
-| [Getting Started](./getting-started/) | Initial orientation and getting started with HTB Academy. |
-| [Introduction to Academy](./introduction-to-academy/) | Introduction to the Academy platform and its learning environment. |
+<!-- AUTO:MODULES:START -->
+| Module | Description | Status |
+|---|---|---|
+| [Getting Started](./getting-started/) | Initial orientation and getting started with HTB Academy. | Completed |
+| [Introduction to Academy](./introduction-to-academy/) | Introduction to the Academy platform and its learning environment. | Completed |
+<!-- AUTO:MODULES:END -->
 
 ---
 
