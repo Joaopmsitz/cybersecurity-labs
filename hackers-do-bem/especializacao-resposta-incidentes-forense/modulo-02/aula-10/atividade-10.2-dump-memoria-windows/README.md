@@ -1,93 +1,249 @@
-﻿# Activity 10.2 - Windows Memory Dump with FTK Imager
+﻿# Activity 10.2 — Windows Memory Dump with FTK Imager
 
-## Overview
+> **Program:** Hackers do Bem  
+> **Stage:** Specialization — Incident Response and Digital Forensics  
+> **Module:** 02  
+> **Class:** 10  
+> **Environment:** Windows forensic workstation  
+> **Status:** Completed
 
-This activity demonstrates volatile memory acquisition on a Windows system using AccessData FTK Imager.
+## 1. Objective
 
-The training environment uses the `forensewin` virtual machine, where FTK Imager is already installed.
+Acquire volatile memory from a running Windows system using FTK Imager.
 
-## Objectives
+The activity demonstrates the acquisition of RAM from a live Windows workstation and the preparation of the resulting forensic image for later examination.
 
-- Open FTK Imager.
-- Access the Capture Memory function.
-- Configure the destination path and output filename.
-- Generate a Windows memory image.
+Unlike disk imaging, which collects data stored on persistent storage, memory acquisition captures information available while the operating system is running.
 
-## Environment
+The resulting image can be examined with memory forensic tools such as Volatility 3, which is used in the subsequent activity.
 
-| Component | Description |
+## 2. Environment
+
+| Item | Details |
 |---|---|
-| Virtual Machine | `forensewin` |
+| Virtual Machine | Windows forensic workstation |
 | Operating System | Windows |
-| Memory Acquisition Tool | FTK Imager |
-| Destination Directory | `C:\Users\aluno\Documents` |
-| Output File | `memdump.mem` |
+| Acquisition Tool | FTK Imager |
+| Acquisition Type | Live memory acquisition |
+| Evidence Type | Volatile memory |
+| Application Menu | File → Capture Memory |
+| Output | Windows memory image |
+| Subsequent Analysis | Volatility 3 |
 
-## Procedure
+The exact destination path and output filename are not included in the activity notes available for this documentation. They should be read from the actual FTK Imager configuration or the acquired image.
 
-### 1. Open FTK Imager
+## 3. Memory Acquisition Concepts
 
-Log in to the supplied Windows laboratory machine and start FTK Imager.
+### Volatile Memory in Windows
 
-### 2. Open the Memory Capture Dialog
+Windows uses RAM to store data required by active processes and the operating system.
 
-In FTK Imager:
+During an incident investigation, memory can contain relevant artifacts such as:
 
-1. Open **File**.
-2. Select **Capture Memory**.
+- Running process information.
+- Loaded modules and drivers.
+- Active network connections.
+- Command execution artifacts.
+- Data associated with user sessions.
+- Information that may not be available in ordinary files on disk.
 
-Alternatively, use the corresponding toolbar button.
+The contents of RAM are temporary. Shutting down or restarting a system can destroy information that might be relevant to an investigation.
 
-### 3. Configure the Memory Capture
+### FTK Imager
 
-Set the destination directory:
+FTK Imager is a forensic acquisition and examination utility.
+
+The application provides a memory capture function that can acquire RAM from a live system.
+
+The acquisition procedure is accessed through:
 
 ```text
-C:\Users\aluno\Documents
+File → Capture Memory...
 ```
 
-Set the output filename:
+The Memory Capture dialog allows the examiner to configure the destination path and filename, along with optional collection settings.
+
+### Memory Capture Configuration
+
+The capture dialog can expose the following options:
+
+| Option | Function |
+|---|---|
+| Destination path | Defines the directory used to save the acquired data |
+| Destination filename | Defines the name of the memory image |
+| Include pagefile | Includes the Windows pagefile in the collection |
+| Create AD1 file | Creates an additional AD1 evidence container |
+
+These options are separate from the RAM capture itself.
+
+The activity notes available for this documentation do not preserve the exact checkbox state or destination filename used during the laboratory execution. Therefore, those settings are not presented as confirmed selections.
+
+## 4. Procedure
+
+### Step 1 — Access the Windows Forensic Workstation
+
+The Windows forensic workstation was accessed to perform the live memory acquisition.
+
+The FTK Imager application was used to capture memory from the running Windows system.
+
+Memory acquisition requires elevated privileges because the application needs access to system memory.
+
+The application should therefore be opened using the administrative context provided for the laboratory.
+
+### Step 2 — Open FTK Imager
+
+After accessing the workstation, FTK Imager was opened.
+
+The application provides a graphical interface for forensic image acquisition and examination.
+
+The memory capture functionality is available from the main menu.
+
+### Step 3 — Open the Memory Capture Function
+
+Within FTK Imager, the memory acquisition function is accessed through:
 
 ```text
-memdump.mem
+File → Capture Memory...
 ```
 
-Leave the virtual memory inclusion option unchecked, as instructed by the course.
+Selecting this option opens the Memory Capture dialog.
 
-Leave the vendor-specific output format option unchecked for this exercise.
+The dialog is used to configure the output destination and acquisition settings before starting the capture.
 
-### 4. Start the Acquisition
+### Step 4 — Configure the Destination
 
-Select **Capture Memory**.
+The Memory Capture dialog contains the following fields and options:
 
-Wait for the acquisition process to complete.
+| Field | Description |
+|---|---|
+| Destination path | Directory where the acquired memory data will be stored |
+| Destination filename | Name assigned to the memory image |
+| Include pagefile | Optional collection of the Windows pagefile |
+| Create AD1 file | Optional creation of an AD1 evidence container |
 
-### 5. Clean Up the Lab File
+The destination path and filename must be selected before the acquisition begins.
 
-After the activity and any required validation are complete, remove the large memory image from the laboratory workstation to release storage space.
+For forensic work, an external or dedicated evidence destination is preferable to writing the acquired image to the same system volume being investigated. This reduces unnecessary writes to the source system and helps preserve evidence.
 
-## Expected Result
+The exact path, filename, and option selections used in the laboratory should be taken from the actual capture configuration. They are not inferred in this documentation.
 
-FTK Imager creates the Windows memory image `memdump.mem` in the configured Documents directory.
+### Step 5 — Start the Memory Capture
 
-## Evidence
+After configuring the destination, the acquisition is initiated using the capture control in FTK Imager:
 
-No screenshot is required for Activity 10.2 in the course's final evidence PDF.
+```text
+Capture Memory
+```
 
-## Technical Notes
+FTK Imager begins reading the live system memory and writing the result to the selected destination.
 
-- Memory acquisition captures volatile information that may disappear when the system is powered off.
-- The laboratory stores the dump locally for instructional purposes.
-- Real forensic investigations should use a separate external destination to reduce changes to the system under examination.
-- Record the acquisition context, system details, tool version, destination, and integrity hashes according to the applicable forensic procedure.
-- Treat memory images as sensitive evidence because they may contain credentials, tokens, and private data.
+A progress indicator is presented while the acquisition is running.
+
+The acquisition duration depends on the amount of memory and the system environment.
+
+The activity notes do not contain a verbatim completion message or exact duration, so no specific progress output is reproduced here.
+
+### Step 6 — Verify the Acquisition Result
+
+After the capture process finishes, the destination directory should be inspected to confirm that the memory image was created.
+
+The image is the primary artifact required for the next activity, where Volatility 3 is used to examine Windows memory structures.
+
+The exact output filename and file size depend on the destination and the machine used in the laboratory.
+
+## 5. Expected Results
+
+The activity produces a Windows memory image at the destination selected in FTK Imager.
+
+The expected result is:
+
+| Artifact | Description |
+|---|---|
+| Memory image | Acquired snapshot of the live Windows system memory |
+| Optional pagefile | Additional file collected when the pagefile option is selected |
+| Optional AD1 container | Additional evidence container when that option is selected |
+
+The memory image is subsequently used as input for the analysis performed in Activity 10.3.
+
+## 6. Technical Analysis
+
+### Live Acquisition
+
+The acquisition is performed while Windows is running.
+
+This is important because the contents of RAM are volatile and can disappear when the system is shut down.
+
+The acquisition itself also interacts with the running system and may cause changes to its memory state. Forensic procedures should therefore document the time of acquisition and the tool configuration.
+
+### RAM Image and Pagefile
+
+RAM and the pagefile are related but distinct sources of information.
+
+RAM is physical volatile memory. The pagefile is a disk-based Windows paging file used by the memory management system.
+
+If the pagefile is included, the collection contains additional information from a persistent file. It should not be confused with the physical memory image itself.
+
+### Why FTK Imager Is Used Before Volatility
+
+FTK Imager performs acquisition.
+
+Volatility 3 performs analysis of an acquired memory image.
+
+The tools therefore have complementary roles:
+
+| Tool | Role |
+|---|---|
+| FTK Imager | Acquires the Windows memory image |
+| Volatility 3 | Examines operating system structures and memory artifacts |
+
+Volatility does not replace the acquisition procedure performed by FTK Imager.
+
+### Evidence Preservation
+
+After acquisition, the memory image should be preserved and protected against accidental modification.
+
+A forensic workflow should record the destination, filename, acquisition time, examiner, tool version, and integrity values when available.
+
+The activity summary does not preserve the exact output filename, destination path, or hash values, so these values are not fabricated in this report.
+
+## 7. Results and Interpretation
+
+This activity demonstrates how FTK Imager can acquire volatile memory from an active Windows workstation.
+
+The process begins with administrative access, followed by the use of the Capture Memory function and configuration of the output destination.
+
+Once the acquisition completes, the resulting memory image becomes the input artifact for subsequent memory analysis.
+
+The activity establishes the acquisition stage of the Windows memory forensics workflow. The next activity uses Volatility 3 to examine the collected image.
+
+## 8. Concepts Practiced
+
+- Windows memory acquisition
+- Volatile memory
+- Live forensic acquisition
+- FTK Imager
+- Administrative privileges
+- Memory Capture dialog
+- Pagefile collection
+- AD1 evidence container
+- Evidence destination management
+- Forensic image preservation
+- Memory acquisition and analysis workflow
+
+## 9. Evidence
+
+The activity information available for this class indicates that Activity 10.2 did not require a dedicated screenshot for the consolidated submission.
+
+The consolidated class evidence remains available here:
+
+[View Universal Class Evidence PDF](../evidences.pdf)
 
 ## References
 
-- [Exterro - FTK Imager User Guide](https://d1kpmuwb7gvu1i.cloudfront.net/Imager/8.2/Exterro%20FTK%20Imager%208.2%20-%20User%20Guide-%20.pdf)
+- [Exterro — FTK Imager](https://www.exterro.com/digital-forensics-software/ftk-imager)
+- [CISA — Memory Capture with FTK Imager](https://content.govdelivery.com/accounts/USDHSCISA/bulletins/2c5011c)
+- [Volatility 3 — Windows Tutorial](https://volatility3.readthedocs.io/en/latest/getting-started-windows-tutorial.html)
 
-## Navigation
+---
 
-- [Class 10](../README.md)
-- [Previous Activity - 10.1](../atividade-10.1-dump-memoria-linux/README.md)
-- [Next Activity - 10.3](../atividade-10.3-evidencias-logicas-memoria/README.md)
+[Back to Class 10](../README.md) · [Back to Module 02](../../README.md) · [Back to Specialization](../../../README.md)
