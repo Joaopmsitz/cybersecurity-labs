@@ -1,41 +1,41 @@
 ﻿# Hackers do Bem - Specialization | Module 02 - Class 06
 
-This class covers the collection, processing, and analysis of network data using SIEM platforms. The practical activities focus on forwarding Zeek logs to Splunk and Elastic, performing searches, building visualizations, and applying threat hunting queries.
+Practical activities covering the collection, processing, and analysis of network security data using SIEM platforms. The exercises forward Zeek logs to Splunk and Elastic for searching, threat hunting, and visualization.
 
 ## Class Overview
 
 | Item | Description |
 |---|---|
 | Program | Hackers do Bem |
-| Track | Specialization - Incident Response and Digital Forensics |
+| Track | Incident Response and Digital Forensics |
 | Module | 02 - Data Processing |
 | Class | 06 |
 | Main Topic | Data Collection, Processing, and Analysis using SIEM/SOAR |
-| Main Technologies | Zeek, Splunk, Elastic Stack, Filebeat |
+| Main Technologies | Zeek, Splunk, Elasticsearch, Logstash, Kibana, Filebeat |
 
 ## Practical Activities
 
-| Activity | Topic | Description | View |
+| Activity | Topic | Description | Documentation |
 |---|---|---|---|
-| 6.1 | Preparing Splunk to Receive Zeek Logs | Create and configure a Splunk index to receive Zeek data. | [View Activity](./atividade-6.1-preparando-splunk-zeek/README.md) |
-| 6.2 | Visualizing Zeek Logs in Splunk | Configure log forwarding and search for Zeek events in Splunk. | [View Activity](./atividade-6.2-visualizando-logs-splunk/README.md) |
-| 6.3 | Threat Hunting with Zeek | Use SPL queries to investigate network connections, traffic volume, and communication patterns. | [View Activity](./atividade-6.3-threat-hunting-zeek-splunk/README.md) |
-| 6.4 | Preparing Elastic to Receive Zeek Logs | Start and verify the Elasticsearch, Kibana, and Logstash services. | [View Activity](./atividade-6.4-preparando-elastic/README.md) |
-| 6.5 | Sending Zeek Data to Elastic | Configure Filebeat integration and analyze Zeek events using Kibana and KQL. | [View Activity](./atividade-6.5-enviando-zeek-elastic/README.md) |
+| 6.1 | Preparing Splunk to Receive Zeek Logs | Inspect Zeek JSON logs and create a dedicated Splunk index. | [View Activity](./atividade-6.1-preparando-splunk-zeek/README.md) |
+| 6.2 | Visualizing Zeek Logs in Splunk | Configure log forwarding and search for collected Zeek events. | [View Activity](./atividade-6.2-visualizando-logs-splunk/README.md) |
+| 6.3 | Threat Hunting with Zeek | Investigate network connections and traffic patterns using SPL. | [View Activity](./atividade-6.3-threat-hunting-zeek-splunk/README.md) |
+| 6.4 | Preparing Elastic to Receive Zeek Logs | Start and validate Elasticsearch, Kibana, and Logstash services. | [View Activity](./atividade-6.4-preparando-elastic/README.md) |
+| 6.5 | Sending Zeek Data to Elastic | Forward Zeek logs with Filebeat and investigate events in Kibana. | [View Activity](./atividade-6.5-enviando-zeek-elastic/README.md) |
 
 ## Environment
 
-The practical activities use the `forenseLinux` virtual machine provided by the training environment.
+The activities use the `forenseLinux` virtual machine provided by the training environment.
 
-| Component | Description |
+| Component | Purpose |
 |---|---|
 | Zeek | Network security monitoring and log generation |
 | Splunk Enterprise | Log indexing, search, and visualization |
-| Splunk Universal Forwarder | Collection and forwarding of Zeek logs |
-| Elasticsearch | Storage and search engine for network events |
-| Logstash | Data processing pipeline |
+| Splunk Universal Forwarder | Log collection and forwarding |
+| Elasticsearch | Data storage and search |
+| Logstash | Data processing |
 | Kibana | Data exploration and visualization |
-| Filebeat | Collection and forwarding of Zeek logs to Elastic |
+| Filebeat | Log collection and forwarding to Elastic |
 
 ## Tools and Technologies
 
@@ -46,50 +46,47 @@ The practical activities use the `forenseLinux` virtual machine provided by the 
 - Logstash
 - Kibana
 - Filebeat
-- SPL (Search Processing Language)
-- KQL (Kibana Query Language)
+- Search Processing Language (SPL)
+- Kibana Query Language (KQL)
 - Linux
 
 ## Learning Outcomes
 
 - Configure Zeek to generate JSON-formatted logs.
-- Prepare Splunk to receive and index network monitoring data.
+- Prepare Splunk to index network monitoring data.
 - Configure log forwarding using Splunk Universal Forwarder.
-- Search and analyze Zeek connection logs using SPL.
-- Create time-based visualizations to investigate network traffic.
-- Verify Elastic Stack services and their availability.
-- Forward Zeek logs to Elastic using Filebeat.
-- Use KQL to filter network events and investigate suspicious activity.
+- Search and investigate Zeek connection logs using SPL.
+- Build time-based network traffic visualizations.
+- Verify Elastic Stack service availability.
+- Forward Zeek logs with Filebeat.
+- Filter network events using KQL in Kibana.
 
-## Evidence Requirements
+## Evidence
 
-A single PDF document must contain the screenshots required for all five practical activities:
+| Activity | Evidence | Required Capture |
+|---|---|---|
+| 6.1 | [6.1.pdf](./6.1.pdf) | Step 4 - Splunk index creation page displaying the `zeek` index name. |
+| 6.2 | Pending | Step 8 - Splunk search results for the Zeek log directory. |
+| 6.3 | Pending | Step 6 - Line chart showing incoming and outgoing traffic over time by service. |
+| 6.4 | Pending | Step 9 - Terminal output confirming Elasticsearch, Kibana, and Logstash status. |
+| 6.5 | Pending | Step 5 - Kibana confirmation that Zeek data was successfully received. |
 
-| Activity | Required Evidence |
-|---|---|
-| 6.1 | Step 4 - Splunk index creation page showing the `zeek` index name. |
-| 6.2 | Step 8 - Splunk search results displaying data collected from the Zeek log directory. |
-| 6.3 | Step 6 - Line chart showing incoming and outgoing network traffic over time by service. |
-| 6.4 | Step 9 - Terminal output confirming that Elasticsearch, Kibana, and Logstash are running. |
-| 6.5 | Step 5 - Kibana confirmation showing that Zeek data was successfully received. |
-
-The screenshots must be legible and demonstrate the completion of the required steps.
+The `6.1.pdf` file contains the evidence currently available for this class. The remaining evidence will be added as the activities are completed.
 
 ## Technical Notes
 
-- Zeek logs must be generated in JSON format for the described Splunk and Elastic workflows.
-- Splunk Universal Forwarder and Splunk Enterprise use different installation paths and executables.
-- The Universal Forwarder's `inputs.conf` defines monitored data sources, while `outputs.conf` defines forwarding destinations.
-- The Filebeat Zeek module processes Zeek log data and provides predefined visualizations.
-- KQL is used to filter events in Kibana. Aggregations and visualizations are configured separately through Kibana.
-- Credentials used in the training environment are intentionally omitted from this documentation.
+- Zeek logs must use JSON formatting for the parsing workflows described in these activities.
+- Splunk Enterprise and Splunk Universal Forwarder use separate installation paths and executables.
+- The Filebeat Zeek module follows the traditional Beats workflow used in this training environment.
+- KQL filters documents; Kibana visualizations handle data presentation and aggregation.
+- Training credentials and sensitive environment information are excluded from this documentation.
 
 ## References
 
-- [Splunk - Configure the Universal Forwarder using configuration files](https://help.splunk.com/en/splunk-cloud-platform/forward-and-process-data/universal-forwarder-manual/9.1/configure-the-universal-forwarder/configure-the-universal-forwarder-using-configuration-files)
+- [Splunk - Configure the Universal Forwarder](https://help.splunk.com/en/splunk-cloud-platform/forward-and-process-data/universal-forwarder-manual/9.1/configure-the-universal-forwarder/configure-the-universal-forwarder-using-configuration-files)
 - [Splunk - Configure forwarding with outputs.conf](https://help.splunk.com/en/data-management/forward-data/universal-forwarder-manual/9.1/forward-data/configure-forwarding-with-outputs.conf)
 - [Splunk - timechart command](https://help.splunk.com/en/splunk-enterprise/spl-search-reference/10.4/search-commands/timechart)
-- [Elastic - Filebeat Zeek module](https://www.elastic.co/docs/reference/beats/filebeat/filebeat-module-zeek)
+- [Elastic - Filebeat Zeek Module](https://www.elastic.co/docs/reference/beats/filebeat/filebeat-module-zeek)
 - [Elastic - Zeek Integration](https://www.elastic.co/docs/reference/integrations/zeek)
 - [Elastic - Kibana Query Language](https://www.elastic.co/docs/reference/query-languages/kql)
 - [Elastic - The Elastic Stack](https://www.elastic.co/docs/products/elastic-stack)
@@ -97,4 +94,4 @@ The screenshots must be legible and demonstrate the completion of the required s
 ## Navigation
 
 - [Module 02](../README.md)
-- [Next Class](../aula-07/README.md)
+- [Specialization Overview](../../README.md)
