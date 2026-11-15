@@ -28,20 +28,6 @@ The final case study combines threat intelligence and digital forensic investiga
 
 [View Final Case Study — Financial Crime](https://github.com/Joaopmsitz/cybersecurity-labs/tree/main/hackers-do-bem/especializacao-resposta-incidentes-forense/estudo-de-caso-crime-financeiro)
 
-## Module 01 — Incident Response and Digital Forensics
-
-The first module develops practical knowledge across five classes, progressing from threat reconnaissance and security event investigation to network monitoring, incident response procedures, and CSIRT infrastructure.
-
-| Class | Main Topics |
-|---|---|
-| Class 01 | Cyber threats, Kill Chain methodology, information gathering, reconnaissance, and network scanning |
-| Class 02 | Incident response and security event investigation with Splunk |
-| Class 03 | Malware and email incident investigation with Zeek |
-| Class 04 | Network Security Monitoring, CyberChef, incident response playbooks, Sigma, and MITRE ATT&CK |
-| Class 05 | CSIRT team organization, infrastructure architecture, incident workflows, and operational services |
-
-[Explore all Module 01 classes](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-01/README.md)
-
 ## Areas of Study
 
 The specialization covers several complementary areas of cybersecurity operations:
