@@ -115,11 +115,11 @@ The connection, DNS, and certificate queries can be used to filter the ingested 
 
 ## Evidence
 
-The required screenshot is **Step 5**, showing the successful data reception message:
+Step 5 - Kibana confirmation that Zeek data was successfully received.
 
-```text
-Data successfully received from this module
-```
+The required screenshot is included in the consolidated class-level evidence document:
+
+- [View evidences.pdf](../evidences.pdf)
 
 ## Technical Notes
 
@@ -140,3 +140,4 @@ Data successfully received from this module
 - [Class 06](../README.md)
 - [Previous Activity - 6.4](../atividade-6.4-preparando-elastic/README.md)
 - [Module 02](../../README.md)
+

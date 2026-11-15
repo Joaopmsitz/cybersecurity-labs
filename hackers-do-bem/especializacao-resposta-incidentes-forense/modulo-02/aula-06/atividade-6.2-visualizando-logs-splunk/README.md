@@ -87,7 +87,11 @@ Zeek log events are searchable in Splunk Enterprise, including data collected fr
 
 ## Evidence
 
-The required screenshot is **Step 8**, showing Splunk search results for the Zeek log directory query.
+Step 8 - Splunk search results displaying data collected from the Zeek log directory.
+
+The required screenshot is included in the consolidated class-level evidence document:
+
+- [View evidences.pdf](../evidences.pdf)
 
 ## Technical Notes
 
@@ -108,3 +112,4 @@ The required screenshot is **Step 8**, showing Splunk search results for the Zee
 - [Class 06](../README.md)
 - [Previous Activity - 6.1](../atividade-6.1-preparando-splunk-zeek/README.md)
 - [Next Activity - 6.3](../atividade-6.3-threat-hunting-zeek-splunk/README.md)
+

@@ -75,13 +75,11 @@ Elasticsearch responds to the local API request.
 
 ## Evidence
 
-The required screenshot is **Step 9**, showing the terminal output from:
+Step 9 - Terminal output confirming Elasticsearch, Kibana, and Logstash status.
 
-```bash
-cat /home/aluno/atv_pratica_6-4.txt
-```
+The required screenshot is included in the consolidated class-level evidence document:
 
-The screenshot must display the status information for Elasticsearch, Kibana, and Logstash.
+- [View evidences.pdf](../evidences.pdf)
 
 ## Technical Notes
 
@@ -100,3 +98,4 @@ The screenshot must display the status information for Elasticsearch, Kibana, an
 - [Class 06](../README.md)
 - [Previous Activity - 6.3](../atividade-6.3-threat-hunting-zeek-splunk/README.md)
 - [Next Activity - 6.5](../atividade-6.5-enviando-zeek-elastic/README.md)
+
