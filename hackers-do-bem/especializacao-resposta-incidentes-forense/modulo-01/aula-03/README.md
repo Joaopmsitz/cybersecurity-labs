@@ -16,7 +16,12 @@ This class explores Zeek as a network security monitoring and investigation plat
 ## Practical Activities
 
 | Activity | Topic | Description | Documentation |
-|---|---|---|---|
+| -------- | ----- | ----------- | ------------- |
+| 3.1 — Configuring Zeek | Network Monitoring | Configure, deploy, and verify the operational status of the Zeek network monitoring platform. | [View Activity](./atividade-3.1-configurando-zeek/README.md) |
+| 3.2 — File Analysis and SHA256 Hashing with Zeek | Digital Forensics | Enable file hashing analyzers to generate MD5, SHA-1, and SHA-256 hashes. | [View Activity](./atividade-3.2-analise-arquivos-zeek/README.md) |
+| 3.3 — Understanding Zeek Logs and JSON Output | Security Logging | Configure Zeek to generate structured JSON logs for network event investigation. | [View Activity](./atividade-3.3-logs-json-zeek/README.md) |
+| 3.4 — Automatic File Extraction with Zeek | Network Forensics | Configure file extraction, inspect recovered network files, and validate the extraction process. | [View Activity](./atividade-3.4-extracao-automatica-arquivos/README.md) |
+| 3.5 — Malware Investigation and Incident Response: Malicious Email Download | Malware Analysis | Investigate suspicious downloads using Zeek connection, HTTP, notice, and file logs. | [View Activity](./atividade-3.5-caso-uso-malware-email/README.md) |
 
 ## Environment
 

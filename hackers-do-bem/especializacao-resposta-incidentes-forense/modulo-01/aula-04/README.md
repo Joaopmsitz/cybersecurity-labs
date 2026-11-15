@@ -16,7 +16,12 @@ This class explores Network Security Monitoring (NSM), Enterprise Security Monit
 ## Practical Activities
 
 | Activity | Topic | Description | Documentation |
-|---|---|---|---|
+| -------- | ----- | ----------- | ------------- |
+| 4.1 — Getting Started with CyberChef | Data Decoding | Decode a hexadecimal string protected with a single-byte XOR key using brute-force analysis. | [View Activity](./atividade-4.1-cyberchef-xor-brute-force/README.md) |
+| 4.2 — Solving Simple Cryptography Challenges with CyberChef | Cryptographic Decoding | Automate Morse code normalization and decoding using sequential CyberChef operations. | [View Activity](./atividade-4.2-cyberchef-morse-decoding/README.md) |
+| 4.3 — Incident Response Playbook: Malware on a Server | Incident Response | Develop a server malware incident response playbook covering preparation, identification, containment, eradication, and recovery. | [View Activity](./atividade-4.3-malware-incident-response-playbook/README.md) |
+| 4.4 — Converting Playbooks for Incident Response Platforms | Detection Engineering | Create a Sigma rule for chattr immutable attribute removal and convert it to ElastAlert. | [View Activity](./atividade-4.4-sigma-to-elastalert/README.md) |
+| 4.5 — MITRE ATT&CK Navigator: APT3 and APT29 | Threat Intelligence | Compare APT3 and APT29 techniques using scored and combined MITRE ATT&CK Navigator layers. | [View Activity](./atividade-4.5-mitre-attack-navigator-apt3-apt29/README.md) |
 
 ## Environment
 

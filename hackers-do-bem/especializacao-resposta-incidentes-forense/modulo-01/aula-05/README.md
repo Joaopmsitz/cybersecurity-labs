@@ -16,7 +16,12 @@ This class examines the infrastructure, technologies, processes, and operational
 ## Practical Activities
 
 | Activity | Topic | Description | Documentation |
-|---|---|---|---|
+| -------- | ----- | ----------- | ------------- |
+| 5.1 — Analyzing a Basic CSIRT Infrastructure | Infrastructure Analysis | Evaluate connectivity redundancy, high availability, and laboratory isolation in a basic CSIRT architecture. | [View Activity](./atividade-5.1-simple-csirt-infrastructure/README.md) |
+| 5.2 — Analyzing a Virtualized CSIRT Infrastructure | Virtualization and Storage | Analyze virtual machine clusters, SAN dependencies, resource utilization, and infrastructure availability. | [View Activity](./atividade-5.2-virtualized-csirt-infrastructure/README.md) |
+| 5.3 — Analyzing an Enterprise-Scale Network Architecture | Network Security | Evaluate network segmentation, traffic monitoring, defense in depth, and enterprise infrastructure dependencies. | [View Activity](./atividade-5.3-enterprise-network-architecture/README.md) |
+| 5.4 — Analyzing an Incident Response Workflow | Incident Management | Analyze incident triage, ticket queues, investigation workflows, and lessons learned. | [View Activity](./atividade-5.4-incident-response-workflow/README.md) |
+| 5.5 — Discussion of Incident Handling Infrastructure and Services | CSIRT Operations | Discuss incident reporting, ticketing, communication, monitoring, continuity, remote access, and investigation tools. | [View Activity](./atividade-5.5-incident-handling-service-discussion/README.md) |
 
 ## Environment
 

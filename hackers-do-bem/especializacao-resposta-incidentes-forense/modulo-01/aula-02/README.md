@@ -16,7 +16,12 @@ This class explores security event monitoring and incident investigation using S
 ## Practical Activities
 
 | Activity | Topic | Description | Documentation |
-|---|---|---|---|
+| -------- | ----- | ----------- | ------------- |
+| 2.1 — Splunk Enterprise | SIEM Fundamentals | Explore Splunk Enterprise and prepare the platform for security event monitoring. | [View Activity](./atividade-2.1-splunk-enterprise/README.md) |
+| 2.2 — Linux Authentication Log Monitoring with Splunk | Log Analysis | Search Linux authentication events and investigate user, password, group, and administrative activity. | [View Activity](./atividade-2.2-monitoramento-logs/README.md) |
+| 2.3 — Real-Time Alert Configuration in Splunk | Security Alerting | Configure alerts to identify user creation commands and monitor matching security events. | [View Activity](./atividade-2.3-criacao-alerta/README.md) |
+| 2.4 — Linux Monitoring Dashboard in Splunk | Security Visualization | Create a dashboard to visualize Linux authentication and account management events. | [View Activity](./atividade-2.4-dashboard/README.md) |
+| 2.5 — Security Monitoring Use Cases with Splunk | Detection and Investigation | Use SPL searches to identify privileged command execution and investigate security events. | [View Activity](./atividade-2.5-casos-uso-seguranca/README.md) |
 
 ## Environment
 

@@ -16,7 +16,12 @@ This class introduces cyber threats and the reconnaissance techniques used durin
 ## Practical Activities
 
 | Activity | Topic | Description | Documentation |
-|---|---|---|---|
+| -------- | ----- | ----------- | ------------- |
+| 1.1 — Information Gathering with Python Sockets | Network Programming | Develop and analyze a basic client-server application using Python TCP sockets. | [View Activity](./atividade-1.1-coleta-informacoes/README.md) |
+| 1.2 — TCP Port Scanner using Python Sockets | Port Scanning | Build a Python TCP scanner to identify open ports within a specified target port range. | [View Activity](./atividade-1.2-port-scanner-socket/README.md) |
+| 1.3 — Web Reconnaissance with FinalRecon | Web Reconnaissance | Inspect SSL information, HTTP headers, WHOIS data, and web resources using FinalRecon. | [View Activity](./atividade-1.3-reconhecimento-finalrecon/README.md) |
+| 1.4 — DNS Reconnaissance and Nmap Scanning | Network Discovery | Perform forward and reverse DNS lookups and investigate network ports using Nmap. | [View Activity](./atividade-1.4-varredura-nmap/README.md) |
+| 1.5 — Information Gathering with cURL and DMitry | Information Gathering | Collect IP intelligence and domain information using cURL, IPinfo, and DMitry. | [View Activity](./atividade-1.5-outras-ferramentas-curl-dmitry/README.md) |
 
 ## Environment
 
