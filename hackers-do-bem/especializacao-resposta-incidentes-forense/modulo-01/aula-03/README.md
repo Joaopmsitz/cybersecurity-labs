@@ -1,8 +1,8 @@
 # Hackers do Bem — Specialization | Module 01 — Class 03
 
-Documentation of the practical activities from Class 03 of the Hackers do Bem Incident Response and Digital Forensics specialization.
+Detailed documentation of the practical activities from Class 03 of the Hackers do Bem Incident Response and Digital Forensics specialization.
 
-This class explores network security monitoring, malware investigation, file analysis, automated file extraction, and incident response using Zeek.
+This class focuses on malware investigation, email-borne threats, network security monitoring, file analysis, cryptographic hashing, structured logs, and automatic file extraction using Zeek.
 
 ## Class Overview
 
@@ -14,71 +14,91 @@ This class explores network security monitoring, malware investigation, file ana
 | Class | 03 |
 | Activities | 5 |
 | Environment | forenseLinux VM |
-| Primary Tool | Zeek |
-| Focus | Malware and Email Incident Response |
+| Main Tool | Zeek |
+| Main Focus | Malware and Email Incident Response |
 
 ## Practical Activities
 
 | Activity | Topic | Documentation |
 |---|---|---|
 | 3.1 | Configuring Zeek | [View Activity](./atividade-3.1-configurando-zeek/) |
-| 3.2 | File Analysis with Zeek | [View Activity](./atividade-3.2-analise-arquivos-zeek/) |
-| 3.3 | Understanding Zeek Logs and JSON | [View Activity](./atividade-3.3-logs-json-zeek/) |
+| 3.2 | File Analysis and SHA256 Hashing | [View Activity](./atividade-3.2-analise-arquivos-zeek/) |
+| 3.3 | Zeek Logs and JSON Output | [View Activity](./atividade-3.3-logs-json-zeek/) |
 | 3.4 | Automatic File Extraction | [View Activity](./atividade-3.4-extracao-automatica-arquivos/) |
-| 3.5 | Malware Investigation Use Case | [View Activity](./atividade-3.5-caso-uso-malware-email/) |
+| 3.5 | Malware Investigation and Incident Response | [View Activity](./atividade-3.5-caso-uso-malware-email/) |
+
+## Environment
+
+| Component | Configuration |
+|---|---|
+| Virtual Machine | forenseLinux |
+| Access Method | Remote Desktop through landing |
+| VM Address | 192.168.98.10 |
+| Zeek Installation | /opt/zeek |
+| Site Configuration | /opt/zeek/share/zeek/site/local.zeek |
+| Current Logs | /opt/zeek/logs/current/ |
+| Network Interface Used in Exercise | ens5 |
 
 ## Tools and Technologies
 
-| Category | Tools | Context |
+| Category | Tools | Application |
 |---|---|---|
-| Network Security Monitoring | Zeek | Network traffic analysis and security monitoring |
-| File Analysis | Zeek File Analysis Framework | File identification and metadata analysis |
-| Cryptographic Hashing | MD5, SHA1, SHA256 | File identification and integrity analysis |
+| Network Security Monitoring | Zeek | Passive network traffic analysis |
+| File Analysis | Zeek File Analysis Framework | File identification and analysis |
+| Cryptographic Hashing | MD5, SHA1, SHA256 | File identification and integrity |
 | Malware Intelligence | Team Cymru Malware Hash Registry | Known malware hash matching |
-| Network Analysis | conn.log, dns.log, http.log | Network activity investigation |
 | File Extraction | Zeek File Extraction Framework | Automatic extraction of transferred files |
-| Log Processing | Zeek JSON Logs | Structured security event analysis |
+| Network Investigation | conn.log, dns.log, http.log | Connection and protocol investigation |
+| File Investigation | files.log | File metadata and hash analysis |
+| Security Notifications | notice.log, weird.log | Suspicious events and protocol anomalies |
+| Structured Logging | JSON | Machine-readable event records |
 
 ## Evidence Requirements
 
-The original practical assignment requires one PDF containing the five requested screenshots.
+The original assignment requires a single PDF containing the requested screenshots:
 
-| Activity | Required Screenshot |
-|---|---|
-| 3.1 | Step 2 |
-| 3.2 | Step 2 |
-| 3.3 | Step 5 |
-| 3.4 | Step 6 |
-| 3.5 | Step 1 |
+| Activity | Required Step | Evidence |
+|---|---:|---|
+| 3.1 | 2 | Zeek service status |
+| 3.2 | 2 | SHA256 configuration in local.zeek |
+| 3.3 | 5 | Generated log directory or JSON connection log |
+| 3.4 | 6 | Network capture and file extraction |
+| 3.5 | 1 | Connection UID highlighted in conn.log |
 
 [View Universal Class Evidence PDF](./evidences.pdf)
 
-The same evidence document is referenced by all five activity READMEs.
+The same PDF is referenced by all five activity READMEs.
 
 ## Learning Outcomes
 
-- Zeek service configuration and deployment
-- Network security monitoring
-- File hashing and SHA256 analysis
-- Malware hash intelligence
-- Structured JSON log generation
-- Automatic file extraction
-- Network traffic investigation
-- Correlation of security events
-- Identification and documentation of indicators of compromise
+- Configure and deploy Zeek.
+- Inspect Zeek service status and diagnostic information.
+- Enable MD5 and SHA1 file hashing.
+- Develop a custom Zeek script for SHA256 analysis.
+- Configure Team Cymru Malware Hash Registry integration.
+- Inspect connection and file analysis logs.
+- Configure JSON log output.
+- Configure automatic file extraction.
+- Identify and monitor network interfaces.
+- Correlate connection, HTTP, file, and security notice records.
+- Identify indicators of compromise.
+- Document technical findings for incident response.
 
-## Technical Notes
+## Important Technical Distinctions
 
-The final activity uses a historical training scenario involving a suspicious executable delivered through a download link associated with a supposed employee bonus.
-
-The scenario demonstrates how Zeek logs can support incident investigation through connection identifiers, file identifiers, hashes, network addresses, and malware intelligence.
-
-The example indicators are presented as training material and are not represented as current threat intelligence.
+- A connection UID identifies a network connection.
+- A file UID (fuid) identifies an observed file.
+- An entry in files.log does not necessarily mean that file contents were extracted to disk.
+- A notice.log entry represents a security notice generated by a Zeek script; weird.log records unexpected protocol behavior.
+- Example indicators and JSON records in the training material are historical exercise data, not current threat intelligence.
 
 ## References
 
-- [Official Zeek Documentation](https://docs.zeek.org/en/master/)
-- [Zeek — About](https://docs.zeek.org/en/master/about.html)
+- [Zeek Documentation](https://docs.zeek.org/en/master/)
+- [Zeek File Analysis Framework](https://docs.zeek.org/en/current/frameworks/file-analysis.html)
+- [Zeek Logs](https://docs.zeek.org/en/current/tutorial/logs.html)
+- [Zeek files.log Reference](https://docs.zeek.org/en/current/reference/logs/files.html)
+- [Zeek Script Index](https://docs.zeek.org/en/current/reference/zeekscript/scripts.html)
 
 ---
 
