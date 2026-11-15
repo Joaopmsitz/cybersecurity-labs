@@ -75,9 +75,7 @@ Elasticsearch responds to the local API request.
 
 ## Evidence
 
-Step 9 - Terminal output confirming Elasticsearch, Kibana, and Logstash status.
-
-The required screenshot is included in the consolidated class-level evidence document:
+The required screenshot for this activity is included in the consolidated class-level evidence document:
 
 - [View evidences.pdf](../evidences.pdf)
 
@@ -98,5 +96,6 @@ The required screenshot is included in the consolidated class-level evidence doc
 - [Class 06](../README.md)
 - [Previous Activity - 6.3](../atividade-6.3-threat-hunting-zeek-splunk/README.md)
 - [Next Activity - 6.5](../atividade-6.5-enviando-zeek-elastic/README.md)
+
 
 

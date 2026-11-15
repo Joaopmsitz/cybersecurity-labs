@@ -72,9 +72,7 @@ The timechart query produces a line chart comparing incoming and outgoing traffi
 
 ## Evidence
 
-Step 6 - Line chart showing incoming and outgoing network traffic over time by service.
-
-The required screenshot is included in the consolidated class-level evidence document:
+The required screenshot for this activity is included in the consolidated class-level evidence document:
 
 - [View evidences.pdf](../evidences.pdf)
 
@@ -97,5 +95,6 @@ The required screenshot is included in the consolidated class-level evidence doc
 - [Class 06](../README.md)
 - [Previous Activity - 6.2](../atividade-6.2-visualizando-logs-splunk/README.md)
 - [Next Activity - 6.4](../atividade-6.4-preparando-elastic/README.md)
+
 
 

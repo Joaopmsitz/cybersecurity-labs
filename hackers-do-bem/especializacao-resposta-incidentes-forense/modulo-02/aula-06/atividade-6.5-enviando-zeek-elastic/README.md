@@ -115,9 +115,7 @@ The connection, DNS, and certificate queries can be used to filter the ingested 
 
 ## Evidence
 
-Step 5 - Kibana confirmation that Zeek data was successfully received.
-
-The required screenshot is included in the consolidated class-level evidence document:
+The required screenshot for this activity is included in the consolidated class-level evidence document:
 
 - [View evidences.pdf](../evidences.pdf)
 
@@ -140,5 +138,6 @@ The required screenshot is included in the consolidated class-level evidence doc
 - [Class 06](../README.md)
 - [Previous Activity - 6.4](../atividade-6.4-preparando-elastic/README.md)
 - [Module 02](../../README.md)
+
 
 

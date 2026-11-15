@@ -45,9 +45,7 @@ A dedicated Splunk index named `zeek` is available to receive Zeek network monit
 
 ## Evidence
 
-Step 4 - Splunk index creation page displaying the zeek index name.
-
-The required screenshot is included in the consolidated class-level evidence document:
+The required screenshot for this activity is included in the consolidated class-level evidence document:
 
 - [View evidences.pdf](../evidences.pdf)
 
@@ -62,5 +60,6 @@ The required screenshot is included in the consolidated class-level evidence doc
 - [Class 06](../README.md)
 - [Module 02](../../README.md)
 - [Next Activity - 6.2](../atividade-6.2-visualizando-logs-splunk/README.md)
+
 
 

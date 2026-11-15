@@ -67,7 +67,7 @@ The activities use the `forenseLinux` virtual machine provided by the training e
 |---|---|---|
 | [evidences.pdf](./evidences.pdf) | 6.1-6.5 | Consolidated evidence document containing the screenshots required for all five practical activities. |
 
-All required screenshots for activities 6.1 through 6.5 are included in this single class-level PDF, organized according to the steps specified in the training instructions.
+All required screenshots for activities 6.1 through 6.5 are organized in this single class-level PDF.
 
 ## Technical Notes
 
@@ -91,4 +91,5 @@ All required screenshots for activities 6.1 through 6.5 are included in this sin
 
 - [Module 02](../README.md)
 - [Specialization Overview](../../README.md)
+
 
