@@ -141,3 +141,4 @@ The required screenshot is included in the consolidated class-level evidence doc
 - [Previous Activity - 6.4](../atividade-6.4-preparando-elastic/README.md)
 - [Module 02](../../README.md)
 
+

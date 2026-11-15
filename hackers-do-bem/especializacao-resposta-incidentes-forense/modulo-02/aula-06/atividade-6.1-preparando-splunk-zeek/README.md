@@ -63,3 +63,4 @@ The required screenshot is included in the consolidated class-level evidence doc
 - [Module 02](../../README.md)
 - [Next Activity - 6.2](../atividade-6.2-visualizando-logs-splunk/README.md)
 
+

@@ -98,3 +98,4 @@ The required screenshot is included in the consolidated class-level evidence doc
 - [Previous Activity - 6.2](../atividade-6.2-visualizando-logs-splunk/README.md)
 - [Next Activity - 6.4](../atividade-6.4-preparando-elastic/README.md)
 
+

@@ -113,3 +113,4 @@ The required screenshot is included in the consolidated class-level evidence doc
 - [Previous Activity - 6.1](../atividade-6.1-preparando-splunk-zeek/README.md)
 - [Next Activity - 6.3](../atividade-6.3-threat-hunting-zeek-splunk/README.md)
 
+

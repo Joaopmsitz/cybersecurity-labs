@@ -63,15 +63,11 @@ The activities use the `forenseLinux` virtual machine provided by the training e
 
 ## Evidence
 
-| Activity | Evidence | Required Capture |
+| Document | Activities Covered | Description |
 |---|---|---|
-| 6.1 | [6.1.pdf](./6.1.pdf) | Step 4 - Splunk index creation page displaying the `zeek` index name. |
-| 6.2 | Pending | Step 8 - Splunk search results for the Zeek log directory. |
-| 6.3 | Pending | Step 6 - Line chart showing incoming and outgoing traffic over time by service. |
-| 6.4 | Pending | Step 9 - Terminal output confirming Elasticsearch, Kibana, and Logstash status. |
-| 6.5 | Pending | Step 5 - Kibana confirmation that Zeek data was successfully received. |
+| [evidences.pdf](./evidences.pdf) | 6.1-6.5 | Consolidated evidence document containing the screenshots required for all five practical activities. |
 
-The `6.1.pdf` file contains the evidence currently available for this class. The remaining evidence will be added as the activities are completed.
+All required screenshots for activities 6.1 through 6.5 are included in this single class-level PDF, organized according to the steps specified in the training instructions.
 
 ## Technical Notes
 
@@ -95,3 +91,4 @@ The `6.1.pdf` file contains the evidence currently available for this class. The
 
 - [Module 02](../README.md)
 - [Specialization Overview](../../README.md)
+
