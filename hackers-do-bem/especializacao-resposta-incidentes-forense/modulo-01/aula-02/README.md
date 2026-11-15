@@ -50,11 +50,11 @@ This class explores security monitoring and incident investigation using Splunk 
 
 ## Documentation and Evidence
 
-The original activity PDF was unavailable during this documentation process. The activity records were reconstructed from the available written report and screenshot transcription.
+The class evidence PDF contains the practical screenshots associated with the five activities.
 
-No original screenshots are represented as attached evidence in this directory.
+[View Class Evidence PDF](./evidences.pdf)
 
-The documentation distinguishes between observed search results, recorded configurations, and activities described in the report.
+The written activity documentation was reconstructed from the available report and screenshot transcription. Technical findings and documented observations are distinguished from information that could not be independently verified.
 
 ## Technical Notes
 

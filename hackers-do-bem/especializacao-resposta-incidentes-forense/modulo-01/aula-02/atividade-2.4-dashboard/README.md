@@ -1,10 +1,10 @@
 # Activity 2.4 — Splunk Monitoring Dashboard
 
-> **Program:** Hackers do Bem  
-> **Stage:** Specialization — Incident Response and Digital Forensics  
-> **Module:** 01  
-> **Class:** 02  
-> **Environment:** forenseLinux VM  
+> **Program:** Hackers do Bem
+> **Stage:** Specialization — Incident Response and Digital Forensics
+> **Module:** 01
+> **Class:** 02
+> **Environment:** forenseLinux VM
 > **Status:** Completed
 
 ## Objective
@@ -64,6 +64,9 @@ Centralizing these events provides a convenient view of activity relevant to sec
 - Log aggregation
 - Security operations monitoring
 
----
+## Evidence
 
+[View Class Evidence PDF](../evidences.pdf)
+
+---
 [Back to Class 02](../README.md) · [Back to Specialization](../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)

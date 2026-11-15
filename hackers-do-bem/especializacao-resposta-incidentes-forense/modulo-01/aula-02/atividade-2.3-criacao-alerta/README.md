@@ -1,10 +1,10 @@
 # Activity 2.3 — Splunk Alert Configuration
 
-> **Program:** Hackers do Bem  
-> **Stage:** Specialization — Incident Response and Digital Forensics  
-> **Module:** 01  
-> **Class:** 02  
-> **Environment:** forenseLinux VM  
+> **Program:** Hackers do Bem
+> **Stage:** Specialization — Incident Response and Digital Forensics
+> **Module:** 01
+> **Class:** 02
+> **Environment:** forenseLinux VM
 > **Status:** Completed
 
 ## Objective
@@ -63,6 +63,9 @@ The available records document the configuration and test event, with the alert-
 - Account creation detection
 - Security monitoring and alert validation
 
----
+## Evidence
 
+[View Class Evidence PDF](../evidences.pdf)
+
+---
 [Back to Class 02](../README.md) · [Back to Specialization](../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)

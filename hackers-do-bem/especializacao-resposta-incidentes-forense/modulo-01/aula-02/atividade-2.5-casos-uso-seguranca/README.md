@@ -1,10 +1,10 @@
 # Activity 2.5 — Security Monitoring Use Cases
 
-> **Program:** Hackers do Bem  
-> **Stage:** Specialization — Incident Response and Digital Forensics  
-> **Module:** 01  
-> **Class:** 02  
-> **Environment:** forenseLinux VM  
+> **Program:** Hackers do Bem
+> **Stage:** Specialization — Incident Response and Digital Forensics
+> **Module:** 01
+> **Class:** 02
+> **Environment:** forenseLinux VM
 > **Status:** Completed
 
 ## Objective
@@ -71,6 +71,9 @@ The recorded SPL query demonstrates how authentication logs can be filtered and 
 - Log filtering and field selection
 - Event analysis and investigation
 
----
+## Evidence
 
+[View Class Evidence PDF](../evidences.pdf)
+
+---
 [Back to Class 02](../README.md) · [Back to Specialization](../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)

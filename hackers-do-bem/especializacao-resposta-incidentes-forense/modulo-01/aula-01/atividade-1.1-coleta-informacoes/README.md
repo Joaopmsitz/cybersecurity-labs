@@ -115,8 +115,6 @@ The activity demonstrates how to create a listening server, establish a client c
 
 [Activity 1.1 — PDF Evidence](./1.1.pdf)
 
-[Class Evidence PDF](../evidencias.pdf)
-
 ---
 
 [Back to Class 01](../README.md) · [Back to Specialization](../../README.md) · [Back to Cybersecurity Portfolio](../../../../../README.md)

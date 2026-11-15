@@ -1,10 +1,10 @@
 # Activity 2.1 — Splunk Enterprise
 
-> **Program:** Hackers do Bem  
-> **Stage:** Specialization — Incident Response and Digital Forensics  
-> **Module:** 01  
-> **Class:** 02  
-> **Environment:** forenseLinux VM  
+> **Program:** Hackers do Bem
+> **Stage:** Specialization — Incident Response and Digital Forensics
+> **Module:** 01
+> **Class:** 02
+> **Environment:** forenseLinux VM
 > **Status:** Completed
 
 ## Objective
@@ -54,6 +54,9 @@ The initial license-related error was recorded as an environment limitation enco
 - Search and Reporting interface
 - Splunk licensing and search execution
 
----
+## Evidence
 
+[View Class Evidence PDF](../evidences.pdf)
+
+---
 [Back to Class 02](../README.md) · [Back to Specialization](../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)
