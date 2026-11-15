@@ -11,8 +11,8 @@ This repository organizes the practical classes, technical activities, procedure
 | Program | Hackers do Bem |
 | Stage | Specialization |
 | Focus | Incident Response and Digital Forensics |
-| Repository Coverage | Modules 01-02 |
-| Classes Documented | 10 |
+| Repository Coverage | Modules 01-03 |
+| Classes Documented | 11 |
 
 ## Module Structure
 
@@ -20,6 +20,7 @@ This repository organizes the practical classes, technical activities, procedure
 |---|---|---|
 | Module 01 | Cyber threats, security monitoring, incident investigation, forensic analysis, and CSIRT infrastructure | [View Module 01](./modulo-01/README.md) |
 | Module 02 | SIEM/SOAR data collection, processing, analysis, Zeek, Splunk, and Elastic | [View Module 02](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-02/README.md) |
+| Module 03 | Computer forensics, timeline reconstruction, investigation, password auditing, and steganography | [View Module 03](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-03/README.md) |
 
 ## Module 01 — Incident Response and Digital Forensics
 
@@ -107,6 +108,7 @@ The specialization develops practical understanding of:
 - [Back to Hackers do Bem](../README.md)
 - [View Specialization Module 01](./modulo-01/README.md)
 - [Back to Cybersecurity Portfolio](../../README.md)
+
 
 
 

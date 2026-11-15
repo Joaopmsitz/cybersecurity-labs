@@ -105,4 +105,5 @@ Activity 10.2 does not require a screenshot for this practical submission.
 
 - [Module 02](../README.md)
 - [Previous Class - 09](../aula-09/README.md)
+- [Next Module - 03](../../modulo-03/README.md)
 - [Specialization Overview](../../README.md)

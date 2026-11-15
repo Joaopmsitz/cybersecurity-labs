@@ -26,4 +26,5 @@ This module covers security data collection, processing, threat intelligence, ne
 ## Navigation
 
 - [Specialization Overview](../README.md)
+- [Next Module - 03: Computer Forensics](../modulo-03/README.md)
 - [Cybersecurity Labs](../../README.md)
