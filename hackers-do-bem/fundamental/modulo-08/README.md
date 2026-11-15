@@ -1,50 +1,36 @@
-# Module 08 — Cryptography and Data Protection
+﻿# Hackers do Bem — Fundamental | Module 08
 
-> **Program:** Hackers do Bem  
-> **Stage:** Fundamental  
-> **Module:** 08  
-> **Status:** Completed
+> Program: Hackers do Bem > Stage: Fundamental > Module: 08 > Status: Completed
 
-## Overview
+## Activities
 
-This module covers steganography, Python code obfuscation, symmetric and asymmetric encryption, cryptographic hashes, and digital signatures. The activities use tools such as OpenSSL and Steghide in Kali Linux to demonstrate core cryptographic concepts and data protection techniques.
-
-## Classes 29–30 — Steganography and Symmetric Encryption
+### Activities — Class 29–30
 
 | Activity | Topic | Description | View |
 |---|---|---|---|
-| 8.01 | Steganography on Kali Linux | Hide a text message inside a JPG image and extract the hidden file. | [View](aula-29-30/atividade-8.01-esteganografia-kali/README.md) |
-| 8.02 | Python Code Obfuscation | Compile Python code into bytecode and examine the compiled file. | [View](aula-29-30/atividade-8.02-ofuscacao-python/README.md) |
-| 8.03 | AES-256 Encryption and Decryption | Encrypt and recover an image file using AES-256-CTR with OpenSSL. | [View](aula-29-30/atividade-8.03-aes-256/README.md) |
-| 8.04 | 3DES Encryption and Decryption | Encrypt and decrypt an image using Triple DES in CFB mode. | [View](aula-29-30/atividade-8.04-3des/README.md) |
-| 8.05 | Blowfish Encryption and Decryption | Encrypt and recover an image using Blowfish in CFB mode. | [View](aula-29-30/atividade-8.05-blowfish/README.md) |
+| 8.01 — Using Steganography on Kali Linux | Cybersecurity Practice | Use steganography to hide the contents of a text file inside a JPG image and then recover the hidden file from the image. | [View](./aula-29-30/atividade-8.01-esteganografia-kali/README.md) |
+| 8.02 — Obfuscating Python Code on Kali Linux | Network Programming and Reconnaissance | Use the Python compiler to generate an optimized bytecode version of a program and examine its behavior after changing the extension of the compiled file. | [View](./aula-29-30/atividade-8.02-ofuscacao-python/README.md) |
+| 8.03 — Encrypting and Decrypting a File with AES-256 on Kali Linux | Cryptography | Use OpenSSL to encrypt and decrypt a file using AES-256 in CTR mode, demonstrating how to protect a file and subsequently recover it using the password provided during encryption. | [View](./aula-29-30/atividade-8.03-aes-256/README.md) |
+| 8.04 — Encrypting and Decrypting a File with 3DES on Linux | Cryptography | Use OpenSSL to encrypt and decrypt a file using 3DES (Triple DES) in CFB mode, verifying the creation of the encrypted file and its subsequent recovery. | [View](./aula-29-30/atividade-8.04-3des/README.md) |
+| 8.05 — Encrypting and Decrypting a File with Blowfish on Linux | Cryptography | Use OpenSSL to encrypt and decrypt a file using the Blowfish algorithm in CFB mode, verifying the creation of an encrypted file and its subsequent recovery. | [View](./aula-29-30/atividade-8.05-blowfish/README.md) |
 
-**Evidence:** [View PDF — Classes 29–30](aula-29-30/evidencias.pdf)
-
-## Classes 31–32 — Hashing and Asymmetric Cryptography
+### Activities — Class 31–32
 
 | Activity | Topic | Description | View |
 |---|---|---|---|
-| 8.06 | MD5, RIPEMD-160, and BLAKE2 Hashes | Calculate and compare cryptographic digests using different hash algorithms. | [View](aula-31-32/atividade-8.06-hash-md5-ripemd160-blake2/README.md) |
-| 8.07 | SHA-1, SHA-2, and SHA-3 Hashes | Compute and compare SHA-family digests with different output lengths. | [View](aula-31-32/atividade-8.07-hash-sha/README.md) |
-| 8.08 | RSA-2048 for Confidentiality | Generate an RSA key pair and encrypt and decrypt a message. | [View](aula-31-32/atividade-8.08-rsa-2048-confidencialidade/README.md) |
-| 8.09 | ECC-256 for Confidentiality | Generate ECC keys, derive a shared secret, and demonstrate symmetric encryption. | [View](aula-31-32/atividade-8.09-ecc-256-confidencialidade/README.md) |
-| 8.10 | RSA-2048 Digital Signatures | Create and verify a digital signature, then test verification with modified content. | [View](aula-31-32/atividade-8.10-rsa-2048-assinatura-digital/README.md) |
+| 8.06 — Computing MD5, RIPEMD-160, and BLAKE2 Hashes | Cryptographic Hashing | Calculate the hash of a file using different cryptographic hash algorithms on Kali Linux: | [View](./aula-31-32/atividade-8.06-hash-md5-ripemd160-blake2/README.md) |
+| 8.07 — Computing SHA-1, SHA-2, and SHA-3 Hashes | Cryptographic Hashing | Calculate the hash of a file using different algorithms from the SHA family on Kali Linux: | [View](./aula-31-32/atividade-8.07-hash-sha/README.md) |
+| 8.08 — RSA-2048 for Confidentiality | Cybersecurity Practice | Use the RSA-2048 algorithm to demonstrate an asymmetric encryption process involving: | [View](./aula-31-32/atividade-8.08-rsa-2048-confidencialidade/README.md) |
+| 8.09 — ECC-256 for Confidentiality | Cybersecurity Practice | Use Elliptic Curve Cryptography (ECC) to demonstrate a process for protecting and recovering a message. | [View](./aula-31-32/atividade-8.09-ecc-256-confidencialidade/README.md) |
+| 8.10 — RSA-2048 and Digital Signatures | Cybersecurity Practice | Use RSA-2048 to create and verify a digital signature with OpenSSL. | [View](./aula-31-32/atividade-8.10-rsa-2048-assinatura-digital/README.md) |
 
-**Evidence:** [View PDF — Classes 31–32](aula-31-32/evidencias.pdf)
+## Evidence
 
-## Key Skills Practiced
+Evidence files are organized by class. Each PDF consolidates the screenshots and supporting material required for the corresponding practical activities.
 
-- Steganography and file extraction.
-- Python bytecode compilation and code obfuscation concepts.
-- Symmetric encryption using AES, 3DES, and Blowfish.
-- Cryptographic hash calculation and comparison.
-- Asymmetric cryptography using RSA and elliptic curves.
-- Digital signature generation and verification.
-- Understanding the limitations of legacy cryptographic algorithms and configurations.
-
-> **Security note:** Some activities use legacy algorithms or demonstrate simplified cryptographic workflows for educational purposes. For real-world applications, prefer modern, authenticated encryption and current key derivation practices.
+- [View Evidence — Class 29–30](./aula-29-30/evidencias.pdf)
+- [View Evidence — Class 31–32](./aula-31-32/evidencias.pdf)
 
 ---
 
-[Back to Fundamental](../README.md) · [Back to Hackers do Bem](../../README.md) · [Back to Repository](../../../README.md)
+[Back to Fundamental](../README.md) · [Back to Hackers do Bem](../../README.md) · [Back to Cybersecurity Portfolio](../../../README.md)
