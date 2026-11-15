@@ -1,109 +1,63 @@
-﻿# Hackers do Bem - Specialization | Module 02 - Class 10
+﻿# Class 10 — Memory Forensics and Network Evidence Collection
 
-This class covers memory acquisition and analysis, network traffic capture, and logical evidence collection using forensic tools for Linux, Windows, and network environments.
+This class covers the acquisition and examination of volatile memory from Linux and Windows systems, followed by network packet collection and HTTP object extraction.
 
-The practical activities use AVML, FTK Imager, Volatility 3, tcpdump, and Wireshark.
-
-## Class Overview
-
-| Item | Description |
-|---|---|
-| Program | Hackers do Bem |
-| Track | Incident Response and Digital Forensics |
-| Module | 02 - Data Processing |
-| Class | 10 |
-| Main Topic | Memory and Network Dump Tools and Techniques |
-| Main Technologies | AVML, FTK Imager, Volatility 3, tcpdump, Wireshark |
+The practical activities introduce AVML, FTK Imager, Volatility 3, tcpdump, and Wireshark as part of a digital forensic workflow.
 
 ## Practical Activities
 
 | Activity | Topic | Description | Documentation |
 |---|---|---|---|
-| 10.1 | Linux Memory Dump | Acquire volatile memory from a Linux system using AVML and calculate cryptographic hashes. | [View Activity](./atividade-10.1-dump-memoria-linux/README.md) |
-| 10.2 | Windows Memory Dump | Acquire a Windows memory image using FTK Imager. | [View Activity](./atividade-10.2-dump-memoria-windows/README.md) |
-| 10.3 | Logical Memory Evidence Collection | Analyze a Windows memory image using Volatility 3 plugins and preserve extracted forensic results. | [View Activity](./atividade-10.3-evidencias-logicas-memoria/README.md) |
-| 10.4 | Network Dump | Capture network packets using tcpdump and calculate capture integrity hashes. | [View Activity](./atividade-10.4-dump-rede-tcpdump/README.md) |
-| 10.5 | Logical Network Evidence Collection | Analyze a network capture with Wireshark and export HTTP objects. | [View Activity](./atividade-10.5-evidencias-logicas-rede-wireshark/README.md) |
+| 10.1 — Linux Memory Dump with AVML | Linux Memory Acquisition | Acquire volatile memory from the forenseLinux virtual machine and generate MD5 and SHA-256 hashes for integrity verification. | [View](.//README.md) |
+| 10.2 — Windows Memory Dump with FTK Imager | Windows Memory Acquisition | Capture volatile memory from a live Windows workstation using FTK Imager. | [View](.//README.md) |
+| 10.3 — Windows Memory Analysis with Volatility 3 | Memory Forensics | Examine Windows kernel information and account hash artifacts from the acquired memory image. | [View](.//README.md) |
+| 10.4 — Network Dump with tcpdump | Network Forensics | Inspect Linux network interfaces and capture packets into a PCAP file using tcpdump. | [View](.//README.md) |
+| 10.5 — Logical Network Evidence Collection with Wireshark | Network Forensics | Analyze the packet capture and export reconstructed HTTP objects using Wireshark. | [View](.//README.md) |
 
-## Environment
+## Environment and Tools
 
-The activities use the `forenseLinux` virtual machine and the `forensewin` Windows virtual machine provided by the training environment.
-
-| Component | Purpose |
+| Component | Description |
 |---|---|
-| AVML | Linux volatile memory acquisition |
-| FTK Imager | Windows memory acquisition and forensic imaging |
-| Volatility 3 | Memory image analysis |
-| tcpdump | Network packet capture |
-| Wireshark | Packet inspection and logical evidence extraction |
-| Netcat | Not used in this class; network capture is performed with tcpdump |
-
-## Tools and Technologies
-
-- AVML
-- FTK Imager
-- Volatility 3
-- tcpdump
-- Wireshark
-- MD5
-- SHA-256
-- PCAP
-- Linux
-- Windows
-- Memory forensics
-- Network forensics
+| Linux Environment | forenseLinux |
+| Windows Environment | Windows forensic workstation |
+| Linux Memory Acquisition | AVML |
+| Windows Memory Acquisition | FTK Imager |
+| Memory Analysis | Volatility 3 |
+| Network Interface Inspection | ip a |
+| Network Capture | tcpdump |
+| Packet Analysis | Wireshark |
+| Evidence Format | Memory images and PCAP files |
+| Integrity Verification | MD5 and SHA-256 |
 
 ## Learning Outcomes
 
-- Acquire volatile memory from a Linux system.
-- Generate and verify memory dump hashes.
-- Understand Windows memory acquisition using FTK Imager.
-- Identify operating system information from memory images.
-- Extract forensic artifacts using Volatility 3.
-- Capture network traffic using tcpdump.
-- Preserve network captures and calculate integrity hashes.
-- Analyze network packets with Wireshark.
-- Filter HTTP traffic and export transferred objects.
+- Acquire volatile memory from Linux and Windows systems.
+- Prepare memory images for forensic examination.
+- Generate cryptographic hashes to support evidence integrity verification.
+- Identify operating system information from Windows memory.
+- Examine account-related artifacts using Volatility 3.
+- Inspect Linux network interfaces.
+- Capture packets using tcpdump.
+- Analyze PCAP files in Wireshark.
+- Export reconstructed HTTP objects from network traffic.
+- Preserve and correlate forensic artifacts from different sources.
 
 ## Evidence
 
-A single PDF contains the screenshots required for four practical activities.
+The consolidated PDF contains the screenshots required by the practical activities in this class.
 
-| Activity | Required Step | Evidence Description | PDF Page |
-|---|---|---|---|
-| 10.1 | Step 2 | Terminal showing the creation of `/home/aluno/forense`, the copy of AVML, and the prepared working directory. | 1 |
-| 10.3 | Step 3 | Volatility 3 `windows.info` output displaying the memory image operating system metadata. | 2 |
-| 10.4 | Step 2 | `ip a` output showing the active network interfaces and their assigned IP addresses. | 3 |
-| 10.5 | Step 8 | Wireshark HTTP Export Objects view showing the objects identified in the network capture and the exported files. | 4 |
-
-Activity 10.2 does not require a screenshot for this practical submission.
-
-- [View consolidated evidence - evidences.pdf](./evidences.pdf)
+[View Evidence — Class 10](./evidences.pdf)
 
 ## Technical Notes
 
-- AVML is a Linux volatile memory acquisition tool. The training VM supplies a binary that uses the command syntax documented in the course; current upstream AVML uses the `acquire` subcommand.
-- Memory acquisition may change system state. In real investigations, store the acquisition on a separate trusted external device whenever possible.
-- Volatility 3 uses plugins and symbol tables to analyze memory images.
-- The course's `windows.hashdump.Hashdump` plugin is documented as deprecated in current Volatility 3 documentation.
-- Memory artifacts may contain credential hashes and other sensitive information. Do not publish raw memory dumps or credential extraction outputs.
-- tcpdump supports packet filters and writing captures to PCAP files.
-- Wireshark's Export Objects feature reconstructs objects transferred through supported protocols, including HTTP.
-- Only capture traffic in networks and systems for which you have authorization.
-
-## References
-
-- [Microsoft - AVML](https://github.com/microsoft/avml)
-- [Exterro - FTK Imager User Guide](https://d1kpmuwb7gvu1i.cloudfront.net/Imager/8.2/Exterro%20FTK%20Imager%208.2%20-%20User%20Guide-%20.pdf)
-- [Volatility 3 - Official Documentation](https://volatility3.readthedocs.io/en/latest/)
-- [Volatility 3 - Windows Hashdump Plugin](https://volatility3.readthedocs.io/en/stable/volatility3.plugins.windows.hashdump.html)
-- [tcpdump - Manual](https://www.tcpdump.org/manpages/tcpdump.1.html)
-- [Wireshark - Exporting Data](https://www.wireshark.org/docs/wsug_html_chunked/ChIOExportSection.html)
-- [Wireshark - Display Filters](https://www.wireshark.org/docs/man-pages/wireshark-filter.html)
+- AVML is used for Linux volatile memory acquisition.
+- FTK Imager is used to acquire memory from the live Windows workstation.
+- Volatility 3 analyzes acquired memory images; it does not perform the acquisition in this workflow.
+- The legacy windows.hashdump implementation is deprecated in current Volatility 3 documentation. The current replacement is windows.registry.hashdump.
+- tcpdump uses -w to save captured packet data to a file for later analysis.
+- Wireshark's Export Objects function can reconstruct HTTP objects from available protocol streams.
+- Actual memory sizes, hashes, network interface addresses, packet counts, and exported object metadata are environment-specific and should be taken from the original evidence rather than estimated.
 
 ## Navigation
 
-- [Module 02](../README.md)
-- [Previous Class - 09](../aula-09/README.md)
-- [Next Module - 03](../../modulo-03/README.md)
-- [Specialization Overview](../../README.md)
+[Back to Module 02](../README.md) · [Back to Specialization](../../README.md) · [Back to Hackers do Bem](../../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)
