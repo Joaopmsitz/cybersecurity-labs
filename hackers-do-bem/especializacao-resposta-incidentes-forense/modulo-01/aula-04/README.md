@@ -1,66 +1,91 @@
-﻿# Lesson 04 — Incident Handling: Network and Web Application
+﻿# Hackers do Bem — Specialization | Module 01 — Class 04
 
-**Training:** Hackers do Bem — Incident Response and Digital Forensics Specialization  
-**Participant:** João Paulo Moreira de Sousa  
-**Submission status:** Submitted for evaluation  
-**Evaluation status:** Evaluated  
-**Last modification recorded by the course platform:** May 11, 2026 — 21:01
+This class explores Network Security Monitoring (NSM), Enterprise Security Monitoring (ESM), data decoding, detection engineering, incident response playbooks, and threat behavior analysis. The practical activities combine CyberChef, Sigma, ElastAlert, and MITRE ATT&CK Navigator.
 
-## Overview
+## Class Overview
 
-This lesson introduces Network Security Monitoring (NSM) and its relationship with Enterprise Security Monitoring (ESM). It explores how network traffic, endpoint telemetry, security logs, and incident response procedures can be combined to identify and investigate suspicious activity.
+| Item | Details |
+|---|---|
+| Program | Hackers do Bem |
+| Stage | Specialization |
+| Module | 01 |
+| Class | 04 |
+| Activities | 5 |
+| Main Topics | Network Security Monitoring, CyberChef, Cryptographic Decoding, Incident Response Playbooks, Sigma Rules, ElastAlert, and MITRE ATT&CK |
 
-NSM is not limited to generating intrusion alerts. It also involves collecting and analyzing relevant network data so that an investigation can reconstruct events, identify attacker behavior, and support incident response.
+## Practical Activities
 
-The lesson discusses capabilities commonly found in an NSM environment, including:
+| Activity | Topic | Description | Documentation |
+|---|---|---|---|
 
-- Network traffic monitoring and packet capture.
-- Log collection, search, and visualization.
-- Intrusion detection with tools such as Suricata and Snort.
-- Threat hunting and investigation of suspicious activity.
-- Incident case management and playbook execution.
-- Endpoint and network telemetry correlation.
+## Environment
 
-Security Onion is presented as an example of an open-source NSM platform integrating multiple security tools and investigation capabilities.
+The activities primarily use browser-based security tools and online analysis platforms.
 
-## Activities
+| Component | Tool |
+|---|---|
+| Data Decoding | CyberChef |
+| Detection Rule Format | Sigma |
+| Rule Conversion | Uncoder IO |
+| Alerting Format | ElastAlert |
+| Threat Behavior Analysis | MITRE ATT&CK Navigator |
+| Threat Emulation Reference | Atomic Red Team |
 
-| Activity | Subject | Evidence |
+## Tools and Technologies
+
+| Category | Tools | Purpose |
 |---|---|---|
-| 4.1 | CyberChef — XOR brute-force decoding | [Page 1](./evidences.pdf) |
-| 4.2 | CyberChef — Morse code decoding | [Page 2](./evidences.pdf) |
-| 4.3 | Malware incident response playbook | [Pages 5–7](./evidences.pdf) |
-| 4.4 | Sigma rule conversion to ElastAlert | [Page 3](./evidences.pdf) |
-| 4.5 | MITRE ATT&CK Navigator — APT3 and APT29 | [Page 4](./evidences.pdf) |
+| Data Analysis | CyberChef | Decode, transform, and manipulate encoded data. |
+| Detection Engineering | Sigma | Describe security detections in a generic, vendor-independent format. |
+| Rule Conversion | Uncoder IO | Convert detection rules into formats supported by security platforms. |
+| Alerting | ElastAlert | Generate alerts from matching Elasticsearch events. |
+| Threat Intelligence | MITRE ATT&CK Navigator | Visualize and compare adversary techniques using ATT&CK layers. |
+| Threat Emulation | Atomic Red Team | Provide controlled tests aligned with MITRE ATT&CK techniques. |
 
-## Repository structure
+## Learning Outcomes
 
-    aula-04/
-    ├── README.md
-    ├── evidences.pdf
-    ├── atividade-4.1-cyberchef-xor-brute-force/
-    │   └── README.md
-    ├── atividade-4.2-cyberchef-morse-decoding/
-    │   └── README.md
-    ├── atividade-4.3-malware-incident-response-playbook/
-    │   └── README.md
-    ├── atividade-4.4-sigma-to-elastalert/
-    │   └── README.md
-    └── atividade-4.5-mitre-attack-navigator-apt3-apt29/
-        └── README.md
+- Understand the objectives of NSM and ESM.
+- Build sequential decoding recipes using CyberChef.
+- Apply brute-force analysis to a controlled XOR challenge.
+- Automate Morse code transformations and decoding.
+- Organize incident response procedures in a malware playbook.
+- Describe detection logic using Sigma.
+- Convert detection rules into an alerting platform format.
+- Compare threat group techniques using MITRE ATT&CK Navigator.
 
-## Evidence file
+## Evidence Requirements
 
-All activity screenshots and the written playbook deliverable are consolidated into a single PDF:
+The original practical assignment consolidates the required evidence into a single PDF document.
 
 [View Universal Class Evidence PDF](./evidences.pdf)
 
-The PDF contains the evidence pages in the following order:
+| Activity | Required Screenshot |
+|---|---|
+| 4.1 | Step 4 |
+| 4.2 | Step 5 |
+| 4.4 | Step 2 |
+| 4.5 | Step 9 |
 
-1. Activity 4.1 — XOR Brute Force result.
-2. Activity 4.2 — final Morse decoding result.
-3. Activity 4.4 — Sigma-to-ElastAlert conversion.
-4. Activity 4.5 — combined APT3 and APT29 layer.
-5. Activity 4.3 — incident response playbook, pages 5–7.
+The written malware incident response playbook from Activity 4.3 is included in the same PDF, on pages 5–7.
 
-Each activity README describes its objective, procedure, configuration, result, and technical relevance.
+## Technical Notes
+
+- The XOR exercise uses a known plaintext prefix and a single-byte test key to recover a training flag.
+- The Morse activity applies several transformations in sequence. Their order is important to obtain the expected decoded output.
+- The Sigma exercise focuses on detecting the removal of the Linux immutable file attribute using chattr -i. The detection must be evaluated in the context of legitimate administrative activity.
+- The APT3 and APT29 scores configured in Navigator are analytical values assigned for the exercise, not universal severity ratings for the groups.
+
+## References
+
+- [GCHQ CyberChef — Official Repository](https://github.com/gchq/CyberChef)
+- [Sigma Rules Specification](https://sigmahq.io/sigma-specification/specification/sigma-rules-specification.html)
+- [ElastAlert Documentation](https://elastalert.readthedocs.io/en/latest/ruletypes.html)
+- [Uncoder IO](https://uncoder.io/)
+- [MITRE ATT&CK Navigator](https://mitre-attack.github.io/attack-navigator/)
+- [MITRE ATT&CK — APT3 (G0022)](https://attack.mitre.org/groups/G0022/)
+- [MITRE ATT&CK — APT29 (G0016)](https://attack.mitre.org/groups/G0016/)
+- [Atomic Red Team — T1222.002](https://github.com/redcanaryco/atomic-red-team/tree/master/atomics/T1222.002)
+
+---
+
+[Back to Module 01](../README.md) · [Back to Specialization](../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)

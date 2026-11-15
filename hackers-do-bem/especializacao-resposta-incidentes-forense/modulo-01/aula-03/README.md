@@ -1,8 +1,6 @@
-# Hackers do Bem — Specialization | Module 01 — Class 03
+﻿# Hackers do Bem — Specialization | Module 01 — Class 03
 
-Detailed documentation of the practical activities from Class 03 of the Hackers do Bem Incident Response and Digital Forensics specialization.
-
-This class focuses on malware investigation, email-borne threats, network security monitoring, file analysis, cryptographic hashing, structured logs, and automatic file extraction using Zeek.
+This class explores Zeek as a network security monitoring and investigation platform. The activities cover deployment, file hashing, structured JSON logging, automatic file extraction, and the investigation of suspicious downloads using network and file-related telemetry.
 
 ## Class Overview
 
@@ -13,93 +11,79 @@ This class focuses on malware investigation, email-borne threats, network securi
 | Module | 01 |
 | Class | 03 |
 | Activities | 5 |
-| Environment | forenseLinux VM |
-| Main Tool | Zeek |
-| Main Focus | Malware and Email Incident Response |
+| Main Topics | Network Security Monitoring, Zeek, File Analysis, Cryptographic Hashing, JSON Logs, File Extraction, and Malware Investigation |
 
 ## Practical Activities
 
-| Activity | Topic | Documentation |
-|---|---|---|
-| 3.1 | Configuring Zeek | [View Activity](./atividade-3.1-configurando-zeek/) |
-| 3.2 | File Analysis and SHA256 Hashing | [View Activity](./atividade-3.2-analise-arquivos-zeek/) |
-| 3.3 | Zeek Logs and JSON Output | [View Activity](./atividade-3.3-logs-json-zeek/) |
-| 3.4 | Automatic File Extraction | [View Activity](./atividade-3.4-extracao-automatica-arquivos/) |
-| 3.5 | Malware Investigation and Incident Response | [View Activity](./atividade-3.5-caso-uso-malware-email/) |
+| Activity | Topic | Description | Documentation |
+|---|---|---|---|
 
 ## Environment
 
-| Component | Configuration |
+The activities used the `forenseLinux` environment with Zeek installed and configured for network traffic monitoring.
+
+| Component | Details |
 |---|---|
-| Virtual Machine | forenseLinux |
-| Access Method | Remote Desktop through landing |
-| VM Address | 192.168.98.10 |
-| Zeek Installation | /opt/zeek |
-| Site Configuration | /opt/zeek/share/zeek/site/local.zeek |
-| Current Logs | /opt/zeek/logs/current/ |
-| Network Interface Used in Exercise | ens5 |
+| Environment | forenseLinux |
+| Zeek Installation | `/opt/zeek` |
+| Network Interface | `ens5` |
+| Current Logs | `/opt/zeek/logs/current/` |
+| Configuration | `local.zeek` |
+| Management Utility | ZeekControl |
+| Package Manager | ZKG |
 
 ## Tools and Technologies
 
-| Category | Tools | Application |
+| Category | Tools | Purpose |
 |---|---|---|
-| Network Security Monitoring | Zeek | Passive network traffic analysis |
-| File Analysis | Zeek File Analysis Framework | File identification and analysis |
-| Cryptographic Hashing | MD5, SHA1, SHA256 | File identification and integrity |
-| Malware Intelligence | Team Cymru Malware Hash Registry | Known malware hash matching |
-| File Extraction | Zeek File Extraction Framework | Automatic extraction of transferred files |
-| Network Investigation | conn.log, dns.log, http.log | Connection and protocol investigation |
-| File Investigation | files.log | File metadata and hash analysis |
-| Security Notifications | notice.log, weird.log | Suspicious events and protocol anomalies |
-| Structured Logging | JSON | Machine-readable event records |
-
-## Evidence Requirements
-
-The original assignment requires a single PDF containing the requested screenshots:
-
-| Activity | Required Step | Evidence |
-|---|---:|---|
-| 3.1 | 2 | Zeek service status |
-| 3.2 | 2 | SHA256 configuration in local.zeek |
-| 3.3 | 5 | Generated log directory or JSON connection log |
-| 3.4 | 6 | Network capture and file extraction |
-| 3.5 | 1 | Connection UID highlighted in conn.log |
-
-[View Universal Class Evidence PDF](./evidences.pdf)
-
-The same PDF is referenced by all five activity READMEs.
+| Network Monitoring | Zeek | Inspect network activity and generate security telemetry. |
+| Service Management | ZeekControl | Check, deploy, and manage the Zeek monitoring service. |
+| File Analysis | Zeek File Analysis Framework | Analyze files observed in network traffic. |
+| Hashing | MD5, SHA-1, SHA-256 analyzers | Generate file hashes for identification and correlation. |
+| Package Management | ZKG | Manage Zeek packages and extensions. |
+| Linux Utilities | wget, file, ip | Download test files, identify file types, and inspect network interfaces. |
+| Log Formats | TSV, JSON | Represent and process structured network event records. |
 
 ## Learning Outcomes
 
-- Configure and deploy Zeek.
-- Inspect Zeek service status and diagnostic information.
-- Enable MD5 and SHA1 file hashing.
-- Develop a custom Zeek script for SHA256 analysis.
-- Configure Team Cymru Malware Hash Registry integration.
-- Inspect connection and file analysis logs.
-- Configure JSON log output.
-- Configure automatic file extraction.
-- Identify and monitor network interfaces.
-- Correlate connection, HTTP, file, and security notice records.
-- Identify indicators of compromise.
-- Document technical findings for incident response.
+- Deploy and manage Zeek using ZeekControl.
+- Understand the purpose of Zeek network monitoring logs.
+- Configure file hashing and identify files using cryptographic hashes.
+- Generate structured JSON logs.
+- Configure file extraction from monitored network traffic.
+- Correlate connection, HTTP, notice, and file-related events.
+- Use network telemetry to support malware investigations.
 
-## Important Technical Distinctions
+## Evidence Requirements
 
-- A connection UID identifies a network connection.
-- A file UID (fuid) identifies an observed file.
-- An entry in files.log does not necessarily mean that file contents were extracted to disk.
-- A notice.log entry represents a security notice generated by a Zeek script; weird.log records unexpected protocol behavior.
-- Example indicators and JSON records in the training material are historical exercise data, not current threat intelligence.
+The original practical assignment consolidates the required evidence into a single PDF document.
+
+[View Universal Class Evidence PDF](./evidences.pdf)
+
+| Activity | Required Screenshot |
+|---|---|
+| 3.1 | Step 2 |
+| 3.2 | Step 2 |
+| 3.3 | Step 5 |
+| 3.4 | Step 6 |
+| 3.5 | Step 1 |
+
+The universal evidence PDF consolidates the five screenshots required by the practical assignment.
+
+## Technical Notes
+
+- The reported lab results included a running Zeek service, SHA-256 hashing configuration, JSON log configuration, and extraction of a test PDF through the ens5 interface.
+- The presence of a file record in files.log does not by itself prove that the file content was extracted to disk. Extraction requires an appropriate file extraction configuration.
+- The suspicious executable and malware indicators described in Activity 3.5 belong to the training scenario. Example paths and sample metadata should not be assumed to represent independent malware validation.
 
 ## References
 
-- [Zeek Documentation](https://docs.zeek.org/en/master/)
-- [Zeek File Analysis Framework](https://docs.zeek.org/en/current/frameworks/file-analysis.html)
-- [Zeek Logs](https://docs.zeek.org/en/current/tutorial/logs.html)
-- [Zeek files.log Reference](https://docs.zeek.org/en/current/reference/logs/files.html)
-- [Zeek Script Index](https://docs.zeek.org/en/current/reference/zeekscript/scripts.html)
+- [Zeek Documentation — Logs](https://docs.zeek.org/en/current/tutorial/logs.html)
+- [Zeek Documentation — files.log](https://docs.zeek.org/en/current/reference/logs/files.html)
+- [Zeek Documentation — File Analysis Framework](https://docs.zeek.org/en/current/frameworks/file-analysis.html)
+- [ZeekControl — GitHub](https://github.com/zeek/zeekctl)
+- [Zeek — Official Project](https://zeek.org/)
 
 ---
 
-[Back to Module 01](../README.md) · [Back to Specialization](../../README.md) · [Back to Hackers do Bem](../../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)
+[Back to Module 01](../README.md) · [Back to Specialization](../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)

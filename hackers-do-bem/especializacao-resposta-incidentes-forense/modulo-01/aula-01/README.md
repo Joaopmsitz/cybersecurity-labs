@@ -1,8 +1,6 @@
-# Hackers do Bem — Specialization | Module 01 — Class 01
+﻿# Hackers do Bem — Specialization | Module 01 — Class 01
 
-Documentation of the practical activities from Class 01 of the Hackers do Bem Incident Response and Digital Forensics specialization.
-
-The class introduces cyber threats, information gathering, network reconnaissance, port scanning, DNS investigation, and technical tools used during the initial phases of security assessments.
+This class introduces cyber threats and the reconnaissance techniques used during the initial phases of security assessments. The practical activities explore network programming, TCP port scanning, web reconnaissance, DNS investigation, and information gathering.
 
 ## Class Overview
 
@@ -13,23 +11,16 @@ The class introduces cyber threats, information gathering, network reconnaissanc
 | Module | 01 |
 | Class | 01 |
 | Activities | 5 |
-| Environment | forenseLinux VM |
-| VM Address | 192.168.98.10 |
-| Main Topics | Cyber Threats and Kill Chain Methodology |
+| Main Topics | Cyber Threats, Cyber Kill Chain, Network Reconnaissance, Port Scanning, DNS Investigation, and Information Gathering |
 
 ## Practical Activities
 
-| Activity | Topic | Documentation |
-|---|---|---|
-| 1.1 | Information Gathering with Python Sockets | [View Activity](./atividade-1.1-coleta-informacoes/) |
-| 1.2 | TCP Port Scanner using Python Sockets | [View Activity](./atividade-1.2-port-scanner-socket/) |
-| 1.3 | Web Reconnaissance with FinalRecon | [View Activity](./atividade-1.3-reconhecimento-finalrecon/) |
-| 1.4 | DNS Reconnaissance and Nmap Scanning | [View Activity](./atividade-1.4-varredura-nmap/) |
-| 1.5 | Information Gathering with cURL and DMitry | [View Activity](./atividade-1.5-outras-ferramentas-curl-dmitry/) |
+| Activity | Topic | Description | Documentation |
+|---|---|---|---|
 
 ## Environment
 
-All activities were performed in the forenseLinux virtual machine, accessed through the landing system using Remote Desktop Protocol (RDP).
+All activities were performed in the `forenseLinux` virtual machine, accessed through the landing system using Remote Desktop Protocol (RDP).
 
 | Component | Details |
 |---|---|
@@ -44,30 +35,28 @@ All activities were performed in the forenseLinux virtual machine, accessed thro
 
 | Category | Tools | Purpose |
 |---|---|---|
-| Network Programming | Python, Socket | TCP client-server communication |
-| Port Scanning | Python Socket, Nmap | Discover listening ports |
-| Web Reconnaissance | FinalRecon | SSL, WHOIS, HTTP headers, and crawling |
-| DNS Investigation | nslookup, dig | Forward and reverse name resolution |
-| IP Intelligence | cURL, IPinfo | Retrieve IP registration and geolocation data |
-| Domain Reconnaissance | DMitry | WHOIS, subdomains, email addresses, and port scanning |
+| Network Programming | Python 3, Socket | Implement TCP client-server communication. |
+| Port Scanning | Python Socket, Nmap | Identify accessible hosts and listening ports. |
+| Web Reconnaissance | FinalRecon | Inspect SSL certificates, HTTP headers, WHOIS information, and web resources. |
+| DNS Investigation | nslookup, dig | Perform forward and reverse name resolution. |
+| IP Intelligence | cURL, IPinfo | Retrieve IP registration and network-related information. |
+| Domain Reconnaissance | DMitry | Collect WHOIS, subdomain, email, and port information. |
 
 ## Learning Outcomes
 
-- Understand network socket communication.
+- Understand TCP socket communication and client-server architecture.
 - Distinguish TCP stream sockets from UDP datagram sockets.
-- Create a basic client-server application.
-- Develop a TCP port scanner using Python.
-- Perform web reconnaissance.
-- Inspect SSL certificates and HTTP headers.
-- Perform forward and reverse DNS resolution.
+- Develop a basic TCP port scanner using Python.
+- Perform web reconnaissance and inspect SSL information.
+- Investigate forward and reverse DNS records.
 - Interpret Nmap port scanning results.
-- Retrieve IP information through HTTP requests.
-- Collect domain information with DMitry.
-- Document reconnaissance results and technical findings.
+- Collect IP and domain intelligence using reconnaissance tools.
 
 ## Evidence Requirements
 
-The original assignment requires one PDF containing the five specified screenshots.
+The original practical assignment consolidates the required evidence into a single PDF document.
+
+[View Universal Class Evidence PDF](./evidences.pdf)
 
 | Activity | Required Screenshot |
 |---|---|
@@ -77,27 +66,22 @@ The original assignment requires one PDF containing the five specified screensho
 | 1.4 | Step 3 |
 | 1.5 | Step 3 |
 
-[View Universal Class Evidence PDF](./evidences.pdf)
-
-The same evidence document is referenced by all five activity READMEs.
+The universal evidence PDF consolidates the five screenshots required by the practical assignment.
 
 ## Technical Notes
 
-The original training material describes the first socket activity as a UDP Echo Server, but the supplied implementation uses TCP stream sockets and sends a fixed confirmation message.
-
-The Python port scanner uses `range(70, 81)`, which tests ports 70 through 80, inclusive.
-
-Expected scan results from the training material are identified separately from independently verified execution results.
+- The first activity is described in the course material as a UDP Echo Server, but the supplied implementation uses TCP stream sockets (SOCK_STREAM) and sends a fixed confirmation message rather than echoing the received payload.
+- The Python port scanner uses range(70, 81), which tests ports 70 through 80, inclusive.
+- Expected scan results from the training material should be distinguished from independently verified execution results.
 
 ## References
 
 - [Python Socket Documentation](https://docs.python.org/3/library/socket.html)
 - [Python Socket Programming HOWTO](https://docs.python.org/3/howto/sockets.html)
-- [Nmap Documentation](https://nmap.org/book/)
-- [Nmap Scanme Legal Information](https://nmap.org/book/legal-issues.html)
-- [FinalRecon](https://github.com/thewhiteh4t/FinalRecon)
+- [Nmap Reference Guide](https://nmap.org/book/man.html)
+- [FinalRecon — GitHub](https://github.com/thewhiteh4t/FinalRecon)
 - [Kali Linux — DMitry](https://www.kali.org/tools/dmitry/)
-- [IPinfo](https://ipinfo.io/)
+- [IPinfo Developer Documentation](https://ipinfo.io/developers)
 
 ---
 
