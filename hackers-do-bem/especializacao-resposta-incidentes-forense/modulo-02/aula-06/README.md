@@ -90,6 +90,8 @@ All required screenshots for activities 6.1 through 6.5 are organized in this si
 ## Navigation
 
 - [Module 02](../README.md)
+- [Next Class - 07](../aula-07/README.md)
 - [Specialization Overview](../../README.md)
+
 
 

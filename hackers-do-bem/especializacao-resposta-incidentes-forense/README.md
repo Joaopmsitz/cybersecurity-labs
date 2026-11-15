@@ -12,7 +12,7 @@ This repository organizes the practical classes, technical activities, procedure
 | Stage | Specialization |
 | Focus | Incident Response and Digital Forensics |
 | Repository Coverage | Modules 01-02 |
-| Classes Documented | 6 |
+| Classes Documented | 7 |
 
 ## Module Structure
 
@@ -107,4 +107,5 @@ The specialization develops practical understanding of:
 - [Back to Hackers do Bem](../README.md)
 - [View Specialization Module 01](./modulo-01/README.md)
 - [Back to Cybersecurity Portfolio](../../README.md)
+
 
