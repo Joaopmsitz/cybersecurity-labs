@@ -11,16 +11,22 @@ This repository organizes the practical classes, technical activities, procedure
 | Program | Hackers do Bem |
 | Stage | Specialization |
 | Focus | Incident Response and Digital Forensics |
-| Repository Coverage | Modules 01-03 |
-| Classes Documented | 11 |
+| Repository Coverage | Modules 01–03 and Final Case Study |
+| Classes Documented | 15 |
 
 ## Module Structure
 
 | Module | Main Topics | Documentation |
 |---|---|---|
-| Module 01 | Cyber threats, security monitoring, incident investigation, forensic analysis, and CSIRT infrastructure | [View Module 01](./modulo-01/README.md) |
+| Module 01 | Cyber threats, security monitoring, incident investigation, forensic analysis, and CSIRT infrastructure | [View Module 01](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-01/README.md) |
 | Module 02 | SIEM/SOAR data collection, processing, analysis, Zeek, Splunk, and Elastic | [View Module 02](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-02/README.md) |
-| Module 03 | Computer forensics, timeline reconstruction, investigation, password auditing, and steganography | [View Module 03](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-03/README.md) |
+| Module 03 | Computer forensics, timeline reconstruction, disk and memory analysis, network forensics, and web attack investigation | [View Module 03](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-03/README.md) |
+
+## Final Case Study — Financial Crime
+
+The final case study combines threat intelligence and digital forensic investigation to analyze a financial crime scenario, identify relevant indicators of compromise, examine digital evidence, and document forensic findings.
+
+[View Final Case Study — Financial Crime](https://github.com/Joaopmsitz/cybersecurity-labs/tree/main/hackers-do-bem/especializacao-resposta-incidentes-forense/estudo-de-caso-crime-financeiro)
 
 ## Module 01 — Incident Response and Digital Forensics
 
@@ -34,7 +40,7 @@ The first module develops practical knowledge across five classes, progressing f
 | Class 04 | Network Security Monitoring, CyberChef, incident response playbooks, Sigma, and MITRE ATT&CK |
 | Class 05 | CSIRT team organization, infrastructure architecture, incident workflows, and operational services |
 
-[Explore all Module 01 classes](./modulo-01/README.md)
+[Explore all Module 01 classes](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-01/README.md)
 
 ## Areas of Study
 
@@ -105,12 +111,9 @@ The specialization develops practical understanding of:
 
 ## Repository Navigation
 
-- [Back to Hackers do Bem](../README.md)
-- [View Specialization Module 01](./modulo-01/README.md)
-- [Back to Cybersecurity Portfolio](../../README.md)
-
-
-
-
-
-
+- [Back to Hackers do Bem](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/README.md)
+- [View Specialization Module 01](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-01/README.md)
+- [View Specialization Module 02](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-02/README.md)
+- [View Specialization Module 03](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/hackers-do-bem/especializacao-resposta-incidentes-forense/modulo-03/README.md)
+- [View Final Case Study — Financial Crime](https://github.com/Joaopmsitz/cybersecurity-labs/tree/main/hackers-do-bem/especializacao-resposta-incidentes-forense/estudo-de-caso-crime-financeiro)
+- [Back to Cybersecurity Portfolio](https://github.com/Joaopmsitz/cybersecurity-labs/blob/main/README.md)
