@@ -131,4 +131,5 @@ Activities 9.1 and 9.2 do not require screenshots for this practical submission.
 
 - [Module 02](../README.md)
 - [Previous Class - 08](../aula-08/README.md)
+- [Next Class - 10](../aula-10/README.md)
 - [Specialization Overview](../../README.md)

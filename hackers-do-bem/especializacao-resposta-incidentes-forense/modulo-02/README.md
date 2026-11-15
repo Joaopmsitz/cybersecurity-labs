@@ -2,7 +2,7 @@
 
 Documentation of the second module of the Hackers do Bem Incident Response and Digital Forensics specialization.
 
-This module covers security data collection, processing, threat intelligence, network traffic analysis, digital investigation, and forensic procedures.
+This module covers security data collection, processing, threat intelligence, network traffic analysis, digital investigation, memory forensics, and disk evidence recovery.
 
 ## Module Overview
 
@@ -11,7 +11,7 @@ This module covers security data collection, processing, threat intelligence, ne
 | Program | Hackers do Bem |
 | Track | Incident Response and Digital Forensics |
 | Module | 02 - Data Processing |
-| Main Topics | SIEM/SOAR, threat intelligence, threat hunting, digital investigation, and forensics |
+| Main Topics | SIEM/SOAR, threat intelligence, threat hunting, investigation, and digital forensics |
 
 ## Classes
 
@@ -21,6 +21,7 @@ This module covers security data collection, processing, threat intelligence, ne
 | Class 07 | Enhanced Incident Detection with Threat Intelligence and RITA | [View Class 07](./aula-07/README.md) |
 | Class 08 | Investigation Process | [View Class 08](./aula-08/README.md) |
 | Class 09 | Preparation, Collection, and Recovery of Disk Data | [View Class 09](./aula-09/README.md) |
+| Class 10 | Memory and Network Dump Tools and Techniques | [View Class 10](./aula-10/README.md) |
 
 ## Navigation
 
