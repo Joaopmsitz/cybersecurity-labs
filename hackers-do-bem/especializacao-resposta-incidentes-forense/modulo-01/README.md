@@ -1,149 +1,67 @@
-﻿# Hackers do Bem — Specialization | Module 01
+﻿# Module 01 — Incident Response and Digital Forensics
 
-Index of practical classes documented for Module 01 of the Hackers do Bem Incident Response and Digital Forensics specialization.
+This module covers practical cybersecurity activities involving threat reconnaissance, security event monitoring, malware investigation, network security monitoring, digital forensics, detection engineering, and Computer Security Incident Response Team (CSIRT) operations.
 
-The module progresses from cyber threat reconnaissance and security event investigation to malware analysis, network monitoring, incident response processes, and CSIRT infrastructure.
+## Activities — Class 01
 
-## Module Overview
+| Activity | Topic | Description | View |
+| -------- | ----- | ----------- | ---- |
+| 1.1 — Information Gathering with Python Sockets | Network Programming | Develop and analyze a basic client-server application using Python TCP sockets. | [View](./aula-01/atividade-1.1-coleta-informacoes/README.md) |
+| 1.2 — TCP Port Scanner using Python Sockets | Port Scanning | Build a Python TCP scanner to identify open ports within a target port range. | [View](./aula-01/atividade-1.2-port-scanner-socket/README.md) |
+| 1.3 — Web Reconnaissance with FinalRecon | Web Reconnaissance | Inspect SSL information, HTTP headers, WHOIS data, and web resources using FinalRecon. | [View](./aula-01/atividade-1.3-reconhecimento-finalrecon/README.md) |
+| 1.4 — DNS Reconnaissance and Nmap Scanning | Network Discovery | Perform forward and reverse DNS lookups and investigate target ports using Nmap. | [View](./aula-01/atividade-1.4-varredura-nmap/README.md) |
+| 1.5 — Information Gathering with cURL and DMitry | Information Gathering | Collect IP intelligence and domain information using cURL, IPinfo, and DMitry. | [View](./aula-01/atividade-1.5-outras-ferramentas-curl-dmitry/README.md) |
 
-| Item | Details |
-|---|---|
-| Program | Hackers do Bem |
-| Stage | Specialization |
-| Module | 01 |
-| Classes | 5 |
-| Main Focus | Incident Response and Digital Forensics |
-| Documentation | Class and activity READMEs |
-| Evidence | Universal PDF files organized by class |
+## Activities — Class 02
 
-## Classes
+| Activity | Topic | Description | View |
+| -------- | ----- | ----------- | ---- |
+| 2.1 — Splunk Enterprise | SIEM and Incident Investigation | Practice security event monitoring and incident investigation using Splunk. | [View](./aula-02/atividade-2.1-splunk-enterprise/README.md) |
+| 2.2 — Linux Authentication Log Monitoring with Splunk | SIEM and Incident Investigation | Practice security event monitoring and incident investigation using Splunk. | [View](./aula-02/atividade-2.2-monitoramento-logs/README.md) |
+| 2.3 — Real-Time Alert Configuration in Splunk | SIEM and Incident Investigation | Practice security event monitoring and incident investigation using Splunk. | [View](./aula-02/atividade-2.3-criacao-alerta/README.md) |
+| 2.4 — Linux Monitoring Dashboard in Splunk | SIEM and Incident Investigation | Practice security event monitoring and incident investigation using Splunk. | [View](./aula-02/atividade-2.4-dashboard/README.md) |
+| 2.5 — Security Monitoring Use Cases with Splunk | SIEM and Incident Investigation | Practice security event monitoring and incident investigation using Splunk. | [View](./aula-02/atividade-2.5-casos-uso-seguranca/README.md) |
 
-### Class 01 — Cyber Threats and Kill Chain Methodology
+## Activities — Class 03
 
-Introduction to cyber threats and reconnaissance techniques used during the initial phases of security assessments.
+| Activity | Topic | Description | View |
+| -------- | ----- | ----------- | ---- |
+| 3.1 — Configuring Zeek | Network Monitoring | Configure, deploy, and verify the operational status of the Zeek network monitoring platform. | [View](./aula-03/atividade-3.1-configurando-zeek/README.md) |
+| 3.2 — File Hash Analysis with Zeek | Digital Forensics | Enable file hashing capabilities to generate MD5, SHA-1, and SHA-256 file hashes. | [View](./aula-03/atividade-3.2-analise-arquivos-zeek/README.md) |
+| 3.3 — JSON Logging with Zeek | Security Logging | Configure Zeek to generate structured JSON logs for network event investigation. | [View](./aula-03/atividade-3.3-logs-json-zeek/README.md) |
+| 3.4 — Automatic File Extraction with Zeek | Network Forensics | Configure file extraction, inspect extracted network files, and validate the extraction process. | [View](./aula-03/atividade-3.4-extracao-automatica-arquivos/README.md) |
+| 3.5 — Malware and Email Investigation | Malware Analysis | Investigate suspicious downloads and malware-related indicators using Zeek logs and file metadata. | [View](./aula-03/atividade-3.5-caso-uso-malware-email/README.md) |
 
-Main topics:
+## Activities — Class 04
 
-- Cyber threats and the Cyber Kill Chain.
-- Python socket communication.
-- TCP port scanning.
-- Web reconnaissance with FinalRecon.
-- DNS investigation and Nmap.
-- Information gathering with cURL and DMitry.
+| Activity | Topic | Description | View |
+| -------- | ----- | ----------- | ---- |
+| 4.1 — XOR Brute Force with CyberChef | Data Decoding | Decode a hexadecimal string protected with a single-byte XOR key using brute-force analysis. | [View](./aula-04/atividade-4.1-cyberchef-xor-brute-force/README.md) |
+| 4.2 — Morse Code Decoding with CyberChef | Cryptography | Automate Morse code normalization and decoding through a sequence of CyberChef operations. | [View](./aula-04/atividade-4.2-cyberchef-morse-decoding/README.md) |
+| 4.3 — Malware Incident Response Playbook | Incident Response | Develop an incident response playbook covering preparation, identification, containment, eradication, and recovery. | [View](./aula-04/atividade-4.3-malware-incident-response-playbook/README.md) |
+| 4.4 — Sigma Rule Conversion to ElastAlert | Detection Engineering | Create a Sigma rule to detect immutable attribute removal with chattr and convert it to ElastAlert. | [View](./aula-04/atividade-4.4-sigma-to-elastalert/README.md) |
+| 4.5 — MITRE ATT&CK Navigator: APT3 and APT29 | Threat Intelligence | Compare APT3 and APT29 techniques by creating, scoring, and combining ATT&CK Navigator layers. | [View](./aula-04/atividade-4.5-mitre-attack-navigator-apt3-apt29/README.md) |
 
-[View Class 01](./aula-01/README.md)
+## Activities — Class 05
 
-**Class evidence:** [View Evidence PDF](./aula-01/evidences.pdf)
+| Activity | Topic | Description | View |
+| -------- | ----- | ----------- | ---- |
+| 5.1 — Basic CSIRT Infrastructure Analysis | Infrastructure Analysis | Evaluate redundancy, high availability, and laboratory isolation in a basic CSIRT architecture. | [View](./aula-05/atividade-5.1-simple-csirt-infrastructure/README.md) |
+| 5.2 — Virtualized CSIRT Infrastructure | Virtualization and Storage | Analyze virtual machine clusters, SAN dependencies, resource utilization, and infrastructure availability. | [View](./aula-05/atividade-5.2-virtualized-csirt-infrastructure/README.md) |
+| 5.3 — Enterprise Network Architecture | Network Security | Evaluate enterprise network segmentation, traffic monitoring, defense in depth, and infrastructure dependencies. | [View](./aula-05/atividade-5.3-enterprise-network-architecture/README.md) |
+| 5.4 — Incident Response Workflow | Incident Management | Analyze incident triage, ticket queues, investigation workflows, and lessons learned. | [View](./aula-05/atividade-5.4-incident-response-workflow/README.md) |
+| 5.5 — Incident Handling Services and Infrastructure | CSIRT Operations | Discuss incident reporting, ticketing, communication, monitoring, continuity, remote access, and investigation tools. | [View](./aula-05/atividade-5.5-incident-handling-service-discussion/README.md) |
 
-### Class 02 — Incident Response with Splunk
+## Evidence
 
-Introduction to security event monitoring and investigation using Splunk and Linux authentication logs.
+Evidence files are organized by class. Each PDF consolidates the screenshots and supporting material required for the corresponding practical activities.
 
-Main topics:
+- [View Evidence — Class 01](./aula-01/evidences.pdf)
+- [View Evidence — Class 02](./aula-02/evidences.pdf)
+- [View Evidence — Class 03](./aula-03/evidences.pdf)
+- [View Evidence — Class 04](./aula-04/evidences.pdf)
+- [View Evidence — Class 05](./aula-05/evidences.pdf)
 
-- Splunk Enterprise and search interface.
-- Linux authentication and security logs.
-- User and group activity investigation.
-- Alert creation and monitoring.
-- Dashboard creation.
-- SPL queries for security event analysis.
+---
 
-[View Class 02](./aula-02/README.md)
-
-**Class evidence:** [View Evidence PDF](./aula-02/evidences.pdf)
-
-### Class 03 — Malware and Email Incident Response with Zeek
-
-Practical use of Zeek to collect, structure, and investigate network and file-related telemetry.
-
-Main topics:
-
-- Zeek installation and deployment.
-- File hashing and analysis.
-- JSON log configuration.
-- Automatic file extraction.
-- Investigation of suspicious downloads and malware-related indicators.
-
-[View Class 03](./aula-03/README.md)
-
-**Class evidence:** [View Evidence PDF](./aula-03/evidences.pdf)
-
-### Class 04 — Incident Handling: Network and Web Application
-
-Exploration of Network Security Monitoring and tools used to support security analysis and incident response.
-
-Main topics:
-
-- Network Security Monitoring (NSM) and Enterprise Security Monitoring (ESM).
-- CyberChef encoding and decoding operations.
-- XOR brute-force analysis and Morse decoding.
-- Malware incident response playbooks.
-- Sigma detection rules and ElastAlert conversion.
-- MITRE ATT&CK Navigator and threat group comparison.
-
-[View Class 04](./aula-04/README.md)
-
-**Class evidence:** [View Evidence PDF](./aula-04/evidences.pdf)
-
-### Class 05 — Building an Incident Response Team
-
-Analysis of the infrastructure, processes, and operational capabilities needed to establish a CSIRT.
-
-Main topics:
-
-- Basic CSIRT infrastructure.
-- Virtualization and Storage Area Networks (SAN).
-- Enterprise network architecture.
-- Network monitoring and high availability.
-- Incident response workflows and ticket queues.
-- Secure communication and incident reporting.
-- Monitoring, business continuity, and remote investigation tools.
-
-[View Class 05](./aula-05/README.md)
-
-**Class evidence:** [View Evidence PDF](./aula-05/evidences.pdf)
-
-## Skills Practiced
-
-- Network reconnaissance and security assessment.
-- Python socket programming and port scanning.
-- DNS analysis and network discovery.
-- SIEM operation and SPL-based investigation.
-- Security alerting and dashboard development.
-- Network monitoring and traffic analysis with Zeek.
-- File hashing, extraction, and forensic investigation.
-- Data decoding and transformation with CyberChef.
-- Detection engineering with Sigma.
-- Threat behavior analysis using MITRE ATT&CK.
-- Incident response planning and playbook development.
-- CSIRT infrastructure and operational workflow analysis.
-- Technical reporting and evidence organization.
-
-## Documentation Standards
-
-Each class directory contains a class-level README, supporting evidence when available, and separate directories for practical activities.
-
-Each activity README should document:
-
-- Objective and technical context.
-- Lab environment and tools used.
-- Procedures, commands, and configurations.
-- Observed results and technical findings.
-- Relevant concepts and security implications.
-- Supporting evidence.
-
-Documentation distinguishes actual observed results from expected outputs or examples provided by the training material.
-
-## Evidence Organization
-
-When the course requires a single evidence document for multiple activities, the PDF is stored in the corresponding class root directory as `evidences.pdf`.
-
-Individual activity READMEs link to the shared class evidence file instead of maintaining duplicate PDFs.
-
-Evidence files should be reviewed before publication to avoid exposing credentials, personal information, sensitive infrastructure details, or material not authorized for public distribution.
-
-## Repository Navigation
-
-- [Back to Specialization](../README.md)
-- [Back to Hackers do Bem](../../README.md)
-- [Back to Cybersecurity Portfolio](../../../README.md)
+[Back to Specialization](../README.md) · [Back to Hackers do Bem](../../README.md) · [Back to Cybersecurity Portfolio](../../../README.md)
