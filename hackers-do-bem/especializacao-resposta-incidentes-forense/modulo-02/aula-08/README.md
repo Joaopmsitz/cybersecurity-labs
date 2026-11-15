@@ -103,9 +103,9 @@ The PDF is stored at the class level and consolidates the five required screensh
 - [CrowdStrike - Sandbox Scryer](https://www.crowdstrike.com/en-us/blog/sandbox-scryer-free-threat-hunting-tool/)
 - [Volatility 3 - Documentation](https://volatility3.readthedocs.io/en/latest/)
 - [Volatility 3 - Windows Tutorial](https://volatility3.readthedocs.io/en/latest/getting-started-windows-tutorial.html)
-
 ## Navigation
 
 - [Module 02](../README.md)
 - [Previous Class - 07](../aula-07/README.md)
+- [Next Class - 09](../aula-09/README.md)
 - [Specialization Overview](../../README.md)

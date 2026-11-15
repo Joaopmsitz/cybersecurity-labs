@@ -20,6 +20,7 @@ This module covers security data collection, processing, threat intelligence, ne
 | Class 06 | Data Collection, Processing, and Analysis using SIEM/SOAR | [View Class 06](./aula-06/README.md) |
 | Class 07 | Enhanced Incident Detection with Threat Intelligence and RITA | [View Class 07](./aula-07/README.md) |
 | Class 08 | Investigation Process | [View Class 08](./aula-08/README.md) |
+| Class 09 | Preparation, Collection, and Recovery of Disk Data | [View Class 09](./aula-09/README.md) |
 
 ## Navigation
 
