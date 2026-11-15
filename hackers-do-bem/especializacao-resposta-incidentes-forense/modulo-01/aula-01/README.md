@@ -50,8 +50,7 @@ The original assignment requires one PDF containing the requested screenshots:
 
 The class-level evidence PDF is maintained in this directory.
 
-[View Class Evidence PDF](./evidencias.pdf)
-
+[View Universal Class Evidence PDF](./evidences.pdf)
 An additional Activity 1.1 PDF is stored alongside its corresponding documentation.
 
 ## Learning Outcomes

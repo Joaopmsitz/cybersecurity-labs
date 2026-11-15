@@ -52,8 +52,7 @@ This class explores security monitoring and incident investigation using Splunk 
 
 The class evidence PDF contains the practical screenshots associated with the five activities.
 
-[View Class Evidence PDF](./evidences.pdf)
-
+[View Universal Class Evidence PDF](./evidences.pdf)
 The written activity documentation was reconstructed from the available report and screenshot transcription. Technical findings and documented observations are distinguished from information that could not be independently verified.
 
 ## Technical Notes

@@ -93,9 +93,7 @@ The activity introduces IP intelligence retrieval, domain reconnaissance, and sa
 
 ## Evidence
 
-The assignment requests a screenshot of Step 3, showing the generated DMitry output file.
-
-[Class Evidence PDF](../evidencias.pdf)
+[View Universal Class Evidence PDF](../evidences.pdf)
 
 ---
 

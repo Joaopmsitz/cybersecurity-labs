@@ -73,7 +73,7 @@ The recorded SPL query demonstrates how authentication logs can be filtered and 
 
 ## Evidence
 
-[View Class Evidence PDF](../evidences.pdf)
+[View Universal Class Evidence PDF](../evidences.pdf)
 
 ---
 [Back to Class 02](../README.md) · [Back to Specialization](../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)

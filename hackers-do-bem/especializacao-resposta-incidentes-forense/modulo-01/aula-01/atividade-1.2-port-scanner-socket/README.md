@@ -84,7 +84,7 @@ Port scanning must only be performed against systems for which explicit authoriz
 
 ## Evidence
 
-[Class Evidence PDF](../evidencias.pdf)
+[View Universal Class Evidence PDF](../evidences.pdf)
 
 ---
 

@@ -66,7 +66,7 @@ Centralizing these events provides a convenient view of activity relevant to sec
 
 ## Evidence
 
-[View Class Evidence PDF](../evidences.pdf)
+[View Universal Class Evidence PDF](../evidences.pdf)
 
 ---
 [Back to Class 02](../README.md) · [Back to Specialization](../../README.md) · [Back to Cybersecurity Portfolio](../../../../README.md)

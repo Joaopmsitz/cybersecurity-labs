@@ -94,9 +94,7 @@ Scanning other systems requires appropriate authorization.
 
 ## Evidence
 
-The assignment requests a screenshot of Step 3, showing the Nmap command and its output.
-
-[Class Evidence PDF](../evidencias.pdf)
+[View Universal Class Evidence PDF](../evidences.pdf)
 
 ---
 

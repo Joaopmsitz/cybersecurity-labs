@@ -97,9 +97,7 @@ The activity explores FinalRecon's modular reconnaissance features and demonstra
 
 ## Evidence
 
-The assignment requests a screenshot of Step 2, showing the SSL information command and its output.
-
-[Class Evidence PDF](../evidencias.pdf)
+[View Universal Class Evidence PDF](../evidences.pdf)
 
 ---
 
