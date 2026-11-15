@@ -99,4 +99,6 @@ The PDF is stored at the class level and consolidates the five required screensh
 ## Navigation
 
 - [Module 02](../README.md)
+- [Next Class - 08](../aula-08/README.md)
 - [Specialization Overview](../../README.md)
+
