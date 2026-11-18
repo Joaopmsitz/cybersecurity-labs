@@ -1,30 +1,70 @@
-﻿# LetsDefend — SOC Training Profile
+﻿<div align="center">
 
-A collection of SOC investigation exercises and defensive security training completed on [LetsDefend](https://letsdefend.io/).
+# LETSDEFEND | SOC ANALYST DASHBOARD
 
-## Public Profile
+**Joaopmsitz** · SOC Training & Investigation Performance
 
-**Username:** Joaopmsitz
+[Public Profile](https://app.letsdefend.io/user/JoaopmsItz) · [Investigation Reports](./investigations/README.md)
 
-**Profile:** [View Public LetsDefend Profile](https://app.letsdefend.io/user/JoaopmsItz)
+![Status](https://img.shields.io/badge/Status-Open%20to%20Work-2ea44f?style=flat-square)
+![Platform](https://img.shields.io/badge/Platform-LetsDefend-2563eb?style=flat-square)
+![Focus](https://img.shields.io/badge/Focus-SOC%20Analysis-8250df?style=flat-square)
 
-**Status:** Open to Work
+*Profile metrics snapshot — November 18, 2026*
 
-## Platform Performance
+</div>
 
-The following metrics represent a snapshot of the public LetsDefend profile.
+---
 
-| Metric | Value |
-|---|---:|
-| Platform Score | 1,913 points |
-| Success Rate | 94% |
-| SLA Metric | 19,266 |
+## 01 | Performance Overview
 
-The SLA value is reproduced as displayed by the platform; its unit and exact calculation are not specified in this profile snapshot.
+<table>
+<tr>
+<td align="center" width="33%">
 
-## Alert Activity by Category
+<h2>1,913</h2>
 
-The profile dashboard displays activity across 16 alert categories.
+**TOTAL SCORE**
+
+Platform points
+
+</td>
+<td align="center" width="33%">
+
+<h2>94%</h2>
+
+**SUCCESS RATE**
+
+Platform-reported rate
+
+</td>
+<td align="center" width="33%">
+
+<h2>19,266</h2>
+
+**SLA**
+
+Platform-reported value
+
+</td>
+</tr>
+</table>
+
+---
+
+## 02 | Alert Investigation Distribution
+
+The profile dashboard tracks activity across 16 alert categories.
+
+```mermaid
+xychart-beta
+    title "Investigated Alert Types"
+    x-axis ["Malware", "Exchange", "Web", "Proxy", "Brute Force", "Data Leakage"]
+    y-axis "Profile Value" 0 --> 8
+    bar [7, 5, 3, 1, 1, 1]
+```
+
+### Category Breakdown
 
 | Alert Category | Profile Value |
 |---|---:|
@@ -44,50 +84,50 @@ The profile dashboard displays activity across 16 alert categories.
 | C2 | 0 |
 | Privilege Escalation | 0 |
 | APT Group | 0 |
-| **Total** | **18** |
 
-These values represent the category breakdown displayed on the platform. They are separate from the number of individual investigation reports published in this repository.
-
-## Recent Badges
-
-| Achievement | Date |
-|---|---|
-| Introduction to Security+ | 15 October 2026 |
-| SOC Analyst Learning Path | 28 September 2026 |
-| Lab Builder | 28 September 2026 |
-
-## Profile Knowledge Areas
-
-Knowledge areas listed in the LetsDefend profile:
-
-- Dynamic Malware Analysis
-- MITRE ATT&CK Framework
-- IT Security Fundamentals
-- Malicious Document Analysis
-
-These are profile-listed knowledge areas and platform achievements, not a substitute for professional certifications.
-
-## Investigation Documentation
-
-The individual SOC investigation reports are organized by category:
-
-| Category | Documented Cases | Focus |
-|---|---:|---|
-| [Brute Force](./investigations/brute-force/README.md) | 1 | Authentication attacks and RDP brute-force detection. |
-| [Malware](./investigations/malware/README.md) | 5 | Suspicious files, malware, scripts, and malicious documents. |
-| [Phishing](./investigations/phishing/README.md) | 7 | Phishing emails, malicious attachments, and URLs. |
-| [Web Attacks](./investigations/web-attacks/README.md) | 2 | Web attack indicators and suspicious HTTP activity. |
-
-**Total: 15 documented investigation reports.**
-
-[Explore All Investigations](./investigations/README.md)
-
-## Documentation Scope
-
-The reports document simulated training scenarios and focus on alert triage, evidence analysis, threat intelligence, endpoint investigation, incident classification, and response actions.
-
-Findings and response actions refer to the LetsDefend training environment and should not be interpreted as real-world incident response experience.
+<sub>Source: Public LetsDefend profile. Values represent the category breakdown supplied by the platform and are separate from the number of reports published in this repository.</sub>
 
 ---
 
+## 03 | Technical Knowledge Areas
+
+Areas listed in the LetsDefend profile:
+
+| Knowledge Area | Focus |
+|---|---|
+| Dynamic Malware Analysis | Malware behavior and execution analysis |
+| MITRE ATT&CK Framework | Adversary tactics and techniques |
+| IT Security Fundamentals | Information security foundations |
+| Malicious Document Analysis | Suspicious documents and embedded content |
+
+---
+
+## 04 | Achievements & Badges
+
+| Achievement | Date |
+|---|---|
+| Introduction to Security+ | October 15, 2026 |
+| SOC Analyst Learning Path | September 28, 2026 |
+| Lab Builder | September 28, 2026 |
+
+---
+
+## 05 | Investigation Portfolio
+
+Technical investigation reports are maintained separately to avoid duplicating case information in this dashboard.
+
+**[Explore the LetsDefend Investigation Catalog →](./investigations/README.md)**
+
+The catalog provides category navigation, individual case reports, investigation methodology, and technical findings.
+
+---
+
+<div align="center">
+
+**LETSDEFEND PROFILE**
+
+[Joaopmsitz](https://app.letsdefend.io/user/JoaopmsItz)
+
 [Back to Cybersecurity Portfolio](../README.md)
+
+</div>
