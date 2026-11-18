@@ -1,36 +1,25 @@
-# LetsDefend — SOC Investigations
+﻿# LetsDefend
 
-Documented SOC investigation exercises completed on the LetsDefend platform, focusing on alert triage, evidence analysis, threat validation, and incident classification.
+A collection of SOC training exercises completed on the [LetsDefend](https://letsdefend.io/) platform. This section focuses on developing practical investigation skills through simulated security alerts and incident scenarios.
 
-## Investigation Overview
+## Repository Navigation
 
-| Category | Cases | Focus |
-| --- | ---: | --- |
-| [Brute Force](./investigations/brute-force/) | 1 | RDP attacks and authentication analysis |
-| [Malware](./investigations/malware/) | 4 | Suspicious files, scripts, and malware alerts |
-| [Phishing](./investigations/phishing/) | 7 | Phishing emails, malicious attachments, and URLs |
-| [Web Attacks](./investigations/web-attacks/) | 2 | SQL injection indicators and suspicious JavaScript |
+| Resource | Description |
+|---|---|
+| [Investigation Catalog](./investigations/README.md) | Browse documented SOC investigations by category. |
+| [LetsDefend Profile](https://app.letsdefend.io/user/JoaoPmsItz) | View the training profile and platform activity. |
 
-**Total: 14 documented investigations**
+## Documentation Scope
 
-## Skills Practiced
+The investigation reports document the analytical process behind each exercise, including alert context, relevant telemetry, evidence review, threat intelligence, and response decisions.
 
-- SOC alert triage and investigation
-- Log and evidence analysis
-- Indicator of Compromise (IOC) identification
-- Phishing, malware, and web attack investigation
-- Threat validation and incident classification
-- MITRE ATT&CK mapping when supported by evidence
-- Incident reporting and technical documentation
+The documentation distinguishes observed evidence from analytical conclusions. MITRE ATT&CK techniques are included when relevant to the available investigation data.
 
-## Investigation Approach
+## Training Environment
 
-Each investigation is documented in its respective category, covering relevant evidence, analysis, findings, and conclusions supported by the training scenario.
+All investigations in this directory were performed through LetsDefend training scenarios.
 
-## Profiles
-
-- **LetsDefend:** [JoaoPmsItz](https://app.letsdefend.io/user/JoaoPmsItz)
-- **GitHub:** [Joaopmsitz](https://github.com/Joaopmsitz)
+Findings and response actions refer to simulated environments and should not be interpreted as professional incident response experience.
 
 ---
 
