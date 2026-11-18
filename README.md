@@ -1,4 +1,4 @@
-# Cybersecurity Labs
+﻿# Cybersecurity Labs
 
 Hands-on cybersecurity portfolio documenting practical learning across SOC investigations, defensive security, cybersecurity fundamentals, and authorized training platforms.
 
@@ -18,6 +18,9 @@ This repository documents guided training, practical exercises, and authorized l
 | [LetsDefend](./letsdefend/) | SOC alert triage, investigation scenarios, indicators, and incident-response practice. |
 | [Hackers do Bem](./hackers-do-bem/) | Structured training in security fundamentals, networking, cryptography, hardening, logs, and digital forensics. |
 
+## Training Profiles
+
+- **LetsDefend:** [Public SOC training profile](https://app.letsdefend.io/user/JoaopmsItz)
 ## Areas of Practice
 
 - **SOC and incident investigation:** Reviewing alerts, collecting relevant evidence, evaluating indicators, and documenting conclusions.
@@ -28,10 +31,10 @@ This repository documents guided training, practical exercises, and authorized l
 
 ## Certifications and Learning Status
 
-- **Microsoft SC-900** — Earned, 2026.
-- **Microsoft SC-200: Security Operations Analyst** — Earned, 2026.
-- **Google Cybersecurity Professional Certificate** — Completed.
-- **CompTIA Security+ (SY0-701)** — Preparation in progress.
+- **Microsoft SC-900** â€” Earned, 2026.
+- **Microsoft SC-200: Security Operations Analyst** â€” Earned, 2026.
+- **Google Cybersecurity Professional Certificate** â€” Completed.
+- **CompTIA Security+ (SY0-701)** â€” Preparation in progress.
 
 ## Related Technical Portfolios
 
@@ -62,3 +65,4 @@ Before publishing documentation, review all files and evidence to avoid exposing
 ---
 
 *This portfolio is updated as new labs, investigations, and projects are documented.*
+
