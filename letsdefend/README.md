@@ -1,18 +1,18 @@
 # LetsDefend Investigations
 
-A collection of SOC alert investigations completed in the LetsDefend training environment.
+Central index of SOC investigation reports completed in the LetsDefend training environment.
 
-The reports document alert triage, evidence analysis, threat intelligence correlation, MITRE ATT&CK mapping, response actions, and investigation conclusions.
+Each case is identified by its Event ID. SOC identifiers refer to detection rules and may recur across different events.
 
-## Investigation Inventory
+## Documented Investigation Inventory
 
-| Category | Reports | Index |
-|---|---:|---|
-| Brute Force | 1 | [Open](./brute-force/README.md) |
-| Malware | 6 | [Open](./malware/README.md) |
-| Phishing | 7 | [Open](./phishing/README.md) |
-| Web Attacks | 2 | [Open](./web-attacks/README.md) |
-| **Total** | **16** | |
+| Category | Reports |
+|---|---:|
+| [Brute Force](./brute-force/README.md) | 1 |
+| [Malware](./malware/README.md) | 6 |
+| [Phishing](./phishing/README.md) | 7 |
+| [Web Attacks](./web-attacks/README.md) | 2 |
+| **Total** | **16** |
 
 ## Case Index
 
@@ -56,5 +56,3 @@ The reports document alert triage, evidence analysis, threat intelligence correl
 ## Scope
 
 These reports document simulated LetsDefend training scenarios. Findings and response actions should not be interpreted as real-world incident response engagements.
-
-[Back to Cybersecurity Portfolio](../README.md)

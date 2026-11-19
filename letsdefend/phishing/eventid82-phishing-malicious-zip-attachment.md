@@ -1,115 +1,103 @@
-# Phishing Mail Detected - Suspicious Task Scheduler
+# Phishing Mail - Malicious ZIP Attachment
 
 ## 1. Alert Summary
 
-### Alert Details
-
-
 | Field | Value |
-|---------|---------|
-| Alert ID | SOC140 |
+|---|---|
 | Event ID | 82 |
+| Detection Rule | SOC140 - Phishing Mail Detected - Suspicious Task Scheduler |
+| Event Time | 2021-03-21 12:26 |
 | Category | Phishing |
 | Sender | aaronluo@cmail.carleton.ca |
 | Recipient | mark@letsdefend.io |
 | SMTP IP | 189.162.189.159 |
 | Subject | COVID19 Vaccine |
-| Hostname | MarkPRD |
-| User | MarkGuna |
-
----
-
-
+| Attachment | Password-protected ZIP |
+| Device Action | Blocked |
+| Investigation Verdict | True Positive |
 
 ## 2. Investigation Overview
 
-### Summary
+The alert was generated after a phishing email using a COVID-19 vaccine-themed lure was identified.
 
+The message contained a password-protected ZIP attachment. Investigation confirmed that the archive contained a malicious PDF file.
 
-A phishing email alert was generated after a malicious email containing a suspicious attachment was delivered to an internal user. The investigation focused on validating the email, analyzing the attachment, and determining whether endpoint compromise occurred.
-
----
-
-
+Email security controls blocked delivery before the attachment reached the recipient's endpoint.
 
 ## 3. Evidence Analysis
 
-### Investigation
+### Email Analysis
 
+The email used urgency around COVID-19 vaccine information to encourage the recipient to open the attachment.
 
-### Key Findings
-
-- Suspicious phishing email identified
-- Malicious attachment included in the email
-- Social engineering lure related to COVID-19 news
-- Sandbox analysis confirmed malicious behavior
-- No evidence of attachment execution on the endpoint
-- No malicious network communication observed
-- No indicators of endpoint compromise identified
-
----
-
-
-### Indicators of Compromise (IOCs)
-
-
-| Type | Indicator |
-|--------|-----------|
-| SMTP IP | 189.162.189.159 |
+| Field | Value |
+|---|---|
 | Sender | aaronluo@cmail.carleton.ca |
+| Recipient | mark@letsdefend.io |
 | Subject | COVID19 Vaccine |
-| Attachment Hash | 72c812cf21909a48eb9cceb9e04b865d |
+| SMTP IP | 189.162.189.159 |
+| Event Time | 2021-03-21 12:26 |
+| Device Action | Blocked |
 
----
+### Attachment Analysis
+
+The email contained a password-protected ZIP archive.
+
+| Attribute | Value |
+|---|---|
+| Archive | ZIP |
+| Archive MD5 | `72c812cf21909a48eb9cceb9e04b865d` |
+| Archive Password | `infected` |
+| Extracted File | `Material.pdf` |
+| PDF SHA256 | `39fb927c32221134a423760c5d1f58bca4cbbcc87c891c79e390a22b63608eb4` |
+
+Sandbox and threat intelligence analysis classified the attachment as malicious.
+
+A public analysis associated the PDF with attempted communication to `69.39.225.3`. The available investigation records did not identify outbound communication from the recipient's endpoint to this address.
+
+### Delivery and Endpoint Assessment
+
+The email security gateway recorded the message as Blocked.
+
+Consequently:
+
+- The email was not delivered to the recipient.
+- No user interaction with the attachment was established.
+- No attachment execution on the endpoint was identified.
+- No endpoint containment action was required.
 
 ### External References
 
-Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+- [Independent EventID 82 analysis](https://medium.com/@higherdas09/letsdefend-soc140-phishing-mail-detected-event-id-82-dc88e1134d7e)
+- [SOC140 technical walkthrough](https://darrenkhobbs.com/letsdefend-soc140-phishing-mail-detected-suspicious-task-scheduler/)
 
-- [Independent EventID 82 write-up](https://medium.com/@higherdas09/letsdefend-soc140-phishing-mail-detected-event-id-82-dc88e1134d7e)
+These sources corroborate the blocked email, the password-protected archive, and the malicious PDF.
 
 ## 4. MITRE ATT&CK Mapping
 
+| Technique | Name | Supporting Evidence |
+|---|---|---|
+| T1566.001 | Spearphishing Attachment | Phishing email containing a malicious ZIP attachment |
 
-| Technique | Description |
-|------------|------------|
-| T1566 | Phishing |
-| T1204 | User Execution |
-
----
-
-
+The alert rule name references Suspicious Task Scheduler. However, the available evidence does not independently establish scheduled task creation or execution.
 
 ## 5. Response Actions
 
+- Reviewed sender, recipient, and email metadata.
+- Examined the message and its attachment.
+- Analyzed the archive and extracted PDF.
+- Reviewed sandbox and threat intelligence results.
+- Verified that email security blocked delivery.
+- Classified the alert as True Positive.
 
-- Confirmed malicious phishing email
-- Validated attachment behavior in sandbox
-- Verified no execution occurred on the endpoint
-- Reviewed related network activity
-- Classified alert as True Positive
-
----
-
-
+No endpoint isolation or malware removal was required because the email was blocked before delivery.
 
 ## 6. Conclusion
 
+The investigation confirmed a **True Positive** phishing attempt involving a password-protected ZIP attachment containing a malicious PDF.
 
-The investigation confirmed that the email contained a malicious attachment and represented a genuine phishing attempt.
+Email security controls blocked the message before delivery, preventing user interaction and endpoint execution.
 
-Although the attachment was identified as malicious through sandbox analysis, no evidence indicated that the file was executed or that the endpoint was compromised.
+**Final Verdict: True Positive**
 
-###  Final Verdict
-
-**True Positive**
-
-###  Classification
-
-**Phishing Email / Malicious Attachment**
-
----
-
-⭐ SOC investigation completed following the workflow:
-
-**Detection → Analysis → Threat Validation → Response**
+**Impact Assessment: Malicious Attachment Blocked Before Delivery**

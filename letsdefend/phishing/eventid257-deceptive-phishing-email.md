@@ -1,145 +1,121 @@
-# Phishing Email Detected
+# Deceptive Phishing Email
 
 ## 1. Alert Summary
 
-### Alert Details
-
-
 | Field | Value |
-|---------|---------|
-| Alert ID | SOC282 |
-| Category | Phishing |
+|---|---|
+| Event ID | 257 |
+| Detection Rule | SOC282 - Phishing Alert - Deceptive Mail Detected |
+| Event Time | 2024-05-13 09:22 |
 | Severity | Medium |
+| Category | Phishing |
 | Recipient | Felix |
 | Sender | free@coffeeshoop.com |
 | SMTP IP | 103.80.134.63 |
 | Subject | Free Coffee Voucher |
-
----
-
-
+| Device Action | Allowed |
+| Investigation Verdict | True Positive |
 
 ## 2. Investigation Overview
 
-### Summary
+A phishing email using a free coffee voucher lure was delivered to the internal user Felix.
 
+The investigation identified a malicious ZIP attachment, execution of `Coffee.exe`, and outbound communication with infrastructure associated with AsyncRAT.
 
-A medium-severity phishing alert was generated after a malicious email containing a weaponized attachment was delivered to an internal user. The investigation focused on email analysis, attachment behavior, endpoint activity, and post-exploitation communication.
-
----
-
-
+The available public investigation records identify the affected endpoint as Felix (`172.16.20.151`).
 
 ## 3. Evidence Analysis
 
-### Investigation
+### Email Analysis
 
+| Field | Value |
+|---|---|
+| Sender | free@coffeeshoop.com |
+| Recipient | Felix@letsdefend.io |
+| SMTP IP | 103.80.134.63 |
+| Subject | Free Coffee Voucher |
+| Event Time | 2024-05-13 09:22 |
 
-The investigation focused on email metadata, attachment analysis, and endpoint activity.
+The original report records the sender domain as `coffeeshoop.com`. An independent writeup spells it `coffeeshooop.com`. The original alert should be used to resolve this spelling discrepancy.
 
-### Key Findings
+### Payload Analysis
 
-- Suspicious sender domain indicating possible spoofing
-- Social engineering technique using a "Free Coffee Voucher" lure
-- Malicious attachment identified as `free-coffee.zip`
-- Attachment contained an executable payload
-- Payload execution was confirmed on the target endpoint
-- Outbound communication was detected following execution
-- Evidence indicated post-infection communication with external infrastructure
+The email contained a ZIP archive:
 
----
+`free-coffee.zip`
 
+The archive delivered the executable:
+
+`Coffee.exe`
+
+Sandbox analysis identified the executable as **AsyncRAT**, a Remote Access Trojan.
 
 ### Network Activity
 
+The investigation identified outbound communication to:
 
 | Field | Value |
-|---------|---------|
+|---|---|
 | C2 IP | 37.120.233.226 |
+| C2 Port | 3451/TCP |
 
-The compromised endpoint established outbound communication with an external command-and-control (C2) server following payload execution.
+An independent investigation recorded two outbound attempts to the C2 endpoint: one denied and one permitted by the firewall.
 
----
+The public writeup also records the following timeline:
 
-
-### Impact Assessment
-
-
-- Successful phishing email delivery
-- Malicious payload execution confirmed
-- Endpoint compromise likely
-- External C2 communication established
-- Increased risk of further malicious activity on the affected host
-
----
-
-
-### Indicators of Compromise (IOCs)
-
-
-| Type | Indicator |
-|--------|-----------|
-| SMTP IP | 103.80.134.63 |
-| Domain | coffeeshoop.com |
-| Attachment | free-coffee.zip |
-| C2 IP | 37.120.233.226 |
-
----
+| Time | Activity |
+|---|---|
+| 09:20 | Phishing email delivered |
+| 09:22 | SOC282 alert generated |
+| 12:59 | User accessed the download link |
+| 13:00 | `Coffee.exe` executed and C2 communication attempted |
 
 ### External References
 
-Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+- [Independent EventID 257 investigation](https://github.com/Avdhut-Gogawale/SOC-Analyst-Writeups/blob/main/Phishing/SOC282-Phishing-AsyncRAT.md)
+- [Additional EventID 257 writeup](https://www.policytopackets.com/writeups/letsdefend/soc/282_257/)
 
-- [Independent EventID 257 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/282_257/)
-- [SOC282 technical walkthrough](https://github.com/ogtamimi/SOC-Analyst-WriteUp-LetsDefend.io/blob/main/SOC/Labs/LetsDefend%20SOC%20Walkthrough%20-%20SOC282%20-%20Phishing%20Alert.md)
+These sources provide additional context for the payload, endpoint, and C2 connection.
 
 ## 4. MITRE ATT&CK Mapping
 
-
-| Technique | Description |
-|------------|------------|
-| T1566 | Phishing |
-| T1204 | User Execution |
-| T1105 | Ingress Tool Transfer |
-| T1071 | Application Layer Protocol |
-
----
-
-
+| Technique | Name | Supporting Evidence |
+|---|---|---|
+| T1566.002 | Spearphishing Link | Phishing email using a malicious download link |
+| T1204.001 | User Execution: Malicious Link | User accessed the phishing link |
+| T1105 | Ingress Tool Transfer | Malicious ZIP and executable delivery |
+| T1071.001 | Application Layer Protocol: Web Protocols | Outbound web communication |
 
 ## 5. Response Actions
 
+### Investigation Performed
 
-- Classified alert as True Positive
-- Recommended isolation of the affected endpoint
-- Identified and documented malicious indicators
-- Recommended blocking network indicators
-- Recommended additional forensic investigation
-- Monitored environment for related activity
+- Reviewed the phishing email and sender infrastructure.
+- Investigated the malicious ZIP attachment.
+- Reviewed `Coffee.exe` sandbox classification.
+- Correlated user activity with the download and execution timeline.
+- Reviewed outbound firewall communication.
+- Identified the C2 endpoint and malware family.
+- Classified the alert as True Positive.
 
----
+### Recommended Containment
 
+- Isolate the affected endpoint if not already contained.
+- Remove the malicious email and attachment.
+- Block validated C2 indicators.
+- Investigate persistence and credential theft.
+- Hunt for related AsyncRAT indicators across the environment.
 
+The supplied report does not independently confirm that all containment recommendations were completed.
 
 ## 6. Conclusion
 
+The investigation confirmed a **True Positive** phishing incident involving delivery and execution of `Coffee.exe`, identified as AsyncRAT.
 
-The investigation confirmed a phishing attack involving a malicious email attachment designed to deliver malware to the target host.
+The affected endpoint communicated with external infrastructure associated with the RAT, including `37.120.233.226:3451`.
 
-Analysis identified successful payload execution and outbound communication with an external command-and-control server, indicating likely endpoint compromise.
+The sender-domain spelling discrepancy should be resolved against the original email record before the indicator is finalized.
 
-Based on the collected evidence, the alert was classified as a **True Positive** and required containment and further forensic investigation.
+**Final Verdict: True Positive**
 
-###  Final Verdict
-
-**True Positive**
-
-###  Classification
-
-**Phishing Email / Malware Delivery**
-
----
-
-⭐ SOC investigation completed following the workflow:
-
-**Detection → Analysis → Impact Assessment → Response**
+**Classification: Phishing / AsyncRAT Delivery**

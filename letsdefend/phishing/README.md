@@ -27,4 +27,4 @@ Documented investigations involving phishing emails, malicious attachments, dece
 
 These reports document simulated LetsDefend training scenarios. Findings and response actions should not be interpreted as real-world incident response engagements.
 
-[Back to Investigation Catalog](../README.md) · [Back to LetsDefend](../../README.md)
+[Back to LetsDefend](../README.md)

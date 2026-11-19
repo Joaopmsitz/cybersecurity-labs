@@ -1,135 +1,69 @@
-# SOC120 — Phishing Mail Detected - Internal to Internal
+# Internal Phishing Email
 
 ## 1. Alert Summary
 
-*Not separately documented in the source report.*
-
+| Field | Value |
+|---|---|
+| Event ID | 52 |
+| Detection Rule | SOC120 - Phishing Mail Detected - Internal to Internal |
+| Event Time | 2021-02-06 22:24:09 (BRT, as recorded) |
+| Category | Exchange / Phishing |
+| Sender | john@letsdefend.io |
+| Recipient | susie@letsdefend.io |
+| SMTP Server | 172.16.20.3 |
+| Subject | Meeting |
+| Device Action | Allowed |
+| Investigation Verdict | False Positive |
 
 ## 2. Investigation Overview
 
-### Alert Overview
+The SOC120 rule generated an alert for an email sent between two internal users.
 
+The investigation focused on reviewing the email content, sender and recipient context, SMTP traffic, and available endpoint activity to determine whether the message represented a genuine phishing attempt.
 
-| Field                   | Value                                                  |
-| ----------------------- | ------------------------------------------------------ |
-| **Event ID**            | 52                                                     |
-| **Rule**                | SOC120 - Phishing Mail Detected - Internal to Internal |
-| **Alert Type**          | Exchange                                               |
-| **Role**                | Security Analyst                                       |
-| **Difficulty**          | Beginner                                               |
-| **Device Action**       | Allowed                                                |
-| **Email Subject**       | Meeting                                                |
-| **Source Address**      | [john@letsdefend.io](mailto:john@letsdefend.io)        |
-| **Destination Address** | [susie@letsdefend.io](mailto:susie@letsdefend.io)      |
-| **Disposition**         | False Positive                                         |
-
----
-
-
-### Objective
-
-
-Investigate an email flagged by the SOC120 phishing detection rule and determine whether the message represents a genuine phishing attempt or legitimate internal communication.
-
----
-
-
+The message was a routine meeting request with no malicious URL, attachment, or credential request.
 
 ## 3. Evidence Analysis
 
 ### Email Analysis
 
+| Field | Value |
+|---|---|
+| Sender | john@letsdefend.io |
+| Recipient | susie@letsdefend.io |
+| Subject | Meeting |
+| Sender IP | 172.16.20.3 |
 
-### Message Details
-
-| Field         | Value                                             |
-| ------------- | ------------------------------------------------- |
-| **From**      | [john@letsdefend.io](mailto:john@letsdefend.io)   |
-| **To**        | [susie@letsdefend.io](mailto:susie@letsdefend.io) |
-| **Subject**   | Meeting                                           |
-| **Sender IP** | 172.16.20.3                                       |
-| **Date**      | 2021-02-06 22:24:09 BRT                           |
-| **Action**    | Unknown                                           |
-
-### Email Content
+The email content was:
 
 > Hi Susie, Can we arrange a meeting today if you are available?
 
-The message is a short internal communication regarding a meeting.
-
-No malicious URL, attachment, credential request, or suspicious instruction was identified in the email content provided.
-
-### Evidence
-
-<img width="1439" height="697" alt="image" src="https://github.com/user-attachments/assets/81f17250-775c-487b-870c-d6db7006dd06" />
-
----
-
+No malicious URL, attachment, credential request, or suspicious instruction was identified.
 
 ### Network Evidence
 
-
-The email transaction was observed between JohnComputer and the internal Exchange/SMTP server:
+The email transaction was observed between `JohnComputer` and the internal Exchange server.
 
 ```text
-2021-02-06 22:23:51
-Exchange
+Timestamp: 2021-02-06 22:23:51
 Source: 172.16.17.82:49582
 Destination: 172.16.20.3:25
+Protocol: SMTP
 ```
-
-### Communication Flow
-
-```text
-JohnComputer
-172.16.17.82
-      │
-      │ SMTP
-      │ TCP/25
-      ▼
-Exchange Server
-172.16.20.3
-      │
-      ▼
-john@letsdefend.io
-      │
-      │ Internal Email
-      ▼
-susie@letsdefend.io
-```
-
----
-
 
 ### Endpoint Investigation
 
+| Field | Value |
+|---|---|
+| Hostname | JohnComputer |
+| IP Address | 172.16.17.82 |
+| Domain | LetsDefend |
+| Operating System | Windows 10 |
+| Primary User | John |
 
-### Host Information
+The available browser history included ordinary browsing activity, such as a Google Chrome support page, a Chrome update search, and the LetsDefend GitHub repository.
 
-| Field                | Value               |
-| -------------------- | ------------------- |
-| **Hostname**         | JohnComputer        |
-| **Domain**           | LetsDefend          |
-| **IP Address**       | 172.16.17.82        |
-| **Operating System** | Windows 10          |
-| **Bit Level**        | 64-bit              |
-| **Primary User**     | John                |
-| **Client/Server**    | Client              |
-| **Last Login**       | 2020-10-10 12:53:37 |
-
-### Browser History
-
-Observed activity included:
-
-* Google Chrome support page
-* Google search for updating Chrome
-* LetsDefend GitHub repository
-
-No suspicious phishing domain or malicious URL was identified in the provided browser history.
-
-### Command History
-
-Observed commands:
+Command history included:
 
 ```text
 net user
@@ -141,74 +75,42 @@ ping raw.githubusercontent.com
 
 These commands alone do not provide sufficient evidence of compromise or malicious activity.
 
----
-
-
 ### Investigation Findings
 
+- Sender and recipient belonged to the same internal domain.
+- The message contained a routine meeting request.
+- No malicious attachment or URL was identified.
+- No credential-harvesting request was found.
+- SMTP communication was directed to the internal Exchange server.
+- Available browser and command history did not establish malicious activity.
 
-The investigation identified the following:
+### External Reference
 
-* The sender and recipient belong to the same internal domain.
-* The email contains a simple meeting request.
-* No malicious attachment was identified.
-* No suspicious URL was identified.
-* No credential-harvesting request was identified.
-* The endpoint history did not reveal clear indicators of compromise.
-* The observed SMTP communication was directed to the internal Exchange server.
-* No evidence was identified linking the email to malware delivery or successful phishing activity.
+[Independent EventID 52 investigation](https://www.policytopackets.com/writeups/letsdefend/soc/120_52/)
 
----
-
-
-### Analysis
-
-
-Although the email triggered the **SOC120 - Phishing Mail Detected - Internal to Internal** rule, the available evidence does not support classification as a malicious phishing message.
-
-The alert appears to have been triggered by the characteristics of the email communication rather than by confirmed malicious content or endpoint compromise.
-
----
-
-
-### SOC Skills Demonstrated
-
-
-* Alert Triage
-* Email Analysis
-* SMTP Traffic Analysis
-* Endpoint Investigation
-* Browser History Analysis
-* Command-Line Investigation
-* False Positive Identification
-* Threat Classification
-* Incident Documentation
-
-### External References
-
-Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
-
-- [Independent EventID 52 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/120_52/)
+The independent investigation also classified this internal meeting email as a False Positive.
 
 ## 4. MITRE ATT&CK Mapping
 
-*Not separately documented in the source report.*
+No MITRE ATT&CK technique was substantiated by the available evidence.
 
+The investigated activity was consistent with legitimate internal email communication.
 
 ## 5. Response Actions
 
-*Not separately documented in the source report.*
+- Reviewed the alert and email metadata.
+- Inspected the message content.
+- Checked for malicious URLs and attachments.
+- Reviewed SMTP communication.
+- Examined available browser and command history.
+- Classified the alert as a False Positive.
 
+No endpoint containment or remediation was required based on the available evidence.
 
 ## 6. Conclusion
 
+The investigation determined that the SOC120 alert was a **False Positive**.
 
-**Disposition: False Positive**
+The email was a routine internal meeting request between `john@letsdefend.io` and `susie@letsdefend.io`. No malicious links, attachments, credential requests, or other indicators of phishing were identified.
 
-No evidence of compromise or malicious activity was identified during the investigation.
-
-The email was an internal communication between `john@letsdefend.io` and `susie@letsdefend.io` concerning a meeting, with no malicious links, attachments, credential requests, or other suspicious content identified.
-
-**Recommended Action:** Close the alert as a false positive. No containment or remediation action is required based on the available evidence.
-
----
+**Final Verdict: False Positive**

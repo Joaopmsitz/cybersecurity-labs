@@ -14,16 +14,16 @@ Documented investigations involving authentication attacks, password guessing, a
 
 ### EventID 234 - RDP Brute Force Detected
 
-The investigation identified repeated RDP connection attempts from 218.92.0.56 against Matthew (172.16.17.148).
+The investigation identified repeated RDP connection attempts from `218.92.0.56` against Matthew (`172.16.17.148`).
 
 Firewall logs recorded 15 connection attempts targeting TCP port 3389. Windows Security logs showed multiple failed logons (Event ID 4625), followed by a successful RemoteInteractive logon (Event ID 4624, Logon Type 10).
 
 Post-authentication commands included:
 
-- whoami
-- net user letsdefend
-- net localgroup administrators
-- netstat -ano
+- `whoami`
+- `net user letsdefend`
+- `net localgroup administrators`
+- `netstat -ano`
 
 The original Analyst Note records that the affected endpoint was contained.
 
@@ -42,4 +42,4 @@ The original Analyst Note records that the affected endpoint was contained.
 
 This directory contains simulated LetsDefend training investigations. Findings and response actions should not be interpreted as real-world incident response experience.
 
-[Back to Investigation Catalog](../README.md) · [Back to LetsDefend](../../README.md)
+[Back to LetsDefend](../README.md)

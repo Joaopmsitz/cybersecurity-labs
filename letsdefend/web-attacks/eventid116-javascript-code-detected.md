@@ -2,133 +2,93 @@
 
 ## 1. Alert Summary
 
-### Alert Details
-
-
 | Field | Value |
-|---------|---------|
-| Alert ID | SOC166 |
-| Category | Web Attack |
+|---|---|
+| Event ID | 116 |
+| Detection Rule | SOC166 - Javascript Code Detected in Requested URL |
+| Event Time | 2022-02-26 18:56 |
 | Severity | Medium |
-| Attack Type | Cross-Site Scripting (XSS) |
-
----
-
-
+| Category | Web Attack |
+| Hostname | WebServer1002 |
+| Source IP | 112.85.42.13 |
+| Destination IP | 172.16.17.17 |
+| HTTP Method | GET |
+| Target | `/search/` |
+| Device Action | Allowed |
+| Investigation Verdict | True Positive |
 
 ## 2. Investigation Overview
 
-### Summary
+A web attack alert was generated after suspicious JavaScript code was identified in a requested URL targeting `WebServer1002`.
 
+The investigation focused on validating the payload, correlating HTTP requests, and reviewing server responses to determine whether the activity resulted in successful Cross-Site Scripting (XSS) exploitation.
 
-A medium-severity alert was generated after detecting suspicious JavaScript code embedded within a URL, indicating a possible Cross-Site Scripting (XSS) attack attempt against a web application.
-
-The investigation focused on analyzing the malicious payload, validating attack intent, and determining whether code execution was successful.
-
----
-
-
+The available evidence confirmed an XSS attempt, but did not establish successful JavaScript execution or server compromise.
 
 ## 3. Evidence Analysis
 
-### Investigation
+### Suspicious Request
 
+The alert identified the following request:
 
-The investigation began with the analysis of an HTTP request containing a suspicious encoded payload within the URL.
-
-### Key Findings
-
-- Encoded JavaScript was identified in the URL
-- The payload was consistent with a Cross-Site Scripting (XSS) attack
-- The attacker attempted to inject client-side JavaScript code
-- The request targeted a web application input field
-- No evidence of successful code execution was identified
-- No abnormal application behavior was observed
-
-### Suspicious Payload
-
-```html
-<script>alert(1)</script>
+```text
+https://172.16.17.17/search/?q=<$script>javascript:$alert(1)<$/script>
 ```
 
-This payload is commonly used to test whether an application is vulnerable to Cross-Site Scripting by attempting to execute JavaScript code within a user's browser.
+The payload attempted to inject JavaScript through the `q` search parameter.
 
----
+### Network Analysis
 
+| Field | Value |
+|---|---|
+| Source IP | 112.85.42.13 |
+| Destination IP | 172.16.17.17 |
+| Hostname | WebServer1002 |
+| HTTP Method | GET |
 
-### Impact Assessment
+SIEM logs showed that ordinary application requests returned HTTP 200 responses, while suspicious XSS-related requests received HTTP 302 redirects.
 
+The redirect behavior did not provide evidence that the injected JavaScript executed successfully.
 
-- XSS attack attempt confirmed
-- Malicious JavaScript payload identified
-- Client-side code execution was attempted
-- No evidence of successful exploitation
-- No indicators of compromise identified
+### Source Reputation
 
----
+The source IP was identified as suspicious by reputation sources, including AbuseIPDB.
 
-
-### Indicators of Compromise (IOCs)
-
-
-| Type | Indicator |
-|--------|-----------|
-| Payload | Encoded JavaScript in URL |
-| Technique | Cross-Site Scripting (XSS) |
-| Attack Method | JavaScript Injection |
-| Target | Web Application Input Field |
-
----
+The available endpoint and server analysis did not establish successful exploitation.
 
 ### External References
 
-Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+- [Independent EventID 116 investigation](https://www.policytopackets.com/writeups/letsdefend/soc/166_116/)
+- [Additional SOC166 analysis](https://github.com/Fooster171/LetsDefend-Writeups/wiki/SOC166-Javascript-Code-Detected-in-Requested-URL)
 
-- [Independent EventID 116 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/166_116/)
+These sources corroborate the source IP, target server, suspicious request, and HTTP 302 responses.
 
 ## 4. MITRE ATT&CK Mapping
 
+| Technique | Name | Supporting Evidence |
+|---|---|---|
+| T1190 | Exploit Public-Facing Application | XSS payload sent to a web application endpoint |
 
-| Technique | Description |
-|------------|------------|
-| T1059.007 | JavaScript |
-| T1059 | Command and Scripting Interpreter |
-
----
-
-
+This mapping represents the attempted exploitation. The available evidence did not confirm successful client-side JavaScript execution.
 
 ## 5. Response Actions
 
+- Reviewed the alert and suspicious URL.
+- Analyzed the JavaScript injection payload.
+- Correlated source and destination IP addresses.
+- Reviewed HTTP response codes and request behavior.
+- Checked source IP reputation.
+- Verified that successful exploitation was not established.
+- Classified the alert as True Positive.
 
-- Classified alert as True Positive
-- Investigated malicious payload
-- Reviewed affected web requests
-- Verified no successful code execution occurred
-- Recommended input validation controls
-- Recommended output encoding and sanitization
-
----
-
-
+Input validation, output encoding, and web application security controls were identified as relevant recommendations.
 
 ## 6. Conclusion
 
+The investigation confirmed a **True Positive XSS attempt** targeting the search endpoint of `WebServer1002`.
 
-The investigation confirmed a Cross-Site Scripting (XSS) attack attempt involving malicious JavaScript embedded within a URL.
+The attacker submitted JavaScript payloads through the URL, but the requests received HTTP 302 redirects. No evidence established successful script execution or compromise of the web application.
 
-Analysis identified a known JavaScript injection payload designed to execute client-side code. Although the attack attempt was confirmed, no evidence indicated successful execution or compromise of the target application.
+**Final Verdict: True Positive**
 
-###  Final Verdict
-
-**True Positive**
-
-###  Classification
-
-**Web Attack / Cross-Site Scripting (XSS)**
-
----
-
-⭐ SOC investigation completed following the workflow:
-
-**Detection → Analysis → Threat Validation → Response**
+**Impact Assessment: XSS Attempt - No Confirmed Exploitation**

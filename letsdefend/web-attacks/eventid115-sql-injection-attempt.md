@@ -2,131 +2,105 @@
 
 ## 1. Alert Summary
 
-### Alert Details
-
-
 | Field | Value |
-|---------|---------|
-| Alert ID | SOC165 |
-| Category | Web Attack |
+|---|---|
+| Event ID | 115 |
+| Detection Rule | SOC165 - Possible SQL Injection Payload Detected |
+| Event Time | 2022-02-25 11:34 |
 | Severity | High |
-| Attack Type | SQL Injection |
-
----
-
-
+| Category | Web Attack |
+| Hostname | WebServer1001 |
+| Source IP | 167.99.169.17 |
+| Destination IP | 172.16.17.18 |
+| HTTP Method | GET |
+| Target | `/search/` |
+| Device Action | Allowed |
+| Investigation Verdict | True Positive |
 
 ## 2. Investigation Overview
 
-### Summary
+A web attack alert was generated after a GET request containing a SQL injection payload was detected against the `/search/` endpoint of `WebServer1001`.
 
+The investigation focused on analyzing the requested URLs, decoding the payloads, reviewing HTTP responses, and determining whether the attack successfully altered application behavior.
 
-A high-severity alert was generated after detecting suspicious input consistent with a SQL Injection attempt targeting a web application authentication endpoint.
-
-The investigation focused on analyzing HTTP requests, identifying malicious payloads, and determining whether exploitation was successful.
-
----
-
-
+The available logs confirmed multiple SQL injection attempts, but did not establish successful exploitation.
 
 ## 3. Evidence Analysis
 
-### Investigation
+### Suspicious Request
 
+The original request contained the following URL-encoded payload:
 
-The investigation began with the analysis of HTTP request logs captured from the affected web application.
-
-### Key Findings
-
-- A malicious SQL Injection payload was identified
-- The payload targeted an authentication endpoint
-- Multiple repeated requests were observed
-- The activity appeared consistent with automated probing or attack attempts
-- The attacker attempted to manipulate SQL query logic to bypass authentication controls
-
-### Malicious Payload
-
-```sql
-' OR 1=1 --
+```text
+https://172.16.17.18/search/?q=%22%20OR%201%20%3D%201%20--%20-
 ```
 
-This payload is commonly associated with SQL Injection attacks and is designed to alter application logic by forcing authentication conditions to evaluate as true.
+Decoded:
 
----
+```sql
+" OR 1 = 1 -- -
+```
 
+Additional requests included authentication-bypass and SQL query-manipulation patterns, such as:
 
-### Impact Assessment
+```sql
+' OR 'x'='x
+1' ORDER BY 3--+
+```
 
+### HTTP Response Analysis
 
-- SQL Injection attempt confirmed
-- Authentication bypass technique identified
-- Repeated malicious requests observed
-- No successful exploitation confirmed
-- No evidence of unauthorized access identified
+SIEM logs showed multiple requests to the affected application.
 
----
+The investigated SQL injection requests returned:
 
+| HTTP Status | Response Size | Assessment |
+|---|---:|---|
+| 500 | 948 bytes | Internal Server Error |
 
-### Indicators of Compromise (IOCs)
+Normal application requests returned HTTP 200 responses.
 
+The repeated HTTP 500 responses did not indicate successful query manipulation or authentication bypass.
 
-| Type | Indicator |
-|--------|-----------|
-| Payload | ' OR 1=1 -- |
-| Technique | SQL Injection |
-| Attack Method | Authentication Bypass |
-| Target | Web Application Login Endpoint |
+### Source Reputation
 
----
+The source IP `167.99.169.17` was identified as suspicious by external reputation sources.
+
+The endpoint investigation did not identify evidence of successful exploitation.
 
 ### External References
 
-Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+- [Independent EventID 115 investigation](https://www.policytopackets.com/writeups/letsdefend/soc/165_115/)
+- [Additional SOC165 walkthrough](https://octopus175.github.io/letsdefend/letsdefend-soc165/)
 
-- [Independent EventID 115 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/165_115/)
+These sources provide additional context for the requested URLs, source IP, and HTTP response analysis.
 
 ## 4. MITRE ATT&CK Mapping
 
+| Technique | Name | Supporting Evidence |
+|---|---|---|
+| T1190 | Exploit Public-Facing Application | SQL injection attempts targeting the web application |
 
-| Technique | Description |
-|------------|------------|
-| T1190 | Exploit Public-Facing Application |
-
----
-
-
+The technique represents the attempted exploitation. Successful application compromise was not established.
 
 ## 5. Response Actions
 
+- Reviewed the alert and HTTP request metadata.
+- Analyzed the suspicious SQL injection payloads.
+- Decoded URL-encoded request parameters.
+- Correlated requests with server response codes.
+- Reviewed source IP reputation.
+- Verified that exploitation was unsuccessful.
+- Classified the alert as True Positive.
 
-- Classified alert as True Positive
-- Investigated malicious requests
-- Verified no successful compromise occurred
-- Recommended continued monitoring of the affected application
-- Recommended input validation and secure coding controls
-- Recommended implementation of additional filtering and detection rules
-
----
-
-
+No containment or remediation action was documented in the original investigation.
 
 ## 6. Conclusion
 
+The investigation confirmed a **True Positive SQL Injection attempt** targeting the search endpoint of `WebServer1001`.
 
-The investigation confirmed a SQL Injection attempt targeting a public-facing web application.
+Multiple malicious requests were identified, but the server returned HTTP 500 responses instead of evidence of successful query manipulation or unauthorized access.
 
-Analysis identified a known authentication bypass payload and multiple malicious requests consistent with SQL Injection activity. Although the attack was confirmed, no evidence indicated successful exploitation or unauthorized access.
+**Final Verdict: True Positive**
 
-###  Final Verdict
-
-**True Positive**
-
-###  Classification
-
-**Web Attack / SQL Injection Attempt**
-
----
-
-⭐ SOC investigation completed following the workflow:
-
-**Detection → Analysis → Threat Validation → Response**
+**Impact Assessment: SQL Injection Attempt - No Confirmed Exploitation**
