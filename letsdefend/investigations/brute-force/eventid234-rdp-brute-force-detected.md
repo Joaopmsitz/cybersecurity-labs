@@ -2,6 +2,7 @@
 
 ## 1. Alert Summary
 
+
 ### Alert Details
 
 
@@ -20,7 +21,10 @@
 
 
 
+
+
 ## 2. Investigation Overview
+
 
 ### Investigation
 
@@ -67,7 +71,10 @@ These commands indicate account discovery, privilege enumeration, and network re
 
 
 
+
+
 ## 3. Evidence Analysis
+
 
 ### Summary
 
@@ -103,9 +110,14 @@ The investigation revealed multiple failed authentication attempts originating f
 
 **Detection → Analysis → Threat Validation → Containment**
 
+### External References
 
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent EventID 234 walkthrough](https://medium.com/@edukayky/soc-alert-rdp-brute-force-detected-by-letsdefend-50da65a89711)
 
 ## 4. MITRE ATT&CK Mapping
+
 
 
 | Technique | Description |
@@ -120,7 +132,10 @@ The investigation revealed multiple failed authentication attempts originating f
 
 
 
+
+
 ## 5. Response Actions
+
 
 
 - Validated malicious source IP activity
@@ -134,7 +149,10 @@ The investigation revealed multiple failed authentication attempts originating f
 
 
 
+
+
 ## 6. Conclusion
+
 
 
 The investigation confirmed a successful RDP brute force attack originating from **218.92.0.56** against the host **Matthew**.

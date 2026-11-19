@@ -1,12 +1,9 @@
-#  SOC114 — Malicious Attachment Detected - Phishing Alert
+# SOC114 — Malicious Attachment Detected - Phishing Alert
 
-##  Objective
+## 1. Alert Summary
 
-Investigate a phishing alert involving a malicious email attachment, determine whether the attachment was delivered and opened, analyze the associated endpoint activity, and identify indicators of compromise.
+### Alert Information
 
----
-
-##  Alert Information
 
 | Field             | Details                                                             |
 | ----------------- | ------------------------------------------------------------------- |
@@ -27,7 +24,23 @@ Investigate a phishing alert involving a malicious email attachment, determine w
 
 ---
 
-##  Email Analysis
+
+
+## 2. Investigation Overview
+
+### Objective
+
+
+Investigate a phishing alert involving a malicious email attachment, determine whether the attachment was delivered and opened, analyze the associated endpoint activity, and identify indicators of compromise.
+
+---
+
+
+
+## 3. Evidence Analysis
+
+### Email Analysis
+
 
 The alert involved an email sent from:
 
@@ -54,7 +67,9 @@ The attachment was identified as malicious and associated with **CVE-2017-11882*
 
 ---
 
-##  Attachment Analysis
+
+### Attachment Analysis
+
 
 VirusTotal analysis identified the attachment as malicious.
 
@@ -69,7 +84,9 @@ The results indicate that the attachment was associated with exploit and malware
 
 ---
 
-##  Endpoint Investigation
+
+### Endpoint Investigation
+
 
 The affected endpoint was:
 
@@ -107,7 +124,9 @@ This indicates execution with elevated system privileges.
 
 ---
 
-##  JuicyPotato Analysis
+
+### JuicyPotato Analysis
+
 
 VirusTotal analysis confirmed the executable as malicious:
 
@@ -124,7 +143,9 @@ The high detection rate across multiple security vendors provides strong evidenc
 
 ---
 
-##  Network Activity
+
+### Network Activity
+
 
 Additional external network connections were observed from the affected endpoint.
 
@@ -132,7 +153,9 @@ These connections were treated as indicators requiring further investigation. Th
 
 ---
 
-##  Investigation Findings
+
+### Investigation Findings
+
 
 | Finding                      | Result |
 | ---------------------------- | ------ |
@@ -154,25 +177,9 @@ The available evidence does **not** conclusively establish that the phishing att
 
 ---
 
-##  MITRE ATT&CK
 
-**T1598.001 — Phishing for Information: Spearphishing Service**
+### Skills Demonstrated
 
-The alert is mapped by LetsDefend to MITRE ATT&CK technique `T1598.001`.
-
----
-
-##  Conclusion
-
-The investigation confirmed a **True Positive**.
-
-The email was delivered to the user and contained a malicious attachment associated with CVE-2017-11882. Endpoint investigation also identified `JuicyPotato.exe`, which was confirmed malicious by VirusTotal and was executed under `NT AUTHORITY\SYSTEM`.
-
-The combination of a malicious phishing attachment and confirmed malicious endpoint activity indicates that the alert represents a genuine security incident within the LetsDefend training environment.
-
----
-
-##  Skills Demonstrated
 
 * Phishing Email Analysis
 * Malicious Attachment Analysis
@@ -186,3 +193,38 @@ The combination of a malicious phishing attachment and confirmed malicious endpo
 * SOC Alert Triage
 * Incident Classification
 * Security Investigation Reporting
+
+### External References
+
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent EventID 45 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/114_45/)
+
+## 4. MITRE ATT&CK Mapping
+
+### MITRE ATT&CK
+
+
+**T1598.001 — Phishing for Information: Spearphishing Service**
+
+The alert is mapped by LetsDefend to MITRE ATT&CK technique `T1598.001`.
+
+---
+
+
+
+## 5. Response Actions
+
+*Not separately documented in the source report.*
+
+
+## 6. Conclusion
+
+
+The investigation confirmed a **True Positive**.
+
+The email was delivered to the user and contained a malicious attachment associated with CVE-2017-11882. Endpoint investigation also identified `JuicyPotato.exe`, which was confirmed malicious by VirusTotal and was executed under `NT AUTHORITY\SYSTEM`.
+
+The combination of a malicious phishing attachment and confirmed malicious endpoint activity indicates that the alert represents a genuine security incident within the LetsDefend training environment.
+
+---

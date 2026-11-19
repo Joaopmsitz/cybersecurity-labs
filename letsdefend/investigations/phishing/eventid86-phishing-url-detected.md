@@ -1,12 +1,9 @@
-#  SOC141 - Phishing URL Detected
+# Phishing URL Detected
 
-##  Summary
+## 1. Alert Summary
 
-A security alert was triggered after an internal user accessed a suspicious URL identified as a phishing domain. The investigation focused on validating the malicious URL, analyzing network activity, and investigating endpoint behavior to determine potential compromise.
+### Alert Details
 
----
-
-##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -22,7 +19,23 @@ A security alert was triggered after an internal user accessed a suspicious URL 
 
 ---
 
-##  Investigation
+
+
+## 2. Investigation Overview
+
+### Summary
+
+
+A security alert was triggered after an internal user accessed a suspicious URL identified as a phishing domain. The investigation focused on validating the malicious URL, analyzing network activity, and investigating endpoint behavior to determine potential compromise.
+
+---
+
+
+
+## 3. Evidence Analysis
+
+### Investigation
+
 
 The investigation focused on proxy logs, threat intelligence analysis, and endpoint activity.
 
@@ -45,7 +58,9 @@ The command indicates abuse of the legitimate Windows binary **rundll32.exe** to
 
 ---
 
-##  Network Activity
+
+### Network Activity
+
 
 | Field | Value |
 |---------|---------|
@@ -63,7 +78,9 @@ The activity indicates attempted payload delivery from attacker-controlled infra
 
 ---
 
-##  Impact Assessment
+
+### Impact Assessment
+
 
 - Successful phishing URL access
 - Malicious command execution identified
@@ -73,7 +90,9 @@ The activity indicates attempted payload delivery from attacker-controlled infra
 
 ---
 
-##  Indicators of Compromise (IOCs)
+
+### Indicators of Compromise (IOCs)
+
 
 | Type | Indicator |
 |--------|-----------|
@@ -85,7 +104,14 @@ The activity indicates attempted payload delivery from attacker-controlled infra
 
 ---
 
-##  MITRE ATT&CK Mapping
+### External References
+
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent EventID 86 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/141_86/)
+
+## 4. MITRE ATT&CK Mapping
+
 
 | Technique | Description |
 |------------|------------|
@@ -96,7 +122,10 @@ The activity indicates attempted payload delivery from attacker-controlled infra
 
 ---
 
-##  Response Actions
+
+
+## 5. Response Actions
+
 
 - Classified alert as True Positive
 - Isolated the affected endpoint
@@ -107,7 +136,10 @@ The activity indicates attempted payload delivery from attacker-controlled infra
 
 ---
 
-##  Conclusion
+
+
+## 6. Conclusion
+
 
 This investigation identified a phishing attack in which a user accessed a malicious URL, leading to attempted code execution through the abuse of **rundll32.exe**.
 

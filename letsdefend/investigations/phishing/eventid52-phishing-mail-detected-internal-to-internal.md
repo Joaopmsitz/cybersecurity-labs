@@ -1,6 +1,14 @@
-#  SOC120 — Phishing Mail Detected - Internal to Internal
+# SOC120 — Phishing Mail Detected - Internal to Internal
 
-##  Alert Overview
+## 1. Alert Summary
+
+*Not separately documented in the source report.*
+
+
+## 2. Investigation Overview
+
+### Alert Overview
+
 
 | Field                   | Value                                                  |
 | ----------------------- | ------------------------------------------------------ |
@@ -17,13 +25,20 @@
 
 ---
 
-##  Objective
+
+### Objective
+
 
 Investigate an email flagged by the SOC120 phishing detection rule and determine whether the message represents a genuine phishing attempt or legitimate internal communication.
 
 ---
 
-##  Email Analysis
+
+
+## 3. Evidence Analysis
+
+### Email Analysis
+
 
 ### Message Details
 
@@ -50,7 +65,9 @@ No malicious URL, attachment, credential request, or suspicious instruction was 
 
 ---
 
-##  Network Evidence
+
+### Network Evidence
+
 
 The email transaction was observed between JohnComputer and the internal Exchange/SMTP server:
 
@@ -83,7 +100,9 @@ susie@letsdefend.io
 
 ---
 
-##  Endpoint Investigation
+
+### Endpoint Investigation
+
 
 ### Host Information
 
@@ -124,7 +143,9 @@ These commands alone do not provide sufficient evidence of compromise or malicio
 
 ---
 
-##  Investigation Findings
+
+### Investigation Findings
+
 
 The investigation identified the following:
 
@@ -139,7 +160,9 @@ The investigation identified the following:
 
 ---
 
-##  Analysis
+
+### Analysis
+
 
 Although the email triggered the **SOC120 - Phishing Mail Detected - Internal to Internal** rule, the available evidence does not support classification as a malicious phishing message.
 
@@ -147,19 +170,9 @@ The alert appears to have been triggered by the characteristics of the email com
 
 ---
 
-##  Conclusion
 
-**Disposition: False Positive**
+### SOC Skills Demonstrated
 
-No evidence of compromise or malicious activity was identified during the investigation.
-
-The email was an internal communication between `john@letsdefend.io` and `susie@letsdefend.io` concerning a meeting, with no malicious links, attachments, credential requests, or other suspicious content identified.
-
-**Recommended Action:** Close the alert as a false positive. No containment or remediation action is required based on the available evidence.
-
----
-
-##  SOC Skills Demonstrated
 
 * Alert Triage
 * Email Analysis
@@ -170,3 +183,32 @@ The email was an internal communication between `john@letsdefend.io` and `susie@
 * False Positive Identification
 * Threat Classification
 * Incident Documentation
+
+### External References
+
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent EventID 52 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/120_52/)
+
+## 4. MITRE ATT&CK Mapping
+
+*Not separately documented in the source report.*
+
+
+## 5. Response Actions
+
+*Not separately documented in the source report.*
+
+
+## 6. Conclusion
+
+
+**Disposition: False Positive**
+
+No evidence of compromise or malicious activity was identified during the investigation.
+
+The email was an internal communication between `john@letsdefend.io` and `susie@letsdefend.io` concerning a meeting, with no malicious links, attachments, credential requests, or other suspicious content identified.
+
+**Recommended Action:** Close the alert as a false positive. No containment or remediation action is required based on the available evidence.
+
+---

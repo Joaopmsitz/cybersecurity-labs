@@ -1,14 +1,9 @@
-#  SOC165 - SQL Injection Attempt Detected
+# SQL Injection Attempt Detected
 
-##  Summary
+## 1. Alert Summary
 
-A high-severity alert was generated after detecting suspicious input consistent with a SQL Injection attempt targeting a web application authentication endpoint.
+### Alert Details
 
-The investigation focused on analyzing HTTP requests, identifying malicious payloads, and determining whether exploitation was successful.
-
----
-
-##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -19,7 +14,25 @@ The investigation focused on analyzing HTTP requests, identifying malicious payl
 
 ---
 
-##  Investigation
+
+
+## 2. Investigation Overview
+
+### Summary
+
+
+A high-severity alert was generated after detecting suspicious input consistent with a SQL Injection attempt targeting a web application authentication endpoint.
+
+The investigation focused on analyzing HTTP requests, identifying malicious payloads, and determining whether exploitation was successful.
+
+---
+
+
+
+## 3. Evidence Analysis
+
+### Investigation
+
 
 The investigation began with the analysis of HTTP request logs captured from the affected web application.
 
@@ -41,7 +54,9 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-##  Impact Assessment
+
+### Impact Assessment
+
 
 - SQL Injection attempt confirmed
 - Authentication bypass technique identified
@@ -51,7 +66,9 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-##  Indicators of Compromise (IOCs)
+
+### Indicators of Compromise (IOCs)
+
 
 | Type | Indicator |
 |--------|-----------|
@@ -62,7 +79,14 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-##  MITRE ATT&CK Mapping
+### External References
+
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent EventID 115 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/165_115/)
+
+## 4. MITRE ATT&CK Mapping
+
 
 | Technique | Description |
 |------------|------------|
@@ -70,7 +94,10 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-##  Response Actions
+
+
+## 5. Response Actions
+
 
 - Classified alert as True Positive
 - Investigated malicious requests
@@ -81,7 +108,10 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-##  Conclusion
+
+
+## 6. Conclusion
+
 
 The investigation confirmed a SQL Injection attempt targeting a public-facing web application.
 

@@ -1,12 +1,9 @@
-#  SOC282 - Phishing Email Detected
+# Phishing Email Detected
 
-##  Summary
+## 1. Alert Summary
 
-A medium-severity phishing alert was generated after a malicious email containing a weaponized attachment was delivered to an internal user. The investigation focused on email analysis, attachment behavior, endpoint activity, and post-exploitation communication.
+### Alert Details
 
----
-
-##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -20,7 +17,23 @@ A medium-severity phishing alert was generated after a malicious email containin
 
 ---
 
-##  Investigation
+
+
+## 2. Investigation Overview
+
+### Summary
+
+
+A medium-severity phishing alert was generated after a malicious email containing a weaponized attachment was delivered to an internal user. The investigation focused on email analysis, attachment behavior, endpoint activity, and post-exploitation communication.
+
+---
+
+
+
+## 3. Evidence Analysis
+
+### Investigation
+
 
 The investigation focused on email metadata, attachment analysis, and endpoint activity.
 
@@ -36,7 +49,9 @@ The investigation focused on email metadata, attachment analysis, and endpoint a
 
 ---
 
-##  Network Activity
+
+### Network Activity
+
 
 | Field | Value |
 |---------|---------|
@@ -46,7 +61,9 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-##  Impact Assessment
+
+### Impact Assessment
+
 
 - Successful phishing email delivery
 - Malicious payload execution confirmed
@@ -56,7 +73,9 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-##  Indicators of Compromise (IOCs)
+
+### Indicators of Compromise (IOCs)
+
 
 | Type | Indicator |
 |--------|-----------|
@@ -67,7 +86,15 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-##  MITRE ATT&CK Mapping
+### External References
+
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent EventID 257 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/282_257/)
+- [SOC282 technical walkthrough](https://github.com/ogtamimi/SOC-Analyst-WriteUp-LetsDefend.io/blob/main/SOC/Labs/LetsDefend%20SOC%20Walkthrough%20-%20SOC282%20-%20Phishing%20Alert.md)
+
+## 4. MITRE ATT&CK Mapping
+
 
 | Technique | Description |
 |------------|------------|
@@ -78,7 +105,10 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-##  Response Actions
+
+
+## 5. Response Actions
+
 
 - Classified alert as True Positive
 - Recommended isolation of the affected endpoint
@@ -89,7 +119,10 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-##  Conclusion
+
+
+## 6. Conclusion
+
 
 The investigation confirmed a phishing attack involving a malicious email attachment designed to deliver malware to the target host.
 

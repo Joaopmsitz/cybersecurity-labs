@@ -1,12 +1,9 @@
-#  SOC140 - Phishing Mail Detected - Suspicious Task Scheduler
+# Phishing Mail Detected - Suspicious Task Scheduler
 
-##  Summary
+## 1. Alert Summary
 
-A phishing email alert was generated after a malicious email containing a suspicious attachment was delivered to an internal user. The investigation focused on validating the email, analyzing the attachment, and determining whether endpoint compromise occurred.
+### Alert Details
 
----
-
-##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -22,7 +19,23 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-##  Investigation
+
+
+## 2. Investigation Overview
+
+### Summary
+
+
+A phishing email alert was generated after a malicious email containing a suspicious attachment was delivered to an internal user. The investigation focused on validating the email, analyzing the attachment, and determining whether endpoint compromise occurred.
+
+---
+
+
+
+## 3. Evidence Analysis
+
+### Investigation
+
 
 ### Key Findings
 
@@ -36,7 +49,9 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-##  Indicators of Compromise (IOCs)
+
+### Indicators of Compromise (IOCs)
+
 
 | Type | Indicator |
 |--------|-----------|
@@ -47,7 +62,14 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-##  MITRE ATT&CK Mapping
+### External References
+
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent EventID 82 write-up](https://medium.com/@higherdas09/letsdefend-soc140-phishing-mail-detected-event-id-82-dc88e1134d7e)
+
+## 4. MITRE ATT&CK Mapping
+
 
 | Technique | Description |
 |------------|------------|
@@ -56,7 +78,10 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-##  Response Actions
+
+
+## 5. Response Actions
+
 
 - Confirmed malicious phishing email
 - Validated attachment behavior in sandbox
@@ -66,7 +91,10 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-##  Conclusion
+
+
+## 6. Conclusion
+
 
 The investigation confirmed that the email contained a malicious attachment and represented a genuine phishing attempt.
 

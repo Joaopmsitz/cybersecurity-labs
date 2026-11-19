@@ -1,14 +1,9 @@
-#  SOC166 - JavaScript Code Detected in URL
+# JavaScript Code Detected in URL
 
-##  Summary
+## 1. Alert Summary
 
-A medium-severity alert was generated after detecting suspicious JavaScript code embedded within a URL, indicating a possible Cross-Site Scripting (XSS) attack attempt against a web application.
+### Alert Details
 
-The investigation focused on analyzing the malicious payload, validating attack intent, and determining whether code execution was successful.
-
----
-
-##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -19,7 +14,25 @@ The investigation focused on analyzing the malicious payload, validating attack 
 
 ---
 
-##  Investigation
+
+
+## 2. Investigation Overview
+
+### Summary
+
+
+A medium-severity alert was generated after detecting suspicious JavaScript code embedded within a URL, indicating a possible Cross-Site Scripting (XSS) attack attempt against a web application.
+
+The investigation focused on analyzing the malicious payload, validating attack intent, and determining whether code execution was successful.
+
+---
+
+
+
+## 3. Evidence Analysis
+
+### Investigation
+
 
 The investigation began with the analysis of an HTTP request containing a suspicious encoded payload within the URL.
 
@@ -42,7 +55,9 @@ This payload is commonly used to test whether an application is vulnerable to Cr
 
 ---
 
-##  Impact Assessment
+
+### Impact Assessment
+
 
 - XSS attack attempt confirmed
 - Malicious JavaScript payload identified
@@ -52,7 +67,9 @@ This payload is commonly used to test whether an application is vulnerable to Cr
 
 ---
 
-##  Indicators of Compromise (IOCs)
+
+### Indicators of Compromise (IOCs)
+
 
 | Type | Indicator |
 |--------|-----------|
@@ -63,7 +80,14 @@ This payload is commonly used to test whether an application is vulnerable to Cr
 
 ---
 
-##  MITRE ATT&CK Mapping
+### External References
+
+Public sources used for contextual cross-checking. Their findings are not attributed to this lab investigation unless independently corroborated.
+
+- [Independent EventID 116 write-up](https://www.policytopackets.com/writeups/letsdefend/soc/166_116/)
+
+## 4. MITRE ATT&CK Mapping
+
 
 | Technique | Description |
 |------------|------------|
@@ -72,7 +96,10 @@ This payload is commonly used to test whether an application is vulnerable to Cr
 
 ---
 
-##  Response Actions
+
+
+## 5. Response Actions
+
 
 - Classified alert as True Positive
 - Investigated malicious payload
@@ -83,7 +110,10 @@ This payload is commonly used to test whether an application is vulnerable to Cr
 
 ---
 
-##  Conclusion
+
+
+## 6. Conclusion
+
 
 The investigation confirmed a Cross-Site Scripting (XSS) attack attempt involving malicious JavaScript embedded within a URL.
 
