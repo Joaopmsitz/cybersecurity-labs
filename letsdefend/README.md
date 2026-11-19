@@ -1,137 +1,60 @@
-<div align="center">
+# LetsDefend Investigations
 
-# LETSDEFEND | SOC ANALYST DASHBOARD
+A collection of SOC alert investigations completed in the LetsDefend training environment.
 
-**Joaopmsitz** · SOC Training & Investigation Performance
+The reports document alert triage, evidence analysis, threat intelligence correlation, MITRE ATT&CK mapping, response actions, and investigation conclusions.
 
-[Public Profile](https://app.letsdefend.io/user/JoaopmsItz) · [Investigation Reports](./investigations/README.md)
+## Investigation Inventory
 
-![Status](https://img.shields.io/badge/Status-Open%20to%20Work-2ea44f?style=flat-square)
-![Platform](https://img.shields.io/badge/Platform-LetsDefend-2563eb?style=flat-square)
-![Focus](https://img.shields.io/badge/Focus-SOC%20Analysis-8250df?style=flat-square)
+| Category | Reports | Index |
+|---|---:|---|
+| Brute Force | 1 | [Open](./brute-force/README.md) |
+| Malware | 6 | [Open](./malware/README.md) |
+| Phishing | 7 | [Open](./phishing/README.md) |
+| Web Attacks | 2 | [Open](./web-attacks/README.md) |
+| **Total** | **16** | |
 
-*Profile metrics snapshot — November 18, 2026*
+## Case Index
 
-</div>
+| Event ID | Category | Detection Rule | Investigation |
+|---:|---|---|---|
+| 17 | Malware | SOC106 | [Suspicious File Detected](./malware/eventid17-suspicious-file-detected.md) |
+| 21 | Malware | SOC104 | [Emotet Malware Detected](./malware/eventid21-emotet-malware-detected.md) |
+| 45 | Phishing | SOC114 | [Malicious Attachment Detected](./phishing/eventid45-malicious-attachment-detected.md) |
+| 52 | Phishing | SOC120 | [Internal Phishing Email](./phishing/eventid52-internal-phishing-email.md) |
+| 76 | Malware | SOC137 | [Malicious Download Attempt](./malware/eventid76-malicious-download-attempt.md) |
+| 77 | Malware | SOC138 | [Suspicious XLS File Detected](./malware/eventid77-suspicious-xls-file-detected.md) |
+| 82 | Phishing | SOC140 | [Phishing Mail - Malicious ZIP Attachment](./phishing/eventid82-phishing-malicious-zip-attachment.md) |
+| 84 | Malware | SOC104 | [WinRAR Installer - False Positive](./malware/eventid84-winrar-false-positive.md) |
+| 86 | Phishing | SOC141 | [Phishing URL Detected](./phishing/eventid86-phishing-url-detected.md) |
+| 93 | Phishing | SOC146 | [Excel 4.0 Macro Phishing](./phishing/eventid93-excel-4-0-macro-phishing.md) |
+| 115 | Web Attacks | SOC165 | [SQL Injection Attempt](./web-attacks/eventid115-sql-injection-attempt.md) |
+| 116 | Web Attacks | SOC166 | [JavaScript Code Detected](./web-attacks/eventid116-javascript-code-detected.md) |
+| 231 | Malware | SOC205 | [Malicious Macro Execution](./malware/eventid231-malicious-macro-execution.md) |
+| 234 | Brute Force | SOC176 | [RDP Brute Force Detected](./brute-force/eventid234-rdp-brute-force-detected.md) |
+| 257 | Phishing | SOC282 | [Deceptive Phishing Email](./phishing/eventid257-deceptive-phishing-email.md) |
+| 316 | Phishing | SOC338 | [Lumma Stealer - ClickFix](./phishing/eventid316-lumma-stealer-clickfix.md) |
 
----
+## Investigation Methodology
 
-## 01 | Performance Overview
+1. **Alert Triage** - Review alert metadata, affected assets, and detection context.
+2. **Evidence Analysis** - Examine available email, endpoint, network, and system telemetry.
+3. **Threat Validation** - Correlate indicators with reputation services and threat intelligence.
+4. **Technical Assessment** - Distinguish confirmed activity from assumptions and historical context.
+5. **Response Assessment** - Separate completed actions from recommended containment and remediation.
+6. **Classification** - Document the verdict and its supporting evidence.
 
-<table>
-<tr>
-<td align="center" width="33%">
+## Documentation Principles
 
-<h2>1,913</h2>
+- Conclusions must be supported by evidence.
+- Missing telemetry must not be interpreted as proof that an activity did not occur.
+- External writeups are references for contextual cross-checking, not evidence collected during the lab.
+- MITRE ATT&CK mappings must reflect observed or sufficiently supported behavior.
+- Completed response actions must be distinguished from recommendations.
+- Platform results and analyst assessments must be documented separately when they differ.
 
-**TOTAL SCORE**
+## Scope
 
-Platform points
-
-</td>
-<td align="center" width="33%">
-
-<h2>94%</h2>
-
-**SUCCESS RATE**
-
-Platform-reported rate
-
-</td>
-<td align="center" width="33%">
-
-<h2>19,266</h2>
-
-**SLA (UNIT UNSPECIFIED)**
-
-Platform-reported value; unit not specified in the public profile
-
-</td>
-</tr>
-</table>
-
----
-
-## 02 | Alert Investigation Distribution
-
-The public profile exposes 16 alert-category labels. The values below are platform-reported activity figures and are separate from this repository's documented case count.
-
-```mermaid
-xychart-beta
-    title "Investigated Alert Types"
-    x-axis ["Malware", "Exchange", "Web", "Proxy", "Brute Force", "Data Leakage"]
-    y-axis "Profile Value" 0 --> 8
-    bar [7, 5, 3, 1, 1, 1]
-```
-
-### Category Breakdown (Platform-Reported Activity)
-
-| Alert Category | Activity Value |
-|---|---:|
-| Malware | 7 |
-| Exchange | 5 |
-| Web Attack | 3 |
-| Proxy | 1 |
-| Brute Force | 1 |
-| Data Leakage | 1 |
-| Mobile | 0 |
-| ThreatIntel | 0 |
-| Ransomware | 0 |
-| Generic | 0 |
-| Unauthorized Access | 0 |
-| LOLBin | 0 |
-| Persistence | 0 |
-| C2 | 0 |
-| Privilege Escalation | 0 |
-| APT Group | 0 |
-
-<sub>Source: Public LetsDefend profile. Values represent the category breakdown supplied by the platform and are separate from the number of reports published in this repository.</sub>
-
----
-
-## 03 | Technical Knowledge Areas
-
-Areas listed in the LetsDefend profile:
-
-| Knowledge Area | Focus |
-|---|---|
-| Dynamic Malware Analysis | Malware behavior and execution analysis |
-| MITRE ATT&CK Framework | Adversary tactics and techniques |
-| IT Security Fundamentals | Information security foundations |
-| Malicious Document Analysis | Suspicious documents and embedded content |
-
----
-
-## 04 | Achievements & Badges
-
-| Achievement | Date |
-|---|---|
-| Introduction to Security+ | October 15, 2026 |
-| SOC Analyst Learning Path | September 28, 2026 |
-| Lab Builder | September 28, 2026 |
-
----
-
-Note: "Introduction to Security+" is a LetsDefend platform achievement, not the CompTIA Security+ certification.
-
----
-
-## 05 | Investigation Portfolio
-
-Technical investigation reports are maintained separately to avoid duplicating case information in this dashboard.
-
-**[Explore the LetsDefend Investigation Catalog →](./investigations/README.md)**
-
-The catalog provides category navigation, individual case reports, investigation methodology, and technical findings.
-
----
-
-<div align="center">
-
-**LETSDEFEND PROFILE**
-
-[Joaopmsitz](https://app.letsdefend.io/user/JoaopmsItz)
+These reports document simulated LetsDefend training scenarios. Findings and response actions should not be interpreted as real-world incident response engagements.
 
 [Back to Cybersecurity Portfolio](../README.md)
-
-</div>
