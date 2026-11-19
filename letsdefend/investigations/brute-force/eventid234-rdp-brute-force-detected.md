@@ -1,14 +1,9 @@
-# 🚨 SOC176 - RDP Brute Force Detected
+# RDP Brute Force Detected
 
-## 📌 Summary
+## 1. Alert Summary
 
-An RDP brute force attack was detected against the host **Matthew (172.16.17.148)**.
+### Alert Details
 
-The investigation revealed multiple failed authentication attempts originating from a single external IP address, followed by a successful Remote Desktop logon and post-compromise reconnaissance activity.
-
----
-
-## 🧾 Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -23,7 +18,12 @@ The investigation revealed multiple failed authentication attempts originating f
 
 ---
 
-## 🔍 Investigation
+
+
+## 2. Investigation Overview
+
+### Investigation
+
 
 ### Key Findings
 
@@ -65,7 +65,22 @@ These commands indicate account discovery, privilege enumeration, and network re
 
 ---
 
-## 🔗 Indicators of Compromise (IOCs)
+
+
+## 3. Evidence Analysis
+
+### Summary
+
+
+An RDP brute force attack was detected against the host **Matthew (172.16.17.148)**.
+
+The investigation revealed multiple failed authentication attempts originating from a single external IP address, followed by a successful Remote Desktop logon and post-compromise reconnaissance activity.
+
+---
+
+
+### Indicators of Compromise (IOCs)
+
 
 | Type | Indicator |
 |---------|---------|
@@ -76,7 +91,22 @@ These commands indicate account discovery, privilege enumeration, and network re
 
 ---
 
-## 🧠 MITRE ATT&CK Mapping
+
+### Classification
+
+
+**Brute Force / Unauthorized RDP Access / Post-Compromise Reconnaissance**
+
+---
+
+⭐ SOC investigation completed following the workflow:
+
+**Detection → Analysis → Threat Validation → Containment**
+
+
+
+## 4. MITRE ATT&CK Mapping
+
 
 | Technique | Description |
 |------------|------------|
@@ -88,7 +118,10 @@ These commands indicate account discovery, privilege enumeration, and network re
 
 ---
 
-## 🛠️ Response Actions
+
+
+## 5. Response Actions
+
 
 - Validated malicious source IP activity
 - Confirmed brute force attack attempts
@@ -99,7 +132,10 @@ These commands indicate account discovery, privilege enumeration, and network re
 
 ---
 
-## 📚 Conclusion
+
+
+## 6. Conclusion
+
 
 The investigation confirmed a successful RDP brute force attack originating from **218.92.0.56** against the host **Matthew**.
 
@@ -107,16 +143,8 @@ After multiple failed authentication attempts, the attacker successfully logged 
 
 The compromised endpoint was isolated to prevent further attacker activity.
 
-## ✅ Final Verdict
+
+### Final Verdict
+
 
 **True Positive**
-
-## 🎯 Classification
-
-**Brute Force / Unauthorized RDP Access / Post-Compromise Reconnaissance**
-
----
-
-⭐ SOC investigation completed following the workflow:
-
-**Detection → Analysis → Threat Validation → Containment**

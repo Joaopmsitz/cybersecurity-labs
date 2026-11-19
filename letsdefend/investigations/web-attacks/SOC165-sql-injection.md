@@ -1,6 +1,6 @@
-# 🚨 SOC165 - SQL Injection Attempt Detected
+#  SOC165 - SQL Injection Attempt Detected
 
-## 📌 Summary
+##  Summary
 
 A high-severity alert was generated after detecting suspicious input consistent with a SQL Injection attempt targeting a web application authentication endpoint.
 
@@ -8,7 +8,7 @@ The investigation focused on analyzing HTTP requests, identifying malicious payl
 
 ---
 
-## 🧾 Alert Details
+##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -19,7 +19,7 @@ The investigation focused on analyzing HTTP requests, identifying malicious payl
 
 ---
 
-## 🔍 Investigation
+##  Investigation
 
 The investigation began with the analysis of HTTP request logs captured from the affected web application.
 
@@ -41,7 +41,7 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-## 🚨 Impact Assessment
+##  Impact Assessment
 
 - SQL Injection attempt confirmed
 - Authentication bypass technique identified
@@ -51,7 +51,7 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-## 🔗 Indicators of Compromise (IOCs)
+##  Indicators of Compromise (IOCs)
 
 | Type | Indicator |
 |--------|-----------|
@@ -62,7 +62,7 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-## 🧠 MITRE ATT&CK Mapping
+##  MITRE ATT&CK Mapping
 
 | Technique | Description |
 |------------|------------|
@@ -70,7 +70,7 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-## 🛠️ Response Actions
+##  Response Actions
 
 - Classified alert as True Positive
 - Investigated malicious requests
@@ -81,17 +81,17 @@ This payload is commonly associated with SQL Injection attacks and is designed t
 
 ---
 
-## 📚 Conclusion
+##  Conclusion
 
 The investigation confirmed a SQL Injection attempt targeting a public-facing web application.
 
 Analysis identified a known authentication bypass payload and multiple malicious requests consistent with SQL Injection activity. Although the attack was confirmed, no evidence indicated successful exploitation or unauthorized access.
 
-### ✅ Final Verdict
+###  Final Verdict
 
 **True Positive**
 
-### 🎯 Classification
+###  Classification
 
 **Web Attack / SQL Injection Attempt**
 

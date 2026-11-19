@@ -1,12 +1,12 @@
-# 🚨 SOC282 - Phishing Email Detected
+#  SOC282 - Phishing Email Detected
 
-## 📌 Summary
+##  Summary
 
 A medium-severity phishing alert was generated after a malicious email containing a weaponized attachment was delivered to an internal user. The investigation focused on email analysis, attachment behavior, endpoint activity, and post-exploitation communication.
 
 ---
 
-## 🧾 Alert Details
+##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -20,7 +20,7 @@ A medium-severity phishing alert was generated after a malicious email containin
 
 ---
 
-## 🔍 Investigation
+##  Investigation
 
 The investigation focused on email metadata, attachment analysis, and endpoint activity.
 
@@ -36,7 +36,7 @@ The investigation focused on email metadata, attachment analysis, and endpoint a
 
 ---
 
-## 🌐 Network Activity
+##  Network Activity
 
 | Field | Value |
 |---------|---------|
@@ -46,7 +46,7 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-## 🚨 Impact Assessment
+##  Impact Assessment
 
 - Successful phishing email delivery
 - Malicious payload execution confirmed
@@ -56,7 +56,7 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-## 🔗 Indicators of Compromise (IOCs)
+##  Indicators of Compromise (IOCs)
 
 | Type | Indicator |
 |--------|-----------|
@@ -67,7 +67,7 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-## 🧠 MITRE ATT&CK Mapping
+##  MITRE ATT&CK Mapping
 
 | Technique | Description |
 |------------|------------|
@@ -78,7 +78,7 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-## 🛠️ Response Actions
+##  Response Actions
 
 - Classified alert as True Positive
 - Recommended isolation of the affected endpoint
@@ -89,7 +89,7 @@ The compromised endpoint established outbound communication with an external com
 
 ---
 
-## 📚 Conclusion
+##  Conclusion
 
 The investigation confirmed a phishing attack involving a malicious email attachment designed to deliver malware to the target host.
 
@@ -97,11 +97,11 @@ Analysis identified successful payload execution and outbound communication with
 
 Based on the collected evidence, the alert was classified as a **True Positive** and required containment and further forensic investigation.
 
-### ✅ Final Verdict
+###  Final Verdict
 
 **True Positive**
 
-### 🎯 Classification
+###  Classification
 
 **Phishing Email / Malware Delivery**
 

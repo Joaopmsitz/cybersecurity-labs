@@ -4,10 +4,10 @@ Documented SOC investigation exercises completed on the LetsDefend platform, foc
 
 ## Investigations
 
-| Case | Focus |
-| --- | --- |
-| [SOC165 — Possible SQL Injection Payload Detected](./SOC165-possible-sql-injection-payload-detected.md) | Investigation of a suspected SQL injection payload in web traffic. |
-| [SOC166 — JavaScript Code Detected in URL](./SOC166-javascript-code-detected-in-url.md) | Investigation of suspicious JavaScript code detected in a requested URL. |
+
+| Event ID | Detection Rule | Investigation Report |
+|---:|---|---|
+| - | - | No investigation reports available |
 
 ## Topics
 

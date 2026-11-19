@@ -1,6 +1,6 @@
-# 🎣 SOC120 — Phishing Mail Detected - Internal to Internal
+#  SOC120 — Phishing Mail Detected - Internal to Internal
 
-## 📌 Alert Overview
+##  Alert Overview
 
 | Field                   | Value                                                  |
 | ----------------------- | ------------------------------------------------------ |
@@ -17,13 +17,13 @@
 
 ---
 
-## 🎯 Objective
+##  Objective
 
 Investigate an email flagged by the SOC120 phishing detection rule and determine whether the message represents a genuine phishing attempt or legitimate internal communication.
 
 ---
 
-## 📧 Email Analysis
+##  Email Analysis
 
 ### Message Details
 
@@ -50,7 +50,7 @@ No malicious URL, attachment, credential request, or suspicious instruction was 
 
 ---
 
-## 🌐 Network Evidence
+##  Network Evidence
 
 The email transaction was observed between JohnComputer and the internal Exchange/SMTP server:
 
@@ -83,7 +83,7 @@ susie@letsdefend.io
 
 ---
 
-## 🖥️ Endpoint Investigation
+##  Endpoint Investigation
 
 ### Host Information
 
@@ -124,7 +124,7 @@ These commands alone do not provide sufficient evidence of compromise or malicio
 
 ---
 
-## 🔎 Investigation Findings
+##  Investigation Findings
 
 The investigation identified the following:
 
@@ -139,7 +139,7 @@ The investigation identified the following:
 
 ---
 
-## 🧠 Analysis
+##  Analysis
 
 Although the email triggered the **SOC120 - Phishing Mail Detected - Internal to Internal** rule, the available evidence does not support classification as a malicious phishing message.
 
@@ -147,7 +147,7 @@ The alert appears to have been triggered by the characteristics of the email com
 
 ---
 
-## ✅ Conclusion
+##  Conclusion
 
 **Disposition: False Positive**
 
@@ -159,7 +159,7 @@ The email was an internal communication between `john@letsdefend.io` and `susie@
 
 ---
 
-## 🛠️ SOC Skills Demonstrated
+##  SOC Skills Demonstrated
 
 * Alert Triage
 * Email Analysis

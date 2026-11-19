@@ -1,12 +1,12 @@
-# 🚨 SOC140 - Phishing Mail Detected - Suspicious Task Scheduler
+#  SOC140 - Phishing Mail Detected - Suspicious Task Scheduler
 
-## 📌 Summary
+##  Summary
 
 A phishing email alert was generated after a malicious email containing a suspicious attachment was delivered to an internal user. The investigation focused on validating the email, analyzing the attachment, and determining whether endpoint compromise occurred.
 
 ---
 
-## 🧾 Alert Details
+##  Alert Details
 
 | Field | Value |
 |---------|---------|
@@ -22,7 +22,7 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-## 🔍 Investigation
+##  Investigation
 
 ### Key Findings
 
@@ -36,7 +36,7 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-## 🔗 Indicators of Compromise (IOCs)
+##  Indicators of Compromise (IOCs)
 
 | Type | Indicator |
 |--------|-----------|
@@ -47,7 +47,7 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-## 🧠 MITRE ATT&CK Mapping
+##  MITRE ATT&CK Mapping
 
 | Technique | Description |
 |------------|------------|
@@ -56,7 +56,7 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-## 🛠️ Response Actions
+##  Response Actions
 
 - Confirmed malicious phishing email
 - Validated attachment behavior in sandbox
@@ -66,17 +66,17 @@ A phishing email alert was generated after a malicious email containing a suspic
 
 ---
 
-## 📚 Conclusion
+##  Conclusion
 
 The investigation confirmed that the email contained a malicious attachment and represented a genuine phishing attempt.
 
 Although the attachment was identified as malicious through sandbox analysis, no evidence indicated that the file was executed or that the endpoint was compromised.
 
-### ✅ Final Verdict
+###  Final Verdict
 
 **True Positive**
 
-### 🎯 Classification
+###  Classification
 
 **Phishing Email / Malicious Attachment**
 

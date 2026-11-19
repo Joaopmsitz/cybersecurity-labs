@@ -4,9 +4,10 @@ Documented SOC investigation exercises from LetsDefend focused on brute-force at
 
 ## Investigations
 
-| Case | Focus | Status |
-| --- | --- | --- |
-| [SOC176 — RDP Brute Force Detected](./SOC176-rdp-brute-force-detected.md) | RDP authentication failures, successful logon analysis, and post-authentication reconnaissance. | Completed |
+
+| Event ID | Detection Rule | Investigation Report |
+|---:|---|---|
+| 234 | SOC176 | [RDP Brute Force Detected](eventid234-rdp-brute-force-detected.md) |
 
 ## Topics Covered
 

@@ -1,12 +1,12 @@
-# 🚨 SOC114 — Malicious Attachment Detected - Phishing Alert
+#  SOC114 — Malicious Attachment Detected - Phishing Alert
 
-## 🎯 Objective
+##  Objective
 
 Investigate a phishing alert involving a malicious email attachment, determine whether the attachment was delivered and opened, analyze the associated endpoint activity, and identify indicators of compromise.
 
 ---
 
-## 📋 Alert Information
+##  Alert Information
 
 | Field             | Details                                                             |
 | ----------------- | ------------------------------------------------------------------- |
@@ -27,7 +27,7 @@ Investigate a phishing alert involving a malicious email attachment, determine w
 
 ---
 
-## 📧 Email Analysis
+##  Email Analysis
 
 The alert involved an email sent from:
 
@@ -54,7 +54,7 @@ The attachment was identified as malicious and associated with **CVE-2017-11882*
 
 ---
 
-## 🦠 Attachment Analysis
+##  Attachment Analysis
 
 VirusTotal analysis identified the attachment as malicious.
 
@@ -69,7 +69,7 @@ The results indicate that the attachment was associated with exploit and malware
 
 ---
 
-## 💻 Endpoint Investigation
+##  Endpoint Investigation
 
 The affected endpoint was:
 
@@ -107,7 +107,7 @@ This indicates execution with elevated system privileges.
 
 ---
 
-## 🔍 JuicyPotato Analysis
+##  JuicyPotato Analysis
 
 VirusTotal analysis confirmed the executable as malicious:
 
@@ -124,7 +124,7 @@ The high detection rate across multiple security vendors provides strong evidenc
 
 ---
 
-## 🌐 Network Activity
+##  Network Activity
 
 Additional external network connections were observed from the affected endpoint.
 
@@ -132,19 +132,19 @@ These connections were treated as indicators requiring further investigation. Th
 
 ---
 
-## 🧠 Investigation Findings
+##  Investigation Findings
 
 | Finding                      | Result |
 | ---------------------------- | ------ |
-| Email delivered to user      | ✅ Yes  |
-| Malicious attachment present | ✅ Yes  |
-| Attachment opened            | ✅ Yes  |
-| Attachment malicious         | ✅ Yes  |
-| CVE-2017-11882 associated    | ✅ Yes  |
-| Malicious process identified | ✅ Yes  |
-| `JuicyPotato.exe` detected   | ✅ Yes  |
-| Process executed as SYSTEM   | ✅ Yes  |
-| Endpoint compromise evidence | ✅ Yes  |
+| Email delivered to user      |  Yes  |
+| Malicious attachment present |  Yes  |
+| Attachment opened            |  Yes  |
+| Attachment malicious         |  Yes  |
+| CVE-2017-11882 associated    |  Yes  |
+| Malicious process identified |  Yes  |
+| `JuicyPotato.exe` detected   |  Yes  |
+| Process executed as SYSTEM   |  Yes  |
+| Endpoint compromise evidence |  Yes  |
 
 The evidence confirms that the phishing email contained a malicious attachment and that malicious activity was subsequently identified on the affected endpoint.
 
@@ -154,7 +154,7 @@ The available evidence does **not** conclusively establish that the phishing att
 
 ---
 
-## 🎯 MITRE ATT&CK
+##  MITRE ATT&CK
 
 **T1598.001 — Phishing for Information: Spearphishing Service**
 
@@ -162,7 +162,7 @@ The alert is mapped by LetsDefend to MITRE ATT&CK technique `T1598.001`.
 
 ---
 
-## 📝 Conclusion
+##  Conclusion
 
 The investigation confirmed a **True Positive**.
 
@@ -172,7 +172,7 @@ The combination of a malicious phishing attachment and confirmed malicious endpo
 
 ---
 
-## 🛠️ Skills Demonstrated
+##  Skills Demonstrated
 
 * Phishing Email Analysis
 * Malicious Attachment Analysis
