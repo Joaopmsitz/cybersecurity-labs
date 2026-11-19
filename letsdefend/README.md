@@ -1,4 +1,4 @@
-﻿<div align="center">
+<div align="center">
 
 # LETSDEFEND | SOC ANALYST DASHBOARD
 
@@ -42,9 +42,9 @@ Platform-reported rate
 
 <h2>19,266</h2>
 
-**SLA**
+**SLA (UNIT UNSPECIFIED)**
 
-Platform-reported value
+Platform-reported value; unit not specified in the public profile
 
 </td>
 </tr>
@@ -54,7 +54,7 @@ Platform-reported value
 
 ## 02 | Alert Investigation Distribution
 
-The profile dashboard tracks activity across 16 alert categories.
+The public profile exposes 16 alert-category labels. The values below are platform-reported activity figures and are separate from this repository's documented case count.
 
 ```mermaid
 xychart-beta
@@ -64,9 +64,9 @@ xychart-beta
     bar [7, 5, 3, 1, 1, 1]
 ```
 
-### Category Breakdown
+### Category Breakdown (Platform-Reported Activity)
 
-| Alert Category | Profile Value |
+| Alert Category | Activity Value |
 |---|---:|
 | Malware | 7 |
 | Exchange | 5 |
@@ -109,6 +109,10 @@ Areas listed in the LetsDefend profile:
 | Introduction to Security+ | October 15, 2026 |
 | SOC Analyst Learning Path | September 28, 2026 |
 | Lab Builder | September 28, 2026 |
+
+---
+
+Note: "Introduction to Security+" is a LetsDefend platform achievement, not the CompTIA Security+ certification.
 
 ---
 
