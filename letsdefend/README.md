@@ -9,16 +9,17 @@ Each case is identified by its Event ID. SOC identifiers refer to detection rule
 | Category | Reports |
 |---|---:|
 | [Brute Force](./brute-force/README.md) | 1 |
-| [Malware](./malware/README.md) | 6 |
+| [Malware](./malware/README.md) | 7 |
 | [Phishing](./phishing/README.md) | 7 |
 | [Web Attacks](./web-attacks/README.md) | 2 |
-| **Total** | **16** |
+| **Total** | **17** |
 
 ## Case Index
 
 | Event ID | Category | Detection Rule | Investigation |
 |---:|---|---|---|
 | 17 | Malware | SOC106 | [Suspicious File Detected](./malware/eventid17-suspicious-file-detected.md) |
+| 19 | Malware | SOC107 | [Linux Privilege Escalation Exploit Detected](./malware/eventid19-linux-privilege-escalation-detected.md) |
 | 21 | Malware | SOC104 | [Emotet Malware Detected](./malware/eventid21-emotet-malware-detected.md) |
 | 45 | Phishing | SOC114 | [Malicious Attachment Detected](./phishing/eventid45-malicious-attachment-detected.md) |
 | 52 | Phishing | SOC120 | [Internal Phishing Email](./phishing/eventid52-internal-phishing-email.md) |
@@ -56,3 +57,7 @@ Each case is identified by its Event ID. SOC identifiers refer to detection rule
 ## Scope
 
 These reports document simulated LetsDefend training scenarios. Findings and response actions should not be interpreted as real-world incident response engagements.
+
+---
+
+[Back to Cybersecurity Labs](../README.md)
