@@ -5,6 +5,7 @@ Documented SOC investigation exercises from LetsDefend focused on brute-force at
 ## Investigations
 
 
+
 | Event ID | Detection Rule | Investigation Report |
 |---:|---|---|
 | 234 | SOC176 | [RDP Brute Force Detected](eventid234-rdp-brute-force-detected.md) |

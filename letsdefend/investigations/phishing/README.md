@@ -5,6 +5,7 @@ Documented SOC investigation exercises completed on the LetsDefend platform, foc
 ## Investigations
 
 
+
 | Event ID | Detection Rule | Investigation Report |
 |---:|---|---|
 | - | - | No investigation reports available |
