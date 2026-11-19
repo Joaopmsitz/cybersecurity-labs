@@ -7,7 +7,7 @@
 | LetsDefend Event ID | 234 |
 | Detection Rule | SOC176 - RDP Brute Force Detected |
 | Category | Brute Force |
-| Target Account | Matthew |
+| Affected Asset / User | Matthew |
 | Target IP | `172.16.17.148` |
 | Source IP | `218.92.0.56` |
 | Target Service | Remote Desktop Protocol (RDP) |
